@@ -3,17 +3,41 @@
 /// Запускается "tgstation.dme" - запускает "andromeda.dme" - запускает уже всё то, что в "modular_andromeda"
 
 /// Инициализация всех .dm и .dme в "modular_andromeda"
-#include "code\cyrillic_fixes\cyrillic_fixes.dm"
+
+
 // BEGIN_INTERNALS
 // END_INTERNALS
+
+
 // BEGIN_FILE_DIR
 #define FILE_DIR .
 // END_FILE_DIR
+
+
 // BEGIN_PREFERENCES
 // END_PREFERENCES
+
+
 // BEGIN_INCLUDE
-#include "code\_DEFINES13\ru_jobs.dm"
+#include "_modpack.dm"
+#include "_modpacks.dm"
+#include "code\_DEFINES\ru_jobs.dm"
+#include "code\cyrillic_fixes\cyrillic_fixes.dm"
+#include "code\ru_jobs\_ru_jobs.dm"
 #include "code\ru_jobs\ru_id_cards.dm"
 #include "code\ru_jobs\ru_jobs.dm"
 #include "code\ru_jobs\ru_pda.dm"
+#include "code\translations\_translations.dm"
+#include "code\translations\bodyparts.dm"
+#include "code\translations\pronouns.dm"
+#include "code\translations\saymode.dm"
+#include "code\translations\translate_emotes.dm"
+#include "code\translations\translate_security_level.dm"
+#include "code\translations\translate_suggest_ru_names.dm"
+#include "code\translations\translate_verbs.dm"
+#include "code\translations\ru_names\ru_name_base.dm"
+#include "code\translations\ru_names\ru_name_design.dm"
+#include "code\translations\ru_names\ru_name_materials.dm"
+#include "code\translations\ru_names\ru_name_orderables.dm"
+#include "code\translations\ru_names\ru_name_reagents.dm"
 // END_INCLUDE
