@@ -1,0 +1,6 @@
+/// Пояснялка от Rewokin'a
+/// Чтоб нам не дрочить каждый раз "tgstation.dme", что находится в корне билда, мы делаем свой "andromeda.dme"
+/// Запускается "tgstation.dme" - запускает "andromeda.dme" - запускает уже всё то, что в "modular_andromeda"
+
+/// Инициализация всех .dm и .dme в "modular_andromeda"
+#include "code\cyrillic_fixes\cyrillic_fixes.dm"
