@@ -1,16 +1,16 @@
-## Communication key for receiving data through world/Topic(), you don't want to give this out.
-## Must be set to something other than 'default_pwd' and at least 7 characters long to be valid.
+Ключ связи для получения данных через world/Topic(), этот ключ не следует разглашать.
+Должен быть установлен на значение отличное от 'default_pwd' и содержать минимум 7 символов для валидности.
 #COMMS_KEY default_pwd
 
-## World address and port for server receiving cross server messages
-## Use '+' to denote spaces in ServerName
-## Repeat this entry to add more servers
-#CROSS_SERVER ServerName byond:\\address:port
+Адрес и порт мира для сервера, принимающего межсерверные сообщения
+Используйте '+' для обозначения пробелов в ServerName
+Повторите эту запись для добавления дополнительных серверов
+#CROSS_SERVER ServerName byond:\address:port
 
-## Name that the server calls itself in communications
+Имя, которым сервер называет себя в коммуникациях
 #CROSS_COMMS_NAME
 
-## Network-name used for cross-server broadcasts made from communication consoles.
-## Servers that do not match this network-name will have their messages discarded.
-## Leaving this commented will allow all messages through, regardless of network.
+Сетевое имя, используемое для межсерверных трансляций с коммуникационных консолей.
+Сообщения от серверов с несоответствующим сетевым именем будут отбрасываться.
+Если оставить закомментированным, будут приниматься все сообщения независимо от сети.
 #CROSS_COMMS_NETWORK default_network

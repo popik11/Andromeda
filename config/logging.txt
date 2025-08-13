@@ -1,106 +1,106 @@
-### Config Flags for logging, compatibility flags are at the top
+### Флаги конфигурации логирования (флаги совместимости вверху)
 
-## Whether or not admin/adminprivate logging is also sent to LOG_CATEGORY_GAME for legacy log parsers
+## Дублировать логи админов/приватных действий в LOG_CATEGORY_GAME для старых парсеров логов
 LOGGING_COMPAT_ADMINPRIVATE
 
-## Should we also log entries as human readable
+## Дублировать записи логов в человекочитаемом формате
 LOG_AS_HUMAN_READABLE
 
-### Actual logging flags
+### Основные флаги логирования
 
-## log client access (logon/logoff)
+## Логирование входа/выхода игроков
 LOG_ACCESS
 
-## log admin actions
+## Логи действий администраторов
 LOG_ADMIN
 
-## log admin chat
+## Логи админ-чата
 LOG_ADMINCHAT
 
-## log asset debug logs
+## Логи отладки ассетов (закомментировано)
 # LOG_ASSET
 
-## log attack messages
+## Логи атак
 LOG_ATTACK
 
-## log economy actions
+## Логи экономических действий
 LOG_ECON
 
-## log emotes
+## Логи эмоций
 LOG_EMOTE
 
-## log ghost polling
+## Логи опросов призраков
 LOG_GHOST_POLL
 
-## log game actions (start of round, results, etc.)
+## Логи игровых событий (начало раунда, результаты и т.д.)
 LOG_GAME
 
-## log job divide debugging information
+## Логи отладки распределения профессий (закомментировано)
 # LOG_JOB_DEBUG
 
-## log crew manifest to separate file
+## Логи манифеста экипажа в отдельный файл
 LOG_MANIFEST
 
-## log mecha actions
+## Логи действий мехов
 LOG_MECHA
 
-## log OOC channel
+## Логи OOC-чата
 LOG_OOC
 
-## log pda messages
+## Логи сообщений КПК
 LOG_PDA
 
-## Enable logging pictures
+## Логирование изображений
 LOG_PICTURES
 
-## log prayers
+## Логи молитв
 LOG_PRAYER
 
-## log client Say
+## Логи устной речи (Say)
 LOG_SAY
 
-## log shuttle actions
+## Логи действий шаттлов
 LOG_SHUTTLE
 
-## log silicons
+## Логи действий ИИ и киборгов
 LOG_SILICON
 
-## log speech indicators
+## Логи речевых индикаторов
 LOG_SPEECH_INDICATORS
 
-## Enables log entries for logins that failed due to suspicious circumstances (banned player, CID randomiser, spoofed BYOND version, etc.) to a dedicated file.
+## Логи подозрительных входов (бан, подделка CID и т.д.) в отдельный файл
 LOG_SUSPICIOUS_LOGIN
 
-## log telecomms messages
+## Логи телекоммуникаций
 LOG_TELECOMMS
 
-## Log all timers on timer auto reset
+## Логи сброса таймеров (закомментировано)
 # LOG_TIMERS_ON_BUCKET_RESET
 
-## log tool interactions [/atom/proc/tool_act]
+## Логи взаимодействий инструментов [/atom/proc/tool_act]
 LOG_TOOLS
 
-## log traitor objectives
+## Логи задач предателей
 LOG_TRAITOR
 
-## enables use of the proc twitterize() that lets you take a large list of strings and turn it into a JSON file of tweet sized strings.
-## As an example of how this could be """useful""" look towards Poly (https://twitter.com/Poly_the_Parrot)
+## Включение функции twitterize() для конвертации текста в твиты (закомментировано)
+## Пример "использования": https://twitter.com/Poly_the_Parrot
 # LOG_TWITTER
 
-## log uplink purchases
+## Логи покупок в аплинке
 LOG_UPLINK
 
-## log virus and actions
+## Логи вирусов и действий с ними
 LOG_VIRUS
 
-## log player votes
+## Логи голосований
 LOG_VOTE
 
-## log client Whisper
+## Логи шёпота (Whisper)
 LOG_WHISPER
 
-## log all world.Topic() calls
+## Логи всех вызовов world.Topic()
 LOG_WORLD_TOPIC
 
-## log manual target zone switching
+## Логи ручного переключения зон атаки
 LOG_ZONE_SWITCH

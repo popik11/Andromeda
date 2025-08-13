@@ -1,36 +1,36 @@
 #!/bin/sh
 
-#Project dependencies file
-#Final authority on what's required to fully build the project
+# Файл зависимостей проекта
+# Окончательный источник информации о требованиях для сборки проекта
 
-# byond version. Also must be updated in .tgs.yml
+# Версия BYOND (должна совпадать с .tgs.yml)
 export BYOND_MAJOR=516
 export BYOND_MINOR=1659
 
-#rust_g git tag
+# Тег версии rust_g
 export RUST_G_VERSION=4.0.0
 
-# node version
+# Версия Node.js (LTS)
 export NODE_VERSION_LTS=22.11.0
 
-# Bun version
+# Версия Bun
 export BUN_VERSION=1.2.16
 
-# SpacemanDMM git tag
+# Тег версии SpacemanDMM
 export SPACEMAN_DMM_VERSION=suite-1.10
 
-# Python version for mapmerge and other tools
+# Версия Python для mapmerge и других инструментов
 export PYTHON_VERSION=3.9.0
 
-#dreamluau repo
+# Репозиторий dreamluau
 export DREAMLUAU_REPO="tgstation/dreamluau"
 
-#dreamluau git tag
+# Тег версии dreamluau
 export DREAMLUAU_VERSION=0.1.2
 
-#hypnagogic repo
+# Репозиторий hypnagogic
 export CUTTER_REPO=spacestation13/hypnagogic
 
-#hypnagogic git tag
+# Тег версии hypnagogic
 export CUTTER_VERSION=v5.0.0
 

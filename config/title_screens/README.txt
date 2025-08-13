@@ -1,50 +1,51 @@
-The enclosed /images folder holds the image files used as the title screen for the game.
+Папка /images содержит изображения, используемые в качестве загрузочного экрана игры.
 
-Specification:
-Formats: PNG, JPG, GIF, DMI*
-Dimensions: 608x480
-	*Byond's DMI format is also supported, but if you use a DMI only include one image per file and do not give it an icon_state (the text label below the image).
+Технические требования:
+Форматы: PNG, JPG, GIF, DMI*
+Разрешение: 608x480 пикселей
+*Поддерживается формат DMI от Byond, но каждый DMI-файл должен содержать только одно изображение без указания icon_state (текстовой метки под изображением).
 
-The game won't scale these images for you, so smaller images will not fill the screen and larger ones will be cut off.
+Игра не масштабирует изображения автоматически:
+- Изображения меньшего размера не заполнят весь экран
+- Изображения большего размера будут обрезаны
 
-Using unnecessarily huge images can cause client side lag and should be avoided. Extremely large GIFs should preferentially be converted to DMIs.
-Placing non-image files in the images folder can cause errors.
+Рекомендации:
+- Избегайте использования чрезмерно больших изображений (могут вызывать лаги у клиентов)
+- Большие GIF-файлы следует конвертировать в DMI
+- Не размещайте файлы других типов в этой папке (могут возникнуть ошибки)
 
-You may add as many title screens as you like, if there is more than one a random screen is chosen (see name conventions for specifics).
+Вы можете добавить любое количество загрузочных экранов. Если экранов несколько, игра будет выбирать их случайным образом (см. правила именования).
 
 ---
 
-Naming Conventions:
+Правила именования:
 
-Every title screen you add must have a unique name. It is allowed to name two things the same if they have different file types, but this should be discouraged.
-Avoid using the plus sign "+" and the period "." in names, as these are used internally to classify images.
+Каждый загрузочный экран должен иметь уникальное имя. Хотя допускается использование одинаковых имён для файлов разных типов, это не рекомендуется.
+Избегайте использования знаков "+" и "." в именах, так как они используются системой для классификации изображений.
 
+Обычные экраны:
+Отображаются в стандартной ротации. Любое имя, не содержащее символ "+", считается обычным экраном.
+Пример: "clown"
 
-Common Titles:
+Экран с именем "default" особенный:
+- Используется только при отсутствии других доступных экранов
+- Чтобы включить его в общую ротацию, используйте другое имя
 
-Common titles are in the rotation to be displayed all the time. Any name that does not include the character "+" is considered a common title.
+Экраны для конкретных карт:
+Связываются с определённой игровой картой. Формат имени:
+"(название карты)+(название экрана)"
 
-An example of a common title name is "clown".
+Важно:
+- Название карты должно точно соответствовать MAP_NAME из соответствующего .JSON файла в папке /_maps
+- Название можно увидеть в игровом меню статуса
+- Не используйте пробелы между частями имени
 
-The common title screen named "default" is special. It is only used if no other titles are available. Because default only runs in the
-absence of other titles, if you want it to also appear in the general rotation you must name it something else.
+Пример: "Omegastation+splash"
+Допускается несколько экранов для одной карты.
 
+Редкие экраны:
+Специальный тип экранов с шансом появления 1% в каждом раунде.
+Добавьте префикс "rare+" в начало имени (без пробелов).
+Экран не может быть одновременно редким и привязанным к карте.
 
-Map Titles:
-
-Map titles are tied to a specific in game map. To make a map title you format the name like this "(name of a map)+(name of your title)"
-
-The spelling of the map name is important. It must match exactly the define MAP_NAME found in the relevant .JSON file in the /_maps folder in
-the root directory. It can also be seen in game in the status menu. Note that there are no spaces between the two names.
-
-It is absolutely fine to have more than one title tied to the same map.
-
-An example of a map title name is "Omegastation+splash".
-
-
-Rare Titles:
-
-Rare titles are a just for fun feature where they will only have a 1% chance of appear in in the title screen pool of a given round.
-Add the phrase "rare+" to the beginning of the name. Again note there are no spaces. A title cannot be rare title and a map title at the same time.
-
-An example of a rare title name is "rare+explosion"
+Пример: "rare+explosion"

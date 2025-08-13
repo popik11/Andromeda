@@ -1,9 +1,10 @@
-##Listing maps here will make the shuttle not available to buy in comms console.
-##Maps must be the full path to them
-##Only shuttles with a price in the code will work with this!
-##SPECIFYING AN INVALID MAP WILL RESULT IN RUNTIMES ON GAME START
+## Чёрный список шаттлов
+## Указанные здесь шаттлы нельзя будет купить через коммуникационную консоль
+## Пути должны быть полными и точными
+## Работает только с шаттлами, имеющими цену в коде!
+## НЕВЕРНЫЕ ПУТИ ВЫЗОВУТ ОШИБКИ ПРИ ЗАПУСКЕ ИГРЫ
 
-##Station shuttles
+## Стандартные шаттлы станции
 #_maps/shuttles/emergency_birdboat.dmm
 #_maps/shuttles/emergency_box.dmm
 #_maps/shuttles/emergency_delta.dmm
@@ -11,25 +12,25 @@
 #_maps/shuttles/emergency_mini.dmm
 #_maps/shuttles/emergency_pubby.dmm
 
-##Others
-#_maps/shuttles/emergency_arena.dmm
-#_maps/shuttles/emergency_asteroid.dmm
-#_maps/shuttles/emergency_bar.dmm
-#_maps/shuttles/emergency_bballhooper.dmm
-#_maps/shuttles/emergency_clown.dmm
-#_maps/shuttles/emergency_construction.dmm
-#_maps/shuttles/emergency_cramped.dmm
-#_maps/shuttles/emergency_discoinferno.dmm
-#_maps/shuttles/emergency_goon.dmm
-#_maps/shuttles/emergency_hugcage.dmm
-#_maps/shuttles/emergency_imfedupwiththisworld.dmm
-#_maps/shuttles/emergency_lance.dmm
-#_maps/shuttles/emergency_luxury.dmm
-#_maps/shuttles/emergency_meteor.dmm
-#_maps/shuttles/emergency_raven.dmm
-#_maps/shuttles/emergency_russiafightpit.dmm
-#_maps/shuttles/emergency_scrapheap.dmm
-#_maps/shuttles/emergency_supermatter.dmm
-#_maps/shuttles/emergency_tranquility.dmm
-#_maps/shuttles/emergency_venture.dmm
-#_maps/shuttles/emergency_wabbajack.dmm
+## Специальные шаттлы
+#_maps/shuttles/emergency_arena.dmm       # Арена
+#_maps/shuttles/emergency_asteroid.dmm     # Астероид
+#_maps/shuttles/emergency_bar.dmm          # Бар
+#_maps/shuttles/emergency_bballhooper.dmm  # Баскетбол
+#_maps/shuttles/emergency_clown.dmm         # Клоунский
+#_maps/shuttles/emergency_construction.dmm # Строительный
+#_maps/shuttles/emergency_cramped.dmm      # Тесный
+#_maps/shuttles/emergency_discoinferno.dmm  # Диско-инферно
+#_maps/shuttles/emergency_goon.dmm          # Гунский
+#_maps/shuttles/emergency_hugcage.dmm       # Клетка для объятий
+#_maps/shuttles/emergency_imfedupwiththisworld.dmm  # "С меня хватит"
+#_maps/shuttles/emergency_lance.dmm         # Копье
+#_maps/shuttles/emergency_luxury.dmm        # Люксовый
+#_maps/shuttles/emergency_meteor.dmm        # Метеор
+#_maps/shuttles/emergency_raven.dmm         # Ворон
+#_maps/shuttles/emergency_russiafightpit.dmm # Русская бойцовая яма
+#_maps/shuttles/emergency_scrapheap.dmm     # Свалка
+#_maps/shuttles/emergency_supermatter.dmm   # Суперматерия
+#_maps/shuttles/emergency_tranquility.dmm   # Транквильность
+#_maps/shuttles/emergency_venture.dmm       # Венчур
+#_maps/shuttles/emergency_wabbajack.dmm     # Ваббаджак

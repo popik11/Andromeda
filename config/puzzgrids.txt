@@ -1,4 +1,55 @@
-[{"cells": ["Hour", "Year", "Second", "Day"], "description": "Measurements of time."}, {"cells": ["Items", "Emits", "Smite", "Mites"], "description": "Anagrams of each other."}, {"cells": ["Little", "Miniature", "Tiny", "Wee"], "description": "Synonyms of small."}, {"cells": ["City", "Minute", "Times", "Mets"], "description": "Words that can follow \"New York.\""}]
-[{"cells": ["Ben", "Rob", "Dave", "Nick"], "description": "Shortened Boys Names"}, {"cells": ["Scrambled", "Boiled", "Fried", "Easter"], "description": "Eggs"}, {"cells": ["Poached", "Took", "Stole", "Plundered"], "description": "Words for theft"}, {"cells": ["Beech", "Willow", "Oak", "Christmas"], "description": "______Trees"}]
-[{"cells": ["Earth", "Book", "Silk", "Inch"], "description": "Types of worm."}, {"cells": ["Humpback", "Blue", "Beluga", "Killer"], "description": "Types of whale."}, {"cells": ["Cerulean", "Azure", "Cornflower", "Cobalt"], "description": "Shades of blue."}, {"cells": ["Obtuse", "Acute", "Right", "Straight"], "description": "Types of angle"}]
-[{"cells": ["Celsius", "Carbon; Periodically.", "Coding Language", "Cosmic Constant"], "description": "All are represented as \"C\"\n\nCarbon is \"C\" on the periodic table.\nCosmic Constant is the speed of light, represented as \"c\" (E = mc^2 for example)\nCoding Language is \"C\"\nCelsius is represented as \"C\""}, {"cells": ["Catch A Glimpse", "Cones & Rods Function", "Coupled With Saw", "Catholic Governing Body"], "description": "All items relate to the word \"see\"\n\nCones & Rods in your eyes help you to \"see\"\nCatholic Governing Body is the Holy \"See\"\n\"See\" Saw\nCatch A Glimpse is to \"See\""}, {"cells": ["China (South)", "Could Be Black", "Could Be Red", "Caspian"], "description": "All items refer to \"seas\"\n\nCaspian Sea\nRed Sea\nBlack Sea\nSouth China Sea"}, {"cells": ["Coupled With Fire", "Cancel", "Companion To Desist", "Come To An End"], "description": "All are associated with the word \"cease\"\n\nCease and desist.\nTo cease is to come to an end.\nCeasefire.\nTo cancel something is to cease its operation."}]
+[{
+    "cells": ["Час", "Год", "Секунда", "День"],
+    "description": "Единицы измерения времени."
+}, {
+    "cells": ["Предметы", "Излучает", "Карает", "Клещи"],
+    "description": "Анаграммы друг друга."
+}, {
+    "cells": ["Маленький", "Миниатюрный", "Крошечный", "Крохотный"],
+    "description": "Синонимы слова «маленький»."
+}, {
+    "cells": ["Город", "Минута", "Таймс", "Метс"],
+    "description": "Слова, которые могут следовать за «Нью-Йорк»."
+},
+
+{
+    "cells": ["Бен", "Роб", "Дэйв", "Ник"],
+    "description": "Сокращенные мужские имена."
+}, {
+    "cells": ["Всмятку", "Вкрутую", "Яичница", "Пасхальное"],
+    "description": "Виды яиц."
+}, {
+    "cells": ["Украл", "Взял", "Стащил", "Разграбил"],
+    "description": "Синонимы воровства."
+}, {
+    "cells": ["Бук", "Ива", "Дуб", "Рождественская"],
+    "description": "Виды деревьев."
+},
+
+{
+    "cells": ["Земляной", "Книжный", "Шелковый", "Дюймовый"],
+    "description": "Виды червей."
+}, {
+    "cells": ["Горбатый", "Синий", "Белуха", "Косатка"],
+    "description": "Виды китов."
+}, {
+    "cells": ["Лазурный", "Азур", "Васильковый", "Кобальтовый"],
+    "description": "Оттенки синего цвета."
+}, {
+    "cells": ["Тупой", "Острый", "Прямой", "Развернутый"],
+    "description": "Виды углов."
+},
+
+{
+    "cells": ["Цельсий", "Углерод (в таблице)", "Язык программирования", "Космическая константа"],
+    "description": "Все обозначаются буквой «C»\n\nУглерод — «C» в таблице Менделеева.\nКосмическая константа — скорость света («c» в формуле E=mc²).\nЯзык программирования — «C».\nЦельсий обозначается как «C»."
+}, {
+    "cells": ["Увидеть мельком", "Функция колбочек и палочек", "В паре с пилой", "Управляющий орган католиков"],
+    "description": "Все связаны со словом «see» (видеть)\n\nКолбочки и палочки помогают «видеть».\nУправляющий орган католиков — Святой Престол (Holy «See»).\n«See» Saw (качели).\nУвидеть мельком — «see»."
+}, {
+    "cells": ["Китай (Южный)", "Может быть Черным", "Может быть Красным", "Каспийское"],
+    "description": "Все относятся к морям\n\nКаспийское море.\nКрасное море.\nЧерное море.\nЮжно-Китайское море."
+}, {
+    "cells": ["В паре с огнем", "Отмена", "Парный к «прекратить»", "Завершение"],
+    "description": "Все связаны со словом «cease» (прекращать)\n\n«Cease» and desist (прекратить и воздержаться).\n«Cease» — завершить.\n«Ceasefire» (прекращение огня).\nОтмена — «cease» операцию."
+}]

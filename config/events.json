@@ -1,354 +1,439 @@
 {
+	"_comment": "Файл конфигурации случайных событий | Перевод названий",
+	"_note": "Оригинальные имена событий не изменяются!",
+
 	"Space Pirates": {
+		"_russia_name": "Космические пираты",
 		"min_players": 20,
 		"weight": 10
 	},
 	"Spawn Bitrunning Glitch": {
+		"_russia_name": "Глюк битраннинга",
 		"min_players": 1,
 		"weight": 100
 	},
 	"Aurora Caelus": {
+		"_russia_name": "Северное сияние",
 		"min_players": 0,
 		"weight": 1,
 		"earliest_start": 3000
 	},
 	"Spontaneous Brain Trauma": {
+		"_russia_name": "Спонтанная черепно-мозговая травма",
 		"min_players": 13,
 		"weight": 25
 	},
 	"Brand Intelligence": {
+		"_russia_name": "Брендовый ИИ",
 		"min_players": 20,
 		"weight": 5
 	},
 	"Bureaucratic Error": {
+		"_russia_name": "Бюрократическая ошибка",
 		"min_players": 0,
 		"weight": 5
 	},
 	"Camera Failure": {
+		"_russia_name": "Отказ камер",
 		"min_players": 0,
 		"weight": 100
 	},
 	"Carp Migration": {
+		"_russia_name": "Миграция карпов",
 		"min_players": 12,
 		"weight": 15,
 		"earliest_start": 6000
 	},
 	"Disease Outbreak: Classic": {
+		"_russia_name": "Вспышка болезни: Классическая",
 		"min_players": 10,
 		"weight": 5
 	},
 	"Disease Outbreak: Advanced": {
+		"_russia_name": "Вспышка болезни: Продвинутая",
 		"min_players": 35,
 		"weight": 15,
 		"earliest_start": 9000
 	},
 	"Space Dust: Minor": {
+		"_russia_name": "Космическая пыль: Легкая",
 		"min_players": 0,
 		"weight": 200,
 		"earliest_start": 0
 	},
 	"Electrical Storm": {
+		"_russia_name": "Электрическая буря",
 		"min_players": 5,
 		"weight": 20,
 		"earliest_start": 6000
 	},
 	"Fake Virus": {
+		"_russia_name": "Фальшивый вирус",
 		"min_players": 0,
 		"weight": 20
 	},
 	"False Alarm": {
+		"_russia_name": "Ложная тревога",
 		"min_players": 0,
 		"weight": 20
 	},
 	"Gravity Generator Blackout": {
+		"_russia_name": "Отключение гравигенераторов",
 		"min_players": 0,
 		"weight": 30
 	},
 	"Grey Tide": {
+		"_russia_name": "Серая волна",
 		"min_players": 5,
 		"weight": 10
 	},
 	"Grid Check": {
+		"_russia_name": "Проверка сети",
 		"min_players": 0,
 		"weight": 10
 	},
 	"Random Heart Attack": {
+		"_russia_name": "Случайный инфаркт",
 		"min_players": 40,
 		"weight": 20
 	},
 	"Ion Storm": {
+		"_russia_name": "Ионная буря",
 		"min_players": 2,
 		"weight": 15
 	},
 	"Market Crash": {
+		"_russia_name": "Обвал рынка",
 		"min_players": 0,
 		"weight": 10
 	},
 	"Mass Hallucination": {
+		"_russia_name": "Массовые галлюцинации",
 		"min_players": 1,
 		"weight": 10
 	},
 	"Mice Migration": {
+		"_russia_name": "Миграция мышей",
 		"min_players": 0,
 		"weight": 10
 	},
 	"Portal Storm: Syndicate Shocktroops": {
+		"_russia_name": "Портал-шторм: Ударные отряды Синдиката",
 		"min_players": 15,
 		"weight": 2,
 		"earliest_start": 18000
 	},
 	"Portal Storm: Constructs": {
+		"_russia_name": "Портал-шторм: Конструкты",
 		"min_players": 0,
 		"weight": 0
 	},
 	"Processor Overload": {
+		"_russia_name": "Перегрузка процессоров",
 		"min_players": 20,
 		"weight": 15
 	},
 	"Radiation Leak": {
+		"_russia_name": "Утечка радиации",
 		"min_players": 0,
 		"weight": 15
 	},
 	"Radiation Storm": {
+		"_russia_name": "Радиационная буря",
 		"min_players": 0,
 		"weight": 10
 	},
 	"Sandstorm: Directional": {
+		"_russia_name": "Песчаная буря: Направленная",
 		"min_players": 35,
 		"weight": 10,
 		"earliest_start": 21000
 	},
 	"Sandstorm: Classic": {
+		"_russia_name": "Песчаная буря: Классическая",
 		"min_players": 0,
 		"weight": 0,
 		"earliest_start": 0
 	},
 	"Scrubber Overflow: Normal": {
+		"_russia_name": "Переполнение скрубберов: Обычное",
 		"min_players": 10,
 		"weight": 10
 	},
 	"Scrubber Overflow: Threatening": {
+		"_russia_name": "Переполнение скрубберов: Угрожающее",
 		"min_players": 25,
 		"weight": 4,
 		"earliest_start": 21000
 	},
 	"Scrubber Overflow: Catastrophic": {
+		"_russia_name": "Переполнение скрубберов: Катастрофическое",
 		"min_players": 35,
 		"weight": 2,
 		"earliest_start": 27000
 	},
 	"Scrubber Overflow: Every Vent": {
+		"_russia_name": "Переполнение скрубберов: Все венты",
 		"min_players": 10,
 		"weight": 0
 	},
 	"Shuttle Catastrophe": {
+		"_russia_name": "Крушение шаттла",
 		"min_players": 0,
 		"weight": 10
 	},
 	"Shuttle Insurance": {
+		"_russia_name": "Страховка шаттла",
 		"min_players": 0,
 		"weight": 10
 	},
 	"Spider Infestation": {
+		"_russia_name": "Нашествие пауков",
 		"min_players": 20,
 		"weight": 10
 	},
 	"Stray Cargo Pod": {
+		"_russia_name": "Заблудившийся грузовой отсек",
 		"min_players": 0,
 		"weight": 20,
 		"earliest_start": 6000
 	},
 	"Stray Syndicate Cargo Pod": {
+		"_russia_name": "Заблудившийся отсек Синдиката",
 		"min_players": 0,
 		"weight": 6,
 		"earliest_start": 18000
 	},
 	"Supermatter Surge": {
+		"_russia_name": "Скачок суперматерии",
 		"min_players": 0,
 		"weight": 15
 	},
 	"Supermatter Surge: Poly's Revenge": {
+		"_russia_name": "Скачок суперматерии: Месть Поли",
 		"min_players": 0,
 		"weight": 0
 	},
 	"Tram Malfunction": {
+		"_russia_name": "Неисправность трамвая",
 		"min_players": 0,
 		"weight": 30,
 		"earliest_start": 9000
 	},
 	"Ventilation Clog: Minor": {
+		"_russia_name": "Затор вентиляции: Легкий",
 		"min_players": 0,
 		"weight": 25,
 		"earliest_start": 3000
 	},
 	"Ventilation Clog: Major": {
+		"_russia_name": "Затор вентиляции: Серьезный",
 		"min_players": 0,
 		"weight": 10,
 		"earliest_start": 6000
 	},
 	"Ventilation Clog: Critical": {
+		"_russia_name": "Затор вентиляции: Критический",
 		"min_players": 15,
 		"weight": 8,
 		"earliest_start": 15000
 	},
 	"Ventilation Clog: Strange": {
+		"_russia_name": "Затор вентиляции: Странный",
 		"min_players": 0,
 		"weight": 5,
 		"earliest_start": 3000
 	},
 	"Wisdom Cow": {
+		"_russia_name": "Мудрая корова",
 		"min_players": 0,
 		"weight": 20
 	},
 	"Wormholes": {
+		"_russia_name": "Червоточины",
 		"min_players": 2,
 		"weight": 1
 	},
 	"Anomaly: Energetic Flux": {
+		"_russia_name": "Аномалия: Энергетический поток",
 		"min_players": 1,
 		"weight": 15
 	},
 	"Anomaly: Bioscrambler": {
+		"_russia_name": "Аномалия: Биоскремблер",
 		"min_players": 10,
 		"weight": 20
 	},
 	"Anomaly: Bluespace": {
+		"_russia_name": "Аномалия: Блюспейс",
 		"min_players": 1,
 		"weight": 15
 	},
 	"Anomaly: Dimensional": {
+		"_russia_name": "Аномалия: Разлом",
 		"min_players": 10,
 		"weight": 20
 	},
 	"Anomaly: Ectoplasmic Outburst": {
+		"_russia_name": "Аномалия: Всплеск эктоплазмы",
 		"min_players": 30,
 		"weight": 4
 	},
 	"Anomaly: Hyper-Energetic Flux": {
+		"_russia_name": "Аномалия: Гиперэнергетический поток",
 		"min_players": 10,
 		"weight": 20
 	},
 	"Anomaly: Gravitational": {
+		"_russia_name": "Аномалия: Гравитационная",
 		"min_players": 1,
 		"weight": 25
 	},
 	"Anomaly: Gravitational (High Intensity)": {
+		"_russia_name": "Аномалия: Гравитационная (Высокая интенсивность)",
 		"min_players": 1,
 		"weight": 15
 	},
 	"Anomaly: Hallucination": {
+		"_russia_name": "Аномалия: Галлюциногенная",
 		"min_players": 10,
 		"weight": 20
 	},
 	"Anomaly: Pyroclastic": {
+		"_russia_name": "Аномалия: Пирокластическая",
 		"min_players": 1,
 		"weight": 20
 	},
 	"Anomaly: Vortex": {
+		"_russia_name": "Аномалия: Вихревая",
 		"min_players": 20,
 		"weight": 10
 	},
 	"Abductors": {
+		"_russia_name": "Похитители",
 		"min_players": 20,
 		"weight": 10
 	},
 	"Alien Infestation": {
+		"_russia_name": "Инопланетное заражение",
 		"min_players": 10,
 		"weight": 5
 	},
 	"Blob": {
+		"_russia_name": "Блоб",
 		"min_players": 20,
 		"weight": 10
 	},
 	"Changeling Meteor": {
+		"_russia_name": "Метеорит генокрадов",
 		"min_players": 20,
 		"weight": 8
 	},
 	"Spawn Fugitives": {
+		"_russia_name": "Появление беглецов",
 		"min_players": 20,
 		"weight": 10,
 		"earliest_start": 18000
 	},
 	"Spawn Morph": {
+		"_russia_name": "Появление морфов",
 		"min_players": 0,
 		"weight": 0
 	},
 	"Spawn Nightmare": {
+		"_russia_name": "Появление кошмаров",
 		"min_players": 20,
 		"weight": 10
 	},
 	"Lone Operative": {
+		"_russia_name": "Одиночный оперативник",
 		"min_players": 0,
 		"weight": 0
 	},
 	"Spawn Revenant": {
+		"_russia_name": "Появление ревенанта",
 		"min_players": 5,
 		"weight": 7
 	},
 	"Random Human-level Intelligence": {
+		"_russia_name": "Случайный ИИ человеческого уровня",
 		"min_players": 0,
 		"weight": 10
 	},
 	"Station-wide Human-level Intelligence": {
+		"_russia_name": "Общестанционный ИИ человеческого уровня",
 		"min_players": 0,
 		"weight": 0
 	},
 	"Spawn Slaughter Demon": {
+		"_russia_name": "Появление демона-убийцы",
 		"min_players": 20,
 		"weight": 1,
 		"earliest_start": 36000
 	},
 	"Spawn Space Dragon": {
+		"_russia_name": "Появление космического дракона",
 		"min_players": 20,
 		"weight": 7
 	},
 	"Spawn Space Ninja": {
+		"_russia_name": "Появление космического ниндзя",
 		"min_players": 20,
 		"weight": 10
 	},
 	"Immovable Rod": {
+		"_russia_name": "Неподвижный стержень",
 		"min_players": 15,
 		"weight": 10
 	},
 	"Dark Matt-eor": {
+		"_russia_name": "Темный метеор",
 		"min_players": 0,
 		"weight": 0
 	},
 	"Meteor Wave: Normal": {
+		"_russia_name": "Метеоритный дождь: Обычный",
 		"min_players": 15,
 		"weight": 4,
 		"earliest_start": 15000
 	},
 	"Meteor Wave: Threatening": {
+		"_russia_name": "Метеоритный дождь: Угрожающий",
 		"min_players": 20,
 		"weight": 5,
 		"earliest_start": 21000
 	},
 	"Meteor Wave: Catastrophic": {
+		"_russia_name": "Метеоритный дождь: Катастрофический",
 		"min_players": 25,
 		"weight": 7,
 		"earliest_start": 27000
 	},
 	"Meteor Wave: Meaty": {
+		"_russia_name": "Метеоритный дождь: Мясной",
 		"min_players": 15,
 		"weight": 2,
 		"earliest_start": 15000
 	},
 	"Major Space Dust": {
+		"_russia_name": "Сильная космическая пыль",
 		"min_players": 15,
 		"weight": 14,
 		"earliest_start": 9000
 	},
 	"Stray Meteor": {
+		"_russia_name": "Блуждающий метеор",
 		"min_players": 15,
 		"weight": 15
 	},
 	"Shuttle Loan": {
+		"_russia_name": "Аренда шаттла",
 		"min_players": 0,
 		"weight": 10,
 		"earliest_start": 4200
 	},
 	"Space Vines": {
+		"_russia_name": "Космические лозы",
 		"min_players": 10,
 		"weight": 15
 	}

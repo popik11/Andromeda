@@ -1,3 +1,3 @@
-Add the config files for modular maps here.
+Добавьте сюда файлы конфигурации для модульных карт.
 
-**These are fully cached so keep this directory empty by default.**
+**Они полностью кэшируются, поэтому по умолчанию оставьте этот каталог пустым.**

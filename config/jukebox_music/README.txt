@@ -1,15 +1,15 @@
-The enclosed /sounds folder holds the sound files used for player selectable songs for an ingame jukebox. OGG and WAV are supported.
+Папка /sounds содержит звуковые файлы для внутриигрового музыкального автомата. Поддерживаются форматы OGG и WAV.
 
-Using unnecessarily huge sounds can cause client side lag and should be avoided.
+Избегайте использования слишком больших аудиофайлов - это может вызвать лаги у клиентов.
 
-You may add as many sounds as you would like.
+Вы можете добавить любое количество звуковых файлов.
 
 ---
 
-Naming Conventions:
+Правила именования музыкальных файлов:
 
-Every sound you add must have a unique name. Avoid using the plus sign "+" and the period "." in names, as these are used internally to classify sounds.
+Каждый звуковой файл должен иметь уникальное имя. Не используйте символы "+" и "." в названиях, так как они используются системой для классификации звуков.
 
-Sound names must be in the format of [song name]+[length in deciseconds]+[beat in deciseconds].ogg
+Имя файла должно быть в формате: [название трека]+[длительность в децисекундах]+[интервал битов в децисекундах].ogg
 
-A three minute song title "SS13" that lasted 3 minutes would have a file name SS13+1800+5.ogg
+Пример для 3-минутного трека "SS13": SS13+1800+5.ogg

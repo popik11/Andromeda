@@ -1,5 +1,5 @@
 {
-	"How do I set policy?": "Policy is set in this file. It's simply setting the key to the text to show up.",
-	"Where is policy shown?": "Most, but not all policy text, is displayed when relevant, such as on gaining a role.",
-	"What can I all set policy of?": "Antagonist typepaths, mob typepaths, species typepaths, special roles, and some extra special policy keys are all valid. Consult the code."
+	"Как установить политику?": "Политика настраивается в этом файле. Просто укажите ключ и текст, который будет отображаться.",
+	"Где отображается политика?": "Большинство (но не все) текстов политики показываются в соответствующих ситуациях, например при получении роли.",
+	"Для чего можно установить политику?": "Допустимые цели: антагонисты, типы мобов, виды рас, особые роли и некоторые специальные ключи политики. Подробности в коде."
 }

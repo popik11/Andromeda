@@ -1,34 +1,55 @@
+RUS
+---ЛИЦЕНЗИОННОЕ УВЕДОМЛЕНИЕ---
+
+Оператор(ы) сервера несет ответственность за статус авторских прав всех звуковых файлов, размещенных в папке /config/jukebox_music, если не указано иное.
+
+Если для звукового файла требуется указание авторства и/или специальная лицензия, оператор(ы) обязан(ы) сделать эту информацию публично доступной либо на сайте, связанном с их сервером, либо на самом сервере.
+
+Если оператор(ы) разрешает публичный доступ к этим конфигурационным файлам, данный файл может служить этой цели при условии его регулярного обновления.
+
+Если в будущем в эти папки будут добавлены новые звуковые файлы (например, в онлайн-репозитории кода), они должны явно указывать свою лицензию, если таковая отличается от лицензии по умолчанию, указанной в файле README.md в корневом каталоге проекта.
+
+Не удаляйте это уведомление.
+
+---КОНЕЦ УВЕДОМЛЕНИЯ---
+
+---ПРИМЕРЫ (НЕ ЯВЛЯЮТСЯ ЧАСТЬЮ ЛИЦЕНЗИИ)---
+
+Здесь приведены примеры правильно атрибутированных и лицензированных звуков.
+Эти примеры ни при каких обстоятельствах не являются частью какой-либо лицензии.
+
+title5.ogg был создан Майей Куинн 28 февраля 2557 года. Распространяется по лицензии Combative Clowning 3.0 HO-NK (http://example.com/license/url/).
+
+Если не указано иное, все звуки были созданы Кьюбаном Питом 26 июля 2555 года. Они распространяются по публичной лицензии RUMBABEAT (http://example.com/license/url/).
+
+---КОНЕЦ ПРИМЕРОВ (НЕ ЯВЛЯЮТСЯ ЧАСТЬЮ ЛИЦЕНЗИИ)---
+
+
+
+ENG
 ---LICENSE NOTICE---
 
 The server operator(s) is responsible for the copyright status of all sounds placed within the /config/jukebox_music folder unless otherwise noted.
 
-If a sound requires attribution and/or a specific license it is up to the operator(s) to make this information publicly available on either 
-a website associated with their server or on the server itself. 
+If a sound requires attribution and/or a specific license it is up to the operator(s) to make this information publicly available on either
+a website associated with their server or on the server itself.
 
 If operators(s) allow these configuration files to be public this file can serve that purpose by keeping it properly updated.
 
-If in the future new sounds are published to these folders (i.e. in an online code repository) they must explicitly state their 
+If in the future new sounds are published to these folders (i.e. in an online code repository) they must explicitly state their
 license if said license is not the same as the default licensing found in README.md in the root directory of the project.
 
 Do not remove this notice.
 
 ---END NOTICE---
 
-
-
-
 ---EXAMPLES (NOT PART OF ANY LICENSE)---
 
-These are examples of properly attributed and licensed sounds. 
+These are examples of properly attributed and licensed sounds.
 They are not an actual part of any license under any circumstance.
 
-title5.ogg was created by Mya Quinn on February 28, 2557. It is licensed under a Combative Clowning 3.0 HO-NK license (http://example.com/license/url/). 
+title5.ogg was created by Mya Quinn on February 28, 2557. It is licensed under a Combative Clowning 3.0 HO-NK license (http://example.com/license/url/).
 
 Unless otherwise noted all sounds were created by Cuban Pete on July 26, 2555. They are licensed under the RUMBABEAT Public License.(http://example.com/license/url/).
 
 ---END EXAMPLES (NOT PART OF ANY LICENSE)---
-
-
-
-
----ADD LICENSING INFORMATION BELOW---

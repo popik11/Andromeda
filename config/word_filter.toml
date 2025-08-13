@@ -1,28 +1,27 @@
-# This configuration file forms the in-game chat filter.
-# Values are stored as "word" = "reason for being banned".
-# Soft filter reasons should be kept short or the tgui gets messy.
+# Конфигурация фильтра чата в игре
+# Формат: "слово" = "причина блокировки"
+# Для мягкого фильтра причины должны быть краткими
 
-# Anything in here will be blocked from IC interactions, dead chat, and OOC
+# Блокируется везде: IC, чат мертвых, OOC
 [shared]
-"blockedinshared" = "This message is not allowed anywhere, please use a different weird test phrase."
+"blockedinshared" = "Это сообщение запрещено везде, используйте другую фразу."
 
-# Anything in here is blocked just from IC interactions, such as chat or names, but is allowed in dead chat and OOC
+# Блокируется только в IC-чате (разрешено в мертвых и OOC)
 [ic]
-"blockedinic" = "This message is not allowed IC, please use a different weird test phrase."
+"blockedinic" = "Это сообщение запрещено в IC, используйте другую фразу."
 
-# Anything in here is blocked from all IC interactions *except* PDAs.
-# On /tg/, netspeak is OK in PDAs.
+# Блокируется в IC, кроме КПК (разрешено в КПК)
 [ic_outside_pda]
-"<(0_0<)" = "Kirby dancing is strictly prohibited on this server."
+"<(0_0<)" = "Танцующий Кирби запрещен на этом сервере."
 
-# Anything in here will warn the player if said in IC, dead chat or OOC, the player must approve their message to send it
+# Предупреждение при использовании (везде)
 [soft_shared]
-"testsoftblocks" = "You risk being banned if this term is used improperly."
+"testsoftblocks" = "Вы рискуете получить бан за неправильное использование."
 
-# Anything in here will warn the player if said ICly, but is allowed in dead chat and OOC, the player must approve their message to send it
+# Предупреждение в IC (разрешено в мертвых/OOC)
 [soft_ic]
-"testsofterblocks" = "This term is commonly considered OOC, only use it with context."
+"testsofterblocks" = "Этот термин считается OOC, используйте с контекстом."
 
-# Anything in here will warn the player if said ICly *except* PDAs. the player must approve their message to send it
+# Предупреждение в IC, кроме КПК
 [soft_ic_outside_pda]
-"testsoftestblocks" = "Stop saying debug phrases ICly."
+"testsoftestblocks" = "Прекратите использовать тестовые фразы в IC."

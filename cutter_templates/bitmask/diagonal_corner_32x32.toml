@@ -1,20 +1,22 @@
+# Конфигурационный файл для угловых диагональных соединений 32x32
+# Наследует настройки из diagonal_32x32.toml
 template = "bitmask/diagonal_32x32"
 
-# We're a corner diagonal
+# Специализированный тип вывода - угловые диагонали
 output_type = "CornerDiagonal"
 
-# And because of that we need a state for all directions and all our asshole corner bits
+# Расширенный набор позиций для сложных угловых соединений:
 [positions]
-convex = 0
-vertical = 1
-horizontal = 2
-concave = 3
-flat = 4
-bottom_right_inner = 5
-bottom_left_inner = 6
-top_right_inner = 7
-top_left_inner = 8
-bottom_right_outer = 9
-bottom_left_outer = 10
-top_right_outer = 11
-top_left_outer = 12
+convex = 0               # Без соединений (изолированный объект)
+vertical = 1             # Вертикальное соединение
+horizontal = 2           # Горизонтальное соединение
+concave = 3              # Полное соединение по 4 сторонам
+flat = 4                 # Плоское соединение
+bottom_right_inner = 5   # Внутренний правый нижний угол
+bottom_left_inner = 6    # Внутренний левый нижний угол
+top_right_inner = 7      # Внутренний правый верхний угол
+top_left_inner = 8       # Внутренний левый верхний угол
+bottom_right_outer = 9   # Внешний правый нижний угол
+bottom_left_outer = 10   # Внешний левый нижний угол
+top_right_outer = 11     # Внешний правый верхний угол
+top_left_outer = 12      # Внешний левый верхний угол

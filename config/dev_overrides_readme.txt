@@ -1,5 +1,4 @@
-# Make a new file named dev_overrides.txt in order to be able to add your own configuration
-# without worrying about committing. These are applied after config.txt.
-# You do not need this if you are a server operator! You should instead use the $include system.
-
-#STATIONNAME My Dev World
+Создайте новый файл с именем dev_overrides.txt для добавления собственных настроек
+без риска случайного коммита. Эти настройки применяются ПОСЛЕ config.txt.
+Этот файл не нужен серверным операторам! Вместо этого используйте систему $include.
+#STATIONNAME Мой Тестовый Мир

@@ -1,12 +1,14 @@
+# Файл конфигурации для обработки диагональных соединений 32x32
+# Наследует настройки из шаблона cardinal_32x32.toml
 template = "bitmask/cardinal_32x32"
 
-# We're diagonal
+# Тип вывода - диагональные соединения (Standard + Diagonal)
 output_type = "StandardDiagonal"
 
-# And because of that we need a state for all directions
+# Определение позиций спрайтов для разных типов соединений:
 [positions]
-convex = 0
-vertical = 1
-horizontal = 2
-concave = 3
-flat = 4
+convex = 0    # Нет соединений (изолированный тайл)
+vertical = 1  # Вертикальное соединение (север-юг)
+horizontal = 2 # Горизонтальное соединение (восток-запад)
+concave = 3   # Полное соединение (все 4 стороны)
+flat = 4      # Плоское соединение (специальный случай)

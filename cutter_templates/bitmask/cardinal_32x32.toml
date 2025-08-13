@@ -1,45 +1,40 @@
+# Режим обработки - нарезка по битовой маске
 mode = "BitmaskSlice"
 
-# Dictates what sort of directions this dmi will have.
-# There are currently 4 possible values:
-# Standard (Default, used if none is specified) -> only 1 direction per frame
-# Cardinals -> 4 directions per frame, arranged as duplicates of the full input set out to the right
-#   ... in order SOUTH, NORTH, EAST, WEST
-# All -> 8 directions per frame, arranged in the same pattern as cardinals
-#   ... in order SOUTH, NORTH, EAST, WEST, SOUTHEAST, SOUTHWEST, NORTHEAST, NORTHWEST
-# CardinalsRotated -> 1 direction per frame, will be expanded in the dmi to be Cardinals, with each
-#   ... direction being that base junction, rotated in whatever way. Exists mostly so client.dir supporting states
-#   ... can be created. Creates a lot of duplicate blocks otherwise.
+# Определяет типы направлений для этого DMI
+# Доступно 4 варианта:
+# Standard (по умолчанию) - 1 направление на кадр
+# Cardinals - 4 направления на кадр (ЮГ, СЕВЕР, ВОСТОК, ЗАПАД)
+# All - 8 направлений (как Cardinals + диагонали: ЮВ, ЮЗ, СВ, СЗ)
+# CardinalsRotated - 1 базовое направление с автоматической ротацией
 directional_strategy = "Standard"
-# We smooth only with our cardinal neighbors, not the ones on the diagonal
+
+# Сглаживание только по основным направлениям (без диагоналей)
 output_type = "Cardinal"
 
-# Take as input a set of 32x32 blocks
+# Размер входных блоков 32x32
 [icon_size]
 x = 32
 y = 32
 
-# Output our stuff at the same level as its input
+# Позиция вывода иконки (без смещения)
 [output_icon_pos]
 x = 0
 y = 0
 
-# And at the same width/height too
+# Размер выходных иконок (сохранение оригинального размера)
 [output_icon_size]
 x = 32
 y = 32
 
-# This defines where in our list of blocks we draw each "direction" from
-# no connections, east/west, north/south, and north/south/east/west
-# the 0-3 is the block to read from, starting at 0
+# Соответствие типов соединений номерам блоков
 [positions]
-convex = 0
-horizontal = 1
-vertical = 2
-concave = 3
+convex = 0    # Нет соединений
+horizontal = 1 # Горизонтальное (восток-запад)
+vertical = 2   # Вертикальное (север-юг)
+concave = 3    # Все направления
 
-# When we cut up our blockls, we're cutting "around" a central point
-# We typically want to cut around the center, so let's do that here
+# Точка центра для нарезки
 [cut_pos]
-x = 16
-y = 16
+x = 16  # Центр по X
+y = 16  # Центр по Y

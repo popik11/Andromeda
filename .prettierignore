@@ -1,4 +1,4 @@
-# Directories
+# Каталоги
 changelogs
 data
 font-awesome
@@ -8,7 +8,7 @@ juke
 **/dist
 **/node_modules
 
-# File names / types
+# Имена/типы файлов
 *.min.*
 *.pnp.*
 *.bundle.*

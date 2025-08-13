@@ -1,9 +1,6 @@
 ###############################################################################################
-# Basically, a list of ckeys who make it past user connection                                 #
-# Case is not important for ckey.                                                             #
+# Файл вайтлиста - список ckey пользователей, которым разрешено подключение к серверу         #
+# Регистр букв в ckey не имеет значения                                                       #
 ###############################################################################################
-#Optimumtact
-#kevinz000
-#Iamgoofball
-#Rshoe95
-#That one penguin who became an admin
+
+

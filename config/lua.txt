@@ -1,5 +1,6 @@
-## This file allows server hosts to specify the paths that the lua function "require" searches for modules in.
-## The character '?' will be replaced with the name of the module being searched.
+## Этот файл позволяет администраторам сервера указать пути,
+## по которым функция Lua "require" будет искать модули.
+## Символ '?' заменяется на имя искомого модуля.
 
 LUA_PATH ?
 LUA_PATH ?.lua

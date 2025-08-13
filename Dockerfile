@@ -1,4 +1,4 @@
-# base = ubuntu + full apt update
+# Базовый образ = ubuntu + полное обновление apt
 FROM ubuntu:xenial AS base
 RUN dpkg --add-architecture i386 \
     && apt-get update \
@@ -7,7 +7,7 @@ RUN dpkg --add-architecture i386 \
     && apt-get install -y --no-install-recommends \
         ca-certificates
 
-# byond = base + byond installed globally
+# Образ с BYOND = базовый образ + глобальная установка BYOND
 FROM base AS byond
 WORKDIR /byond
 
@@ -31,7 +31,7 @@ RUN . ./dependencies.sh \
     && cd .. \
     && rm -rf byond byond.zip
 
-# build = byond + tgstation compiled and deployed to /deploy
+# Образ сборки = BYOND + компиляция tgstation и развертывание в /deploy
 FROM byond AS build
 WORKDIR /tgstation
 
@@ -43,14 +43,14 @@ COPY . .
 RUN env TG_BOOTSTRAP_NODE_LINUX=1 tools/build/build.sh \
     && tools/deploy.sh /deploy
 
-# rust = base + rustc and i686 target
+# Образ Rust = базовый образ + rustc и цель i686
 FROM base AS rust
 RUN apt-get install -y --no-install-recommends \
         curl && \
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal \
     && ~/.cargo/bin/rustup target add i686-unknown-linux-gnu
 
-# rust_g = base + rust_g compiled to /rust_g
+# Образ rust_g = базовый образ + компиляция rust_g в /rust_g
 FROM rust AS rust_g
 WORKDIR /rust_g
 
@@ -69,7 +69,7 @@ RUN . ./dependencies.sh \
     && git checkout FETCH_HEAD \
     && env PKG_CONFIG_ALLOW_CROSS=1 ~/.cargo/bin/cargo build --release --target i686-unknown-linux-gnu
 
-# final = byond + runtime deps + rust_g + build
+# Финальный образ = BYOND + зависимости для работы + rust_g + сборка
 FROM byond
 WORKDIR /tgstation
 

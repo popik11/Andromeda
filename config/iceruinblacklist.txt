@@ -1,20 +1,21 @@
-#Listing maps here will blacklist them from generating in the ice moon.
-#Maps must be the full path to them
-#A list of maps valid to blacklist can be found in _maps\RandomRuins\IceRuins
-#SPECIFYING AN INVALID MAP WILL RESULT IN RUNTIMES ON GAME START
+#Чёрный список карт для генерации руин на ледяной луне.
+#Указанные здесь карты не будут появляться при генерации.
+#Пути должны быть полными и точными.
+#Список доступных для блокировки карт можно найти в _maps\RandomRuins\IceRuins
+#НЕВЕРНЫЕ ПУТИ ВЫЗОВУТ ОШИБКИ ПРИ ЗАПУСКЕ ИГРЫ
 
-##RESPAWN
+##РЕСПАВН
 #_maps/RandomRuins/AnywhereRuins/golem_ship.dmm
 #_maps/RandomRuins/IceRuins/icemoon_underground_comms_agent.dmm
 #_maps/RandomRuins/IceRuins/icemoon_underground_hermit.dmm
 
-##MEGAFAUNA
+##МЕГАФАУНА
 #_maps/RandomRuins/IceRuins/icemoon_surface_mining_site.dmm
 #_maps/RandomRuins/IceRuins/icemoon_underground_mining_site.dmm
 #_maps/RandomRuins/IceRuins/icemoon_underground_lavaland.dmm
 #_maps/RandomRuins/IceRuins/icemoon_underground_wendigo_cave.dmm
 
-##MISC
+##РАЗНОЕ
 #_maps/RandomRuins/AnywhereRuins/fountain_hall.dmm
 #_maps/RandomRuins/IceRuins/icemoon_surface_asteroid.dmm
 #_maps/RandomRuins/IceRuins/icemoon_surface_bughabitat.dmm
