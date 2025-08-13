@@ -1,6 +1,6 @@
 import { map } from 'es-toolkit/compat';
 import { Button, Section, Table } from 'tgui-core/components';
-
+import { DEPARTMENTS_RU } from '../andromeda/ru_jobs';
 import { useBackend } from '../backend';
 import { NtosWindow } from '../layouts';
 
@@ -21,7 +21,15 @@ export const NtosCrewManifest = (props) => {
           }
         >
           {map(manifest, (entries, department) => (
-            <Section key={department} level={2} title={department}>
+            <Section
+              key={department}
+              level={2}
+              title={
+                DEPARTMENTS_RU[department]
+                  ? DEPARTMENTS_RU[department]
+                  : department
+              }
+            >
               <Table>
                 {entries.map((entry) => (
                   <Table.Row key={entry.name} className="candystripe">

@@ -1,6 +1,7 @@
 import { sortBy } from 'es-toolkit';
 import type { PropsWithChildren, ReactNode } from 'react';
 import { useBackend } from 'tgui/backend';
+import { JOBS_RU } from '../../../andromeda/ru_jobs';
 import { Box, Button, Dropdown, Stack, Tooltip } from 'tgui-core/components';
 import { classes } from 'tgui-core/react';
 
@@ -244,7 +245,7 @@ function JobRow(props: JobRowProps) {
               paddingLeft: '0.3em',
             }}
           >
-            {name}
+            {JOBS_RU[name] ? JOBS_RU[name] : name}
           </Stack.Item>
         </Tooltip>
 
@@ -312,7 +313,7 @@ function JoblessRoleDropdown(props) {
 
   const options = [
     {
-      displayText: `Join as ${data.overflow_role} if unavailable`,
+      displayText: `Присоединиться за ${JOBS_RU[data.overflow_role] ? JOBS_RU[data.overflow_role] : data.overflow_role} если не удалось войти`,
       value: JoblessRole.BeOverflow,
     },
     {
