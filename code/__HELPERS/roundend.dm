@@ -245,11 +245,11 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 	//Set news report and mode result
 	SSdynamic.set_round_result()
 
-	to_chat(world, span_infoplain(span_big(span_bold("<BR><BR><BR>The round has ended."))))
-	log_game("The round has ended.")
+	to_chat(world, span_infoplain(span_big(span_bold("<BR><BR><BR>Раунд окончен."))))
+	log_game("Раунд окончен.")
 	for(var/channel_tag in CONFIG_GET(str_list/channel_announce_end_game))
-		send2chat(new /datum/tgs_message_content("[GLOB.round_id ? "Round [GLOB.round_id]" : "The round has"] just ended."), channel_tag)
-	send2adminchat("Server", "Round just ended.")
+		send2chat(new /datum/tgs_message_content("[GLOB.round_id ? "Раунд [GLOB.round_id]" : "Текущий раунд"] только что завершился."), channel_tag)
+	send2adminchat("Сервер", "Раунд только что закончился.")
 
 	if(length(CONFIG_GET(keyed_list/cross_server)))
 		send_news_report()

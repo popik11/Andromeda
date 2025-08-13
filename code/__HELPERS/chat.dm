@@ -38,11 +38,12 @@ it will be sent to all connected chats.
 */
 
 /**
- * Asynchronously sends a message to TGS chat channels.
- *
- * message - The [/datum/tgs_message_content] to send.
- * channel_tag - Required. If "", the message with be sent to all connected (Game-type for TGS3) channels. Otherwise, it will be sent to TGS4 channels with that tag (Delimited by ','s).
- * admin_only - Determines if this communication can only be sent to admin only channels.
+/*
+ * Асинхронно отправляет сообщение в чат-каналы TGS.
+ * message - Объект [/datum/tgs_message_content] для отправки.
+ * channel_tag - Обязательный параметр. Если указан как "", сообщение будет отправлено во все подключенные каналы (типа Game для TGS3). Иначе - будет отправлено в каналы TGS4 с этим тегом (разделяются запятыми).
+ * admin_only - Определяет, можно ли отправлять сообщение только в админ-каналы.
+*/
  */
 /proc/send2chat(datum/tgs_message_content/message, channel_tag, admin_only = FALSE)
 	set waitfor = FALSE
@@ -65,10 +66,10 @@ it will be sent to all connected chats.
 		world.TgsChatBroadcast(message, channels_to_use)
 
 /**
- * Asynchronously sends a message to TGS admin chat channels.
+ * Асинхронно отправляет сообщение в админ-чаты TGS.
  *
- * category - The category of the mssage.
- * message - The message to send.
+ * category - Категория сообщения.
+ * message - Отправляемое сообщение.
  */
 /proc/send2adminchat(category, message, embed_links = FALSE)
 	set waitfor = FALSE

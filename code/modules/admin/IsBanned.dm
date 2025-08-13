@@ -52,17 +52,17 @@
 
 		qdel(query_client_in_db)
 
-	//Whitelist
+// Вайтлист
 	if(!real_bans_only && !C && CONFIG_GET(flag/usewhitelist))
 		if(!check_whitelist(ckey))
 			if (admin)
-				log_admin("The admin [ckey] has been allowed to bypass the whitelist")
+				log_admin("Администратору [ckey] разрешён обход вайтлиста")
 				if (message)
-					message_admins(span_adminnotice("The admin [ckey] has been allowed to bypass the whitelist"))
-					addclientmessage(ckey,span_adminnotice("You have been allowed to bypass the whitelist"))
+					message_admins(span_adminnotice("Администратору [ckey] разрешён обход вайтлиста"))
+					addclientmessage(ckey,span_adminnotice("Вам разрешён обход вайтлиста"))
 			else
-				log_access("Failed Login: [ckey] - Not on whitelist")
-				return list("reason"="whitelist", "desc" = "\nReason: You are not on the white list for this server")
+				log_access("Ошибка входа: [ckey] - Нет в вайтлисте")
+				return list("reason"="whitelist", "desc" = "Причина: Вы не внесены в вайтлист этого сервера")
 
 	//Guest Checking
 	if(!real_bans_only && !C && is_guest_key(key))
