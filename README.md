@@ -1,6 +1,6 @@
 ## Кодовая база /tg/station
 
-Руководства по внесению вклада см. в [https://github.com/tgstation/tgstation](https://github.com/tgstation/tgstation)
+TGstation - [https://github.com/tgstation/tgstation](https://github.com/tgstation/tgstation)
 
 ## АНДРОМЕДА-13
 
