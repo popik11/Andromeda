@@ -3,7 +3,7 @@
 ## администрирования и внутриигровой библиотеки.
 
 ## Включить ли SQL? Раскомментируйте для активации
-#SQL_ENABLED
+SQL_ENABLED
 
 ## Адрес сервера MySQL. Примеры:
 ## localhost, 200.135.5.43, www.mysqldb.com и т.д.
@@ -13,19 +13,19 @@ ADDRESS localhost
 PORT 3306
 
 ## Имя базы данных для всех SQL-функций.
-FEEDBACK_DATABASE feedback
+FEEDBACK_DATABASE tgstation_schema
 
 ## Префикс для названий таблиц (для старых БД требуется "erro_").
 ## Пример:
 ## FEEDBACK_TABLEPREFIX SS13_
 ## Примечание: не меняет имена таблиц в БД автоматически!
-FEEDBACK_TABLEPREFIX SS13_
+FEEDBACK_TABLEPREFIX
 
 ## Логин для доступа к базе данных.
-FEEDBACK_LOGIN username
+FEEDBACK_LOGIN root
 
 ## Пароль для доступа к базе данных.
-FEEDBACK_PASSWORD password
+FEEDBACK_PASSWORD root
 
 ## Таймаут асинхронных запросов (в секундах).
 ## 0 = бесконечное ожидание.
