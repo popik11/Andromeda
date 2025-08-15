@@ -627,7 +627,7 @@
 	log_admin_private("[kn] [msg][is_server_ban ? "" : " Roles: [roles_to_ban.Join(", ")]"] Reason: [reason]")
 	message_admins("[kna] [msg][is_server_ban ? "" : " Roles: [roles_to_ban.Join("\n")]"]\nReason: [reason]")
 	if(applies_to_admins)
-		send2adminchat("BAN ALERT","[kn] [msg]")
+		send2adminchat("Оповещение о бане","[kn] [msg]")
 	if(player_ckey)
 		create_message("note", player_ckey, admin_ckey, note_reason, null, null, 0, 0, null, 0, severity)
 
@@ -973,7 +973,7 @@
 	log_admin_private("[kn] has edited the [changes_keys_text] of a ban for [old_key ? "[old_key]" : "[old_ip]-[old_cid]"].") //if a ban doesn't have a key it must have an ip and/or a cid to have reached this point normally
 	message_admins("[kna] has edited the [changes_keys_text] of a ban for [old_key ? "[old_key]" : "[old_ip]-[old_cid]"].")
 	if(changes["Applies to admins"])
-		send2adminchat("BAN ALERT","[kn] has edited a ban for [old_key ? "[old_key]" : "[old_ip]-[old_cid]"] to [applies_to_admins ? "" : "not"]affect admins")
+		send2adminchat("Оповещение о бане","[kn] отредактировал бан для [old_key ? "[old_key]" : "[old_ip]-[old_cid]"] теперь он [applies_to_admins ? "" : "не"]распространяется на админов")
 
 	var/player_edit_message = span_boldannounce("[usr.client.key] has edited the [changes_keys_text] of a ban for your key.")
 	var/other_edit_message = span_boldannounce("[usr.client.key] has edited the [changes_keys_text] of a ban for your IP or CID.")

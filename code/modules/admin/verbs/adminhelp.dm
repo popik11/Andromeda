@@ -354,7 +354,7 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 		admins_involved |= usr.ckey
 		if(heard_by_no_admins)
 			heard_by_no_admins = FALSE
-			send2adminchat(initiator_ckey, "Ticket #[id]: Answered by [key_name(usr)]")
+			send2adminchat(initiator_ckey, "Тикет #[id]: ответил [key_name(usr)]")
 
 	ticket_interactions += "[time_stamp()]: [formatted_message]"
 	if (!isnull(player_message))

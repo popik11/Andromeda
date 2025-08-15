@@ -163,9 +163,9 @@
 					return
 				mode = SHUTTLE_DOCKED
 				setTimer(SSshuttle.emergency_dock_time)
-				send2adminchat("Server", "The Emergency Shuttle has docked with the station.")
+				send2adminchat("Сервер", "Аварийный шаттл пристыковался к станции.")
 				priority_announce(
-					text = "[SSshuttle.emergency] has docked with the station. You have [DisplayTimeText(SSshuttle.emergency_dock_time)] to board the emergency shuttle.",
+					text = "[SSshuttle.emergency] пристыковался к станции. У вас есть [DisplayTimeText(SSshuttle.emergency_dock_time)] для посадки на аварийный шаттл.",
 					title = "Emergency Shuttle Arrival",
 					sound = ANNOUNCER_SHUTTLEDOCK,
 					sender_override = "Emergency Shuttle Uplink Alert",

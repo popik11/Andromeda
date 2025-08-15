@@ -1249,24 +1249,22 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 
 	if (isnull(cheesy_messages))
 		cheesy_messages = list(
-			"Forever alone :(",
-			"I have no admins online!",
-			"I need a hug :(",
-			"I need someone on me :(",
-			"I want a man :(",
-			"I'm all alone :(",
-			"I'm feeling lonely :(",
-			"I'm so lonely :(",
-			"Someone come hold me :(",
-			"What happened? Where has everyone gone?",
-			"Where has everyone gone?",
-			"Why does nobody love me? :(",
+			"Наконец-то, да будет робаст!",
+			"Я абсолютно одна в коридоре, этот ассистент в техах стоит неподвижно уже час... он не шевелится не разговаривает.. Я не знаю, вызывать ли СБ..",
+			"Ты когда нибудь запускал турбину на вульпах?",
+			"Повар каннибал.. Да это же самое оригинальное, что можно придумать!",
+			"ХоС сказал, что все, кто не относится к людям, будет гулять в космосе.",
+			"Эй.. Зачем тебе топливный бак и сварка?",
+			"Капитан ввёл налог на кислород, пиздец..",
+			"Смена идёт уже 8 час, но капитан отказывается вызывать шаттл, т.к. он развлекается с вульпой.",
+			"Синдикат выкупил ядерную боеголовку через карго, ЦентКом, что нам делать?",
+			"Клоун убил ХоСа и казнит всех, кто плохо рассказывает шутки.",
 		)
 
 	message_to_send += pick(cheesy_messages)
-	message_to_send += "(No admins online)"
+	message_to_send += "(Нет администраторов онлайн)"
 
-	send2adminchat("Server", jointext(message_to_send, " "))
+	send2adminchat("Сервер", jointext(message_to_send, " "))
 
 /// This grabs the DPI of the user per their skin
 /client/proc/acquire_dpi()

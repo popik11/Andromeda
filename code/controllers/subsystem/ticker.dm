@@ -339,7 +339,7 @@ SUBSYSTEM_DEF(ticker)
 
 	var/list/adm = get_admin_counts()
 	var/list/allmins = adm["present"]
-	send2adminchat("Server", "Round [GLOB.round_id ? "#[GLOB.round_id]" : ""] has started[allmins.len ? ".":" with no active admins online!"]")
+	send2adminchat("Сервер", "Раунд [GLOB.round_id ? "#[GLOB.round_id]" : ""] запустился[allmins.len ? ".":" (без активных администраторов!)"]")
 	setup_done = TRUE
 
 	for(var/i in GLOB.start_landmarks_list)
