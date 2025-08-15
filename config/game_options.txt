@@ -57,10 +57,10 @@ HUMANS_NEED_SURNAMES
 #FORCE_RANDOM_NAMES
 
 ## Раскомментируйте, чтобы включить автоматическое повторное открытие роли игрока, если он совершает суицид в начале раунда
-#REOPEN_ROUNDSTART_SUICIDE_ROLES
+REOPEN_ROUNDSTART_SUICIDE_ROLES
 
 ## Раскомментируйте, чтобы включить повторное открытие командных позиций
-#REOPEN_ROUNDSTART_SUICIDE_ROLES_COMMAND_POSITIONS
+REOPEN_ROUNDSTART_SUICIDE_ROLES_COMMAND_POSITIONS
 
 ## Определите задержку для повторного открытия ролей после начала раунда в секундах.
 ## Минимальная задержка — 30 секунд, но рекомендуется держать больше 1 минуты.
@@ -205,14 +205,14 @@ MINIMAL_ACCESS_THRESHOLD 20
 #JOBS_HAVE_MINIMAL_ACCESS
 
 ## Раскомментируйте, чтобы дать ассистентам доступ в техтоннели.
-#ASSISTANTS_HAVE_MAINT_ACCESS
+ASSISTANTS_HAVE_MAINT_ACCESS
 
 ## Раскомментируйте, чтобы дать службе безопасности доступ в техтоннели.
 ## Примечание: если вы отключите JOBS_HAVE_MINIMAL_ACCESS, у службы безопасности уже будет доступ из-за этого.
 #SECURITY_HAS_MAINT_ACCESS
 
 ## Раскомментируйте, чтобы дать всем доступ в техтоннели.
-#EVERYONE_HAS_MAINT_ACCESS
+EVERYONE_HAS_MAINT_ACCESS
 
 ## Закомментируйте, чтобы офицеры безопасности появлялись в отделах, а не в бриге.
 #SEC_START_BRIG
@@ -376,7 +376,7 @@ ROUNDSTART_RACES ethereal
 
 ## Вероятность появления нечеловеческих трупов в морге (только если MORGUE_CADAVER_DISABLE_NONHUMANS отключен).
 ## По умолчанию 50%.
-MORGUE_CADAVER_OTHER_SPECIES_PROBABILITY 50
+MORGUE_CADAVER_OTHER_SPECIES_PROBABILITY 20
 
 ## Конкретная раса для трупов в морге (вместо случайного выбора).
 ## Вероятность задается MORGUE_CADAVER_OTHER_SPECIES_PROBABILITY.
@@ -392,7 +392,7 @@ OVERFLOW_JOB Assistant
 OVERFLOW_CAP -1
 
 ## Раскомментируйте для возврата серых комбинезонов ассистентов вместо радужных.
-#GREY_ASSISTANTS
+GREY_ASSISTANTS
 
 ### ОГРАНИЧЕНИЯ ЗАКЛИНАНИЙ
 ## Запрет определенных заклинаний волшебников как слишком хаотичных:
@@ -436,7 +436,7 @@ MICE_ROUNDSTART 10
 
 ### АВТОВЫЗОВ ШАТТЛА
 ## Автоматически вызывать шаттл, если живыми осталось меньше % игроков:
-#EMERGENCY_SHUTTLE_AUTOCALL_THRESHOLD 0.2
+EMERGENCY_SHUTTLE_AUTOCALL_THRESHOLD 0.2
 
 ### ОСОБЕННОСТИ
 ## Раскомментируйте для выбора особенностей при создании персонажа.
@@ -486,7 +486,7 @@ MAXFINE 2000
 
 ### ОБУЧЕНИЕ
 ## Давать обучение без БД (для тестирования):
-#GIVE_TUTORIALS_WITHOUT_DB
+# GIVE_TUTORIALS_WITHOUT_DB
 
 ### ОСОБЕННОСТИ СТАНЦИИ
 ## Бюджеты и веса для положительных/нейтральных/отрицательных особенностей:
