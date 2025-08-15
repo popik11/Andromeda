@@ -127,7 +127,7 @@ SUBSYSTEM_DEF(atoms)
 					if(mapload_source)
 						set_tracked_initalized(INITIALIZATION_INNEW_MAPLOAD, mapload_source)
 
-	testing("Initialized [count] atoms")
+	testing("Инициализировано [count] атомов")
 
 /datum/controller/subsystem/atoms/proc/map_loader_begin(source)
 	set_tracked_initalized(INITIALIZATION_INSSATOMS, source)
