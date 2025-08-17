@@ -1,7 +1,7 @@
 #define MAP_AREA_TYPE "area_type"
 #define MAP_ALLOW_AREA_SUBTYPES "allow_area_subtypes"
-#define DEFAULT_GAIN_MESSAGE span_big(span_green("You are now invulnerable."))
-#define DEFAULT_LOSE_MESSAGE span_big(span_red("You are no longer invulnerable."))
+#define DEFAULT_GAIN_MESSAGE span_big(span_green("Теперь вы неуязвимы."))
+#define DEFAULT_LOSE_MESSAGE span_big(span_red("Вы больше не неуязвимы."))
 
 /**
  * Area-based godmode.

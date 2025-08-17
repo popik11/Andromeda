@@ -4,8 +4,8 @@
  * If it's food we might eat it instead.
  */
 /datum/pet_command/fetch
-	command_name = "Fetch"
-	command_desc = "Command your pet to retrieve something you throw or point at."
+	command_name = "Принести"
+	command_desc = "Прикажите вашему питомцу принести то, что вы бросили или на что указали."
 	radial_icon_state = "fetch"
 	requires_pointing = TRUE
 	speech_commands = list("fetch")
@@ -31,7 +31,7 @@
 	UnregisterSignal(unfriended, COMSIG_MOB_THROW)
 
 /datum/pet_command/fetch/retrieve_command_text(atom/living_pet, atom/target)
-	return isnull(target) ? null : "signals [living_pet] to fetch [target]!"
+	return isnull(target) ? null : "подаёт сигнал [living_pet] принести [target]!"
 
 /// A friend has thrown something, if we're listening or at least not busy then go get it
 /datum/pet_command/fetch/proc/listened_throw(mob/living/carbon/thrower)

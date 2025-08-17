@@ -106,17 +106,17 @@
 		if(player.mind?.assigned_role.job_flags & JOB_HEAD_OF_STAFF)
 			head_check++
 
-	if(head_check < heads_necessary - 1) // little bit of leeway
+	if(head_check < heads_necessary - 1) // небольшой запас
 		SSdynamic.unreported_rulesets += src
-		name += " (Canceled)"
-		log_dynamic("[config_tag]: Not enough heads of staff were present to start a revolution.")
+		name += " (Отменено)"
+		log_dynamic("[config_tag]: Недостаточно глав отделов для начала революции.")
 		return
 
 	if(!can_be_headrev(candidate))
 		SSdynamic.unreported_rulesets += src
-		name += " (Canceled)"
-		log_dynamic("[config_tag]: [key_name(candidate)] was ineligible after the timer expired. Ruleset canceled.")
-		message_admins("[config_tag]: [key_name(candidate)] was ineligible after the timer expired. Ruleset canceled.")
+		name += " (Отменено)"
+		log_dynamic("[config_tag]: [key_name(candidate)] не подходит после истечения таймера. Правило отменено.")
+		message_admins("[config_tag]: [key_name(candidate)] не подходит после истечения таймера. Правило отменено.")
 		return
 
 	GLOB.revolution_handler ||= new()

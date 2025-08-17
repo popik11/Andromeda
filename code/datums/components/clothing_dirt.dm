@@ -59,7 +59,7 @@
 /datum/component/clothing_dirt/proc/on_examine(datum/source, mob/user, list/examine_list)
 	SIGNAL_HANDLER
 	if (dirtiness > 0)
-		examine_list += span_warning("It appears to be covered in something. Won't see much while wearing it until you wash it off.")
+		examine_list += span_warning("Оно покрыто каким-то веществом. В таком виде толком ничего не разглядеть, пока не отмоешь.")
 
 /datum/component/clothing_dirt/proc/on_overlays_updated(obj/item/clothing/source, list/overlays)
 	SIGNAL_HANDLER
@@ -127,8 +127,8 @@
 	clothing.update_appearance()
 	wearer.update_clothing(wearer.get_slot_by_item(clothing))
 	wearer.update_tint()
-	user.visible_message(span_danger("[user] sprays [spraycan] into the face of [wearer]!"))
-	to_chat(wearer, span_userdanger("[user] sprays [spraycan] into your face!"))
+	user.visible_message(span_danger("[user] брызгает [spraycan] в лицо [wearer]!"))
+	to_chat(wearer, span_userdanger("[user] брызгает [spraycan] тебе в лицо!"))
 	return COMPONENT_CANCEL_SPRAYPAINT
 
 /datum/component/clothing_dirt/proc/on_clean(datum/source, clean_types)

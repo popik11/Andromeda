@@ -1,4 +1,4 @@
-ADMIN_VERB(dynamic_panel, R_ADMIN, "Dynamic Panel", "Mess with dynamic.", ADMIN_CATEGORY_GAME)
+ADMIN_VERB(dynamic_panel, R_ADMIN, "Панель Динамики", "Работа с динамическим режимом.", ADMIN_CATEGORY_GAME)
 	dynamic_panel(user.mob)
 
 /proc/dynamic_panel(mob/user)
@@ -7,10 +7,10 @@ ADMIN_VERB(dynamic_panel, R_ADMIN, "Dynamic Panel", "Mess with dynamic.", ADMIN_
 	var/datum/dynamic_panel/tgui = new()
 	tgui.ui_interact(user)
 
-	log_admin("[key_name(user)] opened the Dynamic Panel.")
+	log_admin("[key_name(user)] открыл Панель Динамики.")
 	if(!isobserver(user))
-		message_admins("[key_name_admin(user)] opened the Dynamic Panel.")
-	BLACKBOX_LOG_ADMIN_VERB("Dynamic Panel")
+		message_admins("[key_name_admin(user)] открыл Панель Динамики.")
+	BLACKBOX_LOG_ADMIN_VERB("Панель Динамики")
 
 /datum/dynamic_panel
 
@@ -117,8 +117,8 @@ ADMIN_VERB(dynamic_panel, R_ADMIN, "Dynamic Panel", "Mess with dynamic.", ADMIN_
 			if(!ruleset)
 				return
 			SSdynamic.queued_rulesets -= ruleset
-			message_admins("[key_name_admin(ui.user)] removed [ruleset.config_tag] from the dynamic ruleset queue.")
-			log_admin("[key_name_admin(ui.user)] removed [ruleset.config_tag] from the dynamic ruleset queue.")
+			message_admins("[key_name_admin(ui.user)] удалил [ruleset.config_tag] из очереди динамических правил.")
+			log_admin("[key_name_admin(ui.user)] удалил [ruleset.config_tag] из очереди динамических правил.")
 			qdel(ruleset)
 			return TRUE
 		if("add_queued_ruleset")
@@ -126,8 +126,8 @@ ADMIN_VERB(dynamic_panel, R_ADMIN, "Dynamic Panel", "Mess with dynamic.", ADMIN_
 			if(!ruleset_path)
 				return
 			SSdynamic.queue_ruleset(ruleset_path)
-			message_admins("[key_name_admin(ui.user)] added [initial(ruleset_path.config_tag)] to the dynamic ruleset queue.")
-			log_admin("[key_name_admin(ui.user)] added [initial(ruleset_path.config_tag)] to the dynamic ruleset queue.")
+			message_admins("[key_name_admin(ui.user)] добавил [initial(ruleset_path.config_tag)] в очередь динамических правил.")
+			log_admin("[key_name_admin(ui.user)] добавил [initial(ruleset_path.config_tag)] в очередь динамических правил.")
 			return TRUE
 		if("dynamic_vv")
 			ui.user?.client?.debug_variables(SSdynamic)
@@ -137,8 +137,8 @@ ADMIN_VERB(dynamic_panel, R_ADMIN, "Dynamic Panel", "Mess with dynamic.", ADMIN_
 			if(!category)
 				return
 			SSdynamic.rulesets_to_spawn[category] += 1
-			message_admins("[key_name_admin(ui.user)] added 1 to the [category] ruleset category.")
-			log_admin("[key_name_admin(ui.user)] added 1 to the [category] ruleset category.")
+			message_admins("[key_name_admin(ui.user)] увеличил количество правил категории [category] на 1.")
+			log_admin("[key_name_admin(ui.user)] увеличил количество правил категории [category] на 1.")
 			return TRUE
 		if("set_ruleset_category_count")
 			var/category = params["ruleset_category"]
@@ -146,15 +146,15 @@ ADMIN_VERB(dynamic_panel, R_ADMIN, "Dynamic Panel", "Mess with dynamic.", ADMIN_
 			if(!category || !isnum(count))
 				return
 			SSdynamic.rulesets_to_spawn[category] = count
-			message_admins("[key_name_admin(ui.user)] set the [category] ruleset category to [count].")
-			log_admin("[key_name_admin(ui.user)] set the [category] ruleset category to [count].")
+			message_admins("[key_name_admin(ui.user)] установил количество правил категории [category] в [count].")
+			log_admin("[key_name_admin(ui.user)] установил количество правил категории [category] в [count].")
 			return TRUE
 		if("execute_ruleset")
 			var/datum/dynamic_ruleset/ruleset_path = text2path(params["ruleset_type"])
 			if(!ruleset_path)
 				return
-			message_admins("[key_name_admin(ui.user)] executed the ruleset [initial(ruleset_path.config_tag)].")
-			log_admin("[key_name_admin(ui.user)] executed the ruleset [initial(ruleset_path.config_tag)].")
+			message_admins("[key_name_admin(ui.user)] применил правило [initial(ruleset_path.config_tag)].")
+			log_admin("[key_name_admin(ui.user)] применил правило [initial(ruleset_path.config_tag)].")
 			ASYNC
 				SSdynamic.force_run_midround(ruleset_path, alert_admins_on_fail = TRUE, admin = ui.user)
 			return TRUE
@@ -164,72 +164,72 @@ ADMIN_VERB(dynamic_panel, R_ADMIN, "Dynamic Panel", "Mess with dynamic.", ADMIN_
 				return
 			if(ruleset_path in SSdynamic.admin_disabled_rulesets)
 				SSdynamic.admin_disabled_rulesets -= ruleset_path
-				message_admins("[key_name_admin(ui.user)] enabled [ruleset_path] to be selected.")
-				log_admin("[key_name_admin(ui.user)] enabled [ruleset_path] to be selected.")
+				message_admins("[key_name_admin(ui.user)] разрешил выбор правила [ruleset_path].")
+				log_admin("[key_name_admin(ui.user)] разрешил выбор правила [ruleset_path].")
 			else
 				SSdynamic.admin_disabled_rulesets += ruleset_path
-				message_admins("[key_name_admin(ui.user)] disabled [ruleset_path] from being selected.")
-				log_admin("[key_name_admin(ui.user)] disabled [ruleset_path] from being selected.")
+				message_admins("[key_name_admin(ui.user)] запретил выбор правила [ruleset_path].")
+				log_admin("[key_name_admin(ui.user)] запретил выбор правила [ruleset_path].")
 			return TRUE
 		if("disable_all")
 			SSdynamic.admin_disabled_rulesets |= subtypesof(/datum/dynamic_ruleset)
-			message_admins("[key_name_admin(ui.user)] disabled all rulesets from being selected.")
-			log_admin("[key_name_admin(ui.user)] disabled all rulesets from being selected.")
+			message_admins("[key_name_admin(ui.user)] отключил все правила.")
+			log_admin("[key_name_admin(ui.user)] отключил все правила.")
 		if("enable_all")
 			SSdynamic.admin_disabled_rulesets.Cut()
-			message_admins("[key_name_admin(ui.user)] re-enabled all rulesets.")
-			log_admin("[key_name_admin(ui.user)] re_enabled all rulesets.")
+			message_admins("[key_name_admin(ui.user)] включил все правила.")
+			log_admin("[key_name_admin(ui.user)] включил все правила.")
 		if("set_tier")
 			if(SSdynamic.current_tier && SSticker.HasRoundStarted())
 				return TRUE
 			var/list/tiers = list()
 			for(var/datum/dynamic_tier/tier as anything in subtypesof(/datum/dynamic_tier))
 				tiers[tier::config_tag] = tier
-			var/picked = tgui_input_list(ui.user, "Pick a dynamic tier before the game starts", "Pick tier", tiers, ui_state = ADMIN_STATE(R_ADMIN))
+			var/picked = tgui_input_list(ui.user, "Выберите уровень сложности перед началом раунда", "Выбор уровня", tiers, ui_state = ADMIN_STATE(R_ADMIN))
 			if(picked && !SSticker.HasRoundStarted())
 				SSdynamic.set_tier(tiers[picked])
-				message_admins("[key_name_admin(ui.user)] set the dynamic tier to [picked].")
-				log_admin("[key_name_admin(ui.user)] set the dynamic tier to [picked].")
+				message_admins("[key_name_admin(ui.user)] установил уровень сложности [picked].")
+				log_admin("[key_name_admin(ui.user)] установил уровень сложности [picked].")
 			return TRUE
 		if("max_light_chance")
 			SSdynamic.admin_forcing_next_light = !SSdynamic.admin_forcing_next_light
-			message_admins("[key_name_admin(ui.user)] [SSdynamic.admin_forcing_next_light ? "forced" : "reset"] the next light ruleset chance.")
-			log_admin("[key_name_admin(ui.user)] [SSdynamic.admin_forcing_next_light ? "forced" : "reset"] the next light ruleset chance.")
+			message_admins("[key_name_admin(ui.user)] [SSdynamic.admin_forcing_next_light ? "принудительно включил" : "сбросил"] шанс легких событий.")
+			log_admin("[key_name_admin(ui.user)] [SSdynamic.admin_forcing_next_light ? "принудительно включил" : "сбросил"] шанс легких событий.")
 			return TRUE
 		if("max_heavy_chance")
 			SSdynamic.admin_forcing_next_heavy = !SSdynamic.admin_forcing_next_heavy
-			message_admins("[key_name_admin(ui.user)] [SSdynamic.admin_forcing_next_heavy ? "forced" : "reset"] the next heavy ruleset chance.")
-			log_admin("[key_name_admin(ui.user)] [SSdynamic.admin_forcing_next_heavy ? "forced" : "reset"] the next heavy ruleset chance.")
+			message_admins("[key_name_admin(ui.user)] [SSdynamic.admin_forcing_next_heavy ? "принудительно включил" : "сбросил"] шанс тяжелых событий.")
+			log_admin("[key_name_admin(ui.user)] [SSdynamic.admin_forcing_next_heavy ? "принудительно включил" : "сбросил"] шанс тяжелых событий.")
 			return TRUE
 		if("max_latejoin_chance")
 			SSdynamic.admin_forcing_next_latejoin = !SSdynamic.admin_forcing_next_latejoin
-			message_admins("[key_name_admin(ui.user)] [SSdynamic.admin_forcing_next_latejoin ? "forced" : "reset"] the next latejoin ruleset chance.")
-			log_admin("[key_name_admin(ui.user)] [SSdynamic.admin_forcing_next_latejoin ? "forced" : "reset"] the next latejoin ruleset chance.")
+			message_admins("[key_name_admin(ui.user)] [SSdynamic.admin_forcing_next_latejoin ? "принудительно включил" : "сбросил"] шанс поздних событий.")
+			log_admin("[key_name_admin(ui.user)] [SSdynamic.admin_forcing_next_latejoin ? "принудительно включил" : "сбросил"] шанс поздних событий.")
 			return TRUE
 		if("light_start_now")
 			COOLDOWN_RESET(SSdynamic, light_ruleset_start)
-			message_admins("[key_name_admin(ui.user)] reset the light ruleset start cooldown.")
-			log_admin("[key_name_admin(ui.user)] reset the light ruleset start cooldown.")
+			message_admins("[key_name_admin(ui.user)] сбросил кулдаун легких событий.")
+			log_admin("[key_name_admin(ui.user)] сбросил кулдаун легких событий.")
 			return TRUE
 		if("heavy_start_now")
 			COOLDOWN_RESET(SSdynamic, heavy_ruleset_start)
-			message_admins("[key_name_admin(ui.user)] reset the heavy ruleset start cooldown.")
-			log_admin("[key_name_admin(ui.user)] reset the heavy ruleset start cooldown.")
+			message_admins("[key_name_admin(ui.user)] сбросил кулдаун тяжелых событий.")
+			log_admin("[key_name_admin(ui.user)] сбросил кулдаун тяжелых событий.")
 			return TRUE
 		if("latejoin_start_now")
 			COOLDOWN_RESET(SSdynamic, latejoin_ruleset_start)
-			message_admins("[key_name_admin(ui.user)] reset the latejoin ruleset start cooldown.")
-			log_admin("[key_name_admin(ui.user)] reset the latejoin ruleset start cooldown.")
+			message_admins("[key_name_admin(ui.user)] сбросил кулдаун поздних событий.")
+			log_admin("[key_name_admin(ui.user)] сбросил кулдаун поздних событий.")
 			return TRUE
 		if("reset_midround_cooldown")
 			COOLDOWN_RESET(SSdynamic, midround_cooldown)
-			message_admins("[key_name_admin(ui.user)] reset the midround cooldown.")
-			log_admin("[key_name_admin(ui.user)] reset the midround cooldown.")
+			message_admins("[key_name_admin(ui.user)] сбросил кулдаун мидроундов.")
+			log_admin("[key_name_admin(ui.user)] сбросил кулдаун мидроундов.")
 			return TRUE
 		if("reset_latejoin_cooldown")
 			COOLDOWN_RESET(SSdynamic, latejoin_cooldown)
-			message_admins("[key_name_admin(ui.user)] reset the latejoin cooldown.")
-			log_admin("[key_name_admin(ui.user)] reset the latejoin cooldown.")
+			message_admins("[key_name_admin(ui.user)] сбросил кулдаун поздних присоединений.")
+			log_admin("[key_name_admin(ui.user)] сбросил кулдаун поздних присоединений.")
 			return TRUE
 		if("hide_ruleset")
 			var/index = params["ruleset_index"]
@@ -240,15 +240,15 @@ ADMIN_VERB(dynamic_panel, R_ADMIN, "Dynamic Panel", "Mess with dynamic.", ADMIN_
 				return
 			if(ruleset in SSdynamic.unreported_rulesets)
 				SSdynamic.unreported_rulesets -= ruleset
-				message_admins("[key_name_admin(ui.user)] hid [ruleset] from the roundend report.")
-				log_admin("[key_name_admin(ui.user)] hid [ruleset] from the roundend report.")
+				message_admins("[key_name_admin(ui.user)] скрыл [ruleset] из отчета раунда.")
+				log_admin("[key_name_admin(ui.user)] скрыл [ruleset] из отчета раунда.")
 			else
 				SSdynamic.unreported_rulesets += ruleset
-				message_admins("[key_name_admin(ui.user)] unhid [ruleset] from the roundend report.")
-				log_admin("[key_name_admin(ui.user)] unhid [ruleset] from the roundend report.")
+				message_admins("[key_name_admin(ui.user)] показал [ruleset] в отчете раунда.")
+				log_admin("[key_name_admin(ui.user)] показал [ruleset] в отчете раунда.")
 			return TRUE
 		if("toggle_antag_events")
 			SSdynamic.antag_events_enabled = !SSdynamic.antag_events_enabled
-			message_admins("[key_name_admin(ui.user)] [SSdynamic.antag_events_enabled ? "enabled" : "disabled"] antag events.")
-			log_admin("[key_name_admin(ui.user)] [SSdynamic.antag_events_enabled ? "enabled" : "disabled"] antag events.")
+			message_admins("[key_name_admin(ui.user)] [SSdynamic.antag_events_enabled ? "включил" : "отключил"] антагонистические события.")
+			log_admin("[key_name_admin(ui.user)] [SSdynamic.antag_events_enabled ? "включил" : "отключил"] антагонистические события.")
 			return TRUE

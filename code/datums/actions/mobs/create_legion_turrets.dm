@@ -1,12 +1,12 @@
 /datum/action/cooldown/mob_cooldown/create_legion_turrets
-	name = "Create Sentinels"
+	name = "Создать Часовых"
 	button_icon = 'icons/mob/simple/lavaland/lavaland_monsters.dmi'
 	button_icon_state = "legion_turret"
-	desc = "Create legion sentinels that fire at any enemies."
+	desc = "Создать часовых легиона, которые атакуют врагов."
 	cooldown_time = 2 SECONDS
-	/// Minimum number of turrets that can be spawned
+	/// Минимальное количество турелей для создания
 	var/minimum_turrets = 2
-	/// Maximum number of turrets that can be spawned
+	/// Максимальное количество турелей для создания
 	var/maximum_turrets = 2
 
 /datum/action/cooldown/mob_cooldown/create_legion_turrets/Activate(atom/target_atom)
@@ -30,8 +30,8 @@
 
 /// A basic turret that shoots at nearby mobs. Intended to be used for the legion megafauna.
 /obj/structure/legionturret
-	name = "\improper Legion sentinel"
-	desc = "The eye pierces your soul."
+	name = "\improper Часовой Легиона"
+	desc = "Глаз пронзает вашу душу."
 	icon = 'icons/mob/simple/lavaland/lavaland_monsters.dmi'
 	icon_state = "legion_turret"
 	light_power = 0.5
@@ -92,7 +92,7 @@
 
 /// Used for the legion turret.
 /obj/projectile/beam/legion
-	name = "blood pulse"
+	name = "кровавый импульс"
 	icon_state = null
 	hitsound = 'sound/effects/magic/magic_missile.ogg'
 	damage = 19

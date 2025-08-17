@@ -61,18 +61,18 @@
 		return
 	var/mob/mob_parent = parent
 	held_disk.forceMove(mob_parent.drop_location())
-	mob_parent.visible_message(span_danger("[mob_parent] drops [held_disk] onto the ground!"))
+	mob_parent.visible_message(span_danger("[mob_parent] роняет [held_disk] на пол!"))
 	disky = null
 	mob_parent.update_appearance(updates = UPDATE_ICON)
 
-/// Add details about carrying the nuke disc to examination.
+/// Добавляет информацию о переноске ядерного диска при осмотре.
 /datum/component/nuclear_bomb_operator/proc/on_examine(atom/parent_atom, mob/examiner, list/examine_list)
 	SIGNAL_HANDLER
 	var/obj/item/disk/nuclear/held_disk = disky?.resolve()
 	if (!held_disk)
 		return
 	var/mob/mob_parent = parent
-	examine_list += span_notice("Wait... [mob_parent.p_are()] [mob_parent.p_they()] holding [held_disk]?")
+	examine_list += span_notice("Стоп... [mob_parent.p_are()] [mob_parent.p_they()] держит [held_disk]?")
 
 /// Drop the disk when we are killed
 /datum/component/nuclear_bomb_operator/proc/on_death(atom/parent_atom)
@@ -105,7 +105,7 @@
 	potential_disky.forceMove(mob_parent)
 	disky = WEAKREF(potential_disky)
 	mob_parent.update_appearance(updates = UPDATE_ICON)
-	mob_parent.balloon_alert(mob_parent, "disk secured!")
+	mob_parent.balloon_alert(mob_parent, "диск закреплён!")
 	on_disk_collected?.InvokeAsync(potential_disky)
 
 /// Uses the disk on clicked atom, or places it on the ground
@@ -118,7 +118,7 @@
 
 	held_disk.forceMove(attacked_target)
 	disky = null
-	mob_parent.balloon_alert(mob_parent, "disk dropped!")
+	mob_parent.balloon_alert(mob_parent, "диск уронили!")
 	mob_parent.update_appearance(updates = UPDATE_ICON)
 	return COMPONENT_CANCEL_ATTACK_CHAIN
 

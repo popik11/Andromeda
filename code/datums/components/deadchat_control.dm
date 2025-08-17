@@ -36,8 +36,8 @@
 	input_cooldown = _input_cooldown
 	on_removal = _on_removal
 	if(deadchat_mode & DEMOCRACY_MODE)
-		if(deadchat_mode & ANARCHY_MODE) // Choose one, please.
-			stack_trace("deadchat_control component added to [parent.type] with both democracy and anarchy modes enabled.")
+		if(deadchat_mode & ANARCHY_MODE) // Выберите что-то одно.
+			stack_trace("Компонент deadchat_control добавлен к [parent.type] с одновременно включенными режимами демократии и анархии.")
 		timerid = addtimer(CALLBACK(src, PROC_REF(democracy_loop)), input_cooldown, TIMER_STOPPABLE | TIMER_LOOP)
 	if(!ismob(parent) && !SSpoints_of_interest.is_valid_poi(parent))
 		SSpoints_of_interest.make_point_of_interest(parent)
@@ -48,9 +48,9 @@
 		var/mob/mob_parent = parent
 		parent_name = "[mob_parent.real_name]"
 	notify_ghosts(
-		"[parent_name] is now deadchat controllable!",
+		"[parent_name] теперь под контролем мертвого чата!",
 		source = parent,
-		header = "Ghost Possession!",
+		header = "Контроль призраков!",
 	)
 
 /datum/component/deadchat_control/Destroy(force)
@@ -76,17 +76,17 @@
 			return
 		var/cooldown = ckey_to_cooldown[source.ckey] - world.time
 		if(cooldown > 0)
-			to_chat(source, span_warning("Your deadchat control inputs are still on cooldown for another [CEILING(cooldown * 0.1, 1)] second\s."))
+			to_chat(source, span_warning("Твои команды в мертвый чат ещё на кулдауне ещё [CEILING(cooldown * 0.1, 1)] секунд."))
 			return MOB_DEADSAY_SIGNAL_INTERCEPT
 		ckey_to_cooldown[source.ckey] = world.time + input_cooldown
 		addtimer(CALLBACK(src, PROC_REF(end_cooldown), source.ckey), input_cooldown)
 		inputs[message].Invoke()
-		to_chat(source, span_notice("\"[message]\" input accepted. You are now on cooldown for [input_cooldown * 0.1] second\s."))
+		to_chat(source, span_notice("Команда \"[message]\" принята. Теперь ты на кулдауне [input_cooldown * 0.1] секунд."))
 		return MOB_DEADSAY_SIGNAL_INTERCEPT
 
 	if(deadchat_mode & DEMOCRACY_MODE)
 		ckey_to_cooldown[source.ckey] = message
-		to_chat(source, span_notice("You have voted for \"[message]\"."))
+		to_chat(source, span_notice("Ты проголосовал за \"[message]\"."))
 		return MOB_DEADSAY_SIGNAL_INTERCEPT
 
 /datum/component/deadchat_control/proc/democracy_loop()
@@ -97,11 +97,11 @@
 	if(!isnull(result))
 		inputs[result].Invoke()
 		if(!(deadchat_mode & MUTE_DEMOCRACY_MESSAGES))
-			var/message = "<span class='deadsay italics bold'>[parent] has done action [result]!<br>New vote started. It will end in [input_cooldown * 0.1] second\s.</span>"
+			var/message = "<span class='deadsay italics bold'>[parent] выполнил действие [result]!<br>Начато новое голосование. Результат через [input_cooldown * 0.1] секунд.</span>"
 			for(var/M in orbiters)
 				to_chat(M, message)
 	else if(!(deadchat_mode & MUTE_DEMOCRACY_MESSAGES))
-		var/message = "<span class='deadsay italics bold'>No votes were cast this cycle.</span>"
+		var/message = "<span class='deadsay italics bold'>В этом цикле голосов не было.</span>"
 		for(var/M in orbiters)
 			to_chat(M, message)
 
@@ -180,34 +180,34 @@
 	. = COMPONENT_VV_HANDLED
 	INVOKE_ASYNC(src, PROC_REF(async_handle_vv_topic), user, href_list)
 
-/// Async proc handling the alert input and associated logic for an admin removing this component via the VV dropdown.
+/// Асинхронная процедура обработки ввода админа при удалении этого компонента через VV меню.
 /datum/component/deadchat_control/proc/async_handle_vv_topic(mob/user, list/href_list)
-	if(tgui_alert(user, "Remove deadchat control from [parent]?", "Deadchat Plays [parent]", list("Remove", "Cancel")) == "Remove")
-		// Quick sanity check as this is an async call.
+	if(tgui_alert(user, "Убрать контроль мертвого чата с [parent]?", "Мертвый чат играет [parent]", list("Убрать", "Отмена")) == "Убрать")
+		// Быстрая проверка, так как это асинхронный вызов.
 		if(QDELETED(src))
 			return
 
-		to_chat(user, span_notice("Deadchat can no longer control [parent]."))
-		log_admin("[key_name(user)] has removed deadchat control from [parent]")
-		message_admins(span_notice("[key_name(user)] has removed deadchat control from [parent]"))
+		to_chat(user, span_notice("Мертвый чат больше не может контролировать [parent]."))
+		log_admin("[key_name(user)] убрал контроль мертвого чата с [parent]")
+		message_admins(span_notice("[key_name(user)] убрал контроль мертвого чата с [parent]"))
 
 		qdel(src)
 
-/// Informs any examiners to the inputs available as part of deadchat control, as well as the current operating mode and cooldowns.
+/// Сообщает осматривающим о доступных командах мертвого чата, текущем режиме работы и кулдаунах.
 /datum/component/deadchat_control/proc/on_examine(atom/A, mob/user, list/examine_list)
 	SIGNAL_HANDLER
 
 	if(!isobserver(user))
 		return
 
-	examine_list += span_notice("[A.p_Theyre()] currently under deadchat control using the [(deadchat_mode & DEMOCRACY_MODE) ? "democracy" : "anarchy"] ruleset!")
+	examine_list += span_notice("[A.p_Theyre()] сейчас под контролем мертвого чата в режиме [(deadchat_mode & DEMOCRACY_MODE) ? "демократии" : "анархии"]!")
 
 	if(deadchat_mode & DEMOCRACY_MODE)
-		examine_list += span_notice("Type a command into chat to vote on an action. This happens once every [input_cooldown * 0.1] second\s.")
+		examine_list += span_notice("Введите команду в чат для голосования. Голосование происходит каждые [input_cooldown * 0.1] секунд.")
 	else if(deadchat_mode & ANARCHY_MODE)
-		examine_list += span_notice("Type a command into chat to perform. You may do this once every [input_cooldown * 0.1] second\s.")
+		examine_list += span_notice("Введите команду в чат для выполнения. Можно делать это каждые [input_cooldown * 0.1] секунд.")
 
-	var/extended_examine = "<span class='notice'>Command list:"
+	var/extended_examine = "<span class='notice'>Список команд:"
 
 	for(var/possible_input in inputs)
 		extended_examine += " [possible_input]"
@@ -216,13 +216,13 @@
 
 	examine_list += extended_examine
 
-///Removes the ghost from the ckey_to_cooldown list and lets them know they are free to submit a command for the parent again.
+/// Удаляет призрака из списка ckey_to_cooldown и сообщает ему, что он снова может отправлять команды.
 /datum/component/deadchat_control/proc/end_cooldown(ghost_ckey)
 	ckey_to_cooldown -= ghost_ckey
 	var/mob/ghost = get_mob_by_ckey(ghost_ckey)
 	if(!ghost || isliving(ghost))
 		return
-	to_chat(ghost, "[FOLLOW_LINK(ghost, parent)] <span class='nicegreen'>Your deadchat control inputs for [parent] are no longer on cooldown.</span>")
+	to_chat(ghost, "[FOLLOW_LINK(ghost, parent)] <span class='nicegreen'>Кулдаун на управление [parent] через мертвый чат закончился.</span>")
 
 /**
  * Deadchat Moves Things

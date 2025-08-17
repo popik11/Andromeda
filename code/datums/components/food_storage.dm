@@ -56,25 +56,25 @@
 /datum/component/food_storage/proc/try_inserting_item(datum/source, mob/living/user, obj/item/inserted_item, list/modifiers)
 	SIGNAL_HANDLER
 
-	// No matryoshka-ing food storage
+	// Защита от матрешечного хранения контейнеров
 	if(istype(inserted_item, /obj/item/storage) || IS_EDIBLE(inserted_item))
 		return NONE
 
-	//Harm intent will bypass inserting for injecting food with syringes and such
+	// Режим боя пропускает вставку для инъекций еды шприцами и подобного
 	if(user.combat_mode)
 		return NONE
 
 	if(inserted_item.w_class > minimum_weight_class)
-		to_chat(user, span_warning("[inserted_item] won't fit in [parent]."))
+		to_chat(user, span_warning("[inserted_item] не помещается в [parent]."))
 		return ITEM_INTERACT_BLOCKING
 
 	if(!QDELETED(stored_item))
-		to_chat(user, span_warning("There's something in [parent]."))
+		to_chat(user, span_warning("В [parent] уже что-то есть."))
 		return ITEM_INTERACT_BLOCKING
 
 	user.visible_message(
-		span_notice("[user] begins inserting [inserted_item] into [parent]."),
-		span_notice("You start to insert the [inserted_item] into [parent]."),
+		span_notice("[user] начинает помещать [inserted_item] в [parent]."),
+		span_notice("Вы начинаете помещать [inserted_item] в [parent]."),
 	)
 
 	INVOKE_ASYNC(src, PROC_REF(insert_item), inserted_item, user)
@@ -95,8 +95,8 @@
 	if(!food.can_interact(user))
 		return CLICK_ACTION_BLOCKING
 
-	user.visible_message(span_notice("[user] begins tearing at [parent]."), \
-					span_notice("You start to rip into [parent]."))
+	user.visible_message(span_notice("[user] начинает разрывать [parent]."), \
+					span_notice("Вы начинаете разрывать [parent]."))
 
 	INVOKE_ASYNC(src, PROC_REF(begin_remove_item), user)
 	return CLICK_ACTION_SUCCESS
@@ -111,13 +111,13 @@
 	if(!do_after(user, 1.5 SECONDS, target = parent))
 		return
 	if(!user.temporarilyRemoveItemFromInventory(inserted_item))
-		to_chat(user, span_warning("You can't seem to insert [inserted_item] into [parent]."))
+		to_chat(user, span_warning("Не получается поместить [inserted_item] в [parent]."))
 		return
 
 	var/atom/food = parent
-	to_chat(user, span_notice("You slip [inserted_item] inside [parent]."))
+	to_chat(user, span_notice("Вы помещаете [inserted_item] внутрь [parent]."))
 	inserted_item.forceMove(food)
-	user.log_message("inserted [inserted_item] into [parent].", LOG_ATTACK)
+	user.log_message("поместил(а) [inserted_item] в [parent].", LOG_ATTACK)
 	food.add_fingerprint(user)
 	inserted_item.add_fingerprint(user)
 
@@ -132,7 +132,7 @@
 	if(!do_after(user, 10 SECONDS, target = parent))
 		return
 	if(QDELETED(stored_item))
-		to_chat(user, span_warning("There's nothing in [parent]."))
+		to_chat(user, span_warning("В [parent] ничего нет."))
 		return
 	remove_item(user)
 
@@ -141,10 +141,10 @@
  */
 /datum/component/food_storage/proc/remove_item(mob/user)
 	if(user.put_in_hands(stored_item))
-		user.visible_message(span_warning("[user] slowly pulls [stored_item] out of [parent]."), \
-							span_warning("You slowly pull [stored_item] out of [parent]."))
+		user.visible_message(span_warning("[user] медленно извлекает [stored_item] из [parent]."), \
+							span_warning("Вы медленно извлекаете [stored_item] из [parent]."))
 	else
-		stored_item.visible_message(span_warning("[stored_item] falls out of [parent]."))
+		stored_item.visible_message(span_warning("[stored_item] выпадает из [parent]."))
 
 	update_stored_item()
 
@@ -164,24 +164,24 @@
 /datum/component/food_storage/proc/consume_food_storage(datum/source, mob/living/target, mob/living/user, bitecount, bitesize)
 	SIGNAL_HANDLER
 
-	if(QDELETED(stored_item)) //if the stored item was deleted/null...
-		if(!update_stored_item()) //check if there's a replacement item
+	if(QDELETED(stored_item)) // если хранимый предмет был удалён...
+		if(!update_stored_item()) // проверяем наличие замены
 			return
 
-	/// Chance of biting the held item = amount of bites / (intitial reagents / reagents per bite) * 100
+	/// Шанс укусить предмет = количество укусов / (начальный объём / объём за укус) * 100
 	bad_chance_of_discovery = (bitecount / (initial_volume / bitesize))*100
-	/// Chance of finding the held item = bad chance - 50
+	/// Шанс обнаружения предмета = плохой шанс - 50
 	good_chance_of_discovery = bad_chance_of_discovery - 50
 
 	var/discovered = FALSE
-	if(prob(good_chance_of_discovery)) //finding the item, without biting it
+	if(prob(good_chance_of_discovery)) // обнаружение предмета без укуса
 		discovered = TRUE
-		to_chat(target, span_warning("It feels like there's something in [parent]...!"))
+		to_chat(target, span_warning("Кажется, в [parent] что-то есть...!"))
 
-	else if(prob(bad_chance_of_discovery)) //finding the item, BY biting it
-		user.log_message("just fed [key_name(target)] \a [stored_item] which was hidden in [parent].", LOG_ATTACK)
+	else if(prob(bad_chance_of_discovery)) // обнаружение предмета ПРИ укусе
+		user.log_message("скормил(а) [key_name(target)] предмет [stored_item], спрятанный в [parent].", LOG_ATTACK)
 		discovered = stored_item.on_accidental_consumption(target, user, parent)
-		update_stored_item() //make sure if the item was changed, the reference changes as well
+		update_stored_item() // обновляем ссылку, если предмет изменился
 
 	if(!QDELETED(stored_item) && discovered)
 		INVOKE_ASYNC(src, PROC_REF(remove_item), user)
@@ -235,11 +235,11 @@
 	. = NONE
 
 	if(isnull(held_item) || held_item == source)
-		context[SCREENTIP_CONTEXT_CTRL_LMB] = "Remove embedded item (if any)"
+		context[SCREENTIP_CONTEXT_CTRL_LMB] = "Извлечь вложенный предмет (если есть)"
 		. = CONTEXTUAL_SCREENTIP_SET
 
 	if(istype(held_item) && held_item.w_class <= WEIGHT_CLASS_SMALL && held_item != source && !IS_EDIBLE(held_item))
-		context[SCREENTIP_CONTEXT_RMB] = "Embed item"
+		context[SCREENTIP_CONTEXT_RMB] = "Вложить предмет"
 		. = CONTEXTUAL_SCREENTIP_SET
 
 	return .

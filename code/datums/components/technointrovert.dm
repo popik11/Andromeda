@@ -4,7 +4,7 @@
 	/// Typecache of allowed machinery
 	var/list/whitelist
 	/// Message presented when
-	var/message = "That %TARGET is strange! Let's avoid it."
+	var/message = "Этот %TARGET странный! Давай держаться подальше."
 
 /datum/component/technointrovert/Initialize(whitelist, message)
 	if(!ismob(parent))

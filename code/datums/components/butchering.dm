@@ -50,9 +50,9 @@
 
 	if(ishuman(M) && source.force && source.get_sharpness())
 		var/mob/living/carbon/human/H = M
-		if((user.pulling == H && user.grab_state >= GRAB_AGGRESSIVE) && user.zone_selected == BODY_ZONE_HEAD) // Only aggressive grabbed can be sliced.
+		if((user.pulling == H && user.grab_state >= GRAB_AGGRESSIVE) && user.zone_selected == BODY_ZONE_HEAD) // Только агрессивный захват позволяет резать.
 			if(HAS_TRAIT(user, TRAIT_PACIFISM))
-				to_chat(user, span_warning("You don't want to harm other living beings!"))
+				to_chat(user, span_warning("Вы не хотите причинять вред живым существам!"))
 				return COMPONENT_CANCEL_ATTACK_CHAIN
 
 			if(H.has_status_effect(/datum/status_effect/neck_slice))
@@ -62,54 +62,54 @@
 			return COMPONENT_CANCEL_ATTACK_CHAIN
 
 /datum/component/butchering/proc/startButcher(obj/item/source, mob/living/M, mob/living/user)
-	to_chat(user, span_notice("You begin to butcher [M]..."))
+	to_chat(user, span_notice("Вы начинаете разделывать [M]..."))
 	playsound(M.loc, butcher_sound, 50, TRUE, -1)
 	if(do_after(user, speed, M) && M.Adjacent(source))
 		on_butchering(user, M)
 
 /datum/component/butchering/proc/startNeckSlice(obj/item/source, mob/living/carbon/human/H, mob/living/user)
 	if(DOING_INTERACTION_WITH_TARGET(user, H))
-		to_chat(user, span_warning("You're already interacting with [H]!"))
+		to_chat(user, span_warning("Вы уже взаимодействуете с [H]!"))
 		return
 
-	user.visible_message(span_danger("[user] is slitting [H]'s throat!"), \
-					span_danger("You start slicing [H]'s throat!"), \
-					span_hear("You hear a cutting noise!"), ignored_mobs = H)
-	H.show_message(span_userdanger("Your throat is being slit by [user]!"), MSG_VISUAL, \
-					span_userdanger("Something is cutting into your neck!"), NONE)
-	log_combat(user, H, "attempted throat slitting", source)
+	user.visible_message(span_danger("[user] перерезает горло [H]!"), \
+					span_danger("Вы начинаете резать горло [H]!"), \
+					span_hear("Слышите режущий звук!"), ignored_mobs = H)
+	H.show_message(span_userdanger("[user] перерезает вам горло!"), MSG_VISUAL, \
+					span_userdanger("Что-то режет вашу шею!"), NONE)
+	log_combat(user, H, "попытка перерезать горло", source)
 
 	playsound(H.loc, butcher_sound, 50, TRUE, -1)
 	if(do_after(user, clamp(500 / source.force, 30, 100), H) && H.Adjacent(source))
 		if(H.has_status_effect(/datum/status_effect/neck_slice))
-			user.show_message(span_warning("[H]'s neck has already been already cut, you can't make the bleeding any worse!"), MSG_VISUAL, \
-							span_warning("Their neck has already been already cut, you can't make the bleeding any worse!"))
+			user.show_message(span_warning("Горло [H] уже порезано, вы не можете усугубить кровотечение!"), MSG_VISUAL, \
+							span_warning("Горло уже порезано, вы не можете усугубить кровотечение!"))
 			return
 
-		H.visible_message(span_danger("[user] slits [H]'s throat!"), \
-					span_userdanger("[user] slits your throat..."))
-		log_combat(user, H, "wounded via throat slitting", source)
-		H.apply_damage(source.force, BRUTE, BODY_ZONE_HEAD, wound_bonus=CANT_WOUND) // easy tiger, we'll get to that in a sec
+		H.visible_message(span_danger("[user] перерезает горло [H]!"), \
+					span_userdanger("[user] перерезает вам горло..."))
+		log_combat(user, H, "рана от перерезания горла", source)
+		H.apply_damage(source.force, BRUTE, BODY_ZONE_HEAD, wound_bonus=CANT_WOUND) // полегче, мы ещё до этого дойдём
 		var/obj/item/bodypart/slit_throat = H.get_bodypart(BODY_ZONE_HEAD)
 		if (H.cause_wound_of_type_and_severity(WOUND_SLASH, slit_throat, WOUND_SEVERITY_CRITICAL))
 			H.apply_status_effect(/datum/status_effect/neck_slice)
 
 /**
- * Handles a user butchering a target
+ * Обрабатывает процесс разделки моба
  *
- * Arguments:
- * - [butcher][/mob/living]: The mob doing the butchering
- * - [target][/mob/living]: The mob being butchered
+ * Аргументы:
+ * - [butcher][/mob/living]: Моб, выполняющий разделку
+ * - [target][/mob/living]: Моб, которого разделывают
  */
 /datum/component/butchering/proc/on_butchering(atom/butcher, mob/living/target)
 	var/list/results = list()
 	var/turf/location = target.drop_location()
 	var/final_effectiveness = effectiveness - target.butcher_difficulty
-	var/bonus_chance = max(0, (final_effectiveness - 100) + bonus_modifier) //so 125 total effectiveness = 25% extra chance
+	var/bonus_chance = max(0, (final_effectiveness - 100) + bonus_modifier) // например, 125 общей эффективности = 25% дополнительного шанса
 
 	if(target.flags_1 & HOLOGRAM_1)
-		butcher.visible_message(span_notice("[butcher] tries to butcher [target], but it vanishes."), \
-			span_notice("You try to butcher [target], but it vanishes."))
+		butcher.visible_message(span_notice("[butcher] пытается разделать [target], но тот исчезает."), \
+			span_notice("Вы пытаетесь разделать [target], но он исчезает."))
 		qdel(target)
 		return
 
@@ -119,12 +119,12 @@
 		for(var/_i in 1 to amount)
 			if(!prob(final_effectiveness))
 				if(butcher)
-					to_chat(butcher, span_warning("You fail to harvest some of the [initial(remains.name)] from [target]."))
+					to_chat(butcher, span_warning("Вам не удаётся собрать часть [initial(remains.name)] с [target]."))
 				continue
 
 			if(prob(bonus_chance))
 				if(butcher)
-					to_chat(butcher, span_info("You harvest some extra [initial(remains.name)] from [target]!"))
+					to_chat(butcher, span_info("Вы собрали дополнительно [initial(remains.name)] с [target]!"))
 				results += new remains (location)
 			results += new remains (location)
 
@@ -168,11 +168,11 @@
 					diseased_remains.AddComponent(/datum/component/infective, diseases_to_add)
 
 	if(butcher)
-		butcher.visible_message(span_notice("[butcher] butchers [target]."), \
-			span_notice("You butcher [target]."))
+		butcher.visible_message(span_notice("[butcher] разделывает [target]."), \
+			span_notice("Вы разделали [target]."))
 	butcher_callback?.Invoke(butcher, target)
 	target.harvest(butcher)
-	target.log_message("has been butchered by [key_name(butcher)]", LOG_ATTACK)
+	target.log_message("был разделано [key_name(butcher)]", LOG_ATTACK)
 	target.gib(DROP_BRAIN|DROP_ORGANS)
 
 ///Enables the butchering mechanic for the mob who has equipped us.

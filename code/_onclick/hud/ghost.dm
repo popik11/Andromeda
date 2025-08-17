@@ -7,7 +7,7 @@
 	flick(icon_state + "_anim", src)
 
 /atom/movable/screen/ghost/spawners_menu
-	name = "Spawners menu"
+	name = "Меню спавнеров"
 	icon_state = "spawners"
 
 /atom/movable/screen/ghost/spawners_menu/Click()
@@ -15,14 +15,14 @@
 	observer.open_spawners_menu()
 
 /atom/movable/screen/ghost/orbit
-	name = "Orbit"
+	name = "Орбита"
 	icon_state = "orbit"
 
 /atom/movable/screen/ghost/orbit/Click()
 	GLOB.orbit_menu.show(usr)
 
 /atom/movable/screen/ghost/reenter_corpse
-	name = "Reenter corpse"
+	name = "Вернуться в тело"
 	icon_state = "reenter_corpse"
 
 /atom/movable/screen/ghost/reenter_corpse/Click()
@@ -30,7 +30,7 @@
 	G.reenter_corpse()
 
 /atom/movable/screen/ghost/dnr
-	name = "Do Not Resuscitate"
+	name = "Не реанимировать"
 	icon_state = "dnr"
 
 /atom/movable/screen/ghost/dnr/Click()
@@ -38,7 +38,7 @@
 	dnring.do_not_resuscitate()
 
 /atom/movable/screen/ghost/teleport
-	name = "Teleport"
+	name = "Телепорт"
 	icon_state = "teleport"
 
 /atom/movable/screen/ghost/teleport/Click()
@@ -46,7 +46,7 @@
 	G.dead_tele()
 
 /atom/movable/screen/ghost/settings
-	name = "Ghost Settings"
+	name = "Настройки призрака"
 	icon_state = "settings"
 
 /atom/movable/screen/ghost/settings/MouseEntered(location, control, params)
@@ -57,7 +57,7 @@
 	GLOB.ghost_menu.ui_interact(usr)
 
 /atom/movable/screen/ghost/minigames_menu
-	name ="Minigames"
+	name = "Мини-игры"
 	icon_state = "minigames"
 
 /atom/movable/screen/ghost/minigames_menu/Click()

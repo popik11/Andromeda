@@ -35,15 +35,15 @@
 /datum/component/crate_carrier/UnregisterFromParent()
 	UnregisterSignal(parent, list(COMSIG_LIVING_UNARMED_ATTACK, COMSIG_LIVING_DEATH, COMSIG_ATOM_EXAMINE))
 
-/// Signal proc for [COMSIG_ATOM_EXAMINE] to show when we're carrying crates
+/// Обработчик сигнала [COMSIG_ATOM_EXAMINE] для отображения переносимых ящиков
 /datum/component/crate_carrier/proc/on_examine(mob/living/source, mob/examiner, list/examine_list)
 	SIGNAL_HANDLER
 
 	var/num_crates = LAZYLEN(crates_in_hand)
 	if(num_crates > 0)
-		examine_list += span_notice("[source.p_Theyre()] carrying [num_crates == 1 ? "a crate":"[num_crates] crates"].")
+		examine_list += span_notice("[source.p_Theyre()] переносит [num_crates == 1 ? "ящик":"[num_crates] ящиков"].")
 
-/// Signal proc for [COMSIG_LIVING_UNARMED_ATTACK] to allow mobs to pick up or drop crates
+/// Обработчик сигнала [COMSIG_LIVING_UNARMED_ATTACK] для подбора/сброса ящиков
 /datum/component/crate_carrier/proc/on_unarm_attack(mob/living/source, atom/target, proximity, modifiers)
 	SIGNAL_HANDLER
 
@@ -53,23 +53,23 @@
 	if(is_type_in_typecache(target, carriable_cache))
 		var/atom/movable/movable_target = target
 		if(LAZYLEN(crates_in_hand) >= crate_limit)
-			source.balloon_alert(source, "too many crates!")
+			source.balloon_alert(source, "слишком много ящиков!")
 			return COMPONENT_CANCEL_ATTACK_CHAIN
 
 		for(var/mob/living/inside_mob in movable_target.get_all_contents())
 			if(inside_mob.mob_size < MOB_SIZE_HUMAN)
 				continue
-			source.balloon_alert(source, "crate too heavy!")
+			source.balloon_alert(source, "ящик слишком тяжёлый!")
 			return COMPONENT_CANCEL_ATTACK_CHAIN
 
 		LAZYADD(crates_in_hand, target)
 		movable_target.forceMove(source)
-		source.balloon_alert(source, "grabbed crate")
+		source.balloon_alert(source, "поднял ящик")
 		return COMPONENT_CANCEL_ATTACK_CHAIN
 
 	if(isopenturf(target) && LAZYLEN(crates_in_hand))
 		drop_all_crates(target)
-		source.balloon_alert(source, "dropped crate")
+		source.balloon_alert(source, "бросил ящик")
 		return COMPONENT_CANCEL_ATTACK_CHAIN
 
 /// Signal proc for [COMSIG_LIVING_DEATH], so we drop crates on death or gib

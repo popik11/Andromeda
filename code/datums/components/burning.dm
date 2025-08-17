@@ -76,23 +76,23 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		return
 	atom_parent.take_damage(10 * seconds_per_tick, BURN, FIRE, FALSE)
 
-/// Alerts any examiners that the parent is on fire (even though it should be rather obvious)
+/// Предупреждает осматривающих, что объект в огне (хотя это должно быть очевидно)
 /datum/component/burning/proc/on_examine(atom/source, mob/user, list/examine_list)
 	SIGNAL_HANDLER
 
-	examine_list += span_danger("[source.p_Theyre()] burning!")
+	examine_list += span_danger("[source.p_Theyre()] в огне!")
 
-/// Handles searing the hand of anyone who tries to touch parent without protection.
+/// Обжигает руку любого, кто попытается прикоснуться к объекту без защиты.
 /datum/component/burning/proc/on_attack_hand(atom/source, mob/living/carbon/user)
 	SIGNAL_HANDLER
 
 	if(!iscarbon(user) || user.can_touch_burning(source))
-		to_chat(user, span_notice("You put out the fire on [source]."))
+		to_chat(user, span_notice("Вы тушите огонь на [source]."))
 		source.extinguish()
 		return COMPONENT_CANCEL_ATTACK_CHAIN
 
 	user.apply_damage(5, BURN, user.get_active_hand())
-	to_chat(user, span_userdanger("You burn your hand on [source]!"))
+	to_chat(user, span_userdanger("Вы обжигаете руку о [source]!"))
 	INVOKE_ASYNC(user, TYPE_PROC_REF(/mob, emote), "scream")
 	playsound(source, SFX_SEAR, 50, TRUE)
 	return COMPONENT_CANCEL_ATTACK_CHAIN

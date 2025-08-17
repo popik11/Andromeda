@@ -79,30 +79,30 @@ SUBSYSTEM_DEF(modular_computers)
 
 	///pda message code here
 	var/static/list/promo_messages = list(
-		"A new discount has dropped for %GOODY: %DISCOUNT.",
-		"Check this new offer out: %GOODY, now %DISCOUNT off.",
-		"Now on sales: %GOODY, at %DISCOUNT discount!",
-		"This item is now on sale (%DISCOUNT off): %GOODY.",
-		"Would you look at that! A %DISCOUNT discount on %GOODY!",
-		"Exclusive offer for %GOODY. Only %DISCOUNT! Get it now:",
-		"%GOODY is now %DISCOUNT off.",
-		"*RING* A new discount has dropped: %GOODY, %DISCOUNT off.",
-		"%GOODY - %DISCOUNT off."
+		"Новая скидка на %GOODY: %DISCOUNT.",
+		"Оцените новое предложение: %GOODY со скидкой %DISCOUNT.",
+		"Специальное предложение: %GOODY со скидкой %DISCOUNT!",
+		"Товар по скидке (%DISCOUNT): %GOODY.",
+		"Только посмотрите! Скидка %DISCOUNT на %GOODY!",
+		"Эксклюзивное предложение на %GOODY. Всего %DISCOUNT! Получите сейчас:",
+		"На %GOODY теперь скидка %DISCOUNT.",
+		"*ДЗИНЬ* Новая скидка: %GOODY, скидка %DISCOUNT.",
+		"%GOODY - скидка %DISCOUNT."
 	)
 	var/static/list/code_messages = list(
-		"Here's the code",
-		"Use this code to redeem it",
-		"Open the app to redeem it",
-		"Code",
-		"Redeem it now",
-		"Buy it now",
+		"Вот ваш код",
+		"Используйте этот код для активации",
+		"Откройте приложение для активации",
+		"Код",
+		"Активируйте сейчас",
+		"Купите сейчас",
 	)
 
 	var/chosen_promo_message = replacetext(replacetext(pick(promo_messages), "%GOODY", pack_name), "%DISCOUNT", "[chosen_discount*100]%")
 	var/datum/signal/subspace/messaging/tablet_message/signal = new(announcement_system, list(
-		"fakename" = "Coupon Master",
-		"fakejob" = "Goodies Promotion",
-		"message" = "[chosen_promo_message] [pick(code_messages)]: [coupon_code][expires_in ? " (EXPIRES IN [uppertext(DisplayTimeText(expires_in))])" : ""].",
+		"fakename" = "Мастер Купонов",
+		"fakejob" = "Акции на Гуди",
+		"message" = "[chosen_promo_message] [pick(code_messages)]: [coupon_code][expires_in ? " (ДЕЙСТВИТЕЛЕН [uppertext(DisplayTimeText(expires_in))])" : ""].",
 		"targets" = targets,
 		"automated" = TRUE,
 	))
@@ -147,22 +147,22 @@ SUBSYSTEM_DEF(modular_computers)
 /datum/controller/subsystem/modular_computers/proc/add_log(log_string)
 	var/list/log_text = list()
 	log_text += "\[[station_time_timestamp()]\]"
-	log_text += "*SYSTEM* - "
+	log_text += "*СИСТЕМА* - "
 	log_text += log_string
 	log_string = log_text.Join()
 
 	modpc_logs.Add(log_string)
 
-	// We have too many logs, remove the oldest entries until we get into the limit
+	// Слишком много логов, удаляем старые записи до достижения лимита
 	if(modpc_logs.len > MAX_LOG_COUNT)
 		modpc_logs = modpc_logs.Copy(modpc_logs.len - MAX_LOG_COUNT, 0)
 
 /**
- * Removes all station logs and leaves it with an alert that it's been wiped.
+ * Удаляет все логи станции, оставляя сообщение об очистке.
  */
 /datum/controller/subsystem/modular_computers/proc/purge_logs()
 	modpc_logs = list()
-	add_log("-!- LOGS DELETED BY SYSTEM OPERATOR -!-")
+	add_log("-!- ЛОГИ УДАЛЕНЫ СИСТЕМНЫМ ОПЕРАТОРОМ -!-")
 
 /**
  * Returns a name which a /datum/picture can be assigned to.

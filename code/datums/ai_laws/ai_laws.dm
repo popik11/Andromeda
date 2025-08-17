@@ -47,7 +47,7 @@ GLOBAL_VAR(round_default_lawset)
 			for (var/law_id in specified_law_ids)
 				var/datum/ai_laws/laws = lawid_to_type(law_id)
 				if (isnull(laws))
-					log_config("ERROR: Specified law [law_id] does not exist!")
+					log_config("ОШИБКА: Указанный закон [law_id] не существует!")
 					continue
 				specified_laws += laws
 			var/datum/ai_laws/lawtype

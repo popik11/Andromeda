@@ -188,19 +188,19 @@ GLOBAL_DATUM_INIT(acid_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 	parent_integrity -= seconds_per_tick
 	if(parent_integrity <= 0)
-		target_turf.visible_message(span_warning("[target_turf] collapses under its own weight into a puddle of goop and undigested debris!"))
+		target_turf.visible_message(span_warning("[target_turf] обрушивается под собственным весом в лужу слизи и непереваренного мусора!"))
 		target_turf.acid_melt()
 	else if(parent_integrity <= 4 && stage <= 3)
-		target_turf.visible_message(span_warning("[target_turf] begins to crumble under the acid!"))
+		target_turf.visible_message(span_warning("[target_turf] начинает разрушаться под действием кислоты!"))
 		stage = 4
 	else if(parent_integrity <= 8 && stage <= 2)
-		target_turf.visible_message(span_warning("[target_turf] is struggling to withstand the acid!"))
+		target_turf.visible_message(span_warning("[target_turf] с трудом выдерживает кислоту!"))
 		stage = 3
 	else if(parent_integrity <= 16 && stage <= 1)
-		target_turf.visible_message(span_warning("[target_turf] is being melted by the acid!"))
+		target_turf.visible_message(span_warning("[target_turf] плавится под действием кислоты!"))
 		stage = 2
 	else if(parent_integrity <= 24 && stage == 0)
-		target_turf.visible_message(span_warning("[target_turf] is holding up against the acid!"))
+		target_turf.visible_message(span_warning("[target_turf] пока держится против кислоты!"))
 		stage = 1
 
 /// Used to maintain the acid overlay on the parent [/atom].
@@ -214,7 +214,7 @@ GLOBAL_DATUM_INIT(acid_overlay, /mutable_appearance, mutable_appearance('icons/e
 /datum/component/acid/proc/on_examine(atom/source, mob/user, list/examine_list)
 	SIGNAL_HANDLER
 
-	examine_list += span_danger("[source.p_Theyre()] covered in a corrosive liquid!")
+	examine_list += span_danger("[source.p_Theyre()] покрыт едкой жидкостью!")
 
 /// Makes it possible to clean acid off of objects.
 /datum/component/acid/proc/on_clean(atom/source, clean_types)
@@ -244,7 +244,7 @@ GLOBAL_DATUM_INIT(acid_overlay, /mutable_appearance, mutable_appearance('icons/e
 		return NONE
 
 	user.apply_damage(5, BURN, user.get_active_hand())
-	to_chat(user, span_userdanger("The acid on \the [source] burns your hand!"))
+	to_chat(user, span_userdanger("Кислота на [source] обжигает вашу руку!"))
 	INVOKE_ASYNC(user, TYPE_PROC_REF(/mob, emote), "scream")
 	playsound(source, SFX_SEAR, 50, TRUE)
 	return COMPONENT_CANCEL_ATTACK_CHAIN
@@ -269,5 +269,5 @@ GLOBAL_DATUM_INIT(acid_overlay, /mutable_appearance, mutable_appearance('icons/e
 	if(!crosser.acid_act(acid_power, acid_used, FEET))
 		return
 	playsound(crosser, SFX_SEAR, 50, TRUE)
-	to_chat(crosser, span_userdanger("The acid on the [parent] burns you!"))
+	to_chat(crosser, span_userdanger("Кислота на [parent] обжигает вас!"))
 	set_volume(max(acid_volume - acid_used, 10))

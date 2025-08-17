@@ -65,8 +65,8 @@
 
 	var/mob/holder = get(movable_parent, /mob)
 	if(holder)
-		to_chat(holder, span_danger("You can't help but feel that you just lost something back there..."))
-		holder.temporarilyRemoveItemFromInventory(parent, TRUE) // prevents ghost diskie
+		to_chat(holder, span_danger("Ты чувствуешь, что только что потерял что-то важное..."))
+		holder.temporarilyRemoveItemFromInventory(parent, TRUE) // предотвращает появление призрачного диска
 
 	movable_parent.forceMove(target_turf)
 
@@ -82,35 +82,35 @@
 
 	var/turf/current_turf = get_turf(source)
 	var/turf/new_destination = relocate()
-	// Our turf actually didn't change, so it's more likely we became secluded
+	// Наш тайл не изменился, скорее всего мы оказались в изоляции
 	if(current_turf == old_turf)
-		log_game("[parent] moved out of bounds at [loc_name(current_turf)], becoming inaccessible / secluded. \
-			Moving it to [loc_name(new_destination)].")
+		log_game("[parent] вышел за границы станции в [loc_name(current_turf)], став недоступным/изолированным. \
+			Перемещаем в [loc_name(new_destination)].")
 
 		if(inform_admins)
-			message_admins("[parent] moved out of bounds at [ADMIN_VERBOSEJMP(current_turf)], becoming inaccessible / secluded. \
-				Moving it to [ADMIN_VERBOSEJMP(new_destination)].")
+			message_admins("[parent] вышел за границы станции в [ADMIN_VERBOSEJMP(current_turf)], став недоступным/изолированным. \
+				Перемещаем в [ADMIN_VERBOSEJMP(new_destination)].")
 
-	// Our locs changes, we did in fact move somewhere
+	// Наша локация изменилась, мы действительно куда-то переместились
 	else
-		log_game("[parent] attempted to be moved out of bounds from [loc_name(old_turf)] \
-			to [loc_name(current_turf)]. Moving it to [loc_name(new_destination)].")
+		log_game("[parent] была попытка перемещения за границы станции из [loc_name(old_turf)] \
+			в [loc_name(current_turf)]. Перемещаем в [loc_name(new_destination)].")
 
 		if(inform_admins)
-			message_admins("[parent] attempted to be moved out of bounds from [ADMIN_VERBOSEJMP(old_turf)] \
-				to [ADMIN_VERBOSEJMP(current_turf)]. Moving it to [ADMIN_VERBOSEJMP(new_destination)].")
+			message_admins("[parent] была попытка перемещения за границы станции из [ADMIN_VERBOSEJMP(old_turf)] \
+				в [ADMIN_VERBOSEJMP(current_turf)]. Перемещаем в [ADMIN_VERBOSEJMP(new_destination)].")
 
-/// Signal proc for [SIGNAL_ADDTRAIT], via [TRAIT_SECLUDED_LOCATION] on our locs, to ensure nothing funky happens
+/// Обработчик сигнала [SIGNAL_ADDTRAIT] при получении трейта [TRAIT_SECLUDED_LOCATION] для контроля нестандартных ситуаций
 /datum/component/stationloving/proc/on_loc_secluded(atom/movable/source)
 	SIGNAL_HANDLER
 
 	var/turf/new_destination = relocate()
-	log_game("[parent] moved out of bounds at [loc_name(source)], becoming inaccessible / secluded. \
-		Moving it to [loc_name(new_destination)].")
+	log_game("[parent] оказался в изоляции в [loc_name(source)], став недоступным. \
+		Перемещаем в [loc_name(new_destination)].")
 
 	if(inform_admins)
-		message_admins("[parent] moved out of bounds at [ADMIN_VERBOSEJMP(source)], becoming inaccessible / secluded. \
-			Moving it to [ADMIN_VERBOSEJMP(new_destination)].")
+		message_admins("[parent] оказался в изоляции в [ADMIN_VERBOSEJMP(source)], став недоступным. \
+			Перемещаем в [ADMIN_VERBOSEJMP(new_destination)].")
 
 /datum/component/stationloving/proc/check_soul_imbue(datum/source)
 	SIGNAL_HANDLER
@@ -170,16 +170,16 @@
 	var/turf/current_turf = get_turf(parent)
 
 	if(force && inform_admins)
-		message_admins("[parent] has been !!force deleted!! in [ADMIN_VERBOSEJMP(current_turf)].")
-		log_game("[parent] has been !!force deleted!! in [loc_name(current_turf)].")
+		message_admins("[parent] был !!ПРИНУДИТЕЛЬНО УДАЛЁН!! в [ADMIN_VERBOSEJMP(current_turf)].")
+		log_game("[parent] был !!ПРИНУДИТЕЛЬНО УДАЛЁН!! в [loc_name(current_turf)].")
 
 	if(force || allow_item_destruction)
 		return FALSE
 
 	var/turf/new_turf = relocate()
-	log_game("[parent] has been destroyed in [loc_name(current_turf)]. \
-		Preventing destruction and moving it to [loc_name(new_turf)].")
+	log_game("[parent] был уничтожен в [loc_name(current_turf)]. \
+		Отменяем уничтожение и перемещаем в [loc_name(new_turf)].")
 	if(inform_admins)
-		message_admins("[parent] has been destroyed in [ADMIN_VERBOSEJMP(current_turf)]. \
-			Preventing destruction and moving it to [ADMIN_VERBOSEJMP(new_turf)].")
+		message_admins("[parent] был уничтожен в [ADMIN_VERBOSEJMP(current_turf)]. \
+			Отменяем уничтожение и перемещаем в [ADMIN_VERBOSEJMP(new_turf)].")
 	return TRUE

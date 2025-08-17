@@ -98,35 +98,35 @@
 	var/scoops_len = length(scoops)
 	if(!scoops_len)
 		source.desc = initial(source.desc)
-	else if(scoops_len == 1 || length(unique_list(scoops)) == 1) /// Only one flavour.
+	else if(scoops_len == 1 || length(unique_list(scoops)) == 1) /// Только один вкус.
 		var/key = scoops[1]
 		var/datum/ice_cream_flavour/flavour = GLOB.ice_cream_flavours[LAZYACCESS(special_scoops, key) || key]
 		if(!flavour?.desc) //I scream.
 			source.desc = initial(source.desc)
 		else
 			source.desc = replacetext(replacetext("[flavour.desc_prefix] [flavour.desc]", "$CONE_NAME", initial(source.name)), "$CUSTOM_NAME", key)
-	else /// Many flavours.
-		source.desc = "A delicious [initial(source.name)] filled with scoops of [english_list(scoops)] ice cream. That's as many as [scoops_len] scoops!"
+	else /// Много вкусов.
+		source.desc = "Вкусный [initial(source.name)] с шариками мороженого со вкусами [english_list(scoops)]. Целых [scoops_len] шариков!"
 
 /datum/component/ice_cream_holder/proc/on_examine(atom/source, mob/mob, list/examine_list)
 	SIGNAL_HANDLER
 	if(length(scoops) < max_scoops)
-		examine_list += span_tinynoticeital("you could use a ice cream vat to fill it with yummy ice cream...")
+		examine_list += span_tinynoticeital("можно наполнить его вкусным мороженым из аппарата...")
 
 /datum/component/ice_cream_holder/proc/on_examine_more(atom/source, mob/mob, list/examine_list)
 	SIGNAL_HANDLER
 	var/scoops_len = length(scoops)
 	if(!scoops_len)
 		return
-	if(scoops_len == 1 || length(unique_list(scoops)) == 1) /// Only one flavour.
+	if(scoops_len == 1 || length(unique_list(scoops)) == 1) /// Только один вкус.
 		var/key = scoops[1]
 		var/datum/ice_cream_flavour/flavour = GLOB.ice_cream_flavours[LAZYACCESS(special_scoops, key) || key]
 		if(flavour?.desc) //I scream.
-			examine_list += "[source.p_Theyre()] filled with scoops of [flavour ? flavour.name : "broken, unhappy"] ice cream."
+			examine_list += "[source.p_Theyre()] наполнен шариками мороженого со вкусом [flavour ? flavour.name : "сломанного, несчастного"]."
 		else
 			examine_list += replacetext(replacetext("[source.p_Theyre()] [flavour.desc]", "$CONE_NAME", initial(source.name)), "$CUSTOM_NAME", key)
-	else /// Many flavours.
-		examine_list += "[source.p_Theyre()] filled with scoops of [english_list(scoops)] ice cream. That's as many as [scoops_len] scoops!"
+	else /// Много вкусов.
+		examine_list += "[source.p_Theyre()] наполнен шариками мороженого со вкусами [english_list(scoops)]. Целых [scoops_len] шариков!"
 
 /datum/component/ice_cream_holder/proc/on_update_overlays(atom/source, list/new_overlays)
 	SIGNAL_HANDLER
@@ -148,7 +148,7 @@
 	if(!istype(target, /obj/machinery/icecream_vat))
 		return COMPONENT_CANCEL_ATTACK_CHAIN
 	if(length(scoops) >= max_scoops)
-		target.balloon_alert(user, "too many scoops!")
+		target.balloon_alert(user, "слишком много шариков!")
 		return COMPONENT_CANCEL_ATTACK_CHAIN
 	var/obj/machinery/icecream_vat/dispenser = target
 	dispenser.add_flavor_to_cone(src, user, source)
@@ -211,7 +211,7 @@ GLOBAL_LIST_INIT_TYPED(ice_cream_flavours, /datum/ice_cream_flavour, init_ice_cr
 	 * Depending on the value of the [/datum/component/ice_cream/var/change_desc] bool, 'desc' may effectively be the description
 	 * or a text string shown on [/atom/proc/examine_more]. In the former case, the desc is joined with this prefix.
 	 */
-	var/desc_prefix = "A delicious $CONE_NAME"
+	var/desc_prefix = "Вкусный $CONE_NAME"
 	/// The ingredients required to produce a unit with the ice cream vat, these are multiplied by 3.
 	var/list/ingredients = list(/datum/reagent/consumable/milk, /datum/reagent/consumable/ice, /datum/reagent/consumable/vanilla)
 	/// The same as above, but in a readable text generated on New() that can also contain fluff ingredients such as "lot of love" or "optional flavorings".
@@ -227,7 +227,7 @@ GLOBAL_LIST_INIT_TYPED(ice_cream_flavours, /datum/ice_cream_flavour, init_ice_cr
 
 /datum/ice_cream_flavour/New()
 	if(ingredients)
-		ingredients_text = "Requires: [reagent_paths_list_to_text(ingredients, ingredients_text)]"
+		ingredients_text = "Требуется: [reagent_paths_list_to_text(ingredients, ingredients_text)]"
 
 /// Adds a new flavour to the ice cream cone.
 /datum/ice_cream_flavour/proc/add_flavour(datum/component/ice_cream_holder/target, datum/reagents/custom_ingredients)
@@ -252,117 +252,117 @@ GLOBAL_LIST_INIT_TYPED(ice_cream_flavours, /datum/ice_cream_flavour, init_ice_cr
 	owner.update_appearance(update_flags)
 	return TRUE
 
-///// OUR TYPES OF ICE CREAM, COME GET SOME.
+///// НАШИ ВИДЫ МОРОЖЕНОГО, ПРИХОДИТЕ И ПОПРОБУЙТЕ.
 
 /datum/ice_cream_flavour/vanilla
 	name = ICE_CREAM_VANILLA
-	desc = "filled with vanilla ice cream. All the other ice creams take content from it."
+	desc = "наполнен ванильным мороженым. Все остальные вкусы основаны на нём."
 	reagent_type = /datum/reagent/consumable/vanilla
 
 /datum/ice_cream_flavour/chocolate
 	name = ICE_CREAM_CHOCOLATE
 	color = COLOR_ICECREAM_CHOCOLATE
-	desc = "filled with chocolate ice cream. Surprisingly, made with real cocoa."
+	desc = "наполнен шоколадным мороженым. Удивительно, но сделано из настоящего какао."
 	ingredients = list(/datum/reagent/consumable/milk, /datum/reagent/consumable/ice, /datum/reagent/consumable/coco)
 	reagent_type = /datum/reagent/consumable/coco
 
 /datum/ice_cream_flavour/strawberry
 	name = ICE_CREAM_STRAWBERRY
 	color = COLOR_ICECREAM_STRAWBERRY
-	desc = "filled with strawberry ice cream. Definitely not made with real strawberries."
+	desc = "наполнен клубничным мороженым. Определённо не из настоящей клубники."
 	ingredients = list(/datum/reagent/consumable/milk, /datum/reagent/consumable/ice, /datum/reagent/consumable/berryjuice)
 	reagent_type = /datum/reagent/consumable/berryjuice
 
 /datum/ice_cream_flavour/blue
 	name = ICE_CREAM_BLUE
 	color = COLOR_ICECREAM_BLUE
-	desc = "filled with blue ice cream. Made with real... blue?"
+	desc = "наполнен синим мороженым. Сделано из настоящего... синего?"
 	ingredients = list(/datum/reagent/consumable/milk, /datum/reagent/consumable/ice, /datum/reagent/consumable/ethanol/singulo)
 	reagent_type = /datum/reagent/consumable/ethanol/singulo
 
 /datum/ice_cream_flavour/lemon
 	name = ICE_CREAM_LEMON
 	color = COLOR_ICECREAM_LEMON
-	desc = "filled with lemon sorbet. Like frozen lemonade in a cone."
-	ingredients = list(/datum/reagent/consumable/ice, /datum/reagent/consumable/lemonjuice) //contains no milk
+	desc = "наполнен лимонным сорбетом. Как замороженный лимонад в рожке."
+	ingredients = list(/datum/reagent/consumable/ice, /datum/reagent/consumable/lemonjuice) //не содержит молока
 	reagent_type = /datum/reagent/consumable/lemonjuice
 
 /datum/ice_cream_flavour/caramel
 	name = ICE_CREAM_CARAMEL
 	color = COLOR_ICECREAM_CARAMEL
-	desc = "filled with caramel ice cream. It is deliciously sweet."
+	desc = "наполнен карамельным мороженым. Восхитительно сладкое."
 	ingredients = list(/datum/reagent/consumable/milk, /datum/reagent/consumable/ice, /datum/reagent/consumable/caramel)
 	reagent_type = /datum/reagent/consumable/caramel
 
 /datum/ice_cream_flavour/banana
 	name = ICE_CREAM_BANANA
 	color = COLOR_YELLOW
-	desc = "filled with banana ice cream. Honk!"
+	desc = "наполнен банановым мороженым. Хонк!"
 	ingredients = list(/datum/reagent/consumable/milk, /datum/reagent/consumable/ice, /datum/reagent/consumable/banana)
 	reagent_type = /datum/reagent/consumable/banana
 
 /datum/ice_cream_flavour/orange_cream
 	name = ICE_CREAM_ORANGE_CREAM
 	color = COLOR_ICECREAM_ORANGESICLE
-	desc = "filled with orange creamsicle. Not quite the same off the stick..."
+	desc = "наполнен апельсиновым крем-сорбетом. Не совсем то же самое, что на палочке..."
 	ingredients = list(/datum/reagent/consumable/cream, /datum/reagent/consumable/ice, /datum/reagent/consumable/orangejuice)
 	reagent_type = /datum/reagent/consumable/orangejuice
 
 /datum/ice_cream_flavour/peach
 	name = ICE_CREAM_PEACH
 	color = COLOR_ICECREAM_PEACH
-	desc = "filled with limited edition peach flavour. Enjoy it while it lasts!"
+	desc = "наполнен ограниченным тиражом персикового вкуса. Наслаждайтесь, пока есть!"
 	ingredients = list(/datum/reagent/consumable/milk, /datum/reagent/consumable/ice, /datum/reagent/consumable/peachjuice)
 	reagent_type = /datum/reagent/consumable/peachjuice
 
 /datum/ice_cream_flavour/vanilla/korta
 	name = ICE_CREAM_KORTA_VANILLA
-	desc = "filled with vanilla ice cream made with korta milk. Lizards love it!"
+	desc = "наполнен ванильным мороженым на молоке корта. Ящерицы его обожают!"
 	ingredients = list(/datum/reagent/consumable/korta_milk, /datum/reagent/consumable/ice, /datum/reagent/consumable/vanilla)
 
 /datum/ice_cream_flavour/cherry_chocolate
 	name = ICE_CREAM_CHERRY_CHOCOLATE
 	color = COLOR_ICECREAM_CHERRY_CHOCOLATE
-	desc = "filled with cherry chocolate chip ice cream. It is wonderfully tangy and sweet."
+	desc = "наполнен вишнёвым мороженым с шоколадной крошкой. Удивительно терпкое и сладкое."
 	ingredients = list(/datum/reagent/consumable/milk, /datum/reagent/consumable/ice, /datum/reagent/consumable/coco, /datum/reagent/consumable/cherryjelly)
 	reagent_type = /datum/reagent/consumable/cherryjelly
 
 /datum/ice_cream_flavour/mob
 	name = ICE_CREAM_MOB
 	color = COLOR_ICECREAM_STRAWBERRY
-	desc = "filled with bright red ice cream. That's probably not strawberry..."
-	desc_prefix = "A suspicious $CONE_NAME"
+	desc = "наполнен ярко-красным мороженым. Вряд ли это клубника..."
+	desc_prefix = "Подозрительный $CONE_NAME"
 	reagent_type = /datum/reagent/consumable/liquidgibs
 	hidden = TRUE
 
 /datum/ice_cream_flavour/custom
 	name = ICE_CREAM_CUSTOM
-	color = COLOR_STARLIGHT //has its own mutable appearance overlay it will be overwritten with anyways.
-	desc = "filled with artisanal ice cream. Made with real $CUSTOM_NAME. Ain't that something."
+	color = COLOR_STARLIGHT //будет перезаписан собственным изменяемым внешним видом
+	desc = "наполнен авторским мороженым. Сделано из настоящего $CUSTOM_NAME. Ну разве не чудо?"
 	ingredients = list(/datum/reagent/consumable/milk, /datum/reagent/consumable/ice)
-	ingredients_text = "optional flavorings"
+	ingredients_text = "дополнительные вкусовые добавки"
 	takes_custom_ingredients = TRUE
 
 /datum/ice_cream_flavour/custom/korta
 	name = ICE_CREAM_KORTA_CUSTOM
-	desc = "filled with artisanal lizard-friendly ice cream. Made with real $CUSTOM_NAME. Ain't that something."
+	desc = "наполнен авторским мороженым для ящериц. Сделано из настоящего $CUSTOM_NAME. Ну разве не чудо?"
 	ingredients = list(/datum/reagent/consumable/korta_milk, /datum/reagent/consumable/ice)
-	ingredients_text = "optional flavorings"
+	ingredients_text = "дополнительные вкусовые добавки"
 
 /datum/ice_cream_flavour/custom/add_flavour(datum/component/ice_cream_holder/target, datum/reagents/custom_ingredients)
-	if(!custom_ingredients || custom_ingredients.total_volume < 4) //consumable reagents have stronger taste so higher volume are required to allow non-food flavourings to break through better.
-		return GLOB.ice_cream_flavours[ICE_CREAM_BLAND].add_flavour(target) //Bland, sugary ice and milk.
+	if(!custom_ingredients || custom_ingredients.total_volume < 4) //у пищевых реагентов вкус сильнее, поэтому требуется больший объём, чтобы непищевые добавки лучше ощущались.
+		return GLOB.ice_cream_flavours[ICE_CREAM_BLAND].add_flavour(target) //Пресное, сахарное мороженое из молока и льда.
 	var/image/flavoring = image('icons/obj/service/kitchen.dmi', "icecream_custom")
 	var/datum/reagent/master = custom_ingredients.get_master_reagent()
 	flavoring.color = master.color
 	LAZYADD(target.scoop_overlays, flavoring)
-	. = ..() // Make some space for reagents before attempting to transfer some to the target.
+	. = ..() // Освобождаем место для реагентов перед попыткой передачи в цель.
 	custom_ingredients.trans_to(target.parent, 4)
 
 /datum/ice_cream_flavour/bland
 	name = ICE_CREAM_BLAND
 	color = COLOR_ICECREAM_CUSTOM
-	desc = "filled with anemic, flavorless ice cream. You wonder why this was ever scooped..."
+	desc = "наполнен безвкусным, бледным мороженым. Интересно, зачем его вообще накладывали..."
 	hidden = TRUE
 
 #undef SWEETENER_PER_SCOOP

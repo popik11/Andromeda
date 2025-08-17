@@ -60,13 +60,13 @@ SUBSYSTEM_DEF(polling)
 	if(role && !role_name_text)
 		role_name_text = role
 	if(role_name_text && !question)
-		question = "Do you want to play as [span_notice(role_name_text)]?"
+		question = "Хотите играть за [span_notice(role_name_text)]?"
 	if(!question)
-		question = "Do you want to play as a special role?"
-	log_ghost_poll("Candidate poll started.", data = list(
-		"role name" = role_name_text,
-		"poll question" = question,
-		"poll duration" = DisplayTimeText(poll_time),
+		question = "Хотите играть за особую роль?"
+	log_ghost_poll("Начат опрос кандидатов.", data = list(
+		"название роли" = role_name_text,
+		"вопрос опроса" = question,
+		"длительность опроса" = DisplayTimeText(poll_time),
 	))
 
 	// Start firing

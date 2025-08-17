@@ -327,21 +327,21 @@
 			return FALSE
 	return TRUE
 
-/// Logs to admins that a singularity was created
+/// Логирует для админов создание сингулярности
 /datum/component/singularity/proc/admin_investigate_setup()
 	var/turf/spawned_turf = get_turf(parent)
-	message_admins("A singulo has been created at [ADMIN_VERBOSEJMP(spawned_turf)].")
+	message_admins("Сингулярность создано в [ADMIN_VERBOSEJMP(spawned_turf)].")
 	var/atom/atom_parent = parent
-	atom_parent.investigate_log("was made into a singularity at [AREACOORD(spawned_turf)].", INVESTIGATE_ENGINE)
+	atom_parent.investigate_log("было превращено в сингулярность в [AREACOORD(spawned_turf)].", INVESTIGATE_ENGINE)
 
-/// Fired when the singularity is fired at with the BSA and deletes it
+/// Вызывается при попадании БСА по сингулярности и удаляет её
 /datum/component/singularity/proc/bluespace_reaction()
 	SIGNAL_HANDLER
 	if (!bsa_targetable)
 		return
 
 	var/atom/atom_parent = parent
-	atom_parent.investigate_log("has been shot by bluespace artillery and destroyed.", INVESTIGATE_ENGINE)
+	atom_parent.investigate_log("было уничтожено блюспейс-артиллерией.", INVESTIGATE_ENGINE)
 	qdel(parent)
 
 /datum/component/singularity/bloodthirsty

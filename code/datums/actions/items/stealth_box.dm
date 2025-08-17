@@ -1,17 +1,17 @@
-///MGS BOX!
+///КОРОБКА MGS!
 /datum/action/item_action/agent_box
-	name = "Deploy Box"
-	desc = "Find inner peace, here, in the box."
+	name = "Развернуть коробку"
+	desc = "Обрести покой здесь, в коробке."
 	check_flags = AB_CHECK_INCAPACITATED|AB_CHECK_HANDS_BLOCKED|AB_CHECK_IMMOBILE|AB_CHECK_CONSCIOUS
 	background_icon_state = "bg_agent"
 	overlay_icon_state = "bg_agent_border"
 	button_icon = 'icons/mob/actions/actions_items.dmi'
 	button_icon_state = "deploy_box"
-	///The type of closet this action spawns.
+	///Тип разворачиваемого шкафа
 	var/boxtype = /obj/structure/closet/cardboard/agent
 	COOLDOWN_DECLARE(box_cooldown)
 
-///Handles opening and closing the box.
+///Обрабатывает открытие и закрытие коробки
 /datum/action/item_action/agent_box/do_effect(trigger_flags)
 	. = ..()
 	if(!.)
@@ -21,9 +21,9 @@
 		if(box.open())
 			owner.playsound_local(box, 'sound/misc/box_deploy.ogg', 50, TRUE)
 		return FALSE
-	//Box closing from here on out.
-	if(!isturf(owner.loc)) //Don't let the player use this to escape mechs/welded closets.
-		to_chat(owner, span_warning("You need more space to activate this implant!"))
+	//Закрытие в коробку
+	if(!isturf(owner.loc)) //Не позволяем игрокам использовать это для побега из мехов/закрытых шкафов
+		to_chat(owner, span_warning("Нужно больше места для активации!"))
 		return FALSE
 	if(!COOLDOWN_FINISHED(src, box_cooldown))
 		return FALSE
@@ -51,7 +51,7 @@
 	var/obj/structure/closet/cardboard/agent/box = owner.loc
 	owner.playsound_local(box, 'sound/misc/box_deploy.ogg', 50, TRUE)
 	box.open()
-	owner.visible_message(span_suicide("[owner] falls out of [box]! It looks like [owner.p_they()] committed suicide!"))
+	owner.visible_message(span_suicide("[owner] выпадает из [box]! Похоже на самоубийство!"))
 	owner.throw_at(get_turf(owner))
 	if(isliving(owner))
 		var/mob/living/suicider = owner

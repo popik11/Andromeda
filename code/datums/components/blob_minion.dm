@@ -135,7 +135,7 @@
 	SIGNAL_HANDLER
 	if (isnull(overmind))
 		return
-	status_items += "Blobs to Win: [length(overmind.blobs_legit)]/[overmind.blobwincount]"
+	status_items += "Блобов для победы: [length(overmind.blobs_legit)]/[overmind.blobwincount]"
 
 /// If we feel the gentle caress of a blob, we feel better
 /datum/component/blob_minion/proc/on_blob_touched(mob/living/minion)
@@ -169,12 +169,12 @@
 	if (!isnull(blob_handhold))
 		return COMSIG_MOVABLE_STOP_SPACEMOVE
 
-/// We only speak telepathically to blobs
+/// Мы общаемся с блобами только телепатически
 /datum/component/blob_minion/proc/on_try_speech(mob/living/minion, message, ignore_spam, forced)
 	SIGNAL_HANDLER
 	minion.log_talk(message, LOG_SAY, tag = "blob hivemind telepathy")
 	var/spanned_message = minion.say_quote(message)
-	var/rendered = span_blob("<b>\[Blob Telepathy\] [minion.real_name]</b> [spanned_message]")
+	var/rendered = span_blob("<b>\[Телепатия Блоба\] [minion.real_name]</b> [spanned_message]")
 	relay_to_list_and_observers(rendered, GLOB.blob_telepathy_mobs, minion, MESSAGE_TYPE_RADIO)
 	return COMPONENT_CANNOT_SPEAK
 

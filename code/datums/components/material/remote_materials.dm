@@ -132,10 +132,10 @@ handles linking back and forth.
 	. = NONE
 	if (!QDELETED(M.buffer) && istype(M.buffer, /obj/machinery/ore_silo))
 		if (silo == M.buffer)
-			to_chat(user, span_warning("[parent] is already connected to [silo]!"))
+			to_chat(user, span_warning("[parent] уже подключен к [silo]!"))
 			return ITEM_INTERACT_BLOCKING
 		if(!check_z_level(M.buffer))
-			to_chat(user, span_warning("[parent] is too far away to get a connection signal!"))
+			to_chat(user, span_warning("[parent] слишком далеко для установки соединения!"))
 			return ITEM_INTERACT_BLOCKING
 
 		var/obj/machinery/ore_silo/new_silo = M.buffer
@@ -156,7 +156,7 @@ handles linking back and forth.
 		if(!(mat_container_flags & MATCONTAINER_NO_INSERT))
 			RegisterSignal(parent, COMSIG_ATOM_ITEM_INTERACTION, PROC_REF(on_item_insert))
 			RegisterSignal(parent, COMSIG_ATOM_ITEM_INTERACTION_SECONDARY, PROC_REF(on_secondary_insert))
-		to_chat(user, span_notice("You connect [parent] to [silo] from the multitool's buffer."))
+		to_chat(user, span_notice("Вы подключили [parent] к [silo] из буфера мультитула."))
 		return ITEM_INTERACT_SUCCESS
 
 /datum/component/remote_materials/proc/on_item_insert(datum/source, mob/living/user, obj/item/target)
@@ -211,11 +211,11 @@ handles linking back and forth.
 	var/atom/movable/movable_parent = parent
 	if (!istype(movable_parent))
 		return FALSE
-	if (!mat_container) //no silolink & local storage not supported
-		movable_parent.say("No access to material storage, please contact the quartermaster.")
+	if (!mat_container) //нет связи с силосом и локальное хранилище не поддерживается
+		movable_parent.say("Нет доступа к хранилищу материалов, обратитесь к квартирмейстеру.")
 		return FALSE
-	if(check_hold && on_hold()) //silo on hold
-		movable_parent.say("Mineral access is on hold, please contact the quartermaster.")
+	if(check_hold && on_hold()) //силос заблокирован
+		movable_parent.say("Доступ к минералам ограничен, обратитесь к квартирмейстеру.")
 		return FALSE
 	if(SEND_SIGNAL(movable_parent, COMSIG_ORE_SILO_PERMISSION_CHECKED, user_data, movable_parent) & COMPONENT_ORE_SILO_DENY)
 		return FALSE

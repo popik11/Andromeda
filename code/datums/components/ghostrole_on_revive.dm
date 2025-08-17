@@ -93,14 +93,14 @@
 	ADD_TRAIT(aliver, TRAIT_BLOCK_FORMALDEHYDE_METABOLISM, type)
 
 	var/mob/dead/observer/chosen_one = SSpolling.poll_ghosts_for_target(
-		question = "Would you like to play as a recovered crewmember?",
+		question = "Хотите сыграть за восстановленного члена экипажа?",
 		role = null,
 		check_jobban = ROLE_RECOVERED_CREW,
 		poll_time = 15 SECONDS,
 		checked_target = aliver,
 		ignore_category = POLL_IGNORE_RECOVERED_CREW,
 		alert_pic = aliver,
-		role_name_text = "recovered crew",
+		role_name_text = "восстановленный член экипажа",
 	)
 
 	REMOVE_TRAIT(aliver, TRAIT_BLOCK_FORMALDEHYDE_METABOLISM, type)
@@ -111,7 +111,7 @@
 	if(!isobserver(chosen_one))
 		if(refuse_revival_if_failed)
 			aliver.death()
-			aliver.visible_message(span_deadsay("[aliver.name]'s soul is struggling to return!"))
+			aliver.visible_message(span_deadsay("Душа [aliver.name] отчаянно пытается вернуться!"))
 	else
 		aliver.PossessByPlayer(chosen_one.ckey)
 		on_successful_revive?.Invoke(aliver)
@@ -120,26 +120,26 @@
 /datum/component/ghostrole_on_revive/proc/add_orbit_twitching(mob/living/liver)
 	liver.AddElement(/datum/element/orbit_twitcher, twitch_chance)
 
-	// Add it to the ghostrole spawner menu. Note that we can't directly spawn from it, but we can make it twitch to alert bystanders to defib it
-	LAZYADD(GLOB.joinable_mobs[format_text("Recovered Crew")], liver)
+	// Добавляем в меню выбора ролей призраков. Нельзя напрямую заспавнить, но можно привлечь внимание подёргиванием
+	LAZYADD(GLOB.joinable_mobs[format_text("Восстановленный Экипаж")], liver)
 	RegisterSignal(liver, COMSIG_LIVING_GHOSTROLE_INFO, PROC_REF(set_spawner_info))
 
 /datum/component/ghostrole_on_revive/proc/set_spawner_info(datum/spawners_menu/menu, string_info)
 	SIGNAL_HANDLER
 
-	string_info["you_are_text"] = "You are a long dead crewmember, but are soon to be revived to rejoin the crew!"
-	string_info["flavor_text"] = "Get a job and get back to work!"
-	string_info["important_text"] = "Do your best to help the station. You still roll for midround antagonists."
+	string_info["you_are_text"] = "Вы давно погибший член экипажа, но скоро будете реанимированы!"
+	string_info["flavor_text"] = "Получите работу и возвращайтесь к обязанностям!"
+	string_info["important_text"] = "Помогайте станции. Вы всё ещё можете стать антагонистом."
 
 /datum/component/ghostrole_on_revive/proc/remove_orbit_twitching(mob/living/living)
 	living.RemoveElement(/datum/element/orbit_twitcher, twitch_chance)
 
 	// Remove from the ghostrole spawning menu
-	var/list/spawners = GLOB.joinable_mobs[format_text("Recovered Crew")]
+	var/list/spawners = GLOB.joinable_mobs[format_text("Восстановленный Экипаж")]
 	LAZYREMOVE(spawners, living)
 
 	if(!LAZYLEN(spawners))
-		GLOB.joinable_mobs -= format_text("Recovered Crew")
+		GLOB.joinable_mobs -= format_text("Восстановленный Экипаж")
 
 	UnregisterSignal(living, COMSIG_LIVING_GHOSTROLE_INFO)
 

@@ -47,19 +47,19 @@
 
 /datum/component/crank_recharge/proc/crank(obj/source, mob/user)
 	if(charging_cell.charge >= charging_cell.maxcharge)
-		source.balloon_alert(user, "already charged!")
+		source.balloon_alert(user, "уже заряжено!")
 		return
 	if(is_charging)
 		return
 	if(spin_to_win && !HAS_TRAIT(user, TRAIT_GUNFLIP))
-		source.balloon_alert(user, "need holster to spin!")
+		source.balloon_alert(user, "нужен кобура для вращения!")
 		return
 
 	is_charging = TRUE
 	if(COOLDOWN_FINISHED(src, charge_sound_cooldown))
 		COOLDOWN_START(src, charge_sound_cooldown, charge_sound_cooldown_time)
 		playsound(source, charge_sound, 40)
-	source.balloon_alert(user, "charging...")
+	source.balloon_alert(user, "зарядка...")
 	if(!do_after(user, cooldown_time, source, interaction_key = DOAFTER_SOURCE_CHARGE_CRANKRECHARGE, timed_action_flags = charge_move))
 		is_charging = FALSE
 		return
@@ -67,5 +67,5 @@
 	source.update_appearance()
 	is_charging = FALSE
 	if(spin_to_win)
-		source.SpinAnimation(4, 2) //What a badass
-	source.balloon_alert(user, "charged")
+		source.SpinAnimation(4, 2) //Как же круто
+	source.balloon_alert(user, "заряжено")

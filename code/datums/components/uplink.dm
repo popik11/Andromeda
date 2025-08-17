@@ -107,11 +107,11 @@
 
 /datum/component/uplink/proc/load_tc(mob/user, obj/item/stack/telecrystal/telecrystals, silent = FALSE)
 	if(!silent)
-		to_chat(user, span_notice("You slot [telecrystals] into [parent] and charge its internal uplink."))
+		to_chat(user, span_notice("Вы вставляете [telecrystals] в [parent], заряжая его внутренний аплинк."))
 	var/amt = telecrystals.amount
 	uplink_handler.add_telecrystals(amt)
 	telecrystals.use(amt)
-	log_uplink("[key_name(user)] loaded [amt] telecrystals into [parent]'s uplink")
+	log_uplink("[key_name(user)] загрузил [amt] телекристаллов в аплинк [parent]")
 
 /datum/component/uplink/proc/OnAttackBy(datum/source, obj/item/item, mob/user)
 	SIGNAL_HANDLER
@@ -131,11 +131,11 @@
 
 	if(user != owner)
 		return
-	examine_list += span_warning("[parent] contains your hidden uplink\
-		[unlock_code ? ", the code to unlock it is [span_boldwarning(unlock_code)]" : null].")
+	examine_list += span_warning("В [parent] находится ваш скрытый аплинк\
+		[unlock_code ? ", код для разблокировки: [span_boldwarning(unlock_code)]" : null].")
 
 	if(failsafe_code)
-		examine_list += span_warning("The failsafe code is [span_boldwarning(failsafe_code)].")
+		examine_list += span_warning("Отказоустойчивый код: [span_boldwarning(failsafe_code)].")
 
 /datum/component/uplink/proc/interact(datum/source, mob/user)
 	SIGNAL_HANDLER
@@ -257,7 +257,7 @@
 		if("buy_raw_tc")
 			if (uplink_handler.telecrystals <= 0)
 				return
-			var/desired_amount = tgui_input_number(ui.user, "How many raw telecrystals to buy?", "Buy Raw TC", default = uplink_handler.telecrystals, max_value = uplink_handler.telecrystals)
+			var/desired_amount = tgui_input_number(ui.user, "Сколько сырых телекристаллов купить?", "Купить сырые ТК", default = uplink_handler.telecrystals, max_value = uplink_handler.telecrystals)
 			if(!desired_amount || desired_amount < 1)
 				return
 			uplink_handler.purchase_raw_tc(ui.user, desired_amount, parent)
@@ -321,7 +321,7 @@
 	locked = FALSE
 	if(ismob(user))
 		interact(null, user)
-		to_chat(user, span_hear("The computer softly beeps."))
+		to_chat(user, span_hear("Компьютер тихо пищит."))
 	return COMPONENT_STOP_RINGTONE_CHANGE
 
 /datum/component/uplink/proc/check_detonate()
@@ -356,7 +356,7 @@
 		return
 	locked = FALSE
 	interact(null, user)
-	to_chat(user, "As you whisper the code into your headset, a soft chime fills your ears.")
+	to_chat(user, "Когда вы шепчете код в гарнитуру, в ушах раздается тихий звон.")
 	return COMPONENT_CANNOT_USE_RADIO
 
 // Pen signal responses
@@ -374,7 +374,7 @@
 		previous_attempts.Cut()
 		master.degrees = 0
 		interact(null, user)
-		to_chat(user, span_warning("Your pen makes a clicking noise, before quickly rotating back to 0 degrees!"))
+		to_chat(user, span_warning("Ваша ручка издает щелчок и мгновенно возвращается в исходное положение!"))
 
 	else if(compare_list(previous_attempts, failsafe_code))
 		failsafe(user)
@@ -383,11 +383,11 @@
 	unlock_code = generate_code()
 	var/obj/item/P = parent
 	if(istype(parent,/obj/item/modular_computer))
-		unlock_note = "<B>Uplink Passcode:</B> [unlock_code] ([P.name])."
+		unlock_note = "<B>Код аплинка:</B> [unlock_code] ([P.name])."
 	else if(istype(parent,/obj/item/radio))
-		unlock_note = "<B>Radio Passcode:</B> [unlock_code] ([P.name], [RADIO_TOKEN_UPLINK] channel)."
+		unlock_note = "<B>Радиокод:</B> [unlock_code] ([P.name], канал [RADIO_TOKEN_UPLINK])."
 	else if(istype(parent,/obj/item/pen))
-		unlock_note = "<B>Uplink Degrees:</B> [english_list(unlock_code)] ([P.name])."
+		unlock_note = "<B>Градусы аплинка:</B> [english_list(unlock_code)] ([P.name])."
 
 /datum/component/uplink/proc/generate_code()
 	var/returnable_code = ""
@@ -422,16 +422,16 @@
 	var/turf/T = get_turf(parent)
 	if(!T)
 		return
-	var/user_deets = "an uplink failsafe explosion has been triggered"
+	var/user_deets = "активирован аварийный взрыв аплинка"
 	if(ismob(source))
-		user_deets = "[ADMIN_LOOKUPFLW(source)] has triggered an uplink failsafe explosion"
-		source.log_message("triggered an uplink failsafe explosion. Uplink owner: [key_name(owner)].", LOG_ATTACK)
+		user_deets = "[ADMIN_LOOKUPFLW(source)] активировал аварийный взрыв аплинка"
+		source.log_message("активировал аварийный взрыв аплинка. Владелец: [key_name(owner)].", LOG_ATTACK)
 	else if(istype(source, /obj/item/circuit_component))
 		var/obj/item/circuit_component/circuit = source
-		user_deets = "[circuit.parent.get_creator_admin()] has triggered an uplink failsafe explosion"
+		user_deets = "[circuit.parent.get_creator_admin()] активировал аварийный взрыв аплинка"
 	else
-		source?.log_message("somehow triggered an uplink failsafe explosion. Uplink owner: [key_name(owner)].", LOG_ATTACK)
-	message_admins("[user_deets] at [AREACOORD(T)] The owner of the uplink was [ADMIN_LOOKUPFLW(owner)].")
+		source?.log_message("каким-то образом активировал аварийный взрыв аплинка. Владелец: [key_name(owner)].", LOG_ATTACK)
+	message_admins("[user_deets] в [AREACOORD(T)]. Владелец аплинка: [ADMIN_LOOKUPFLW(owner)].")
 
 	explosion(parent, devastation_range = 1, heavy_impact_range = 2, light_impact_range = 3)
 	qdel(parent) //Alternatively could brick the uplink.

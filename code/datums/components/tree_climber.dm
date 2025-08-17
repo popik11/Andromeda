@@ -33,7 +33,7 @@
 		return
 
 	if(!can_climb_tree(target)) //check if another animal is on the tree
-		to_chat(source, span_warning("[target] is blocked!"))
+		to_chat(source, span_warning("[target] заблокирован!"))
 		return COMPONENT_HOSTILE_NO_ATTACK
 
 	handle_climb_tree(source, target)
@@ -54,7 +54,7 @@
 /datum/component/tree_climber/proc/on_examine(datum/source, mob/user, list/examine_text)
 	SIGNAL_HANDLER
 	if(current_tree)
-		examine_text += "It is clinging to [current_tree]!"
+		examine_text += "Он цепляется за [current_tree]!"
 
 /datum/component/tree_climber/proc/can_climb_tree(obj/structure/flora/tree/target)
 	if(current_tree)

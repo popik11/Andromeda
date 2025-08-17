@@ -145,17 +145,16 @@
 /datum/component/puzzgrid/proc/out_of_lives()
 	var/atom/movable/movable_parent = parent
 	if (istype(movable_parent))
-		movable_parent.say("Ran out of lives!", forced = "puzzgrid component")
+		movable_parent.say("Жизни закончились!", forced = "компонент puzzgrid")
 
 	fail()
 
 /datum/component/puzzgrid/proc/out_of_time()
 	var/atom/movable/movable_parent = parent
 	if (istype(movable_parent))
-		movable_parent.say("Ran out of time!", forced = "puzzgrid component")
+		movable_parent.say("Время вышло!", forced = "компонент puzzgrid")
 
 	fail()
-
 /datum/component/puzzgrid/proc/fail()
 	report_answers()
 	on_fail_callback?.InvokeAsync()
@@ -224,7 +223,7 @@
 
 		var/line_json_decoded = safe_json_decode(line)
 		if (isnull(line_json_decoded))
-			log_config("Line [line_number + 1] in puzzgrids.txt is not a JSON: [line]")
+			log_config("Строка [line_number + 1] в puzzgrids.txt не является JSON: [line]")
 			continue
 
 		var/datum/puzzgrid/puzzgrid = new
@@ -233,7 +232,7 @@
 		if (populate_result == TRUE)
 			return puzzgrid
 		else
-			log_config("Line [line_number + 1] in puzzgrids.txt is not formatted correctly: [populate_result]")
+			log_config("Строка [line_number + 1] в puzzgrids.txt имеет неверный формат: [populate_result]")
 
 	stack_trace("No valid puzzgrid config could be found in [PUZZGRID_MAX_ATTEMPTS] attempts, please check config_error. If it is empty, then seek line is failing.")
 	return null
@@ -247,20 +246,20 @@
 /// Will return TRUE if the populate succeeded, or a string denoting the error otherwise.
 /datum/puzzgrid/proc/populate(list/from_json)
 	if (!islist(from_json))
-		return "Puzzgrid was not a list"
+		return "Puzzgrid не является списком"
 
 	var/list/answers = list()
 	var/list/groups = list()
 
 	for (var/group_json in from_json)
 		if (!islist(group_json))
-			return "Group was not a list (received [json_encode(group_json)])"
+			return "Группа не является списком (получено [json_encode(group_json)])"
 
 		if (!("cells" in group_json))
-			return "Group did not have a 'cells' field (received [json_encode(group_json)])"
+			return "Группа не содержит поле 'cells' (получено [json_encode(group_json)])"
 
 		if (!("description" in group_json))
-			return "Group did not have a 'description' field (received [json_encode(group_json)])"
+			return "Группа не содержит поле 'description' (получено [json_encode(group_json)])"
 
 		var/datum/puzzgrid_group/group = new
 		group.answers = group_json["cells"]
@@ -280,7 +279,7 @@
 	var/list/answers = list()
 	var/description
 
-ADMIN_VERB(validate_puzzgrids, R_DEBUG, "Validate Puzzgrid Config", "Validate the puzzgrid config to ensure it's set up correctly.", ADMIN_CATEGORY_DEBUG)
+ADMIN_VERB(validate_puzzgrids, R_DEBUG, "Проверить конфиг Puzzgrid", "Проверяет конфигурацию Puzzgrid на корректность.", ADMIN_CATEGORY_DEBUG)
 	var/line_number = 0
 
 	for (var/line in world.file2list(PUZZGRID_CONFIG))
@@ -291,16 +290,16 @@ ADMIN_VERB(validate_puzzgrids, R_DEBUG, "Validate Puzzgrid Config", "Validate th
 
 		var/line_json_decoded = safe_json_decode(line)
 		if (isnull(line_json_decoded))
-			to_chat(user, span_warning("Line [line_number] in puzzgrids.txt is not a JSON: [line]"))
+			to_chat(user, span_warning("Строка [line_number] в puzzgrids.txt не является JSON: [line]"))
 			continue
 
 		var/datum/puzzgrid/puzzgrid = new
 		var/populate_result = puzzgrid.populate(line_json_decoded)
 
 		if (populate_result != TRUE)
-			to_chat(user, span_warning("Line [line_number] in puzzgrids.txt is not formatted correctly: [populate_result]"))
+			to_chat(user, span_warning("Строка [line_number] в puzzgrids.txt имеет неверный формат: [populate_result]"))
 
-	to_chat(user, span_notice("Validated. If you did not see any errors, you're in the clear."))
+	to_chat(user, span_notice("Проверка завершена. Если ошибок не было, конфигурация корректна."))
 
 #undef PUZZGRID_CONFIG
 #undef PUZZGRID_GROUP_COUNT

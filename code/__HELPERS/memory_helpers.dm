@@ -100,7 +100,7 @@
 			continue
 		choice_list[memory_iter.name] = memory_iter
 
-	var/choice = tgui_input_list(usr, "Select a memory to [verbage]", "Memory Selection?", choice_list)
+	var/choice = tgui_input_list(usr, "Выберите воспоминание для [verbage]", "Выбор воспоминания", choice_list)
 	if(isnull(choice))
 		return FALSE
 	if(isnull(choice_list[choice]))

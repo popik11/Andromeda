@@ -98,7 +98,7 @@
 	if(isliving(hunted)) // Are we hunting a living mob?
 		var/mob/living/living_target = hunted
 		hunter.manual_emote("chomps [living_target]!")
-		living_target.investigate_log("has been killed by [key_name(hunter)].", INVESTIGATE_DEATHS)
+		living_target.investigate_log("был убит [key_name(hunter)].", INVESTIGATE_DEATHS)
 		living_target.death()
 
 	else if(IS_EDIBLE(hunted))
@@ -164,5 +164,5 @@
 		return FALSE
 	if(!hunted.buckle_mob(hunter, force = TRUE))
 		return FALSE
-	hunted.visible_message(span_notice("[hunted] has been latched onto by [hunter]!"))
+	hunted.visible_message(span_notice("[hunted] был схвачен [hunter]!"))
 	return TRUE

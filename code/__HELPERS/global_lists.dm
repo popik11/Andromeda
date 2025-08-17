@@ -96,7 +96,7 @@
 	for(var/list/recipe_list in material_stack_recipes)
 		for(var/stack_recipe in recipe_list)
 			var/datum/crafting_recipe/stack/recipe = new/datum/crafting_recipe/stack(/obj/item/stack/sheet/iron, stack_recipe)
-			recipe.steps = list("Use different materials in hand to make an item of that material")
+			recipe.steps = list("Используйте различные материалы в руке для создания предмета из этого материала.")
 			GLOB.crafting_recipes += recipe
 
 /// Inits atoms used in crafting recipes

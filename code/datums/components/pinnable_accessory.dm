@@ -34,17 +34,17 @@
 /datum/component/pinnable_accessory/proc/try_to_pin(obj/item/clothing/accessory/badge, mob/living/carbon/human/distinguished, mob/user)
 	var/obj/item/clothing/under/distinguished_uniform = distinguished.w_uniform
 	if(!istype(distinguished_uniform))
-		distinguished.balloon_alert(user, "no uniform to pin on!")
+		distinguished.balloon_alert(user, "нет униформы для крепления!")
 		return
 
 	if(!badge.can_attach_accessory(distinguished_uniform, user))
-		// Check handles feedback messages and etc
+		// Проверка сама выдает сообщения об ошибках
 		return
 
 	if (!silent)
 		user.visible_message(
-			span_notice("[user] tries to pin [badge] on [distinguished]'s chest."),
-			span_notice("You try to pin [badge] on [distinguished]'s chest."),
+			span_notice("[user] пытается прикрепить [badge] на грудь [distinguished]."),
+			span_notice("Ты пытаешься прикрепить [badge] на грудь [distinguished]."),
 		)
 
 	if (on_pre_pin && !on_pre_pin.Invoke(distinguished, user))
@@ -58,13 +58,13 @@
 
 	if (pinned)
 		user.visible_message(
-			span_notice("[user] pins [badge] on [distinguished]'s chest."),
-			span_notice("You pin [badge] on [distinguished]'s chest."),
+			span_notice("[user] прикрепляет [badge] на грудь [distinguished]."),
+			span_notice("Ты прикрепляешь [badge] на грудь [distinguished]."),
 		)
 	else
 		user.visible_message(
-			span_warning("[user] fails to pin [badge] on [distinguished]'s chest, seemingly unable to part with it."),
-			span_warning("You fail to pin [badge] on [distinguished]'s chest."),
+			span_warning("[user] не удается прикрепить [badge] на грудь [distinguished], похоже не может с ним расстаться."),
+			span_warning("Тебе не удается прикрепить [badge] на грудь [distinguished]."),
 		)
 
 /// Callback for do_after to check if we can still be pinned

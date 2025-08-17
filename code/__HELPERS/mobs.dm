@@ -362,7 +362,7 @@ GLOBAL_LIST_INIT(skin_tone_names, list(
 	message = span_deadsay("[source][span_linkify(message)]")
 
 	if(admin_only)
-		message += span_deadsay(" (This is viewable to admins only).")
+		message += span_deadsay(" (Это доступно для просмотра только администраторам).")
 
 	for(var/mob/M in GLOB.player_list)
 		var/chat_toggles = TOGGLES_DEFAULT_CHAT
@@ -617,36 +617,38 @@ GLOBAL_LIST_INIT(skin_tone_names, list(
 			return mob
 
 /// Returns a string for the specified body zone. If we have a bodypart in this zone, refers to its plaintext_zone instead.
-/mob/living/proc/parse_zone_with_bodypart(zone)
+/mob/living/proc/parse_zone_with_bodypart(zone, declent = NOMINATIVE)
 	var/obj/item/bodypart/part = get_bodypart(zone)
 
-	return part?.plaintext_zone || parse_zone(zone)
+	if(part?.ru_plaintext_zone[declent])
+		return part.ru_plaintext_zone[declent]
+	return ru_parse_zone(zone, declent)
 
 ///Return a string for the specified body zone. Should be used for parsing non-instantiated bodyparts, otherwise use [/obj/item/bodypart/var/plaintext_zone]
 /proc/parse_zone(zone)
 	switch(zone)
 		if(BODY_ZONE_CHEST)
-			return "chest"
+			return "грудь"
 		if(BODY_ZONE_HEAD)
-			return "head"
+			return "голова"
 		if(BODY_ZONE_PRECISE_R_HAND)
-			return "right hand"
+			return "правая кисть"
 		if(BODY_ZONE_PRECISE_L_HAND)
-			return "left hand"
+			return "левая кисть"
 		if(BODY_ZONE_L_ARM)
-			return "left arm"
+			return "левая рука"
 		if(BODY_ZONE_R_ARM)
-			return "right arm"
+			return "правая рука"
 		if(BODY_ZONE_L_LEG)
-			return "left leg"
+			return "левая нога"
 		if(BODY_ZONE_R_LEG)
-			return "right leg"
+			return "правая нога"
 		if(BODY_ZONE_PRECISE_L_FOOT)
-			return "left foot"
+			return "левая ступня"
 		if(BODY_ZONE_PRECISE_R_FOOT)
-			return "right foot"
+			return "правая ступня"
 		if(BODY_ZONE_PRECISE_GROIN)
-			return "groin"
+			return "паховая область"
 		else
 			return zone
 
@@ -807,18 +809,18 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 /mob/dview/Initialize(mapload) //Properly prevents this mob from gaining huds or joining any global lists
 	SHOULD_CALL_PARENT(FALSE)
 	if(flags_1 & INITIALIZED_1)
-		stack_trace("Warning: [src]([type]) initialized multiple times!")
+		stack_trace("Внимание: [src]([type]) инициализирован несколько раз!")
 	flags_1 |= INITIALIZED_1
 	return INITIALIZE_HINT_NORMAL
 
 /mob/dview/Destroy(force = FALSE)
 	if(!ready_to_die)
-		stack_trace("ALRIGHT WHICH FUCKER TRIED TO DELETE *MY* DVIEW?")
+		stack_trace("ЛАДНО, КАКОЙ УБРИД ПЫТАЛСЯ УДАЛИТЬ *МОЙ* DVIEW?")
 
 		if (!force)
 			return QDEL_HINT_LETMELIVE
 
-		log_world("EVACUATE THE SHITCODE IS TRYING TO STEAL MUH JOBS")
+		log_world("ЭВАКУИРУЙТЕ, ЭТОТ ГОВНОКОД ПЫТАЕТСЯ УКРАДИТЬ МНОГО РАБОЧИХ МЕСТ")
 		GLOB.dview_mob = new
 	return ..()
 

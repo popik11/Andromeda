@@ -101,7 +101,7 @@
 		return FALSE
 
 	if (SPT_PROB(15, seconds_per_tick))
-		to_chat(owner, span_warning("You feel trapped! Must escape... can't breathe..."))
+		to_chat(owner, span_warning("Вы чувствуете себя в ловушке! Нужно выбраться... не могу дышать..."))
 
 	return TRUE
 
@@ -141,7 +141,7 @@
 		return FALSE
 
 	if (SPT_PROB(15, seconds_per_tick))
-		to_chat(owner, span_warning("Santa Claus is here! I gotta get out of here!"))
+		to_chat(owner, span_warning("Санта Клаус здесь! Мне нужно выбираться отсюда!"))
 
 	return TRUE
 

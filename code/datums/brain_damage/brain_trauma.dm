@@ -1,28 +1,27 @@
-//Brain Traumas are the new actual brain damage. Brain damage itself acts as a way to acquire traumas: every time brain damage is dealt, there's a chance of receiving a trauma.
-//This chance gets higher the higher the mob's brainloss is. Removing traumas is a separate thing from removing brain damage: you can get restored to full brain operativity,
-// but keep the quirks, until repaired by neurine, surgery, lobotomy or magic; depending on the resilience
-// of the trauma.
+// Травмы мозга теперь представляют собой реальное повреждение мозга. Само повреждение мозга выступает способом получения травм: при каждом нанесении урона мозгу есть шанс получить травму.
+// Этот шанс увеличивается с ростом повреждения мозга (brainloss). Удаление травм - отдельный процесс от лечения повреждений: можно восстановить полную функциональность мозга,
+// но сохранить особенности поведения, пока травма не будет вылечена нейрином, операцией, лоботомией или магией - в зависимости от устойчивости травмы.
 
 /datum/brain_trauma
-	var/name = "Brain Trauma"
-	var/desc = "A trauma caused by brain damage, which causes issues to the patient."
-	var/scan_desc = "generic brain trauma" //description when detected by a health scanner
-	var/mob/living/carbon/owner //the poor bastard
-	var/obj/item/organ/brain/brain //the poor bastard's brain
-	var/gain_text = span_notice("You feel traumatized.")
-	var/lose_text = span_notice("You no longer feel traumatized.")
+	var/name = "Травма мозга"
+	var/desc = "Травма, вызванная повреждением мозга, которая вызывает проблемы у пациента."
+	var/scan_desc = "общая травма мозга" // описание при обнаружении сканером здоровья
+	var/mob/living/carbon/owner // несчастный
+	var/obj/item/organ/brain/brain // мозг несчастного
+	var/gain_text = span_notice("Вы чувствуете себя травмированным.")
+	var/lose_text = span_notice("Вы больше не чувствуете себя травмированным.")
 	var/can_gain = TRUE
-	var/random_gain = TRUE //can this be gained through random traumas?
-	var/resilience = TRAUMA_RESILIENCE_BASIC //how hard is this to cure?
+	var/random_gain = TRUE // может ли быть получена случайным образом?
+	var/resilience = TRAUMA_RESILIENCE_BASIC // насколько сложно вылечить?
 
-	/// Tracks abstract types of brain traumas, useful for determining traumas that should not exist
+	/// Отслеживает абстрактные типы травм мозга, полезно для определения травм, которых не должно существовать
 	var/abstract_type = /datum/brain_trauma
 
 /datum/brain_trauma/Destroy()
-	// Handles our references with our brain
+	// Обрабатываем ссылки на мозг
 	brain?.remove_trauma_from_traumas(src)
 	if(owner)
-		log_game("[key_name_and_tag(owner)] has lost the following brain trauma: [type]")
+		log_game("[key_name_and_tag(owner)] потерял следующую травму мозга: [type]")
 		on_lose()
 		owner = null
 	return ..()

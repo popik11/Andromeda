@@ -92,16 +92,16 @@
 /datum/component/mob_harvest/UnregisterFromParent()
 	UnregisterSignal(parent, list(COMSIG_ATOM_EXAMINE, COMSIG_ATOM_ATTACKBY, COMSIG_ATOM_UPDATE_ICON_STATE))
 
-///signal called on parent being examined
+///сигнал вызывается при осмотре родителя
 /datum/component/mob_harvest/proc/on_examine(datum/source, mob/user, list/examine_list)
 	SIGNAL_HANDLER
 
 	if(amount_ready < 1)
-		examine_list += span_notice("[parent] seems like they could use a bit more time.")
+		examine_list += span_notice("[parent] выглядит так, будто ему нужно ещё немного времени.")
 	if(amount_ready > 1)
-		examine_list += span_notice("[parent] looks like they can be harvested about [amount_ready] times.")
+		examine_list += span_notice("[parent] выглядит так, будто его можно собрать примерно [amount_ready] раз.")
 	if(amount_ready == 1)
-		examine_list += span_notice("[parent] looks ready to be harvested.")
+		examine_list += span_notice("[parent] выглядит готовым к сбору.")
 
 ///signal called on parent being attacked with an item
 /datum/component/mob_harvest/proc/on_attackby(datum/source, obj/item/used_item, mob/user)
@@ -138,10 +138,10 @@
  */
 /datum/component/mob_harvest/proc/remove_wait_time(mob/user)
 	if(amount_ready >= max_ready)
-		to_chat(user, span_warning("[parent] looks too full to keep feeding!"))
+		to_chat(user, span_warning("[parent] выглядит переполненным для дальнейшего кормления!"))
 		return
 	item_generation_time -= item_reduction_time
-	to_chat(user, span_notice("You feed [parent]."))
+	to_chat(user, span_notice("Вы кормите [parent]."))
 	return
 
 /**
@@ -152,12 +152,12 @@
  */
 /datum/component/mob_harvest/proc/harvest_item(mob/user)
 	if(amount_ready < 1)
-		to_chat(user, span_warning("[parent] doesn't seem to have enough [produced_item_desc] to harvest."))
+		to_chat(user, span_warning("[parent] не имеет достаточно [produced_item_desc] для сбора."))
 		return
-	to_chat(user, span_notice("You start to harvest [produced_item_desc] from [parent]..."))
+	to_chat(user, span_notice("Вы начинаете собирать [produced_item_desc] с [parent]..."))
 	if(do_after(user, item_harvest_time, target = parent))
 		playsound(parent, item_harvest_sound, 20, TRUE)
-		to_chat(user, span_notice("You harvest some [produced_item_desc] from [parent]."))
+		to_chat(user, span_notice("Вы собрали немного [produced_item_desc] с [parent]."))
 		amount_ready--
 		if(!iscarbon(parent))
 			var/mob/living/living_parent = parent

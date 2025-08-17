@@ -1,7 +1,7 @@
 
 /// Verb to open the create command report window and send command reports.
-ADMIN_VERB(dynamic_tester, R_DEBUG, "Dynamic Tester", "See dynamic probabilities.", ADMIN_CATEGORY_DEBUG)
-	BLACKBOX_LOG_ADMIN_VERB("Dynamic Tester")
+ADMIN_VERB(dynamic_tester, R_DEBUG, "Тестер Динамики", "Просмотр вероятностей динамического режима.", ADMIN_CATEGORY_DEBUG)
+	BLACKBOX_LOG_ADMIN_VERB("Тестер Динамики")
 	var/datum/dynamic_tester/tgui = new()
 	tgui.ui_interact(user.mob)
 
@@ -88,7 +88,7 @@ ADMIN_VERB(dynamic_tester, R_DEBUG, "Dynamic Tester", "See dynamic probabilities
 		var/comment = ""
 		if(istype(ruleset, /datum/dynamic_ruleset/roundstart/revolution))
 			var/datum/dynamic_ruleset/roundstart/revolution/revs = ruleset
-			comment = " (Assuming [initial(revs.heads_necessary)] heads of staff)"
+			comment = " (Предполагается [initial(revs.heads_necessary)] глав отделов)"
 
 		roundstart_ruleset_report[ruleset] = list(
 			"name" = ruleset.name,

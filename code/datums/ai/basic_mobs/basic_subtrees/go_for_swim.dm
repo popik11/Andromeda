@@ -22,7 +22,7 @@
 
 	// have some fun in the water
 	if(controller.blackboard[BB_CURRENTLY_SWIMMING] && SPT_PROB(5, seconds_per_tick))
-		controller.queue_behavior(/datum/ai_behavior/perform_emote, "splashes water all around!")
+		controller.queue_behavior(/datum/ai_behavior/perform_emote, "разбрызгивает воду во все стороны!")
 
 
 ///find land if its time to get out of water, otherwise find water

@@ -31,28 +31,28 @@
 	if(isturf(parent))
 		UnregisterSignal(parent, COMSIG_TURF_EXPOSE)
 
-/// Do the flooding. Trigger temperature is the temperature we will flood at if we dont have a temp set at the start. Trigger referring to whatever triggered it.
+/// Затопление. Температура срабатывания - температура, при которой произойдет затопление, если не задана изначально. Триггер - что-либо, что вызвало срабатывание.
 /datum/component/combustible_flooder/proc/flood(mob/user, trigger_temperature)
 	var/delete_parent = TRUE
 	var/turf/open/flooded_turf = get_turf(parent)
 
-	// We do this check early so closed turfs are still be able to flood.
-	if(isturf(parent)) // Walls and floors.
+	// Проверяем заранее, чтобы закрытые тайлы тоже могли затопляться.
+	if(isturf(parent)) // Стены и полы.
 		var/turf/parent_turf = parent
-		flooded_turf = parent_turf.ScrapeAway(1, CHANGETURF_INHERIT_AIR | CHANGETURF_FORCEOP) // Ensure that we always forcefully replace the turf, even if the baseturf has the same type
+		flooded_turf = parent_turf.ScrapeAway(1, CHANGETURF_INHERIT_AIR | CHANGETURF_FORCEOP) // Гарантируем замену тайла, даже если базовый тип совпадает
 		delete_parent = FALSE
 
 	flooded_turf.atmos_spawn_air("[gas_id]=[gas_amount];[TURF_TEMPERATURE((temp_amount || trigger_temperature))]")
 
-	// Logging-related
-	var/admin_message = "[flooded_turf] ignited in [ADMIN_VERBOSEJMP(flooded_turf)]"
-	var/log_message = "ignited [flooded_turf] at [AREACOORD(flooded_turf)]"
+	// Логирование
+	var/admin_message = "[flooded_turf] воспламенился в [ADMIN_VERBOSEJMP(flooded_turf)]"
+	var/log_message = "воспламенил [flooded_turf] в [AREACOORD(flooded_turf)]"
 	if(user)
-		admin_message += " by [ADMIN_LOOKUPFLW(user)] at [ADMIN_COORDJMP(flooded_turf)]"
-		user.log_message(log_message, LOG_ATTACK, log_globally = FALSE)//only individual log
+		admin_message += " от [ADMIN_LOOKUPFLW(user)] в [ADMIN_COORDJMP(flooded_turf)]"
+		user.log_message(log_message, LOG_ATTACK, log_globally = FALSE) // Только индивидуальный лог
 	else
-		log_message = "[key_name(user)] " + log_message + " by fire at [AREACOORD(flooded_turf)]"
-		admin_message += " by fire at [ADMIN_COORDJMP(flooded_turf)]"
+		log_message = "[key_name(user)] " + log_message + " от огня в [AREACOORD(flooded_turf)]"
+		admin_message += " от огня в [ADMIN_COORDJMP(flooded_turf)]"
 		log_attack(log_message)
 	message_admins(admin_message)
 
@@ -61,7 +61,7 @@
 			var/obj/obj_parent = parent
 			obj_parent.deconstruct(disassembled = FALSE)
 		else
-			qdel(parent) // For things with the explodable component like plasma mats this isn't necessary, but there's no harm.
+			qdel(parent) // Для объектов с компонентом взрываемости (как плазменные материалы) это не обязательно, но и не вредно.
 	qdel(src)
 
 /// fire_act reaction.

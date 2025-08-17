@@ -88,14 +88,14 @@
 
 	switch(blood_cost)
 		if(1 to 50)
-			cost_desc = "trickle"
+			cost_desc = "струйка"
 		if(51 to 100)
-			cost_desc = "stream"
+			cost_desc = "поток"
 		if(101 to 200)
-			cost_desc = "river"
+			cost_desc = "река"
 		if(201 to INFINITY)
-			cost_desc = "torrent"
+			cost_desc = "водопад"
 
-	to_chat(source, span_danger("You feel a [cost_desc] of your blood drained into the spell you just cast."))
+	to_chat(source, span_danger("Ты чувствуешь, как [cost_desc] твоей крови впиталась в только что сотворённое заклинание."))
 
 #undef COOLDOWN_TO_BLOOD_RATIO

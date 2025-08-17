@@ -50,8 +50,8 @@
 /datum/component/palette/proc/on_examine(datum/source, mob/user, list/examine_list)
 	SIGNAL_HANDLER
 
-	examine_list += span_notice("<b>Right-Click</b> this item while it's in your active hand to open/close its color picker menu.")
-	examine_list += span_notice("In the color picker, <b>Left-Click</b> a color button to pick it or <b>Right-Click</b> to edit it.")
+	examine_list += span_notice("<b>Правый-Клик</b> по предмету в активной руке, чтобы открыть/закрыть меню выбора цвета.")
+	examine_list += span_notice("В меню выбора: <b>Левый-Клик</b> по кнопке цвета для выбора или <b>Правый-Клик</b> для редактирования.")
 
 /datum/component/palette/proc/on_attack_self_secondary(datum/source, mob/user)
 	SIGNAL_HANDLER
@@ -106,7 +106,7 @@
 	var/is_right_clicking = LAZYACCESS(params2list(params), RIGHT_CLICK)
 	var/index = text2num(choice)
 	if(is_right_clicking)
-		var/chosen_color = input(user, "Pick new color", "[parent]", colors[index]) as color|null
+		var/chosen_color = input(user, "Выберите новый цвет", "[parent]", colors[index]) as color|null
 		if(chosen_color && !QDELETED(src) && !IS_DEAD_OR_INCAP(user) && user.is_holding(parent))
 			colors[index] = chosen_color
 		update_radial_list()

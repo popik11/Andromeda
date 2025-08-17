@@ -48,7 +48,7 @@
 		if(prob(irradiation_chance))
 			SSradiation.irradiate(parent)
 			var/atom/atom = parent
-			atom.investigate_log("was irradiated by [source].", INVESTIGATE_RADIATION)
+			atom.investigate_log("был облучён [source].", INVESTIGATE_RADIATION)
 		else
 			irradiation_chance += irradiation_chance_increment
 	else // we're immune, either through species, clothing, already being irradiated, etcetera
@@ -73,6 +73,6 @@
 	return ..()
 
 /atom/movable/screen/alert/radioactive_area
-	name = "Radioactive Area"
-	desc = "This place is no good! We need to get some protection or get out fast!"
+	name = "Радиоактивная зона"
+	desc = "Здесь опасно! Нужно срочно найти защиту или убраться отсюда!"
 	icon_state = ALERT_RADIOACTIVE_AREA

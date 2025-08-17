@@ -1,6 +1,6 @@
 /datum/action/cooldown/mob_cooldown/sneak
-	name = "Sneak"
-	desc = "Blend into the environment."
+	name = "Красться"
+	desc = "Слиться с окружающей средой."
 	button_icon = 'icons/mob/actions/actions_animal.dmi'
 	button_icon_state = "sniper_zoom"
 	background_icon_state = "bg_alien"
@@ -22,15 +22,15 @@
 
 /datum/action/cooldown/mob_cooldown/sneak/Activate(atom/target)
 	if(HAS_TRAIT(owner, TRAIT_SNEAK))
-		// It's safest to go to the initial alpha of the mob.
-		// Otherwise we get permanent invisbility exploits.
+		// Безопаснее вернуть начальную прозрачность моба
+		// чтобы избежать эксплойтов с перманентной невидимостью
 		animate(owner, alpha = initial(owner.alpha), time = animation_time)
-		owner.balloon_alert(owner, "you reveal yourself")
+		owner.balloon_alert(owner, "вы перестали скрываться")
 		REMOVE_TRAIT(owner, TRAIT_SNEAK, ACTION_TRAIT)
 
 	else
 		animate(owner, alpha = sneak_alpha, time = animation_time)
-		owner.balloon_alert(owner, "you blend into the environment")
+		owner.balloon_alert(owner, "вы сливаетесь с окружением")
 		ADD_TRAIT(owner, TRAIT_SNEAK, ACTION_TRAIT)
 
 	return TRUE

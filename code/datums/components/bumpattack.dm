@@ -63,10 +63,10 @@
 	SIGNAL_HANDLER
 	var/obj/item/our_weapon = proxy_weapon || parent
 	if(!istype(our_weapon))
-		CRASH("[our_weapon] somehow failed istype")
+		CRASH("[our_weapon] каким-то образом не прошёл проверку istype")
 	if(TIMER_COOLDOWN_FINISHED(src, COOLDOWN_BUMP_ATTACK))
 		TIMER_COOLDOWN_START(src, COOLDOWN_BUMP_ATTACK, attack_cooldown)
 		INVOKE_ASYNC(target, TYPE_PROC_REF(/atom, attackby), our_weapon, bumper)
-		bumper.visible_message(span_danger("[bumper] charges into [target], attacking with [our_weapon]!"), span_danger("You charge into [target], attacking with [our_weapon]!"), vision_distance = COMBAT_MESSAGE_RANGE)
+		bumper.visible_message(span_danger("[bumper] врезается в [target], атакуя [our_weapon]!"), span_danger("Вы врезаетесь в [target], атакуя [our_weapon]!"), vision_distance = COMBAT_MESSAGE_RANGE)
 
 #undef COOLDOWN_BUMP_ATTACK

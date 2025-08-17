@@ -105,7 +105,7 @@
 	last_color_index = (last_color_index % colors.len) + 1
 
 	var/message = "<span style='color: [colors[last_color_index]]; text-align: center; font-size: 24pt'>"
-	message += "HEY!<br>An admin is trying to talk to you!<br>Check your chat window,<br>and click their name to respond!"
+	message += "ЭЙ!<br>Администратор пытается связаться с вами!<br>Проверьте окно чата<br>и нажмите на их имя для ответа!"
 	message += "</span>"
 
 	maptext = MAPTEXT(message)
@@ -114,11 +114,11 @@
 /// Tries to give the target an admin popup.
 /// If it fails, will send the error to the passed admin.
 /proc/give_admin_popup(client/target, client/admin, message)
-	log_admin("[key_name(admin)] sent an admin popup to [key_name(target)].")
+	log_admin("[key_name(admin)] отправил всплывающее сообщение администратора [key_name(target)].")
 
 	var/datum/admin_help/current_ticket = target.current_ticket
 	if (!current_ticket)
-		to_chat(admin, span_warning("[key_name(target)] had no active ahelp, aborting."))
+		to_chat(admin, span_warning("[key_name(target)] не имеет активного обращения в админ-помощь, операция прервана."))
 		return
 
 	admin.cmd_admin_pm(target, message)

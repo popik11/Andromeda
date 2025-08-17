@@ -5,8 +5,8 @@
  * Tells a pet to resume its idle behaviour, usually staying put where you leave it
  */
 /datum/pet_command/idle
-	command_name = "Stay"
-	command_desc = "Command your pet to stay idle in this location."
+	command_name = "Ждать"
+	command_desc = "Приказать вашему питомцу оставаться на месте."
 	radial_icon_state = "halt"
 	speech_commands = list("sit", "stay", "stop")
 	command_feedback = "sits"
@@ -15,15 +15,15 @@
 	return SUBTREE_RETURN_FINISH_PLANNING // This cancels further AI planning
 
 /datum/pet_command/idle/retrieve_command_text(atom/living_pet, atom/target)
-	return "signals [living_pet] to stay idle!"
+	return "подаёт сигнал [living_pet] оставаться на месте!"
 
 /**
  * # Pet Command: Stop
  * Tells a pet to exit command mode and resume its normal behaviour, which includes regular target-seeking and what have you
  */
 /datum/pet_command/free
-	command_name = "Loose"
-	command_desc = "Allow your pet to resume its natural behaviours."
+	command_name = "Отпустить"
+	command_desc = "Позволить питомцу вернуться к естественному поведению."
 	radial_icon_state = "free"
 	speech_commands = list("free", "loose")
 	command_feedback = "relaxes"
@@ -33,15 +33,15 @@
 	return // Just move on to the next planning subtree.
 
 /datum/pet_command/free/retrieve_command_text(atom/living_pet, atom/target)
-	return "signals [living_pet] to go free!"
+	return "подаёт сигнал [living_pet] освободиться!"
 
 /**
  * # Pet Command: Follow
  * Tells a pet to follow you until you tell it to do something else
  */
 /datum/pet_command/follow
-	command_name = "Follow"
-	command_desc = "Command your pet to accompany you."
+	command_name = "Следовать"
+	command_desc = "Приказать питомцу следовать за вами."
 	radial_icon_state = "follow"
 	speech_commands = list("heel", "follow")
 	callout_type = /datum/callout_option/move
@@ -55,7 +55,7 @@
 	set_command_target(parent, commander)
 
 /datum/pet_command/follow/retrieve_command_text(atom/living_pet, atom/target)
-	return "signals [living_pet] to follow!"
+	return "подаёт сигнал [living_pet] следовать за хозяином!"
 
 /datum/pet_command/follow/execute_action(datum/ai_controller/controller)
 	controller.queue_behavior(follow_behavior, BB_CURRENT_PET_TARGET)
@@ -78,8 +78,8 @@
  * Pretend to be dead for a random period of time
  */
 /datum/pet_command/play_dead
-	command_name = "Play Dead"
-	command_desc = "Play a macabre trick."
+	command_name = "Притвориться мёртвым"
+	command_desc = "Сыграть мрачноватую шутку."
 	radial_icon_state = "play_dead"
 	speech_commands = list("play dead") // Don't get too creative here, people talk about dying pretty often
 
@@ -88,28 +88,28 @@
 	return SUBTREE_RETURN_FINISH_PLANNING
 
 /datum/pet_command/play_dead/retrieve_command_text(atom/living_pet, atom/target)
-	return "signals [living_pet] to play dead!"
+	return "подаёт сигнал [living_pet] притвориться мёртвым!"
 
 /**
  * # Pet Command: Good Boy
  * React if complimented
  */
 /datum/pet_command/good_boy
-	command_name = "Good Boy"
-	command_desc = "Give your pet a compliment."
+	command_name = "Хороший мальчик"
+	command_desc = "Похвалить питомца."
 	hidden = TRUE
 
 /datum/pet_command/good_boy/New(mob/living/parent)
 	. = ..()
-	speech_commands += "good [parent.name]"
+	speech_commands += "хороший [parent.name]"
 	switch (parent.gender)
 		if (MALE)
-			speech_commands += "good boy"
+			speech_commands += "хороший мальчик"
 			return
 		if (FEMALE)
-			speech_commands += "good girl"
+			speech_commands += "хорошая девочка"
 			return
-	// If we get past this point someone has finally added a non-binary dog
+	// Если мы дошли сюда, значит кто-то наконец добавил небинарную собаку
 
 /datum/pet_command/good_boy/execute_action(datum/ai_controller/controller)
 	controller.clear_blackboard_key(BB_ACTIVE_PET_COMMAND)
@@ -138,15 +138,15 @@
 	return SUBTREE_RETURN_FINISH_PLANNING
 
 /datum/pet_command/untargeted_ability/retrieve_command_text(atom/living_pet, atom/target)
-	return "signals [living_pet] to use an ability!"
+	return "подаёт сигнал [living_pet] использовать способность!"
 
 /**
  * # Pet Command: Attack
  * Tells a pet to chase and bite the next thing you point at
  */
 /datum/pet_command/attack
-	command_name = "Attack"
-	command_desc = "Command your pet to attack things that you point out to it."
+	command_name = "Атаковать"
+	command_desc = "Приказать питомцу атаковать указанные цели."
 	radial_icon_state = "attack"
 	requires_pointing = TRUE
 	callout_type = /datum/callout_option/attack
@@ -174,13 +174,13 @@
 	return ..()
 
 /datum/pet_command/attack/retrieve_command_text(atom/living_pet, atom/target)
-	return isnull(target) ? null : "signals [living_pet] to attack [target]!"
+	return isnull(target) ? null : "подаёт сигнал [living_pet] атаковать [target]!"
 
-/// Display feedback about not targeting something
+/// Отобразить реакцию на отказ атаковать цель
 /datum/pet_command/attack/proc/refuse_target(mob/living/parent, atom/target)
 	var/mob/living/living_parent = parent
 	living_parent.balloon_alert_to_viewers("[refuse_reaction]")
-	living_parent.visible_message(span_notice("[living_parent] refuses to attack [target]."))
+	living_parent.visible_message(span_notice("[living_parent] отказывается атаковать [target]."))
 
 /datum/pet_command/attack/execute_action(datum/ai_controller/controller)
 	controller.queue_behavior(attack_behaviour, BB_CURRENT_PET_TARGET, targeting_strategy_key)
@@ -190,8 +190,8 @@
  * # Breed command. breed with a partner!
  */
 /datum/pet_command/breed
-	command_name = "Breed"
-	command_desc = "Command your pet to attempt to breed with a partner."
+	command_name = "Спариваться" 		/// Рядовой, зарядить ствол! Сэр да сэр! Рядовой, поднять демографию страный! СЭР ДА СЭР!
+	command_desc = "Приказать питомцу попытаться спариться с партнёром."
 	requires_pointing = TRUE
 	radial_icon_state = "breed"
 	speech_commands = list("breed", "consummate")
@@ -219,15 +219,15 @@
 	return SUBTREE_RETURN_FINISH_PLANNING
 
 /datum/pet_command/breed/retrieve_command_text(atom/living_pet, atom/target)
-	return isnull(target) ? null : "signals [living_pet] to breed with [target]!"
+	return isnull(target) ? null : "подаёт сигнал [living_pet] спариваться с [target]!"		/// По улитке 333!
 
 /**
  * # Pet Command: Targetted Ability
  * Tells a pet to use some kind of ability on the next thing you point at
  */
 /datum/pet_command/use_ability
-	command_name = "Use ability"
-	command_desc = "Command your pet to use one of its special skills on something that you point out to it."
+	command_name = "Использовать способность"
+	command_desc = "Приказать питомцу использовать одну из его особых способностей на указанной цели."
 	radial_icon = 'icons/mob/actions/actions_spells.dmi'
 	radial_icon_state = "projectile"
 	requires_pointing = TRUE
@@ -251,11 +251,11 @@
 	return SUBTREE_RETURN_FINISH_PLANNING
 
 /datum/pet_command/use_ability/retrieve_command_text(atom/living_pet, atom/target)
-	return isnull(target) ? null : "signals [living_pet] to use an ability on [target]!"
+	return isnull(target) ? null : "подаёт сигнал [living_pet] использовать способность на [target]!"
 
 /datum/pet_command/protect_owner
-	command_name = "Protect owner"
-	command_desc = "Your pet will run to your aid."
+	command_name = "Защитить хозяина"
+	command_desc = "Ваш питомец прибежит к вам на помощь."
 	hidden = TRUE
 	callout_type = /datum/callout_option/guard
 	///the range our owner needs to be in for us to protect him
@@ -317,8 +317,8 @@
  * # Fish command: command the mob to fish at the next fishing spot you point at. Requires the profound fisher component
  */
 /datum/pet_command/fish
-	command_name = "Fish"
-	command_desc = "Command your pet to try fishing at a nearby fishing spot."
+	command_name = "Ловить рыбу"
+	command_desc = "Приказать питомцу попытаться ловить рыбу в ближайшем рыбном месте."
 	requires_pointing = TRUE
 	radial_icon_state = "fish"
 	speech_commands = list("fish")
@@ -329,11 +329,11 @@
 	return SUBTREE_RETURN_FINISH_PLANNING
 
 /datum/pet_command/fish/retrieve_command_text(atom/living_pet, atom/target)
-	return "signals [living_pet] to go fish!"
+	return "подаёт сигнал [living_pet] ловить рыбу!"
 
 /datum/pet_command/move
-	command_name = "Move"
-	command_desc = "Command your pet to move to a location!"
+	command_name = "Идти"
+	command_desc = "Приказать питомцу переместиться в указанное место!"
 	requires_pointing = TRUE
 	radial_icon_state = "move"
 	speech_commands = list("move", "walk")
@@ -351,4 +351,4 @@
 	return SUBTREE_RETURN_FINISH_PLANNING
 
 /datum/pet_command/move/retrieve_command_text(atom/living_pet, atom/target)
-	return "signals [living_pet] to move!"
+	return "подаёт сигнал [living_pet] двигаться!"

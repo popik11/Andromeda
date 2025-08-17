@@ -36,9 +36,9 @@
 
 	var/atom/result = new bake_result
 	if(!item_target.compare_materials(result))
-		var/warning = "custom_materials of [result.type] when baked compared to just spawned don't match"
+		var/warning = "custom_materials [result.type] при выпечке не совпадают с только что созданными"
 		var/what_it_should_be = item_target.get_materials_english_list()
-		stack_trace("[warning]. custom_materials should be [what_it_should_be].")
+		stack_trace("[warning]. custom_materials должны быть [what_it_should_be].")
 	qdel(result)
 
 // Inherit the new values passed to the component
@@ -81,15 +81,15 @@
 
 	return COMPONENT_HANDLED_BAKING | baking_result
 
-///Ran when an object finished baking
+///Вызывается, когда объект закончил выпекаться
 /datum/component/bakeable/proc/finish_baking(atom/used_oven)
 	var/atom/original_object = parent
 	var/obj/item/plate/oven_tray/used_tray = original_object.loc
 	var/atom/baked_result = new bake_result(used_tray)
-	if(baked_result.reagents && positive_result) //make space and tranfer reagents if it has any & the resulting item isn't bad food or other bad baking result
+	if(baked_result.reagents && positive_result) //Освобождаем место и переносим реагенты, если они есть, и результат не является испорченной едой или другим плохим результатом выпечки
 		baked_result.reagents.clear_reagents()
 		original_object.reagents.trans_to(baked_result, original_object.reagents.total_volume)
-		if(added_reagents) // Add any new reagents that should be added
+		if(added_reagents) //Добавляем новые реагенты, если нужно
 			baked_result.reagents.add_reagent_list(added_reagents)
 		if(istype(original_object, /obj/item/food) && istype(baked_result, /obj/item/food))
 			var/obj/item/food/original_food = original_object
@@ -113,37 +113,37 @@
 
 	if(positive_result)
 		used_oven.visible_message(
-			span_notice("You smell something great coming from [used_oven]."),
-			blind_message = span_notice("You smell something great..."),
+			span_notice("Вы чувствуете, как [used_oven.declent_ru(NOMINATIVE)] источает приятный запах."),
+			blind_message = span_notice("Вы чувствуете приятный запах..."),
 			ignored_mobs = asomnia_hadders,
 		)
 		BLACKBOX_LOG_FOOD_MADE(baked_result.type)
 	else
 		used_oven.visible_message(
-			span_warning("You smell a burnt smell coming from [used_oven]."),
-			blind_message = span_warning("You smell a burnt smell..."),
+			span_warning("Вы чувствуете, как [used_oven.declent_ru(NOMINATIVE)] испускает горелое зловоние."),
+			blind_message = span_warning("Вы чувствуете запах горелого..."),
 			ignored_mobs = asomnia_hadders,
 		)
 	SEND_SIGNAL(parent, COMSIG_ITEM_BAKED, baked_result)
 	SEND_SIGNAL(baked_result, COMSIG_ITEM_BAKED_RESULT, parent)
 	qdel(parent)
 
-///Gives info about the items baking status so you can see if its almost done
+///Дает информацию о состоянии выпечки предмета, чтобы можно было понять, готов ли он почти
 /datum/component/bakeable/proc/on_examine(atom/source, mob/user, list/examine_list)
 	SIGNAL_HANDLER
 
-	if(!current_bake_time) //Not baked yet
+	if(!current_bake_time) //Еще не выпекался
 		if(positive_result)
 			if(initial(bake_result.gender) == PLURAL)
-				examine_list += span_notice("[parent] can be [span_bold("baked")] into some [initial(bake_result.name)].")
+				examine_list += span_notice("[capitalize(parent.declent_ru(NOMINATIVE))] [span_bold("запекается")] в [declent_ru_initial(bake_result::name, ACCUSATIVE, bake_result::name)].")
 			else
-				examine_list += span_notice("[parent] can be [span_bold("baked")] into \a [initial(bake_result.name)].")
+				examine_list += span_notice("[capitalize(parent.declent_ru(NOMINATIVE))] [span_bold("запекается")] в [declent_ru_initial(bake_result::name, ACCUSATIVE, bake_result::name)].")
 		return
 
 	if(positive_result)
 		if(current_bake_time <= required_bake_time * 0.75)
-			examine_list += span_notice("[parent] probably needs to be baked a bit longer!")
+			examine_list += span_notice("Наверное, [parent.declent_ru(ACCUSATIVE)] нужно выпекать немного дольше!")
 		else if(current_bake_time <= required_bake_time)
-			examine_list += span_notice("[parent] seems to be almost finished baking!")
+			examine_list += span_notice("Кажется, что [parent.declent_ru(NOMINATIVE)] вот-вот запечется!")
 	else
-		examine_list += span_danger("[parent] should probably not be put in the oven.")
+		examine_list += span_danger("[capitalize(parent.declent_ru(NOMINATIVE))] не стоит засовывать в духовку.")

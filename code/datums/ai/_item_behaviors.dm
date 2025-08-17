@@ -7,7 +7,7 @@
 	if(!istype(item_holder))
 		//We're no longer being held. abort abort!!
 		return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_FAILED
-	item_pawn.visible_message(span_warning("[item_pawn] slips out of the hands of [item_holder]!"))
+	item_pawn.visible_message(span_warning("[item_pawn] выскальзывает из рук [item_holder]!"))
 	item_holder.dropItemToGround(item_pawn, TRUE)
 	return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_SUCCEEDED
 
@@ -33,7 +33,7 @@
 	var/obj/item/item_pawn = controller.pawn
 	var/atom/throw_target = controller.blackboard[target_key]
 
-	item_pawn.visible_message(span_warning("[item_pawn] hurls towards [throw_target]!"))
+	item_pawn.visible_message(span_warning("[item_pawn] летит в сторону [throw_target]!"))
 	item_pawn.throw_at(throw_target, rand(4,5), 9)
 	playsound(item_pawn.loc, attack_sound, 100, TRUE)
 	controller.add_blackboard_key(throw_count_key, 1)

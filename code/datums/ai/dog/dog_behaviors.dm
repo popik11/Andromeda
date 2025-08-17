@@ -39,19 +39,19 @@
 	living_pawn.melee_damage_upper = old_melee_upper
 	return AI_BEHAVIOR_DELAY
 
-/// Swat at someone we don't like but won't hurt
+/// Безвредно лягать того, кто нам не нравится
 /datum/ai_behavior/basic_melee_attack/dog/proc/paw_harmlessly(mob/living/living_pawn, atom/target, seconds_per_tick)
 	if(!SPT_PROB(20, seconds_per_tick))
 		return
 	living_pawn.do_attack_animation(target, ATTACK_EFFECT_DISARM)
 	playsound(target, 'sound/items/weapons/thudswoosh.ogg', 50, TRUE, -1)
-	target.visible_message(span_danger("[living_pawn] paws ineffectually at [target]!"), span_danger("[living_pawn] paws ineffectually at you!"))
+	target.visible_message(span_danger("[living_pawn] слегка толкает [target]!"), span_danger("[living_pawn] слегка толкает вас!"))
 
-/// Let them know we mean business
+/// Дать понять, что мы настроены серьезно
 /datum/ai_behavior/basic_melee_attack/dog/proc/growl_at(mob/living/living_pawn, atom/target, seconds_per_tick)
 	if(!SPT_PROB(15, seconds_per_tick))
 		return
-	living_pawn.manual_emote("[pick("barks", "growls", "stares")] menacingly at [target]!")
+	living_pawn.manual_emote("[pick("barks", "growls", "stares")] угрожающе на [target]!")
 	if(!SPT_PROB(40, seconds_per_tick))
 		return
 	playsound(living_pawn, SFX_GROWL, 50, TRUE, -1)

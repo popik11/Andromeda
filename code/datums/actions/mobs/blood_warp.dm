@@ -1,14 +1,14 @@
 /datum/action/cooldown/mob_cooldown/blood_warp
-	name = "Blood Warp"
+	name = "Кровавый Сдвиг"
 	button_icon = 'icons/effects/blood.dmi'
 	button_icon_state = "floor1"
-	desc = "Allows you to teleport to blood at a clicked position."
+	desc = "Позволяет телепортироваться к крови в выбранном месте."
 	cooldown_time = 0
-	/// The range of turfs to try to jaunt to from around the target
+	/// Диапазон тайлов для выбора точки телепорта вокруг цели
 	var/pick_range = 5
-	/// The range of turfs if a client is using this ability
+	/// Диапазон тайлов при использовании способности клиентом
 	var/client_pick_range = 0
-	/// Whether or not to remove the inside of our radius from the possible pools to jaunt to
+	/// Удалять ли внутренние зоны из возможных точек телепорта
 	var/remove_inner_pools = TRUE
 
 /datum/action/cooldown/mob_cooldown/blood_warp/Activate(atom/target_atom)
@@ -57,11 +57,11 @@
 		shuffle_inplace(pools)
 		found_bloodpool = pick(pools)
 	if(found_bloodpool)
-		owner.visible_message(span_danger("[owner] sinks into the blood..."))
+		owner.visible_message(span_danger("[owner] погружается в кровь..."))
 		playsound(owner_turf, 'sound/effects/magic/enter_blood.ogg', 100, TRUE, -1)
 		owner.forceMove(get_turf(found_bloodpool))
 		playsound(get_turf(owner), 'sound/effects/magic/exit_blood.ogg', 100, TRUE, -1)
-		owner.visible_message(span_danger("And springs back out!"))
+		owner.visible_message(span_danger("И выныривает обратно!"))
 		SEND_SIGNAL(owner, COMSIG_BLOOD_WARP)
 		return TRUE
 	return FALSE

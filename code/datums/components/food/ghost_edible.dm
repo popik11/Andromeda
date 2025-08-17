@@ -29,9 +29,9 @@
 		var/mob/mob_parent = parent
 		parent_name = "[mob_parent.real_name]"
 	notify_ghosts(
-		"[parent_name] is edible by ghosts!",
+		"[parent_name] можно съесть призракам!",
 		source = parent,
-		header = "Something Tasty!",
+		header = "Что-то вкусное!",
 		notify_flags = NOTIFY_CATEGORY_NOFLASH,
 	)
 
@@ -47,7 +47,7 @@
 
 /datum/component/ghost_edible/process(seconds_per_tick)
 	var/atom/atom_parent = parent
-	// Ghosts can eat this burger
+	// Призраки могут съесть этот бургер
 	var/munch_chance = 0
 	for(var/mob/dead/observer/ghost in atom_parent.orbiters?.orbiter_list)
 		munch_chance += bite_chance
@@ -58,7 +58,7 @@
 	playsound(atom_parent.loc,'sound/items/eatfood.ogg', vol = rand(10,50), vary = TRUE)
 	atom_parent.reagents.remove_all(bite_consumption)
 	if (atom_parent.reagents.total_volume <= 0)
-		atom_parent.visible_message(span_notice("[atom_parent] disappears completely!"))
+		atom_parent.visible_message(span_notice("[atom_parent] полностью исчезает!"))
 		new /obj/item/ectoplasm(atom_parent.loc)
 		qdel(parent)
 		return

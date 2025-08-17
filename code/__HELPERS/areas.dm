@@ -130,9 +130,9 @@ GLOBAL_LIST_INIT(typecache_powerfailure_safe_areas, typecacheof(list(
 	var/list/turfs = detect_room(get_turf(creator), area_or_turf_fail_types, BP_MAX_ROOM_SIZE*2)
 	var/turf_count = length(turfs)
 	if(!turf_count)
-		error = "The new area must be completely airtight and not a part of a shuttle."
+		error = "Новая зона должна быть полностью герметичной и не являться частью шаттла."
 	else if(turf_count > BP_MAX_ROOM_SIZE)
-		error = "The room you're in is too big. It is [turf_count >= BP_MAX_ROOM_SIZE *2 ? "more than 100" : ((turf_count / BP_MAX_ROOM_SIZE)-1)*100]% larger than allowed."
+		error = "Комната слишком большая. Она [turf_count >= BP_MAX_ROOM_SIZE *2 ? "более чем на 100" : ((turf_count / BP_MAX_ROOM_SIZE)-1)*100]% превышает допустимый размер."
 	if(error)
 		to_chat(creator, span_warning(error))
 		return
@@ -151,20 +151,20 @@ GLOBAL_LIST_INIT(typecache_powerfailure_safe_areas, typecacheof(list(
 		if(!isnull(place.apc))
 			apc_map[place.name] = place.apc
 		if(length(apc_map) > 1) // When merging 2 or more areas make sure we arent merging their apc into 1 area
-			to_chat(creator, span_warning("Multiple APC's detected in the vicinity. only 1 is allowed."))
+			to_chat(creator, span_warning("Обнаружено несколько ЛКП (APC) поблизости. Разрешён только один."))
 			return
 		areas[place.name] = place
 
-	var/area_choice = tgui_input_list(creator, "Choose an area to expand or make a new area", "Area Expansion", areas)
+	var/area_choice = tgui_input_list(creator, "Выберите зону для расширения или создайте новую", "Расширение зоны", areas)
 	if(isnull(area_choice))
-		to_chat(creator, span_warning("No choice selected. The area remains undefined."))
+		to_chat(creator, span_warning("Ничего не выбрано. Зона остаётся неопределённой."))
 		return
 	area_choice = areas[area_choice]
 
 	var/area/newA
 	var/area/oldA = get_area(get_turf(creator))
 	if(!isarea(area_choice))
-		var/str = tgui_input_text(creator, "New area name", "Blueprint Editing", max_length = MAX_NAME_LEN)
+		var/str = tgui_input_text(creator, "Название новой зоны", "Редактирование чертежа", max_length = MAX_NAME_LEN)
 		if(!str)
 			return
 		newA = new area_choice
@@ -178,7 +178,7 @@ GLOBAL_LIST_INIT(typecache_powerfailure_safe_areas, typecacheof(list(
 
 	//we haven't done anything. let's get outta here
 	if(newA == oldA)
-		to_chat(creator, span_warning("Selected choice is same as the area your standing in. No area changes were requested."))
+		to_chat(creator, span_warning("Выбранная зона совпадает с зоной, в которой вы находитесь. Изменения не требуются."))
 		return
 
 	/**
@@ -198,8 +198,8 @@ GLOBAL_LIST_INIT(typecache_powerfailure_safe_areas, typecacheof(list(
 	for(var/area_name in affected_areas)
 		area_list += affected_areas[area_name]
 	SEND_GLOBAL_SIGNAL(COMSIG_AREA_CREATED, newA, area_list, creator)
-	to_chat(creator, span_notice("You have created a new area, named [newA.name]. It is now weather proof, and constructing an APC will allow it to be powered."))
-	creator.log_message("created a new area: [AREACOORD(creator)] (previously \"[oldA.name]\")", LOG_GAME)
+	to_chat(creator, span_notice("Вы создали новую зону с названием [newA.name]. Теперь она защищена от погодных условий, а установка ЛКП позволит подать в неё питание."))
+	creator.log_message("создана новая зона: [AREACOORD(creator)] (ранее \"[oldA.name]\")", LOG_GAME)
 
 	//purge old areas that had all their turfs merged into the new one i.e. old empty areas. also recompute fire doors
 	for(var/i in 1 to length(area_list))

@@ -1,29 +1,29 @@
 /**
- * Deployable - Bring your big guns with you, and smack em' down where you want.
+ * Развертываемое - Возьмите с собой тяжёлое вооружение и установите его где нужно.
  *
- * Allows items to spawn other items (usually objects) in front of the user after a short delay.
- * If attaching this to something:
- * Set deploy_time to a number in seconds for the deploy delay
- * Set thing_to_be_deployed to an obj path for the thing that gets spawned
- * Multiple deployments and deployments work together to allow a thing to be placed down several times. If multiple deployments is false then don't worry about deployments
- * Direction setting true means the object spawned will face the direction of the person who deployed it, false goes to the default direction
+ * Позволяет предметам создавать другие предметы (обычно объекты) перед пользователем после небольшой задержки.
+ * При добавлении этого компонента:
+ * Установите deploy_time в число (секунды) для задержки развертывания
+ * Установите thing_to_be_deployed в путь объекта, который будет создан
+ * Если multiple_deployments = TRUE, deployments определяет сколько раз можно развернуть объект
+ * direction_setting = TRUE означает что объект будет повёрнут в сторону пользователя
  */
 
 /datum/component/deployable
-	/// The time it takes to deploy the object
+	/// Время развертывания объекта
 	var/deploy_time
-	/// The object that gets spawned if deployed successfully
+	/// Объект, который создаётся при успешном развертывании
 	var/obj/thing_to_be_deployed
-	/// Can the parent be deployed multiple times
+	/// Можно ли развернуть объект несколько раз
 	var/multiple_deployments
-	/// How many times we can deploy the parent, if multiple deployments is set to true and this gets below zero, the parent will be deleted
+	/// Сколько раз можно развернуть объект (при multiple_deployments = TRUE)
 	var/deployments
-	/// If the component adds a little bit into the parent's description
+	/// Добавлять ли подсказку в описание предмета
 	var/add_description_hint
-	/// If the direction of the thing we place is changed upon placing
+	/// Менять ли направление развернутого объекта
 	var/direction_setting
 
-	/// Used in getting the name of the deployed object
+	/// Имя развернутого объекта (для описания)
 	var/deployed_name
 
 /datum/component/deployable/Initialize(deploy_time = 5 SECONDS, thing_to_be_deployed, multiple_deployments = FALSE, deployments = 1, add_description_hint = TRUE, direction_setting = TRUE)
@@ -47,31 +47,31 @@
 
 /datum/component/deployable/proc/examine(datum/source, mob/user, list/examine_list)
 	SIGNAL_HANDLER
-	examine_list += span_notice("It can be used <b>in hand</b> to deploy into [((deployments > 1) && multiple_deployments) ? "[deployments]" : "a"] [deployed_name].")
+	examine_list += span_notice("Можно использовать <b>в руках</b> для развертывания в [((deployments > 1) && multiple_deployments) ? "[deployments]" : ""] [deployed_name].")
 
 /datum/component/deployable/proc/on_attack_hand(datum/source, mob/user, location, direction)
 	SIGNAL_HANDLER
 	INVOKE_ASYNC(src, PROC_REF(deploy), source, user, location, direction)
 
-/datum/component/deployable/proc/deploy(obj/source, mob/user, location, direction) //If there's no user, location and direction are used
-	// The object we are going to create
+/datum/component/deployable/proc/deploy(obj/source, mob/user, location, direction) // Если нет пользователя, используются location и direction
+	// Создаваемый объект
 	var/atom/deployed_object
-	// The turf our object is going to be deployed to
+	// Позиция развертывания
 	var/turf/deploy_location
-	// What direction will the deployed object be placed facing
+	// Направление объекта
 	var/new_direction
 
 	if(user)
-		deploy_location = get_step(user, user.dir) //Gets spawn location for thing_to_be_deployed if there is a user
+		deploy_location = get_step(user, user.dir) // Позиция перед пользователем
 		if(deploy_location.is_blocked_turf(TRUE, parent))
-			source.balloon_alert(user, "insufficient room to deploy here.")
+			source.balloon_alert(user, "недостаточно места!")
 			return
-		new_direction = user.dir //Gets the direction for thing_to_be_deployed if there is a user
-		source.balloon_alert(user, "deploying...")
+		new_direction = user.dir // Направление пользователя
+		source.balloon_alert(user, "развертывание...")
 		playsound(source, 'sound/items/tools/ratchet.ogg', 50, TRUE)
 		if(!do_after(user, deploy_time))
 			return
-	else // If there is for some reason no user, then the location and direction are set here
+	else // Если нет пользователя
 		deploy_location = location
 		new_direction = direction
 

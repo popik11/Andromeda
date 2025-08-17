@@ -35,7 +35,7 @@
 	if(istype(crosser, /obj/structure/grille))
 		var/obj/structure/grille/grillefriend = crosser
 		if(grillefriend.is_shocked()) //prevent passage of shocked
-			crosser.balloon_alert(passer, "is shocked!")
+			crosser.balloon_alert(passer, "получает разряд!")
 			return COMPONENT_BLOCK_CROSS
 
 	return null

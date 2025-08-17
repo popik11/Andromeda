@@ -3,23 +3,23 @@
 
 /datum/ai_planning_subtree/express_happiness
 	operational_datums = list(/datum/component/happiness)
-	///the key storing our happiness value
+	///ключ, хранящий значение счастья
 	var/happiness_key = BB_BASIC_HAPPINESS
-	///list of emotions we relay when happy
+	///список эмоций при радости
 	var/static/list/happy_emotions = list(
-		"celebrates happily!",
-		"dances around in excitement!",
+		"радостно празднует!",
+		"танцует от возбуждения!",
 	)
-	///our moderate emotions
+	///эмоции при умеренном настроении
 	var/static/list/moderate_emotions = list(
-		"looks satisfied.",
-		"trots around.",
+		"выглядит удовлетворённым.",
+		"бегает вокруг.",
 	)
-	///emotions we display when we are sad
+	///эмоции при грусти
 	var/static/list/depressed_emotions = list(
-		"looks depressed...",
-		"turns its back and sulks...",
-		"looks towards the floor in dissapointment...",
+		"выглядит подавленным...",
+		"отворачивается и дуется...",
+		"опускает взгляд в разочаровании...",
 	)
 
 /datum/ai_planning_subtree/express_happiness/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)

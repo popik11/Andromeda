@@ -205,7 +205,7 @@
 
 	toggle_breaker(user)
 
-/// Toggle APC environment settings (atmos)
+/// Переключение настроек окружения APC (атмос)
 /obj/machinery/power/apc/AICtrlShiftClick(mob/living/silicon/ai/user)
 	if(!can_use(user, loud = TRUE))
 		return
@@ -216,13 +216,13 @@
 	environ = environ ? APC_CHANNEL_OFF : APC_CHANNEL_ON
 	if (user)
 		add_hiddenprint(user)
-		var/enabled_or_disabled = environ ? "enabled" : "disabled"
-		balloon_alert(user, "environment power [enabled_or_disabled]")
-		user.log_message("[enabled_or_disabled] the [src] environment settings", LOG_GAME)
+		var/enabled_or_disabled = environ ? "включено" : "выключено"
+		balloon_alert(user, "питание окружения [enabled_or_disabled]")
+		user.log_message("[enabled_or_disabled] настройки окружения [src]", LOG_GAME)
 	update_appearance()
 	update()
 
-/// Toggle APC lighting settings
+/// Переключение настроек освещения APC
 /obj/machinery/power/apc/AIShiftClick(mob/living/silicon/ai/user)
 	if(!can_use(user, loud = TRUE))
 		return FALSE
@@ -232,15 +232,15 @@
 
 	lighting = lighting ? APC_CHANNEL_OFF : APC_CHANNEL_ON
 	if (user)
-		var/enabled_or_disabled = lighting ? "enabled" : "disabled"
+		var/enabled_or_disabled = lighting ? "включено" : "выключено"
 		add_hiddenprint(user)
-		balloon_alert(user, "lighting power toggled [enabled_or_disabled]")
-		user.log_message("turned [enabled_or_disabled] the [src] lighting settings", LOG_GAME)
+		balloon_alert(user, "питание освещения [enabled_or_disabled]")
+		user.log_message("переключил [enabled_or_disabled] настройки освещения [src]", LOG_GAME)
 	update_appearance()
 	update()
 	return TRUE
 
-/// Toggle APC equipment settings
+/// Переключение настроек оборудования APC
 /obj/machinery/power/apc/ai_click_alt(mob/living/silicon/ai/user)
 	if(!can_use(user, loud = TRUE))
 		return NONE
@@ -250,10 +250,10 @@
 
 	equipment = equipment ? APC_CHANNEL_OFF : APC_CHANNEL_ON
 	if (user)
-		var/enabled_or_disabled = equipment ? "enabled" : "disabled"
-		balloon_alert(user, "equipment power toggled [enabled_or_disabled]")
+		var/enabled_or_disabled = equipment ? "включено" : "выключено"
+		balloon_alert(user, "питание оборудования [enabled_or_disabled]")
 		add_hiddenprint(user)
-		user.log_message("turned [enabled_or_disabled] the [src] equipment settings", LOG_GAME)
+		user.log_message("переключил [enabled_or_disabled] настройки оборудования [src]", LOG_GAME)
 	update_appearance()
 	update()
 	return CLICK_ACTION_SUCCESS
@@ -275,10 +275,10 @@
 		return
 	toggle_on(user)
 
-/* Holopads */
+/* Голопады */
 /obj/machinery/holopad/ai_click_alt(mob/living/silicon/ai/user)
 	if (user)
-		balloon_alert(user, "disrupted all active calls")
+		balloon_alert(user, "все вызовы прерваны")
 		add_hiddenprint(user)
 	hangup_all_calls()
 	return CLICK_ACTION_SUCCESS

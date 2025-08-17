@@ -54,10 +54,10 @@
 
 	var/list/soft_filter_result = CAN_BYPASS_FILTER(user) ? null : is_soft_ic_filtered_for_pdas(message)
 	if (soft_filter_result)
-		if(tgui_alert(user, "Your message contains \"[soft_filter_result[CHAT_FILTER_INDEX_WORD]]\". \"[soft_filter_result[CHAT_FILTER_INDEX_REASON]]\", Are you sure you want to send it?", "Soft Blocked Word", list("Yes", "No")) != "Yes")
+		if(tgui_alert(user, "Ваше сообщение содержит слово \"[soft_filter_result[CHAT_FILTER_INDEX_WORD]]\". Причина: \"[soft_filter_result[CHAT_FILTER_INDEX_REASON]]\". Вы уверены, что хотите отправить его?", "Слово заблокировано фильтром", list("Да", "Нет")) != "Да")
 			return FALSE
-		message_admins("[ADMIN_LOOKUPFLW(user)] has passed the soft filter for \"[soft_filter_result[CHAT_FILTER_INDEX_WORD]]\" they may be using a disallowed term in PDA messages. Message: \"[message]\"")
-		log_admin_private("[key_name(user)] has passed the soft filter for \"[soft_filter_result[CHAT_FILTER_INDEX_WORD]]\" they may be using a disallowed term in PDA messages. Message: \"[message]\"")
+		message_admins("[ADMIN_LOOKUPFLW(user)] прошёл мягкий фильтр для слова \"[soft_filter_result[CHAT_FILTER_INDEX_WORD]]\" - возможно использование запрещённого термина в PDA-сообщении. Текст: \"[message]\"")
+		log_admin_private("[key_name(user)] прошёл мягкий фильтр для слова \"[soft_filter_result[CHAT_FILTER_INDEX_WORD]]\" - возможно использование запрещённого термина в PDA-сообщении. Текст: \"[message]\"")
 
 	return TRUE
 
@@ -95,6 +95,6 @@
 
 /// Logs to the filter log with the given message, match, and scope
 /proc/log_filter(scope, message, filter_result)
-	log_filter_raw("[scope] filter:\n\tMessage: [message]\n\tFilter match: [filter_result[CHAT_FILTER_INDEX_WORD]]")
+	log_filter_raw("Фильтр [scope]:\n\tСообщение: [message]\n\tСовпадение фильтра: [filter_result[CHAT_FILTER_INDEX_WORD]]")
 
 #undef GET_MATCHED_GROUP

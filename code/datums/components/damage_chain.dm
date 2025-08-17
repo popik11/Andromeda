@@ -41,7 +41,7 @@
 	if (!isatom(parent))
 		return COMPONENT_INCOMPATIBLE
 	if (!isatom(linked_to))
-		CRASH("Attempted to create [type] linking [parent.type] with non-atom [linked_to]!")
+		CRASH("Попытка создать [type], связывая [parent.type] с не-атомом [linked_to]!")
 
 	src.tick_interval = tick_interval
 	src.damage_per_tick = damage_per_tick

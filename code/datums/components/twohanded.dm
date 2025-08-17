@@ -211,22 +211,22 @@
 	var/atom/atom_parent = parent
 	if(HAS_TRAIT(user, TRAIT_NO_TWOHANDING))
 		if(HAS_TRAIT(parent, TRAIT_NEEDS_TWO_HANDS))
-			atom_parent.balloon_alert(user, "can't wield!")
+			atom_parent.balloon_alert(user, "нельзя держать одной рукой!")
 			user.dropItemToGround(parent, force = TRUE)
 		else
-			atom_parent.balloon_alert(user, "can't wield with both hands!")
+			atom_parent.balloon_alert(user, "нельзя держать двумя руками!")
 		return COMPONENT_EQUIPPED_FAILED
 	if(user.get_inactive_held_item())
 		if(HAS_TRAIT(parent, TRAIT_NEEDS_TWO_HANDS))
-			atom_parent.balloon_alert(user, "can't carry in one hand!")
+			atom_parent.balloon_alert(user, "нельзя держать одной рукой!")
 			user.dropItemToGround(parent, force = TRUE)
 		else
-			atom_parent.balloon_alert(user, "holding something in other hand!")
+			atom_parent.balloon_alert(user, "вторая рука занята!")
 		return COMPONENT_EQUIPPED_FAILED
 	if(user.usable_hands < 2)
 		if(HAS_TRAIT(parent, TRAIT_NEEDS_TWO_HANDS))
 			user.dropItemToGround(parent, force = TRUE)
-		atom_parent.balloon_alert(user, "not enough hands!")
+		atom_parent.balloon_alert(user, "не хватает рук!")
 		return COMPONENT_EQUIPPED_FAILED
 
 	// wield update status
@@ -239,7 +239,7 @@
 	ADD_TRAIT(parent, TRAIT_WIELDED, REF(src))
 	RegisterSignal(user, COMSIG_MOB_SWAPPING_HANDS, PROC_REF(on_swapping_hands))
 
-	// update item stats and name
+	// обновляем характеристики и название предмета
 	var/obj/item/parent_item = parent
 	if(force_multiplier != 1)
 		parent_item.force *= force_multiplier
@@ -247,22 +247,22 @@
 		parent_item.force = force_wielded
 	if(sharpened_increase)
 		parent_item.force += sharpened_increase
-	parent_item.name = "[parent_item.name] (Wielded)"
+	parent_item.name = "[parent_item.name] (Двуручный)"
 	parent_item.update_appearance()
 
 	if(iscyborg(user))
-		to_chat(user, span_notice("You dedicate your module to [parent]."))
+		to_chat(user, span_notice("Вы выделяете модуль под [parent]."))
 	else
-		to_chat(user, span_notice("You grab [parent] with both hands."))
+		to_chat(user, span_notice("Вы берёте [parent] двумя руками."))
 
-	// Play sound if one is set
+	// Проигрываем звук, если он задан
 	if(wieldsound)
 		playsound(parent_item.loc, wieldsound, 50, TRUE)
 
-	// Let's reserve the other hand
+	// Резервируем вторую руку
 	offhand_item = new(user)
-	offhand_item.name = "[parent_item.name] - offhand"
-	offhand_item.desc = "Your second grip on [parent_item]."
+	offhand_item.name = "[parent_item.name] - вторая рука"
+	offhand_item.desc = "Ваша вторая рука держит [parent_item]."
 	offhand_item.wielded = TRUE
 	RegisterSignal(offhand_item, COMSIG_ITEM_DROPPED, PROC_REF(on_drop))
 	RegisterSignal(offhand_item, COMSIG_QDELETING, PROC_REF(on_destroy))
@@ -297,7 +297,7 @@
 		parent_item.force = force_unwielded
 
 	// update the items name to remove the wielded status
-	var/sf = findtext(parent_item.name, " (Wielded)", -10) // 10 == length(" (Wielded)")
+	var/sf = findtext(parent_item.name, " (Двуручный)", -10) // 10 == length(" (Wielded)")
 	if(sf)
 		parent_item.name = copytext(parent_item.name, 1, sf)
 	else
@@ -316,14 +316,14 @@
 		if(HAS_TRAIT(parent, TRAIT_NEEDS_TWO_HANDS) && can_drop)
 			user.dropItemToGround(parent, force=TRUE)
 
-		// Show message if requested
+		// Показываем сообщение, если требуется
 		if(show_message)
 			if(iscyborg(user))
-				to_chat(user, span_notice("You free up your module."))
+				to_chat(user, span_notice("Вы освобождаете модуль."))
 			else if(HAS_TRAIT(parent, TRAIT_NEEDS_TWO_HANDS))
-				to_chat(user, span_notice("You drop [parent]."))
+				to_chat(user, span_notice("Вы бросаете [parent]."))
 			else
-				to_chat(user, span_notice("You are now carrying [parent] with one hand."))
+				to_chat(user, span_notice("Теперь вы держите [parent] одной рукой."))
 
 	// Play sound if set
 	if(unwieldsound)

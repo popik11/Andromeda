@@ -35,9 +35,9 @@
 	if(HAS_TRAIT(src, TRAIT_MOVE_VENTCRAWLING))
 		return
 
-	/// No loot panel if it's on our person
+/// Не показывать панель добычи, если предмет уже у нас
 	if(isobj(target) && (target in get_all_gear()))
-		to_chat(src, span_warning("You can't search for this item, it's already in your inventory! Take it off first."))
+		to_chat(src, span_warning("Нельзя искать этот предмет - он уже в вашем инвентаре! Сначала снимите его."))
 		return
 
 	client.loot_panel.open(get_turf(target))

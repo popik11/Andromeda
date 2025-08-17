@@ -1,8 +1,8 @@
 /datum/action/cooldown/mob_cooldown/projectile_attack
-	name = "Projectile Attack"
+	name = "Атака Проектилями"
 	button_icon = 'icons/mob/actions/actions_items.dmi'
 	button_icon_state = "sniper_zoom"
-	desc = "Fires a set of projectiles at a selected target."
+	desc = "Выпускает серию снарядов по выбранной цели."
 	cooldown_time = 1.5 SECONDS
 	/// The type of the projectile to be fired
 	var/projectile_type
@@ -63,10 +63,10 @@
 	return our_projectile
 
 /datum/action/cooldown/mob_cooldown/projectile_attack/rapid_fire
-	name = "Rapid Fire"
+	name = "Скорострельность"
 	button_icon = 'icons/obj/weapons/guns/energy.dmi'
 	button_icon_state = "kineticgun"
-	desc = "Fires projectiles repeatedly at a given target."
+	desc = "Быстро выпускает снаряды по выбранной цели."
 	cooldown_time = 1.5 SECONDS
 	projectile_type = /obj/projectile/colossus/snowball
 	default_projectile_spread = 45
@@ -85,10 +85,10 @@
 	default_projectile_spread = 5
 
 /datum/action/cooldown/mob_cooldown/projectile_attack/rapid_fire/shrapnel
-	name = "Shrapnel Fire"
+	name = "Осколочный Обстрел"
 	button_icon = 'icons/mob/actions/actions_items.dmi'
 	button_icon_state = "sniper_zoom"
-	desc = "Fires projectiles that will split into shrapnel after a period of time."
+	desc = "Выпускает снаряды, которые разлетаются на осколки через некоторое время."
 	cooldown_time = 6 SECONDS
 	projectile_type = /obj/projectile/colossus/frost_orb
 	has_homing = TRUE
@@ -115,15 +115,15 @@
 	qdel(to_explode)
 
 /datum/action/cooldown/mob_cooldown/projectile_attack/rapid_fire/shrapnel/strong
-	name = "Strong Shrapnel Fire"
+	name = "Мощный Осколочный Обстрел"
 	shot_count = 16
 	shot_delay = 0.5 SECONDS
 
 /datum/action/cooldown/mob_cooldown/projectile_attack/spiral_shots
-	name = "Spiral Shots"
+	name = "Спиральные Выстрелы"
 	button_icon = 'icons/mob/actions/actions_items.dmi'
 	button_icon_state = "sniper_zoom"
-	desc = "Fires projectiles in a spiral pattern."
+	desc = "Выпускает снаряды по спиральной траектории."
 	cooldown_time = 3 SECONDS
 	projectile_type = /obj/projectile/colossus
 	projectile_sound = 'sound/effects/magic/clockwork/invoke_general.ogg'
@@ -180,10 +180,10 @@
 	SLEEP_CHECK_DEATH(3 SECONDS, firer)
 
 /datum/action/cooldown/mob_cooldown/projectile_attack/random_aoe
-	name = "All Directions"
+	name = "Во Все Стороны"
 	button_icon = 'icons/effects/effects.dmi'
 	button_icon_state = "at_shield2"
-	desc = "Fires projectiles in all directions."
+	desc = "Выпускает снаряды во всех направлениях."
 	cooldown_time = 3 SECONDS
 	projectile_type = /obj/projectile/colossus
 	projectile_sound = 'sound/effects/magic/clockwork/invoke_general.ogg'
@@ -202,10 +202,10 @@
 	return ..()
 
 /datum/action/cooldown/mob_cooldown/projectile_attack/shotgun_blast
-	name = "Shotgun Fire"
+	name = "Дробовой Выстрел"
 	button_icon = 'icons/obj/weapons/guns/ballistic.dmi'
 	button_icon_state = "shotgun"
-	desc = "Fires projectiles in a shotgun pattern."
+	desc = "Выпускает снаряды веером по дробовиковой схеме."
 	cooldown_time = 2 SECONDS
 	projectile_type = /obj/projectile/colossus
 	projectile_sound = 'sound/effects/magic/clockwork/invoke_general.ogg'
@@ -235,8 +235,8 @@
 	return ..()
 
 /datum/action/cooldown/mob_cooldown/projectile_attack/shotgun_blast/pattern
-	name = "Alternating Shotgun Fire"
-	desc = "Fires projectiles in an alternating shotgun pattern."
+	name = "Чередующийся Дробовик"
+	desc = "Выпускает снаряды чередующимся веерным паттерном."
 	projectile_type = /obj/projectile/colossus/ice_blast
 	projectile_sound = null
 	shot_angles = list(list(-40, -20, 0, 20, 40), list(-30, -10, 10, 30))
@@ -250,17 +250,17 @@
 
 
 /datum/action/cooldown/mob_cooldown/projectile_attack/shotgun_blast/pattern/circular
-	name = "Circular Shotgun Fire"
+	name = "Круговой Дробовик"
 	shot_angles = list(list(0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330), list(-30, -15, 0, 15, 30))
 
 /datum/action/cooldown/mob_cooldown/projectile_attack/shotgun_blast/pattern/circular/complete
 	shot_angles = list(list(-180, -140, -100, -60, -20, 20, 60, 100, 140), list(-160, -120, -80, -40, 0, 40, 80, 120, 160))
 
 /datum/action/cooldown/mob_cooldown/projectile_attack/dir_shots
-	name = "Directional Shots"
+	name = "Направленные Выстрелы"
 	button_icon = 'icons/obj/weapons/guns/ballistic.dmi'
 	button_icon_state = "pistol"
-	desc = "Fires projectiles in specific directions."
+	desc = "Производит выстрелы в заданных направлениях."
 	cooldown_time = 4 SECONDS
 	projectile_type = /obj/projectile/colossus
 	projectile_sound = 'sound/effects/magic/clockwork/invoke_general.ogg'
@@ -282,8 +282,8 @@
 		shoot_projectile(firer, target, dir2angle(dir), firer)
 
 /datum/action/cooldown/mob_cooldown/projectile_attack/dir_shots/alternating
-	name = "Alternating Shots"
-	desc = "Fires projectiles in alternating directions."
+	name = "Чередующиеся Выстрелы"
+	desc = "Производит выстрелы в чередующихся направлениях."
 
 /datum/action/cooldown/mob_cooldown/projectile_attack/dir_shots/alternating/attack_sequence(mob/living/firer, atom/target)
 	fire_in_directions(firer, target, GLOB.diagonals)
@@ -302,10 +302,10 @@
 	return ..()
 
 /datum/action/cooldown/mob_cooldown/projectile_attack/kinetic_accelerator
-	name = "Fire Kinetic Accelerator"
+	name = "Выстрел Кинетического Ускорителя"
 	button_icon = 'icons/obj/weapons/guns/energy.dmi'
 	button_icon_state = "kineticgun"
-	desc = "Fires a kinetic accelerator projectile at the target."
+	desc = "Выпускает снаряд из кинетического ускорителя в цель."
 	cooldown_time = 1.5 SECONDS
 	projectile_type = /obj/projectile/kinetic/miner
 	projectile_sound = 'sound/items/weapons/kinetic_accel.ogg'
@@ -313,13 +313,13 @@
 /datum/action/cooldown/mob_cooldown/projectile_attack/kinetic_accelerator/Activate(atom/target_atom)
 	. = ..()
 	playsound(owner, projectile_sound, 200, TRUE, 2)
-	owner.visible_message(span_danger("[owner] fires the proto-kinetic accelerator!"))
+	owner.visible_message(span_danger("[owner] стреляет из прото-кинетического ускорителя!"))
 	owner.face_atom(target_atom)
 	new /obj/effect/temp_visual/dir_setting/firing_effect(owner.loc, owner.dir)
 
 /datum/action/cooldown/mob_cooldown/projectile_attack/colossus_final
-	name = "Titan's Finale"
-	desc = "A single-use ability that shoots a large amount of projectiles around you."
+	name = "Финальный Удар Титана"
+	desc = "Одноразовая способность, выпускающая множество снарядов вокруг вас."
 	cooldown_time = 2.5 SECONDS
 	projectile_type = /obj/projectile/colossus
 
@@ -331,7 +331,7 @@
 	var/mob/living/simple_animal/hostile/megafauna/colossus/colossus
 	if(istype(firer, /mob/living/simple_animal/hostile/megafauna/colossus))
 		colossus = firer
-		colossus.say("Perish.", spans = list("colossus", "yell"))
+		colossus.say("Погибните.", spans = list("colossus", "yell"))
 
 	SLEEP_CHECK_DEATH(1.5 SECONDS, firer) //gives dumbasses in melee range a slim chance to retreat
 	var/finale_counter = 10
@@ -364,10 +364,10 @@
 		SLEEP_CHECK_DEATH(1 SECONDS, firer)
 
 /datum/action/cooldown/mob_cooldown/projectile_attack/alternating_circle
-	name = "Alternating Shots"
+	name = "Чередующиеся Выстрелы"
 	button_icon = 'icons/mob/actions/actions_items.dmi'
 	button_icon_state = "sniper_zoom"
-	desc = "Fires projectiles around you in an alternating fashion."
+	desc = "Выпускает снаряды вокруг вас чередующимся образом."
 	cooldown_time = 10 SECONDS
 	projectile_type = /obj/projectile/colossus/wendigo_shockwave
 	can_move = FALSE
@@ -389,10 +389,10 @@
 	SLEEP_CHECK_DEATH(3 SECONDS, firer)
 
 /datum/action/cooldown/mob_cooldown/projectile_attack/wave
-	name = "Wave Shots"
+	name = "Волновые Выстрелы"
 	button_icon = 'icons/mob/actions/actions_items.dmi'
 	button_icon_state = "sniper_zoom"
-	desc = "Fires projectiles around you in a circular wave."
+	desc = "Выпускает снаряды волнообразно по кругу вокруг вас."
 	cooldown_time = 10 SECONDS
 	projectile_type = /obj/projectile/colossus/wendigo_shockwave/wave
 	can_move = FALSE

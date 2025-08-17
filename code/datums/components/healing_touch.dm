@@ -59,8 +59,8 @@
 	valid_biotypes = MOB_ORGANIC | MOB_MINERAL,
 	required_bodytype = BODYTYPE_ORGANIC,
 	self_targeting = HEALING_TOUCH_NOT_SELF,
-	action_text = "%SOURCE% begins healing %TARGET%",
-	complete_text = "%SOURCE% finishes healing %TARGET%",
+	action_text = "%SOURCE% начинает лечить %TARGET%",
+complete_text = "%SOURCE% заканчивает лечение %TARGET%",
 	show_health = FALSE,
 	heal_color = COLOR_HEALING_CYAN,
 	required_modifier = null,
@@ -127,30 +127,30 @@
 		return COMPONENT_CANCEL_ATTACK_CHAIN
 
 	if (DOING_INTERACTION(healer, interaction_key))
-		healer.balloon_alert(healer, "busy!")
+		healer.balloon_alert(healer, "занят!")
 		return COMPONENT_CANCEL_ATTACK_CHAIN
 
 	switch (self_targeting)
 		if (HEALING_TOUCH_NOT_SELF)
 			if (target == healer)
-				healer.balloon_alert(healer, "can't heal yourself!")
+				healer.balloon_alert(healer, "нельзя лечить себя!")
 				return COMPONENT_CANCEL_ATTACK_CHAIN
 		if (HEALING_TOUCH_SELF_ONLY)
 			if (target != healer)
-				healer.balloon_alert(healer, "can only heal yourself!")
+				healer.balloon_alert(healer, "можно лечить только себя!")
 				return COMPONENT_CANCEL_ATTACK_CHAIN
 
 	var/mob/living/living_target = target
 	if (living_target.health >= living_target.maxHealth)
-		target.balloon_alert(healer, "not hurt!")
+		target.balloon_alert(healer, "не повреждён!")
 		return COMPONENT_CANCEL_ATTACK_CHAIN
 
 	if (!has_healable_damage(living_target))
-		target.balloon_alert(healer, "can't heal that!")
+		target.balloon_alert(healer, "нельзя вылечить!")
 		return COMPONENT_CANCEL_ATTACK_CHAIN
 
 	if (living_target.stat == DEAD)
-		target.balloon_alert(healer, "they're dead!")
+		target.balloon_alert(healer, "они мертвы!")
 		return COMPONENT_CANCEL_ATTACK_CHAIN
 
 	INVOKE_ASYNC(src, PROC_REF(heal_target), healer, target)
@@ -184,7 +184,7 @@
 		healer.visible_message(span_notice("[format_string(action_text, healer, target)]"))
 
 	if (heal_time && !do_after(healer, heal_time, target = target, interaction_key = interaction_key))
-		healer.balloon_alert(healer, "interrupted!")
+		healer.balloon_alert(healer, "прервано!")
 		return
 
 	if (complete_text)
@@ -208,7 +208,7 @@
 
 	if(!show_health)
 		return
-	var/formatted_string = format_string("%TARGET% now has <b>[health_percentage(target)] health.</b>", healer, target)
+	var/formatted_string = format_string("%TARGET% теперь имеет <b>[health_percentage(target)] здоровья.</b>", healer, target)
 	to_chat(healer, span_danger(formatted_string))
 
 /// Reformats the passed string with the replacetext keys

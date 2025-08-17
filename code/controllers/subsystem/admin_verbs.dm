@@ -89,7 +89,7 @@ SUBSYSTEM_DEF(admin_verbs)
 
 /datum/controller/subsystem/admin_verbs/proc/dynamic_invoke_verb(client/admin, datum/admin_verb/verb_type, ...)
 	if(IsAdminAdvancedProcCall())
-		message_admins("PERMISSION ELEVATION: [key_name_admin(admin)] attempted to dynamically invoke admin verb '[verb_type]'.")
+		message_admins("ПОВЫШЕНИЕ ПРАВ: [key_name_admin(admin)] попытался динамически вызвать админ-команду '[verb_type]'.")
 		return
 
 	if(ismob(admin))
@@ -108,7 +108,7 @@ SUBSYSTEM_DEF(admin_verbs)
 		CRASH("Attempted to dynamically invoke admin verb '[verb_type]' that doesn't exist.")
 
 	if(!admin.holder.check_for_rights(verb_singleton.permissions))
-		to_chat(admin, span_adminnotice("You lack the permissions to do this."))
+		to_chat(admin, span_adminnotice("У вас недостаточно прав для этого действия."))
 		return
 
 	var/old_usr = usr
@@ -125,8 +125,8 @@ SUBSYSTEM_DEF(admin_verbs)
 	if(IsAdminAdvancedProcCall())
 		return
 
-	if(!isnull(admins_pending_subsytem_init)) // if the list exists we are still initializing
-		to_chat(admin, span_big(span_green("Admin Verbs are still initializing. Please wait and you will be automatically assigned your verbs when it is complete.")))
+	if(!isnull(admins_pending_subsytem_init)) // если список существует, инициализация еще продолжается
+		to_chat(admin, span_big(span_green("Админ-команды все еще инициализируются. Пожалуйста, подождите - ваши команды будут автоматически назначены по завершении.")))
 		admins_pending_subsytem_init |= list(admin.ckey)
 		return
 

@@ -95,8 +95,8 @@
 	qdel(src)
 	return ITEM_INTERACT_BLOCKING
 
-/// Give people a little hint
+/// Даём небольшую подсказку игрокам
 /datum/component/interaction_booby_trap/proc/on_examine(atom/source, mob/examiner, list/examine_list)
 	SIGNAL_HANDLER
-	var/defuse_hint = (defuse_tool) ? "Perhaps [tool_behaviour_name(defuse_tool)] could help..." : ""
-	examine_list += span_warning("There's a light flashing red inside the maintenance panel. [defuse_hint]")
+	var/defuse_hint = (defuse_tool) ? "Возможно, [tool_behaviour_name(defuse_tool)] поможет..." : ""
+	examine_list += span_warning("Внутри сервисной панели мигает красный индикатор. [defuse_hint]")

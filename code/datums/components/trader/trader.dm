@@ -194,10 +194,10 @@ Can accept both a type path, and an instance of a datum. Type path has priority.
 	product_info = products[item_to_buy]
 
 	if(!product_info[TRADER_PRODUCT_INFO_QUANTITY])
-		trader.say("[initial(item_to_buy.name)] appears to be out of stock.")
+		trader.say("Похоже, [initial(item_to_buy.name)] закончился.")
 		return
 
-	trader.say("It will cost you [product_info[TRADER_PRODUCT_INFO_PRICE]] [trader_data.currency_name] to buy \the [initial(item_to_buy.name)]. Are you sure you want to buy it?")
+	trader.say("Это будет стоить вам [product_info[TRADER_PRODUCT_INFO_PRICE]] [trader_data.currency_name] за [initial(item_to_buy.name)]. Вы уверены, что хотите купить это?")
 	var/list/npc_options = list(
 		TRADER_OPTION_YES = radial_icons_cache[TRADER_RADIAL_YES],
 		TRADER_OPTION_NO = radial_icons_cache[TRADER_RADIAL_NO],
@@ -216,7 +216,7 @@ Can accept both a type path, and an instance of a datum. Type path has priority.
 	item_to_buy = new item_to_buy(get_turf(customer))
 	customer.put_in_hands(item_to_buy)
 	playsound(trader, trader_data.sell_sound, 50, TRUE)
-	log_econ("[item_to_buy] has been sold to [customer] (typepath used for product info; [item_to_buy.type]) by [trader] for [product_info[TRADER_PRODUCT_INFO_PRICE]] cash.")
+	log_econ("[item_to_buy] был продан [customer] (использован typepath для информации о продукте; [item_to_buy.type]) через [trader] за [product_info[TRADER_PRODUCT_INFO_PRICE]] денег.")
 	product_info[TRADER_PRODUCT_INFO_QUANTITY] -= 1
 	trader.say(trader_data.return_trader_phrase(BUY_PHRASE))
 
@@ -291,7 +291,7 @@ Can accept both a type path, and an instance of a datum. Type path has priority.
 		return FALSE
 
 	trader.say(trader_data.return_trader_phrase(INTERESTED_PHRASE))
-	trader.say("You will receive [cost] [trader_data.currency_name] for the [selling].")
+	trader.say("Вы получите [cost] [trader_data.currency_name] за [selling].")
 	var/list/npc_options = list(
 		TRADER_OPTION_YES = radial_icons_cache[TRADER_RADIAL_YES],
 		TRADER_OPTION_NO = radial_icons_cache[TRADER_RADIAL_NO],
@@ -308,7 +308,7 @@ Can accept both a type path, and an instance of a datum. Type path has priority.
 
 	trader.say(trader_data.return_trader_phrase(ITEM_SELLING_ACCEPTED_PHRASE))
 	playsound(trader, trader_data.sell_sound, 50, TRUE)
-	log_econ("[selling] has been sold to [trader] (typepath used for product info; [typepath_for_product_info]) by [customer] for [cost] cash.")
+	log_econ("[selling] был продан [trader] (использован typepath для информации о продукте; [typepath_for_product_info]) через [customer] за [cost] денег.")
 	exchange_sold_items(selling, cost, typepath_for_product_info)
 	generate_cash(cost, customer)
 	return TRUE
@@ -383,20 +383,20 @@ Can accept both a type path, and an instance of a datum. Type path has priority.
 		trader.say(trader_data.return_trader_phrase(TRADER_NOT_BUYING_ANYTHING))
 		return
 
-	var/list/buy_info = list(span_green("I'm willing to buy the following:"))
+	var/list/buy_info = list(span_green("Я готов купить следующее:"))
 
 	var/list/product_info
 	for(var/obj/item/thing as anything in wanted_items)
 		product_info = wanted_items[thing]
-		var/tern_op_result = (product_info[TRADER_PRODUCT_INFO_QUANTITY] == INFINITY ? "as many as I can." : "[product_info[TRADER_PRODUCT_INFO_QUANTITY]]") //Coder friendly string concat
-		if(product_info[TRADER_PRODUCT_INFO_QUANTITY] <= 0) //Zero demand
-			buy_info += span_notice("&bull; [span_red("(DOESN'T WANT MORE)")] [initial(thing.name)] for [product_info[TRADER_PRODUCT_INFO_PRICE]] [trader_data.currency_name][product_info[TRADER_PRODUCT_INFO_PRICE_MOD_DESCRIPTION]]; willing to buy [span_red("[tern_op_result]")] more.")
+		var/tern_op_result = (product_info[TRADER_PRODUCT_INFO_QUANTITY] == INFINITY ? "столько, сколько смогу." : "[product_info[TRADER_PRODUCT_INFO_QUANTITY]]") //Удобная для разработчика конкатенация строк
+		if(product_info[TRADER_PRODUCT_INFO_QUANTITY] <= 0) //Нулевой спрос
+			buy_info += span_notice("&bull; [span_red("(НЕ НУЖНО БОЛЬШЕ)")] [initial(thing.name)] за [product_info[TRADER_PRODUCT_INFO_PRICE]] [trader_data.currency_name][product_info[TRADER_PRODUCT_INFO_PRICE_MOD_DESCRIPTION]]; готов купить [span_red("[tern_op_result]")] ещё.")
 		else
-			buy_info += span_notice("&bull; [initial(thing.name)] for [product_info[TRADER_PRODUCT_INFO_PRICE]] [trader_data.currency_name][product_info[TRADER_PRODUCT_INFO_PRICE_MOD_DESCRIPTION]]; willing to buy [span_green("[tern_op_result]")]")
+			buy_info += span_notice("&bull; [initial(thing.name)] за [product_info[TRADER_PRODUCT_INFO_PRICE]] [trader_data.currency_name][product_info[TRADER_PRODUCT_INFO_PRICE_MOD_DESCRIPTION]]; готов купить [span_green("[tern_op_result]")]")
 
 	to_chat(customer, boxed_message(buy_info.Join("\n")))
 
-///Displays to the customer what the trader is selling and how much is in stock
+///Показывает покупателю, что продает торговец и сколько есть в наличии
 /datum/component/trader/proc/trader_sells_what(mob/customer)
 	if(!can_trade(customer))
 		return
@@ -404,15 +404,15 @@ Can accept both a type path, and an instance of a datum. Type path has priority.
 	if(!length(products))
 		trader.say(trader_data.return_trader_phrase(TRADER_NOT_SELLING_ANYTHING))
 		return
-	var/list/sell_info = list(span_green("I'm currently selling the following:"))
+	var/list/sell_info = list(span_green("Сейчас я продаю следующее:"))
 	var/list/product_info
 	for(var/obj/item/thing as anything in products)
 		product_info = products[thing]
-		var/tern_op_result = (product_info[TRADER_PRODUCT_INFO_QUANTITY] == INFINITY ? "an infinite amount" : "[product_info[TRADER_PRODUCT_INFO_QUANTITY]]") //Coder friendly string concat
-		if(product_info[TRADER_PRODUCT_INFO_QUANTITY] <= 0) //Out of stock
-			sell_info += span_notice("&bull; [span_red("(OUT OF STOCK)")] [initial(thing.name)] for [product_info[TRADER_PRODUCT_INFO_PRICE]] [trader_data.currency_name]; [span_red("[tern_op_result]")] left in stock")
+		var/tern_op_result = (product_info[TRADER_PRODUCT_INFO_QUANTITY] == INFINITY ? "бесконечное количество" : "[product_info[TRADER_PRODUCT_INFO_QUANTITY]]") //Удобная для разработчика конкатенация строк
+		if(product_info[TRADER_PRODUCT_INFO_QUANTITY] <= 0) //Нет в наличии
+			sell_info += span_notice("&bull; [span_red("(НЕТ В НАЛИЧИИ)")] [initial(thing.name)] за [product_info[TRADER_PRODUCT_INFO_PRICE]] [trader_data.currency_name]; [span_red("[tern_op_result]")] осталось")
 		else
-			sell_info += span_notice("&bull; [initial(thing.name)] for [product_info[TRADER_PRODUCT_INFO_PRICE]] [trader_data.currency_name]; [span_green("[tern_op_result]")] left in stock")
+			sell_info += span_notice("&bull; [initial(thing.name)] за [product_info[TRADER_PRODUCT_INFO_PRICE]] [trader_data.currency_name]; [span_green("[tern_op_result]")] осталось")
 	to_chat(customer, boxed_message(sell_info.Join("\n")))
 
 ///Sets quantity of all products to initial(quanity); this proc is currently called during initialize
@@ -427,10 +427,10 @@ Can accept both a type path, and an instance of a datum. Type path has priority.
 /datum/component/trader/proc/can_trade(mob/customer)
 	var/mob/living/trader = parent
 	if(trader.combat_mode)
-		trader.balloon_alert(customer, "in combat!")
+		trader.balloon_alert(customer, "в бою!")
 		return FALSE
 	if(IS_DEAD_OR_INCAP(trader))
-		trader.balloon_alert(customer, "indisposed!")
+		trader.balloon_alert(customer, "не в состоянии!")
 		return FALSE
 	return TRUE
 

@@ -67,7 +67,7 @@
 		message = message,
 		spans = spans.Copy(),
 		language = language,
-		forced = "[source]'s marionette",
+		forced = "[source] марионетка",
 		saymode = saymode,
 		message_mods = list(MODE_RELAY = TRUE),
 	)

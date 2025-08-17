@@ -136,7 +136,7 @@
 	return isnull(living_pet) ? null : retrieve_command_text(living_pet, target)
 
 /datum/pet_command/proc/retrieve_command_text(atom/living_pet, atom/target)
-	return "signals [living_pet] to spring into action!"
+	return "подаёт сигнал [living_pet] к действию!"
 
 /// Target the pointed atom for actions
 /datum/pet_command/proc/look_for_target(mob/living/friend, atom/potential_target)
@@ -218,7 +218,7 @@
 	parent.ai_controller.CancelActions()
 	if(!look_for_target(friend, potential_target) || !set_command_target(parent, potential_target))
 		return FALSE
-	parent.visible_message(span_warning("[parent] follows [friend]'s gesture towards [potential_target] [pointed_reaction]!"))
+	parent.visible_message(span_warning("[parent] реагирует на жест [friend] в сторону [potential_target] [pointed_reaction]!"))
 	return TRUE
 
 

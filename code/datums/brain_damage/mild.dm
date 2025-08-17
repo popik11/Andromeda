@@ -6,12 +6,12 @@
 	abstract_type = /datum/brain_trauma/mild
 
 /datum/brain_trauma/mild/hallucinations
-	name = "Hallucinations"
-	desc = "Patient suffers constant hallucinations."
-	scan_desc = "schizophrenia"
-	gain_text = span_warning("You feel your grip on reality slipping...")
-	lose_text = span_notice("You feel more grounded.")
-	/// Whether the hallucinations we give are uncapped, ie all the wacky ones
+	name = "Галлюцинации"
+	desc = "Пациент страдает постоянными галлюцинациями."
+	scan_desc = "шизофрения"
+	gain_text = span_warning("Вы чувствуете, как теряете связь с реальностью...")
+	lose_text = span_notice("Вы чувствуете себя более устойчиво.")
+	/// Дают ли галлюцинации неограниченные эффекты (все самые странные)
 	var/uncapped = FALSE
 
 /datum/brain_trauma/mild/hallucinations/on_life(seconds_per_tick, times_fired)
@@ -32,11 +32,11 @@
 	return ..()
 
 /datum/brain_trauma/mild/stuttering
-	name = "Stuttering"
-	desc = "Patient can't speak properly."
-	scan_desc = "reduced mouth coordination"
-	gain_text = span_warning("Speaking clearly is getting harder.")
-	lose_text = span_notice("You feel in control of your speech.")
+	name = "Заикание"
+	desc = "Пациент не может говорить нормально."
+	scan_desc = "сниженная координация речи"
+	gain_text = span_warning("Говорить четко становится все труднее.")
+	lose_text = span_notice("Вы чувствуете контроль над своей речью.")
 
 /datum/brain_trauma/mild/stuttering/on_life(seconds_per_tick, times_fired)
 	owner.adjust_stutter_up_to(5 SECONDS * seconds_per_tick, 50 SECONDS)
@@ -46,11 +46,11 @@
 	return ..()
 
 /datum/brain_trauma/mild/dumbness
-	name = "Dumbness"
-	desc = "Patient has reduced brain activity, making them less intelligent."
-	scan_desc = "reduced brain activity"
-	gain_text = span_warning("You feel dumber.")
-	lose_text = span_notice("You feel smart again.")
+	name = "Слабоумие"
+	desc = "У пациента снижена мозговая активность, что делает его менее сообразительным."
+	scan_desc = "сниженная мозговая активность"
+	gain_text = span_warning("Вы чувствуете себя глупее.")
+	lose_text = span_notice("Вы снова чувствуете себя умным.")
 
 /datum/brain_trauma/mild/dumbness/on_gain()
 	ADD_TRAIT(owner, TRAIT_DUMB, TRAUMA_TRAIT)
@@ -71,11 +71,11 @@
 	return ..()
 
 /datum/brain_trauma/mild/speech_impediment
-	name = "Speech Impediment"
-	desc = "Patient is unable to form coherent sentences."
-	scan_desc = "communication disorder"
-	gain_text = span_danger("You can't seem to form any coherent thoughts!")
-	lose_text = span_danger("Your mind feels more clear.")
+	name = "Нарушение речи"
+	desc = "Пациент не может формировать связные предложения."
+	scan_desc = "расстройство коммуникации"
+	gain_text = span_danger("Вы не можете сформировать ни одной связной мысли!")
+	lose_text = span_danger("Ваш разум проясняется.")
 
 /datum/brain_trauma/mild/speech_impediment/on_gain()
 	ADD_TRAIT(owner, TRAIT_UNINTELLIGIBLE_SPEECH, TRAUMA_TRAIT)
@@ -86,11 +86,11 @@
 	..()
 
 /datum/brain_trauma/mild/concussion
-	name = "Concussion"
-	desc = "Patient's brain is concussed."
-	scan_desc = "concussion"
-	gain_text = span_warning("Your head hurts!")
-	lose_text = span_notice("The pressure inside your head starts fading.")
+	name = "Сотрясение мозга"
+	desc = "У пациента сотрясение мозга."
+	scan_desc = "сотрясение"
+	gain_text = span_warning("У вас болит голова!")
+	lose_text = span_notice("Давление в голове начинает ослабевать.")
 
 /datum/brain_trauma/mild/concussion/on_life(seconds_per_tick, times_fired)
 	if(SPT_PROB(2.5, seconds_per_tick))
@@ -105,20 +105,20 @@
 			if(6 to 9)
 				owner.adjust_slurring(1 MINUTES)
 			if(10)
-				to_chat(owner, span_notice("You forget for a moment what you were doing."))
+				to_chat(owner, span_notice("Вы на мгновение забываете, что делали."))
 				owner.Stun(20)
 			if(11)
-				to_chat(owner, span_warning("You faint."))
+				to_chat(owner, span_warning("Вы теряете сознание."))
 				owner.Unconscious(80)
 
 	..()
 
 /datum/brain_trauma/mild/healthy
-	name = "Anosognosia"
-	desc = "Patient always feels healthy, regardless of their condition."
-	scan_desc = "self-awareness deficit"
-	gain_text = span_notice("You feel great!")
-	lose_text = span_warning("You no longer feel perfectly healthy.")
+	name = "Анозогнозия"
+	desc = "Пациент всегда чувствует себя здоровым, независимо от состояния."
+	scan_desc = "дефицит самосознания"
+	gain_text = span_notice("Вы чувствуете себя прекрасно!")
+	lose_text = span_warning("Вы больше не чувствуете себя абсолютно здоровым.")
 
 /datum/brain_trauma/mild/healthy/on_gain()
 	owner.apply_status_effect(/datum/status_effect/grouped/screwy_hud/fake_healthy, type)
@@ -132,18 +132,18 @@
 	return ..()
 
 /datum/brain_trauma/mild/muscle_weakness
-	name = "Muscle Weakness"
-	desc = "Patient experiences occasional bouts of muscle weakness."
-	scan_desc = "weak motor nerve signal"
-	gain_text = span_warning("Your muscles feel oddly faint.")
-	lose_text = span_notice("You feel in control of your muscles again.")
+	name = "Мышечная слабость"
+	desc = "Пациент испытывает периодические приступы мышечной слабости."
+	scan_desc = "ослабление двигательных нервных сигналов"
+	gain_text = span_warning("Ваши мышцы странно ослабли.")
+	lose_text = span_notice("Вы снова чувствуете контроль над своими мышцами.")
 
 /datum/brain_trauma/mild/muscle_weakness/on_life(seconds_per_tick, times_fired)
 	var/fall_chance = 1
 	if(owner.move_intent == MOVE_INTENT_RUN)
 		fall_chance += 2
 	if(SPT_PROB(0.5 * fall_chance, seconds_per_tick) && owner.body_position == STANDING_UP)
-		to_chat(owner, span_warning("Your leg gives out!"))
+		to_chat(owner, span_warning("Ваша нога подкашивается!"))
 		owner.Paralyze(35)
 
 	else if(owner.get_active_held_item())
@@ -151,19 +151,19 @@
 		var/obj/item/I = owner.get_active_held_item()
 		drop_chance += I.w_class
 		if(SPT_PROB(0.5 * drop_chance, seconds_per_tick) && owner.dropItemToGround(I))
-			to_chat(owner, span_warning("You drop [I]!"))
+			to_chat(owner, span_warning("Вы роняете [I]!"))
 
 	else if(SPT_PROB(1.5, seconds_per_tick))
-		to_chat(owner, span_warning("You feel a sudden weakness in your muscles!"))
+		to_chat(owner, span_warning("Вы чувствуете внезапную слабость в мышцах!"))
 		owner.adjustStaminaLoss(50)
 	..()
 
 /datum/brain_trauma/mild/muscle_spasms
-	name = "Muscle Spasms"
-	desc = "Patient has occasional muscle spasms, causing them to move unintentionally."
-	scan_desc = "nervous fits"
-	gain_text = span_warning("Your muscles feel oddly faint.")
-	lose_text = span_notice("You feel in control of your muscles again.")
+	name = "Мышечные спазмы"
+	desc = "У пациента периодически возникают мышечные спазмы, вызывающие непроизвольные движения."
+	scan_desc = "нервные приступы"
+	gain_text = span_warning("Ваши мышцы странно дергаются.")
+	lose_text = span_notice("Вы снова чувствуете контроль над своими мышцами.")
 
 /datum/brain_trauma/mild/muscle_spasms/on_gain()
 	owner.apply_status_effect(/datum/status_effect/spasms)
@@ -174,16 +174,16 @@
 	..()
 
 /datum/brain_trauma/mild/nervous_cough
-	name = "Nervous Cough"
-	desc = "Patient feels a constant need to cough."
-	scan_desc = "nervous cough"
-	gain_text = span_warning("Your throat itches incessantly...")
-	lose_text = span_notice("Your throat stops itching.")
+	name = "Нервозный кашель"
+	desc = "Пациент испытывает постоянную потребность кашлять."
+	scan_desc = "нервозный кашель"
+	gain_text = span_warning("Ваше горло непрерывно першит...")
+	lose_text = span_notice("Першение в горле прекращается.")
 
 /datum/brain_trauma/mild/nervous_cough/on_life(seconds_per_tick, times_fired)
 	if(SPT_PROB(6, seconds_per_tick) && !HAS_TRAIT(owner, TRAIT_SOOTHED_THROAT))
 		if(prob(5))
-			to_chat(owner, span_warning("[pick("You have a coughing fit!", "You can't stop coughing!")]"))
+			to_chat(owner, span_warning("[pick("У вас приступ кашля!", "Вы не можете перестать кашлять!")]"))
 			owner.Immobilize(20)
 			owner.emote("cough")
 			addtimer(CALLBACK(owner, TYPE_PROC_REF(/mob/, emote), "cough"), 0.6 SECONDS)
@@ -192,11 +192,11 @@
 	..()
 
 /datum/brain_trauma/mild/expressive_aphasia
-	name = "Expressive Aphasia"
-	desc = "Patient is affected by partial loss of speech leading to a reduced vocabulary."
-	scan_desc = "inability to form complex sentences"
-	gain_text = span_warning("You lose your grasp on complex words.")
-	lose_text = span_notice("You feel your vocabulary returning to normal again.")
+	name = "Экспрессивная афазия"
+	desc = "У пациента наблюдается частичная потеря речи, приводящая к сокращению словарного запаса."
+	scan_desc = "неспособность формировать сложные предложения"
+	gain_text = span_warning("Вы теряете способность использовать сложные слова.")
+	lose_text = span_notice("Вы чувствуете, как ваш словарный запас возвращается к норме.")
 
 /datum/brain_trauma/mild/expressive_aphasia/handle_speech(datum/source, list/speech_args)
 	var/message = speech_args[SPEECH_MESSAGE]
@@ -221,7 +221,7 @@
 				new_message += word + suffix
 			else
 				if(prob(30) && message_split.len > 2)
-					new_message += pick("uh","erm")
+					new_message += pick("умх","ех","аэ","ааа")
 					break
 				else
 					var/list/charlist = text2charlist(word)
@@ -234,11 +234,11 @@
 	speech_args[SPEECH_MESSAGE] = trim(message)
 
 /datum/brain_trauma/mild/mind_echo
-	name = "Mind Echo"
-	desc = "Patient's language neurons do not terminate properly, causing previous speech patterns to occasionally resurface spontaneously."
-	scan_desc = "looping neural pattern"
-	gain_text = span_warning("You feel a faint echo of your thoughts...")
-	lose_text = span_notice("The faint echo fades away.")
+	name = "Эхо сознания"
+	desc = "Языковые нейроны пациента работают некорректно, вызывая спонтанное повторение предыдущих речевых паттернов."
+	scan_desc = "зацикленный нейронный паттерн"
+	gain_text = span_warning("Вы чувствуете слабое эхо своих мыслей...")
+	lose_text = span_notice("Слабое эхо исчезает.")
 	var/list/hear_dejavu = list()
 	var/list/speak_dejavu = list()
 
@@ -249,7 +249,7 @@
 	if(hear_dejavu.len >= 5)
 		if(prob(25))
 			var/deja_vu = pick_n_take(hear_dejavu)
-			var/static/regex/quoted_spoken_message = regex("\".+\"", "gi")
+			var/static/regex/quoted_spoken_message = regex("\".+\"", "ги")
 			hearing_args[HEARING_RAW_MESSAGE] = quoted_spoken_message.Replace(hearing_args[HEARING_RAW_MESSAGE], "\"[deja_vu]\"") //Quotes included to avoid cases where someone says part of their name
 			return
 	if(hear_dejavu.len >= 15)
@@ -273,11 +273,11 @@
 		speak_dejavu += speech_args[SPEECH_MESSAGE]
 
 /datum/brain_trauma/mild/color_blindness
-	name = "Achromatopsia"
-	desc = "Patient's occipital lobe is unable to recognize and interpret color, rendering the patient completely colorblind."
-	scan_desc = "colorblindness"
-	gain_text = span_warning("The world around you seems to lose its color.")
-	lose_text = span_notice("The world feels bright and colorful again.")
+	name = "Ахроматопсия"
+	desc = "Затылочная доля пациента неспособна распознавать и интерпретировать цвета, делая пациента полностью дальтоником."
+	scan_desc = "дальтонизм"
+	gain_text = span_warning("Мир вокруг вас теряет цвета.")
+	lose_text = span_notice("Мир снова кажется ярким и красочным.")
 
 /datum/brain_trauma/mild/color_blindness/on_gain()
 	owner.add_client_colour(/datum/client_colour/monochrome, TRAUMA_TRAIT)
@@ -288,11 +288,11 @@
 	return ..()
 
 /datum/brain_trauma/mild/possessive
-	name = "Possessive"
-	desc = "Patient is extremely possessive of their belongings."
-	scan_desc = "possessiveness"
-	gain_text = span_warning("You start to worry about your belongings.")
-	lose_text = span_notice("You worry less about your belongings.")
+	name = "Собственничество"
+	desc = "Пациент проявляет крайнюю степень собственничества по отношению к своим вещам."
+	scan_desc = "собственническое поведение"
+	gain_text = span_warning("Вы начинаете беспокоиться о своих вещах.")
+	lose_text = span_notice("Вы меньше беспокоитесь о своих вещах.")
 
 /datum/brain_trauma/mild/possessive/on_lose(silent)
 	. = ..()
@@ -309,14 +309,14 @@
 
 	ADD_TRAIT(my_thing, TRAIT_NODROP, TRAUMA_TRAIT)
 	RegisterSignals(my_thing, list(COMSIG_ITEM_DROPPED, COMSIG_MOVABLE_MOVED), PROC_REF(clear_trait))
-	to_chat(owner, span_warning("You feel a need to keep [my_thing] close..."))
+	to_chat(owner, span_warning("Вы чувствуете потребность держать [my_thing] рядом..."))
 	addtimer(CALLBACK(src, PROC_REF(relax), my_thing), rand(30 SECONDS, 3 MINUTES), TIMER_DELETE_ME)
 
 /datum/brain_trauma/mild/possessive/proc/relax(obj/item/my_thing)
 	if(QDELETED(my_thing))
 		return
 	if(HAS_TRAIT_FROM_ONLY(my_thing, TRAIT_NODROP, TRAUMA_TRAIT)) // in case something else adds nodrop, somehow?
-		to_chat(owner, span_notice("You feel more comfortable letting go of [my_thing]."))
+		to_chat(owner, span_notice("Вам стало комфортнее отпустить [my_thing]."))
 	clear_trait(my_thing)
 
 /datum/brain_trauma/mild/possessive/proc/clear_trait(obj/item/my_thing, ...)

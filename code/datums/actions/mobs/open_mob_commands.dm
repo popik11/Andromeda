@@ -1,12 +1,12 @@
 /datum/action/cooldown/open_mob_commands
-	name = "Command Star Gazer"
-	desc = "Open the command menu for your star gazer."
+	name = "Команды Звездочёта"
+	desc = "Открывает меню команд для вашего звездочёта."
 	background_icon_state = "bg_heretic"
 	overlay_icon_state = "bg_heretic_border"
 	button_icon = 'icons/mob/actions/actions_ecult.dmi'
 	button_icon_state = "stargazer_menu"
 	check_flags = AB_CHECK_CONSCIOUS | AB_CHECK_INCAPACITATED | AB_CHECK_PHASED
-	/// Weakref for storing our stargazer
+	/// Ссылка на нашего звездочёта
 	var/datum/weakref/our_mob
 
 /datum/action/cooldown/open_mob_commands/Grant(mob/granted_to, mob/living/basic/heretic_summon/star_gazer/our_mob_input)

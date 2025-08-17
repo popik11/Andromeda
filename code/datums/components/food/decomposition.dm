@@ -113,12 +113,12 @@
 
 /datum/component/decomposition/proc/decompose()
 	decomp_timerid = null
-	var/obj/decomp = parent //Lets us spawn things at decomp
+	var/obj/decomp = parent //Позволяет спавнить вещи при разложении
 	if(produce_ants)
 		new /obj/effect/decal/cleanable/ants(decomp.loc)
 	if(decomp_result)
 		new decomp_result(decomp.loc)
-	decomp.visible_message(span_warning("[decomp] gets overtaken by mold[produce_ants ? " and ants":""]! Gross!"))
+	decomp.visible_message(span_warning("[decomp] покрывается плесенью[produce_ants ? " и муравьями":""]! Фу!"))
 	qdel(decomp)
 	return
 
@@ -126,12 +126,12 @@
 	SIGNAL_HANDLER
 	var/time_d = get_time()
 	switch(time_d / original_time)
-		if(0.5 to 0.75) // 25% rotten
-			examine_list += span_notice("[parent] looks kinda stale.")
-		if(0.25 to 0.5) // 50% rotten
-			examine_list += span_notice("[parent] is starting to look pretty gross.")
-		if(0 to 0.25) // 75% rotten
-			examine_list += span_danger("[parent] barely looks edible.")
+		if(0.5 to 0.75) // 25% разложения
+			examine_list += span_notice("[parent] выглядит немного несвежим.")
+		if(0.25 to 0.5) // 50% разложения
+			examine_list += span_notice("[parent] начинает выглядеть довольно противно.")
+		if(0 to 0.25) // 75% разложения
+			examine_list += span_danger("[parent] уже не выглядит съедобным.")
 
 #undef DECOMPOSITION_TIME
 #undef DECOMPOSITION_TIME_GROSS

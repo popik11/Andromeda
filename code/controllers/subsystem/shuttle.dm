@@ -171,13 +171,13 @@ SUBSYSTEM_DEF(shuttle)
 		//Adds access requirements to the end of each description.
 		if(pack.access && pack.access_view)
 			if(pack.access == pack.access_view)
-				pack.desc += " Requires [SSid_access.get_access_desc(pack.access)] access to open or purchase."
+				pack.desc += " Требуется доступ [SSid_access.get_access_desc(pack.access)] для открытия или покупки."
 			else
-				pack.desc += " Requires [SSid_access.get_access_desc(pack.access)] access to open, or [SSid_access.get_access_desc(pack.access_view)] access to purchase."
+				pack.desc += " Требуется доступ [SSid_access.get_access_desc(pack.access)] для открытия или [SSid_access.get_access_desc(pack.access_view)] для покупки."
 		else if(pack.access)
-			pack.desc += " Requires [SSid_access.get_access_desc(pack.access)] access to open."
+			pack.desc += " Требуется доступ [SSid_access.get_access_desc(pack.access)] для открытия."
 		else if(pack.access_view)
-			pack.desc += " Requires [SSid_access.get_access_desc(pack.access_view)] access to purchase."
+			pack.desc += " Требуется доступ [SSid_access.get_access_desc(pack.access_view)] для покупки."
 
 		supply_packs[pack.id] = pack
 
@@ -266,15 +266,15 @@ SUBSYSTEM_DEF(shuttle)
 		return //no players no autoevac
 
 	if(alive / total <= threshold)
-		var/msg = "Automatically dispatching emergency shuttle due to crew death."
+		var/msg = "Автоматический вызов аварийного шаттла в связи с гибелью экипажа."
 		message_admins(msg)
-		log_shuttle("[msg] Alive: [alive], Roundstart: [total], Threshold: [threshold]")
+		log_shuttle("[msg] Выжило: [alive], В начале раунда: [total], Порог: [threshold]")
 		emergency_no_recall = TRUE
 		priority_announce(
-			text = "Catastrophic casualties detected: crisis shuttle protocols activated - jamming recall signals across all frequencies.",
-			title = "Emergency Shuttle Dispatched",
+			text = "Обнаружены катастрофические потери: активированы протоколы аварийного шаттла - блокируем сигналы отзыва на всех частотах.",
+			title = "Аварийный шаттл отправлен",
 			sound = ANNOUNCER_SHUTTLECALLED,
-			sender_override = "Emergency Shuttle Uplink Alert",
+			sender_override = "Диспетчерская Флота",
 			color_override = "orange",
 		)
 		if(EMERGENCY_IDLE_OR_RECALLED || emergency.timeLeft(1) > emergency_call_time * ALERT_COEFF_AUTOEVAC_CRITICAL)
@@ -282,13 +282,13 @@ SUBSYSTEM_DEF(shuttle)
 
 /datum/controller/subsystem/shuttle/proc/block_recall(lockout_timer)
 	if(isnull(lockout_timer))
-		CRASH("Emergency shuttle block was called, but missing a value for the lockout duration")
+		CRASH("Была вызвана блокировка аварийного шаттла, но отсутствует значение длительности блокировки")
 	if(admin_emergency_no_recall)
 		priority_announce(
-			text = "Emergency shuttle uplink interference detected, shuttle call disabled while the system reinitializes. Estimated restore in [DisplayTimeText(lockout_timer, round_seconds_to = 60)].",
-			title = "Uplink Interference",
+			text = "Обнаружены помехи в канале связи аварийного шаттла, вызов шаттла отключен во время переинициализации системы. Примерное время восстановления: [DisplayTimeText(lockout_timer, round_seconds_to = 60)].",
+			title = "Помехи в канале связи",
 			sound = 'sound/announcer/announcement/announce_dig.ogg',
-			sender_override = "Emergency Shuttle Uplink Alert",
+			sender_override = "Диспетчерская Флота",
 			color_override = "grey",
 		)
 		addtimer(CALLBACK(src, PROC_REF(unblock_recall)), lockout_timer)
@@ -299,10 +299,10 @@ SUBSYSTEM_DEF(shuttle)
 /datum/controller/subsystem/shuttle/proc/unblock_recall()
 	if(admin_emergency_no_recall)
 		priority_announce(
-			text= "Emergency shuttle uplink services are now back online.",
-			title = "Uplink Restored",
+			text= "Связь с аварийным шаттлом восстановлена.",
+			title = "Восстановление соединения",
 			sound = 'sound/announcer/announcement/announce_dig.ogg',
-			sender_override = "Emergency Shuttle Uplink Alert",
+			sender_override = "Диспетчерская Флота",
 			color_override = "green",
 		)
 		return
@@ -312,34 +312,34 @@ SUBSYSTEM_DEF(shuttle)
 	for(var/obj/docking_port/mobile/M in mobile_docking_ports)
 		if(M.shuttle_id == id)
 			return M
-	WARNING("couldn't find shuttle with id: [id]")
+	WARNING("Не удалось найти шаттл с идентификатором: [id]")
 
 /datum/controller/subsystem/shuttle/proc/getDock(id)
 	for(var/obj/docking_port/stationary/S in stationary_docking_ports)
 		if(S.shuttle_id == id)
 			return S
-	WARNING("couldn't find dock with id: [id]")
+	WARNING("Не удалось найти док с идентификатором: [id]")
 
 /// Check if we can call the evac shuttle.
 /// Returns TRUE if we can. Otherwise, returns a string detailing the problem.
 /datum/controller/subsystem/shuttle/proc/canEvac()
 	var/shuttle_refuel_delay = CONFIG_GET(number/shuttle_refuel_delay)
 	if(world.time - SSticker.round_start_time < shuttle_refuel_delay)
-		return "The emergency shuttle is refueling. Please wait [DisplayTimeText(shuttle_refuel_delay - (world.time - SSticker.round_start_time))] before attempting to call."
+		return "Аварийный шаттл заправляется. Пожалуйста, подождите [DisplayTimeText(shuttle_refuel_delay - (world.time - SSticker.round_start_time))] перед вызовом."
 
 	switch(emergency.mode)
 		if(SHUTTLE_RECALL)
-			return "The emergency shuttle may not be called while returning to CentCom."
+			return "Аварийный шаттл не может быть вызван во время возвращения на ЦентКом."
 		if(SHUTTLE_CALL)
-			return "The emergency shuttle is already on its way."
+			return "Аварийный шаттл уже в пути."
 		if(SHUTTLE_DOCKED)
-			return "The emergency shuttle is already here."
+			return "Аварийный шаттл уже прибыл."
 		if(SHUTTLE_IGNITING)
-			return "The emergency shuttle is firing its engines to leave."
+			return "Аварийный шаттл запускает двигатели для отбытия."
 		if(SHUTTLE_ESCAPE)
-			return "The emergency shuttle is moving away to a safe distance."
+			return "Аварийный шаттл отходит на безопасное расстояние."
 		if(SHUTTLE_STRANDED)
-			return "The emergency shuttle has been disabled by CentCom."
+			return "Аварийный шаттл был отключен ЦентКомом."
 
 	return TRUE
 
@@ -379,19 +379,19 @@ SUBSYSTEM_DEF(shuttle)
 		return
 
 	if(length(trim(call_reason)) < CALL_SHUTTLE_REASON_LENGTH && SSsecurity_level.get_current_level_as_number() > SEC_LEVEL_GREEN)
-		to_chat(user, span_alert("You must provide a reason."))
+		to_chat(user, span_alert("Вы должны указать причину."))
 		return
 
 	var/area/signal_origin = get_area(user)
 	call_evac_shuttle(call_reason, signal_origin)
 
-	log_shuttle("[key_name(user)] has called the emergency shuttle.")
-	deadchat_broadcast(" has called the shuttle at [span_name("[signal_origin.name]")].", span_name("[user.real_name]"), user, message_type=DEADCHAT_ANNOUNCEMENT)
+	log_shuttle("[key_name(user)] вызвал аварийный шаттл.")
+	deadchat_broadcast(" вызвал шаттл в локации [span_name("[signal_origin.name]")].", span_name("[user.real_name]"), user, message_type=DEADCHAT_ANNOUNCEMENT)
 	if(call_reason)
 		SSblackbox.record_feedback("text", "shuttle_reason", 1, "[call_reason]")
-		log_shuttle("Shuttle call reason: [call_reason]")
+		log_shuttle("Причина вызова шаттла: [call_reason]")
 		SSticker.emergency_reason = call_reason
-	message_admins("[ADMIN_LOOKUPFLW(user)] has called the shuttle. (<A href='byond://?_src_=holder;[HrefToken()];trigger_centcom_recall=1'>TRIGGER CENTCOM RECALL</A>)")
+	message_admins("[ADMIN_LOOKUPFLW(user)] вызвал шаттл. (<A href='byond://?_src_=holder;[HrefToken()];trigger_centcom_recall=1'>ОТОЗВАТЬ ШАТТЛ</A>)")
 
 /// Call the emergency shuttle.
 /// If you are doing this on behalf of a player, use requestEvac instead.
@@ -402,7 +402,7 @@ SUBSYSTEM_DEF(shuttle)
 
 	call_reason = trim(html_encode(call_reason))
 
-	var/emergency_reason = "\n\nNature of emergency:\n[call_reason]"
+	var/emergency_reason = "\n\nХарактер чрезвычайной ситуации:\n[call_reason]"
 
 	emergency.request(
 		signal_origin = signal_origin,
@@ -424,16 +424,16 @@ SUBSYSTEM_DEF(shuttle)
 
 	if(!admiral_message)
 		admiral_message = pick(GLOB.admiral_messages)
-	var/intercepttext = "<font size = 3><b>Nanotrasen Update</b>: Request For Shuttle.</font><hr>\
-						To whom it may concern:<br><br>\
-						We have taken note of the situation upon [station_name()] and have come to the \
-						conclusion that it does not warrant the abandonment of the station.<br>\
-						If you do not agree with our opinion we suggest that you open a direct \
-						line with us and explain the nature of your crisis.<br><br>\
-						<i>This message has been automatically generated based upon readings from long \
-						range diagnostic tools. To assure the quality of your request every finalized report \
-						is reviewed by an on-call rear admiral.<br>\
-						<b>Rear Admiral's Notes:</b> \
+	var/intercepttext = "<font size = 3><b>Обновление NanoTrasen</b>: Запрос на отправку шаттла.</font><hr>\
+						Кому это может быть адресовано:<br><br>\
+						Мы проанализировали ситуацию на [station_name()] и пришли к \
+						выводу, что она не требует эвакуации станции.<br>\
+						Если вы не согласны с нашей оценкой, мы предлагаем вам установить \
+						прямую связь с нами и объяснить характер кризиса.<br><br>\
+						<i>Это сообщение было автоматически сгенерировано на основе данных \
+						дистанционной диагностики. Для обеспечения качества вашего запроса каждый окончательный отчет \
+						проверяется дежурным контр-адмиралом.<br>\
+						<b>Заметки контр-адмирала:</b> \
 						[admiral_message]"
 	print_command_report(intercepttext, announce = TRUE)
 
@@ -447,9 +447,9 @@ SUBSYSTEM_DEF(shuttle)
 /datum/controller/subsystem/shuttle/proc/cancelEvac(mob/user)
 	if(canRecall())
 		emergency.cancel(get_area(user))
-		log_shuttle("[key_name(user)] has recalled the shuttle.")
-		message_admins("[ADMIN_LOOKUPFLW(user)] has recalled the shuttle.")
-		deadchat_broadcast(" has recalled the shuttle from [span_name("[get_area_name(user, TRUE)]")].", span_name("[user.real_name]"), user, message_type=DEADCHAT_ANNOUNCEMENT)
+		log_shuttle("[key_name(user)] отозвал шаттл.")
+		message_admins("[ADMIN_LOOKUPFLW(user)] отозвал шаттл.")
+		deadchat_broadcast(" отозвал шаттл из [span_name("[get_area_name(user, TRUE)]")].", span_name("[user.real_name]"), user, message_type=DEADCHAT_ANNOUNCEMENT)
 		return 1
 
 /datum/controller/subsystem/shuttle/proc/canRecall()
@@ -494,8 +494,8 @@ SUBSYSTEM_DEF(shuttle)
 	if(callShuttle)
 		if(EMERGENCY_IDLE_OR_RECALLED)
 			emergency.request(null, set_coefficient = ALERT_COEFF_AUTOEVAC_NORMAL)
-			log_shuttle("There is no means of calling the emergency shuttle anymore. Shuttle automatically called.")
-			message_admins("All the communications consoles were destroyed and all AIs are inactive. Shuttle called.")
+			log_shuttle("Средства вызова аварийного шаттла больше недоступны. Шаттл вызван автоматически.")
+			message_admins("Все коммуникационные консоли уничтожены и все ИИ неактивны. Шаттл вызван.")
 
 /datum/controller/subsystem/shuttle/proc/registerHostileEnvironment(datum/bad)
 	hostile_environments[bad] = TRUE
@@ -540,20 +540,20 @@ SUBSYSTEM_DEF(shuttle)
 		emergency.timer = null
 		emergency.sound_played = FALSE
 		priority_announce(
-			text = "Departure has been postponed indefinitely pending conflict resolution.",
-			title = "Hostile Environment Detected",
+			text = "Отправление отложено на неопределенный срок до разрешения конфликта.",
+			title = "Обнаружена враждебная среда",
 			sound = 'sound/announcer/notice/notice1.ogg',
-			sender_override = "Emergency Shuttle Uplink Alert",
+			sender_override = "Диспетчерская Флота",
 			color_override = "grey",
 		)
 	if(!emergency_no_escape && (emergency.mode == SHUTTLE_STRANDED || emergency.mode == SHUTTLE_DOCKED))
 		emergency.mode = SHUTTLE_DOCKED
 		emergency.setTimer(emergency_dock_time)
 		priority_announce(
-			text = "You have [DisplayTimeText(emergency_dock_time)] to board the emergency shuttle.",
-			title = "Hostile Environment Resolved",
+			text = "У вас есть [DisplayTimeText(emergency_dock_time)] для посадки на аварийный шаттл.",
+			title = "Обнаружена враждебная среда",
 			sound = 'sound/announcer/announcement/announce_dig.ogg',
-			sender_override = "Emergency Shuttle Uplink Alert",
+			sender_override = "Диспетчерская Флота",
 			color_override = "green",
 		)
 
@@ -598,7 +598,7 @@ SUBSYSTEM_DEF(shuttle)
 
 /datum/controller/subsystem/shuttle/proc/request_transit_dock(obj/docking_port/mobile/M)
 	if(!istype(M))
-		CRASH("[M] is not a mobile docking port")
+		CRASH("[M] не является мобильным стыковочным портом")
 
 	if(M.assigned_transit)
 		return
@@ -695,7 +695,7 @@ SUBSYSTEM_DEF(shuttle)
 
 	var/obj/docking_port/stationary/transit/new_transit_dock = new(midpoint)
 	new_transit_dock.reserved_area = proposal
-	new_transit_dock.name = "Transit for [M.shuttle_id]/[M.name]"
+	new_transit_dock.name = "Транзит для [M.shuttle_id]/[M.name]"
 	new_transit_dock.owner = M
 	new_transit_dock.assigned_area = new_area
 
@@ -955,13 +955,13 @@ SUBSYSTEM_DEF(shuttle)
 				found++
 				if(found > 1)
 					qdel(port, force=TRUE)
-					log_mapping("Shuttle Template [loading_template.mappath] has multiple mobile docking ports.")
+					log_mapping("Шаблон шаттла [loading_template.mappath] содержит несколько мобильных стыковочных портов.")
 				else
 					preview_shuttle = port
 			if(istype(port, /obj/docking_port/stationary))
-				log_mapping("Shuttle Template [loading_template.mappath] has a stationary docking port.")
+				log_mapping("Шаблон шаттла [loading_template.mappath] содержит стационарный стыковочный порт.")
 	if(!found)
-		var/msg = "load_template(): Shuttle Template [loading_template.mappath] has no mobile docking port. Aborting import."
+		var/msg = "load_template(): Шаблон шаттла [loading_template.mappath] не содержит мобильного стыковочного порта. Прерывание загрузки."
 		for(var/affected_turfs in affected)
 			var/turf/T0 = affected_turfs
 			T0.empty()
@@ -1062,7 +1062,7 @@ SUBSYSTEM_DEF(shuttle)
 
 	var/mob/user = usr
 
-	// Preload some common parameters
+	// Предзагрузка общих параметров
 	var/shuttle_id = params["shuttle_id"]
 	var/datum/map_template/shuttle/S = SSmapping.shuttle_templates[shuttle_id]
 
@@ -1095,8 +1095,8 @@ SUBSYSTEM_DEF(shuttle)
 				if(M.shuttle_id == params["id"] && M.timer && M.timeLeft(1) >= 50)
 					M.setTimer(50)
 					. = TRUE
-					message_admins("[key_name_admin(usr)] fast travelled [M]")
-					log_admin("[key_name(usr)] fast travelled [M]")
+					message_admins("[key_name_admin(usr)] ускорил перемещение [M]")
+					log_admin("[key_name(usr)] ускорил перемещение [M]")
 					SSblackbox.record_feedback("text", "shuttle_manipulator", 1, "[M.name]")
 					break
 
@@ -1104,12 +1104,12 @@ SUBSYSTEM_DEF(shuttle)
 			if(S && !shuttle_loading)
 				. = TRUE
 				shuttle_loading = TRUE
-				// If successful, returns the mobile docking port
+				// При успехе возвращает мобильный стыковочный порт
 				var/obj/docking_port/mobile/mdp = action_load(S)
 				if(mdp)
 					user.forceMove(get_turf(mdp))
-					message_admins("[key_name_admin(usr)] loaded [mdp] with the shuttle manipulator.")
-					log_admin("[key_name(usr)] loaded [mdp] with the shuttle manipulator.</span>")
+					message_admins("[key_name_admin(usr)] загрузил [mdp] через манипулятор шаттлов.")
+					log_admin("[key_name(usr)] загрузил [mdp] через манипулятор шаттлов.</span>")
 					SSblackbox.record_feedback("text", "shuttle_manipulator", 1, "[mdp.name]")
 				shuttle_loading = FALSE
 
@@ -1127,24 +1127,21 @@ SUBSYSTEM_DEF(shuttle)
 
 		if("replace")
 			if(existing_shuttle == backup_shuttle)
-				// TODO make the load button disabled
-				WARNING("The shuttle that the selected shuttle will replace \
-					is the backup shuttle. Backup shuttle is required to be \
-					intact for round sanity.")
+				WARNING("Шаттл, который будет заменен выбранным шаблоном, является резервным шаттлом. Резервный шаттл должен оставаться нетронутым для корректности раунда.")
 			else if(S && !shuttle_loading)
 				. = TRUE
 				shuttle_loading = TRUE
-				// If successful, returns the mobile docking port
+				// При успехе возвращает мобильный стыковочный порт
 				var/obj/docking_port/mobile/mdp = action_load(S, replace = TRUE)
 				if(mdp)
 					user.forceMove(get_turf(mdp))
-					message_admins("[key_name_admin(usr)] load/replaced [mdp] with the shuttle manipulator.")
-					log_admin("[key_name(usr)] load/replaced [mdp] with the shuttle manipulator.</span>")
+					message_admins("[key_name_admin(usr)] загрузил/заменил [mdp] через манипулятор шаттлов.")
+					log_admin("[key_name(usr)] загрузил/заменил [mdp] через манипулятор шаттлов.</span>")
 					SSblackbox.record_feedback("text", "shuttle_manipulator", 1, "[mdp.name]")
 				shuttle_loading = FALSE
-				if(emergency == mdp) //you just changed the emergency shuttle, there are events in game + captains that can change your snowflake choice.
-					var/set_purchase = tgui_alert(usr, "Do you want to also disable shuttle purchases/random events that would change the shuttle?", "Butthurt Admin Prevention", list("Yes, disable purchases/events", "No, I want to possibly get owned"))
-					if(set_purchase == "Yes, disable purchases/events")
+				if(emergency == mdp) // Была изменена аварийная капсула
+					var/set_purchase = tgui_alert(usr, "Отключить покупку шаттлов/рандомные ивенты, которые могут изменить шаттл?", "Защита от админ-боли", list("Да, отключить", "Нет, оставить возможность"))
+					if(set_purchase == "Да, отключить")
 						SSshuttle.shuttle_purchased = SHUTTLEPURCHASE_FORCED
 
 /datum/controller/subsystem/shuttle/proc/init_has_purchase_shuttle_access()

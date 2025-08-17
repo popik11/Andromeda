@@ -105,8 +105,8 @@
 
 /atom/movable/screen/guardian/manifest
 	icon_state = "manifest"
-	name = "Manifest"
-	desc = "Spring forth into battle!"
+	name = "Манифестация"
+	desc = "Вступить в бой!"
 
 /atom/movable/screen/guardian/manifest/Click()
 	if(isguardian(usr))
@@ -116,8 +116,8 @@
 
 /atom/movable/screen/guardian/recall
 	icon_state = "recall"
-	name = "Recall"
-	desc = "Return to your user."
+	name = "Отзыв"
+	desc = "Вернуться к своему хозяину."
 
 /atom/movable/screen/guardian/recall/Click()
 	if(isguardian(usr))
@@ -126,8 +126,8 @@
 
 /atom/movable/screen/guardian/toggle_mode
 	icon_state = "toggle"
-	name = "Toggle Mode"
-	desc = "Switch between ability modes."
+	name = "Смена режима"
+	desc = "Переключение между режимами способностей."
 
 /atom/movable/screen/guardian/toggle_mode/Click()
 	if(isguardian(usr))
@@ -135,33 +135,32 @@
 		user.toggle_modes()
 
 /atom/movable/screen/guardian/toggle_mode/inactive
-	icon_state = "notoggle" //greyed out so it doesn't look like it'll work
+	icon_state = "notoggle" //серый цвет, чтобы показать неактивность
 
 /atom/movable/screen/guardian/toggle_mode/assassin
 	icon_state = "stealth"
-	name = "Toggle Stealth"
-	desc = "Enter or exit stealth."
+	name = "Скрытность"
+	desc = "Включить или выключить режим скрытности."
 
 /atom/movable/screen/guardian/toggle_mode/gases
 	icon_state = "gases"
-	name = "Toggle Gas"
-	desc = "Switch between possible gases."
+	name = "Смена газа"
+	desc = "Переключение между доступными газами."
 
 /atom/movable/screen/guardian/communicate
 	icon_state = "communicate"
-	name = "Communicate"
-	desc = "Communicate telepathically with your user."
+	name = "Связь"
+	desc = "Телепатическая связь с хозяином."
 
 /atom/movable/screen/guardian/communicate/Click()
 	if(isguardian(usr))
 		var/mob/living/basic/guardian/user = usr
 		user.communicate()
 
-
 /atom/movable/screen/guardian/toggle_light
 	icon_state = "light"
-	name = "Toggle Light"
-	desc = "Glow like star dust."
+	name = "Свет"
+	desc = "Светиться, как звёздная пыль."
 
 /atom/movable/screen/guardian/toggle_light/Click()
 	if(isguardian(usr))

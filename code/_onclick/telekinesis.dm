@@ -91,8 +91,8 @@
 	* Deletes itself if it is ever not in your hand, or if you should have no access to TK.
 */
 /obj/item/tk_grab
-	name = "Telekinetic Grab"
-	desc = "Magic"
+	name = "Телекинетический захват"
+	desc = "Магия"
 	icon = 'icons/effects/magic.dmi'//Needs sprites
 	icon_state = "2"
 	item_flags = NOBLUDGEON | ABSTRACT | DROPDEL
@@ -202,11 +202,11 @@
 		return
 
 	apply_focus_overlay()
-	//Only items can be thrown 10 tiles everything else only 1 tile
-	focus.throw_at(target, focus.tk_throw_range, 1,user)
+	//Только предметы можно бросать на 10 тайлов, остальное - только на 1 тайл
+	focus.throw_at(target, focus.tk_throw_range, 1, user)
 	var/turf/start_turf = get_turf(focus)
 	var/turf/end_turf = get_turf(target)
-	user.log_message("has thrown [focus] from [AREACOORD(start_turf)] towards [AREACOORD(end_turf)] using Telekinesis.", LOG_ATTACK)
+	user.log_message("бросил [focus] из [AREACOORD(start_turf)] в направлении [AREACOORD(end_turf)] используя Телекинез.", LOG_ATTACK)
 	user.changeNext_move(CLICK_CD_MELEE)
 	update_appearance()
 
@@ -214,7 +214,7 @@
 /proc/tkMaxRangeCheck(mob/user, atom/target)
 	var/d = get_dist(user, target)
 	if(d > TK_MAXRANGE)
-		user.balloon_alert(user, "can't TK, too far!")
+		user.balloon_alert(user, "недостаточная дальность ТК!")
 		return
 	return TRUE
 
@@ -255,7 +255,7 @@
 	. += focus_overlay
 
 /obj/item/tk_grab/suicide_act(mob/living/user)
-	user.visible_message(span_suicide("[user] is using [user.p_their()] telekinesis to choke [user.p_them()]self! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] использует [user.p_their()] телекинез, чтобы задушить [user.p_them()] себя! Похоже, [user.p_theyre()] пытается покончить с собой!"))
 	return OXYLOSS
 
 #undef TK_MAXRANGE

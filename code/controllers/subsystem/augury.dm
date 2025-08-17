@@ -69,10 +69,10 @@ SUBSYSTEM_DEF(augury)
 
 /datum/action/innate/augury/Activate()
 	SSaugury.watchers += owner
-	to_chat(owner, span_notice("You are now auto-following debris."))
+	to_chat(owner, span_notice("Теперь вы автоматически следите за обломками."))
 	active = TRUE
 
 /datum/action/innate/augury/Deactivate()
 	SSaugury.watchers -= owner
-	to_chat(owner, span_notice("You are no longer auto-following debris."))
+	to_chat(owner, span_notice("Вы больше не следите за обломками автоматически."))
 	active = FALSE

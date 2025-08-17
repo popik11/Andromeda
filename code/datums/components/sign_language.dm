@@ -140,33 +140,33 @@
 
 	var/mob/living/carbon/carbon_parent = parent
 	if(HAS_MIND_TRAIT(carbon_parent, TRAIT_MIMING))
-		to_chat(carbon_parent, span_green("You stop yourself from signing in favor of the artform of mimery!"))
+		to_chat(carbon_parent, span_green("Ты сдерживаешься от жестов в пользу искусства пантомимы!"))
 		return COMPONENT_CANNOT_SPEAK
 
 	switch(check_signables_state())
-		if(SIGN_HANDS_FULL) // Full hands
-			carbon_parent.visible_message("tries to sign, but can't with [carbon_parent.p_their()] hands full!", visible_message_flags = EMOTE_MESSAGE)
+		if(SIGN_HANDS_FULL) // Руки заняты
+			carbon_parent.visible_message("пытается жестикулировать, но не может с занятыми руками!", visible_message_flags = EMOTE_MESSAGE)
 			return COMPONENT_CANNOT_SPEAK
 
-		if(SIGN_HANDS_COMPLETELY_RESTRAINED) // Restrained
-			carbon_parent.visible_message("tries to sign, but can't with [carbon_parent.p_their()] hands bound!", visible_message_flags = EMOTE_MESSAGE)
+		if(SIGN_HANDS_COMPLETELY_RESTRAINED) // Связаны
+			carbon_parent.visible_message("пытается жестикулировать, но не может со связанными руками!", visible_message_flags = EMOTE_MESSAGE)
 			return COMPONENT_CANNOT_SPEAK
 
-		// If we're handcuffed, we can still sign, but it's slow
+		// Если в наручниках - можем жестикулировать, но медленно
 		if(SIGN_SLOWLY_FROM_CUFFS)
-			carbon_parent.visible_message("struggles, signing slowly with [carbon_parent.p_their()] hands cuffed...", visible_message_flags = EMOTE_MESSAGE)
+			carbon_parent.visible_message("напрягается, медленно жестикулируя в наручниках...", visible_message_flags = EMOTE_MESSAGE)
 			return COMPONENT_IGNORE_CAN_SPEAK
 
-		if(SIGN_ARMLESS) // No arms
-			to_chat(carbon_parent, span_warning("You can't sign with no hands!"))
+		if(SIGN_ARMLESS) // Нет рук
+			to_chat(carbon_parent, span_warning("Ты не можешь жестикулировать без рук!"))
 			return COMPONENT_CANNOT_SPEAK
 
-		if(SIGN_ARMS_DISABLED) // Arms but they're disabled
-			to_chat(carbon_parent, span_warning("You can't sign with your hands right now!"))
+		if(SIGN_ARMS_DISABLED) // Руки есть, но не работают
+			to_chat(carbon_parent, span_warning("Сейчас ты не можешь жестикулировать!"))
 			return COMPONENT_CANNOT_SPEAK
 
-		if(SIGN_TRAIT_BLOCKED) // Hands blocked or emote mute
-			to_chat(carbon_parent, span_warning("You can't sign at the moment!"))
+		if(SIGN_TRAIT_BLOCKED) // Руки заблокированы или эмоции отключены
+			to_chat(carbon_parent, span_warning("Сейчас ты не можешь жестикулировать!"))
 			return COMPONENT_CANNOT_SPEAK
 
 	// Assuming none of the above fail, sign language users can speak
@@ -232,7 +232,7 @@
 		return NONE // Run normal checks
 	else if(check_signables_state() != SIGN_OKAY || HAS_MIND_TRAIT(carbon_parent, TRAIT_MIMING)) // Cannot cast if miming or not SIGN_OKAY
 		if(feedback)
-			to_chat(carbon_parent, span_warning("You can't sign the words to invoke [spell]!"))
+			to_chat(carbon_parent, span_warning("Ты не можешь жестами произнести слова для заклинания [spell]!"))
 		return SPELL_INVOCATION_FAIL
 
 	return SPELL_INVOCATION_ALWAYS_SUCCEED
@@ -312,11 +312,11 @@
 /datum/component/sign_language/proc/emote_tone(mob/living/carbon/carbon_parent, emote_tone)
 	switch(emote_tone)
 		if(TONE_INQUISITIVE)
-			carbon_parent.visible_message(span_bold("quirks [carbon_parent.p_their()] brows quizzically."), visible_message_flags = EMOTE_MESSAGE|BLOCK_SELF_HIGHLIGHT_MESSAGE)
+			carbon_parent.visible_message(span_bold("удивлённо приподнимает брови."), visible_message_flags = EMOTE_MESSAGE|BLOCK_SELF_HIGHLIGHT_MESSAGE)
 		if(TONE_EMPHATIC)
-			carbon_parent.visible_message(span_bold("widens [carbon_parent.p_their()] eyes emphatically!"), visible_message_flags = EMOTE_MESSAGE|BLOCK_SELF_HIGHLIGHT_MESSAGE)
+			carbon_parent.visible_message(span_bold("широко раскрывает глаза!"), visible_message_flags = EMOTE_MESSAGE|BLOCK_SELF_HIGHLIGHT_MESSAGE)
 		if(TONE_INQUISITIVE_EMPHATIC)
-			carbon_parent.visible_message(span_bold("wears an intense, befuddled expression!"), visible_message_flags = EMOTE_MESSAGE|BLOCK_SELF_HIGHLIGHT_MESSAGE)
+			carbon_parent.visible_message(span_bold("выражает напряжённое, озадаченное выражение лица!"), visible_message_flags = EMOTE_MESSAGE|BLOCK_SELF_HIGHLIGHT_MESSAGE)
 
 
 /// Removes the tonal indicator overlay completely

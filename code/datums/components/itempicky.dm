@@ -4,7 +4,7 @@
 	/// Typecache of items you can hold
 	var/whitelist
 	/// Message shown if you try to pick up an item not in the whitelist
-	var/message = "You don't like %TARGET, why would you hold it?"
+	var/message = "Вам не нравится %TARGET, зачем вам держать это?"
 	/// An optional callback we check for overriding our whitelist
 	var/datum/callback/tertiary_condition = null
 
@@ -40,5 +40,5 @@
 	SIGNAL_HANDLER
 	// if we were passed the output of a callback, check against that
 	if(!tertiary_condition?.Invoke() && !is_type_in_typecache(pickingup, whitelist))
-		to_chat(source, span_warning("[replacetext(message, "%TARGET", pickingup)]"))
+		to_chat(source, span_warning("[replacetext(message, "%TARGET", pickingup.declent_ru(ACCUSATIVE))]"))
 		return COMPONENT_LIVING_CANT_PUT_IN_HAND

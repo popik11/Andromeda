@@ -22,11 +22,11 @@
 
 /datum/ai_behavior/vendor_crush/proc/tiltonmob(datum/ai_controller/controller, turf/target_turf)
 	var/obj/machinery/vending/vendor_pawn = controller.pawn
-	if(vendor_pawn.tilt(target_turf, 0) & SUCCESSFULLY_CRUSHED_MOB) //We hit something
-		vendor_pawn.say(pick("Supersize this!", "Eat my shiny metal ass!", "Want to consume some of my products?", "SMASH!", "Don't you love these smashing prices!"))
+	if(vendor_pawn.tilt(target_turf, 0) & SUCCESSFULLY_CRUSHED_MOB) //Мы кого-то придавили
+		vendor_pawn.say(pick("Получите суперразмер!", "Сожрите мой блестящий металлический зад!", "Хотите попробовать мои товары?", "ДАВИМ!", "Нравятся мои сокрушительные цены?"))
 		controller.set_blackboard_key(BB_VENDING_LAST_HIT_SUCCESSFUL, TRUE)
 	else
-		vendor_pawn.say(pick("Get back here!", "Don't you want my well priced love?"))
+		vendor_pawn.say(pick("Вернитесь сюда!", "Разве вам не нужна моя любовь по выгодной цене?"))
 		controller.set_blackboard_key(BB_VENDING_LAST_HIT_SUCCESSFUL, FALSE)
 	finish_action(controller, TRUE)
 
@@ -41,7 +41,7 @@
 
 /datum/ai_behavior/vendor_rise_up/perform(seconds_per_tick, datum/ai_controller/controller)
 	var/obj/machinery/vending/vendor_pawn = controller.pawn
-	vendor_pawn.visible_message(span_warning("[vendor_pawn] untilts itself!"))
+	vendor_pawn.visible_message(span_warning("[vendor_pawn] выпрямляется!"))
 	if(controller.blackboard[BB_VENDING_LAST_HIT_SUCCESSFUL])
 		controller.set_blackboard_key(BB_VENDING_TILT_COOLDOWN, world.time + succes_tilt_cooldown)
 	vendor_pawn.untilt()

@@ -205,12 +205,12 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 			if(greentexted)
 				var/score = round(human_mob.hardcore_survival_score * 2)
 				player_client.give_award(/datum/award/score/hardcore_random, human_mob, score)
-				log_admin("[player_client] gained [score] hardcore random points, including greentext bonus!")
+				log_admin("[player_client] получил [score] очков (хардкорных), включая бонус за гринтекст!")
 				return
 
 	if(considered_escaped(human_mob.mind))
 		player_client.give_award(/datum/award/score/hardcore_random, human_mob, round(human_mob.hardcore_survival_score))
-		log_admin("[player_client] gained [round(human_mob.hardcore_survival_score)] hardcore random points.")
+		log_admin("[player_client] получил [round(human_mob.hardcore_survival_score)] очков (хардкорных).")
 
 /datum/controller/subsystem/ticker/proc/declare_completion(was_forced = END_ROUND_AS_NORMAL)
 	set waitfor = FALSE
@@ -257,7 +257,7 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 	CHECK_TICK
 
 	handle_hearts()
-	set_observer_default_invisibility(0, span_warning("The round is over! You are now visible to the living."))
+	set_observer_default_invisibility(0, span_warning("Раунд окончен! Теперь вас могут видеть живые."))
 
 	CHECK_TICK
 
@@ -275,10 +275,10 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 	CHECK_TICK
 
 	//Now print them all into the log!
-	log_game("Antagonists at round end were...")
+	log_game("Список антагонистов в конце раунда...")
 	for(var/antag_name in total_antagonists)
 		var/list/L = total_antagonists[antag_name]
-		log_game("[antag_name]s :[L.Join(", ")].")
+		log_game("[antag_name] :[L.Join(", ")].")
 
 	CHECK_TICK
 	SSdbcore.SetRoundEnd()
@@ -299,11 +299,11 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 /datum/controller/subsystem/ticker/proc/standard_reboot()
 	if(ready_for_reboot)
 		if(GLOB.station_was_nuked)
-			Reboot("Station destroyed by Nuclear Device.", "nuke")
+			Reboot("Станция уничтожена ядерным устройством.", "nuke")
 		else
-			Reboot("Round ended.", "proper completion")
+			Reboot("Раунд завершён.", "proper completion")
 	else
-		CRASH("Attempted standard reboot without ticker roundend completion")
+		CRASH("Попытка стандартной перезагрузки без завершения раунда в тикере")
 
 //Common part of the report
 /datum/controller/subsystem/ticker/proc/build_roundend_report()
@@ -340,26 +340,26 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 	if(GLOB.round_id)
 		var/statspage = CONFIG_GET(string/roundstatsurl)
 		var/info = statspage ? "<a href='byond://?action=openLink&link=[url_encode(statspage)][GLOB.round_id]'>[GLOB.round_id]</a>" : GLOB.round_id
-		parts += "[FOURSPACES]Round ID: <b>[info]</b>"
-	parts += "[FOURSPACES]Map: [SSmapping.current_map?.return_map_name()]"
-	parts += "[FOURSPACES]Shift Duration: <B>[DisplayTimeText(world.time - SSticker.round_start_time)]</B>"
-	parts += "[FOURSPACES]Station Integrity: <B>[GLOB.station_was_nuked ? span_redtext("Destroyed") : "[popcount["station_integrity"]]%"]</B>"
+		parts += "[FOURSPACES]Раунд ID: <b>[info]</b>"
+	parts += "[FOURSPACES]Карта: [SSmapping.current_map?.return_map_name()]"
+	parts += "[FOURSPACES]Длительность смены: <B>[DisplayTimeText(world.time - SSticker.round_start_time)]</B>"
+	parts += "[FOURSPACES]Состояние станции: <B>[GLOB.station_was_nuked ? span_redtext("Уничтожена") : "[popcount["station_integrity"]]%"]</B>"
 	var/total_players = GLOB.joined_player_list.len
 	if(total_players)
-		parts+= "[FOURSPACES]Total Population: <B>[total_players]</B>"
+		parts+= "[FOURSPACES]Общее население станции: <B>[total_players]</B>"
 		if(station_evacuated)
-			parts += "<BR>[FOURSPACES]Evacuation Rate: <B>[popcount[POPCOUNT_ESCAPEES]] ([PERCENT(popcount[POPCOUNT_ESCAPEES]/total_players)]%)</B>"
-			parts += "[FOURSPACES](on emergency shuttle): <B>[popcount[POPCOUNT_SHUTTLE_ESCAPEES]] ([PERCENT(popcount[POPCOUNT_SHUTTLE_ESCAPEES]/total_players)]%)</B>"
-		parts += "[FOURSPACES]Survival Rate: <B>[popcount[POPCOUNT_SURVIVORS]] ([PERCENT(popcount[POPCOUNT_SURVIVORS]/total_players)]%)</B>"
+			parts += "<BR>[FOURSPACES]Процент эвакуированных: <B>[popcount[POPCOUNT_ESCAPEES]] ([PERCENT(popcount[POPCOUNT_ESCAPEES]/total_players)]%)</B>"
+			parts += "[FOURSPACES](на аварийном шаттле): <B>[popcount[POPCOUNT_SHUTTLE_ESCAPEES]] ([PERCENT(popcount[POPCOUNT_SHUTTLE_ESCAPEES]/total_players)]%)</B>"
+		parts += "[FOURSPACES]Процент выживших <B>[popcount[POPCOUNT_SURVIVORS]] ([PERCENT(popcount[POPCOUNT_SURVIVORS]/total_players)]%)</B>"
 		if(SSblackbox.first_death)
 			var/list/ded = SSblackbox.first_death
 			if(ded.len)
-				parts += "[FOURSPACES]First Death: <b>[ded["name"]], [ded["role"]], at [ded["area"]]. Damage taken: [ded["damage"]].[ded["last_words"] ? " Their last words were: \"[ded["last_words"]]\"" : ""]</b>"
+				parts += "[FOURSPACES]Первая смерть: <b>[ded["name"]], [ded["role"]], at [ded["area"]]. Полученный урон: [ded["damage"]].[ded["last_words"] ? " Последние слова: \"[ded["last_words"]]\"" : ""]</b>"
 			//ignore this comment, it fixes the broken sytax parsing caused by the " above
 			else
 				parts += "[FOURSPACES]<i>Nobody died this shift!</i>"
 
-	parts += "[FOURSPACES]Round: [SSdynamic.current_tier.name]"
+	parts += "[FOURSPACES]Раунд: [SSdynamic.current_tier.name]"
 	for(var/datum/dynamic_ruleset/rule as anything in SSdynamic.executed_rulesets - SSdynamic.unreported_rulesets)
 		parts += "[FOURSPACES][FOURSPACES]- <b>[rule.name]</b> ([rule.config_tag])"
 
@@ -423,17 +423,17 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 			if(EMERGENCY_ESCAPED_OR_ENDGAMED)
 				if(!M.onCentCom() && !M.onSyndieBase())
 					parts += "<div class='panel stationborder'>"
-					parts += "<span class='marooned'>You managed to survive, but were marooned on [station_name()]...</span>"
+					parts += "<span class='marooned'>Вы выжили, но остались на [station_name()]...</span>"
 				else
 					parts += "<div class='panel greenborder'>"
-					parts += span_greentext("You managed to survive the events on [station_name()] as [M.real_name].")
+					parts += span_greentext("Вы пережили события на [station_name()] как [M.real_name].")
 			else
 				parts += "<div class='panel greenborder'>"
-				parts += span_greentext("You managed to survive the events on [station_name()] as [M.real_name].")
+				parts += span_greentext("Вы пережили события на [station_name()] как [M.real_name].")
 
 		else
 			parts += "<div class='panel redborder'>"
-			parts += span_redtext("You did not survive the events on [station_name()]...")
+			parts += span_redtext("Вам не удалось пережить события на [station_name()]...")
 	else
 		parts += "<div class='panel stationborder'>"
 	parts += "<br>"
@@ -453,32 +453,32 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 
 /datum/controller/subsystem/ticker/proc/law_report()
 	var/list/parts = list()
-	var/borg_spacer = FALSE //inserts an extra linebreak to separate AIs from independent borgs, and then multiple independent borgs.
-	//Silicon laws report
+	var/borg_spacer = FALSE // Добавляет дополнительный перенос для разделения ИИ и независимых киборгов
+	// Отчет о законах ИИ
 	for (var/i in GLOB.ai_list)
 		var/mob/living/silicon/ai/aiPlayer = i
 		var/datum/mind/aiMind = aiPlayer.deployed_shell?.mind || aiPlayer.mind
 		if(aiMind)
-			parts += "<b>[aiPlayer.name]</b> (Played by: <b>[aiMind.key]</b>)'s laws [aiPlayer.stat != DEAD ? "at the end of the round" : "when it was [span_redtext("deactivated")]"] were:"
+			parts += "<b>[aiPlayer.name]</b> (Игрок: <b>[aiMind.key]</b>) законы [aiPlayer.stat != DEAD ? "в конце раунда" : "при [span_redtext("деактивации")]"]:"
 			parts += aiPlayer.laws.get_law_list(include_zeroth=TRUE)
 
-		parts += "<b>Total law changes: [aiPlayer.law_change_counter]</b>"
+		parts += "<b>Всего изменений законов: [aiPlayer.law_change_counter]</b>"
 
 		if (aiPlayer.connected_robots.len)
 			var/borg_num = aiPlayer.connected_robots.len
-			parts += "<br><b>[aiPlayer.real_name]</b>'s minions were:"
+			parts += "<br><b>[aiPlayer.real_name]</b> управлял:"
 			for(var/mob/living/silicon/robot/robo in aiPlayer.connected_robots)
 				borg_num--
 				if(robo.mind)
-					parts += "<b>[robo.name]</b> (Played by: <b>[robo.mind.key]</b>)[robo.stat == DEAD ? " [span_redtext("(Deactivated)")]" : ""][borg_num ?", ":""]"
+					parts += "<b>[robo.name]</b> (Игрок: <b>[robo.mind.key]</b>)[robo.stat == DEAD ? " [span_redtext("(Деактивирован)")]" : ""][borg_num ?", ":""]"
 		if(!borg_spacer)
 			borg_spacer = TRUE
 
 	for (var/mob/living/silicon/robot/robo in GLOB.silicon_mobs)
 		if (!robo.connected_ai && robo.mind)
-			parts += "[borg_spacer?"<br>":""]<b>[robo.name]</b> (Played by: <b>[robo.mind.key]</b>) [(robo.stat != DEAD)? "[span_greentext("survived")] as an AI-less borg!" : "was [span_redtext("unable to survive")] the rigors of being a cyborg without an AI."] Its laws were:"
+			parts += "[borg_spacer?"<br>":""]<b>[robo.name]</b> (Игрок: <b>[robo.mind.key]</b>) [(robo.stat != DEAD)? "[span_greentext("выжил")] как киборг без ИИ!" : " [span_redtext("не смог выжить")] без поддержки ИИ."] Его законы:"
 
-			if(robo) //How the hell do we lose robo between here and the world messages directly above this?
+			if(robo)
 				parts += robo.laws.get_law_list(include_zeroth=TRUE)
 
 			if(!borg_spacer)
@@ -499,17 +499,17 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 		parts += goal.get_result()
 	return "<div class='panel stationborder'><ul>[parts.Join()]</ul></div>"
 
-///Generate a report for how much money is on station, as well as the richest crewmember on the station.
+/// Генерирует отчет о количестве денег на станции и самом богатом члене экипажа
 /datum/controller/subsystem/ticker/proc/market_report()
 	var/list/parts = list()
 
-	///total service income
+	/// Общий доход сервиса
 	var/tourist_income = 0
-	///This is the richest account on station at roundend.
+	/// Самый богатый аккаунт на станции
 	var/datum/bank_account/mr_moneybags
-	///This is the station's total wealth at the end of the round.
+	/// Общее богатство станции
 	var/station_vault = 0
-	///How many players joined the round.
+	/// Количество игроков в раунде
 	var/total_players = GLOB.joined_player_list.len
 	var/static/list/typecache_bank = typecacheof(list(/datum/bank_account/department, /datum/bank_account/remote))
 	for(var/i in SSeconomy.bank_accounts_by_id)
@@ -519,36 +519,36 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 		station_vault += current_acc.account_balance
 		if(!mr_moneybags || mr_moneybags.account_balance < current_acc.account_balance)
 			mr_moneybags = current_acc
-	parts += "<div class='panel stationborder'><span class='header'>Station Economic Summary:</span><br>"
-	parts += "<span class='service'>Service Statistics:</span><br>"
+	parts += "<div class='panel stationborder'><span class='header'>Экономический отчет станции:</span><br>"
+	parts += "<span class='service'>Статистика сервиса:</span><br>"
 	for(var/venue_path in SSrestaurant.all_venues)
 		var/datum/venue/venue = SSrestaurant.all_venues[venue_path]
 		tourist_income += venue.total_income
-		parts += "The [venue] served [venue.customers_served] customer\s and made [venue.total_income] credits.<br>"
-	parts += "In total, they earned [tourist_income] credits[tourist_income ? "!" : "..."]<br>"
-	log_econ("Roundend service income: [tourist_income] credits.")
+		parts += "[venue] обслужил [venue.customers_served] посетителей и заработал [venue.total_income] кредитов.<br>"
+	parts += "Общий доход составил [tourist_income] кредитов[tourist_income ? "!" : "..."]<br>"
+	log_econ("Доход сервиса за раунд: [tourist_income] кредитов.")
 	switch(tourist_income)
 		if(0)
-			parts += "[span_redtext("Service did not earn any credits...")]<br>"
+			parts += "[span_redtext("Сервис не заработал ни кредита...")]<br>"
 		if(1 to 2000)
-			parts += "[span_redtext("Centcom is displeased. Come on service, surely you can do better than that.")]<br>"
+			parts += "[span_redtext("Центком недоволен. Сервис, вы можете лучше!")]<br>"
 			award_service(/datum/award/achievement/jobs/service_bad)
 		if(2001 to 4999)
-			parts += "[span_greentext("Centcom is satisfied with service's job today.")]<br>"
+			parts += "[span_greentext("Центком удовлетворен работой сервиса сегодня.")]<br>"
 			award_service(/datum/award/achievement/jobs/service_okay)
 		else
-			parts += "<span class='reallybig greentext'>Centcom is incredibly impressed with service today! What a team!</span><br>"
+			parts += "<span class='reallybig greentext'>Центком в восторге от работы сервиса сегодня! Великолепная команда!</span><br>"
 			award_service(/datum/award/achievement/jobs/service_good)
 
-	parts += "<b>General Statistics:</b><br>"
-	parts += "There were [station_vault] credits collected by crew this shift.<br>"
+	parts += "<b>Общая статистика:</b><br>"
+	parts += "Экипаж собрал [station_vault] кредитов за смену.<br>"
 	if(total_players > 0)
-		parts += "An average of [station_vault/total_players] credits were collected.<br>"
-		log_econ("Roundend credit total: [station_vault] credits. Average Credits: [station_vault/total_players]")
+		parts += "В среднем по [station_vault/total_players] кредитов на человека.<br>"
+		log_econ("Общее количество кредитов: [station_vault]. Среднее: [station_vault/total_players]")
 	if(mr_moneybags)
-		parts += "The most affluent crew member at shift end was <b>[mr_moneybags.account_holder] with [mr_moneybags.account_balance]</b> cr!</div>"
+		parts += "Самый богатый член экипажа: <b>[mr_moneybags.account_holder] с [mr_moneybags.account_balance]</b> кредитов!</div>"
 	else
-		parts += "Somehow, nobody made any money this shift! This'll result in some budget cuts...</div>"
+		parts += "Как ни странно, никто не заработал ни кредита! Это приведет к сокращению бюджета...</div>"
 	return parts
 
 /**
@@ -570,13 +570,13 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 /datum/controller/subsystem/ticker/proc/medal_report()
 	if(GLOB.commendations.len)
 		var/list/parts = list()
-		parts += span_header("Medal Commendations:")
+		parts += span_header("Награды и благодарности:")
 		for (var/com in GLOB.commendations)
 			parts += com
 		return "<div class='panel stationborder'>[parts.Join("<br>")]</div>"
 	return ""
 
-///Generate a report for all players who made it out alive with a hardcore random character and prints their final score
+/// Генерирует отчет о выживших игроках с хардкорными случайными персонажами и их итоговых очках
 /datum/controller/subsystem/ticker/proc/hardcore_random_report()
 	. = list()
 	var/list/hardcores = list()
@@ -584,17 +584,17 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 		if(!ishuman(i))
 			continue
 		var/mob/living/carbon/human/human_player = i
-		if(!human_player.hardcore_survival_score || !considered_escaped(human_player.mind) || human_player.stat == DEAD) ///gotta escape nerd
+		if(!human_player.hardcore_survival_score || !considered_escaped(human_player.mind) || human_player.stat == DEAD) /// нужно выбраться, умник
 			continue
 		if(!human_player.mind)
 			continue
 		hardcores += human_player
 	if(!length(hardcores))
 		return
-	. += "<div class='panel stationborder'><span class='header'>The following people made it out as a random hardcore character:</span>"
+	. += "<div class='panel stationborder'><span class='header'>Эти игроки выжили с случайным(хардкорным) персонажем:</span>"
 	. += "<ul class='playerlist'>"
 	for(var/mob/living/carbon/human/human_player in hardcores)
-		. += "<li>[printplayer(human_player.mind)] with a hardcore random score of [round(human_player.hardcore_survival_score)]</li>"
+		. += "<li>[printplayer(human_player.mind)] с хардкор-счетом: [round(human_player.hardcore_survival_score)]</li>"
 	. += "</ul></div>"
 
 /datum/controller/subsystem/ticker/proc/antag_report()
@@ -659,10 +659,10 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 	var/datum/action/report/R = new
 	C.persistent_client.player_actions += R
 	R.Grant(C.mob)
-	to_chat(C,span_infoplain("<a href='byond://?src=[REF(R)];report=1'>Show roundend report again</a>"))
+	to_chat(C, span_infoplain("<a href='byond://?src=[REF(R)];report=1'>Показать отчёт о раунде снова</a>"))
 
 /datum/action/report
-	name = "Show roundend report"
+	name = "Показать отчёт о раунде"
 	button_icon_state = "round_end"
 	show_to_observers = FALSE
 
@@ -684,21 +684,21 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 /proc/printplayer(datum/mind/ply, fleecheck)
 	var/jobtext = ""
 	if(!is_unassigned_job(ply.assigned_role))
-		jobtext = " the <b>[ply.assigned_role.title]</b>"
-	var/text = "<b>[ply.key]</b> was <b>[ply.name]</b>[jobtext] and"
+		jobtext = " в роли <b>[ply.assigned_role.title]</b>"
+	var/text = "<b>[ply.key]</b> играл за <b>[ply.name]</b>[jobtext] и"
 	if(ply.current)
 		if(ply.current.stat == DEAD)
-			text += " [span_redtext("died")]"
+			text += " [span_redtext("погиб")]"
 		else
-			text += " [span_greentext("survived")]"
+			text += " [span_greentext("выжил")]"
 		if(fleecheck)
 			var/turf/T = get_turf(ply.current)
 			if(!T || !is_station_level(T.z))
-				text += " while [span_redtext("fleeing the station")]"
+				text += ", [span_redtext("покинув станцию")]"
 		if(ply.current.real_name != ply.name)
-			text += " as <b>[ply.current.real_name]</b>"
+			text += " как <b>[ply.current.real_name]</b>"
 	else
-		text += " [span_redtext("had their body destroyed")]"
+		text += " [span_redtext("тело было уничтожено")]"
 	return text
 
 /proc/printplayerlist(list/players,fleecheck)
@@ -725,11 +725,11 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 /datum/controller/subsystem/ticker/proc/cheevo_report()
 	var/list/parts = list()
 	if(length(GLOB.achievements_unlocked))
-		parts += "<span class='header'>Achievement Get!</span><BR>"
-		parts += "<span class='infoplain'>Total Achievements Earned: <B>[length(GLOB.achievements_unlocked)]!</B></span><BR>"
+		parts += "<span class='header'>Достижение получено!</span><BR>"
+		parts += "<span class='infoplain'>Всего получено достижений: <B>[length(GLOB.achievements_unlocked)]!</B></span><BR>"
 		parts += "<ul class='playerlist'>"
 		for(var/datum/achievement_report/cheevo_report in GLOB.achievements_unlocked)
-			parts += "<BR>[cheevo_report.winner_key] was <b>[cheevo_report.winner]</b>, who earned the [span_greentext("'[cheevo_report.cheevo]'")] achievement at [cheevo_report.award_location]!<BR>"
+			parts += "<BR>[cheevo_report.winner_key] в роли <b>[cheevo_report.winner]</b> получил достижение [span_greentext("'[cheevo_report.cheevo]'")] в локации [cheevo_report.award_location]!<BR>"
 		parts += "</ul>"
 		return "<div class='panel greenborder'><ul>[parts.Join()]</ul></div>"
 

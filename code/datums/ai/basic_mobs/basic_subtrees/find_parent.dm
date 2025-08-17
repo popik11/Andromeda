@@ -18,8 +18,8 @@
 		return
 
 	if(target.stat == DEAD)
-		controller.queue_behavior(/datum/ai_behavior/perform_emote, "cries for their parent!")
+		controller.queue_behavior(/datum/ai_behavior/perform_emote, "плачет по своему родителю!")
 	else
-		controller.queue_behavior(/datum/ai_behavior/perform_emote, "dances around their parent!")
+		controller.queue_behavior(/datum/ai_behavior/perform_emote, "танцует вокруг своего родителя!")
 
 	return SUBTREE_RETURN_FINISH_PLANNING

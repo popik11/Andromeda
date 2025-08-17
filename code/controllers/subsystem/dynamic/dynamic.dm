@@ -123,14 +123,15 @@ SUBSYSTEM_DEF(dynamic)
 		for(var/job in job_prefs)
 			var/priority = job_prefs[job]
 			job_data += "[job]: [SSjob.job_priority_level_to_string(priority)]"
-		to_chat(player, span_danger("You were unable to qualify for any roundstart antagonist role this round \
-			because your job preferences presented a high chance of all of your selected jobs being unavailable, \
-			along with 'return to lobby if job is unavailable' enabled. \
-			Increase the number of roles set to medium or low priority to reduce the chances of this happening."))
-		log_admin("[player.ckey] failed to qualify for any roundstart antagonist role \
-			because their job preferences presented a high chance of all of their selected jobs being unavailable, \
-			along with 'return to lobby if job is unavailable' enabled and has [player.client.prefs.be_special.len] antag preferences enabled. \
-			They will be unable to qualify for any roundstart antagonist role. These are their job preferences - [job_data.Join(" | ")]")
+		to_chat(player, span_danger("Вы не смогли получить роль антагониста в начале раунда, \
+			так как ваши предпочтения по профессиям с высокой вероятностью делают все выбранные вами профессии недоступными, \
+			а также включена опция 'возвращаться в лобби, если профессия недоступна'. \
+			Увеличьте количество профессий со средним или низким приоритетом, чтобы уменьшить вероятность этого."))
+		log_admin("[player.ckey] не смог получить роль антагониста в начале раунда \
+			из-за настроек профессий, делающих все выбранные профессии потенциально недоступными, \
+			а также включенной опции 'возвращаться в лобби'. \
+			У игрока [player.client.prefs.be_special.len] включенных предпочтений антагонистов. \
+			Его настройки профессий: [job_data.Join(" | ")]")
 
 	var/num_real_players = length(antag_candidates)
 	// now select a tier (if admins didn't)
@@ -149,14 +150,14 @@ SUBSYSTEM_DEF(dynamic)
 	for(var/datum/dynamic_ruleset/roundstart/ruleset in queued_rulesets)
 		// NOTE: !! THIS CAN SLEEP !!
 		if(!ruleset.prepare_execution( num_real_players, antag_candidates ))
-			log_dynamic("Roundstart: Selected ruleset [ruleset.config_tag], but preparation failed!")
+			log_dynamic("РаундСтарт: Выбранное правило [ruleset.config_tag] не смогло подготовиться к выполнению!")
 			queued_rulesets -= ruleset
 			qdel(ruleset)
 			continue
 
-		// Just logs who was selected at roundstart
+		// Логирование выбранных игроков в начале раунда
 		for(var/datum/mind/selected as anything in ruleset.selected_minds)
-			log_dynamic("Roundstart: [key_name(selected)] has been selected for [ruleset.config_tag].")
+			log_dynamic("РаундСтарт: [key_name(selected)] был выбран для [ruleset.config_tag].")
 
 		rulesets_to_spawn[ROUNDSTART] -= 1
 	// and start ticking
@@ -175,7 +176,7 @@ SUBSYSTEM_DEF(dynamic)
 	var/config_file = "[global.config.directory]/dynamic.toml"
 	var/list/result = rustg_raw_read_toml_file(config_file)
 	if(!result["success"])
-		log_dynamic("Failed to load config file! ([config_file] - [result["content"]])")
+		log_dynamic("Не удалось загрузить файл конфигурации! ([config_file] - [result["content"]])")
 		return
 
 	dynamic_config = json_decode(result["content"])
@@ -220,12 +221,12 @@ SUBSYSTEM_DEF(dynamic)
 	var/heavy_midround_spawn = rulesets_to_spawn[HEAVY_MIDROUND]
 	var/latejoin_spawn = rulesets_to_spawn[LATEJOIN]
 
-	log_dynamic("Selected tier: [current_tier.tier]")
-	log_dynamic("- Roundstart population: [roundstart_population]")
-	log_dynamic("- Roundstart ruleset count: [roundstart_spawn]")
-	log_dynamic("- Light midround ruleset count: [light_midround_spawn]")
-	log_dynamic("- Heavy midround ruleset count: [heavy_midround_spawn]")
-	log_dynamic("- Latejoin ruleset count: [latejoin_spawn]")
+	log_dynamic("Выбранный уровень сложности: [current_tier.tier]")
+	log_dynamic("- Население в начале раунда: [roundstart_population]")
+	log_dynamic("- Количество начальных правил: [roundstart_spawn]")
+	log_dynamic("- Количество легких мидроунд-правил: [light_midround_spawn]")
+	log_dynamic("- Количество тяжелых мидроунд-правил: [heavy_midround_spawn]")
+	log_dynamic("- Количество поздних правил: [latejoin_spawn]")
 	SSblackbox.record_feedback(
 		"associative",
 		"dynamic_tier",
@@ -264,19 +265,19 @@ SUBSYSTEM_DEF(dynamic)
 	for(var/ruleset in rulesets_weighted)
 		total_weight += rulesets_weighted[ruleset]
 	if(total_weight <= 0)
-		log_dynamic("Roundstart: No rulesets to pick from!")
+		log_dynamic("РаундСтарт: Нет доступных правил для выбора!")
 		return list()
 
 	var/list/picked_rulesets = list()
 	while(rulesets_to_spawn[ROUNDSTART] > 0)
 		if(!length(rulesets_weighted) || total_weight <= 0)
-			log_dynamic("Roundstart: No more rulesets to pick from with [rulesets_to_spawn[ROUNDSTART]] left!")
+			log_dynamic("РаундСтарт: Больше нет доступных правил, осталось [rulesets_to_spawn[ROUNDSTART]]!")
 			break
 		rulesets_to_spawn[ROUNDSTART] -= 1
 		var/datum/dynamic_ruleset/roundstart/picked_ruleset = pick_weight(rulesets_weighted)
-		log_dynamic("Roundstart: Ruleset [picked_ruleset.config_tag] (Chance: [round(rulesets_weighted[picked_ruleset] / total_weight * 100, 0.01)]%)")
+		log_dynamic("РаундСтарт: Выбрано правило [picked_ruleset.config_tag] (Шанс: [round(rulesets_weighted[picked_ruleset] / total_weight * 100, 0.01)]%)")
 		if(picked_ruleset.solo)
-			log_dynamic("Roundstart: Ruleset is a solo ruleset. Cancelling other picks.")
+			log_dynamic("РаундСтарт: Правило является одиночным. Отмена других выборов.")
 			QDEL_LIST(picked_rulesets)
 			rulesets_weighted -= picked_ruleset
 			picked_rulesets += picked_ruleset
@@ -328,7 +329,7 @@ SUBSYSTEM_DEF(dynamic)
 		return FALSE
 	var/midround_chance = get_midround_chance(range)
 	if(!prob(midround_chance))
-		log_dynamic("Midround ([range]): Ruleset chance failed ([midround_chance]% chance)")
+		log_dynamic("СерединаРаунда ([range]): Шанс события не сработал ([midround_chance]% вероятность)")
 		return FALSE
 
 	midround_admin_cancel = FALSE
@@ -339,11 +340,11 @@ SUBSYSTEM_DEF(dynamic)
 	var/list/rulesets_weighted = get_midround_rulesets(player_count, range)
 	var/datum/dynamic_ruleset/midround/picked_ruleset = pick_weight(rulesets_weighted)
 	if(isnull(picked_ruleset))
-		log_dynamic("Midround ([range]): No rulesets to pick from!")
+		log_dynamic("СерединаРаунда ([range]): Нет доступных правил для выбора!")
 		return FALSE
-	message_admins("Midround ([range]): Executing [picked_ruleset.config_tag] \
+	message_admins("СерединаРаунда ([range]): Запускается [picked_ruleset.config_tag] \
 		[MIDROUND_CANCEL_HREF()] [MIDROUND_REROLL_HREF(rulesets_weighted)]")
-	// if we have admins online, we have a waiting period before execution to allow them to cancel or reroll
+	// если есть онлайн-админы, даем время на отмену или перевыбор
 	if(length(GLOB.admins))
 		COOLDOWN_START(src, midround_admin_cancel_period, 15 SECONDS)
 		while(!COOLDOWN_FINISHED(src, midround_admin_cancel_period))
@@ -358,29 +359,29 @@ SUBSYSTEM_DEF(dynamic)
 				qdel(picked_ruleset)
 				picked_ruleset = pick_weight(rulesets_weighted)
 				if(isnull(picked_ruleset))
-					log_dynamic("Midround ([range]): No rulesets to pick from!")
-					message_admins("Rerolling Midround ([range]): Failed to pick a new ruleset, cancelling instead!")
+					log_dynamic("СерединаРаунда ([range]): Нет доступных правил для выбора!")
+					message_admins("Перевыбор СерединаРаунда ([range]): Не удалось выбрать новое правило, отмена!")
 					midround_admin_cancel = TRUE
 					continue
-				message_admins("Rerolling Midround ([range]): Executing [picked_ruleset.config_tag] - \
-					[length(rulesets_weighted) - 1] remaining rulesets in pool. [MIDROUND_CANCEL_HREF()] [MIDROUND_REROLL_HREF(rulesets_weighted)]")
+				message_admins("Перевыбор СерединаРаунда ([range]): Запускается [picked_ruleset.config_tag] - \
+					[length(rulesets_weighted) - 1] правил осталось в пуле. [MIDROUND_CANCEL_HREF()] [MIDROUND_REROLL_HREF(rulesets_weighted)]")
 			stoplag()
 
-	// NOTE: !! THIS CAN SLEEP !!
+	// ВНИМАНИЕ: !! ЭТОТ КОД МОЖЕТ БЫТЬ БЛОКИРУЮЩИМ !!
 	if(!picked_ruleset.prepare_execution(player_count, picked_ruleset.collect_candidates()))
-		log_dynamic("Midround ([range]): Selected ruleset [picked_ruleset.config_tag], but preparation failed!")
+		log_dynamic("СерединаРаунда ([range]): Выбрано правило [picked_ruleset.config_tag], но подготовка не удалась!")
 		QDEL_LIST(rulesets_weighted)
 		return FALSE
-	// Run the thing
+	// Запускаем правило
 	executed_rulesets += picked_ruleset
 	rulesets_weighted -= picked_ruleset
 	picked_ruleset.execute()
-	// Post execute logging
+	// Логирование после выполнения
 	for(var/datum/mind/selected as anything in picked_ruleset.selected_minds)
-		message_admins("Midround ([range]): [ADMIN_LOOKUPFLW(selected.current)] has been selected for [picked_ruleset.config_tag].")
-		log_dynamic("Midround ([range]): [key_name(selected.current)] has been selected for [picked_ruleset.config_tag].")
-		notify_ghosts("[selected.name] has been picked for [picked_ruleset.config_tag]!", source = selected.current)
-	// Clean up unused rulesets
+		message_admins("СерединаРаунда ([range]): [ADMIN_LOOKUPFLW(selected.current)] был выбран для [picked_ruleset.config_tag].")
+		log_dynamic("СерединаРаунда ([range]): [key_name(selected.current)] был выбран для [picked_ruleset.config_tag].")
+		notify_ghosts("[selected.name] был выбран для [picked_ruleset.config_tag]!", source = selected.current)
+	// Очистка неиспользованных правил
 	QDEL_LIST(rulesets_weighted)
 	rulesets_to_spawn[range] -= 1
 	if(range == LIGHT_MIDROUND)
@@ -415,7 +416,7 @@ SUBSYSTEM_DEF(dynamic)
  */
 /datum/controller/subsystem/dynamic/proc/force_run_midround(midround_typepath, forced_max_cap, alert_admins_on_fail = FALSE, mob/admin)
 	if(!ispath(midround_typepath, /datum/dynamic_ruleset/midround))
-		CRASH("force_run_midround() was called with an invalid midround type: [midround_typepath]")
+		CRASH("force_run_midround() вызвана с неверным типом мидраунда: [midround_typepath]")
 
 	var/datum/dynamic_ruleset/midround/running = new midround_typepath(dynamic_config)
 	if(isnum(forced_max_cap) && forced_max_cap > 0)
@@ -427,21 +428,21 @@ SUBSYSTEM_DEF(dynamic)
 			qdel(running)
 			return FALSE
 
-	// NOTE: !! THIS CAN SLEEP !!
+	// ВНИМАНИЕ: !! ЭТОТ КОД МОЖЕТ БЫТЬ БЛОКИРУЮЩИМ !!
 	if(!running.prepare_execution(get_active_player_count(afk_check = TRUE), running.collect_candidates()))
 		if(alert_admins_on_fail)
-			message_admins("Midround (forced): Forced ruleset [running.config_tag], but preparation failed!")
-		log_dynamic("Midround (forced): Forced ruleset [running.config_tag], but preparation failed!")
+			message_admins("СерединаРаунда (принудительно): Принудительное правило [running.config_tag] не смогло подготовиться!")
+		log_dynamic("СерединаРаунда (принудительно): Принудительное правило [running.config_tag] не смогло подготовиться!")
 		qdel(running)
 		return FALSE
 
 	executed_rulesets += running
 	running.execute()
-	// Post execute logging
+	// Логирование после выполнения
 	for(var/datum/mind/selected as anything in running.selected_minds)
-		message_admins("Midround (forced): [ADMIN_LOOKUPFLW(selected.current)] has been selected for [running.config_tag].")
-		log_dynamic("Midround (forced): [key_name(selected.current)] has been selected for [running.config_tag].")
-		notify_ghosts("[selected.name] has been picked for [running.config_tag]!", source = selected.current)
+		message_admins("СерединаРаунда (принудительно): [ADMIN_LOOKUPFLW(selected.current)] был выбран для [running.config_tag].")
+		log_dynamic("СерединаРаунда (принудительно): [key_name(selected.current)] был выбран для [running.config_tag].")
+		notify_ghosts("[selected.name] был выбран для [running.config_tag]!", source = selected.current)
 	return TRUE
 
 /**
@@ -449,16 +450,16 @@ SUBSYSTEM_DEF(dynamic)
  * (This could be a signal in the future)
  */
 /datum/controller/subsystem/dynamic/proc/on_latejoin(mob/living/carbon/human/latejoiner)
-	// First check queued rulesets - queued rulesets by pass cooldowns and probability checks,
-	// because they're generally forced by events or admins (and thus have higher priority)
+	// Сначала проверяем правила в очереди - они игнорируют кулдауны и проверки вероятности,
+	// так как обычно вызываются событиями или админами (и имеют высший приоритет)
 	for(var/datum/dynamic_ruleset/latejoin/queued in queued_rulesets)
-		// NOTE: !! THIS CAN SLEEP !!
+		// ВНИМАНИЕ: !! ЭТОТ КОД МОЖЕТ БЫТЬ БЛОКИРУЮЩИМ !!
 		if(!queued.prepare_execution(get_active_player_count(afk_check = TRUE), list(latejoiner)))
-			message_admins("Latejoin (forced): Queued ruleset [queued.config_tag] failed to prepare! It remains queued for next latejoin. (<a href='byond://?src=[REF(src)];admin_dequeue=[REF(queued)]'>REMOVE FROM QUEUE</a>)")
-			log_dynamic("Latejoin (forced): Queued ruleset [queued.config_tag] failed to prepare! It remains queued for next latejoin.")
+			message_admins("ПозднееПрисоединение (принудительно): Правило [queued.config_tag] в очереди не смогло подготовиться! Остается в очереди для следующего позднего присоединения. (<a href='byond://?src=[REF(src)];admin_dequeue=[REF(queued)]'>УДАЛИТЬ ИЗ ОЧЕРЕДИ</a>)")
+			log_dynamic("ПозднееПрисоединение (принудительно): Правило [queued.config_tag] в очереди не смогло подготовиться! Остается в очереди для следующего позднего присоединения.")
 			continue
-		message_admins("Latejoin (forced): [ADMIN_LOOKUPFLW(latejoiner)] has been selected for [queued.config_tag].")
-		log_dynamic("Latejoin (forced): [key_name(latejoiner)] has been selected for [queued.config_tag].")
+		message_admins("ПозднееПрисоединение (принудительно): [ADMIN_LOOKUPFLW(latejoiner)] был выбран для [queued.config_tag].")
+		log_dynamic("ПозднееПрисоединение (принудительно): [key_name(latejoiner)] был выбран для [queued.config_tag].")
 		queued_rulesets -= queued
 		executed_rulesets += queued
 		queued.execute()
@@ -475,38 +476,37 @@ SUBSYSTEM_DEF(dynamic)
  * Returns TRUE if a ruleset was spawned, FALSE otherwise
  */
 /datum/controller/subsystem/dynamic/proc/try_spawn_latejoin(mob/living/carbon/human/latejoiner)
-
 	if(rulesets_to_spawn[LATEJOIN] <= 0)
 		return FALSE
 	var/latejoin_chance = get_latejoin_chance()
 	if(!prob(latejoin_chance))
-		log_dynamic("Latejoin: Ruleset chance failed ([latejoin_chance]% chance)")
+		log_dynamic("ПозднееПрисоединение: Шанс события не сработал ([latejoin_chance]% вероятность)")
 		return FALSE
 
 	var/player_count = get_active_player_count(afk_check = TRUE)
 	var/list/rulesets_weighted = get_latejoin_rulesets(player_count)
-	// Note, we make no effort to actually pick a valid ruleset here
-	// We pick a ruleset, and they player might not even have that antag selected. And that's fine
+	// Примечание: мы не проверяем доступность правил для игрока здесь
+	// Мы выбираем правило, и у игрока может не быть этого антага в настройках. И это нормально
 	var/datum/dynamic_ruleset/latejoin/picked_ruleset = pick_weight(rulesets_weighted)
 	if(isnull(picked_ruleset))
-		log_dynamic("Latejoin: No rulesets to pick from!")
+		log_dynamic("ПозднееПрисоединение: Нет доступных правил для выбора!")
 		return FALSE
-	// NOTE: !! THIS CAN SLEEP !!
+	// ВНИМАНИЕ: !! ЭТОТ КОД МОЖЕТ БЫТЬ БЛОКИРУЮЩИМ !!
 	if(!picked_ruleset.prepare_execution(player_count, list(latejoiner)))
-		log_dynamic("Latejoin: Selected ruleset [picked_ruleset.name] for [key_name(latejoiner)], but preparation failed! Latejoin chance has increased.")
+		log_dynamic("ПозднееПрисоединение: Выбрано правило [picked_ruleset.name] для [key_name(latejoiner)], но подготовка не удалась! Шанс позднего присоединения увеличен.")
 		QDEL_LIST(rulesets_weighted)
 		failed_latejoins++
 		return FALSE
-	// Run the thing
+	// Запускаем правило
 	executed_rulesets += picked_ruleset
 	rulesets_weighted -= picked_ruleset
 	picked_ruleset.execute()
-	// Post execute logging
+	// Логирование после выполнения
 	if(!(latejoiner.mind in picked_ruleset.selected_minds))
-		stack_trace("Dynamic: Latejoin [picked_ruleset.type] executed, but the latejoiner was not in its selected minds list!")
-	message_admins("Latejoin: [ADMIN_LOOKUPFLW(latejoiner)] has been selected for [picked_ruleset.config_tag].")
-	log_dynamic("Latejoin: [key_name(latejoiner)] has been selected for [picked_ruleset.config_tag].")
-	// Clean up unused rulesets
+		stack_trace("Динамичный: ПозднееПрисоединение [picked_ruleset.type] выполнен, но игрок не попал в список выбранных!")
+	message_admins("ПозднееПрисоединение: [ADMIN_LOOKUPFLW(latejoiner)] был выбран для [picked_ruleset.config_tag].")
+	log_dynamic("ПозднееПрисоединение: [key_name(latejoiner)] был выбран для [picked_ruleset.config_tag].")
+	// Очистка неиспользованных правил
 	QDEL_LIST(rulesets_weighted)
 	rulesets_to_spawn[LATEJOIN] -= 1
 	failed_latejoins = 0
@@ -535,16 +535,16 @@ SUBSYSTEM_DEF(dynamic)
  */
 /datum/controller/subsystem/dynamic/proc/queue_ruleset(ruleset_typepath)
 	if(!ispath(ruleset_typepath, /datum/dynamic_ruleset/latejoin) && !ispath(ruleset_typepath, /datum/dynamic_ruleset/roundstart))
-		CRASH("queue_ruleset() was called with an invalid type: [ruleset_typepath]")
+		CRASH("queue_ruleset() вызвана с неверным типом правила: [ruleset_typepath]")
 
 	queued_rulesets += new ruleset_typepath(dynamic_config)
 
 /**
- * Get the cooldown between attempts to spawn a ruleset of the given type
+ * Получить кулдаун между попытками запустить правило указанного типа
  */
 /datum/controller/subsystem/dynamic/proc/get_ruleset_cooldown(range)
 	if(range == ROUNDSTART)
-		stack_trace("Attempting to get cooldown for roundstart rulesets - this is redundant and is likely an error")
+		stack_trace("Попытка получить кулдаун для roundstart правил - это избыточно и вероятно ошибка")
 		return 0
 
 	var/low = current_tier.ruleset_type_settings[range][EXECUTION_COOLDOWN_LOW] || 0
@@ -598,19 +598,19 @@ SUBSYSTEM_DEF(dynamic)
 	return chance
 
 /datum/controller/subsystem/dynamic/proc/set_round_result()
-	// If it got to this part, just pick one high impact ruleset if it exists
+	// Если дошло до этой части, просто выбираем одно высокоэффективное правило, если оно существует
 	for(var/datum/dynamic_ruleset/rule as anything in executed_rulesets)
 		if(rule.round_result())
 			return
 
-	SSticker.mode_result = "undefined"
+	SSticker.mode_result = "неопределён"
 
 	switch(GLOB.revolution_handler?.result)
 		if(STATION_VICTORY)
-			SSticker.mode_result = "loss - rev heads killed"
+			SSticker.mode_result = "поражение - главы революции убиты"
 			SSticker.news_report = REVS_LOSE
 		if(REVOLUTION_VICTORY)
-			SSticker.mode_result = "win - heads killed"
+			SSticker.mode_result = "победа - главы убиты"
 			SSticker.news_report = REVS_WIN
 
 	// Something nuked the station - it wasn't nuke ops (they set their own via their rulset)
@@ -640,30 +640,30 @@ SUBSYSTEM_DEF(dynamic)
 			return
 		queued_rulesets -= to_remove
 		qdel(to_remove)
-		message_admins(span_adminnotice("[key_name_admin(usr)] [to_remove.config_tag] from the latejoin queue."))
-		log_admin("[key_name(usr)] removed [to_remove.config_tag] from the latejoin queue.")
+		message_admins(span_adminnotice("[key_name_admin(usr)] удалил [to_remove.config_tag] из очереди поздних присоединений."))
+		log_admin("[key_name(usr)] удалил [to_remove.config_tag] из очереди поздних присоединений.")
 		return
 
 	if(href_list["admin_reroll"])
 		if(!check_rights(R_ADMIN) || midround_admin_reroll)
 			return
 		if(COOLDOWN_FINISHED(src, midround_admin_cancel_period))
-			to_chat(usr, span_alert("Too late!"))
+			to_chat(usr, span_alert("Слишком поздно!"))
 			return
 		midround_admin_reroll = TRUE
-		message_admins(span_adminnotice("[key_name_admin(usr)] rerolled the queued midround ruleset."))
-		log_admin("[key_name(usr)] rerolled the queued midround ruleset.")
+		message_admins(span_adminnotice("[key_name_admin(usr)] перевыбрал правило мидраунда."))
+		log_admin("[key_name(usr)] перевыбрал правило мидраунда.")
 		return
 
 	if(href_list["admin_cancel_midround"])
 		if(!check_rights(R_ADMIN) || midround_admin_cancel)
 			return
 		if(COOLDOWN_FINISHED(src, midround_admin_cancel_period))
-			to_chat(usr, span_alert("Too late!"))
+			to_chat(usr, span_alert("Слишком поздно!"))
 			return
 		midround_admin_cancel = TRUE
-		message_admins(span_adminnotice("[key_name_admin(usr)] cancelled the queued midround ruleset."))
-		log_admin("[key_name(usr)] cancelled the queued midround ruleset.")
+		message_admins(span_adminnotice("[key_name_admin(usr)] отменил правило мидраунда."))
+		log_admin("[key_name(usr)] отменил правило мидраунда.")
 		return
 
 #ifdef TESTING

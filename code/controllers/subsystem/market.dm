@@ -7,10 +7,10 @@ SUBSYSTEM_DEF(market)
 
 	/// Descriptions for each shipping methods.
 	var/shipping_method_descriptions = list(
-		SHIPPING_METHOD_LAUNCH = "Launches the item at the station from space, cheap but you might not receive your item at all.",
-		SHIPPING_METHOD_LTSRBT = "Long-To-Short-Range-Bluespace-Transceiver, a machine that receives items outside the station and then teleports them to the location of the uplink.",
-		SHIPPING_METHOD_TELEPORT = "Teleports the item in a random area in the station, you get 60 seconds to get there first though.",
-		SHIPPING_METHOD_SUPPLYPOD = "Ships the item inside a supply pod at your exact location. Showy, speedy and expensive.",
+		SHIPPING_METHOD_LAUNCH = "Запускает предмет на станцию из космоса, дёшево, но вы можете вообще не получить свой заказ.",
+		SHIPPING_METHOD_LTSRBT = "Дальне-Ближний Синепространственный Трансивер — машина, которая получает предметы за пределами станции и затем телепортирует их к местоположению аплинка.",
+		SHIPPING_METHOD_TELEPORT = "Телепортирует предмет в случайную зону станции, но у вас есть 60 секунд, чтобы первым добраться до него.",
+		SHIPPING_METHOD_SUPPLYPOD = "Доставляет предмет внутри грузового контейнера точно в ваше местоположение. Эффектно, быстро и дорого.",
 	)
 
 	/// List of all existing markets.
@@ -68,7 +68,7 @@ SUBSYSTEM_DEF(market)
 
 				lowest_cd_pad.add_to_queue(purchase)
 
-				to_chat(buyer, span_notice("[purchase.uplink] flashes a message noting that the order is being processed by [lowest_cd_pad]."))
+				to_chat(buyer, span_notice("[purchase.uplink] мигает сообщением о том, что заказ обрабатывается через [lowest_cd_pad]."))
 
 			// Get random area, throw it somewhere there.
 			if(SHIPPING_METHOD_TELEPORT)
@@ -78,7 +78,7 @@ SUBSYSTEM_DEF(market)
 					continue
 				queued_purchases -= purchase
 
-				to_chat(buyer, span_notice("[purchase.uplink] flashes a message noting that the order is being teleported to [get_area(targetturf)] in 60 seconds."))
+				to_chat(buyer, span_notice("[purchase.uplink] мигает сообщением о том, что заказ будет телепортирован в [get_area(targetturf)] через 60 секунд."))
 
 				// do_teleport does not want to teleport items from nullspace, so it just forceMoves and does sparks.
 				addtimer(CALLBACK(src, TYPE_PROC_REF(/datum/controller/subsystem/market, fake_teleport), purchase, targetturf), 60 SECONDS)
@@ -93,7 +93,7 @@ SUBSYSTEM_DEF(market)
 				purchase.post_purchase_effects(item)
 				item.throw_at(purchase.uplink, 3, 3, spin = FALSE)
 
-				to_chat(buyer, span_notice("[purchase.uplink] flashes a message noting the order is being launched at the station from [dir2text(startSide)]."))
+				to_chat(buyer, span_notice("[purchase.uplink] мигает сообщением о том, что заказ запущен на станцию с [dir2text(startSide)]."))
 				qdel(purchase)
 
 			if(SHIPPING_METHOD_SUPPLYPOD)
@@ -103,7 +103,7 @@ SUBSYSTEM_DEF(market)
 				))
 				purchase.entry.spawn_item(spawned_pod, purchase)
 
-				to_chat(buyer, span_notice("[purchase.uplink] flashes a message noting the order is being launched at your location. Right here, right now!"))
+				to_chat(buyer, span_notice("[purchase.uplink] мигает сообщением о том, что заказ доставляется прямо сейчас в ваше местоположение!"))
 				qdel(purchase)
 
 		if(MC_TICK_CHECK)

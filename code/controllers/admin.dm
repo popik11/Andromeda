@@ -1,6 +1,6 @@
-// Clickable stat() button.
+// Кликабельная кнопка stat().
 /obj/effect/statclick
-	name = "Initializing..."
+	name = "Инициализация..."
 	blocks_emissive = EMISSIVE_BLOCK_NONE
 	var/target
 
@@ -10,7 +10,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/statclick)
 	. = ..()
 	name = text
 	src.target = target
-	if(isdatum(target)) //Harddel man bad
+	if(isdatum(target)) // Защита от хардделов
 		RegisterSignal(target, COMSIG_QDELETING, PROC_REF(cleanup))
 
 /obj/effect/statclick/Destroy()
@@ -42,20 +42,20 @@ INITIALIZE_IMMEDIATE(/obj/effect/statclick)
 			class = "unknown"
 
 	usr.client.debug_variables(target)
-	message_admins("Admin [key_name_admin(usr)] is debugging the [target] [class].")
+	message_admins("Администратор [key_name_admin(usr)] отлаживает [target] ([class]).")
 
-ADMIN_VERB(restart_controller, R_DEBUG, "Restart Controller", "Restart one of the various periodic loop controllers for the game (be careful!)", ADMIN_CATEGORY_DEBUG, controller in list("Master", "Failsafe"))
+ADMIN_VERB(restart_controller, R_DEBUG, "Перезапустить Контроллер", "Перезапускает один из периодических контроллеров игры (будьте осторожны!)", ADMIN_CATEGORY_DEBUG, controller in list("Master", "Failsafe"))
 	switch(controller)
 		if("Master")
 			Recreate_MC()
-			BLACKBOX_LOG_ADMIN_VERB("Restart Master Controller")
+			BLACKBOX_LOG_ADMIN_VERB("Перезапуск Master Controller")
 		if("Failsafe")
 			new /datum/controller/failsafe()
-			BLACKBOX_LOG_ADMIN_VERB("Restart Failsafe Controller")
+			BLACKBOX_LOG_ADMIN_VERB("Перезапуск Failsafe Controller")
 
-	message_admins("Admin [key_name_admin(user)] has restarted the [controller] controller.")
+	message_admins("Администратор [key_name_admin(user)] перезапустил контроллер [controller].")
 
-ADMIN_VERB(debug_controller, R_DEBUG, "Debug Controller", "Debug the various periodic loop controllers for the game (be careful!)", ADMIN_CATEGORY_DEBUG)
+ADMIN_VERB(debug_controller, R_DEBUG, "Отладить Контроллер", "Отлаживает различные периодические контроллеры игры (будьте осторожны!)", ADMIN_CATEGORY_DEBUG)
 	var/list/controllers = list()
 	var/list/controller_choices = list()
 
@@ -63,10 +63,10 @@ ADMIN_VERB(debug_controller, R_DEBUG, "Debug Controller", "Debug the various per
 		var/datum/controller/controller = global.vars[var_key]
 		if(!istype(controller) || istype(controller, /datum/controller/subsystem))
 			continue
-		controllers[controller.name] = controller //we use an associated list to ensure clients can't hold references to controllers
+		controllers[controller.name] = controller // Используем ассоциативный список для предотвращения утечек ссылок
 		controller_choices += controller.name
 
-	var/datum/controller/controller_string = input("Select controller to debug", "Debug Controller") as null|anything in controller_choices
+	var/datum/controller/controller_string = input("Выберите контроллер для отладки", "Отладка Контроллера") as null|anything in controller_choices
 	var/datum/controller/controller = controllers[controller_string]
 
 	if (!istype(controller))
@@ -74,5 +74,5 @@ ADMIN_VERB(debug_controller, R_DEBUG, "Debug Controller", "Debug the various per
 
 	user.debug_variables(controller)
 
-	BLACKBOX_LOG_ADMIN_VERB("Debug Controller")
-	message_admins("Admin [key_name_admin(user)] is debugging the [controller] controller.")
+	BLACKBOX_LOG_ADMIN_VERB("Отладка Контроллера")
+	message_admins("Администратор [key_name_admin(user)] отлаживает контроллер [controller].")

@@ -36,8 +36,8 @@ Basically, the items they pull cannot be pulled (except by the puller)
  */
 /datum/component/strong_pull/proc/reject_further_pulls(datum/source, mob/living/puller)
 	SIGNAL_HANDLER
-	if(puller != parent) //for increasing grabs, you need to have a valid pull. thus, parent should be able to pull the same object again
-		strongpulling.balloon_alert(puller, "gripped too tightly!")
+	if(puller != parent) // для усиления захвата нужна валидная тяга. родитель должен снова суметь потянуть тот же объект
+		strongpulling.balloon_alert(puller, "слишком крепко схвачено!")
 		return COMSIG_ATOM_CANT_PULL
 
 /*

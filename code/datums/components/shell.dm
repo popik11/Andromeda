@@ -132,21 +132,21 @@
 		return
 
 	if(!attached_circuit)
-		examine_text += span_notice("There is no integrated circuit attached.")
+		examine_text += span_notice("Нет подключённой интегральной схемы.")
 		return
 
-	examine_text += span_notice("There is an integrated circuit attached. Use a multitool to access the wiring. Use a screwdriver to remove it from [source].")
-	examine_text += span_notice("The cover panel to the integrated circuit is [locked? "locked" : "unlocked"].")
+	examine_text += span_notice("Имеется подключённая интегральная схема. Используйте мультитул для доступа к проводке. Используйте отвёртку для извлечения из [source].")
+	examine_text += span_notice("Защитная панель интегральной схемы [locked? "заблокирована" : "разблокирована"].")
 	var/obj/item/stock_parts/power_store/cell = attached_circuit.cell
-	examine_text += span_notice("The charge meter reads [cell ? round(cell.percent(), 1) : 0]%.")
+	examine_text += span_notice("Уровень заряда: [cell ? round(cell.percent(), 1) : 0]%.")
 
 	if (shell_flags & SHELL_FLAG_USB_PORT)
-		examine_text += span_notice("There is a <b>USB port</b> on the front.")
+		examine_text += span_notice("На передней панели имеется <b>USB-порт</b>.")
 
 	if(shell_flags & SHELL_FLAG_REQUIRE_ANCHOR)
-		examine_text += span_notice("The shell does not require a battery to function and will draw from the area's APC whenever possible.")
+		examine_text += span_notice("Оболочка не требует батареи и получает питание от ЛКП зоны при возможности.")
 		if(!source.anchored)
-			examine_text += span_danger("<b>The integrated circuit is non-functional whilst the shell is unanchored.</b>")
+			examine_text += span_danger("<b>Интегральная схема не функционирует, пока оболочка не закреплена.</b>")
 
 
 /**
@@ -168,7 +168,7 @@
 		return
 
 	if(istype(item, /obj/item/stock_parts/power_store/cell))
-		source.balloon_alert(attacker, "can't put cell in directly!")
+		source.balloon_alert(attacker, "нельзя вставить батарею напрямую!")
 		return
 
 	if(istype(item, /obj/item/inducer))
@@ -179,11 +179,11 @@
 	if(attached_circuit)
 		if(attached_circuit.owner_id && item == attached_circuit.owner_id.resolve())
 			set_locked(!locked)
-			source.balloon_alert(attacker, "[locked ? "locked" : "unlocked"] [source]")
+			source.balloon_alert(attacker, "[locked ? "заблокирована" : "разблокирована"] [source]")
 			return COMPONENT_NO_AFTERATTACK
 
 		if(!attached_circuit.owner_id && isidcard(item))
-			source.balloon_alert(attacker, "owner id set for [item]")
+			source.balloon_alert(attacker, "ID-карта [item] установлена как владелец")
 			attached_circuit.owner_id = WEAKREF(item)
 			return COMPONENT_NO_AFTERATTACK
 
@@ -200,11 +200,11 @@
 		return
 
 	if(attached_circuit)
-		source.balloon_alert(attacker, "there is already a circuitboard inside!")
+		source.balloon_alert(attacker, "внутри уже есть плата!")
 		return
 
 	if(logic_board.current_size > capacity)
-		source.balloon_alert(attacker, "this is too large to fit into [parent]!")
+		source.balloon_alert(attacker, "это слишком велико для [parent]!")
 		return
 
 	logic_board.inserter_mind = WEAKREF(attacker.mind)
@@ -227,7 +227,7 @@
 	if(locked)
 		if(shell_flags & SHELL_FLAG_ALLOW_FAILURE_ACTION)
 			return
-		source.balloon_alert(user, "it's locked!")
+		source.balloon_alert(user, "заблокировано!")
 		return ITEM_INTERACT_BLOCKING
 
 	attached_circuit.interact(user)
@@ -247,11 +247,11 @@
 	if(locked)
 		if(shell_flags & SHELL_FLAG_ALLOW_FAILURE_ACTION)
 			return
-		source.balloon_alert(user, "it's locked!")
+		source.balloon_alert(user, "заблокировано!")
 		return ITEM_INTERACT_BLOCKING
 
 	tool.play_tool_sound(parent)
-	source.balloon_alert(user, "you unscrew [attached_circuit] from [parent].")
+	source.balloon_alert(user, "вы откручиваете [attached_circuit] от [parent].")
 	remove_circuit()
 	return ITEM_INTERACT_BLOCKING
 
@@ -273,11 +273,11 @@
 /datum/component/shell/proc/on_circuit_add_component_manually(atom/source, obj/item/circuit_component/added_comp, mob/living/user)
 	SIGNAL_HANDLER
 	if(locked)
-		source.balloon_alert(user, "it's locked!")
+		source.balloon_alert(user, "заблокировано!")
 		return COMPONENT_CANCEL_ADD_COMPONENT
 
 	if(attached_circuit.current_size + added_comp.circuit_size > capacity)
-		source.balloon_alert(user, "it won't fit!")
+		source.balloon_alert(user, "не поместится!")
 		return COMPONENT_CANCEL_ADD_COMPONENT
 
 /datum/component/shell/proc/override_power_usage(datum/source, power_to_use)
@@ -365,15 +365,15 @@
 		return
 
 	if (!(shell_flags & SHELL_FLAG_USB_PORT))
-		source.balloon_alert(user, "this shell has no usb ports")
+		source.balloon_alert(user, "у оболочки нет USB-портов")
 		return COMSIG_CANCEL_USB_CABLE_ATTACK
 
 	if (isnull(attached_circuit))
-		source.balloon_alert(user, "no circuit inside")
+		source.balloon_alert(user, "нет подключённой схемы")
 		return COMSIG_CANCEL_USB_CABLE_ATTACK
 
 	if(attached_circuit.locked)
-		source.balloon_alert(user, "circuit is locked!")
+		source.balloon_alert(user, "схема заблокирована!")
 		return COMSIG_CANCEL_USB_CABLE_ATTACK
 
 	usb_cable.attached_circuit = attached_circuit

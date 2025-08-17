@@ -1,9 +1,9 @@
-// Used by /turf/open/chasm and subtypes to implement the "dropping" mechanic
+// Используется /turf/open/chasm и подтипами для реализации механики "падения"
 /datum/component/chasm
 	var/turf/target_turf
 	var/obj/effect/abstract/chasm_storage/storage
-	var/fall_message = "GAH! Ah... where are you?"
-	var/oblivion_message = "You stumble and stare into the abyss before you. It stares back, and you fall into the enveloping dark."
+	var/fall_message = "ААА!.. Где это я?"
+	var/oblivion_message = "Вы спотыкаетесь, заглядывая в бездну. Бездна смотрит в ответ - и вы падаете в обволакивающую тьму."
 
 	/// List of refs to falling objects -> how many levels deep we've fallen
 	var/static/list/falling_atoms = list()
@@ -128,7 +128,7 @@
 				var/turf/chasm = get_turf(victim)
 				var/fall_into_chasm = jaunter.chasm_react(victim)
 				if(!fall_into_chasm)
-					chasm.visible_message(span_boldwarning("[victim] falls into the [chasm]!")) //To freak out any bystanders
+					chasm.visible_message(span_boldwarning("[victim] падает в [chasm]!")) // Чтобы напугать очевидцев
 				return fall_into_chasm ? CHASM_DROPPING : CHASM_NOT_DROPPING
 	return CHASM_DROPPING
 
@@ -155,8 +155,8 @@
 			return
 
 		// send to the turf below
-		dropped_thing.visible_message(span_boldwarning("[dropped_thing] falls into [parent]!"), span_userdanger("[fall_message]"))
-		below_turf.visible_message(span_boldwarning("[dropped_thing] falls from above!"))
+		dropped_thing.visible_message(span_boldwarning("[dropped_thing] падает в [parent]!"), span_userdanger("[fall_message]"))
+		below_turf.visible_message(span_boldwarning("[dropped_thing] падает сверху!"))
 		dropped_thing.forceMove(below_turf)
 		if(isliving(dropped_thing))
 			var/mob/living/fallen = dropped_thing
@@ -166,7 +166,7 @@
 		return
 
 	// send to oblivion
-	dropped_thing.visible_message(span_boldwarning("[dropped_thing] falls into [parent]!"), span_userdanger("[oblivion_message]"))
+	dropped_thing.visible_message(span_boldwarning("[dropped_thing] падает в [parent]!"), span_userdanger("[oblivion_message]"))
 	if (isliving(dropped_thing))
 		var/mob/living/falling_mob = dropped_thing
 		ADD_TRAIT(falling_mob, TRAIT_NO_TRANSFORM, REF(src))
@@ -205,14 +205,14 @@
 	dropped_thing.pixel_y = oldoffset
 
 	if(!dropped_thing.forceMove(storage))
-		parent.visible_message(span_boldwarning("[parent] spits out [dropped_thing]!"))
+		parent.visible_message(span_boldwarning("[parent] выплёвывает [dropped_thing]!"))
 		dropped_thing.throw_at(get_edge_target_turf(parent, pick(GLOB.alldirs)), rand(1, 10), rand(1, 10))
 
 	else if(isliving(dropped_thing))
 		var/mob/living/fallen_mob = dropped_thing
 		REMOVE_TRAIT(fallen_mob, TRAIT_NO_TRANSFORM, REF(src))
 		if (fallen_mob.stat != DEAD)
-			fallen_mob.investigate_log("has died from falling into a chasm.", INVESTIGATE_DEATHS)
+			fallen_mob.investigate_log("погиб, упав в пропасть.", INVESTIGATE_DEATHS)
 			if(issilicon(fallen_mob))
 				//Silicons are held together by hopes and dreams, unfortunately, I'm having a nightmare
 				var/mob/living/silicon/robot/fallen_borg = fallen_mob
@@ -237,11 +237,11 @@
 GLOBAL_LIST_EMPTY(chasm_fallen_mobs)
 
 /**
- * An abstract object which is basically just a bag that the chasm puts people inside
+ * Абстрактный объект, представляющий собой просто "мешок", куда пропасть помещает упавших
  */
 /obj/effect/abstract/chasm_storage
-	name = "chasm depths"
-	desc = "The bottom of a hole. You shouldn't be able to interact with this."
+	name = "глубины пропасти"
+	desc = "Дно дыры. Вы не должны иметь возможность взаимодействовать с этим."
 	anchored = TRUE
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 
@@ -300,21 +300,21 @@ GLOBAL_LIST_EMPTY(chasm_fallen_mobs)
 
 #define CHASM_TRAIT "chasm trait"
 /**
- * Called if something comes back to life inside the pit. Expected sources are badmins and changelings.
- * Ethereals should take enough damage to be smashed and not revive.
- * Arguments
- * escapee - Lucky guy who just came back to life at the bottom of a hole.
+ * Вызывается, если кто-то ожил на дне пропасти. Ожидаемые источники - админы и генокрады.
+ * Этериалы должны получать достаточно урона, чтобы быть размазанными и не возрождаться.
+ * Аргументы:
+ * escapee - Счастливчик, который только что возродился на дне пропасти.
  */
 /obj/effect/abstract/chasm_storage/proc/on_revive(mob/living/escapee)
 	SIGNAL_HANDLER
 	var/turf/turf = get_turf(src)
 	if(turf.GetComponent(/datum/component/chasm))
-		turf.visible_message(span_boldwarning("After a long climb, [escapee] leaps out of [turf]!"))
+		turf.visible_message(span_boldwarning("После долгого подъёма, [escapee] выпрыгивает из [turf]!"))
 	else
 		playsound(turf, 'sound/effects/bang.ogg', 50, TRUE)
-		turf.visible_message(span_boldwarning("[escapee] busts through [turf], leaping out of the chasm below"))
+		turf.visible_message(span_boldwarning("[escapee] проламывает [turf], выпрыгивая из пропасти под ним"))
 		turf.ScrapeAway(2, flags = CHANGETURF_INHERIT_AIR)
-	ADD_TRAIT(escapee, TRAIT_MOVE_FLYING, CHASM_TRAIT) //Otherwise they instantly fall back in
+	ADD_TRAIT(escapee, TRAIT_MOVE_FLYING, CHASM_TRAIT) // Иначе они мгновенно упадут обратно
 	escapee.forceMove(turf)
 	escapee.throw_at(get_edge_target_turf(turf, pick(GLOB.alldirs)), rand(1, 10), rand(1, 10))
 	REMOVE_TRAIT(escapee, TRAIT_MOVE_FLYING, CHASM_TRAIT)

@@ -44,8 +44,8 @@ This component is used in vat growing to swab for microbiological samples which 
 /datum/component/swabbing/proc/examine(datum/source, mob/user, list/examine_list)
 	SIGNAL_HANDLER
 	if(LAZYLEN(swabbed_items))
-		examine_list += span_nicegreen("There is a microbiological sample on [parent]!")
-		examine_list += "[span_notice("You can see the following micro-organisms:")]\n"
+		examine_list += span_nicegreen("На [parent] есть микробиологический образец!")
+		examine_list += "[span_notice("В образце видны следующие микроорганизмы:")]"
 		for(var/i in swabbed_items)
 			var/datum/biological_sample/samp = i
 			for(var/organism in samp.micro_organisms)
@@ -93,23 +93,23 @@ This component is used in vat growing to swab for microbiological samples which 
 	. = COMPONENT_CANCEL_ATTACK_CHAIN //Point of no return. No more attacking after this.
 
 	if(LAZYLEN(swabbed_items))
-		to_chat(user, span_warning("You cannot collect another sample on [parent]!"))
+		to_chat(user, span_warning("Нельзя собрать ещё один образец с [parent]!"))
 		return
 
-	to_chat(user, span_notice("You start swabbing [target] for samples!"))
+	to_chat(user, span_notice("Вы начинаете собирать образцы с [target]!"))
 	INVOKE_ASYNC(src, PROC_REF(async_try_to_swab), target, user)
 
 /datum/component/swabbing/proc/async_try_to_swab(atom/target, mob/user)
-	if(!do_after(user, 3 SECONDS, target)) // Start swabbing boi
+	if(!do_after(user, 3 SECONDS, target)) // Начинаем сбор образцов
 		return
 
-	LAZYINITLIST(swabbed_items) //If it isn't initialized, initialize it. As we need to pass it by reference
+	LAZYINITLIST(swabbed_items) // Инициализируем, если ещё не инициализирован
 
-	if(SEND_SIGNAL(target, COMSIG_SWAB_FOR_SAMPLES, swabbed_items) == NONE) //If we found something to swab now we let the swabbed thing handle what it would do, we just sit back and relax now.
-		to_chat(user, span_warning("You do not manage to find anything on [target]!"))
+	if(SEND_SIGNAL(target, COMSIG_SWAB_FOR_SAMPLES, swabbed_items) == NONE) // Если нашли что собрать, пусть цель сама решает что делать
+		to_chat(user, span_warning("Не удалось найти ничего на [target]!"))
 		return
 
-	to_chat(user, span_nicegreen("You manage to collect a microbiological sample from [target]!"))
+	to_chat(user, span_nicegreen("Вы собрали микробиологический образец с [target]!"))
 
 	var/obj/item/parent_item = parent
 	parent_item.update_appearance()

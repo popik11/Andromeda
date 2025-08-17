@@ -53,8 +53,8 @@
 		return
 
 	source.visible_message(
-		span_warning("[attacker] knocks off [source]'s [item_parent.name]!"),
-		span_userdanger("[attacker] knocks off your [item_parent.name]!"),
+		span_warning("[attacker] сбивает [item_parent.name] с [source]!"),
+		span_userdanger("[attacker] сбивает ваш [item_parent.name]!"),
 	)
 
 /// Signal proc for [COMSIG_LIVING_STATUS_KNOCKDOWN] on the mob who's equipped our parent
@@ -76,8 +76,8 @@
 		return
 
 	source.visible_message(
-		span_warning("[source]'s [item_parent.name] get[item_parent.p_s()] knocked off!"),
-		span_userdanger("Your [item_parent.name] [item_parent.p_were()] knocked off!"),
+		span_warning("[item_parent.name] слетает с [source]!"),
+		span_userdanger("Ваш [item_parent.name] слетает!"),
 	)
 
 /// Signal proc for [COMSIG_ITEM_EQUIPPED]

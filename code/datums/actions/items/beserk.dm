@@ -1,6 +1,6 @@
 /datum/action/item_action/berserk_mode
-	name = "Berserk"
-	desc = "Increase your movement and melee speed while also increasing your melee armor for a short amount of time."
+	name = "Берсерк"
+	desc = "Увеличивает вашу скорость передвижения и ближнего боя, а также повышает броню на короткое время."
 	button_icon = 'icons/mob/actions/actions_items.dmi'
 	button_icon_state = "berserk_mode"
 	background_icon_state = "bg_demon"
@@ -21,10 +21,10 @@
 	var/obj/item/clothing/head/hooded/berserker/berserk = target
 	if(berserk.berserk_active)
 		if(feedback)
-			to_chat(owner, span_warning("You are already berserk!"))
+			to_chat(owner, span_warning("Вы уже в режиме берсерка!"))
 		return FALSE
 	if(berserk.berserk_charge < 100)
 		if(feedback)
-			to_chat(owner, span_warning("You don't have a full charge."))
+			to_chat(owner, span_warning("Недостаточно заряда."))
 		return FALSE
 	return TRUE

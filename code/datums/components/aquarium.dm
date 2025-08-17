@@ -54,9 +54,9 @@
 	)
 	///static list of available aquarium modes
 	var/static/list/aquarium_modes = list(
-		AQUARIUM_MODE_MANUAL = "Take full control of fluid and temperature settings. There's no stasis option here.",
-		AQUARIUM_MODE_AUTO = "Let an internal processor regulate aquarium settings based on its fish population. Can temporarily fall back to stasis.",
-		AQUARIUM_MODE_SAFE = "Prevent fish from dying from wrong fluid/temperature settings and hunger, but also stops growth and reproduction",
+		AQUARIUM_MODE_MANUAL = "Полный контроль над настройками жидкости и температуры. Режим стазиса недоступен.",
+		AQUARIUM_MODE_AUTO = "Встроенный процессор регулирует настройки аквариума на основе популяции рыб. Может временно переходить в стазис.",
+		AQUARIUM_MODE_SAFE = "Защищает рыб от гибели из-за неправильных настроек жидкости/температуры и голода, но останавливает рост и размножение",
 	)
 
 	///The size of the reagents holder which will store fish feed.
@@ -217,41 +217,41 @@
 		ADD_TRAIT(parent, TRAIT_AQUARIUM_PANEL_OPEN, AQUARIUM_TRAIT)
 		source.reagents.flags |= TRANSPARENT|REFILLABLE
 
-	source.balloon_alert(user, "panel [closing ? "closed" : "open"]")
+	source.balloon_alert(user, "панель [closing ? "закрыта" : "открыта"]")
 	source.update_appearance()
 	return CLICK_ACTION_SUCCESS
 
-///This proc handles feeding the aquarium and inserting aquarium content.
+/// Этот процесс отвечает за кормление аквариума и добавление содержимого.
 /datum/component/aquarium/proc/on_item_interaction(atom/movable/source, mob/living/user, obj/item/item, modifiers)
 	SIGNAL_HANDLER
 
 	if(istype(item, /obj/item/reagent_containers/cup/fish_feed))
 		if(source.reagents && HAS_TRAIT(source, TRAIT_AQUARIUM_PANEL_OPEN))
-			return //don't block, we'll be transferring reagents to the feed storage.
+			return //не блокировать, будем передавать реагенты в хранилище корма.
 		if(!item.reagents.total_volume)
-			source.balloon_alert(user, "[item] is empty!")
+			source.balloon_alert(user, "[item] пуст!")
 			return ITEM_INTERACT_BLOCKING
 		var/list/fishes = get_fishes()
 		if(!length(fishes))
-			source.balloon_alert(user, "no fish to feed!")
+			source.balloon_alert(user, "нет рыб для кормления!")
 			return ITEM_INTERACT_BLOCKING
 		feed_fishes(item, fishes)
-		source.balloon_alert(user, "fed the fish")
+		source.balloon_alert(user, "рыбы накормлены")
 		return ITEM_INTERACT_SUCCESS
 
 	if(!HAS_TRAIT(item, TRAIT_AQUARIUM_CONTENT) || (!isitem(parent) && user.combat_mode))
-		return //proceed with normal interactions
+		return //продолжить обычное взаимодействие
 
 	var/broken = source.get_integrity_percentage() <= source.integrity_failure
 	if(!can_insert(source, item, user))
 		return ITEM_INTERACT_BLOCKING
 	if(broken)
-		source.balloon_alert(user, "aquarium is broken!")
+		source.balloon_alert(user, "аквариум сломан!")
 		return ITEM_INTERACT_BLOCKING
 	if(!user.transferItemToLoc(item, source))
-		user.balloon_alert(user, "stuck to your hand!")
+		user.balloon_alert(user, "прилипло к руке!")
 		return ITEM_INTERACT_BLOCKING
-	source.balloon_alert(user, "added to aquarium")
+	source.balloon_alert(user, "добавлено в аквариум")
 	source.update_appearance()
 	return ITEM_INTERACT_SUCCESS
 
@@ -286,25 +286,25 @@
 /datum/component/aquarium/proc/on_plunger_act(atom/movable/source, obj/item/plunger/plunger, mob/living/user, reinforced)
 	SIGNAL_HANDLER
 	if(!HAS_TRAIT(source, TRAIT_AQUARIUM_PANEL_OPEN))
-		source.balloon_alert(user, "open panel first!")
+		source.balloon_alert(user, "сначала откройте панель!")
 		return
 	INVOKE_ASYNC(src, PROC_REF(do_plunging), source, user)
 	return COMPONENT_NO_AFTERATTACK
 
 /datum/component/aquarium/proc/do_plunging(atom/movable/source, mob/living/user)
-	user.balloon_alert_to_viewers("plunging...")
+	user.balloon_alert_to_viewers("прочищает...")
 	if(do_after(user, 3 SECONDS, target = source))
-		user.balloon_alert_to_viewers("finished plunging")
-		source.reagents.expose(get_turf(source), TOUCH) //splash on the floor
+		user.balloon_alert_to_viewers("закончил прочистку")
+		source.reagents.expose(get_turf(source), TOUCH) //разливает на пол
 		source.reagents.clear_reagents()
 
 /datum/component/aquarium/proc/on_examine(atom/movable/source, mob/user, list/examine_list)
 	SIGNAL_HANDLER
-	examine_list += span_notice("Its temperature and fluid are currently set to [EXAMINE_HINT("[fluid_temp] K")] and [EXAMINE_HINT(fluid_type)].")
+	examine_list += span_notice("Температура и жидкость установлены на [EXAMINE_HINT("[fluid_temp] K")] и [EXAMINE_HINT(fluid_type)].")
 	var/panel_open = HAS_TRAIT(source, TRAIT_AQUARIUM_PANEL_OPEN)
-	examine_list += span_notice("[EXAMINE_HINT("Alt-click")] to [panel_open ? "close" : "open"] the control and feed panel.")
+	examine_list += span_notice("[EXAMINE_HINT("Alt+ЛКМ")] чтобы [panel_open ? "закрыть" : "открыть"] панель управления и кормления.")
 	if(panel_open && source.reagents.total_volume)
-		examine_list += span_notice("You can use a plunger to empty the feed storage.")
+		examine_list += span_notice("Можно использовать вантуз для очистки хранилища корма.")
 
 ///Check if an item can be inserted into the aquarium
 /datum/component/aquarium/proc/can_insert(atom/movable/source, obj/item/item, mob/living/user)
@@ -319,7 +319,7 @@
 			if(content == item)
 				continue
 			if(content.type == item.type)
-				source.balloon_alert(user, "cannot add to aquarium!")
+				source.balloon_alert(user, "нельзя добавить в аквариум!")
 				return FALSE
 	return TRUE
 
@@ -670,7 +670,7 @@
 		if("remove_item")
 			var/atom/movable/item = locate(params["item_reference"]) in movable.contents
 			item?.forceMove(movable.drop_location())
-			to_chat(user, span_notice("You take out [item] from [movable]."))
+			to_chat(user, span_notice("Вы достаёте [item] из [movable]."))
 		if("rename_fish")
 			var/new_name = sanitize_name(params["chosen_name"])
 			var/atom/movable/fish = locate(params["fish_reference"]) in movable.contents
@@ -697,7 +697,7 @@
 		check_fluid_and_temperature(fish)
 
 /datum/component/aquarium/proc/admire(atom/movable/source, mob/living/user)
-	source.balloon_alert(user, "admiring aquarium...")
+	source.balloon_alert(user, "любуется аквариумом...")
 	if(!do_after(user, 5 SECONDS, target = source))
 		return
 	var/alive_fish = 0
@@ -724,19 +724,19 @@
 	if(!held_item || is_held_item)
 		var/isitem = isitem(source)
 		if(!isitem || is_held_item)
-			context[SCREENTIP_CONTEXT_LMB] = open_panel ? "Adjust settings" : "Admire"
+			context[SCREENTIP_CONTEXT_LMB] = open_panel ? "Настроить параметры" : "Полюбоваться"
 		if(isitem)
-			context[SCREENTIP_CONTEXT_RMB] = "Admire"
-		context[SCREENTIP_CONTEXT_ALT_LMB] = "[!open_panel ? "Open" : "Close"] settings panel"
+			context[SCREENTIP_CONTEXT_RMB] = "Полюбоваться"
+		context[SCREENTIP_CONTEXT_ALT_LMB] = "[!open_panel ? "Открыть" : "Закрыть"] панель настроек"
 		return CONTEXTUAL_SCREENTIP_SET
 	if(istype(held_item, /obj/item/plunger))
-		context[SCREENTIP_CONTEXT_LMB] = "Empty feed storage"
+		context[SCREENTIP_CONTEXT_LMB] = "Очистить хранилище корма"
 		return CONTEXTUAL_SCREENTIP_SET
 	if(istype(held_item, /obj/item/reagent_containers/cup/fish_feed) && (!source.reagents || !open_panel))
-		context[SCREENTIP_CONTEXT_LMB] = "Feed fishes"
+		context[SCREENTIP_CONTEXT_LMB] = "Покормить рыб"
 		return CONTEXTUAL_SCREENTIP_SET
 	if(HAS_TRAIT(held_item, TRAIT_AQUARIUM_CONTENT))
-		context[SCREENTIP_CONTEXT_LMB] = "Insert in aquarium"
+		context[SCREENTIP_CONTEXT_LMB] = "Поместить в аквариум"
 		return CONTEXTUAL_SCREENTIP_SET
 
 #undef MIN_AQUARIUM_BEAUTY

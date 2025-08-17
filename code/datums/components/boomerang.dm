@@ -78,9 +78,9 @@
 	aerodynamic_swing(throwingdatum)
 
 /**
- * Proc that triggers when the thrown boomerang has been fully thrown, rethrowing the boomerang back to the thrower, and producing visible feedback.
- * * throwing_datum: The thrownthing datum that originally impacted the object, that we use to build the new throwing datum for the rebound.
- * * hit_atom: The atom that has been hit by the boomerang'd object.
+ * Процедура, срабатывающая когда бумеранг полностью брошен, возвращающая бумеранг обратно к метателю с визуальным эффектом.
+ * * throwing_datum: Данные броска, которые использовались при первоначальном броске, на основе которых строится новый бросок для возврата.
+ * * hit_atom: Атом, в который попал бумеранг.
  */
 /datum/component/boomerang/proc/aerodynamic_swing(datum/thrownthing/throwingdatum)
 	var/mob/thrown_by = throwingdatum?.get_thrower()
@@ -89,9 +89,9 @@
 		addtimer(CALLBACK(true_parent, TYPE_PROC_REF(/atom/movable, throw_at), thrown_by, boomerang_throw_range, throwingdatum.speed, thrown_by, TRUE), 0.1 SECONDS)
 		COOLDOWN_START(src, last_boomerang_throw, BOOMERANG_REBOUND_INTERVAL)
 	true_parent.visible_message(
-		span_danger("[true_parent] is flying back at [thrown_by]!"),
-		span_danger("You see [true_parent] fly back at you!"),
-		span_hear("You hear an aerodynamic woosh!"),
+		span_danger("[true_parent] летит обратно в [thrown_by]!"),
+		span_danger("Вы видите как [true_parent] летит обратно в вас!"),
+		span_hear("Слышите аэродинамический свист!"),
 	)
 
 #undef BOOMERANG_REBOUND_INTERVAL

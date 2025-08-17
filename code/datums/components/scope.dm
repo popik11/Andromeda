@@ -113,12 +113,12 @@
 /datum/component/scope/proc/on_examine(datum/source, mob/user, list/examine_list)
 	SIGNAL_HANDLER
 
-	var/scope = isgun(parent) ? "scope in" : "zoom out"
+	var/scope = isgun(parent) ? "прицелиться" : "увеличить"
 	switch(zoom_method)
 		if(ZOOM_METHOD_RIGHT_CLICK)
-			examine_list += span_notice("You can [scope] with <b>right-click</b>.")
+			examine_list += span_notice("Можно [scope] с помощью <b>правой кнопки мыши</b>.")
 		if(ZOOM_METHOD_WIELD)
-			examine_list += span_notice("You can [scope] by wielding it with both hands.")
+			examine_list += span_notice("Можно [scope], удерживая в обеих руках.")
 
 /**
  * We find and return the best target to hit on a given turf.
@@ -162,7 +162,7 @@
 	if(isnull(user.client))
 		return
 	if(HAS_TRAIT(user, TRAIT_USER_SCOPED))
-		user.balloon_alert(user, "already zoomed!")
+		user.balloon_alert(user, "уже увеличен!")
 		return
 	user.playsound_local(parent, 'sound/items/weapons/scope.ogg', 75, TRUE)
 	tracker = user.overlay_fullscreen("scope", /atom/movable/screen/fullscreen/cursor_catcher/scope, isgun(parent))

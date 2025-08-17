@@ -61,12 +61,12 @@
 		START_PROCESSING(SSdcs, src)
 		COOLDOWN_START(src, heart_timer, pump_delay)
 
-	to_chat(parent, span_userdanger("Your heart no longer beats automatically! You have to pump it manually - otherwise you'll die!"))
+	to_chat(parent, span_userdanger("Твоё сердце больше не бьётся автоматически! Тебе нужно качать его вручную - иначе ты умрёшь!"))
 
 /datum/component/manual_heart/UnregisterFromParent()
 	UnregisterSignal(parent, list(COMSIG_CARBON_GAIN_ORGAN, COMSIG_CARBON_LOSE_ORGAN, COMSIG_HEART_MANUAL_PULSE, COMSIG_LIVING_REVIVE, COMSIG_LIVING_DEATH, SIGNAL_ADDTRAIT(TRAIT_NOBLOOD), SIGNAL_REMOVETRAIT(TRAIT_NOBLOOD)))
 
-	to_chat(parent, span_userdanger("You feel your heart start beating normally again!"))
+	to_chat(parent, span_userdanger("Ты чувствуешь, как твоё сердце снова начинает биться нормально!"))
 	var/mob/living/carbon/carbon_parent = parent
 	if(istype(carbon_parent))
 		carbon_parent.remove_client_colour(REF(src))
@@ -116,7 +116,7 @@
 		return
 
 	carbon_parent.blood_volume = max(carbon_parent.blood_volume - blood_loss, 0)
-	to_chat(carbon_parent, span_userdanger("You have to keep pumping your blood!"))
+	to_chat(carbon_parent, span_userdanger("Ты должен продолжать качать свою кровь!"))
 	COOLDOWN_START(src, heart_timer, MANUAL_HEART_GRACE_PERIOD) //give two full seconds before losing more blood
 	if(add_colour)
 		carbon_parent.add_client_colour(/datum/client_colour/manual_heart_blood, REF(src))
@@ -153,9 +153,9 @@
 	var/obj/item/organ/heart/parent_heart = carbon_parent.get_organ_slot(ORGAN_SLOT_HEART)
 	return !isnull(parent_heart) && !HAS_TRAIT(carbon_parent, TRAIT_NOBLOOD) && carbon_parent.stat != DEAD
 
-///Action to pump your heart. Cooldown will always be set to 1 second less than the pump delay.
+/// Действие для накачки сердца. Кулдаун всегда будет на 1 секунду меньше, чем задержка между накачками.
 /datum/action/cooldown/manual_heart
-	name = "Pump your blood"
+	name = "Качать кровь"
 	cooldown_time = 2 SECONDS
 	check_flags = NONE
 	button_icon = 'icons/obj/medical/organs/organs.dmi'

@@ -1,52 +1,52 @@
-/// Used to set up a basic AI controller on a mob for admin ease of use
+/// Используется для настройки базового контроллера ИИ на мобе для удобства админов
 /datum/admin_ai_template
-	/// What do admins see when selecting this option?
+	/// Что видят админы при выборе этого варианта?
 	var/name = ""
-	/// What AI controller do we apply?
+	/// Какой контроллер ИИ применяем?
 	var/controller_type
-	/// Should we be active even if the target has an active client?
+	/// Должен ли контроллер оставаться активным при наличии клиента?
 	var/override_client
-	/// Do we apply the hostile faction?
+	/// Применять враждебную фракцию?
 	var/make_hostile
-	/// How likely is it that we move when not busy?
+	/// Вероятность случайного перемещения при бездействии
 	var/idle_chance
-	/// When do we stop targeting mobs?
+	/// При каком состоянии прекращать атаковать мобов?
 	var/minimum_stat
 
-/// Actually perform the process
+/// Фактическое применение шаблона
 /datum/admin_ai_template/proc/apply(mob/living/target, client/user)
 	if (QDELETED(target) || !isliving(target))
-		to_chat(user, span_warning("Invalid target for AI controller."))
+		to_chat(user, span_warning("Недопустимая цель для контроллера ИИ."))
 		return
 	if (gather_information(target, user))
 		apply_controller(target, user)
 
-/// Set up any stored variables before we actually apply the controller
+/// Настроить хранимые переменные перед применением контроллера
 /datum/admin_ai_template/proc/gather_information(mob/living/target, client/user)
-	override_client = tgui_alert(user, "Would you like this controller to be active even while the mob has a client controlling it?", "Override Client?", list("Yes", "No"))
+	override_client = tgui_alert(user, "Должен ли контроллер оставаться активным, даже если мобом управляет клиент?", "Переопределить клиент?", list("Да", "Нет"))
 	if (isnull(override_client))
 		return FALSE
-	override_client = override_client == "Yes"
+	override_client = override_client == "Да"
 
-	idle_chance = tgui_input_number(user, "How likely (% chance per second) should this mob be to move to another tile when it's not doing anything else?", "Walk Chance", max_value = 100, min_value = 0)
+	idle_chance = tgui_input_number(user, "Какова вероятность (% в секунду) случайного перемещения моба, когда он бездействует?", "Шанс перемещения", max_value = 100, min_value = 0)
 	if (isnull(idle_chance))
 		return FALSE
 
 	if (isnull(make_hostile))
-		make_hostile = tgui_alert(user, "Do you want to override this mob's faction with the hostile faction?", "Override Faction?", list("Yes", "No"))
+		make_hostile = tgui_alert(user, "Заменить фракцию моба на враждебную?", "Изменить фракцию?", list("Да", "Нет"))
 		if (isnull(make_hostile))
 			return FALSE
-		make_hostile = make_hostile == "Yes"
+		make_hostile = make_hostile == "Да"
 
 	if (isnull(minimum_stat))
 		var/static/list/stat_types = list(
-			"Conscious" = CONSCIOUS,
-			"Soft Crit" = SOFT_CRIT,
-			"Unconscious" = UNCONSCIOUS,
-			"Hard Crit" = HARD_CRIT,
-			"Dead (will probably get stuck punching a corpse forever)" = DEAD,
+			"В сознании" = CONSCIOUS,
+			"Лёгкий крит" = SOFT_CRIT,
+			"Без сознания" = UNCONSCIOUS,
+			"Тяжёлый крит" = HARD_CRIT,
+			"Мёртв (вероятно, будет вечно бить труп)" = DEAD,
 		)
-		var/selected_stat = tgui_input_list(user, "Attack targets at the maximum health level of...?", "Persistence Level", stat_types, "Soft Crit")
+		var/selected_stat = tgui_input_list(user, "Атаковать цели с максимальным уровнем здоровья...?", "Уровень настойчивости", stat_types, "Лёгкий крит")
 		if (isnull(selected_stat))
 			return FALSE
 		minimum_stat = stat_types[selected_stat]
@@ -71,28 +71,28 @@
 		controller.continue_processing_when_client = TRUE
 		controller.reset_ai_status()
 
-/// Walks at a guy and attacks
+/// Идёт к цели и атакует
 /datum/admin_ai_template/hostile
-	name = "Hostile Melee"
+	name = "Враждебный ближний бой"
 	controller_type = /datum/ai_controller/basic_controller/simple/simple_hostile_obstacles
 
-/// Walks away from a guy and attacks
+/// Отходит от цели и атакует
 /datum/admin_ai_template/hostile_ranged
-	name = "Hostile Ranged"
+	name = "Враждебная дальняя атака"
 	controller_type = /datum/ai_controller/basic_controller/simple/simple_ranged
-	/// When should we retreat?
+	/// На каком расстоянии отступать?
 	var/min_range
-	/// When should we advance?
+	/// На каком расстоянии приближаться?
 	var/max_range
-	/// What projectile do we fire?
+	/// Какой снаряд выпускать?
 	var/projectile_type
-	/// What's the time between shots?
+	/// Задержка между выстрелами?
 	var/fire_cooldown
-	/// How many projectiles per shot?
+	/// Сколько снарядов за очередь?
 	var/burst_shots
-	/// What's the delay between projectiles in a burst?
+	/// Задержка между снарядами в очереди?
 	var/burst_interval
-	/// What sound do we make?
+	/// Звук выстрела?
 	var/projectile_sound
 
 /datum/admin_ai_template/hostile_ranged/gather_information(mob/living/target, client/user)
@@ -105,46 +105,46 @@
 
 	return decide_min_max_range(target, user)
 
-/// Give target a gun
+/// Дать цель огнестрельное оружие
 /datum/admin_ai_template/hostile_ranged/proc/setup_ranged_attacks(mob/living/target, client/user)
 	if (target.GetComponent(/datum/component/ranged_attacks))
 		return TRUE
 
 	var/static/list/all_projectiles = subtypesof(/obj/projectile)
-	// These don't really browsable user-friendly names because there's a lot of duplicates, sorry admins
-	projectile_type = tgui_input_list(user, "What projectile should we fire?", "Select ammo", all_projectiles)
+	// Названия не очень удобные для пользователя, но вариантов много, извините админы
+	projectile_type = tgui_input_list(user, "Какой снаряд выпускать?", "Выбор боеприпаса", all_projectiles)
 	if (isnull(projectile_type))
 		return FALSE
 
-	fire_cooldown = tgui_input_number(user, "How many seconds between shots?", "Fire Rate", round_value = FALSE, max_value = 10, min_value = 0.2, default = 1)
+	fire_cooldown = tgui_input_number(user, "Сколько секунд между выстрелами?", "Скорострельность", round_value = FALSE, max_value = 10, min_value = 0.2, default = 1)
 	if (isnull(fire_cooldown))
 		return FALSE
 	fire_cooldown = fire_cooldown SECONDS
 
-	burst_shots = tgui_input_number(user, "How many shots to fire per burst?", "Burst Count", max_value = 100, min_value = 1, default = 1)
+	burst_shots = tgui_input_number(user, "Сколько выстрелов за очередь?", "Количество в очереди", max_value = 100, min_value = 1, default = 1)
 	if (isnull(burst_shots))
 		return FALSE
 	if (burst_shots > 1)
-		burst_interval = tgui_input_number(user, "How many seconds delay between burst shots?", "Burst Rate", round_value = FALSE, max_value = 2, min_value = 0.1, default = 0.2)
+		burst_interval = tgui_input_number(user, "Задержка между выстрелами в очереди (сек)?", "Скорость очереди", round_value = FALSE, max_value = 2, min_value = 0.1, default = 0.2)
 		if (isnull(burst_interval))
 			return FALSE
 		burst_interval = burst_interval SECONDS
 
-	var/pick_sound = tgui_alert(user, "Select a firing sound effect?", "Select Sound", list("Yes", "No"))
+	var/pick_sound = tgui_alert(user, "Выбрать звук выстрела?", "Выбор звука", list("Да", "Нет"))
 	if (isnull(pick_sound))
 		return FALSE
-	if (pick_sound == "Yes")
-		projectile_sound = input("", "Select fire sound",) as null|sound
+	if (pick_sound == "Да")
+		projectile_sound = input("", "Выберите звук выстрела",) as null|sound
 
 	return TRUE
 
-/// Decide our movement details
+/// Определение параметров движения
 /datum/admin_ai_template/hostile_ranged/proc/decide_min_max_range(mob/living/target, client/user)
-	min_range = tgui_input_number(user, "How far should this mob try to stay away from its target?", "Min Distance", max_value = 9, min_value = 0, default = 2)
+	min_range = tgui_input_number(user, "На каком минимальном расстоянии держаться от цели?", "Минимальная дистанция", max_value = 9, min_value = 0, default = 2)
 	if (isnull(min_range))
 		return FALSE
 
-	max_range = tgui_input_number(user, "How close should this mob try to stay to its target?", "Max Distance", max_value = 9, min_value = 1, default = 6)
+	max_range = tgui_input_number(user, "На каком максимальном расстоянии держаться от цели?", "Максимальная дистанция", max_value = 9, min_value = 1, default = 6)
 	if (isnull(max_range))
 		return FALSE
 
@@ -172,23 +172,23 @@
 	if (fire_cooldown <= 1 SECONDS)
 		target.AddComponent(/datum/component/ranged_mob_full_auto)
 
-/// Walks at a guy while shooting and attacks
+/// Идёт к цели, стреляя и атакуя в ближнем бою
 /datum/admin_ai_template/hostile_ranged/and_melee
-	name = "Hostile Ranged/Melee"
+	name = "Враждебная комбинированная атака"
 	controller_type = /datum/ai_controller/basic_controller/simple/simple_skirmisher
 
 /datum/admin_ai_template/hostile_ranged/and_melee/decide_min_max_range(mob/living/target, client/user)
 	return TRUE
 
-/// Maintain distance from a guy and use an ability on cooldown
+/// Держит дистанцию и использует способности по перезарядке
 /datum/admin_ai_template/ability
-	name = "Hostile Ability User"
+	name = "Враждебный использующий способности"
 	controller_type = /datum/ai_controller/basic_controller/simple/simple_ability
-	/// What is our ability?
+	/// Тип используемой способности
 	var/ability_type
-	/// When should we retreat?
+	/// Минимальная дистанция отступления
 	var/min_range
-	/// When should we advance?
+	/// Максимальная дистанция приближения
 	var/max_range
 
 /datum/admin_ai_template/ability/gather_information(mob/living/target, client/user)
@@ -196,27 +196,27 @@
 	if (!.)
 		return FALSE
 
-	// We'll limit it to mob actions because they're mostly set up for random mobs already, and spells take some extra finagling for wizard clothing etc
+	// Ограничимся действиями мобов, так как они уже настроены для случайных мобов, а заклинания требуют дополнительной настройки (одежда волшебника и т.д.)
 	var/static/list/all_mob_actions = sort_list(subtypesof(/datum/action/cooldown/mob_cooldown), GLOBAL_PROC_REF(cmp_typepaths_asc))
 	var/static/list/actions_by_name = list()
 	if (!length(actions_by_name))
 		for (var/datum/action/cooldown/mob_cooldown as anything in all_mob_actions)
 			actions_by_name["[initial(mob_cooldown.name)] ([mob_cooldown])"] = mob_cooldown
 
-	ability_type = tgui_input_list(user, "Which ability should it use?", "Select Ability", actions_by_name)
+	ability_type = tgui_input_list(user, "Какую способность использовать?", "Выбор способности", actions_by_name)
 	if (isnull(ability_type))
 		return FALSE
 
 	ability_type = actions_by_name[ability_type]
 	return decide_min_max_range(target, user)
 
-/// Decide our movement details, some copy/paste here unfortunately
+/// Определение параметров движения (к сожалению, частично дублируется)
 /datum/admin_ai_template/ability/proc/decide_min_max_range(mob/living/target, client/user)
-	min_range = tgui_input_number(user, "How far should this mob try to stay away from its target?", "Min Distance", max_value = 9, min_value = 0, default = 2)
+	min_range = tgui_input_number(user, "На каком минимальном расстоянии держаться от цели?", "Минимальная дистанция", max_value = 9, min_value = 0, default = 2)
 	if (isnull(min_range))
 		return FALSE
 
-	max_range = tgui_input_number(user, "How close should this mob try to stay to its target?", "Max Distance", max_value = 9, min_value = 1, default = 6)
+	max_range = tgui_input_number(user, "На каком максимальном расстоянии держаться от цели?", "Максимальная дистанция", max_value = 9, min_value = 1, default = 6)
 	if (isnull(max_range))
 		return FALSE
 
@@ -235,19 +235,19 @@
 	controller.set_blackboard_key(BB_RANGED_SKIRMISH_MIN_DISTANCE, min_range)
 	controller.set_blackboard_key(BB_RANGED_SKIRMISH_MAX_DISTANCE, max_range)
 
-/// Walks at a guy and uses an ability on that guy
+/// Идёт к цели и использует способность в ближнем бою
 /datum/admin_ai_template/ability/melee
-	name = "Hostile Ability User (Melee Attacks)"
+	name = "Враждебный использующий способности (ближние атаки)"
 	controller_type = /datum/ai_controller/basic_controller/simple/simple_ability_melee
 
 /datum/admin_ai_template/ability/melee/decide_min_max_range(mob/living/target, client/user)
 	return TRUE
 
-/// Stays away from a guy and uses an ability on that guy
+/// Держится на расстоянии и использует способности
 /datum/admin_ai_template/hostile_ranged/ability
-	name = "Hostile Ability User (Ranged Attacks)"
+	name = "Враждебный использующий способности (дальние атаки)"
 	controller_type = /datum/ai_controller/basic_controller/simple/simple_ability_ranged
-	/// What is our ability?
+	/// Тип используемой способности
 	var/ability_type
 
 /datum/admin_ai_template/hostile_ranged/ability/gather_information(mob/living/target, client/user)
@@ -255,14 +255,14 @@
 	if (!.)
 		return FALSE
 
-	// Sadly gotta copy/paste this here too
+// К сожалению, приходится дублировать и здесь
 	var/static/list/all_mob_actions = sort_list(subtypesof(/datum/action/cooldown/mob_cooldown), GLOBAL_PROC_REF(cmp_typepaths_asc))
 	var/static/list/actions_by_name = list()
 	if (!length(actions_by_name))
 		for (var/datum/action/cooldown/mob_cooldown as anything in all_mob_actions)
 			actions_by_name["[initial(mob_cooldown.name)] ([mob_cooldown])"] = mob_cooldown
 
-	ability_type = tgui_input_list(user, "Which ability should it use?", "Select Ability", actions_by_name)
+	ability_type = tgui_input_list(user, "Какую способность использовать?", "Выбор способности", actions_by_name)
 	if (isnull(ability_type))
 		return FALSE
 	ability_type = actions_by_name[ability_type]
@@ -279,47 +279,47 @@
 	var/datum/ai_controller/controller = target.ai_controller
 	controller.set_blackboard_key(BB_TARGETED_ACTION, ability)
 
-/// Chill unless you throw hands
+/// Спокойный, но даёт сдачи
 /datum/admin_ai_template/retaliate
-	name = "Passive But Fights Back (Melee)"
+	name = "Пассивный, но отвечает (ближний бой)"
 	controller_type = /datum/ai_controller/basic_controller/simple/simple_retaliate
 	make_hostile = FALSE
 
 /datum/admin_ai_template/retaliate/apply_controller(mob/living/target, client/user)
 	. = ..()
-	if (!HAS_TRAIT_FROM(target, TRAIT_SUBTREE_REQUIRED_OPERATIONAL_DATUM, /datum/element/ai_retaliate)) // Not really what this is for but it should work
+	if (!HAS_TRAIT_FROM(target, TRAIT_SUBTREE_REQUIRED_OPERATIONAL_DATUM, /datum/element/ai_retaliate)) // Не совсем для этого предназначено, но должно работать
 		target.AddElement(/datum/element/ai_retaliate)
 
-/// Shoots anyone who attacks them
+/// Стреляет в ответ на атаки
 /datum/admin_ai_template/hostile_ranged/ability/retaliate
-	name = "Passive But Fights Back (Ranged Attacks)"
+	name = "Пассивный, но отвечает (дальние атаки)"
 	controller_type = /datum/ai_controller/basic_controller/simple/simple_ranged_retaliate
 	make_hostile = FALSE
 
 /datum/admin_ai_template/hostile_ranged/ability/retaliate/apply_controller(mob/living/target, client/user)
 	. = ..()
-	if (!HAS_TRAIT_FROM(target, TRAIT_SUBTREE_REQUIRED_OPERATIONAL_DATUM, /datum/element/ai_retaliate)) // Not really what this is for but it should work
+	if (!HAS_TRAIT_FROM(target, TRAIT_SUBTREE_REQUIRED_OPERATIONAL_DATUM, /datum/element/ai_retaliate)) // Не совсем для этого предназначено, но должно работать
 		target.AddElement(/datum/element/ai_retaliate)
 
-/// Uses their signature move on anyone who attacks them
+/// Использует свою фирменную способность в ответ на атаки
 /datum/admin_ai_template/ability/retaliate
-	name = "Passive But Fights Back (Ability)"
+	name = "Пассивный, но отвечает (способности)"
 	controller_type = /datum/ai_controller/basic_controller/simple/simple_ability_retaliate
 	make_hostile = FALSE
 
 /datum/admin_ai_template/ability/retaliate/apply_controller(mob/living/target, client/user)
 	. = ..()
-	if (!HAS_TRAIT_FROM(target, TRAIT_SUBTREE_REQUIRED_OPERATIONAL_DATUM, /datum/element/ai_retaliate)) // Not really what this is for but it should work
+	if (!HAS_TRAIT_FROM(target, TRAIT_SUBTREE_REQUIRED_OPERATIONAL_DATUM, /datum/element/ai_retaliate)) // Не совсем для этого предназначено, но должно работать
 		target.AddElement(/datum/element/ai_retaliate)
 
-/// Who knows what this guy will do, he's a loose cannon
+/// Кто знает, что сделает этот тип - он непредсказуем
 /datum/admin_ai_template/grumpy
-	name = "Gets Mad Unpredictably"
+	name = "Злится непредсказуемо"
 	controller_type = /datum/ai_controller/basic_controller/simple/simple_capricious
 	make_hostile = FALSE
-	/// Chance per second to get pissed off
+	/// Шанс в секунду разозлиться
 	var/flipout_chance
-	/// Chance per second to stop being pissed off
+	/// Шанс в секунду успокоиться
 	var/calm_down_chance
 
 /datum/admin_ai_template/grumpy/gather_information(mob/living/target, client/user)
@@ -327,11 +327,11 @@
 	if (!.)
 		return FALSE
 
-	flipout_chance = tgui_input_number(user, "What's the % chance per second we'll get mad for no reason?", "Tantrum Chance", round_value = FALSE, max_value = 100, min_value = 0, default = 0.5)
+	flipout_chance = tgui_input_number(user, "Какой % шанс в секунду беспричинно злиться?", "Шанс ярости", round_value = FALSE, max_value = 100, min_value = 0, default = 0.5)
 	if (isnull(flipout_chance))
 		return FALSE
 
-	calm_down_chance = tgui_input_number(user, "What's the % chance per second we'll stop being mad?", "Zen Chance", round_value = FALSE, max_value = 100, min_value = 0, default = 10)
+	calm_down_chance = tgui_input_number(user, "Какой % шанс в секунду успокоиться?", "Шанс успокоения", round_value = FALSE, max_value = 100, min_value = 0, default = 10)
 	if (isnull(calm_down_chance))
 		return FALSE
 
@@ -343,33 +343,33 @@
 	controller.set_blackboard_key(BB_RANDOM_AGGRO_CHANCE, flipout_chance)
 	controller.set_blackboard_key(BB_RANDOM_DEAGGRO_CHANCE, calm_down_chance)
 
-	if (!HAS_TRAIT_FROM(target, TRAIT_SUBTREE_REQUIRED_OPERATIONAL_DATUM, /datum/element/ai_retaliate)) // Not really what this is for but it should work
+	if (!HAS_TRAIT_FROM(target, TRAIT_SUBTREE_REQUIRED_OPERATIONAL_DATUM, /datum/element/ai_retaliate)) // Не совсем для этого предназначено, но должно работать
 		target.AddElement(/datum/element/ai_retaliate)
 
-/// Coward
+/// Трус
 /datum/admin_ai_template/fearful
-	name = "Runs Away"
+	name = "Беглец"
 	minimum_stat = CONSCIOUS
 	make_hostile = FALSE
 	controller_type = /datum/ai_controller/basic_controller/simple/simple_fearful
 
-/// Doesn't like violence
+/// Не любит насилие
 /datum/admin_ai_template/skittish
-	name = "Runs Away From Attackers"
+	name = "Убегает от атакующих"
 	minimum_stat = CONSCIOUS
 	make_hostile = FALSE
 	controller_type = /datum/ai_controller/basic_controller/simple/simple_skittish
 
 /datum/admin_ai_template/skittish/apply_controller(mob/living/target, client/user)
 	. = ..()
-	if (!HAS_TRAIT_FROM(target, TRAIT_SUBTREE_REQUIRED_OPERATIONAL_DATUM, /datum/element/ai_retaliate)) // Not really what this is for but it should work
+	if (!HAS_TRAIT_FROM(target, TRAIT_SUBTREE_REQUIRED_OPERATIONAL_DATUM, /datum/element/ai_retaliate)) // Не совсем для этого предназначено, но должно работать
 		target.AddElement(/datum/element/ai_retaliate)
 
-/// You gottit boss
+/// Слушается команд
 /datum/admin_ai_template/goon
-	name = "Obeys Commands"
+	name = "Послушный подручный"
 	controller_type = /datum/ai_controller/basic_controller/simple/simple_goon
-	/// Who is really in charge here?
+	/// Кто здесь главный?
 	var/mob/living/da_boss
 
 /datum/admin_ai_template/goon/gather_information(mob/living/target, client/user)
@@ -377,42 +377,42 @@
 	if (!.)
 		return FALSE
 
-	var/find_a_mob = tgui_alert(user, "Make this mob a minion of a mob in your tile? (If you don't do this you will need to use the befriend proc)", "Set Master?", list("Yes", "No"))
+	var/find_a_mob = tgui_alert(user, "Сделать этого моба подручным другого моба на вашей клетке? (Если отказаться, нужно будет использовать proc befriend)", "Назначить хозяина?", list("Да", "Нет"))
 	if (isnull(override_client))
 		return FALSE
-	find_a_mob = find_a_mob == "Yes"
+	find_a_mob = find_a_mob == "Да"
 	if (!find_a_mob)
 		return TRUE
 
 	return grab_mob(target, user)
 
-/// Find a mob to make the boss
+/// Найти моба, который станет боссом
 /datum/admin_ai_template/goon/proc/grab_mob(mob/living/target, client/user)
 	var/list/mobs_in_my_tile = list()
 	for (var/mob/living/dude in (range(0, user.mob) - target))
 		mobs_in_my_tile[dude.real_name] = dude
 
 	if (length(mobs_in_my_tile))
-		var/picked = tgui_input_list(user, "Select new master.", "Set Master", mobs_in_my_tile + "Try Again", "Try Again")
+		var/picked = tgui_input_list(user, "Выберите нового хозяина.", "Назначить хозяина", mobs_in_my_tile + "Попробовать снова", "Попробовать снова")
 		if (isnull(picked))
 			return FALSE
-		if (picked == "Try Again")
+		if (picked == "Попробовать снова")
 			return grab_mob(target, user)
 
 		da_boss = mobs_in_my_tile[picked]
 		return TRUE
 
-	var/find_a_mob = tgui_alert(user, "No applicable mobs found. Try again?", "Try Again?", list("Yes", "No"))
+	var/find_a_mob = tgui_alert(user, "Подходящих мобов не найдено. Попробовать снова?", "Повторить?", list("Да", "Нет"))
 	if (isnull(find_a_mob))
 		return FALSE
-	find_a_mob = find_a_mob == "Yes"
+	find_a_mob = find_a_mob == "Да"
 	if (!find_a_mob)
 		return TRUE
 	return grab_mob(target, user)
 
 /datum/admin_ai_template/goon/apply_controller(mob/living/target, client/user)
 	. = ..()
-	// There's not really much point making this customisable at the moment
+	// Пока нет особого смысла делать это настраиваемым
 	var/static/list/pet_commands = list(
 		/datum/pet_command/idle,
 		/datum/pet_command/move,
@@ -427,9 +427,9 @@
 
 	target.befriend(da_boss)
 
-/// Whatever it was doing before we fucked with it (mostly, can't do this with total confidence)
+/// Возврат к предыдущему состоянию до вмешательства (не всегда возможно полностью восстановить)
 /datum/admin_ai_template/reset
-	name = "Reset"
+	name = "Сбросить"
 
 /datum/admin_ai_template/reset/gather_information(mob/living/target, client/user)
 	return TRUE
@@ -439,9 +439,9 @@
 	var/controller_type = initial(target.ai_controller)
 	target.ai_controller = new controller_type(src)
 
-/// Like I'm doing nothing at all, nothing at all
+/// Как будто я вообще ничего не делаю, ничего
 /datum/admin_ai_template/clear
-	name = "None"
+	name = "Отсутствует"
 
 /datum/admin_ai_template/clear/gather_information(mob/living/target, client/user)
 	return TRUE

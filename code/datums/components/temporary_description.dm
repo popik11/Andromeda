@@ -11,7 +11,7 @@
 	var/list/removal_signals
 
 /datum/component/temporary_description/Initialize(
-	description_text = "There's something unusual about them.",
+	description_text = "В них есть что-то необычное.",
 	naive_description = "",
 	list/removal_signals = list(COMSIG_LIVING_REVIVE),
 )

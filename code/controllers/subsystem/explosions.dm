@@ -86,8 +86,8 @@ SUBSYSTEM_DEF(explosions)
 	throwturf -= T
 	held_throwturf -= T
 
-ADMIN_VERB(check_bomb_impacts, R_DEBUG, "Check Bomb Impact", "See what the effect of a bomb would be.", ADMIN_CATEGORY_DEBUG)
-	var/newmode = tgui_alert(user, "Use reactionary explosions?","Check Bomb Impact", list("Yes", "No"))
+ADMIN_VERB(check_bomb_impacts, R_DEBUG, "Проверить радиус взрыва", "Просмотреть эффект от взрыва бомбы.", ADMIN_CATEGORY_DEBUG)
+	var/newmode = tgui_alert(user, "Использовать реактивные взрывы?", "Проверка радиуса взрыва", list("Да", "Нет"))
 	var/turf/epicenter = get_turf(user.mob)
 	if(!epicenter)
 		return
@@ -95,27 +95,27 @@ ADMIN_VERB(check_bomb_impacts, R_DEBUG, "Check Bomb Impact", "See what the effec
 	var/dev = 0
 	var/heavy = 0
 	var/light = 0
-	var/list/choices = list("Small Bomb","Medium Bomb","Big Bomb","Custom Bomb")
-	var/choice = tgui_input_list(user, "Pick the bomb size", "Bomb Size?", choices)
+	var/list/choices = list("Малая бомба","Средняя бомба","Большая бомба","Свои параметры")
+	var/choice = tgui_input_list(user, "Выберите размер бомбы", "Размер бомбы", choices)
 	switch(choice)
 		if(null)
 			return 0
-		if("Small Bomb")
+		if("Малая бомба")
 			dev = 1
 			heavy = 2
 			light = 3
-		if("Medium Bomb")
+		if("Средняя бомба")
 			dev = 2
 			heavy = 3
 			light = 4
-		if("Big Bomb")
+		if("Большая бомба")
 			dev = 3
 			heavy = 5
 			light = 7
-		if("Custom Bomb")
-			dev = input(user, "Devastation range (Tiles):") as num
-			heavy = input(user, "Heavy impact range (Tiles):") as num
-			light = input(user, "Light impact range (Tiles):") as num
+		if("Свои параметры")
+			dev = input(user, "Радиус разрушений (тайлы):") as num
+			heavy = input(user, "Радиус сильного воздействия (тайлы):") as num
+			light = input(user, "Радиус слабого воздействия (тайлы):") as num
 
 	var/max_range = max(dev, heavy, light)
 	var/x0 = epicenter.x
@@ -129,7 +129,7 @@ ADMIN_VERB(check_bomb_impacts, R_DEBUG, "Check Bomb Impact", "See what the effec
 		var/dist = CHEAP_HYPOTENUSE(our_x, our_y, x0, y0)
 		var/block = 0
 
-		if(newmode == "Yes")
+		if(newmode == "Да")
 			if(explode != epicenter)
 				var/our_block = cached_exp_block[get_step_towards(explode, epicenter)]
 				block += our_block
@@ -332,35 +332,35 @@ ADMIN_VERB(check_bomb_impacts, R_DEBUG, "Check Bomb Impact", "See what the effec
 	var/who_did_it = "N/A"
 	var/who_did_it_game_log = "N/A"
 
-	// Projectiles have special handling. They rely on a firer var and not fingerprints. Check special cases for firer being
-	// mecha, mob or an object such as the gun itself. Handle each uniquely.
+// Снаряды требуют особой обработки. Они используют переменную firer вместо отпечатков. Проверяем особые случаи, когда firer является
+	// мехом, мобом или объектом вроде самого оружия. Обрабатываем каждый случай уникально.
 	if(isprojectile(explosion_cause))
 		var/obj/projectile/fired_projectile = explosion_cause
 		if(ismecha(fired_projectile.firer))
 			var/obj/vehicle/sealed/mecha/firing_mecha = fired_projectile.firer
 			var/list/mob/drivers = firing_mecha.return_occupants()
 			if(length(drivers))
-				who_did_it = "\[Mecha drivers:"
-				who_did_it_game_log = "\[Mecha drivers:"
+				who_did_it = "\[Пилоты меха:"
+				who_did_it_game_log = "\[Пилоты меха:"
 				for(var/mob/driver in drivers)
 					who_did_it += " [ADMIN_LOOKUPFLW(driver)]"
 					who_did_it_game_log = " [key_name(driver)]"
 				who_did_it += "\]"
 				who_did_it_game_log += "\]"
 		else if(ismob(fired_projectile.firer))
-			who_did_it = "\[Projectile firer: [ADMIN_LOOKUPFLW(fired_projectile.firer)]\]"
-			who_did_it_game_log = "\[Projectile firer: [key_name(fired_projectile.firer)]\]"
+			who_did_it = "\[Стреляющий: [ADMIN_LOOKUPFLW(fired_projectile.firer)]\]"
+			who_did_it_game_log = "\[Стреляющий: [key_name(fired_projectile.firer)]\]"
 		else
-			who_did_it = "\[Projectile firer: [ADMIN_LOOKUPFLW(fired_projectile.firer?.fingerprintslast)]\]"
-			who_did_it_game_log = "\[Projectile firer: [key_name(fired_projectile.firer.fingerprintslast)]\]"
-	// Otherwise if the explosion cause is an atom, try get the fingerprints.
+			who_did_it = "\[Стреляющий: [ADMIN_LOOKUPFLW(fired_projectile.firer?.fingerprintslast)]\]"
+			who_did_it_game_log = "\[Стреляющий: [key_name(fired_projectile.firer.fingerprintslast)]\]"
+	// В остальных случаях, если причина взрыва - атом, пытаемся получить отпечатки.
 	else if(istype(explosion_cause))
 		who_did_it = ADMIN_LOOKUPFLW(explosion_cause.fingerprintslast)
 		who_did_it_game_log = key_name(explosion_cause.fingerprintslast)
 
 	if(adminlog)
-		message_admins("Explosion with size (Devast: [devastation_range], Heavy: [heavy_impact_range], Light: [light_impact_range], Flame: [flame_range], Flash: [flash_range]) in [ADMIN_VERBOSEJMP(epicenter)]. Possible cause: [explosion_cause]. Last fingerprints: [who_did_it].")
-		log_game("Explosion with size ([devastation_range], [heavy_impact_range], [light_impact_range], [flame_range], [flash_range]) in [loc_name(epicenter)].  Possible cause: [explosion_cause]. Last fingerprints: [who_did_it_game_log].")
+		message_admins("Взрыв с параметрами (Разрушение: [devastation_range], Тяжелые: [heavy_impact_range], Легкие: [light_impact_range], Пламя: [flame_range], Свет: [flash_range]) в [ADMIN_VERBOSEJMP(epicenter)]. Возможная причина: [explosion_cause]. Последние отпечатки: [who_did_it].")
+		log_game("Взрыв с параметрами ([devastation_range], [heavy_impact_range], [light_impact_range], [flame_range], [flash_range]) в [loc_name(epicenter)]. Возможная причина: [explosion_cause]. Последние отпечатки: [who_did_it_game_log].")
 
 	var/x0 = epicenter.x
 	var/y0 = epicenter.y
@@ -472,7 +472,7 @@ ADMIN_VERB(check_bomb_impacts, R_DEBUG, "Check Bomb Impact", "See what the effec
 
 	//You need to press the DebugGame verb to see these now....they were getting annoying and we've collected a fair bit of data. Just -test- changes to explosion code using this please so we can compare
 	if(GLOB.Debug2)
-		log_world("## DEBUG: Explosion([x0],[y0],[z0])(d[devastation_range],h[heavy_impact_range],l[light_impact_range]): Took [took] seconds.")
+		log_world("## ОТЛАДКА: Взрыв([x0],[y0],[z0])(р[devastation_range],т[heavy_impact_range],л[light_impact_range]): Заняло [took] секунд.")
 
 	explosion_index += 1
 

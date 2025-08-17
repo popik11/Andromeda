@@ -1,20 +1,20 @@
 /*
- * Simple component for something that is able to destroy
- * certain effects (such as cult runes) in one attack.
+ * Простой компонент для предметов, способных уничтожать
+ * определённые эффекты (например, руны культа) за одно использование.
  */
 /datum/component/effect_remover
 	dupe_mode = COMPONENT_DUPE_ALLOWED
-	/// Line sent to the user on successful removal.
+	/// Сообщение пользователю при успешном удалении
 	var/success_feedback
-	/// Line forcesaid by the user on successful removal.
+	/// Форс-сообщение пользователя при успешном удалении
 	var/success_forcesay
-	/// The text used in the screentip when our parent is hovering over an item we can clear. Ex "Destroy rune"
+	/// Текст подсказки при наведении на удаляемый эффект (например "Уничтожить руну")
 	var/tip_text
-	/// Callback invoked with removal is done.
+	/// Колбэк, вызываемый после удаления
 	var/datum/callback/on_clear_callback
-	/// A typecache of all effects we can clear with our item.
+	/// Типы эффектов, которые можно удалить этим предметом
 	var/list/obj/effect/effects_we_clear
-	/// If above 0, how long it takes while standing still to remove the effect.
+	/// Если больше 0 - время, необходимое для удаления эффекта
 	var/time_to_remove = 0 SECONDS
 
 /datum/component/effect_remover/Initialize(
@@ -31,7 +31,7 @@
 		return COMPONENT_INCOMPATIBLE
 
 	if(!effects_we_clear)
-		stack_trace("[type] was instantiated without any valid removable effects!")
+		stack_trace("[type] создан без указания удаляемых эффектов!")
 		return COMPONENT_INCOMPATIBLE
 
 	src.success_feedback = success_feedback
@@ -57,7 +57,7 @@
 	UnregisterSignal(parent, list(COMSIG_ITEM_INTERACTING_WITH_ATOM, COMSIG_ITEM_REQUESTING_CONTEXT_FOR_TARGET))
 
 /*
- * Signal proc for [COMSIG_ITEM_INTERACTING_WITH_ATOM].
+ * Обработчик сигнала COMSIG_ITEM_INTERACTING_WITH_ATOM.
  */
 
 /datum/component/effect_remover/proc/try_remove_effect(datum/source, mob/living/user, atom/target, params)
@@ -67,15 +67,15 @@
 		return NONE
 
 	if(HAS_TRAIT(target, TRAIT_ILLUSORY_EFFECT))
-		to_chat(user, span_notice("You pass [parent] through the [target], but nothing seems to happen. Is it really even there?"))
+		to_chat(user, span_notice("Вы проводите [parent] сквозь [target], но ничего не происходит. Он вообще реальный?"))
 		return NONE
 
-	if(is_type_in_typecache(target, effects_we_clear)) // Make sure we get all subtypes and everything
+	if(is_type_in_typecache(target, effects_we_clear))
 		INVOKE_ASYNC(src, PROC_REF(do_remove_effect), target, user)
 		return ITEM_INTERACT_SUCCESS
 
 /*
- * Actually removes the effect, invoking our on_clear_callback before it's deleted.
+ * Непосредственно удаляет эффект, вызывая колбэк перед удалением.
  */
 /datum/component/effect_remover/proc/do_remove_effect(obj/effect/target, mob/living/user)
 	if(time_to_remove && !do_after(user, time_to_remove, target))
@@ -85,8 +85,8 @@
 	if(success_forcesay)
 		user.say(success_forcesay, forced = item_parent.name)
 	if(success_feedback)
-		var/real_feedback = replacetext(success_feedback, "%THEEFFECT", "\the [target]")
-		real_feedback = replacetext(real_feedback, "%THEWEAPON", "\the [item_parent]")
+		var/real_feedback = replacetext(success_feedback, "%THEEFFECT", "[target]")
+		real_feedback = replacetext(real_feedback, "%THEWEAPON", "[item_parent]")
 		to_chat(user, span_notice(real_feedback))
 	on_clear_callback?.Invoke(target, user)
 
@@ -94,9 +94,9 @@
 		qdel(target)
 
 /*
- * Signal proc for [COMSIG_ITEM_REQUESTING_CONTEXT_FOR_TARGET].
+ * Обработчик сигнала COMSIG_ITEM_REQUESTING_CONTEXT_FOR_TARGET.
  *
- * Adds some context for the target, if we have one set and it's a valid target.
+ * Добавляет контекстную подсказку для подходящих целей.
  */
 /datum/component/effect_remover/proc/add_item_context(obj/item/source, list/context, atom/target, mob/living/user)
 	SIGNAL_HANDLER

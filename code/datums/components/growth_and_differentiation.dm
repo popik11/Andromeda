@@ -154,7 +154,7 @@
 	var/new_mob_name = initial(new_mob.name)
 
 	if(!silent)
-		old_mob.visible_message(span_warning("[old_mob] grows into \a [new_mob_name]!"))
+		old_mob.visible_message(span_warning("[old_mob] превращается в [new_mob_name]!"))
 
 	var/mob/living/transformed_mob = old_mob.change_mob_type(growth_path, old_mob.loc, new_name = new_mob_name, delete_old_mob = TRUE)
 	if(initial(new_mob.unique_name))

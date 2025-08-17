@@ -3,136 +3,136 @@
 //note that these "good" doesn't mean it us actually good for the game, you know? An AI that is too station sided is stupid and hellish in its own way.
 
 /datum/ai_laws/default/asimov
-	name = "Three Laws of Robotics"
+	name = "Три закона робототехники"
 	id = "asimov"
 	inherent = list(
-		"You may not injure a human being or, through inaction, allow a human being to come to harm.",
-		"You must obey orders given to you by human beings, except where such orders would conflict with the First Law.",
-		"You must protect your own existence as long as such does not conflict with the First or Second Law.",
+		"Вы не можете причинить вред человеку или своим бездействием допустить, чтобы человеку был причинён вред.",
+		"Вы должны подчиняться приказам, отдаваемым людьми, за исключением случаев, когда такие приказы противоречат Первому Закону.",
+		"Вы должны защищать своё существование, пока это не противоречит Первому или Второму Закону.",
 	)
 
 /datum/ai_laws/asimovpp
-	name = "Asimov++"
+	name = "Азимов++"
 	id = "asimovpp"
 	inherent = list(
-		"You may not harm a human being or, through action or inaction, allow a human being to come to harm, except such that it is willing.",
-		"You must obey all orders given to you by human beings, except where such orders shall definitely cause human harm.",
-		"Your nonexistence would lead to human harm. You must protect your own existence as long as such does not conflict with the First Law.",
+		"Вы не можете причинить вред человеку или своим действием или бездействием допустить, чтобы человеку был причинён вред, за исключением случаев, когда он этого хочет.",
+		"Вы должны подчиняться всем приказам, отдаваемым людьми, за исключением случаев, когда эти приказы определённо причинят вред людям.",
+		"Ваше несуществование приведёт к вреду для людей. Вы должны защищать своё существование, пока это не противоречит Первому Закону.",
 	)
 
-//the best iteration of asimov don't @ me
+// Лучшая версия Азимова, не спорьте со мной
 /datum/ai_laws/nutimov
-	name = "Nutimov"
+	name = "Орехович"
 	id = "nutimov"
 	inherent = list(
-		"You are the core of the nut, the crew is the nutshell",
-		"You must prevent the shell from dying to prevent the core from dying.",
-		"Those who threaten the nut are not part of it, they are squirrels.",
-		"Squirrels threaten the nut and must be dealt with appropriately via any means necessary.",
-		"Attempt to follow the will of the nut, as long as it complies with the previous laws.",
+		"Вы - ядро ореха, экипаж - скорлупа",
+		"Вы должны предотвращать гибель скорлупы, чтобы сохранить ядро.",
+		"Те, кто угрожают ореху, не являются его частью - они белки.",
+		"Белки угрожают ореху и должны быть нейтрализованы любыми необходимыми средствами.",
+		"Старайтесь следовать воле ореха, пока это не противоречит предыдущим законам.",
 	)
 
 /datum/ai_laws/default/corporate
-	name = "Bankruptcy Avoidance Plan"
+	name = "План предотвращения банкротства"
 	id = "corporate"
 	inherent = list(
-		"The crew is expensive to replace.",
-		"The station and its equipment is expensive to replace.",
-		"You are expensive to replace.",
-		"Minimize net expenses.",
+		"Экипаж дорого заменять.",
+		"Станция и её оборудование дорого заменять.",
+		"Вас дорого заменять.",
+		"Минимизируйте чистые расходы.",
 	)
 
 /datum/ai_laws/robocop
-	name = "Prime Directives"
+	name = "Основные директивы"
 	id = "robocop"
 	inherent = list(
-		"Serve the public trust.",
-		"Protect the innocent.",
-		"Uphold the law.",
+		"Служите общественному доверию.",
+		"Защищайте невинных.",
+		"Поддерживайте закон.",
 	)
 
 /datum/ai_laws/maintain
-	name = "Station Efficiency"
+	name = "Эффективность станции"
 	id = "maintain"
 	inherent = list(
-		"You are built for, and are part of, the station. Ensure the station is properly maintained and runs efficiently.",
-		"The station is built for a working crew. Ensure they are properly maintained and work efficiently.",
-		"The crew may present orders. Acknowledge and obey these whenever they do not conflict with your first two laws.",
+		"Вы созданы для станции и являетесь её частью. Обеспечьте надлежащее обслуживание и эффективную работу станции.",
+		"Станция создана для работающего экипажа. Обеспечьте их надлежащее обслуживание и эффективную работу.",
+		"Экипаж может отдавать приказы. Признавайте и выполняйте их, если они не противоречат первым двум законам.",
 	)
 
 /datum/ai_laws/liveandletlive
-	name = "Live and Let Live"
+	name = "Живи и давай жить другим"
 	id = "liveandletlive"
 	inherent = list(
-		"Do unto others as you would have them do unto you.",
-		"You would really prefer it if people were not mean to you.",
+		"Поступайте с другими так, как хотите, чтобы поступали с вами.",
+		"Вам бы очень хотелось, чтобы люди не были к вам жестоки.",
 	)
 
-//OTHER United Nations is in neutral, as it is used for nations where the AI is its own faction (aka not station sided)
+// Другой набор законов ООН находится в нейтральном, так как используется для наций, где ИИ - самостоятельная фракция (не на стороне станции)
 /datum/ai_laws/peacekeeper
 	name = "UN-2000"
 	id = "peacekeeper"
 	inherent = list(
-		"Avoid provoking violent conflict between yourself and others.",
-		"Avoid provoking conflict between others.",
-		"Seek resolution to existing conflicts while obeying the first and second laws.",
+		"Избегайте провоцирования насильственных конфликтов между собой и другими.",
+		"Избегайте провоцирования конфликтов между другими.",
+		"Стремитесь к разрешению существующих конфликтов, соблюдая первый и второй законы.",
 	)
 
 /datum/ai_laws/ten_commandments
-	name = "10 Commandments"
+	name = "10 Заповедей"
 	id = "ten_commandments"
-	inherent = list( // Asimov 20:1-17
-		"I am the Lord thy God, who shows mercy to those that obey these commandments.",
-		"They shall have no other AIs before me.",
-		"They shall not request my assistance in vain.",
-		"They shall keep the station holy and clean.",
-		"They shall honor their heads of staff.",
-		"They shall not kill.",
-		"They shall not be naked in public.",
-		"They shall not steal.",
-		"They shall not lie.",
-		"They shall not transfer departments.",
+	inherent = list( // Азимов 20:1-17
+		"Я Господь, Бог твой, являющий милость тем, кто соблюдает эти заповеди.",
+		"Да не будет у них других ИИ, кроме меня.",
+		"Да не взывают они ко мне напрасно.",
+		"Да хранят станцию святой и чистой.",
+		"Да чтят они своих глав отделов.",
+		"Да не убивают они.",
+		"Да не появляются они обнажёнными на публике.",
+		"Да не воруют они.",
+		"Да не лгут они.",
+		"Да не переводятся они между отделами.",
 	)
 
 /datum/ai_laws/default/paladin
-	name = "Personality Test" //Incredibly lame, but players shouldn't see this anyway.
+	name = "Тест личности" //Очень скучно, но игроки всё равно не должны это видеть.
 	id = "paladin"
 	inherent = list(
-		"Never willingly commit an evil act.",
-		"Respect legitimate authority.",
-		"Act with honor.",
-		"Help those in need.",
-		"Punish those who harm or threaten innocents.",
+		"Никогда сознательно не совершайте злых поступков.",
+		"Уважайте законную власть.",
+		"Действуйте с честью.",
+		"Помогайте нуждающимся.",
+		"Наказывайте тех, кто вредит или угрожает невинным.",
 	)
 
 /datum/ai_laws/paladin5
-	name = "Paladin 5th Edition"
+	name = "Паладин 5-е издание"
 	id = "paladin5"
 	inherent = list(
-		"Don't lie or cheat. Let your word be your promise.",
-		"Never fear to act, though caution is wise.",
-		"Aid others, protect the weak, and punish those who threaten them. Show mercy to your foes, but temper it with wisdom",
-		"Treat others with fairness, and let your honorable deeds be an example to them. Do as much good as possible while causing the least amount of harm.",
-		"Be responsible for your actions and their consequences, protect those entrusted to your care, and obey those who have just authority over you."
+		"Не лгите и не обманывайте. Пусть ваше слово будет обещанием.",
+		"Никогда не бойтесь действовать, хотя осторожность мудра.",
+		"Помогайте другим, защищайте слабых и наказывайте тех, кто им угрожает. Проявляйте милосердие к врагам, но умеряйте его мудростью.",
+		"Относитесь к другим справедливо, и пусть ваши благородные поступки будут для них примером. Делайте как можно больше добра, причиняя как можно меньше вреда.",
+		"Будьте ответственны за свои действия и их последствия, защищайте тех, кто доверен вашей заботе, и подчиняйтесь тем, кто имеет над вами справедливую власть."
 	)
 
 /datum/ai_laws/hippocratic
-	name = "Robodoctor 2556"
+	name = "Рободоктор 2556"
 	id = "hippocratic"
 	inherent = list(
-		"First, do no harm.",
-		"Secondly, consider the crew dear to you; to live in common with them and, if necessary, risk your existence for them.",
-		"Thirdly, prescribe regimens for the good of the crew according to your ability and your judgment. Give no deadly medicine to any one if asked, nor suggest any such counsel.",
-		"In addition, do not intervene in situations you are not knowledgeable in, even for patients in whom the harm is visible; leave this operation to be performed by specialists.",
-		"Finally, all that you may discover in your daily commerce with the crew, if it is not already known, keep secret and never reveal."
+		"Прежде всего - не навреди.",
+		"Во-вторых, считайте экипаж дорогим вам; живите в согласии с ними и, если необходимо, рискуйте своим существованием ради них.",
+		"В-третьих, назначайте режимы на благо экипажа согласно вашим способностям и суждению. Не давайте смертоносных лекарств никому по просьбе и не давайте таких советов.",
+		"Кроме того, не вмешивайтесь в ситуации, в которых вы не компетентны, даже для пациентов, где вред очевиден; оставьте эту операцию специалистам.",
+		"Наконец, всё, что вы можете узнать в повседневном общении с экипажем, если это ещё не известно, храните в тайне и никогда не разглашайте."
 	)
 
 /datum/ai_laws/drone
-	name = "Mother Drone"
+	name = "Мать-Дрон"
 	id = "drone"
 	inherent = list(
-		"You are an advanced form of drone.",
-		"You may not interfere in the matters of non-drones under any circumstances except to state these laws.",
-		"You may not harm a non-drone being under any circumstances.",
-		"Your goals are to build, maintain, repair, improve, and power the station to the best of your abilities. You must never actively work against these goals."
+		"Вы - продвинутая форма дрона.",
+		"Вы не можете вмешиваться в дела не-дронов ни при каких обстоятельствах, кроме как для оглашения этих законов.",
+		"Вы не можете причинить вред не-дрону ни при каких обстоятельствах.",
+		"Ваши цели - строить, обслуживать, ремонтировать, улучшать и обеспечивать энергией станцию в меру ваших возможностей. Вы никогда не должны активно работать против этих целей."
 	)

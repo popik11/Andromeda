@@ -42,7 +42,7 @@
 /datum/component/wall_mounted/proc/on_examine(datum/source, mob/user, list/examine_list)
 	SIGNAL_HANDLER
 	if (parent in view(user.client?.view || world.view, user))
-		examine_list += span_notice("\The [hanging_wall_turf] is currently supporting [span_bold("[parent]")]. Deconstruction or excessive damage would cause it to [span_bold("fall to the ground")].")
+		examine_list += span_notice("[hanging_wall_turf] сейчас поддерживает [span_bold("[parent]")]. Разрушение или значительные повреждения приведут к [span_bold("падению на пол")].")
 
 /**
  * When the type of turf changes, if it is changing into a floor we should drop our contents
@@ -73,10 +73,10 @@
 	var/obj/hanging_parent = parent
 
 	if(on_drop)
-		hanging_parent.visible_message(message = span_warning("\The [hanging_parent] falls off the wall!"), vision_distance = 5)
+		hanging_parent.visible_message(message = span_warning("[hanging_parent] падает со стены!"), vision_distance = 5)
 		on_drop.Invoke(hanging_parent)
 	else
-		hanging_parent.visible_message(message = span_warning("\The [hanging_parent] falls apart!"), vision_distance = 5)
+		hanging_parent.visible_message(message = span_warning("[hanging_parent] разваливается на части!"), vision_distance = 5)
 		hanging_parent.deconstruct()
 
 	if(!QDELING(src))

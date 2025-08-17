@@ -98,9 +98,9 @@
 
 	var/atom/atom_parent = parent
 
-	examine_list += "It [LAZYLEN(ingredient_names) \
-		? "contains [english_list(ingredient_names)] making a [custom_adjective()]-sized [initial(atom_parent.name)]" \
-		: "does not contain any ingredients"]."
+	examine_list += "[LAZYLEN(ingredient_names) \
+		? "Содержит [english_list(ingredient_names)], образуя [custom_adjective()] [initial(atom_parent.name)]" \
+		: "Не содержит ингредиентов"]."
 
 //// Proc that checks if an ingredient is valid or not, returning false if it isnt and true if it is.
 /datum/component/ingredients_holder/proc/valid_ingredient(obj/ingredient)
@@ -120,14 +120,14 @@
 	SIGNAL_HANDLER
 
 	if (!valid_ingredient(ingredient))
-		if (ingredient.is_drainable()) // For stuff like adding flour from a flour sack into a bowl, we handle the transfer of the reagent elsewhere, but we shouldn't regard it beyond some user feedback.
-			attacker.balloon_alert(attacker, "transferring...")
+		if (ingredient.is_drainable()) // Для таких случаев как добавление муки из мешка в миску - передача реагентов обрабатывается отдельно, здесь только уведомление
+			attacker.balloon_alert(attacker, "перемещается...")
 			return
-		attacker.balloon_alert(attacker, "doesn't go on that!")
+		attacker.balloon_alert(attacker, "не подходит для этого!")
 		return
 
 	if (LAZYLEN(ingredient_names) >= max_ingredients)
-		attacker.balloon_alert(attacker, "too full!")
+		attacker.balloon_alert(attacker, "слишком много!")
 		return COMPONENT_NO_AFTERATTACK
 
 	if(!attacker.transferItemToLoc(ingredient, parent))
@@ -237,19 +237,19 @@
 		new_materials[mat] += ingredient.custom_materials[mat] * (remove ? -1 : 1)
 	atom_parent.set_custom_materials(new_materials)
 
-///Gives an adjective to describe the size of the custom food.
+/// Возвращает прилагательное для описания размера кастомной еды.
 /datum/component/ingredients_holder/proc/custom_adjective()
 	switch(LAZYLEN(ingredient_names))
 		if (0 to 2)
-			return "small"
+			return "маленький"
 		if (3 to 5)
-			return "standard"
+			return "стандартный"
 		if (6 to 8)
-			return "big"
+			return "большой"
 		if (8 to 11)
-			return "ridiculous"
+			return "огромный"
 		if (12 to INFINITY)
-			return "monstrous"
+			return "гигантский"
 
 
 ///Gives the type of custom food (based on what the first ingredient was).

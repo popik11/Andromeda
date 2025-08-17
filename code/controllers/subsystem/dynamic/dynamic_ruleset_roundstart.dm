@@ -20,7 +20,7 @@
 	if(!candidate_client.prefs.job_preferences[job_typepath::title])
 		return FALSE
 	// And only to people who can actually be AI this round
-	if(SSjob.check_job_eligibility(candidate, SSjob.get_job_type(job_typepath), "[name] Candidacy") != JOB_AVAILABLE)
+	if(SSjob.check_job_eligibility(candidate, SSjob.get_job_type(job_typepath), "[name] Кандидатура") != JOB_AVAILABLE)
 		return FALSE
 	// (Something else forced us to play a job that isn't AI)
 	var/forced_job = LAZYACCESS(SSjob.forced_occupations, candidate)
@@ -187,7 +187,7 @@
 /datum/dynamic_ruleset/roundstart/blood_cult/round_result()
 	var/datum/team/cult/main_cult = locate() in GLOB.antagonist_teams
 	if(main_cult.check_cult_victory())
-		SSticker.mode_result = "win - cult win"
+		SSticker.mode_result = "победа - культ победил"
 		SSticker.news_report = CULT_SUMMON
 		return TRUE
 
@@ -198,7 +198,7 @@
 		if(considered_escaped(escapee))
 			escaped_cultists++
 
-	SSticker.mode_result = "loss - staff stopped the cult"
+	SSticker.mode_result = "поражение - экипаж остановил культ"
 	SSticker.news_report = (escaped_cultists / num_cultists) >= ratio_to_be_considered_escaped ? CULT_ESCAPE : CULT_FAILURE
 	return TRUE
 
@@ -240,34 +240,34 @@
 	var/result = nuke_team.get_result()
 	switch(result)
 		if(NUKE_RESULT_FLUKE)
-			SSticker.mode_result = "loss - syndicate nuked - disk secured"
+			SSticker.mode_result = "поражение - ядерный удар синдиката - диск защищен"
 			SSticker.news_report = NUKE_SYNDICATE_BASE
 		if(NUKE_RESULT_NUKE_WIN)
-			SSticker.mode_result = "win - syndicate nuke"
+			SSticker.mode_result = "победа - ядерный удар синдиката"
 			SSticker.news_report = STATION_DESTROYED_NUKE
 		if(NUKE_RESULT_NOSURVIVORS)
-			SSticker.mode_result = "halfwin - syndicate nuke - did not evacuate in time"
+			SSticker.mode_result = "частичная победа - ядерный удар синдиката - не успели эвакуироваться"
 			SSticker.news_report = STATION_DESTROYED_NUKE
 		if(NUKE_RESULT_WRONG_STATION)
-			SSticker.mode_result = "halfwin - blew wrong station"
+			SSticker.mode_result = "частичная победа - взорвали не ту станцию"
 			SSticker.news_report = NUKE_MISS
 		if(NUKE_RESULT_WRONG_STATION_DEAD)
-			SSticker.mode_result = "halfwin - blew wrong station - did not evacuate in time"
+			SSticker.mode_result = "частичная победа - взорвали не ту станцию - не успели эвакуироваться"
 			SSticker.news_report = NUKE_MISS
 		if(NUKE_RESULT_CREW_WIN_SYNDIES_DEAD)
-			SSticker.mode_result = "loss - evacuation - disk secured - syndi team dead"
+			SSticker.mode_result = "поражение - эвакуация - диск защищен - команда синдиката мертва"
 			SSticker.news_report = OPERATIVES_KILLED
 		if(NUKE_RESULT_CREW_WIN)
-			SSticker.mode_result = "loss - evacuation - disk secured"
+			SSticker.mode_result = "поражение - эвакуация - диск защищен"
 			SSticker.news_report = OPERATIVES_KILLED
 		if(NUKE_RESULT_DISK_LOST)
-			SSticker.mode_result = "halfwin - evacuation - disk not secured"
+			SSticker.mode_result = "частичная победа - эвакуация - диск не защищен"
 			SSticker.news_report = OPERATIVE_SKIRMISH
 		if(NUKE_RESULT_DISK_STOLEN)
-			SSticker.mode_result = "halfwin - detonation averted"
+			SSticker.mode_result = "частичная победа - детонация предотвращена"
 			SSticker.news_report = OPERATIVE_SKIRMISH
 		else
-			SSticker.mode_result = "halfwin - interrupted"
+			SSticker.mode_result = "частичная победа - прервано"
 			SSticker.news_report = OPERATIVE_SKIRMISH
 
 /datum/dynamic_ruleset/roundstart/nukies/clown
@@ -325,12 +325,12 @@
 			head_check++
 
 	if(head_check < heads_necessary)
-		log_dynamic("[config_tag]: Not enough heads of staff were present to start a revolution.")
+		log_dynamic("[config_tag]: Недостаточно глав отделов для начала революции.")
 		addtimer(CALLBACK(src, PROC_REF(revs_execution_failed)), 1 MINUTES, TIMER_UNIQUE|TIMER_DELETE_ME)
 		return
 
 	if(!can_be_headrev(candidate))
-		log_dynamic("[config_tag]: [key_name(candidate)] was not eligible to be a headrev after the timer expired - finding a replacement.")
+		log_dynamic("[config_tag]: [key_name(candidate)] не подходит на роль главы революции после истечения таймера - поиск замены.")
 		find_another_headrev()
 		return
 
@@ -347,20 +347,20 @@
 		if(!can_be_headrev(upstanding_citizen.mind))
 			continue
 		reveal_head(upstanding_citizen.mind)
-		log_dynamic("[config_tag]: [key_name(upstanding_citizen)] was selected as a replacement headrev.")
+		log_dynamic("[config_tag]: [key_name(upstanding_citizen)] выбран в качестве замены главы революции.")
 		return
 
-	log_dynamic("[config_tag]: Failed to find a replacement headrev.")
+	log_dynamic("[config_tag]: Не удалось найти замену главе революции.")
 	addtimer(CALLBACK(src, PROC_REF(revs_execution_failed)), 1 MINUTES, TIMER_UNIQUE|TIMER_DELETE_ME)
 
 /datum/dynamic_ruleset/roundstart/revolution/proc/revs_execution_failed()
 	if(GLOB.revolution_handler)
 		return
-	// Execution is effectively cancelled by this point, but it's not like we can go back and refund it
+	// К этому моменту выполнение фактически отменено, но мы не можем вернуть ресурсы
 	SSdynamic.unreported_rulesets += src
-	name += " (Canceled)"
-	log_dynamic("[config_tag]: All headrevs were ineligible after the timer expired, and no replacements could be found. Ruleset canceled.")
-	message_admins("[config_tag]: All headrevs were ineligible after the timer expired, and no replacements could be found. Ruleset canceled.")
+	name += " (Отменено)"
+	log_dynamic("[config_tag]: Все кандидаты в главы революции оказались непригодны после истечения таймера, и замену найти не удалось. Правило отменено.")
+	message_admins("[config_tag]: Все кандидаты в главы революции оказались непригодны после истечения таймера, и замену найти не удалось. Правило отменено.")
 
 /datum/dynamic_ruleset/roundstart/spies
 	name = "Spies"

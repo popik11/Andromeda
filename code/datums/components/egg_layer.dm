@@ -1,30 +1,30 @@
 /**
- * # egg layer component!
+ * # Компонент кладки яиц!
  *
- * Component that manages how many eggs to lay, what can be fed to the mob to make them lay more, and what is actually laid.
- * Since the only real interaction with the component is an attackby, the nice part is that we're able to make this an atom level proc.
- * egg_layer will loudly fail if you do not provide it the arguments, as to encourage explicicy(?)
+ * Управляет количеством яиц, которые можно отложить, чем можно кормить моба для увеличения кладки, и что именно откладывается.
+ * Поскольку основное взаимодействие с компонентом - это attackby, мы можем сделать это процедурой уровня атома.
+ * egg_layer будет явно выдавать ошибки при отсутствии аргументов, чтобы обеспечить ясность.
  */
 /datum/component/egg_layer
-	/// item laid by the mob
+	/// тип откладываемого яйца
 	var/egg_type
-	/// items that can be fed to the mob to make it lay more eggs
+	/// чем можно кормить моба для увеличения кладки
 	var/list/food_types
-	/// messages sent when fed
+	/// сообщения при кормлении
 	var/list/feed_messages
-	/// messages sent when laying an egg
+	/// сообщения при откладывании яйца
 	var/list/lay_messages
-	/// how many eggs left to lay
+	/// сколько яиц осталось отложить
 	var/eggs_left
-	/// how many eggs to lay given from food
+	/// сколько яиц добавляется при кормлении
 	var/eggs_added_from_eating
-	/// how many eggs can be stored
+	/// максимальное количество хранимых яиц
 	var/max_eggs_held
-	/// callback to a proc that allows the parent to modify their new eggs
+	/// колбэк для модификации новых яиц
 	var/datum/callback/egg_laid_callback
 
 /datum/component/egg_layer/Initialize(egg_type, food_types, feed_messages, lay_messages, eggs_left, eggs_added_from_eating, max_eggs_held, egg_laid_callback)
-	if(!isatom(parent)) //yes, you could make a tameable toolbox.
+	if(!isatom(parent)) // да, можно сделать ручной ящик с инструментами
 		return COMPONENT_INCOMPATIBLE
 
 	src.egg_type = egg_type
@@ -35,7 +35,6 @@
 	src.eggs_added_from_eating = eggs_added_from_eating
 	src.max_eggs_held = max_eggs_held
 	src.egg_laid_callback = egg_laid_callback
-
 
 	START_PROCESSING(SSobj, src)
 
@@ -61,19 +60,18 @@
 	if(isliving(at_least_atom))
 		var/mob/living/potentially_dead_horse = at_least_atom
 		if(potentially_dead_horse.stat == DEAD)
-			to_chat(attacker, span_warning("[parent] is dead!"))
+			to_chat(attacker, span_warning("[parent] мёртв!"))
 			return COMPONENT_CANCEL_ATTACK_CHAIN
 	if(eggs_left > max_eggs_held)
-		to_chat(attacker, span_warning("[parent] doesn't seem hungry!"))
+		to_chat(attacker, span_warning("[parent] не выглядит голодным!"))
 		return COMPONENT_CANCEL_ATTACK_CHAIN
-	attacker.visible_message(span_notice("[attacker] hand-feeds [food] to [parent]."), span_notice("You hand-feed [food] to [parent]."))
+	attacker.visible_message(span_notice("[attacker] кормит [parent] с руки [food]."), span_notice("Вы кормите [parent] с руки [food]."))
 	at_least_atom.visible_message(pick(feed_messages))
 	qdel(food)
-	eggs_left += min(eggs_left + eggs_added_from_eating, max_eggs_held)
+	eggs_left = min(eggs_left + eggs_added_from_eating, max_eggs_held)
 	return COMPONENT_CANCEL_ATTACK_CHAIN
 
 /datum/component/egg_layer/process(seconds_per_tick = SSOBJ_DT)
-
 	var/atom/at_least_atom = parent
 	if(isliving(at_least_atom))
 		var/mob/living/potentially_dead_horse = at_least_atom

@@ -34,8 +34,8 @@ SUBSYSTEM_DEF(lag_switch)
 	auto_switch = FALSE
 	UnregisterSignal(SSdcs, COMSIG_GLOB_CLIENT_CONNECT)
 	veto_timer_id = addtimer(CALLBACK(src, PROC_REF(set_all_measures), TRUE, TRUE), 20 SECONDS, TIMER_STOPPABLE)
-	message_admins("Lag Switch population threshold reached. Automatic activation of lag mitigation measures occuring in 20 seconds. (<a href='byond://?_src_=holder;[HrefToken()];change_lag_switch_option=CANCEL'>CANCEL</a>)")
-	log_admin("Lag Switch population threshold reached. Automatic activation of lag mitigation measures occuring in 20 seconds.")
+	message_admins("Достигнут порог численности для Lag Switch. Автоматическая активация мер по снижению лагов произойдет через 20 секунд. (<a href='byond://?_src_=holder;[HrefToken()];change_lag_switch_option=CANCEL'>ОТМЕНА</a>)")
+	log_admin("Достигнут порог численности для Lag Switch. Автоматическая активация мер по снижению лагов произойдет через 20 секунд.")
 
 /// (En/Dis)able automatic triggering of switches based on client count
 /datum/controller/subsystem/lag_switch/proc/toggle_auto_enable()
@@ -69,7 +69,7 @@ SUBSYSTEM_DEF(lag_switch)
 
 	slowmode_cooldown = length_secs
 	if(measures[SLOWMODE_SAY])
-		to_chat(world, span_boldannounce("Slowmode timer has been changed to [length] seconds by an admin."))
+		to_chat(world, span_boldannounce("Таймер медленного режима был изменен администратором на [length] секунд."))
 	return TRUE
 
 /// Handle the state change for individual measures
@@ -91,10 +91,10 @@ SUBSYSTEM_DEF(lag_switch)
 				for(var/mob/user as anything in GLOB.player_list)
 					if(user.stat == DEAD && !user.client?.holder)
 						GLOB.keyloop_list -= user
-				deadchat_broadcast(span_big("To increase performance Observer freelook is now disabled. Please use Orbit, Teleport, and Jump to look around."), message_type = DEADCHAT_ANNOUNCEMENT)
+				deadchat_broadcast(span_big("Для повышения производительности свободный обзор в режиме наблюдателя отключен. Используйте Orbit, Teleport и Jump для осмотра."), message_type = DEADCHAT_ANNOUNCEMENT)
 			else
 				GLOB.keyloop_list |= GLOB.player_list
-				deadchat_broadcast("Observer freelook has been re-enabled. Enjoy your wooshing.", message_type = DEADCHAT_ANNOUNCEMENT)
+				deadchat_broadcast("Свободный обзор в режиме наблюдателя снова включен. Наслаждайтесь полетами.", message_type = DEADCHAT_ANNOUNCEMENT)
 		if(DISABLE_GHOST_ZOOM_TRAY)
 			if(state) // if enabling make sure current ghosts are updated
 				for(var/mob/dead/observer/ghost in GLOB.dead_mob_list)
@@ -104,26 +104,26 @@ SUBSYSTEM_DEF(lag_switch)
 						ghost.client.view_size.resetToDefault()
 		if(SLOWMODE_SAY)
 			if(state)
-				to_chat(world, span_boldannounce("Slowmode for IC/dead chat has been enabled with [slowmode_cooldown/10] seconds between messages."))
+				to_chat(world, span_boldannounce("Включен медленный режим для IC/мертвого чата с задержкой [slowmode_cooldown/10] секунд между сообщениями."))
 			else
 				for(var/client/C as anything in GLOB.clients)
 					COOLDOWN_RESET(C, say_slowmode)
-				to_chat(world, span_boldannounce("Slowmode for IC/dead chat has been disabled by an admin."))
+				to_chat(world, span_boldannounce("Медленный режим для IC/мертвого чата отключен администратором."))
 		if(DISABLE_NON_OBSJOBS)
 			world.update_status()
 		if(DISABLE_PARALLAX)
 			if (state)
-				to_chat(world, span_boldannounce("Parallax has been disabled for performance concerns."))
+				to_chat(world, span_boldannounce("Параллакс отключен для повышения производительности."))
 			else
-				to_chat(world, span_boldannounce("Parallax has been re-enabled."))
+				to_chat(world, span_boldannounce("Параллакс снова включен."))
 
 			for (var/mob/mob as anything in GLOB.mob_list)
 				mob.hud_used?.update_parallax_pref()
 		if (DISABLE_FOOTSTEPS)
 			if (state)
-				to_chat(world, span_boldannounce("Footstep sounds have been disabled for performance concerns."))
+				to_chat(world, span_boldannounce("Звуки шагов отключены для повышения производительности."))
 			else
-				to_chat(world, span_boldannounce("Footstep sounds have been re-enabled."))
+				to_chat(world, span_boldannounce("Звуки шагов снова включены."))
 
 	return TRUE
 
@@ -134,8 +134,8 @@ SUBSYSTEM_DEF(lag_switch)
 		return FALSE
 
 	if(automatic)
-		message_admins("Lag Switch enabling automatic measures now.")
-		log_admin("Lag Switch enabling automatic measures now.")
+		message_admins("Lag Switch активирует автоматические меры сейчас.")
+		log_admin("Lag Switch активирует автоматические меры сейчас.")
 		veto_timer_id = null
 		for(var/i in 1 to auto_measures.len)
 			set_measure(auto_measures[i], state)

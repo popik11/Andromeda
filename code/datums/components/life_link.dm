@@ -132,11 +132,11 @@
 	else
 		mob_parent.set_hud_image_state(STATUS_HUD, "hudhealthy")
 
-/// When our status tab updates, draw how much HP our host has in there
+/// При обновлении статусной вкладки отображаем здоровье хоста
 /datum/component/life_link/proc/on_status_tab_updated(mob/living/source, list/items)
 	SIGNAL_HANDLER
 	var/healthpercent = health_percentage(host)
-	items += "Host Health: [round(healthpercent, 0.5)]%"
+	items += "Здоровье хоста: [round(healthpercent, 0.5)]%"
 
 /// Called when our host dies, we should die too
 /datum/component/life_link/proc/on_host_died(mob/living/source, gibbed)

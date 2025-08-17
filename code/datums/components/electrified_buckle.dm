@@ -2,37 +2,35 @@
 #define ELECTRIC_BUCKLE_SHOCK_STRENGTH_DIVISOR 5000
 ///it will not shock the mob buckled to parent if its required to use a cable to shock and the cable has less than this power availaible
 #define ELECTRIC_BUCKLE_MINUMUM_POWERNET_STRENGTH 10
-
-
 /**
- * # electrified_buckle component:
- * attach it to any atom/movable that can be buckled to in order to have it shock mobs buckled to it. by default it shocks mobs buckled to parent every shock_loop_time.
- * the parent is supposed to define its behavior with arguments in AddComponent
-*/
+ * # Компонент electrified_buckle:
+ * Добавляет возможность шокировать пристёгнутых мобов.
+ * Родитель должен определить поведение через аргументы в AddComponent.
+ */
 /datum/component/electrified_buckle
-	///if usage_flags has SHOCK_REQUIREMENT_ITEM, this is the item required to be inside parent in order for it to shock buckled mobs
+	/// Требуемый предмет для активации (если SHOCK_REQUIREMENT_ITEM)
 	var/obj/item/required_object
-	///this is casted to the overlay we put on parent_chair
+	/// Оверлеи для отображения
 	var/list/requested_overlays
-	///it will only shock once every shock_loop_time
+	/// Кулдаун между ударами
 	COOLDOWN_DECLARE(electric_buckle_cooldown)
-	///these flags tells this instance what is required in order to allow shocking
+	/// Флаги требований для работы
 	var/usage_flags
-	///if true, this will shock the buckled mob every shock_loop_time in process()
+	/// Шоковать автоматически в процессе
 	var/shock_on_loop = TRUE
-	///if true we zap the buckled mob as soon as it becomes buckled
+	/// Шоковать сразу при пристёгивании
 	var/shock_immediately = FALSE
-	///do we output a message every time someone gets shocked?
+	/// Выводить сообщение при ударе
 	var/print_message = TRUE
-	///how long the component waits before shocking the mob buckled to parent again
+	/// Интервал между ударами
 	var/shock_loop_time = 5 SECONDS
-	///how much damage is done per shock iff usage_flags doesnt have SHOCK_REQUIREMENT_LIVE_CABLE
+	/// Урон от удара (если не используется кабель)
 	var/shock_damage = 50
-	///this signal was given as an argument to register for parent to emit, if its emitted to parent then shock_on_demand is called. var is so it can be unregistered
+	/// Сигнал для ручной активации
 	var/requested_signal_parent_emits = null
-	///what area power channel do we check if area power is required?
+	/// Канал питания для проверки
 	var/area_power_channel = AREA_USAGE_EQUIP
-	///details of how we electrocute people
+	/// Флаги удара
 	var/shock_flags
 
 /**
@@ -62,7 +60,7 @@
 
 	if(!parent_as_movable.can_buckle && !override_buckle)
 		return COMPONENT_INCOMPATIBLE
-	else if (override_buckle)
+	else if(override_buckle)
 		parent_as_movable.can_buckle = TRUE
 
 	if((usage_flags & SHOCK_REQUIREMENT_ITEM) && QDELETED(input_item))
@@ -92,7 +90,7 @@
 
 	ADD_TRAIT(parent_as_movable, TRAIT_ELECTRIFIED_BUCKLE, INNATE_TRAIT)
 
-	//if parent wants us to manually shock on some specified action
+	//если родитель хочет, чтобы мы вручную активировали шок при каком-то указанном действии
 	if(signal_to_register_from_parent)
 		RegisterSignal(parent, signal_to_register_from_parent, PROC_REF(do_electrocution))
 		requested_signal_parent_emits = signal_to_register_from_parent
@@ -101,7 +99,7 @@
 		requested_overlays = overlays_to_add
 		parent_as_movable.add_overlay(requested_overlays)
 
-	parent_as_movable.name = "electrified [initial(parent_as_movable.name)]"
+	parent_as_movable.name = "электрифицированный [initial(parent_as_movable.name)]"
 
 	shock_damage = damage_on_shock
 
@@ -151,9 +149,9 @@
 	if(!istype(mob_to_buckle))
 		return FALSE
 
-	if (requested_overlays)
+	if(requested_overlays)
 		source.update_appearance()
-	if (shock_immediately)
+	if(shock_immediately)
 		do_electrocution()
 
 	COOLDOWN_START(src, electric_buckle_cooldown, shock_loop_time)
@@ -166,18 +164,18 @@
 	if(!istype(unbuckled_mob))
 		return FALSE
 
-	if (requested_overlays)
+	if(requested_overlays)
 		source.update_appearance()
 
 /datum/component/electrified_buckle/proc/on_update_overlays(atom/movable/source, list/overlays)
 	SIGNAL_HANDLER
 	var/overlay_layer = length(source.buckled_mobs) ? ABOVE_MOB_LAYER : OBJ_LAYER
-	for (var/mutable_appearance/electrified_overlay as anything in requested_overlays)
+	for(var/mutable_appearance/electrified_overlay as anything in requested_overlays)
 		electrified_overlay.layer = overlay_layer
 		electrified_overlay = source.color_atom_overlay(electrified_overlay)
 		overlays += electrified_overlay
 
-///where the guinea pig is actually shocked if possible
+///где морская свинка на самом деле подвергается удару током, если это возможно
 /datum/component/electrified_buckle/process(seconds_per_tick)
 	var/atom/movable/parent_as_movable = parent
 	if(QDELETED(parent_as_movable) || !parent_as_movable.has_buckled_mobs())
@@ -192,10 +190,10 @@
 	COOLDOWN_START(src, electric_buckle_cooldown, shock_loop_time)
 	do_electrocution()
 
-	if (print_message)
-		parent_as_movable.visible_message(span_danger("[parent_as_movable] delivers a powerful shock!"), span_hear("You hear a deep sharp shock!"))
+	if(print_message)
+		parent_as_movable.visible_message(span_danger("[parent_as_movable] бьёт мощным разрядом!"), span_hear("Слышу резкий электрический разряд!"))
 
-/// Zap whoever is buckled to us
+/// Убей того, кто к нам пристегнут
 /datum/component/electrified_buckle/proc/do_electrocution()
 	SIGNAL_HANDLER
 
@@ -218,7 +216,7 @@
 
 	if(usage_flags & SHOCK_REQUIREMENT_AREA_POWER)
 		var/area/our_area = get_area(parent)
-		if (!our_area.powered(area_power_channel))
+		if(!our_area.powered(area_power_channel))
 			return
 
 		for(var/mob/living/guinea_pig as anything in parent_as_movable.buckled_mobs)
@@ -235,11 +233,11 @@
 	if(shock_on_loop)
 		shock_on_loop = FALSE
 		STOP_PROCESSING(SSprocessing, src)
-		parent_as_movable.visible_message(span_notice("\The [parent_as_movable] emits a snap as its circuit opens, making it safe for now."))
+		parent_as_movable.visible_message(span_notice("[parent_as_movable] щёлкает, размыкая цепь и делая его безопасным."))
 	else
 		shock_on_loop = TRUE
 		START_PROCESSING(SSprocessing, src)
-		parent_as_movable.visible_message(span_notice("You hear the sound of an electric circuit closing coming from \the [parent_as_movable]!"))
+		parent_as_movable.visible_message(span_notice("Слышу звук замыкания электрической цепи в [parent_as_movable]!"))
 
 #undef ELECTRIC_BUCKLE_SHOCK_STRENGTH_DIVISOR
 #undef ELECTRIC_BUCKLE_MINUMUM_POWERNET_STRENGTH

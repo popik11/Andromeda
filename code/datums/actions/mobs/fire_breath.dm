@@ -1,8 +1,8 @@
 /datum/action/cooldown/mob_cooldown/fire_breath
-	name = "Fire Breath"
+	name = "Огненное Дыхание"
 	button_icon = 'icons/effects/magic.dmi'
 	button_icon_state = "fireball"
-	desc = "Breathe a line of flames towards the target."
+	desc = "Извергает поток пламени в направлении цели."
 	cooldown_time = 3 SECONDS
 	/// The range of the fire
 	var/fire_range = 15
@@ -70,20 +70,20 @@
 
 	return fire_hotspot
 
-/// Do something unpleasant to someone we set on fire
+/// Совершаем неприятные действия с подожжённой целью
 /datum/action/cooldown/mob_cooldown/fire_breath/proc/on_burn_mob(mob/living/barbecued, mob/living/source)
 	if(fire_temperature <= TCMB)
 		barbecued.apply_status_effect(/datum/status_effect/ice_block_talisman, 2 SECONDS)
-		to_chat(barbecued, span_userdanger("You're frozen solid by [source]'s icy breath!"))
+		to_chat(barbecued, span_userdanger("Вас замораживает ледяное дыхание [source]!"))
 	else
-		to_chat(barbecued, span_userdanger("You are burned by [source]'s fire breath!"))
+		to_chat(barbecued, span_userdanger("Вас опаляет огненное дыхание [source]!"))
 	barbecued.adjustFireLoss(fire_damage)
 
-/// Shoot three lines of fire in a sort of fork pattern approximating a cone
+/// Создаёт три линии огня в виде веера, имитируя конусообразную атаку
 /datum/action/cooldown/mob_cooldown/fire_breath/cone
-	name = "Fire Cone"
-	desc = "Breathe several lines of fire directed at a target."
-	/// The angles relative to the target that shoot lines of fire
+	name = "Огненный Конус"
+	desc = "Извергает несколько линий пламени в направлении цели."
+	/// Углы отклонения для создания веерообразного паттерна
 	var/list/angles = list(-40, 0, 40)
 
 /datum/action/cooldown/mob_cooldown/fire_breath/cone/attack_sequence(atom/target)
@@ -91,19 +91,19 @@
 	for(var/offset in angles)
 		fire_line(target, offset)
 
-/// Shoot fire in a whole bunch of directions
+/// Извергает пламя во всех направлениях
 /datum/action/cooldown/mob_cooldown/fire_breath/mass_fire
-	name = "Mass Fire"
+	name = "Круг Огня"
 	button_icon = 'icons/effects/fire.dmi'
 	button_icon_state = "light"
-	desc = "Breathe flames in all directions."
+	desc = "Извергает пламя во всех направлениях."
 	cooldown_time = 10.5 SECONDS
 	click_to_activate = FALSE
-	/// How many fire lines do we produce to turn a full circle?
+	/// Количество секторов для полного круга
 	var/sectors = 12
-	/// How long do we wait between each spin?
+	/// Задержка между вращениями
 	var/breath_delay = 2.5 SECONDS
-	/// How many full circles do we perform?
+	/// Количество полных оборотов
 	var/total_spins = 3
 
 /datum/action/cooldown/mob_cooldown/fire_breath/mass_fire/Activate(atom/target_atom)

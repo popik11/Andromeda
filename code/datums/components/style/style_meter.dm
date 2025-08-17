@@ -1,10 +1,10 @@
 /obj/item/style_meter
 	name = "style meter attachment"
-	desc = "Attach this to a pair of glasses to install a style meter system in them. \
-		You get style points from performing stylish acts and lose them for breaking your style. \
-		The style affects the quality of your mining, with you being able to mine ore better during a good chain. \
-		A responsive data HUD gives you the ability to reflect lavaland-based projectiles by punching them with an empty hand. \
-		In addition, at high style, you are able to swap an item in your hand with one in your backpack by <b>hitting</b> one with another."
+	desc = "Прикрепите это к очкам, чтобы установить систему стилеметра. \
+		Вы получаете очки стиля за стильные действия и теряете их за нарушение стиля. \
+		Стиль влияет на качество вашей добычи - во время удачной серии вы сможете добывать руду лучше. \
+		Реактивный HUD позволяет отражать снаряды лаваленда, ударяя их пустой рукой. \
+		Кроме того, при высоком уровне стиля вы сможете менять предмет в руке с предметом в рюкзаке, <b>ударяя</b> один предмет другим."
 	icon_state = "style_meter"
 	icon = 'icons/obj/clothing/glasses.dmi'
 	/// The style meter component we give.
@@ -25,7 +25,7 @@
 
 /obj/item/style_meter/examine(mob/user)
 	. = ..()
-	. += span_notice("You feel like a <b>multitool</b> could be used on this.")
+	. += span_notice("Кажется, здесь можно использовать <b>мультитул</b>.")
 
 /obj/item/style_meter/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	if(!istype(interacting_with, /obj/item/clothing/glasses))
@@ -40,7 +40,7 @@
 	RegisterSignal(interacting_with, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
 	RegisterSignal(interacting_with, COMSIG_CLICK_ALT, PROC_REF(on_click_alt))
 	RegisterSignal(interacting_with, COMSIG_ATOM_TOOL_ACT(TOOL_MULTITOOL), PROC_REF(redirect_multitool))
-	balloon_alert(user, "style meter attached")
+	balloon_alert(user, "стилеметр установлен")
 	playsound(src, 'sound/machines/click.ogg', 30, TRUE)
 	if(!iscarbon(interacting_with.loc))
 		return .
@@ -85,8 +85,8 @@
 /obj/item/style_meter/proc/on_examine(datum/source, mob/user, list/examine_list)
 	SIGNAL_HANDLER
 
-	examine_list += span_notice("You feel like a <b>multitool</b> could be used on this.")
-	examine_list += span_notice("<b>Alt-click</b> to remove the style meter.")
+	examine_list += span_notice("Кажется, здесь можно использовать <b>мультитул</b>.")
+	examine_list += span_notice("<b>Alt+ЛКМ</b> для удаления стилеметра.")
 
 
 /// Signal proc to remove from glasses
@@ -103,7 +103,7 @@
 
 /obj/item/style_meter/multitool_act(mob/living/user, obj/item/tool)
 	multitooled = !multitooled
-	balloon_alert(user, "meter [multitooled ? "" : "un"]hacked")
+	balloon_alert(user, "стилеметр [multitooled ? "" : "не"]взломан")
 	style_meter?.multitooled = multitooled
 	return ITEM_INTERACT_SUCCESS
 

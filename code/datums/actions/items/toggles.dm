@@ -3,43 +3,43 @@
 /datum/action/item_action/toggle/New(Target)
 	..()
 	var/obj/item/item_target = target
-	name = "Toggle [item_target.name]"
+	name = "Переключить [item_target.name]"
 
 /datum/action/item_action/toggle_light
-	name = "Toggle Light"
+	name = "Переключить свет"
 
 /datum/action/item_action/toggle_computer_light
-	name = "Toggle Flashlight"
+	name = "Переключить фонарик"
 
 /datum/action/item_action/toggle_hood
-	name = "Toggle Hood"
+	name = "Надеть/снять капюшон"
 
 /datum/action/item_action/toggle_firemode
-	name = "Toggle Firemode"
+	name = "Переключить режим огня"
 
 /datum/action/item_action/toggle_gunlight
-	name = "Toggle Gunlight"
+	name = "Переключить тактический фонарь"
 
 /datum/action/item_action/toggle_mode
-	name = "Toggle Mode"
+	name = "Переключить режим"
 
 /datum/action/item_action/toggle_barrier_spread
-	name = "Toggle Barrier Spread"
+	name = "Переключить барьер"
 
 /datum/action/item_action/toggle_paddles
-	name = "Toggle Paddles"
+	name = "Переключить электроды"
 
 /datum/action/item_action/toggle_mister
-	name = "Toggle Mister"
+	name = "Переключить распылитель"
 
 /datum/action/item_action/toggle_helmet_light
-	name = "Toggle Helmet Light"
+	name = "Переключить свет шлема"
 
 /datum/action/item_action/toggle_welding_screen
-	name = "Toggle Welding Screen"
+	name = "Откинуть/закрыть сварочный щиток"
 
 /datum/action/item_action/toggle_spacesuit
-	name = "Toggle Suit Thermal Regulator"
+	name = "Переключить терморегулятор скафандра"
 	button_icon = 'icons/mob/actions/actions_spacesuit.dmi'
 	button_icon_state = "thermal_off"
 
@@ -47,29 +47,28 @@
 	var/obj/item/clothing/suit/space/suit = target
 	if(istype(suit))
 		button_icon_state = "thermal_[suit.thermal_on ? "on" : "off"]"
-
 	return ..()
 
 /datum/action/item_action/toggle_helmet_flashlight
-	name = "Toggle Helmet Flashlight"
+	name = "Переключить фонарь шлема"
 
 /datum/action/item_action/toggle_helmet_mode
-	name = "Toggle Helmet Mode"
+	name = "Переключить режим шлема"
 
 /datum/action/item_action/toggle_voice_box
-	name = "Toggle Voice Box"
+	name = "Переключить голосовой модуль"
 
 /datum/action/item_action/toggle_helmet
-	name = "Toggle Helmet"
+	name = "Надеть/снять шлем"
 
 /datum/action/item_action/toggle_seclight
-	name = "Toggle Seclight"
+	name = "Переключить фонарь охраны"
 
 /datum/action/item_action/toggle_jetpack
-	name = "Toggle Jetpack"
+	name = "Переключить джетпак"
 
 /datum/action/item_action/jetpack_stabilization
-	name = "Toggle Jetpack Stabilization"
+	name = "Переключить стабилизацию джетпака"
 
 /datum/action/item_action/jetpack_stabilization/IsAvailable(feedback = FALSE)
 	var/obj/item/tank/jetpack/linked_jetpack = target
@@ -78,8 +77,8 @@
 	return ..()
 
 /datum/action/item_action/organ_action/toggle_hud
-	name = "Toggle Implant HUD"
-	desc = "Disables your HUD implant's visuals. You can still access examine information."
+	name = "Переключить имплант HUD"
+	desc = "Отключает визуальную часть HUD импланта. Вы по-прежнему можете получать информацию при осмотре."
 
 /datum/action/item_action/organ_action/toggle_hud/do_effect(trigger_flags)
 	var/obj/item/organ/cyberimp/eyes/hud/hud_implant = target
@@ -87,33 +86,33 @@
 	return TRUE
 
 /datum/action/item_action/wheelys
-	name = "Toggle Wheels"
-	desc = "Pops out or in your shoes' wheels."
+	name = "Выдвинуть/убрать колеса"
+	desc = "Выдвигает или убирает колеса на вашей обуви."
 	button_icon = 'icons/mob/actions/actions_items.dmi'
 	button_icon_state = "wheelys"
 
 /datum/action/item_action/kindle_kicks
-	name = "Activate Kindle Kicks"
-	desc = "Kick you feet together, activating the lights in your Kindle Kicks."
+	name = "Активировать Kindle Kicks"
+	desc = "Щелкните каблуками, чтобы активировать подсветку на обуви."
 	button_icon = 'icons/mob/actions/actions_items.dmi'
 	button_icon_state = "kindleKicks"
 
 /datum/action/item_action/storage_gather_mode
-	name = "Switch gathering mode"
-	desc = "Switches the gathering mode of a storage object."
+	name = "Сменить режим сбора"
+	desc = "Изменяет режим сбора предметов в контейнере."
 	background_icon = 'icons/mob/actions/actions_items.dmi'
 	background_icon_state = "storage_gather_switch"
 	overlay_icon_state = "bg_tech_border"
 
 /datum/action/item_action/flip
-	name = "Flip"
+	name = "Перевернуть"
 
 /datum/action/item_action/call_link
-	name = "Call MODlink"
+	name = "Вызов МОДлинк"
 
 /datum/action/item_action/toggle_wearable_hud
-	name = "Toggle Wearable HUD"
-	desc = "Toggles your wearable HUD. You can still access examine information while it's off."
+	name = "Переключить носимый HUD"
+	desc = "Включает/выключает носимый HUD. Вы по-прежнему можете получать информацию при осмотре."
 
 /datum/action/item_action/toggle_wearable_hud/do_effect(trigger_flags)
 	var/obj/item/clothing/glasses/hud/hud_display = target
@@ -121,7 +120,7 @@
 	return TRUE
 
 /datum/action/item_action/toggle_nv
-	name = "Toggle Night Vision"
+	name = "Переключить ночное видение"
 	var/stored_cutoffs
 	var/stored_colour
 

@@ -49,8 +49,8 @@
 	if(!istype(living_parent) || !istype(rider))
 		return
 
-	living_parent.log_message("is now being ridden by [rider].", LOG_GAME, color="pink")
-	rider.log_message("started riding [living_parent].", LOG_GAME, color="pink")
+	living_parent.log_message("теперь оседлан(а) [rider].", LOG_GAME, color="pink")
+	rider.log_message("начал(а) ездить на [living_parent].", LOG_GAME, color="pink")
 
 // this applies to humans and most creatures, but is replaced again for cyborgs
 /datum/component/riding/creature/ride_check(mob/living/rider, consequences = TRUE)
@@ -71,8 +71,8 @@
 	if(. || !consequences)
 		return
 
-	rider.visible_message(span_warning("[rider] falls off of [living_parent]!"), \
-					span_warning("You fall off of [living_parent]!"))
+	rider.visible_message(span_warning("[rider] падает с [living_parent]!"), \
+					span_warning("Вы падаете с [living_parent]!"))
 	rider.Paralyze(1 SECONDS)
 	rider.Knockdown(4 SECONDS)
 	living_parent.unbuckle_mob(rider)
@@ -88,8 +88,8 @@
 
 /datum/component/riding/creature/vehicle_mob_unbuckle(mob/living/formerly_ridden, mob/living/former_rider, force = FALSE)
 	if(istype(formerly_ridden) && istype(former_rider))
-		formerly_ridden.log_message("is no longer being ridden by [former_rider].", LOG_GAME, color="pink")
-		former_rider.log_message("is no longer riding [formerly_ridden].", LOG_GAME, color="pink")
+		formerly_ridden.log_message("больше не оседлан(а) [former_rider].", LOG_GAME, color="pink")
+		former_rider.log_message("больше не ездит на [formerly_ridden].", LOG_GAME, color="pink")
 	remove_abilities(former_rider)
 	if(!formerly_ridden.buckled_mobs.len)
 		REMOVE_TRAIT(formerly_ridden, TRAIT_AI_PAUSED, REF(src))
@@ -104,7 +104,7 @@
 	if(!keycheck(user))
 		if(ispath(keytype, /obj/item))
 			var/obj/item/key = keytype
-			to_chat(user, span_warning("You need a [initial(key.name)] to ride [movable_parent]!"))
+			to_chat(user, span_warning("Вам нужен [initial(key.name)] чтобы оседлать [movable_parent]!"))
 		return COMPONENT_DRIVER_BLOCK_MOVE
 	var/mob/living/living_parent = parent
 	step(living_parent, direction)
@@ -134,8 +134,8 @@
 	if(!iscyborg(movable_parent) && !isanimal_or_basicmob(movable_parent))
 		return
 	var/turf/target = get_edge_target_turf(movable_parent, movable_parent.dir)
-	rider.visible_message(span_warning("[rider] is thrown clear of [movable_parent]!"), \
-	span_warning("You're thrown clear of [movable_parent]!"))
+	rider.visible_message(span_warning("[rider] слетает с [movable_parent]!"), \
+	span_warning("Вас сбрасывает с [movable_parent]!"))
 	rider.throw_at(target, throw_range, throw_speed, movable_parent, gentle = gentle)
 
 /// If we're a cyborg or animal and we spin, we yeet whoever's on us off us
@@ -180,11 +180,11 @@
 		return COMPONENT_RIDDEN_ALLOW_Z_MOVE
 	if(!can_be_driven)
 		if(z_move_flags & ZMOVE_FEEDBACK)
-			to_chat(rider, span_warning("[movable_parent] cannot be driven around. Unbuckle from [movable_parent.p_them()] first."))
+			to_chat(rider, span_warning("[movable_parent] нельзя управлять. Сначала отстегнитесь от [movable_parent.p_them()]."))
 		return COMPONENT_RIDDEN_STOP_Z_MOVE
 	if(!ride_check(rider, FALSE))
 		if(z_move_flags & ZMOVE_FEEDBACK)
-			to_chat(rider, span_warning("You're unable to ride [movable_parent] right now!"))
+			to_chat(rider, span_warning("Сейчас вы не можете управлять [movable_parent]!"))
 		return COMPONENT_RIDDEN_STOP_Z_MOVE
 	return COMPONENT_RIDDEN_ALLOW_Z_MOVE
 
@@ -213,7 +213,7 @@
 		return
 	ridden.Shake(pixelshiftx = 1, pixelshifty = 0, duration = 1 SECONDS)
 	ridden.spin(spintime = 1 SECONDS, speed = 1)
-	ridden.balloon_alert(rider, "tries to shake you off!")
+	ridden.balloon_alert(rider, "пытается сбросить вас!")
 	new /datum/riding_minigame(ridden, rider)
 
 /datum/component/riding/creature/human/RegisterWithParent()
@@ -225,12 +225,12 @@
 	if(!istype(living_parent) || !istype(rider))
 		return
 
-	if(ride_check_flags & RIDER_NEEDS_ARMS) // piggyback
-		living_parent.log_message("started giving [rider] a piggyback ride.", LOG_GAME, color="pink")
-		rider.log_message("started piggyback riding [living_parent].", LOG_GAME, color="pink")
-	else if(ride_check_flags & CARRIER_NEEDS_ARM) // fireman
-		living_parent.log_message("started fireman carrying [rider].", LOG_GAME, color="pink")
-		rider.log_message("was fireman carried by [living_parent].", LOG_GAME, color="pink")
+	if(ride_check_flags & RIDER_NEEDS_ARMS) // на спине
+		living_parent.log_message("начал(а) катать [rider] на спине.", LOG_GAME, color="pink")
+		rider.log_message("начал(а) кататься на спине у [living_parent].", LOG_GAME, color="pink")
+	else if(ride_check_flags & CARRIER_NEEDS_ARM) // пожарный захват
+		living_parent.log_message("начал(а) переносить [rider] пожарным методом.", LOG_GAME, color="pink")
+		rider.log_message("переносится пожарным методом [living_parent].", LOG_GAME, color="pink")
 
 /datum/component/riding/creature/human/vehicle_mob_unbuckle(datum/source, mob/living/former_rider, force = FALSE)
 	unequip_buckle_inhands(parent)
@@ -257,14 +257,14 @@
 		rider.Paralyze(1 SECONDS)
 		rider.Knockdown(4 SECONDS)
 		human_parent.visible_message(
-			span_danger("[rider] topples off of [human_parent] as they both fall to the ground!"),
-			span_warning("You fall to the ground, bringing [rider] with you!"),
-			span_hear("You hear two consecutive thuds."),
+			span_danger("[rider] падает с [human_parent], и они оба оказываются на земле!"),
+			span_warning("Вы падаете на землю, увлекая за собой [rider]!"),
+			span_hear("Слышны два последовательных глухих удара."),
 			COMBAT_MESSAGE_RANGE,
 			ignored_mobs = rider,
 			visible_message_flags = ALWAYS_SHOW_SELF_MESSAGE,
 		)
-		to_chat(rider, span_danger("[human_parent] falls to the ground, bringing you with [human_parent.p_them()]!"))
+		to_chat(rider, span_danger("[human_parent] падает на землю, увлекая вас за собой!"))
 
 /datum/component/riding/creature/human/get_rider_offsets_and_layers(pass_index, mob/offsetter)
 	var/mob/living/carbon/human/seat = parent
@@ -298,8 +298,8 @@
 	rider.Paralyze(1 SECONDS)
 	rider.Knockdown(4 SECONDS)
 	rider.visible_message(
-		span_warning("[seat] pushes [rider] off of [seat.p_them()]!"),
-		span_warning("[seat] pushes you off of [seat.p_them()]!"),
+		span_warning("[seat] сталкивает [rider] с себя!"),
+		span_warning("[seat] сталкивает вас с себя!"),
 	)
 
 
@@ -314,7 +314,7 @@
 	. = user.usable_hands
 	if(!. && consequences)
 		Unbuckle(user)
-		to_chat(user, span_warning("You can't grab onto [robot_parent] with no hands!"))
+		to_chat(user, span_warning("Вы не можете ухватиться за [robot_parent] без рук!"))
 
 /datum/component/riding/creature/cyborg/get_rider_offsets_and_layers(pass_index, mob/offsetter)
 	var/mob/living/silicon/robot/robot_parent = parent

@@ -335,47 +335,47 @@ GLOBAL_DATUM(syndicate_code_response_regex, /regex)
 /proc/tool_behaviour_name(tool_behaviour)
 	switch(tool_behaviour)
 		if(TOOL_CROWBAR)
-			return "a crowbar"
+			return "лом"
 		if(TOOL_MULTITOOL)
-			return "a multitool"
+			return "мультитул"
 		if(TOOL_SCREWDRIVER)
-			return "a screwdriver"
+			return "отвёртка"
 		if(TOOL_WIRECUTTER)
-			return "a pair of wirecutters"
+			return "кусачки"
 		if(TOOL_WRENCH)
-			return "a wrench"
+			return "гаечный ключ"
 		if(TOOL_WELDER)
-			return "a welder"
+			return "сварщик"
 		if(TOOL_ANALYZER)
-			return "an analyzer tool"
+			return "анализатор"
 		if(TOOL_MINING)
-			return "a mining implement"
+			return "шахтёрский инструмент"
 		if(TOOL_SHOVEL)
-			return "a digging tool"
+			return "лопата"
 		if(TOOL_RETRACTOR)
-			return "a retractor"
+			return "ретрактор"
 		if(TOOL_HEMOSTAT)
-			return "something to clamp bleeding"
+			return "зажим для остановки крови"
 		if(TOOL_CAUTERY)
-			return "a cautery"
+			return "каутер"
 		if(TOOL_DRILL)
-			return "a drilling tool"
+			return "дрель"
 		if(TOOL_SCALPEL)
-			return "a fine cutting tool"
+			return "скальпель"
 		if(TOOL_SAW)
-			return "a saw"
+			return "пила"
 		if(TOOL_BONESET)
-			return "a bone setter"
+			return "костоправ"
 		if(TOOL_KNIFE)
-			return "a cutting tool"
+			return "режущий инструмент"
 		if(TOOL_BLOODFILTER)
-			return "a blood filter"
+			return "фильтр крови"
 		if(TOOL_ROLLINGPIN)
-			return "a rolling pin"
+			return "скалка"
 		if(TOOL_RUSTSCRAPER)
-			return "a rust scraper"
+			return "скребок для ржавчины"
 		else
-			return "something... but the gods didn't set this up right (Please report this bug)"
+			return "что-то... но боги настроили это неправильно (Пожалуйста, сообщите об этой ошибке)"
 
 ///Find the first name of a mob from a passed string with regex
 /proc/first_name(given_name)

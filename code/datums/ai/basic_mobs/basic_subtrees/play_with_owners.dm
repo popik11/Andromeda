@@ -17,5 +17,5 @@
 
 /datum/ai_behavior/hunt_target/play_with_owner/target_caught(mob/living/hunter, atom/hunted)
 	var/list/interactions_list = hunter.ai_controller.blackboard[BB_INTERACTIONS_WITH_OWNER]
-	var/interaction_message = length(interactions_list) ? pick(interactions_list) : "Plays with"
+	var/interaction_message = length(interactions_list) ? pick(interactions_list) : "Играет с"
 	hunter.manual_emote("[interaction_message] [hunted]!")

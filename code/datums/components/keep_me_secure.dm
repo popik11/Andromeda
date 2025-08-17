@@ -67,21 +67,21 @@
 		if(unsecured_callback)
 			unsecured_callback.Invoke(last_move)
 
-/// signal sent when parent is examined
+/// сигнал при осмотре родителя
 /datum/component/keep_me_secure/proc/on_examine(mob/living/source, mob/examiner, list/examine_list)
 	SIGNAL_HANDLER
 
-	examine_list += span_boldnotice("[parent] should be secured at all times.")
+	examine_list += span_boldnotice("[parent] должен быть закреплён в любое время.")
 	if(is_secured())
-		examine_list += span_notice("Right now, it is.")
+		examine_list += span_notice("Сейчас он закреплён.")
 	else
-		examine_list += span_warning("Right now, it isn't...")
-	examine_list += span_notice("Examine closer for more info.")
+		examine_list += span_warning("Сейчас он не закреплён...")
+	examine_list += span_notice("Осмотрите внимательнее для подробностей.")
 
-/// signal sent when parent is examined more
+/// сигнал при детальном осмотре
 /datum/component/keep_me_secure/proc/on_examine_more(mob/living/source, mob/examiner, list/examine_list)
 	SIGNAL_HANDLER
 
-	examine_list += span_notice("For [parent] to be secure, it needs to be:")
-	examine_list += span_notice("1. Always on the move, and...")
-	examine_list += span_notice("2. Held or dragged by someone.")
+	examine_list += span_notice("Чтобы [parent] был закреплён, необходимо:")
+	examine_list += span_notice("1. Постоянное движение, и...")
+	examine_list += span_notice("2. Удержание или переноска кем-либо.")

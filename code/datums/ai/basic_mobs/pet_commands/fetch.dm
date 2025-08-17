@@ -68,10 +68,10 @@
 	var/mob/pawn = controller.pawn
 	var/obj/item/carried_item = controller.blackboard[storage_key]
 	if(QDELETED(carried_item) || carried_item.loc != pawn)
-		pawn.visible_message(span_notice("[pawn] looks around as if [pawn.p_they()] [pawn.p_have()] lost something."))
+		pawn.visible_message(span_notice("[pawn] оглядывается вокруг, как будто [pawn.p_they()] [pawn.p_have()] что-то потерял"))
 		return FALSE
 
-	pawn.visible_message(span_notice("[pawn] delivers [carried_item] to [return_target]."))
+	pawn.visible_message(span_notice("[pawn] доставляет [carried_item] к [return_target]."))
 	carried_item.forceMove(get_turf(return_target))
 	controller.clear_blackboard_key(storage_key)
 	return TRUE
@@ -103,7 +103,7 @@
 	var/mob/living/basic/basic_pawn = controller.pawn
 	if(is_living_loc)
 		if(SPT_PROB(10, seconds_per_tick))
-			basic_pawn.manual_emote("Stares at [snack.loc]'s [snack.name] intently.")
+			basic_pawn.manual_emote("Пристально смотрит на [snack.loc]'s [snack.name].")
 		return AI_BEHAVIOR_DELAY
 
 	if(!basic_pawn.Adjacent(snack))

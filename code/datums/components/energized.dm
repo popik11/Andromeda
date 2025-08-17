@@ -77,7 +77,7 @@
 		if(prob(25))
 			do_sparks(1, FALSE, source)
 			playsound(parent, SFX_SPARKS, 40, TRUE, SHORT_RANGE_SOUND_EXTRARANGE)
-			source.audible_message(span_danger("[parent] makes an electric crackle..."))
+			source.audible_message(span_danger("[parent] издаёт электрический треск..."))
 		return FALSE
 
 	// Everything will be based on position and travel direction
@@ -109,11 +109,11 @@
 	if(approach_distance >= XING_THRESHOLD_AMBER)
 		return FALSE
 
-	// Finally the interesting part where they ACTUALLY get hit!
+	// Наконец-то самая интересная часть - ПОРАЖЕНИЕ ТОКОМ!
 	do_sparks(4, FALSE, source)
 	playsound(parent, SFX_SPARKS, 75, TRUE, SHORT_RANGE_SOUND_EXTRARANGE)
-	source.audible_message(span_danger("[parent] makes a loud electric crackle!"))
-	to_chat(future_tram_victim, span_userdanger("You hear a loud electric crackle!"))
+	source.audible_message(span_danger("[parent] издаёт громкий электрический треск!"))
+	to_chat(future_tram_victim, span_userdanger("Вы слышите громкий электрический треск!"))
 	future_tram_victim.electrocute_act(15, parent, 1)
 	return TRUE
 

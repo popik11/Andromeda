@@ -188,11 +188,11 @@
 
 			if((rank < hotswap_rank) && (rank_changed >= hotswap_rank))
 				var/mob/mob_parent = parent
-				mob_parent.balloon_alert(mob_parent, "hotswapping enabled")
+				mob_parent.balloon_alert(mob_parent, "быстрая замена включена")
 
 			else if((rank >= hotswap_rank) && (rank_changed < hotswap_rank))
 				var/mob/mob_parent = parent
-				mob_parent.balloon_alert(mob_parent, "hotswapping disabled")
+				mob_parent.balloon_alert(mob_parent, "быстрая замена отключена")
 
 			rank = rank_changed
 	meter.maptext = "[format_rank_string(rank)][generate_multiplier()][generate_actions()]"
@@ -236,21 +236,21 @@
 /datum/component/style/proc/rank_to_string(new_rank)
 	switch(new_rank)
 		if(STYLE_DULL)
-			return "DULL"
+			return "СКУЧНО"
 		if(STYLE_COOL)
-			return "COOL"
+			return "КРУТО"
 		if(STYLE_BRUTAL)
-			return "BRUTAL"
+			return "БРУТАЛЬНО"
 		if(STYLE_ABSOLUTE)
-			return "ABSOLUTE"
+			return "АБСОЛЮТНО"
 		if(STYLE_SPACED)
-			return "SPACED!"
+			return "КОСМИЧЕСКИ!"
 
 /datum/component/style/proc/format_rank_string(new_rank)
 	return MAPTEXT_PIXELLARI("<font color='[rank_to_color(new_rank)]'>[rank_to_string(new_rank)]</font>")
 
 /datum/component/style/proc/generate_multiplier()
-	return "<br>" + MAPTEXT_GRAND9K("MULTIPLIER: [point_multiplier]X")
+	return "<br>" + MAPTEXT_GRAND9K("МНОЖИТЕЛЬ: [point_multiplier]X")
 
 /datum/component/style/proc/generate_actions()
 	var/action_string = ""
@@ -306,12 +306,12 @@
 	var/datum/storage/atom_storage = item_target.loc.atom_storage
 
 	if(!atom_storage.can_insert(weapon, source, messages = FALSE))
-		source.balloon_alert(source, "unable to hotswap!")
+		source.balloon_alert(source, "нельзя сменить!")
 		return NONE
 
 	atom_storage.attempt_insert(weapon, source, override = TRUE)
 	INVOKE_ASYNC(source, TYPE_PROC_REF(/mob/living, put_in_hands), target)
-	source.visible_message(span_notice("[source] quickly swaps [weapon] out with [target]!"), span_notice("You quickly swap [weapon] with [target]."))
+	source.visible_message(span_notice("[source] быстро меняет [weapon] на [target]!"), span_notice("Вы быстро меняете [weapon] на [target]."))
 	return ITEM_INTERACT_BLOCKING
 
 // Point givers

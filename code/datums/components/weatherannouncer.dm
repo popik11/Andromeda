@@ -103,18 +103,18 @@
 			light.set_light_color(LIGHT_COLOR_INTENSE_RED)
 	light.update_light()
 
-/// Returns a string we should display to communicate what you should be doing
+/// Возвращает строку с предупреждением о погодных условиях
 /datum/component/weather_announcer/proc/get_warning_message()
 	if (!is_weather_dangerous)
-		return "No risk expected from incoming weather front."
+		return "Ожидается спокойная погода без угроз."
 	switch(warning_level)
 		if(WEATHER_ALERT_CLEAR)
-			return "All clear, no weather alerts to report."
+			return "Всё чисто, погодных угроз нет."
 		if(WEATHER_ALERT_INCOMING)
-			return "Weather front incoming, begin to seek shelter."
+			return "Приближается фронт непогоды, рекомендуется укрытие."
 		if(WEATHER_ALERT_IMMINENT_OR_ACTIVE)
-			return "Weather front imminent, find shelter immediately."
-	return "Error in meteorological calculation. Please report this deviation to a trained programmer."
+			return "Фронт непогоды уже близко, немедленно найдите укрытие!"
+	return "Ошибка метеорологических расчётов. Сообщите об этом программисту."
 
 /datum/component/weather_announcer/proc/time_till_storm()
 	var/list/mining_z_levels = SSmapping.levels_by_trait(ZTRAIT_MINING)
@@ -167,9 +167,9 @@
 	if(isnull(time_until_next))
 		return
 	if (time_until_next == 0)
-		examine_texts += span_warning ("A storm is currently active, please seek shelter.")
+		examine_texts += span_warning ("Сейчас шторм, найдите укрытие.")
 	else
-		examine_texts += span_notice("The next storm is inbound in [DisplayTimeText(time_until_next)].")
+		examine_texts += span_notice("Следующий шторм ожидается через [DisplayTimeText(time_until_next)].")
 
 /datum/component/weather_announcer/RegisterWithParent()
 	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
@@ -179,13 +179,13 @@
 	UnregisterSignal(parent, COMSIG_ATOM_EXAMINE)
 
 /datum/aas_config_entry/weather
-	name = "Cargo Alert: Weather Forecast"
-	general_tooltip = "Allows the radio to announce incoming weather."
+	name = "Оповещение для карго: Прогноз погоды"
+	general_tooltip = "Позволяет радио объявлять о приближающейся непогоде."
 	announcement_lines_map = list(
-		"Clear" = "All clear, no weather alerts to report.",
-		"Incoming" = "Weather front incoming, begin to seek shelter.",
-		"Imminent or Active" = "Weather front imminent, find shelter immediately.",
-		"Safe" = "No risk expected from incoming weather front.",
+		"Clear" = "Всё чисто, погодных угроз нет.",
+		"Incoming" = "Приближается фронт непогоды, рекомендуется укрытие.",
+		"Imminent or Active" = "Фронт непогоды уже близко, немедленно найдите укрытие!",
+		"Safe" = "Ожидается спокойная погода без угроз.",
 	)
 
 

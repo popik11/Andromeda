@@ -307,8 +307,8 @@ SUBSYSTEM_DEF(garbage)
 	var/threshold = CONFIG_GET(number/hard_deletes_overrun_threshold)
 	if (threshold && (time > threshold SECONDS))
 		if (!(type_info.qdel_flags & QDEL_ITEM_ADMINS_WARNED))
-			log_game("Error: [type]([refID]) took longer than [threshold] seconds to delete (took [round(time/10, 0.1)] seconds to delete)")
-			message_admins("Error: [type]([refID]) took longer than [threshold] seconds to delete (took [round(time/10, 0.1)] seconds to delete).")
+			log_game("Ошибка: [type]([refID]) удалялся дольше [threshold] секунд (процесс занял [round(time/10, 0.1)] секунд)")
+			message_admins("Ошибка: [type]([refID]) удалялся дольше [threshold] секунд (процесс занял [round(time/10, 0.1)] секунд).")
 			type_info.qdel_flags |= QDEL_ITEM_ADMINS_WARNED
 		type_info.hard_deletes_over_threshold++
 		var/overrun_limit = CONFIG_GET(number/hard_deletes_overrun_limit)

@@ -205,10 +205,10 @@
 
 /datum/component/personal_crafting/proc/construct_item(atom/crafter, datum/crafting_recipe/recipe)
 	if(!crafter)
-		return ", unknown error!" // This should never happen, but in the event that it does...
+		return ", неизвестная ошибка!" // Этого никогда не должно происходить, но на всякий случай...
 
 	if(!recipe)
-		return ", invalid recipe!" // This can happen, I can't really explain why, but it can. Better safe than sorry.
+		return ", неверный рецепт!" // Это может случиться, сложно объяснить почему, но лучше перестраховаться.
 
 	var/list/contents = get_surroundings(crafter, recipe.blacklist)
 	var/fail_message = perform_all_checks(crafter, recipe, contents, check_tools_last = ignored_flags & CRAFT_IGNORE_DO_AFTER)
@@ -264,7 +264,7 @@
 ///This proc performs all the necessary conditional control statement to ensure that the object is allowed to be crafted by the crafter.
 /datum/component/personal_crafting/proc/perform_all_checks(atom/crafter, datum/crafting_recipe/recipe, list/contents, check_tools_last = FALSE)
 	if(!check_contents(crafter, recipe, contents))
-		return ", missing component."
+		return ", недостающий компонент."
 
 	var/turf/dest_turf = get_turf(crafter)
 
@@ -276,52 +276,52 @@
 	// For any non-final perform_all_checks() call, just keep check_tools() here because it's
 	// the most imporant feedback after "missing component".
 	if(!check_tools_last && !check_tools(crafter, recipe, contents, FALSE))
-		return ", missing tool."
+		return ", отсутствует инструмент."
 
 	var/considered_flags = recipe.crafting_flags & ~(ignored_flags)
 
 	if((considered_flags & CRAFT_ONE_PER_TURF) && (locate(recipe.result) in dest_turf))
-		return ", already one here!"
+		return ", здесь уже есть один!"
 
 	if(considered_flags & CRAFT_CHECK_DIRECTION)
 		if(!valid_build_direction(dest_turf, crafter.dir, is_fulltile = (considered_flags & CRAFT_IS_FULLTILE)))
-			return ", won't fit here!"
+			return ", не поместится здесь!"
 
 	if(considered_flags & CRAFT_ON_SOLID_GROUND)
 		if(isclosedturf(dest_turf))
-			return ", cannot be made on a wall!"
+			return ", нельзя построить на стене!"
 
 		if(is_type_in_typecache(dest_turf, GLOB.turfs_without_ground))
-			if(!locate(/obj/structure/thermoplastic) in dest_turf) // for tram construction
-				return ", must be made on solid ground!"
+			if(!locate(/obj/structure/thermoplastic) in dest_turf) // для строительства трамваев
+				return ", должно быть построено на твердой поверхности!"
 
 	if(considered_flags & CRAFT_CHECK_DENSITY)
 		for(var/obj/object in dest_turf)
 			if(object.density && !(object.obj_flags & IGNORE_DENSITY) || object.obj_flags & BLOCKS_CONSTRUCTION)
-				return ", something is in the way!"
+				return ", что-то мешает!"
 
 	if(recipe.placement_checks & STACK_CHECK_CARDINALS)
 		var/turf/nearby_turf
 		for(var/direction in GLOB.cardinals)
 			nearby_turf = get_step(dest_turf, direction)
 			if(locate(recipe.result) in nearby_turf)
-				to_chat(crafter, span_warning("\The [recipe.name] must not be built directly adjacent to another!"))
-				return ", can't be adjacent to another!"
+				to_chat(crafter, span_warning("[recipe.name] не должен быть построен вплотную к другому!"))
+				return ", не может быть рядом с другим!"
 
 	if(recipe.placement_checks & STACK_CHECK_ADJACENT)
 		if(locate(recipe.result) in range(1, dest_turf))
-			return ", can't be near another!"
+			return ", не может быть рядом с другим!"
 
 	if(recipe.placement_checks & STACK_CHECK_TRAM_FORBIDDEN)
 		if(locate(/obj/structure/transport/linear/tram) in dest_turf || locate(/obj/structure/thermoplastic) in dest_turf)
-			return ", can't be on tram!"
+			return ", нельзя на трамвае!"
 
 	if(recipe.placement_checks & STACK_CHECK_TRAM_EXCLUSIVE)
 		if(!locate(/obj/structure/transport/linear/tram) in dest_turf)
-			return ", must be made on a tram!"
+			return ", должно быть построено на трамвае!"
 
 	if(check_tools_last && !check_tools(crafter, recipe, contents, TRUE))
-		return ", missing tool."
+		return ", отсутствует инструмент."
 
 /**
  * get_used_reqs works like this:
@@ -498,7 +498,7 @@
 		var/atom_id = atoms.Find(atom)
 
 		data["atom_data"] += list(list(
-			"name" = initial(atom.name),
+			"name" = declent_ru_initial(atom::name, NOMINATIVE, atom::name),
 			"is_reagent" = ispath(atom, /datum/reagent/),
 		))
 
@@ -520,16 +520,16 @@
 
 /datum/component/personal_crafting/proc/make_action(datum/crafting_recipe/recipe, mob/user)
 	var/atom/result = construct_item(user, recipe)
-	if(istext(result)) //We failed to make an item and got a fail message
-		to_chat(user, span_warning("Construction failed[result]"))
+	if(istext(result)) //Не удалось создать предмет и получили сообщение об ошибке
+		to_chat(user, span_warning("Создание не удалось[result]"))
 		return FALSE
-	if(ismob(user) && isitem(result)) //In case the user is actually possessing a non mob like a machine
+	if(ismob(user) && isitem(result)) //На случай если пользователь - например, машина, а не моб
 		user.put_in_hands(result)
 	else if(ismovable(result) && !istype(result, /obj/effect/spawner))
 		var/atom/movable/movable = result
 		movable.forceMove(user.drop_location())
-	to_chat(user, span_notice("[recipe.name] crafted."))
-	user.investigate_log("crafted [recipe]", INVESTIGATE_CRAFTING)
+	to_chat(user, span_notice("[recipe.name] создан."))
+	user.investigate_log("создал [recipe]", INVESTIGATE_CRAFTING)
 	return TRUE
 
 
@@ -548,7 +548,7 @@
 				while(make_action(crafting_recipe, user))
 					crafted_items++
 				if(crafted_items)
-					to_chat(user, span_notice("You made [crafted_items] item\s."))
+					to_chat(user, span_notice("Вы создали [crafted_items]."))
 			else
 				make_action(crafting_recipe, user)
 			busy = FALSE
@@ -652,10 +652,10 @@
 			var/id = atoms.Find(req_atom)
 			data["chem_catalysts"]["[id]"] = recipe.chem_catalysts[req_atom]
 
-	// Reaction data
+	// Данные реакции
 	if(ispath(recipe.reaction))
 		data["is_reaction"] = TRUE
-		// May be called before chemical reactions list is setup
+		// Может быть вызвано до инициализации списка химических реакций
 		var/datum/chemical_reaction/reaction = GLOB.chemical_reactions_list[recipe.reaction] || new recipe.reaction()
 		if(istype(reaction))
 			if(!data["steps"])
@@ -663,15 +663,15 @@
 			if(reaction.required_container)
 				var/id = atoms.Find(reaction.required_container)
 				data["reqs"]["[id]"] = 1
-				data["steps"] += "Add all ingredients into \a [initial(reaction.required_container.name)]"
+				data["steps"] += "Добавьте все ингредиенты в [initial(reaction.required_container.name)]"
 			else if(length(recipe.reqs) > 1 || length(reaction.required_catalysts))
-				data["steps"] += "Mix all ingredients together"
+				data["steps"] += "Смешайте все ингредиенты вместе"
 			if(reaction.required_temp > T20C)
-				data["steps"] += "Heat up to [reaction.required_temp]K"
+				data["steps"] += "Нагрейте до [reaction.required_temp]K"
 		else
-			stack_trace("Invalid reaction found in recipe code! ([recipe.reaction])")
+			stack_trace("В рецепте найдена недопустимая реакция! ([recipe.reaction])")
 	else if(!isnull(recipe.reaction))
-		stack_trace("Invalid reaction found in recipe code! ([recipe.reaction])")
+		stack_trace("В рецепте найдена недопустимая реакция! ([recipe.reaction])")
 
 	return data
 

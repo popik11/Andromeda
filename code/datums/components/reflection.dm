@@ -199,7 +199,7 @@
 		reflection.pixel_y += 5
 
 	// purely for vv
-	reflection.name = "[target.name]'s reflection"
+	reflection.name = "отражение [target.name]"
 
 ///Called when the target movable changes its appearance or dir.
 /datum/component/reflection/proc/update_reflection(atom/movable/source)

@@ -105,15 +105,15 @@ GLOBAL_LIST_EMPTY(gas_handbook)
 				factor_info["factor_name"] = factor
 				factor_info["factor_type"] = "misc"
 				if(factor == "Temperature" || factor == "Pressure")
-					factor_info["tooltip"] = "Reaction is influenced by the [LOWER_TEXT(factor)] of the place where the reaction is occurring."
+					factor_info["tooltip"] = "На реакцию влияет [LOWER_TEXT(factor)] места, где происходит реакция."
 				else if(factor == "Energy")
-					factor_info["tooltip"] = "Energy released by the reaction, may or may not result in linear temperature change depending on a slew of other factors."
+					factor_info["tooltip"] = "Энергия, выделяемая реакцией, может приводить или не приводить к линейному изменению температуры в зависимости от множества других факторов."
 				else if(factor == "Radiation")
-					factor_info["tooltip"] = "This reaction emits dangerous radiation! Take precautions."
+					factor_info["tooltip"] = "Эта реакция испускает опасную радиацию! Примите меры предосторожности."
 				else if (factor == "Location")
-					factor_info["tooltip"] = "This reaction has special behaviour when occurring in specific locations."
+					factor_info["tooltip"] = "Эта реакция имеет особое поведение при возникновении в определённых местах."
 				else if(factor == "Hot Ice")
-					factor_info["tooltip"] = "Hot ice are solidified stacks of plasma. Ignition of one will result in a raging fire."
+					factor_info["tooltip"] = "Горячий лёд - это затвердевшие скопления плазмы. Воспламенение приведёт к сильному пожару."
 			reaction_info["factors"] += list(factor_info)
 		GLOB.reaction_handbook += list(reaction_info)
 		qdel(reaction)
@@ -138,13 +138,13 @@ GLOBAL_LIST_EMPTY(gas_handbook)
 				factor_info["factor_name"] = factor
 				factor_info["factor_type"] = "misc"
 				if(factor == "Temperature" || factor == "Pressure")
-					factor_info["tooltip"] = "Reaction is influenced by the [LOWER_TEXT(factor)] of the place where the reaction is occurring."
+					factor_info["tooltip"] = "Реакция зависит от [LOWER_TEXT(factor)] места, где она происходит."
 				else if(factor == "Energy")
-					factor_info["tooltip"] = "Energy released by the reaction, may or may not result in linear temperature change depending on a slew of other factors."
+					factor_info["tooltip"] = "Энергия, выделяемая реакцией, может вызывать или не вызывать линейное изменение температуры в зависимости от других факторов."
 				else if(factor == "Radiation")
-					factor_info["tooltip"] = "This reaction emits dangerous radiation! Take precautions."
+					factor_info["tooltip"] = "Эта реакция испускает опасную радиацию! Примите меры предосторожности."
 				else if (factor == "Location")
-					factor_info["tooltip"] = "This reaction has special behaviour when occurring in specific locations."
+					factor_info["tooltip"] = "Эта реакция имеет особое поведение в определённых местах."
 			reaction_info["factors"] += list(factor_info)
 		GLOB.reaction_handbook += list(reaction_info)
 		qdel(reaction)
@@ -201,8 +201,8 @@ GLOBAL_LIST_EMPTY(gas_handbook)
 	return TRUE
 
 /proc/print_gas_mixture(datum/gas_mixture/gas_mixture)
-	var/message = "TEMPERATURE: [gas_mixture.temperature]K, QUANTITY: [gas_mixture.total_moles()] mols, VOLUME: [gas_mixture.volume]L; "
+	var/message = "ТЕМПЕРАТУРА: [gas_mixture.temperature]K, КОЛИЧЕСТВО: [gas_mixture.total_moles()] моль, ОБЪЁМ: [gas_mixture.volume]л; "
 	for(var/key in gas_mixture.gases)
 		var/list/gaslist = gas_mixture.gases[key]
-		message += "[gaslist[GAS_META][META_GAS_ID]]=[gaslist[MOLES]] mols;"
+		message += "[gaslist[GAS_META][META_GAS_ID]]=[gaslist[MOLES]] моль;"
 	return message

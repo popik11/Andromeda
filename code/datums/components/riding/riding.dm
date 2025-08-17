@@ -114,7 +114,7 @@
 	SIGNAL_HANDLER
 	if(target == parent)
 		var/mob/living/ridden = parent
-		ridden.balloon_alert(rider_pulling, "not while riding it!")
+		ridden.balloon_alert(rider_pulling, "нельзя во время езды!")
 		return COMSIG_LIVING_CANCEL_PULL
 
 /// This is called after the ridden atom is successfully moved and is used to handle icon stuff

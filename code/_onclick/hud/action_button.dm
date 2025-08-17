@@ -96,7 +96,7 @@
 /atom/movable/screen/movable/action_button/MouseEntered(location, control, params)
 	. = ..()
 	if(!QDELETED(src))
-		openToolTip(usr, src, params, title = name, content = desc, theme = actiontooltipstyle)
+		openToolTip(usr, src, params, title = declent_ru(NOMINATIVE), content = desc, theme = actiontooltipstyle)
 
 /atom/movable/screen/movable/action_button/MouseExited(location, control, params)
 	closeToolTip(usr)
@@ -267,14 +267,14 @@
 	action.HideFrom(src)
 
 /atom/movable/screen/button_palette
-	desc = "<b>Drag</b> buttons to move them<br><b>Shift-click</b> any button to reset it<br><b>Alt-click any button</b> to begin binding it to a key<br><b>Alt-click this</b> to reset all buttons"
+	desc = "<b>Перетащите</b> кнопки для их перемещения<br><b>Shift-клик</b> по кнопке сбросит её<br><b>Alt-клик по кнопке</b> начнёт привязку к клавише<br><b>Alt-клик здесь</b> сбросит все кнопки"
 	icon = 'icons/hud/64x16_actions.dmi'
 	icon_state = "screen_gen_palette"
 	screen_loc = ui_action_palette
 	mouse_over_pointer = MOUSE_HAND_POINTER
 	var/datum/hud/our_hud
 	var/expanded = FALSE
-	/// Id of any currently running timers that set our color matrix
+	/// ID текущего таймера, устанавливающего цветовую матрицу
 	var/color_timer_id
 
 /atom/movable/screen/button_palette/Destroy()
@@ -339,7 +339,7 @@
 	return ..()
 
 /atom/movable/screen/button_palette/proc/show_tooltip(params)
-	openToolTip(usr, src, params, title = name, content = desc)
+	openToolTip(usr, src, params, title = declent_ru(NOMINATIVE), content = desc)
 
 GLOBAL_LIST_INIT(palette_added_matrix, list(0.4,0.5,0.2,0, 0,1.4,0,0, 0,0.4,0.6,0, 0,0,0,1, 0,0,0,0))
 GLOBAL_LIST_INIT(palette_removed_matrix, list(1.4,0,0,0, 0.7,0.4,0,0, 0.4,0,0.6,0, 0,0,0,1, 0,0,0,0))
@@ -377,7 +377,7 @@ GLOBAL_LIST_INIT(palette_removed_matrix, list(1.4,0,0,0, 0.7,0.4,0,0, 0.4,0,0.6,
 			for(var/datum/hud/hud as anything in action.viewers)
 				var/atom/movable/screen/movable/action_button/button = action.viewers[hud]
 				hud.position_action(button, SCRN_OBJ_DEFAULT)
-		to_chat(usr, span_notice("Action button positions have been reset."))
+		to_chat(usr, span_notice("Позиции кнопок действий были сброшены."))
 		return TRUE
 
 	set_expanded(!expanded)
@@ -446,15 +446,15 @@ GLOBAL_LIST_INIT(palette_removed_matrix, list(1.4,0,0,0, 0.7,0.4,0,0, 0.4,0,0.6,
 	. = ..()
 	if(QDELETED(src))
 		return
-	openToolTip(usr, src, params, title = name, content = desc)
+	openToolTip(usr, src, params, title = declent_ru(NOMINATIVE), content = desc)
 
 /atom/movable/screen/palette_scroll/MouseExited()
 	closeToolTip(usr)
 	return ..()
 
 /atom/movable/screen/palette_scroll/down
-	name = "Scroll Down"
-	desc = "<b>Click</b> on this to scroll the actions above down"
+	name = "Прокрутка вниз"
+	desc = "<b>Кликните</b> здесь, чтобы прокрутить панель действий вниз"
 	icon_state = "scroll_down"
 	scroll_direction = 1
 
@@ -466,8 +466,8 @@ GLOBAL_LIST_INIT(palette_removed_matrix, list(1.4,0,0,0, 0.7,0.4,0,0, 0.4,0,0.6,
 	return ..()
 
 /atom/movable/screen/palette_scroll/up
-	name = "Scroll Up"
-	desc = "<b>Click</b> on this to scroll the actions above up"
+	name = "Прокрутка вверх"
+	desc = "<b>Кликните</b> здесь, чтобы прокрутить панель действий вверх"
 	icon_state = "scroll_up"
 	scroll_direction = -1
 
@@ -480,11 +480,11 @@ GLOBAL_LIST_INIT(palette_removed_matrix, list(1.4,0,0,0, 0.7,0.4,0,0, 0.4,0,0.6,
 
 /// Exists so you have a place to put your buttons when you move them around
 /atom/movable/screen/action_landing
-	name = "Button Space"
-	desc = "<b>Drag and drop</b> a button into this spot<br>to add it to the group"
+	name = "Место для кнопки"
+	desc = "<b>Перетащите</b> кнопку в эту область<br>чтобы добавить её в группу"
 	icon = 'icons/hud/screen_gen.dmi'
 	icon_state = "reserved"
-	// We want our whole 32x32 space to be clickable, so dropping's forgiving
+	// Вся область 32x32 должна быть кликабельной для удобства перетаскивания
 	mouse_opacity = MOUSE_OPACITY_OPAQUE
 	var/datum/action_group/owner
 

@@ -99,7 +99,7 @@
 
 
 	if (spawn_text)
-		spawner.visible_message(span_danger("A creature [spawn_text] [spawner]."))
+		spawner.visible_message(span_danger("Из [spawner] [spawn_text] существо."))
 
 
 

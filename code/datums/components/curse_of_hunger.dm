@@ -42,15 +42,15 @@
 		COMSIG_ITEM_DROPPED,
 	))
 
-///signal called on parent being examined
+///сигнал вызывается при осмотре родителя
 /datum/component/curse_of_hunger/proc/on_examine(datum/source, mob/user, list/examine_list)
 	SIGNAL_HANDLER
 	if(!awakened)
-		return //we should not reveal we are cursed until equipped
+		return //не раскрываем проклятие, пока не экипировано
 	if(current_health < max_health)
-		examine_list += span_notice("[parent] looks sick from something it ate.")
+		examine_list += span_notice("[parent] выглядит больным от чего-то, что он съел.")
 	if(hunger > HUNGER_THRESHOLD_WARNING)
-		examine_list += span_danger("[parent] hungers for something to eat...")
+		examine_list += span_danger("[parent] жаждет чего-нибудь съесть...")
 
 ///signal called from equipping parent
 /datum/component/curse_of_hunger/proc/on_equip(datum/source, mob/equipper, slot)
@@ -94,21 +94,21 @@
 	if(!QDELING(cursed_item)) //gives a head start for the person to get away from the cursed item before it begins hunting again!
 		addtimer(CALLBACK(src, PROC_REF(seek_new_target)), 10 SECONDS)
 
-///proc called after a timer to awaken the AI in the cursed item if it doesn't have a target already.
+///процедура вызывается по таймеру для пробуждения ИИ в проклятом предмете, если у него ещё нет цели.
 /datum/component/curse_of_hunger/proc/seek_new_target()
 	var/obj/item/cursed_item = parent
 	if(iscarbon(cursed_item.loc))
 		return
 	else if(!isturf(cursed_item.loc))
 		cursed_item.forceMove(get_turf(cursed_item))
-	//only taking the most reasonable slot is fine since it unequips what is there to equip itself.
+	//берём только самый подходящий слот, так как предмет сам вытеснит то, что там находится.
 	cursed_item.AddElement(/datum/element/cursed, cursed_item.slot_equipment_priority[1])
-	cursed_item.visible_message(span_warning("[cursed_item] begins to move on [cursed_item.p_their()] own..."))
+	cursed_item.visible_message(span_warning("[cursed_item] начинает двигаться сам по себе..."))
 
 /datum/component/curse_of_hunger/process(seconds_per_tick)
 	var/obj/item/cursed_item = parent
 	var/mob/living/carbon/cursed = cursed_item.loc
-	///check hp
+	///проверка ХП
 	if(current_health <= 0)
 		the_curse_ends(cursed)
 		return
@@ -120,36 +120,36 @@
 	playsound(cursed_item, 'sound/items/eatfood.ogg', 20, TRUE)
 	hunger = 0
 
-	//check hungry enough to eat something!
+	//проверяем, достаточно ли голоден, чтобы что-то съесть!
 	for(var/obj/item/food in cursed_item.contents + cursed.contents)
 		if(!IS_EDIBLE(food))
 			continue
 		food.forceMove(cursed.loc)
-		///poisoned food damages it
+		///отравленная еда наносит урон
 		if(locate(/datum/reagent/toxin) in food.reagents.reagent_list)
-			var/sick_word = pick("queasy", "sick", "iffy", "unwell")
+			var/sick_word = pick("тошнотворно", "болезненно", "странно", "плохо")
 			cursed.visible_message(
-				span_notice("[cursed_item] eats something from [cursed], and looks [sick_word] afterwards!"),
-				span_notice("[cursed_item] eats your [food.name] to sate [cursed_item.p_their()] hunger, and looks [sick_word] afterwards!"),
+				span_notice("[cursed_item] съедает что-то у [cursed] и выглядит [sick_word] после этого!"),
+				span_notice("[cursed_item] съедает ваш [food.name], чтобы утолить голод, и выглядит [sick_word] после этого!"),
 			)
 			current_health--
 		else
 			cursed.visible_message(
-				span_warning("[cursed_item] eats something from [cursed] to sate [cursed_item.p_their()] hunger."),
-				span_warning("[cursed_item] eats your [food.name] to sate [cursed_item.p_their()] hunger."),
+				span_warning("[cursed_item] съедает что-то у [cursed], чтобы утолить голод."),
+				span_warning("[cursed_item] съедает ваш [food.name], чтобы утолить голод."),
 			)
 		cursed.temporarilyRemoveItemFromInventory(food, force = TRUE)
 		qdel(food)
 		return
 
-	///no food found, but you're dead: it bites you slightly, and doesn't regain health.
+	///еда не найдена, но цель мертва: слегка кусает, не восстанавливая здоровье
 	if(cursed.stat == DEAD)
-		cursed.visible_message(span_danger("[cursed_item] nibbles on [cursed]."), span_userdanger("[cursed_item] nibbles on you!"))
+		cursed.visible_message(span_danger("[cursed_item] покусывает [cursed]."), span_userdanger("[cursed_item] покусывает вас!"))
 		cursed.apply_damage(10, BRUTE, BODY_ZONE_CHEST)
 		return
 
-	///no food found: it bites you and regains some health.
-	cursed.visible_message(span_danger("[cursed_item] bites [cursed]!"), span_userdanger("[cursed_item] bites you to sate [cursed_item.p_their()] hunger!"))
+	///еда не найдена: кусает и восстанавливает здоровье
+	cursed.visible_message(span_danger("[cursed_item] кусает [cursed]!"), span_userdanger("[cursed_item] кусает вас, чтобы утолить голод!"))
 	cursed.apply_damage(60, BRUTE, BODY_ZONE_CHEST, wound_bonus = -20, exposed_wound_bonus = 20)
 	current_health = min(current_health + 1, max_health)
 

@@ -40,9 +40,9 @@
 
 	var/atom/result = new cook_result
 	if(!item_parent.compare_materials(result))
-		var/warning = "custom_materials of [result.type] when grilled compared to just spawned don't match"
+		var/warning = "custom_materials [result.type] после жарки не совпадают с исходными"
 		var/what_it_should_be = item_parent.get_materials_english_list()
-		stack_trace("[warning]. custom_materials should be [what_it_should_be].")
+		stack_trace("[warning]. custom_materials должны быть: [what_it_should_be].")
 	qdel(result)
 
 /datum/component/grillable/RegisterWithParent()
@@ -168,30 +168,30 @@
 	if(who_placed_us)
 		ADD_TRAIT(grilled_result, TRAIT_FOOD_CHEF_MADE, who_placed_us)
 
-	grill_source.visible_message("<span class='[positive_result ? "notice" : "warning"]'>[parent] turns into \a [grilled_result]!</span>")
+	grill_source.visible_message("<span class='[positive_result ? "notice" : "warning"]'>[parent] превращается в [grilled_result]!</span>")
 	grilled_result.pixel_x = original_object.pixel_x
 	grilled_result.pixel_y = original_object.pixel_y
 	qdel(parent)
 
-///Ran when an object almost finishes grilling
+/// Вызывается, когда объект почти прожарился
 /datum/component/grillable/proc/on_examine(atom/A, mob/user, list/examine_list)
 	SIGNAL_HANDLER
 
-	if(!current_cook_time) //Not grilled yet
+	if(!current_cook_time) // Ещё не прожарено
 		if(positive_result)
 			if(initial(cook_result.name) == PLURAL)
-				examine_list += span_notice("[parent] can be [span_bold("grilled")] into some [initial(cook_result.name)].")
+				examine_list += span_notice("[parent] можно [span_bold("пожарить")] в [initial(cook_result.name)].")
 			else
-				examine_list += span_notice("[parent] can be [span_bold("grilled")] into \a [initial(cook_result.name)].")
+				examine_list += span_notice("[parent] можно [span_bold("пожарить")] в \a [initial(cook_result.name)].")
 		return
 
 	if(positive_result)
 		if(current_cook_time <= required_cook_time * 0.75)
-			examine_list += span_notice("[parent] probably needs to be cooked a bit longer!")
+			examine_list += span_notice("[parent] нужно пожарить подольше!")
 		else if(current_cook_time <= required_cook_time)
-			examine_list += span_notice("[parent] seems to be almost finished cooking!")
+			examine_list += span_notice("[parent] почти готов!")
 	else
-		examine_list += span_danger("[parent] should probably not be put on the grill.")
+		examine_list += span_danger("[parent] лучше не жарить на гриле.")
 
 /datum/component/grillable/proc/add_grilled_item_overlay(datum/source, list/overlays)
 	SIGNAL_HANDLER

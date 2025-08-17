@@ -141,17 +141,17 @@
 			return TRUE //they picked a sect lets update so some weird spammy shit doesn't happen
 		if("perform_rite")
 			if(!ispath(text2path(params["path"]), /datum/religion_rites))
-				message_admins("[ADMIN_LOOKUPFLW(usr)] has tried to spawn an item when performing a rite.")
+				message_admins("[ADMIN_LOOKUPFLW(usr)] попытался создать предмет во время проведения обряда.")
 				return
 			perform_rite(usr, text2path(params["path"]))
 
 /// Select the sect, called from [/datum/component/religious_tool/proc/AttemptActions]
 /datum/component/religious_tool/proc/select_sect(mob/living/user, path)
 	if(user.mind.holy_role != HOLY_ROLE_HIGHPRIEST)
-		to_chat(user, span_warning("You are not the high priest, and therefore cannot select a religious sect."))
+		to_chat(user, span_warning("Вы не верховный жрец и не можете выбирать религиозную секту."))
 		return
 	if(!user.can_perform_action(parent, FORBID_TELEKINESIS_REACH))
-		to_chat(user,span_warning("You cannot select a sect at this time."))
+		to_chat(user,span_warning("Сейчас вы не можете выбрать секту."))
 		return
 	set_new_religious_sect(text2path(path))
 
@@ -159,15 +159,15 @@
 /datum/component/religious_tool/proc/perform_rite(mob/living/user, path)
 	if(user.mind.holy_role < HOLY_ROLE_PRIEST)
 		if(user.mind.holy_role == HOLY_ROLE_DEACON)
-			to_chat(user, span_warning("You are merely a deacon of [GLOB.deity], and therefore cannot perform rites."))
+			to_chat(user, span_warning("Вы всего лишь дьякон [GLOB.deity] и не можете проводить обряды."))
 		else
-			to_chat(user, span_warning("You are not holy, and therefore cannot perform rites."))
+			to_chat(user, span_warning("Вы не посвящены и не можете проводить обряды."))
 		return
 	if(rite_types_allowlist && !is_path_in_list(path, rite_types_allowlist))
-		to_chat(user, span_warning("This cannot perform that kind of rite."))
+		to_chat(user, span_warning("Этот предмет не может проводить обряды такого типа."))
 		return
 	if(!user.can_perform_action(parent, FORBID_TELEKINESIS_REACH))
-		to_chat(user,span_warning("You are not close enough to perform the rite."))
+		to_chat(user,span_warning("Вы находитесь слишком далеко, чтобы провести обряд."))
 		return
 	//we have a rite already, but we want to do a new one.
 	if(performing_rite && !ispath(performing_rite.type, path))
@@ -259,12 +259,12 @@
 
 	if(!can_i_see)
 		return
-	examine_list += span_notice("Use a [catalyst_type::name] to interact with this.")
+	examine_list += span_notice("Используйте [catalyst_type::name], чтобы взаимодействовать с этим.")
 	if(isnull(easy_access_sect))
 		if(operation_flags & RELIGION_TOOL_SECTSELECT)
-			examine_list += span_notice("This looks like it can be used to select a sect.")
+			examine_list += span_notice("Похоже, этим можно выбрать секту.")
 			return
-	if(operation_flags & RELIGION_TOOL_SACRIFICE)//this can be moved around if things change but usually no rites == no sacrifice
-		examine_list += span_notice("Desired items can be used on this to increase favor.")
+	if(operation_flags & RELIGION_TOOL_SACRIFICE)//это можно изменить, но обычно нет обрядов == нет жертвоприношений
+		examine_list += span_notice("Желаемые предметы можно использовать для увеличения благосклонности.")
 	if(easy_access_sect.rites_list && operation_flags & RELIGION_TOOL_INVOKE)
-		examine_list += span_notice("You can invoke rites from this.")
+		examine_list += span_notice("С помощью этого можно проводить обряды.")

@@ -48,12 +48,12 @@
 	RegisterSignals(targ, list(COMSIG_LIVING_DISARM_HIT, COMSIG_LIVING_GET_PULLED), PROC_REF(cancel))
 	RegisterSignals(weapon, list(COMSIG_ITEM_DROPPED, COMSIG_ITEM_EQUIPPED), PROC_REF(cancel))
 
-	var/distance = max(get_dist(shooter, target), 1) // treat 0 distance as adjacent
-	var/distance_description = (distance <= 1 ? "point blank " : "")
+	var/distance = max(get_dist(shooter, target), 1) // считаем нулевую дистанцию как ближнюю
+	var/distance_description = (distance <= 1 ? "в упор " : "")
 
-	shooter.visible_message(span_danger("[shooter] aims [weapon] [distance_description]at [target]!"),
-		span_danger("You aim [weapon] [distance_description]at [target]!"), ignored_mobs = target)
-	to_chat(target, span_userdanger("[shooter] aims [weapon] [distance_description]at you!"))
+	shooter.visible_message(span_danger("[shooter] наводит [weapon] [distance_description]на [target]!"),
+		span_danger("Вы наводите [weapon] [distance_description]на [target]!"), ignored_mobs = target)
+	to_chat(target, span_userdanger("[shooter] наводит [weapon] [distance_description]на вас!"))
 
 	shooter.Immobilize(0.75 SECONDS / distance)
 	if(!HAS_TRAIT(target, TRAIT_NOFEAR_HOLDUPS))
@@ -100,42 +100,42 @@
 	UnregisterSignal(parent, COMSIG_LIVING_PRE_MOB_BUMP)
 	UnregisterSignal(parent, COMSIG_LIVING_DISARM_HIT)
 
-///If the shooter bumps the target, cancel the holdup to avoid cheesing and forcing the charged shot
+/// Если стрелок сталкивается с целью, отменяем удержание, чтобы избежать читерства и форсирования заряженного выстрела
 /datum/component/gunpoint/proc/check_bump(atom/B, atom/A)
 	SIGNAL_HANDLER
 
 	if(A != target)
 		return
 	var/mob/living/shooter = parent
-	shooter.visible_message(span_danger("[shooter] bumps into [target] and fumbles [shooter.p_their()] aim!"), \
-		span_danger("You bump into [target] and fumble your aim!"), ignored_mobs = target)
-	to_chat(target, span_userdanger("[shooter] bumps into you and fumbles [shooter.p_their()] aim!"))
+	shooter.visible_message(span_danger("[shooter] сталкивается с [target] и теряет прицел!"), \
+		span_danger("Вы сталкиваетесь с [target] и теряете прицел!"), ignored_mobs = target)
+	to_chat(target, span_userdanger("[shooter] сталкивается с вами и теряет прицел!"))
 	qdel(src)
 
-///If the shooter shoves or grabs the target, cancel the holdup to avoid cheesing and forcing the charged shot
+/// Если стрелок толкает или хватает цель, отменяем удержание, чтобы избежать читерства и форсирования заряженного выстрела
 /datum/component/gunpoint/proc/check_shove(mob/living/carbon/shooter, mob/shooter_again, mob/living/T, datum/martial_art/attacker_style, modifiers)
 	SIGNAL_HANDLER
 
 	if(T != target || LAZYACCESS(modifiers, RIGHT_CLICK))
 		return
-	shooter.visible_message(span_danger("[shooter] bumps into [target] and fumbles [shooter.p_their()] aim!"), \
-		span_danger("You bump into [target] and fumble your aim!"), ignored_mobs = target)
-	to_chat(target, span_userdanger("[shooter] bumps into you and fumbles [shooter.p_their()] aim!"))
+	shooter.visible_message(span_danger("[shooter] сталкивается с [target] и теряет прицел!"), \
+		span_danger("Вы сталкиваетесь с [target] и теряете прицел!"), ignored_mobs = target)
+	to_chat(target, span_userdanger("[shooter] сталкивается с вами и теряет прицел!"))
 	qdel(src)
 
-///Update the damage multiplier for whatever stage we're entering into
+/// Обновляем множитель урона для текущей стадии
 /datum/component/gunpoint/proc/update_stage(new_stage)
 	if(check_deescalate())
 		return
 	stage = new_stage
 	if(stage == 2)
-		to_chat(parent, span_danger("You steady [weapon] on [target]."))
-		to_chat(target, span_userdanger("[parent] has steadied [weapon] on you!"))
+		to_chat(parent, span_danger("Вы твёрдо наводите [weapon] на [target]."))
+		to_chat(target, span_userdanger("[parent] твёрдо навёл [weapon] на вас!"))
 		damage_mult = GUNPOINT_MULT_STAGE_2
 		addtimer(CALLBACK(src, PROC_REF(update_stage), 3), GUNPOINT_DELAY_STAGE_3)
 	else if(stage == 3)
-		to_chat(parent, span_danger("You have fully steadied [weapon] on [target]."))
-		to_chat(target, span_userdanger("[parent] has fully steadied [weapon] on you!"))
+		to_chat(parent, span_danger("Вы полностью сфокусировали [weapon] на [target]."))
+		to_chat(target, span_userdanger("[parent] полностью сфокусировал [weapon] на вас!"))
 		damage_mult = GUNPOINT_MULT_STAGE_3
 
 ///Cancel the holdup if the shooter moves out of sight or out of range of the target
@@ -176,21 +176,21 @@
 
 	qdel(src)
 
-///Shooter canceled their shot, either by dropping/equipping their weapon, leaving sight/range, or clicking on the alert
+/// Стрелок отменил выстрел - либо уронил/сменил оружие, либо вышел из зоны видимости/дистанции, либо нажал на уведомление
 /datum/component/gunpoint/proc/cancel()
 	SIGNAL_HANDLER
 
 	var/mob/living/shooter = parent
-	shooter.visible_message(span_danger("[shooter] breaks [shooter.p_their()] aim on [target]!"), \
-		span_danger("You are no longer aiming [weapon] at [target]."), ignored_mobs = target)
-	to_chat(target, span_userdanger("[shooter] breaks [shooter.p_their()] aim on you!"))
+	shooter.visible_message(span_danger("[shooter] прекращает удерживать прицел на [target]!"), \
+		span_danger("Вы больше не удерживаете [weapon] на [target]."), ignored_mobs = target)
+	to_chat(target, span_userdanger("[shooter] прекращает удерживать прицел на вас!"))
 	qdel(src)
 
-///If the shooter is hit by an attack, they have a 50% chance to flinch and fire. If it hit the arm holding the trigger, it's an 80% chance to fire instead
+/// Если стрелка атакуют, есть 50% шанс дёрнуться и выстрелить. При попадании в руку с оружием - 80%
 /datum/component/gunpoint/proc/flinch(mob/living/source, damage_amount, damagetype, def_zone, blocked, wound_bonus, exposed_wound_bonus, sharpness, attack_direction, attacking_item)
 	SIGNAL_HANDLER
 
-	if(!attack_direction) // No fliching from yourself
+	if(!attack_direction) // Не дёргаемся от своих действий
 		return
 
 	var/flinch_chance = 50
@@ -205,33 +205,33 @@
 
 	if(prob(flinch_chance))
 		source.visible_message(
-			span_danger("[source] flinches!"),
-			span_danger("You flinch!"),
+			span_danger("[source] дёргается!"),
+			span_danger("Вы дёргаетесь!"),
 		)
 		INVOKE_ASYNC(src, PROC_REF(trigger_reaction))
 
-///Shows if the parent is holding someone at gunpoint
+/// Показывает, что родитель держит кого-то под прицелом
 /datum/component/gunpoint/proc/examine(datum/source, mob/user, list/examine_list)
 	SIGNAL_HANDLER
 	if(user in viewers(target))
-		examine_list += span_boldwarning("[parent] [parent.p_are()] holding [target] at gunpoint with [weapon]!")
+		examine_list += span_boldwarning("[parent] держит [target] под прицелом [weapon]!")
 
-///Shows if the examine target is being held at gunpoint
+/// Показывает, что цель осмотра находится под прицелом
 /datum/component/gunpoint/proc/examine_target(datum/source, mob/user, list/examine_list)
 	SIGNAL_HANDLER
 	if(user in viewers(parent))
-		examine_list += span_boldwarning("[target] [target.p_are()] being held at gunpoint by [parent]!")
+		examine_list += span_boldwarning("[target] находится под прицелом [parent]!")
 
-///Prevents bumping the shooter to break gunpoint since shove does that
+/// Блокирует толчки стрелка, чтобы не сбить прицел (толчки уже обрабатываются отдельно)
 /datum/component/gunpoint/proc/block_bumps_parent(mob/bumped, mob/living/bumper)
 	SIGNAL_HANDLER
-	to_chat(bumper, span_warning("[bumped] [bumped.p_are()] holding [target] at gunpoint, you cannot push past."))
+	to_chat(bumper, span_warning("[bumped] держит [target] под прицелом, нельзя пройти!"))
 	return COMPONENT_LIVING_BLOCK_PRE_MOB_BUMP
 
-///Prevents bumping the target by an ally to cheese and force the charged shot
+/// Блокирует толчки цели союзниками, чтобы не форсировать выстрел
 /datum/component/gunpoint/proc/block_bumps_target(mob/bumped, mob/living/bumper)
 	SIGNAL_HANDLER
-	to_chat(bumper, span_warning("[bumped] [bumped.p_are()] being held at gunpoint, it's not wise to push [bumped.p_them()]!"))
+	to_chat(bumper, span_warning("[bumped] под прицелом, толкать [bumped.p_them()] неразумно!"))
 	return COMPONENT_LIVING_BLOCK_PRE_MOB_BUMP
 
 #undef GUNPOINT_DELAY_STAGE_2

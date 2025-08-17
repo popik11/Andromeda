@@ -1,23 +1,22 @@
-
-/// how much health healed from casting a chuuni spell
+/// количество здоровья, восстанавливаемого при касте "чуни" заклинания
 #define CHUUNIBYOU_HEAL_AMOUNT 3
-///cooldown between healing to prevent stuff like instant blink spell spam healing
+/// кулдаун между исцелениями, чтобы предотвратить спам-исцеление (например, мгновенное исцеление от blink заклинания)
 #define CHUUNIBYOU_COOLDOWN_TIME 5 SECONDS
 
 /**
- * ## chuunibyou component!
+ * ## Компонент чунибаё!
  *
- * Component that makes casted spells always a shout invocation, a very dumb one. And their projectiles are dumb too.
- * Oh, but it does heal after each spell cast.
+ * Компонент, заставляющий заклинания всегда произноситься с громким крипым возгласом. И их снаряды тоже криповые.
+ * Зато после каждого каста заклинания чуни исцеляется.
  */
 /datum/component/chuunibyou
-	/// invocations per school the spell is from
+	/// возгласы для каждой школы магии
 	var/static/list/chuunibyou_invocations
-	/// amount healed per spell cast
+	/// количество восстанавливаемого здоровья за каст
 	var/heal_amount = CHUUNIBYOU_HEAL_AMOUNT
-	/// cooldown for healing
+	/// кулдаун на исцеление
 	COOLDOWN_DECLARE(heal_cooldown)
-	/// are we casting a spell right now
+	/// кастуем ли мы заклинание в данный момент
 	var/casting_spell = FALSE
 
 /datum/component/chuunibyou/Initialize()
@@ -25,20 +24,20 @@
 		return COMPONENT_INCOMPATIBLE
 	if(!chuunibyou_invocations)
 		chuunibyou_invocations = list(
-			SCHOOL_UNSET = "This is embarrassing... I can't remember the words... um... maybe if I just wave my hand like this... no, that's not wor- Ah! There it goes!",
-			SCHOOL_HOLY = "By the grace of the holy one, I summon the light of salvation. Let my allies rejoice. O, Heaven! Bless them!",
-			SCHOOL_PSYCHIC = "By the secret of the hidden one, I reveal the truth of creation. Let my mind expand. O, Mystery! Enlighten me!",
-			SCHOOL_MIME = "O, Silence! Embrace my soul and amplify my gesture. Let me create the illusion and manipulate the perception!",
-			SCHOOL_RESTORATION = "I invoke the name of the goddess of mercy, hear my plea and grant your blessing to this soul! Divine Grace!",
+			SCHOOL_UNSET = "Как неловко... Я забыл слова... эм... может, просто помахать рукой вот так... нет, не работает... А! Получилось!",
+			SCHOOL_HOLY = "Благословением святого, призываю свет спасения. Да возрадуются союзники. О, Небеса! Благословите их!",
+			SCHOOL_PSYCHIC = "Тайной сокровенного, раскрываю истину творения. Да расширится мой разум. О, Тайна! Просвети меня!",
+			SCHOOL_MIME = "О, Безмолвие! Обними мою душу и усиль мой жест. Позволь мне создать иллюзию и управлять восприятием!",
+			SCHOOL_RESTORATION = "Взываю к имени богини милосердия, услышь мольбу и ниспошли благословение этой душе! Божественная Благодать!",
 
-			SCHOOL_EVOCATION = "Behold, the ultimate power of the Dark Flame Master! I call upon the ancient forces of chaos and destruction to unleash their wrath upon my enemies!",
-			SCHOOL_TRANSMUTATION = "I invoke the law of equivalent exchange, the balance of the cosmos. As I offer this sacrifice, I demand a new creation. Reveal, the mystery of transmutation!",
-			SCHOOL_TRANSLOCATION = "By the power of the spatial rifts, I bend the fabric of reality and move across the dimensions! Let nothing stand in my way as I travel to my destination!",
-			SCHOOL_CONJURATION = "With the eye of fate, I see through the threads of destiny. Nothing can hide from me. Witness me, witness the miracle of manifestation!",
+			SCHOOL_EVOCATION = "Узрите предельную мощь Тёмного Пламени! Призываю древние силы хаоса и разрушения обрушить гнев на врагов!",
+			SCHOOL_TRANSMUTATION = "Взываю к закону равнозначного обмена, балансу космоса. Жертвую сие, требую новое творение. Явь, тайну преображения!",
+			SCHOOL_TRANSLOCATION = "Мощью пространственных разломов искривляю ткань реальности! Ничто не преградит путь меж измерениями!",
+			SCHOOL_CONJURATION = "Оком судьбы вижу нити предназначения. Ничто не укроется. Лицезрите чудо материализации!",
 
-			SCHOOL_NECROMANCY = "I am the Lord of the Dead, the Master of Bones, the Ruler of Shadows. I command the legions of the damned to rise from their graves and serve me!",
-			SCHOOL_FORBIDDEN = "I renounce the laws of this world and embrace the chaos of the old gods! Let the forbidden power flow through me and destroy everything in its path!",
-			SCHOOL_SANGUINE = "I cover my eye with an eyepatch to seal my true power, but now I will unleash it upon you. I feast on the life force of my prey and grow stronger with every drop!",
+			SCHOOL_NECROMANCY = "Я Владыка Мёртвых, Повелитель Костей, Хранитель Теней. Легионы проклятых, восстаньте из могил и служите мне!",
+			SCHOOL_FORBIDDEN = "Отрекаюсь от законов мира, принимаю хаос древних богов! Да течёт запретная сила, уничтожая всё на пути!",
+			SCHOOL_SANGUINE = "Повязкой сокрыто око, сдерживающее истинную мощь. Но ныне я отпускаю узды! Питаюсь жизненной силой жертв, крепну с каждой каплей!",
 		)
 
 /datum/component/chuunibyou/RegisterWithParent()
@@ -73,7 +72,7 @@
 
 	playsound(to_fire,'sound/effects/magic/staff_change.ogg', 75, TRUE)
 	to_fire.color = "#f825f8"
-	to_fire.name = "chuuni-[to_fire.name]"
+	to_fire.name = "чуни-[to_fire.name]"
 	to_fire.set_light(2, 2, LIGHT_COLOR_PINK, l_on = TRUE)
 
 ///signal sent before parent invokes a spell
@@ -102,7 +101,7 @@
 
 	source.heal_overall_damage(heal_amount)
 	playsound(source, 'sound/effects/magic/staff_healing.ogg', 30)
-	to_chat(source, span_danger("You feel slightly healed by your chuuni powers."))
+	to_chat(source, span_danger("Ты чувствуешь, как силы чуни слегка исцеляют тебя."))
 
 /datum/component/chuunibyou/no_healing
 	heal_amount = 0

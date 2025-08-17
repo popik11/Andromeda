@@ -1,8 +1,8 @@
 /datum/action/cooldown/mob_cooldown/dash
-	name = "Dash"
+	name = "Рывок"
 	button_icon = 'icons/mob/actions/actions_items.dmi'
 	button_icon_state = "sniper_zoom"
-	desc = "Allows you to dash towards a position."
+	desc = "Позволяет совершить рывок в выбранном направлении."
 	cooldown_time = 1.5 SECONDS
 	/// The range of the dash
 	var/dash_range = 4

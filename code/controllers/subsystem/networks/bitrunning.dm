@@ -27,7 +27,7 @@ SUBSYSTEM_DEF(bitrunning)
 		UNTYPED_LIST_ADD(levels, list(
 			"announce_ghosts" = domain.announce_to_ghosts,
 			"cost" = domain.cost,
-			"desc" = can_view ? domain.desc : "Limited scanning capabilities. Cannot infer domain details.",
+			"desc" = can_view ? domain.desc : "Ограниченные возможности сканирования. Не удалось определить детали домена.",
 			"difficulty" = domain.difficulty,
 			"id" = domain.key,
 			"is_modular" = domain.is_modular,
@@ -47,15 +47,15 @@ SUBSYSTEM_DEF(bitrunning)
 		domain.secondary_loot[choice] -= 1
 	else
 		choice = /obj/item/paper/paperslip/bitrunning_error
-		CRASH("Virtual domain [domain.name] tried to pick secondary objective loot, but secondary_loot list was empty.")
+		CRASH("Виртуальный домен [domain.name] попытался выбрать дополнительную добычу, но список secondary_loot оказался пуст.")
 	return choice
 
 /obj/item/paper/paperslip/bitrunning_error
-	name = "Apology Letter"
-	desc = "Something went wrong here."
+	name = "Извинение"
+	desc = "Здесь что-то пошло не так."
 
 /obj/item/paper/paperslip/bitrunning_error/Initialize(mapload)
-	default_raw_text = "Your reward for collecting the encrypted curiosity failed to arrive, please report this to technical support."
+	default_raw_text = "Ваша награда за получение зашифрованного артефакта не была доставлена. Пожалуйста, сообщите об этом в техническую поддержку."
 	return ..()
 
 #undef REDACTED

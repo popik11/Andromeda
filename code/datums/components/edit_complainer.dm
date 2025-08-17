@@ -1,4 +1,4 @@
-// This is just a bit of fun while making an example for global signal
+// Просто забавный компонент для примера работы с глобальными сигналами
 /datum/component/edit_complainer
 	var/list/say_lines
 
@@ -7,12 +7,12 @@
 		return COMPONENT_INCOMPATIBLE
 
 	var/static/list/default_lines = list(
-		"CentCom's profligacy frays another thread.",
-		"Another tug at the weave.",
-		"Who knows when the stresses will finally shatter the form?",
-		"Even now a light shines through the cracks.",
-		"CentCom once more twists knowledge beyond its authority.",
-		"There is an uncertain air in the mansus.",
+		"Расточительство ЦентКома рвёт ещё одну нить.",
+		"Ещё один рывок за ткань реальности.",
+		"Кто знает, когда напряжение окончательно разорвёт форму?",
+		"Даже сейчас свет пробивается сквозь трещины.",
+		"ЦентКом вновь искажает знание за пределами своих полномочий.",
+		"В Мансусе витает неопределённость.",
 		)
 	say_lines = text || default_lines
 

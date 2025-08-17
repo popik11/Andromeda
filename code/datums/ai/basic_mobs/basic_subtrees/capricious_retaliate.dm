@@ -19,7 +19,7 @@
 		var/deaggro_chance = controller.blackboard[BB_RANDOM_DEAGGRO_CHANCE] || 10
 		if (!SPT_PROB(deaggro_chance, seconds_per_tick))
 			return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_SUCCEEDED
-		pawn.visible_message(span_notice("[pawn] calms down.")) // We can blackboard key this if anyone else actually wants to customise it
+		pawn.visible_message(span_notice("[pawn] успокаивается.")) // We can blackboard key this if anyone else actually wants to customise it
 		controller.clear_blackboard_key(BB_BASIC_MOB_RETALIATE_LIST)
 		controller.clear_blackboard_key(BB_BASIC_MOB_CURRENT_TARGET)
 		controller.CancelActions() // Otherwise they will try and get one last kick in
@@ -50,12 +50,12 @@
 		return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_FAILED
 
 	controller.insert_blackboard_key_lazylist(BB_BASIC_MOB_RETALIATE_LIST, final_target)
-	pawn.visible_message(span_warning("[pawn] glares grumpily at [final_target]!"))
+	pawn.visible_message(span_warning("[pawn] сердито смотрит на [final_target]!"))
 	return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_SUCCEEDED
 
-/// Called if we try but fail to target something
+/// Вызывается при неудачной попытке выбрать цель
 /datum/ai_behavior/capricious_retaliate/proc/failed_targeting(atom/pawn)
-	pawn.visible_message(span_notice("[pawn] grumbles.")) // We're pissed off but with no outlet to vent our frustration upon
+	pawn.visible_message(span_notice("[pawn] ворчит.")) // Мы раздражены, но не можем выплеснуть свою злость
 
 /datum/ai_behavior/capricious_retaliate/finish_action(datum/ai_controller/controller, succeeded, ignore_faction)
 	. = ..()

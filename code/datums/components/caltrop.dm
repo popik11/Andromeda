@@ -108,8 +108,8 @@
 	if(!(flags & CALTROP_SILENT) && !digitigrade_fan.has_status_effect(/datum/status_effect/caltropped))
 		digitigrade_fan.apply_status_effect(/datum/status_effect/caltropped)
 		digitigrade_fan.visible_message(
-			span_danger("[digitigrade_fan] steps on [parent]."),
-			span_userdanger("You step on [parent]!")
+			span_danger("[digitigrade_fan] наступает на [parent]."),
+			span_userdanger("Вы наступаете на [parent]!")
 		)
 
 	digitigrade_fan.apply_damage(damage, BRUTE, picked_def_zone, wound_bonus = CANT_WOUND, attacking_item = parent)

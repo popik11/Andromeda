@@ -43,7 +43,7 @@
 		return
 
 	if(living_user.usable_hands <= 0)
-		source.balloon_alert(living_user, "you don't have hands!")
+		source.balloon_alert(living_user, "у тебя нет рук!")
 		return
 
 	do_icon_toggle(source, living_user)
@@ -60,7 +60,7 @@
 /datum/component/toggle_icon/proc/on_examine(atom/source, mob/user, list/examine_list)
 	SIGNAL_HANDLER
 
-	examine_list += span_notice("Alt-click on [source] to toggle the [toggle_noun].")
+	examine_list += span_notice("Alt+ЛКМ по [source] чтобы переключить [toggle_noun].")
 
 /*
  * Signal proc for COMSIG_ATOM_REQUESTING_CONTEXT_FROM_ITEM.
@@ -74,7 +74,7 @@
 /datum/component/toggle_icon/proc/on_adding_context(atom/source, list/context, obj/item/held_item, mob/user)
 	SIGNAL_HANDLER
 
-	context[SCREENTIP_CONTEXT_ALT_LMB] = "Toggle [toggle_noun]"
+	context[SCREENTIP_CONTEXT_ALT_LMB] = "Переключить [toggle_noun]"
 	return CONTEXTUAL_SCREENTIP_SET
 
 /*
@@ -85,7 +85,7 @@
  * user - the mob doing the toggling
  */
 /datum/component/toggle_icon/proc/do_icon_toggle(atom/source, mob/living/user)
-	source.balloon_alert(user, "toggled [toggle_noun]")
+	source.balloon_alert(user, "переключил [toggle_noun]")
 
 	toggled = !toggled
 	if(toggled)

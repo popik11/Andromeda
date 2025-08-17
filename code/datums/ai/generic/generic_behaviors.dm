@@ -47,7 +47,7 @@
 	big_guy.start_pulling(batman)
 	big_guy.face_atom(batman)
 
-	batman.visible_message(span_warning("[batman] gets a slightly too tight hug from [big_guy]!"), span_userdanger("You feel your body break as [big_guy] embraces you!"))
+	batman.visible_message(span_warning("[batman] получает слегка слишком крепкие объятия от [big_guy]!"), span_userdanger("Вы чувствуете, как ваше тело ломается в объятиях [big_guy]!"))
 
 	for(var/zone in GLOB.all_body_zones - BODY_ZONE_HEAD)
 		batman.apply_damage(15, BRUTE, zone, wound_bonus = 35)

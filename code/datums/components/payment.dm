@@ -97,12 +97,12 @@
 
 		if(armless)
 			if(!user.pulling || !iscash(user.pulling) && !istype(user.pulling, /obj/item/card/id))
-				to_chat(user, span_notice("Try pulling a valid ID, space cash, holochip or coin while using \the [parent]!"))
+				to_chat(user, span_notice("Попробуй провести ID-карту, космоденьги, голочип или монету, используя [parent]!"))
 				return FALSE
 		return FALSE
 
 	if(physical_cash_total < total_cost)
-		to_chat(user, span_notice("Insufficient funds. Aborting."))
+		to_chat(user, span_notice("Недостаточно средств. Отмена."))
 		return FALSE
 	for(var/obj/cash_object in counted_money)
 		qdel(cash_object)
@@ -110,7 +110,7 @@
 
 	if(physical_cash_total > 0)
 		var/obj/item/holochip/holochange = new /obj/item/holochip(user.loc, physical_cash_total) //Change is made in holocredits exclusively.
-		holochange.name = "[holochange.credits] credit holochip"
+		holochange.name = "[holochange.credits] кредитный голочип"
 		if(ishuman(user))
 			var/mob/living/carbon/human/paying_customer = user
 			var/successfully_put_in_hands
@@ -120,8 +120,8 @@
 				user.pulling = holochange
 		else
 			user.pulling = holochange
-	log_econ("[total_cost] credits were spent on [parent] by [user].")
-	to_chat(user, span_notice("Purchase completed with held credits."))
+	log_econ("[total_cost] кредитов было потрачено на [parent] пользователем [user].")
+	to_chat(user, span_notice("Покупка совершена с использованием кредитов."))
 	playsound(user, 'sound/effects/cashregister.ogg', 20, TRUE)
 	return TRUE
 
@@ -133,40 +133,40 @@
 
 	if(!idcard)
 		if(transaction_style == PAYMENT_VENDING)
-			to_chat(user, span_warning("No card found."))
+			to_chat(user, span_warning("Карта не обнаружена."))
 		return FALSE
 	if(!idcard?.registered_account)
 		switch(transaction_style)
 			if(PAYMENT_FRIENDLY)
-				to_chat(user, span_warning("There's no account detected on your ID, how mysterious!"))
+				to_chat(user, span_warning("На вашей ID-карте не обнаружен аккаунт, как загадочно!"))
 			if(PAYMENT_ANGRY)
-				to_chat(user, span_warning("ARE YOU JOKING. YOU DON'T HAVE A BANK ACCOUNT ON YOUR ID YOU IDIOT."))
+				to_chat(user, span_warning("ТЫ ЧТО, ШУТИШЬ? НА ТВОЕЙ ID НЕТ БАНКОВСКОГО СЧЕТА, ИДИОТ."))
 			if(PAYMENT_CLINICAL)
-				to_chat(user, span_warning("ID Card lacks a bank account. Advancing."))
+				to_chat(user, span_warning("ID-карта не имеет банковского счета. Продолжение."))
 			if(PAYMENT_VENDING)
-				to_chat(user, span_warning("No account found."))
+				to_chat(user, span_warning("Аккаунт не найден."))
 
 		return FALSE
 
 	if(!idcard.can_be_used_in_payment(user))
-		atom_parent.say("Departmental accounts have been blacklisted from personal expenses due to embezzlement.")
+		atom_parent.say("Корпоративные счета заблокированы для личных расходов из-за случаев хищения.")
 		return FALSE
 
 	if(!(idcard.registered_account.has_money(total_cost)))
 		switch(transaction_style)
 			if(PAYMENT_FRIENDLY)
-				to_chat(user, span_warning("I'm so sorry... You don't seem to have enough money."))
+				to_chat(user, span_warning("Мне очень жаль... Похоже, у вас недостаточно средств."))
 			if(PAYMENT_ANGRY)
-				to_chat(user, span_warning("YOU MORON. YOU ABSOLUTE BAFOON. YOU INSUFFERABLE TOOL. YOU ARE POOR."))
+				to_chat(user, span_warning("ТЫ ДЕБИЛ. ТЫ ПОЛНЫЙ НЕУДАЧНИК. НЕВЫНОСИМЫЙ БОЛВАН. ТЫ НИЩИЙ."))
 			if(PAYMENT_CLINICAL)
-				to_chat(user, span_warning("ID Card lacks funds. Aborting."))
+				to_chat(user, span_warning("На ID-карте недостаточно средств. Отмена."))
 			if(PAYMENT_VENDING)
-				to_chat(user, span_warning("You do not possess the funds to purchase that."))
-		atom_parent.balloon_alert(user, "needs [total_cost] credit\s!")
+				to_chat(user, span_warning("У вас недостаточно средств для покупки."))
+		atom_parent.balloon_alert(user, "требуется [total_cost] кредитов!")
 		return FALSE
-	target_acc.transfer_money(idcard.registered_account, total_cost, "Nanotrasen: Usage of Corporate Machinery")
-	log_econ("[total_cost] credits were spent on [parent] by [user] via [idcard.registered_account.account_holder]'s card.")
-	idcard.registered_account.bank_card_talk("[total_cost] credits deducted from your account.")
+	target_acc.transfer_money(idcard.registered_account, total_cost, "Nanotrasen: Использование корпоративного оборудования")
+	log_econ("[total_cost] кредитов было потрачено на [parent] пользователем [user] через карту [idcard.registered_account.account_holder].")
+	idcard.registered_account.bank_card_talk("[total_cost] кредитов списано с вашего счета.")
 	playsound(src, 'sound/effects/cashregister.ogg', 20, TRUE)
 	SSeconomy.track_purchase(idcard.registered_account, total_cost, parent)
 	return TRUE

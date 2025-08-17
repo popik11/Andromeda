@@ -53,10 +53,10 @@
 /datum/component/omen/Destroy(force)
 	var/mob/living/person = parent
 	REMOVE_TRAIT(person, TRAIT_CURSED, SMITE_TRAIT)
-	to_chat(person, span_nicegreen("You feel a horrible omen lifted off your shoulders!"))
+	to_chat(person, span_nicegreen("Ты чувствуешь, как ужасное предзнаменование снято с твоих плеч!"))
 
 	if(vessel)
-		vessel.visible_message(span_warning("[vessel] burns up in a sinister flash, taking an evil energy with it..."))
+		vessel.visible_message(span_warning("[vessel] сгорает в зловещей вспышке, унося с собой тёмную энергию..."))
 		UnregisterSignal(vessel, COMSIG_QDELETING)
 		vessel.burn()
 		vessel = null
@@ -91,8 +91,8 @@
 
 	var/mob/living/living_guy = our_guy
 
-	if(prob(0.001) && (living_guy.stat != DEAD)) // You hit the lottery! Kinda.
-		living_guy.visible_message(span_danger("[living_guy] suddenly bursts into flames!"), span_danger("You suddenly burst into flames!"))
+	if(prob(0.001) && (living_guy.stat != DEAD)) // Тебе выпал джекпот! Ну почти.
+		living_guy.visible_message(span_danger("[living_guy] внезапно вспыхивает пламенем!"), span_danger("Ты внезапно вспыхиваешь пламенем!"))
 		INVOKE_ASYNC(living_guy, TYPE_PROC_REF(/mob, emote), "scream")
 		living_guy.adjust_fire_stacks(20)
 		living_guy.ignite_mob(silent = TRUE)
@@ -122,16 +122,16 @@
 		if(darth_airlock.locked || !darth_airlock.hasPower())
 			continue
 
-		to_chat(living_guy, span_warning("A malevolent force launches your body to the floor..."))
+		to_chat(living_guy, span_warning("Зловещая сила швыряет твоё тело на пол..."))
 		living_guy.Paralyze(1 SECONDS, ignore_canstun = TRUE)
 		INVOKE_ASYNC(src, PROC_REF(slam_airlock), darth_airlock)
 		return
 
 	for(var/turf/the_turf as anything in get_adjacent_open_turfs(living_guy))
-		if(istype(the_turf, /turf/open/floor/glass/reinforced/tram)) // don't fall off the tram bridge, we want to hit you instead
+		if(istype(the_turf, /turf/open/floor/glass/reinforced/tram)) // не падаем с трамвайного моста, лучше ударим
 			return
 		if(living_guy.can_z_move(DOWN, the_turf, z_move_flags = ZMOVE_FALL_FLAGS))
-			to_chat(living_guy, span_warning("A malevolent force guides you towards the edge..."))
+			to_chat(living_guy, span_warning("Зловещая сила подталкивает тебя к краю..."))
 			living_guy.throw_at(the_turf, 1, 10, force = MOVE_FORCE_EXTREMELY_STRONG)
 			consume_omen()
 			return
@@ -139,19 +139,19 @@
 		for(var/obj/machinery/vending/darth_vendor in the_turf)
 			if(!darth_vendor.tiltable || darth_vendor.tilted)
 				continue
-			to_chat(living_guy, span_warning("A malevolent force tugs at the [darth_vendor]..."))
+			to_chat(living_guy, span_warning("Зловещая сила раскачивает [darth_vendor]..."))
 			INVOKE_ASYNC(darth_vendor, TYPE_PROC_REF(/obj/machinery/vending, tilt), living_guy)
 			consume_omen()
 			return
 
 		for(var/obj/machinery/light/evil_light in the_turf)
-			if((evil_light.status == LIGHT_BURNED || evil_light.status == LIGHT_BROKEN) || (HAS_TRAIT(living_guy, TRAIT_SHOCKIMMUNE))) // we can't do anything :( // Why in the world is there no get_siemens_coeff proc???
-				to_chat(living_guy, span_warning("[evil_light] sparks weakly for a second."))
-				do_sparks(2, FALSE, evil_light) // hey maybe it'll ignite them
+			if((evil_light.status == LIGHT_BURNED || evil_light.status == LIGHT_BROKEN) || (HAS_TRAIT(living_guy, TRAIT_SHOCKIMMUNE))) // мы бессильны :( // Почему нет get_siemens_coeff??
+				to_chat(living_guy, span_warning("[evil_light] слабо искрит на секунду."))
+				do_sparks(2, FALSE, evil_light) // может хоть подожжёт
 				return
 
-			to_chat(living_guy, span_warning("[evil_light] glows ominously...")) // ominously
-			evil_light.visible_message(span_boldwarning("[evil_light] suddenly flares brightly and sparks!"))
+			to_chat(living_guy, span_warning("[evil_light] зловеще мерцает...")) // зловеще
+			evil_light.visible_message(span_boldwarning("[evil_light] внезапно вспыхивает и искрит!"))
 			evil_light.break_light_tube(skip_sound_and_sparks = FALSE)
 			do_sparks(number = 4, cardinal_only = FALSE, source = evil_light)
 			evil_light.Beam(living_guy, icon_state = "lightning[rand(1,12)]", time = 0.5 SECONDS)
@@ -160,35 +160,35 @@
 			consume_omen()
 
 		for(var/obj/structure/mirror/evil_mirror in the_turf)
-			to_chat(living_guy, span_warning("You pass by the mirror and glance at it..."))
+			to_chat(living_guy, span_warning("Ты проходишь мимо зеркала и бросаешь взгляд..."))
 			if(evil_mirror.broken)
-				to_chat(living_guy, span_notice("You feel lucky, somehow."))
+				to_chat(living_guy, span_notice("Почему-то чувствуешь себя везучим."))
 				return
 			switch(rand(1, 5))
 				if(1)
-					to_chat(living_guy, span_warning("The mirror explodes into a million pieces! Wait, does that mean you're even more unlucky?"))
+					to_chat(living_guy, span_warning("Зеркало разлетается на миллион осколков! Это значит, что тебе ещё меньше повезло?"))
 					evil_mirror.take_damage(evil_mirror.max_integrity, BRUTE, MELEE, FALSE)
-					if(prob(50 * effective_luck)) // sometimes
+					if(prob(50 * effective_luck)) // иногда
 						luck_mod += 0.25
 						damage_mod += 0.25
 				if(2 to 3)
-					to_chat(living_guy, span_big(span_hypnophrase("Oh god, you can't see your reflection!!")))
-					if(HAS_TRAIT(living_guy, TRAIT_NO_MIRROR_REFLECTION)) // not so living i suppose
-						to_chat(living_guy, span_green("Well, obviously."))
+					to_chat(living_guy, span_big(span_hypnophrase("О боже, ты не видишь своего отражения!!")))
+					if(HAS_TRAIT(living_guy, TRAIT_NO_MIRROR_REFLECTION)) // не такой уж и живой
+						to_chat(living_guy, span_green("Ну, очевидно."))
 						return
 					INVOKE_ASYNC(living_guy, TYPE_PROC_REF(/mob, emote), "scream")
 
 				if(4 to 5)
 					if(HAS_TRAIT(living_guy, TRAIT_NO_MIRROR_REFLECTION))
-						to_chat(living_guy, span_warning("You don't see anything of notice. Huh."))
+						to_chat(living_guy, span_warning("Ничего необычного. Странно."))
 						return
-					to_chat(living_guy, span_userdanger("You see your reflection, but it is grinning malevolently and staring directly at you!"))
+					to_chat(living_guy, span_userdanger("Ты видишь своё отражение, но оно злобно ухмыляется и смотрит прямо на тебя!"))
 					INVOKE_ASYNC(living_guy, TYPE_PROC_REF(/mob, emote), "scream")
 
 			living_guy.set_jitter_if_lower(25 SECONDS)
 			if(prob(7 * effective_luck))
-				to_chat(living_guy, span_warning("You are completely shocked by this turn of events!"))
-				to_chat(living_guy, span_userdanger("You clutch at your heart!"))
+				to_chat(living_guy, span_warning("Ты в полном шоке от происходящего!"))
+				to_chat(living_guy, span_userdanger("Ты хватаешься за сердце!"))
 				var/mob/living/carbon/carbon_guy = living_guy
 				if(istype(carbon_guy))
 					carbon_guy.set_heartattack(status = TRUE)
@@ -200,24 +200,23 @@
 	if(.)
 		consume_omen()
 
-/// If we get knocked down, see if we have a really bad slip and bash our head hard
 /datum/component/omen/proc/check_slip(mob/living/our_guy, amount)
 	SIGNAL_HANDLER
 
-	if(prob(30)) // AAAA
+	if(prob(30)) // АААА
 		INVOKE_ASYNC(our_guy, TYPE_PROC_REF(/mob, emote), "scream")
-		to_chat(our_guy, span_warning("What a horrible night... To have a curse!"))
+		to_chat(our_guy, span_warning("Какая ужасная ночь... Чтобы быть проклятым!"))
 
-	if(prob(30 * luck_mod) && our_guy.get_bodypart(BODY_ZONE_HEAD)) /// Bonk!
+	if(prob(30 * luck_mod) && our_guy.get_bodypart(BODY_ZONE_HEAD)) /// Боньк!
 		playsound(our_guy, 'sound/effects/tableheadsmash.ogg', 90, TRUE)
-		our_guy.visible_message(span_danger("[our_guy] hits [our_guy.p_their()] head really badly falling down!"), span_userdanger("You hit your head really badly falling down!"))
+		our_guy.visible_message(span_danger("[our_guy] очень сильно ударяется головой при падении!"), span_userdanger("Ты очень сильно ударяешься головой при падении!"))
 		our_guy.apply_damage(75 * damage_mod, BRUTE, BODY_ZONE_HEAD, attacking_item = "slipping")
 		our_guy.apply_damage(100 * damage_mod, BRAIN)
 		consume_omen()
 
 	return
 
-/// Hijack the mood system to see if we get the blessing mood event to cancel the omen
+/// Перехватываем систему настроения для проверки благословения, снимающего проклятие
 /datum/component/omen/proc/check_bless(mob/living/our_guy, mob/living/priest, obj/item/book/bible/bible, bless_result)
 	SIGNAL_HANDLER
 
@@ -225,7 +224,7 @@
 		return
 
 	playsound(our_guy, 'sound/effects/pray_chaplain.ogg', 40, TRUE)
-	to_chat(our_guy, span_green("You feel fantastic!"))
+	to_chat(our_guy, span_green("Ты чувствуешь себя потрясающе!"))
 	qdel(src)
 
 /// Severe deaths. Normally lifts the curse.

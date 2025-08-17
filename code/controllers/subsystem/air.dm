@@ -607,7 +607,7 @@ SUBSYSTEM_DEF(air)
 
 		log_active_turfs() // invoke this here so we can count the time it takes to run this proc as "wasted time", quite simple honestly.
 
-		var/msg = "HEY! LISTEN! [DisplayTimeText(world.timeofday - timer, 0.00001)] were wasted processing [starting_ats] turf(s) (connected to [ending_ats - starting_ats] other turfs) with atmos differences at round start."
+		var/msg = "ЭЙ! СЛУШАЙ! [DisplayTimeText(world.timeofday - timer, 0.00001)] было потрачено на обработку [starting_ats] тайла(ов) (связанных с [ending_ats - starting_ats] другими тайлами) с атмосферными различиями в начале раунда."
 		to_chat(world, span_boldannounce("[msg]"))
 		warning(msg)
 
@@ -636,9 +636,9 @@ SUBSYSTEM_DEF(air)
 
 	var/list/message_to_log = list()
 
-	message_to_log += "\nAll that follows is a turf with an active air difference at roundstart. To clear this, make sure that all of the turfs listed below are connected to a turf with the same air contents.\n\
-		In an ideal world, this list should have enough information to help you locate the active turf(s) in question. Unfortunately, this might not be an ideal world.\n\
-		If the round is still ongoing, you can use the \"Mapping -> Show roundstart AT list\" verb to see exactly what active turfs were detected. Otherwise, good luck."
+	message_to_log += "\nВсе что ниже - тайлы с активными атмосферными различиями в начале раунда. Чтобы устранить это, убедитесь что все перечисленные тайлы соединены с тайлами с одинаковым составом воздуха.\n\
+		В идеальном мире этого списка должно быть достаточно для локализации проблемных тайлов. К сожалению, мы живем не в идеальном мире.\n\
+		Если раунд еще идет, вы можете использовать команду \"Mapping -> Показать список AT на старте раунда\" для просмотра обнаруженных активных тайлов. В противном случае - удачи."
 
 	for(var/turf/active_turf as anything in GLOB.active_turfs_startlist)
 		var/turf_z = active_turf.z
@@ -651,7 +651,7 @@ SUBSYSTEM_DEF(air)
 
 		// so we can pass along the area type for the log, making it much easier to locate the active turf for a mapper assuming all area types are unique. This is only really a problem for stuff like ruin areas.
 		var/area/turf_area = get_area(active_turf)
-		message_to_log += "Active turf: [AREACOORD(active_turf)] ([turf_area.type]). Turf type: [active_turf.type]. Relevant Z-Trait(s): [english_list(level_traits)]."
+		message_to_log += "Активный тайл: [AREACOORD(active_turf)] ([turf_area.type]). Тип тайла: [active_turf.type]. Соответствующие Z-особенности: [english_list(level_traits)]."
 
 		tally_by_level["[turf_z]"]++
 
@@ -660,19 +660,19 @@ SUBSYSTEM_DEF(air)
 
 	for(var/z_level in tally_by_level)
 		var/level_turf_count = tally_by_level[z_level]
-		if(level_turf_count == 0) // no point logging it
+		if(level_turf_count == 0) // нет смысла логировать
 			continue
-		message_to_log += "Z-Level [z_level] has [level_turf_count] active turf(s)."
+		message_to_log += "Z-уровень [z_level] содержит [level_turf_count] активных тайлов."
 		SSblackbox.record_feedback("tally", "roundstart_active_turfs_per_z", level_turf_count, z_level)
 
 	for(var/z_trait in tally_by_level_trait)
 		var/trait_turf_count = tally_by_level_trait[z_trait]
 		if(trait_turf_count == 0)
 			continue
-		message_to_log += "Z-Level trait [z_trait] has [trait_turf_count] active turf(s)."
+		message_to_log += "Z-особенность [z_trait] содержит [trait_turf_count] активных тайлов."
 		SSblackbox.record_feedback("amount", "roundstart_active_turfs_for_trait_[z_trait]", trait_turf_count)
 
-	message_to_log += "End of active turf list."
+	message_to_log += "Конец списка активных тайлов."
 	log_mapping(message_to_log.Join("\n"))
 #endif
 

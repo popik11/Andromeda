@@ -2,18 +2,18 @@
 #define STRANGER 1
 
 /datum/brain_trauma/severe/split_personality
-	name = "Split Personality"
-	desc = "Patient's brain is split into two personalities, which randomly switch control of the body."
-	scan_desc = "complete lobe separation"
-	gain_text = span_warning("You feel like your mind was split in two.")
-	lose_text = span_notice("You feel alone again.")
+	name = "Раздвоение личности"
+	desc = "Мозг пациента разделён на две личности, которые случайным образом сменяют контроль над телом."
+	scan_desc = "полное разделение долей"
+	gain_text = span_warning("Ты чувствуешь, как твой разум разделился надвое.")
+	lose_text = span_notice("Ты снова чувствуешь себя одиноким.")
 	var/current_controller = OWNER
-	var/initialized = FALSE //to prevent personalities deleting themselves while we wait for ghosts
-	var/mob/living/split_personality/stranger_backseat //there's two so they can swap without overwriting
+	var/initialized = FALSE //чтобы предотвратить удаление личностей, пока мы ждём призраков
+	var/mob/living/split_personality/stranger_backseat //их двое, чтобы они могли меняться без перезаписи
 	var/mob/living/split_personality/owner_backseat
-	///The role to display when polling ghost
-	var/poll_role = "split personality"
-	///How long do we give ghosts to respond?
+	///Роль для отображения при опросе призраков
+	var/poll_role = "раздвоение личности"
+	///Сколько времени даём призракам на ответ?
 	var/poll_time = 20 SECONDS
 
 /datum/brain_trauma/severe/split_personality/on_gain()
@@ -41,7 +41,7 @@
 /// Attempts to get a ghost to play the personality
 /datum/brain_trauma/severe/split_personality/proc/get_ghost()
 	var/mob/chosen_one = SSpolling.poll_ghosts_for_target(
-		question = "Do you want to play as [span_danger("[owner.real_name]'s")] [span_notice(poll_role)]?",
+		question = "Хотите играть за [span_danger("[owner.real_name]")] [span_notice(poll_role)]?",
 		check_jobban = ROLE_PAI,
 		poll_time = poll_time,
 		checked_target = owner,
@@ -58,8 +58,8 @@
 		return
 
 	stranger_backseat.PossessByPlayer(ghost.ckey)
-	stranger_backseat.log_message("became [key_name(owner)]'s split personality.", LOG_GAME)
-	message_admins("[ADMIN_LOOKUPFLW(stranger_backseat)] became [ADMIN_LOOKUPFLW(owner)]'s split personality.")
+	stranger_backseat.log_message("стал раздвоением личности [key_name(owner)].", LOG_GAME)
+	message_admins("[ADMIN_LOOKUPFLW(stranger_backseat)] стал раздвоением личности [ADMIN_LOOKUPFLW(owner)].")
 
 
 /datum/brain_trauma/severe/split_personality/on_life(seconds_per_tick, times_fired)
@@ -95,9 +95,9 @@
 	if(!current_backseat.client) //Make sure we never switch to a logged off mob.
 		return
 
-	current_backseat.log_message("assumed control of [key_name(owner)] due to [src]. (Original owner: [current_controller == OWNER ? owner.key : current_backseat.key])", LOG_GAME)
-	to_chat(owner, span_userdanger("You feel your control being taken away... your other personality is in charge now!"))
-	to_chat(current_backseat, span_userdanger("You manage to take control of your body!"))
+	current_backseat.log_message("принял контроль над [key_name(owner)] из-за [src]. (Изначальный владелец: [current_controller == OWNER ? owner.key : current_backseat.key])", LOG_GAME)
+	to_chat(owner, span_userdanger("Ты чувствуешь, как теряешь контроль... теперь твоя другая личность главная!"))
+	to_chat(current_backseat, span_userdanger("Тебе удалось взять контроль над телом!"))
 
 	//Body to backseat
 
@@ -142,8 +142,8 @@
 
 
 /mob/living/split_personality
-	name = "split personality"
-	real_name = "unknown conscience"
+	name = "раздвоение личности"
+	real_name = "неизвестное сознание"
 	var/mob/living/carbon/body
 	var/datum/brain_trauma/severe/split_personality/trauma
 
@@ -174,12 +174,12 @@
 	. = ..()
 	if(!. || !client)
 		return FALSE
-	to_chat(src, span_notice("As a split personality, you cannot do anything but observe. However, you will eventually gain control of your body, switching places with the current personality."))
-	to_chat(src, span_warning("<b>Do not commit suicide or put the body in a deadly position. Behave like you care about it as much as the owner.</b>"))
+	to_chat(src, span_notice("Как раздвоение личности, ты не можешь ничего делать, кроме как наблюдать. Однако со временем ты получишь контроль над телом, поменявшись местами с текущей личностью."))
+	to_chat(src, span_warning("<b>Не совершай суицид и не ставь тело в смертельно опасные ситуации. Веди себя так, будто тебе небезразлична его судьба, как и основному сознанию.</b>"))
 
 /mob/living/split_personality/try_speak(message, ignore_spam, forced, filterproof)
 	SHOULD_CALL_PARENT(FALSE)
-	to_chat(src, span_warning("You cannot speak, your other self is controlling your body!"))
+	to_chat(src, span_warning("Ты не можешь говорить, твоё второе я сейчас контролирует тело!"))
 	return FALSE
 
 /mob/living/split_personality/emote(act, m_type = null, message = null, intentional = FALSE, force_silence = FALSE, forced = FALSE)
@@ -188,11 +188,11 @@
 ///////////////BRAINWASHING////////////////////
 
 /datum/brain_trauma/severe/split_personality/brainwashing
-	name = "Split Personality"
-	desc = "Patient's brain is split into two personalities, which randomly switch control of the body."
-	scan_desc = "complete lobe separation"
+	name = "Раздвоение личности"
+	desc = "Мозг пациента разделён на две личности, которые случайным образом сменяют контроль над телом."
+	scan_desc = "полное разделение долей"
 	gain_text = ""
-	lose_text = span_notice("You are free of your brainwashing.")
+	lose_text = span_notice("Вы свободны от промывки мозгов.")
 	can_gain = FALSE
 	var/codeword
 	var/objective
@@ -221,7 +221,7 @@
 
 /datum/brain_trauma/severe/split_personality/brainwashing/get_ghost()
 	set waitfor = FALSE
-	var/mob/chosen_one = SSpolling.poll_ghosts_for_target("Do you want to play as [span_danger("[owner.real_name]'s")] brainwashed mind?", poll_time = 7.5 SECONDS, checked_target = stranger_backseat, alert_pic = owner, role_name_text = "brainwashed mind")
+	var/mob/chosen_one = SSpolling.poll_ghosts_for_target("Хотите играть за [span_danger("[owner.real_name]")] с промытыми мозгами?", poll_time = 7.5 SECONDS, checked_target = stranger_backseat, alert_pic = owner, role_name_text = "промытая личность")
 	if(chosen_one)
 		stranger_backseat.PossessByPlayer(chosen_one.ckey)
 	else
@@ -244,8 +244,8 @@
 		speech_args[SPEECH_MESSAGE] = "" //oh hey did you want to tell people about the secret word to bring you back?
 
 /mob/living/split_personality/traitor
-	name = "split personality"
-	real_name = "unknown conscience"
+	name = "раздвоение личности"
+	real_name = "неизвестное сознание"
 	var/objective
 	var/codeword
 
@@ -253,21 +253,21 @@
 	. = ..()
 	if(!. || !client)
 		return FALSE
-	to_chat(src, span_notice("As a brainwashed personality, you cannot do anything yet but observe. However, you may gain control of your body if you hear the special codeword, switching places with the current personality."))
-	to_chat(src, span_notice("Your activation codeword is: <b>[codeword]</b>"))
+	to_chat(src, span_notice("Как промытая личность, вы пока можете только наблюдать. Однако вы можете получить контроль над телом, услышав кодовое слово, поменявшись местами с текущей личностью."))
+	to_chat(src, span_notice("Ваше кодовое слово для активации: <b>[codeword]</b>"))
 	if(objective)
-		to_chat(src, span_notice("Your master left you an objective: <b>[objective]</b>. Follow it at all costs when in control."))
+		to_chat(src, span_notice("Ваш хозяин оставил вам задание: <b>[objective]</b>. Выполняйте его любой ценой, когда получите контроль."))
 
 /datum/brain_trauma/severe/split_personality/blackout
-	name = "Alcohol-Induced CNS Impairment"
-	desc = "Patient's CNS has been temporarily impaired by imbibed alcohol, blocking memory formation, and causing reduced cognition and stupefaction."
-	scan_desc = "alcohol-induced CNS impairment"
-	gain_text = span_warning("Crap, that was one drink too many. You black out...")
-	lose_text = "You wake up very, very confused and hungover. All you can remember is drinking a lot of alcohol... what happened?"
-	poll_role = "blacked out drunkard"
+	name = "Нарушение ЦНС"
+	desc = "ЦНС пациента временно нарушена из-за употребления алкоголя, что блокирует формирование воспоминаний и вызывает снижение когнитивных функций и оглушение."
+	scan_desc = "алкогольное нарушение ЦНС"
+	gain_text = span_warning("Чёрт, это была последняя капля. Вы отключаетесь...")
+	lose_text = "Вы приходите в себя в крайней степени растерянности и с жуткого похмелья. Всё, что вы помните — это что выпили очень много алкоголя... что произошло?"
+	poll_role = "отключившийся пьяница"
 	random_gain = FALSE
 	poll_time = 10 SECONDS
-	/// Duration of effect, tracked in seconds, not deciseconds. qdels when reaching 0.
+	/// Длительность эффекта в секундах (не в децисекундах). Удаляется при достижении 0.
 	var/duration_in_seconds = 180
 
 /datum/brain_trauma/severe/split_personality/blackout/on_gain()
@@ -278,9 +278,9 @@
 
 	RegisterSignal(owner, COMSIG_ATOM_SPLASHED, PROC_REF(on_splashed))
 	notify_ghosts(
-		"[owner.real_name] is blacking out!",
+		"[owner.real_name] отключается!",
 		source = owner,
-		header = "Bro I'm not even drunk right now",
+		header = "Чувак, я даже не пьян",
 		notify_flags = NOTIFY_CATEGORY_NOFLASH,
 	)
 	var/datum/status_effect/inebriated/inebriation = owner.has_status_effect(/datum/status_effect/inebriated)
@@ -312,13 +312,13 @@
 		qdel(src)
 		return
 	else if(duration_in_seconds <= 60 && !(duration_in_seconds % 20))
-		to_chat(owner, span_warning("You have [duration_in_seconds] seconds left before sobering up!"))
+		to_chat(owner, span_warning("До протрезвления осталось [duration_in_seconds] секунд!"))
 	if(prob(10) && !HAS_TRAIT(owner, TRAIT_DISCOORDINATED_TOOL_USER))
 		ADD_TRAIT(owner, TRAIT_DISCOORDINATED_TOOL_USER, TRAUMA_TRAIT)
-		owner.balloon_alert(owner, "dexterity reduced temporarily!")
+		owner.balloon_alert(owner, "временно снижена координация движений!")
 		//We then send a callback to automatically re-add the trait
 		addtimer(TRAIT_CALLBACK_REMOVE(owner, TRAIT_DISCOORDINATED_TOOL_USER, TRAUMA_TRAIT), 10 SECONDS)
-		addtimer(CALLBACK(owner, TYPE_PROC_REF(/atom, balloon_alert), owner, "dexterity regained!"), 10 SECONDS)
+		addtimer(CALLBACK(owner, TYPE_PROC_REF(/atom, balloon_alert), owner, "координация восстановлена!"), 10 SECONDS)
 	if(prob(15))
 		playsound(owner,'sound/mobs/humanoids/human/hiccup/sf_hiccup_male_01.ogg', 50)
 		owner.emote("hiccup")
@@ -329,15 +329,15 @@
 	duration_in_seconds -= seconds_per_tick
 
 /mob/living/split_personality/blackout
-	name = "blacked-out drunkard"
-	real_name = "drunken consciousness"
+	name = "отключившийся пьяница"
+	real_name = "пьяное сознание"
 
 /mob/living/split_personality/blackout/Login()
 	. = ..()
 	if(!. || !client)
 		return FALSE
-	to_chat(src, span_notice("You're the incredibly inebriated leftovers of your host's consciousness! Make sure to act the part and leave a trail of confusion and chaos in your wake."))
-	to_chat(src, span_boldwarning("While you're drunk, you're not suicidal. Do not commit suicide or put the body in danger. You have a minor license to grief just like a clown, but do not kill anyone or create a situation leading to the body being put in danger or at risk of being harmed."))
+	to_chat(src, span_notice("Вы - невероятно пьяные остатки сознания вашего хозяина! Сыграйте свою роль и оставьте после себя следы хаоса и неразберихи."))
+	to_chat(src, span_boldwarning("Хоть вы и пьяны, вы не суицидальны. Не совершайте самоубийство и не подвергайте тело опасности. У вас есть некоторая свобода действий, как у клоуна, но не убивайте никого и не создавайте ситуаций, ведущих к опасности для тела."))
 
 #undef OWNER
 #undef STRANGER

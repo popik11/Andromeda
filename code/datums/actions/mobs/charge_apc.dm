@@ -2,10 +2,10 @@
 #define CHARGE_AMOUNT (0.08 * STANDARD_CELL_CHARGE)
 
 /datum/action/cooldown/mob_cooldown/charge_apc
-	name = "Charge APCs"
+	name = "Зарядить ЛКП"
 	button_icon = 'icons/obj/machines/wallmounts.dmi'
 	button_icon_state = "apc0"
-	desc = "Give off charge to an APC."
+	desc = "Передать заряд локальному энергоузлу."
 	cooldown_time = 5 SECONDS
 
 /datum/action/cooldown/mob_cooldown/charge_apc/Activate(atom/target_atom)

@@ -19,7 +19,7 @@
 	var/turf/pawn_turf = get_turf(pawn_mob)
 
 	pawn_mob.face_atom(target)
-	pawn_mob.balloon_alert_to_viewers("stops and stares...")
+	pawn_mob.balloon_alert_to_viewers("останавливается и пристально смотрит...")
 	set_movement_target(controller, pawn_turf, /datum/ai_movement/complete_stop)
 
 	if(controller.blackboard[BB_STATIONARY_MOVE_TO_TARGET])

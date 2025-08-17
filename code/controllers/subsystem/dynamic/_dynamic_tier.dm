@@ -116,10 +116,10 @@
 	name = "Greenshift"
 	weight = 2
 
-	advisory_report = "Advisory Level: <b>Green Star</b></center><BR>\
-		Your sector's advisory level is Green Star. \
-		Surveillance information shows no credible threats to Nanotrasen assets within the Spinward Sector at this time. \
-		As always, the Department advises maintaining vigilance against potential threats, regardless of a lack of known threats."
+	advisory_report = "Уровень угрозы: <b>Зелёная звезда</b></center><BR>\
+		Уровень угрозы в вашем секторе - Зелёная звезда. \
+		Данные наблюдения не выявили существенных угроз активам Нанотрейзен в Спинвард Секторе на текущий момент. \
+		Как всегда, Департамент рекомендует сохранять бдительность в отношении потенциальных угроз, независимо от отсутствия известных опасностей."
 
 /datum/dynamic_tier/low
 	tier = DYNAMIC_TIER_LOW
@@ -127,10 +127,10 @@
 	name = "Low Chaos"
 	weight = 8
 
-	advisory_report = "Advisory Level: <b>Yellow Star</b></center><BR>\
-		Your sector's advisory level is Yellow Star. \
-		Surveillance shows a credible risk of enemy attack against our assets in the Spinward Sector. \
-		We advise a heightened level of security alongside maintaining vigilance against potential threats."
+	advisory_report = "Уровень угрозы: <b>Жёлтая звезда</b></center><BR>\
+		Уровень угрозы в вашем секторе - Жёлтая звезда. \
+		Наблюдение показывает существенный риск вражеских атак на наши активы в Спинвард Секторе. \
+		Рекомендуется повышенный уровень безопасности и сохранение бдительности в отношении потенциальных угроз."
 
 	ruleset_type_settings = list(
 		ROUNDSTART = list(
@@ -174,11 +174,11 @@
 	name = "Low-Medium Chaos"
 	weight = 46
 
-	advisory_report = "Advisory Level: <b>Red Star</b></center><BR>\
-		Your sector's advisory level is Red Star. \
-		The Department of Intelligence has decrypted Cybersun communications suggesting a high likelihood of attacks \
-		on Nanotrasen assets within the Spinward Sector. \
-		Stations in the region are advised to remain highly vigilant for signs of enemy activity and to be on high alert."
+	advisory_report = "Уровень угрозы: <b>Красная звезда</b></center><BR>\
+		Уровень угрозы в вашем секторе - Красная звезда. \
+		Департамент разведки расшифровал перехваченные сообщения Киберсан, указывающие на высокую вероятность атак \
+		на активы Нанотрейзен в Спинвард Секторе. \
+		Станциям в регионе рекомендуется сохранять повышенную бдительность к признакам вражеской активности и находиться в состоянии повышенной готовности."
 
 	ruleset_type_settings = list(
 		ROUNDSTART = list(
@@ -222,12 +222,12 @@
 	name = "Medium-High Chaos"
 	weight = 36
 
-	advisory_report = "Advisory Level: <b>Black Orbit</b></center><BR>\
-		Your sector's advisory level is Black Orbit. \
-		Your sector's local communications network is currently undergoing a blackout, \
-		and we are therefore unable to accurately judge enemy movements within the region. \
-		However, information passed to us by GDI suggests a high amount of enemy activity in the sector, \
-		indicative of an impending attack. Remain on high alert and vigilant against any other potential threats."
+	advisory_report = "Уровень угрозы: <b>Черная орбита</b></center><BR>\
+		Уровень угрозы в вашем секторе - Черная орбита. \
+		Локальная сеть связи сектора в настоящее время отключена, \
+		и мы не можем точно отслеживать передвижения противника в регионе. \
+		Однако данные, полученные от GDI, указывают на высокую активность противника в секторе, \
+		что свидетельствует о готовящейся атаке. Сохраняйте высокую бдительность и будьте готовы к любым потенциальным угрозам."
 
 	ruleset_type_settings = list(
 		ROUNDSTART = list(
@@ -273,11 +273,11 @@
 
 	min_pop = 25
 
-	advisory_report = "Advisory Level: <b>Midnight Sun</b></center><BR>\
-		Your sector's advisory level is Midnight Sun. \
-		Credible information passed to us by GDI suggests that the Syndicate \
-		is preparing to mount a major concerted offensive on Nanotrasen assets in the Spinward Sector to cripple our foothold there. \
-		All stations should remain on high alert and prepared to defend themselves."
+	advisory_report = "Уровень угрозы: <b>Полночное солнце</b></center><BR>\
+		Уровень угрозы в вашем секторе - Полночное солнце. \
+		Достоверная информация, полученная от GDI, указывает на то, что Синдикат \
+		готовит масштабное наступление на активы Нанотрейзен в Спинвард Секторе с целью подрыва нашего присутствия в регионе. \
+		Все станции должны сохранять высшую степень боеготовности и быть готовыми к самообороне."
 
 	ruleset_type_settings = list(
 		ROUNDSTART = list(

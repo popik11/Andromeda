@@ -80,7 +80,7 @@ SUBSYSTEM_DEF(events)
 /datum/controller/subsystem/events/proc/checkEvent()
 	if(scheduled <= world.time)
 #ifdef MAP_TEST
-		message_admins("Random event skipped (Game is compiled in MAP_TEST mode)")
+		message_admins("Случайное событие пропущено (Игра скомпилирована в режиме MAP_TEST)")
 #else
 		spawnEvent()
 #endif
@@ -135,8 +135,8 @@ SUBSYSTEM_DEF(events)
 ///Toggles whether or not wizard events will be in the event pool, and sends a notification to the admins.
 /datum/controller/subsystem/events/proc/toggleWizardmode()
 	wizardmode = !wizardmode
-	message_admins("Summon Events has been [wizardmode ? "enabled, events will occur every [SSevents.frequency_lower / 600] to [SSevents.frequency_upper / 600] minutes" : "disabled"]!")
-	log_game("Summon Events was [wizardmode ? "enabled" : "disabled"]!")
+	message_admins("Режим событий был [wizardmode ? "включен, события будут происходить каждые [SSevents.frequency_lower / 600] - [SSevents.frequency_upper / 600] минут" : "отключен"]!")
+	log_game("Режим событий был [wizardmode ? "включен" : "отключен"]!")
 
 ///Sets the event frequency bounds back to their initial value.
 /datum/controller/subsystem/events/proc/resetFrequency()

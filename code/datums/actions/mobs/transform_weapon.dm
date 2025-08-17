@@ -1,8 +1,8 @@
 /datum/action/cooldown/mob_cooldown/transform_weapon
-	name = "Transform Weapon"
+	name = "Трансформация Оружия"
 	button_icon = 'icons/obj/mining_zones/artefacts.dmi'
 	button_icon_state = "cleaving_saw"
-	desc = "Transform weapon into a different state."
+	desc = "Изменяет состояние оружия на альтернативное."
 	cooldown_time = 5 SECONDS
 	shared_cooldown = MOB_SHARED_COOLDOWN_2
 	/// The max possible cooldown, cooldown is random between the default cooldown time and this

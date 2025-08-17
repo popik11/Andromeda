@@ -1,5 +1,5 @@
 /datum/action/item_action/organ_action
-	name = "Organ Action"
+	name = "Действие органа"
 	check_flags = AB_CHECK_CONSCIOUS
 
 /datum/action/item_action/organ_action/IsAvailable(feedback = FALSE)
@@ -9,26 +9,26 @@
 	return ..()
 
 /datum/action/item_action/organ_action/toggle
-	name = "Toggle Organ"
+	name = "Переключить орган"
 
 /datum/action/item_action/organ_action/toggle/New(Target)
 	..()
 	var/obj/item/organ/organ_target = target
-	name = "Toggle [organ_target.name]"
+	name = "Переключить [organ_target.name]"
 
 /datum/action/item_action/organ_action/use
-	name = "Use Organ"
+	name = "Использовать орган"
 
 /datum/action/item_action/organ_action/use/New(Target)
 	..()
 	var/obj/item/organ/organ_target = target
-	name = "Use [organ_target.name]"
+	name = "Использовать [organ_target.name]"
 
 /datum/action/item_action/organ_action/go_feral
-	name = "Go Feral"
+	name = "Одичать"
 	button_icon = 'icons/mob/actions/actions_items.dmi'
 	button_icon_state = "feral_mode_off"
-	var/list/ability_name = list("Go Feral", "Bite the Hand that Feeds", "Unleash Id", "Activate Catbrain", "Gremlin Mode", "Nom Mode", "Dehumanize Yourself", "Misbehave")
+	var/list/ability_name = list("Одичать", "Укусить кормящую руку", "Выпустить Ид", "Активировать кошачий мозг", "Режим гремлина", "Режим нямки", "Дегуманизироваться", "Шалить")
 
 /datum/action/item_action/organ_action/go_feral/New(Target)
 	..()
@@ -40,10 +40,10 @@
 	if(!cat_tongue.feral_mode)
 		background_icon_state = "bg_default"
 		button_icon_state = "feral_mode_off"
-		to_chat(cat_tongue.owner, span_notice("You will make unarmed attacks normally."))
+		to_chat(cat_tongue.owner, span_notice("Вы будете атаковать в рукопашной как обычно."))
 	else
 		background_icon_state = "bg_default_on"
 		button_icon_state = "feral_mode_on"
-		to_chat(cat_tongue.owner, span_notice("You will bite when making an unarmed attack."))
+		to_chat(cat_tongue.owner, span_notice("Вы будете кусаться при рукопашной атаке."))
 	build_all_button_icons()
 	return TRUE

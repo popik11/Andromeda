@@ -64,7 +64,7 @@ SUBSYSTEM_DEF(discord)
 		pass() // The list can just stay as its default (blank). Pass() exists because it needs a catch
 	var/notifymsg = jointext(people_to_notify, ", ")
 	if(notifymsg)
-		notifymsg += ", a new round is starting!"
+		notifymsg += ", начинается новый раунд!"
 		for(var/channel_tag in CONFIG_GET(str_list/chat_new_game_notifications))
 			// Sends the message to the discord, using same config option as the roundstart notification
 			send2chat(new /datum/tgs_message_content(trim(notifymsg)), channel_tag)

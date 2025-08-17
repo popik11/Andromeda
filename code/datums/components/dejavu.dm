@@ -1,40 +1,38 @@
 /**
- * A component to reset the parent to its previous state after some time passes
+ * Компонент для возврата родителя в предыдущее состояние через некоторое время
  */
 /datum/component/dejavu
 	dupe_mode = COMPONENT_DUPE_ALLOWED
 
-	///message sent when dejavu rewinds
-	var/rewind_message = "You remember a time not so long ago..."
-	///message sent when dejavu is out of rewinds
-	var/no_rewinds_message = "But the memory falls out of your reach."
+	///Сообщение при срабатывании эффекта дежавю
+	var/rewind_message = "Вы вспоминаете события недавнего прошлого..."
+	///Сообщение когда эффекты дежавю закончились
+	var/no_rewinds_message = "Но воспоминания ускользают от вас."
 
-	/// The turf the parent was on when this components was applied, they get moved back here after the duration
+	///Турф, на котором находился родитель при создании компонента
 	var/turf/starting_turf
-	/// Determined by the type of the parent so different behaviours can happen per type
+	///Тип перемотки, определяется типом родителя для разного поведения
 	var/rewind_type
-	/// How many rewinds will happen before the effect ends
+	///Сколько раз ещё сработает эффект
 	var/rewinds_remaining
-	/// How long to wait between each rewind
+	///Интервал между срабатываниями
 	var/rewind_interval
-	/// Do we add a new component before teleporting the target to they teleport to the place where *we* teleported them from?
+	///Добавлять ли новый компонент перед телепортацией цели?
 	var/repeating_component
 
-	/// The starting value of toxin loss at the beginning of the effect
+	///Начальный уровень токсинов
 	var/tox_loss = 0
-	/// The starting value of oxygen loss at the beginning of the effect
+	///Начальный уровень кислородного голодания
 	var/oxy_loss = 0
-	/// The starting value of stamina loss at the beginning of the effect
+	///Начальный уровень усталости
 	var/stamina_loss = 0
-	/// The starting value of brain loss at the beginning of the effect
+	///Начальный уровень повреждения мозга
 	var/brain_loss = 0
-	/// The starting value of brute loss at the beginning of the effect
-	/// This only applies to simple animals
+	///Начальный уровень физических повреждений (только для простых мобов)
 	var/brute_loss
-	/// The starting value of integrity at the beginning of the effect
-	/// This only applies to objects
+	///Начальный уровень прочности (только для объектов)
 	var/integrity
-	/// A list of body parts saved at the beginning of the effect
+	///Список сохранённых частей тела
 	var/list/datum/saved_bodypart/saved_bodyparts
 
 /datum/component/dejavu/Initialize(rewinds = 1, interval = 10 SECONDS, add_component = FALSE)
@@ -79,10 +77,10 @@
 /datum/component/dejavu/proc/rewind()
 	to_chat(parent, span_notice(rewind_message))
 
-	//comes after healing so new limbs comically drop to the floor
+	// идёт после лечения, поэтому новые конечности комично падают на пол
 	if(starting_turf)
 		if(!check_teleport_valid(parent, starting_turf))
-			to_chat(parent, span_warning("For some reason, your head aches and fills with mental fog when you try to think of where you were... It feels like you're now going against some dull, unstoppable universal force."))
+			to_chat(parent, span_warning("По какой-то причине вашу голову заполняет туманная боль, когда вы пытаетесь вспомнить, где были... Чувствуется, будто вы сталкиваетесь с какой-то тупой, неостановимой силой вселенной."))
 		else
 			var/atom/movable/master = parent
 			master.forceMove(starting_turf)
@@ -131,17 +129,17 @@
 	master.update_integrity(integrity)
 	rewind()
 
-///differently themed dejavu for modsuits.
+///дежавю с другой тематикой для модульных скафандров
 /datum/component/dejavu/timeline
-	rewind_message = "Your suit rewinds, pulling you through spacetime!"
-	no_rewinds_message = "\"Rewind complete. You have arrived at: 10 seconds ago.\""
+	rewind_message = "Скафандр перематывает время, перенося вас через пространство-время!"
+	no_rewinds_message = "\"Перемотка завершена. Вы прибыли на: 10 секунд назад.\""
 
 /datum/component/dejavu/timeline/rewind()
 	playsound(get_turf(parent), 'sound/items/modsuit/rewinder.ogg')
 	. = ..()
 
 /datum/component/dejavu/wizard
-	rewind_message = "Your temporal ward activated, pulling you through spacetime!"
+	rewind_message = "Ваш временной оберег сработал, перенося вас через пространство-время!"
 
 /datum/component/dejavu/wizard/rewind()
 	playsound(get_turf(parent), 'sound/items/modsuit/rewinder.ogg')

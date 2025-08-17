@@ -107,18 +107,18 @@
 		return
 
 	if(tip_time > 0)
-		to_chat(tipper, span_warning("You begin tipping over [tipped_mob]..."))
+		to_chat(tipper, span_warning("Ты начинаешь опрокидывать [tipped_mob]..."))
 		tipped_mob.visible_message(
-			span_warning("[tipper] begins tipping over [tipped_mob]."),
-			span_userdanger("[tipper] begins tipping you over!"),
+			span_warning("[tipper] начинает опрокидывать [tipped_mob]."),
+			span_userdanger("[tipper] начинает опрокидывать тебя!"),
 			ignored_mobs = tipper
 		)
 
 		if(!do_after(tipper, tip_time, target = tipped_mob))
 			if(!isnull(tipped_mob.client))
-				tipped_mob.log_message("was attempted to tip over by [key_name(tipper)]", LOG_VICTIM, log_globally = FALSE)
-				tipper.log_message("failed to tip over [key_name(tipped_mob)]", LOG_ATTACK)
-			to_chat(tipper, span_danger("You fail to tip over [tipped_mob]."))
+				tipped_mob.log_message("был целью попытки опрокидывания от [key_name(tipper)]", LOG_VICTIM, log_globally = FALSE)
+				tipper.log_message("не смог опрокинуть [key_name(tipped_mob)]", LOG_ATTACK)
+			to_chat(tipper, span_danger("Тебе не удалось опрокинуть [tipped_mob]."))
 			return
 	do_tip(tipped_mob, tipper)
 
@@ -132,17 +132,17 @@
  */
 /datum/component/tippable/proc/do_tip(mob/living/tipped_mob, mob/tipper)
 	if(QDELETED(tipped_mob))
-		CRASH("Tippable component: do_tip() called with QDELETED tipped_mob!")
-	if (is_tipped) // sanity check in case multiple people try to tip at the same time
+		CRASH("Компонент Tippable: do_tip() вызван с QDELETED tipped_mob!")
+	if (is_tipped) // проверка на случай одновременных попыток опрокинуть
 		return
 
-	to_chat(tipper, span_warning("You tip over [tipped_mob]."))
+	to_chat(tipper, span_warning("Ты опрокидываешь [tipped_mob]."))
 	if (!isnull(tipped_mob.client))
-		tipped_mob.log_message("has been tipped over by [key_name(tipper)].", LOG_ATTACK)
-		tipper.log_message("has tipped over [key_name(tipped_mob)].", LOG_ATTACK)
+		tipped_mob.log_message("был опрокинут [key_name(tipper)].", LOG_ATTACK)
+		tipper.log_message("опрокинул [key_name(tipped_mob)].", LOG_ATTACK)
 	tipped_mob.visible_message(
-		span_warning("[tipper] tips over [tipped_mob]."),
-		span_userdanger("You are tipped over by [tipper]!"),
+		span_warning("[tipper] опрокидывает [tipped_mob]."),
+		span_userdanger("Тебя опрокидывает [tipper]!"),
 		ignored_mobs = tipper
 		)
 
@@ -164,15 +164,15 @@
  */
 /datum/component/tippable/proc/try_untip(mob/living/tipped_mob, mob/untipper)
 	if(untip_time > 0)
-		to_chat(untipper, span_notice("You begin righting [tipped_mob]..."))
+		to_chat(untipper, span_notice("Ты начинаешь поднимать [tipped_mob]..."))
 		tipped_mob.visible_message(
-			span_notice("[untipper] begins righting [tipped_mob]."),
-			span_notice("[untipper] begins righting you."),
+			span_notice("[untipper] начинает поднимать [tipped_mob]."),
+			span_notice("[untipper] начинает поднимать тебя."),
 			ignored_mobs = untipper
 		)
 
 		if(!do_after(untipper, untip_time, target = tipped_mob))
-			to_chat(untipper, span_warning("You fail to right [tipped_mob]."))
+			to_chat(untipper, span_warning("Тебе не удалось поднять [tipped_mob]."))
 			return
 
 	do_untip(tipped_mob, untipper)
@@ -187,13 +187,13 @@
 /datum/component/tippable/proc/do_untip(mob/living/tipped_mob, mob/untipper)
 	if(QDELETED(tipped_mob))
 		return
-	if (!is_tipped) // sanity check in case multiple people try to untip at the same time
+	if (!is_tipped) // проверка на случай одновременных попыток поднять
 		return
 
-	to_chat(untipper, span_notice("You right [tipped_mob]."))
+	to_chat(untipper, span_notice("Ты поднимаешь [tipped_mob]."))
 	tipped_mob.visible_message(
-		span_notice("[untipper] rights [tipped_mob]."),
-		span_notice("You are righted by [untipper]!"),
+		span_notice("[untipper] поднимает [tipped_mob]."),
+		span_notice("[untipper] поднимает тебя!"),
 		ignored_mobs = untipper
 		)
 
@@ -216,8 +216,8 @@
 	post_untipped_callback?.Invoke()
 
 	tipped_mob.visible_message(
-		span_notice("[tipped_mob] rights itself."),
-		span_notice("You right yourself.")
+		span_notice("[tipped_mob] поднимается."),
+		span_notice("Ты поднимаешься.")
 		)
 
 /**

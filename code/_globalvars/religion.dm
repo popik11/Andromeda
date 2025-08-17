@@ -18,7 +18,7 @@ GLOBAL_VAR(holy_armor_type)
 /// Sets a new religious sect used by all chaplains int he round
 /proc/set_new_religious_sect(path, reset_existing = FALSE)
 	if(!ispath(path, /datum/religion_sect))
-		message_admins("[ADMIN_LOOKUPFLW(usr)] has tried to spawn an item when selecting a sect.")
+		message_admins("[ADMIN_LOOKUPFLW(usr)] попытался создать предмет при выборе секты.")
 		return
 
 	if(!isnull(GLOB.religious_sect))

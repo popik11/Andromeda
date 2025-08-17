@@ -74,9 +74,9 @@
 		fishie.last_feeding = source.last_feeding
 		fishie.update_integrity(fishie.max_integrity * source.get_integrity_percentage())
 	else
-		result = new result_type (location)
+		result = new result_type(location)
 		if(location != source.loc)
-			result.visible_message(span_boldnotice("\A [result] jumps out of [source.loc]!"))
+			result.visible_message(span_boldnotice("\A [result] выпрыгивает из [source.loc]!"))
 			playsound(result, 'sound/effects/fish_splash.ogg', 60)
 		if(isbasicmob(result))
 			for(var/trait_type in source.fish_traits)
@@ -86,7 +86,7 @@
 			addtimer(CALLBACK(result, TYPE_PROC_REF(/mob/living/basic, hop_on_nearby_turf)), 0.1 SECONDS)
 
 	if(is_evo || location == source.loc)
-		var/message_verb = del_on_grow ? "grows into" : "lays"
+		var/message_verb = del_on_grow ? "превращается в" : "откладывает"
 		location.visible_message(span_notice("[source] [message_verb] \a [result]."), vision_distance = 3)
 
 	if(inherit_name && HAS_TRAIT(source, TRAIT_WAS_RENAMED))

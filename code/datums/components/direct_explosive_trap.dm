@@ -1,17 +1,17 @@
 /**
- * Responds to certain signals and 'explodes' on the person using the item.
- * Differs from `interaction_booby_trap` in that this doesn't actually explode, it just directly calls ex_act on one person.
+ * Реагирует на определённые сигналы и "взрывает" использующего предмет.
+ * Отличается от `interaction_booby_trap` тем, что не создаёт реальный взрыв, а напрямую вызывает ex_act на цели.
  */
 /datum/component/direct_explosive_trap
-	/// An optional mob to inform about explosions
+	/// Опциональный моб, которого нужно уведомлять о взрывах
 	var/mob/living/saboteur
-	/// Amount of force to apply
+	/// Сила взрыва
 	var/explosive_force
-	/// Colour for examine notification
+	/// Цвет подсветки при осмотре
 	var/glow_colour
-	/// Optional additional target checks before we go off
+	/// Дополнительные проверки перед срабатыванием
 	var/datum/callback/explosive_checks
-	/// Signals which set off the bomb, must pass a mob as the first non-source argument
+	/// Сигналы, которые активируют ловушку (первый аргумент после source должен быть mob)
 	var/list/triggering_signals
 
 /datum/component/direct_explosive_trap/Initialize(
@@ -35,7 +35,7 @@
 		addtimer(CALLBACK(src, PROC_REF(bomb_expired)), expire_time, TIMER_DELETE_ME)
 
 /datum/component/direct_explosive_trap/RegisterWithParent()
-	if (!(COMSIG_ATOM_EXAMINE in triggering_signals)) // Maybe you're being extra mean with this one
+	if (!(COMSIG_ATOM_EXAMINE in triggering_signals)) // Для особо коварных ловушек
 		RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(on_examined))
 	RegisterSignals(parent, triggering_signals, PROC_REF(explode))
 	if (!isnull(saboteur))
@@ -53,33 +53,33 @@
 	saboteur = null
 	return ..()
 
-/// Called if we sit too long without going off
+/// Срабатывает при истечении времени без активации
 /datum/component/direct_explosive_trap/proc/bomb_expired()
 	if (!isnull(saboteur))
-		to_chat(saboteur, span_bolddanger("Failure! Your trap didn't catch anyone this time..."))
+		to_chat(saboteur, span_bolddanger("Провал! Ваша ловушка никого не поймала..."))
 	qdel(src)
 
-/// Let people know something is up
+/// Предупреждение при осмотре
 /datum/component/direct_explosive_trap/proc/on_examined(datum/source, mob/user, text)
 	SIGNAL_HANDLER
-	text += span_holoparasite("It glows with a strange <font color=\"[glow_colour]\">light</font>...")
+	text += span_holoparasite("Мерцает <font color=\"[glow_colour]\">странным светом</font>...")
 
-/// Blow up
+/// Взрыв
 /datum/component/direct_explosive_trap/proc/explode(atom/source, mob/living/victim)
 	SIGNAL_HANDLER
 	if (!isliving(victim))
 		return
 	if (!isnull(explosive_checks) && !explosive_checks.Invoke(victim))
 		return
-	to_chat(victim, span_bolddanger("[source] was boobytrapped!"))
+	to_chat(victim, span_bolddanger("[source] оказался ловушкой!"))
 	if (!isnull(saboteur))
-		to_chat(saboteur, span_bolddanger("Success! Your trap on [source] caught [victim.name]!"))
+		to_chat(saboteur, span_bolddanger("Успех! Ваша ловушка на [source] сработала на [victim.name]!"))
 	playsound(source, 'sound/effects/explosion/explosion2.ogg', 200, TRUE)
 	new /obj/effect/temp_visual/explosion(get_turf(source))
 	EX_ACT(victim, explosive_force)
 	qdel(src)
 
-/// Don't hang a reference to the person who placed the bomb
+/// Удаление ссылки на установившего бомбу
 /datum/component/direct_explosive_trap/proc/on_bomber_deleted()
 	SIGNAL_HANDLER
 	saboteur = null

@@ -88,28 +88,28 @@
 /datum/component/lockable_storage/proc/on_requesting_context_from_item(datum/source, list/context, obj/item/held_item, mob/user)
 	SIGNAL_HANDLER
 	if(isnull(held_item))
-		context[SCREENTIP_CONTEXT_LMB] = "Open storage"
+		context[SCREENTIP_CONTEXT_LMB] = "Открыть хранилище"
 		return CONTEXTUAL_SCREENTIP_SET
 
 	if(can_hack_open)
 		switch(held_item.tool_behaviour)
 			if(TOOL_SCREWDRIVER)
-				context[SCREENTIP_CONTEXT_LMB] = "[panel_open ? "Close" : "Open"] panel"
+				context[SCREENTIP_CONTEXT_LMB] = "[panel_open ? "Закрыть" : "Открыть"] панель"
 				return CONTEXTUAL_SCREENTIP_SET
 			if(TOOL_MULTITOOL)
-				context[SCREENTIP_CONTEXT_LMB] = "Hack panel open"
+				context[SCREENTIP_CONTEXT_LMB] = "Взломать панель"
 				return CONTEXTUAL_SCREENTIP_SET
 
 	return NONE
 
-///Called when examining the storage item.
+/// Вызывается при осмотре хранилища.
 /datum/component/lockable_storage/proc/on_examine(atom/source, mob/user, list/examine_list)
 	SIGNAL_HANDLER
 	if(can_hack_open)
-		examine_list += "The service panel is currently <b>[panel_open ? "unscrewed" : "screwed shut"]</b>."
+		examine_list += "Техническая панель <b>[panel_open ? "откручена" : "закручена"]</b>."
 
 /**
- * Called when a screwdriver is used on the parent, if it's hackable.
+ * Вызывается при использовании отвёртки на родителе, если он взламываем.
  */
 /datum/component/lockable_storage/proc/on_screwdriver_act(atom/source, mob/user, obj/item/tool)
 	SIGNAL_HANDLER
@@ -118,7 +118,7 @@
 
 	panel_open = !panel_open
 	tool.play_tool_sound(source)
-	source.balloon_alert(user, "panel [panel_open ? "opened" : "closed"]")
+	source.balloon_alert(user, "панель [panel_open ? "открыта" : "закрыта"]")
 	return ITEM_INTERACT_SUCCESS
 
 /**
@@ -130,17 +130,17 @@
 	if(!can_hack_open || !source.atom_storage.locked)
 		return NONE
 	if(!panel_open)
-		source.balloon_alert(user, "panel closed!")
+		source.balloon_alert(user, "панель закрыта!")
 		return ITEM_INTERACT_BLOCKING
-	source.balloon_alert(user, "hacking...")
+	source.balloon_alert(user, "взлом...")
 	INVOKE_ASYNC(src, PROC_REF(hack_open), source, user, tool)
 	return ITEM_INTERACT_SUCCESS
 
-///Does a do_after to hack the storage open, takes a long time cause idk.
+/// Выполняет do_after для взлома хранилища (занимает много времени)
 /datum/component/lockable_storage/proc/hack_open(atom/source, mob/user, obj/item/tool)
 	if(!tool.use_tool(parent, user, 40 SECONDS, volume = 50))
 		return
-	source.balloon_alert(user, "hacked")
+	source.balloon_alert(user, "взломано")
 	lock_code = null
 
 /datum/component/lockable_storage/proc/on_emag(obj/source, mob/user, obj/item/card/emag/emag_card)
@@ -154,8 +154,8 @@
 	source.obj_flags |= EMAGGED
 	can_hack_open = FALSE // since it's broken for good
 
-	source.visible_message(span_warning("Sparks fly from [source]!"), blind_message = span_hear("You hear a faint electrical spark."))
-	source.balloon_alert(user, "lock destroyed")
+	source.visible_message(span_warning("Из [source] вылетают искры!"), blind_message = span_hear("Слышите слабую электрическую искру."))
+	source.balloon_alert(user, "замок уничтожен")
 	playsound(source, SFX_SPARKS, 50, TRUE, SHORT_RANGE_SOUND_EXTRARANGE)
 	lock_code = null
 	source.atom_storage.locked = STORAGE_NOT_LOCKED

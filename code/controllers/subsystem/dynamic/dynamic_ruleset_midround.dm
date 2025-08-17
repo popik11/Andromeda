@@ -53,8 +53,7 @@
 	addtimer(CALLBACK(src, PROC_REF(announce_spiders)), rand(375, 600) SECONDS)
 
 /datum/dynamic_ruleset/midround/spiders/proc/announce_spiders()
-	priority_announce("Unidentified lifesigns detected coming aboard [station_name()]. Secure any exterior access, including ducting and ventilation.", "Lifesign Alert", ANNOUNCER_ALIENS)
-
+	priority_announce("Обнаружены неопознанные формы жизни на борту [station_name()]. Заблокируйте все внешние доступы, включая вентиляцию и технические тоннели.", "Тревога: формы жизни", ANNOUNCER_ALIENS)
 /datum/dynamic_ruleset/midround/spiders/false_alarm()
 	announce_spiders()
 
@@ -106,7 +105,7 @@
 	var/list/admin_pool = list("[RULESET_CONFIG_CANCEL]" = TRUE, "[RANDOM_PIRATE_POOL]" = TRUE)
 	for(var/datum/pirate_gang/gang as anything in default_pirate_pool())
 		admin_pool[gang.name] = gang
-	var/picked = tgui_input_list(admin, "Select a pirate gang", "Pirate Gang Selection", admin_pool)
+	var/picked = tgui_input_list(admin, "Выберите пиратскую банду", "Выбор пиратской банды", admin_pool)
 	if(!picked || picked == RULESET_CONFIG_CANCEL)
 		return RULESET_CONFIG_CANCEL
 	if(picked == RANDOM_PIRATE_POOL)
@@ -123,18 +122,18 @@
 
 /datum/dynamic_ruleset/midround/pirates/proc/send_pirate_threat(list/pirate_selection)
 	var/datum/pirate_gang/chosen_gang = pick_n_take(pirate_selection)
-	///If there was nothing to pull from our requested list, stop here.
+	/// Если не удалось выбрать банду из списка, прерываем выполнение
 	if(!chosen_gang)
-		message_admins("Error attempting to run the space pirate event, as the given pirate gangs list was empty.")
+		message_admins("Ошибка при попытке запустить событие космических пиратов - список банд пуст.")
 		return
-	//set payoff
+	// Устанавливаем сумму выкупа
 	var/payoff = 0
 	var/datum/bank_account/account = SSeconomy.get_dep_account(ACCOUNT_CAR)
 	if(account)
 		payoff = max(PAYOFF_MIN, FLOOR(account.account_balance * 0.80, 1000))
 	var/datum/comm_message/threat = chosen_gang.generate_message(payoff)
-	//send message
-	priority_announce("Incoming subspace communication. Secure channel opened at all communication consoles.", "Incoming Message", SSstation.announcer.get_rand_report_sound())
+	// Отправляем сообщение
+	priority_announce("Обнаружена входящая субпространственная коммуникация. Безопасный канал открыт на всех коммуникационных консолях.", "Входящее сообщение", SSstation.announcer.get_rand_report_sound())
 	threat.answer_callback = CALLBACK(src, PROC_REF(pirates_answered), threat, chosen_gang, payoff, world.time)
 	addtimer(CALLBACK(src, PROC_REF(spawn_pirates), threat, chosen_gang), RESPONSE_MAX_TIME)
 	GLOB.communications_controller.send_message(threat, unique = TRUE)
@@ -161,7 +160,7 @@
 	if(chosen_gang.paid_off)
 		return
 
-	var/list/candidates = SSpolling.poll_ghost_candidates("Do you wish to be considered for a [span_notice("pirate crew of [chosen_gang.name]?")]", check_jobban = ROLE_TRAITOR, alert_pic = /obj/item/claymore/cutlass, role_name_text = "pirate crew")
+	var/list/candidates = SSpolling.poll_ghost_candidates("Хотите стать частью [span_notice("пиратской команды [chosen_gang.name]?")]", check_jobban = ROLE_TRAITOR, alert_pic = /obj/item/claymore/cutlass, role_name_text = "пиратской команды")
 	shuffle_inplace(candidates)
 
 	var/template_key = "pirate_[chosen_gang.ship_template_id]"
@@ -171,10 +170,10 @@
 	var/z = SSmapping.empty_space.z_value
 	var/turf/T = locate(x,y,z)
 	if(!T)
-		CRASH("Pirate event found no turf to load in")
+		CRASH("Для пиратского события не найдено подходящего места для появления")
 
 	if(!ship.load(T))
-		CRASH("Loading pirate ship failed!")
+		CRASH("Не удалось загрузить пиратский корабль!")
 
 	for(var/turf/area_turf as anything in ship.get_affected_turfs(T))
 		for(var/obj/effect/mob_spawn/ghost_role/human/pirate/spawner in area_turf)
@@ -183,15 +182,15 @@
 				var/mob/spawned_mob = spawner.create_from_ghost(our_candidate)
 				candidates -= our_candidate
 				notify_ghosts(
-					"The [chosen_gang.ship_name] has an object of interest: [spawned_mob]!",
+					"На борту [chosen_gang.ship_name] появился объект интереса: [spawned_mob]!",
 					source = spawned_mob,
-					header = "Pirates!",
+					header = "Пираты!",
 				)
 			else
 				notify_ghosts(
-					"The [chosen_gang.ship_name] has an object of interest: [spawner]!",
+					"На борту [chosen_gang.ship_name] есть точка возрождения: [spawner]!",
 					source = spawner,
-					header = "Pirate Spawn Here!",
+					header = "Появление пиратов!",
 				)
 
 	priority_announce(chosen_gang.arrival_announcement, sender_override = chosen_gang.ship_name)
@@ -249,14 +248,14 @@
 /datum/dynamic_ruleset/midround/from_ghosts/collect_candidates()
 	var/readable_poll_role = candidate_role || pref_flag
 	if(isnull(readable_poll_role))
-		stack_trace("[config_tag]: No candidate role or pref_flag set, give it a human readable candidate roll at the bare minimum.")
-		readable_poll_role = "Some Midround Antagonist Without A Role Set (Yell At Coders)"
+		stack_trace("[config_tag]: Не установлена роль кандидата или pref_flag, необходимо установить хотя бы читаемое название роли.")
+		readable_poll_role = "Какой-то мидроунд антагонист без установленной роли (Ругайте кодера)"
 
 	return SSpolling.poll_candidates(
 		group = trim_candidates(GLOB.dead_player_list | GLOB.current_observers_list),
-		question = "Looking for volunteers to become [span_notice(readable_poll_role)] for [span_danger(name)]",
-		// check_jobban = list(ROLE_SYNDICATE, jobban_flag || pref_flag), // Not necessary, handled in trim_candidates()
-		// role = pref_flag, // Not necessary, handled in trim_candidates()
+		question = "Ищем добровольцев на роль [span_notice(readable_poll_role)] для [span_danger(name)]",
+		// check_jobban = list(ROLE_SYNDICATE, jobban_flag || pref_flag), // Не требуется, обрабатывается в trim_candidates()
+		// role = pref_flag, // Не требуется, обрабатывается в trim_candidates()
 		poll_time = 30 SECONDS,
 		alert_pic = signup_atom_appearance,
 		role_name_text = readable_poll_role,
@@ -324,34 +323,34 @@
 	var/result = nuke_team.get_result()
 	switch(result)
 		if(NUKE_RESULT_FLUKE)
-			SSticker.mode_result = "loss - syndicate nuked - disk secured"
+			SSticker.mode_result = "поражение - ядерный удар синдиката - диск защищен"
 			SSticker.news_report = NUKE_SYNDICATE_BASE
 		if(NUKE_RESULT_NUKE_WIN)
-			SSticker.mode_result = "win - syndicate nuke"
+			SSticker.mode_result = "победа - ядерный удар синдиката"
 			SSticker.news_report = STATION_DESTROYED_NUKE
 		if(NUKE_RESULT_NOSURVIVORS)
-			SSticker.mode_result = "halfwin - syndicate nuke - did not evacuate in time"
+			SSticker.mode_result = "частичная победа - ядерный удар синдиката - не успели эвакуироваться"
 			SSticker.news_report = STATION_DESTROYED_NUKE
 		if(NUKE_RESULT_WRONG_STATION)
-			SSticker.mode_result = "halfwin - blew wrong station"
+			SSticker.mode_result = "частичная победа - взорвали не ту станцию"
 			SSticker.news_report = NUKE_MISS
 		if(NUKE_RESULT_WRONG_STATION_DEAD)
-			SSticker.mode_result = "halfwin - blew wrong station - did not evacuate in time"
+			SSticker.mode_result = "частичная победа - взорвали не ту станцию - не успели эвакуироваться"
 			SSticker.news_report = NUKE_MISS
 		if(NUKE_RESULT_CREW_WIN_SYNDIES_DEAD)
-			SSticker.mode_result = "loss - evacuation - disk secured - syndi team dead"
+			SSticker.mode_result = "поражение - эвакуация - диск защищен - команда синдиката мертва"
 			SSticker.news_report = OPERATIVES_KILLED
 		if(NUKE_RESULT_CREW_WIN)
-			SSticker.mode_result = "loss - evacuation - disk secured"
+			SSticker.mode_result = "поражение - эвакуация - диск защищен"
 			SSticker.news_report = OPERATIVES_KILLED
 		if(NUKE_RESULT_DISK_LOST)
-			SSticker.mode_result = "halfwin - evacuation - disk not secured"
+			SSticker.mode_result = "частичная победа - эвакуация - диск не защищен"
 			SSticker.news_report = OPERATIVE_SKIRMISH
 		if(NUKE_RESULT_DISK_STOLEN)
-			SSticker.mode_result = "halfwin - detonation averted"
+			SSticker.mode_result = "частичная победа - детонация предотвращена"
 			SSticker.news_report = OPERATIVE_SKIRMISH
 		else
-			SSticker.mode_result = "halfwin - interrupted"
+			SSticker.mode_result = "частичная победа - прервано"
 			SSticker.news_report = OPERATIVE_SKIRMISH
 
 /datum/dynamic_ruleset/midround/from_ghosts/nukies/clown
@@ -405,8 +404,7 @@
 	return pick(GLOB.blobstart)
 
 /datum/dynamic_ruleset/midround/from_ghosts/blob/false_alarm()
-	priority_announce("Confirmed outbreak of level 5 biohazard aboard [station_name()]. All personnel must contain the outbreak.", "Biohazard Alert", ANNOUNCER_OUTBREAK5)
-
+	priority_announce("Подтверждена вспышка биологической угрозы 5 уровня на борту [station_name()]. Весь персонал должен сдержать распространение.", "Биологическая тревога", ANNOUNCER_OUTBREAK5)
 /datum/dynamic_ruleset/midround/from_ghosts/xenomorph
 	name = "Alien Infestation"
 	config_tag = "Xenomorph"
@@ -439,7 +437,7 @@
 	addtimer(CALLBACK(src, PROC_REF(announce_xenos)), rand(375, 600) SECONDS)
 
 /datum/dynamic_ruleset/midround/from_ghosts/xenomorph/proc/announce_xenos()
-	priority_announce("Unidentified lifesigns detected coming aboard [station_name()]. Secure any exterior access, including ducting and ventilation.", "Lifesign Alert", ANNOUNCER_ALIENS)
+	priority_announce("Обнаружены неопознанные формы жизни на борту [station_name()]. Заблокируйте все внешние доступы, включая вентиляционные шахты и технические тоннели.", "Тревога: биологические формы", ANNOUNCER_ALIENS)
 
 /datum/dynamic_ruleset/midround/from_ghosts/xenomorph/false_alarm()
 	announce_xenos()
@@ -529,7 +527,7 @@
 	addtimer(CALLBACK(src, PROC_REF(announce_space_dragon)), rand(5, 10) SECONDS)
 
 /datum/dynamic_ruleset/midround/from_ghosts/space_dragon/proc/announce_space_dragon()
-	priority_announce("A large organic energy flux has been recorded near of [station_name()], please stand-by.", "Lifesign Alert")
+	priority_announce("Зафиксирован мощный органический энергопоток вблизи [station_name()]. Приготовьтесь.", "Тревога: биологические формы")
 
 /datum/dynamic_ruleset/midround/from_ghosts/space_dragon/false_alarm()
 	announce_space_dragon()
@@ -793,13 +791,13 @@
 		RULESET_CONFIG_CANCEL,
 	)
 
-	var/picked_fugitive_backstory = tgui_input_list(admin, "Select a fugitive backstory", "Fugitive Backstory", fugitive_backstories)
+	var/picked_fugitive_backstory = tgui_input_list(admin, "Выберите предысторию беглеца", "Предыстория беглеца", fugitive_backstories)
 	if(!picked_fugitive_backstory || picked_fugitive_backstory == RULESET_CONFIG_CANCEL)
 		return RULESET_CONFIG_CANCEL
 	if(picked_fugitive_backstory != RANDOM_BACKSTORY)
 		fugitive_backstory = picked_fugitive_backstory
 
-	var/picked_hunter_backstory = tgui_input_list(admin, "Select a hunter backstory", "Hunter Backstory", hunter_backstories)
+	var/picked_hunter_backstory = tgui_input_list(admin, "Выберите предысторию охотника", "Предыстория охотника", hunter_backstories)
 	if(!picked_hunter_backstory || picked_hunter_backstory == RULESET_CONFIG_CANCEL)
 		return RULESET_CONFIG_CANCEL
 	if(picked_hunter_backstory != RANDOM_BACKSTORY)
@@ -877,7 +875,7 @@
 	addtimer(CALLBACK(src, PROC_REF(check_spawn_hunters), remaining_time - 1 MINUTES), 1 MINUTES)
 
 /datum/dynamic_ruleset/midround/from_ghosts/fugitives/proc/spawn_hunters()
-	var/list/candidates = SSpolling.poll_ghost_candidates("Do you wish to be considered for a group of [span_notice(hunter_backstory)]?", check_jobban = list(ROLE_FUGITIVE_HUNTER, ROLE_SYNDICATE), alert_pic = /obj/machinery/sleeper, role_name_text = hunter_backstory)
+	var/list/candidates = SSpolling.poll_ghost_candidates("Хотите стать частью группы [span_notice(hunter_backstory)]?", check_jobban = list(ROLE_FUGITIVE_HUNTER, ROLE_SYNDICATE), alert_pic = /obj/machinery/sleeper, role_name_text = hunter_backstory)
 	shuffle_inplace(candidates)
 
 	var/datum/map_template/shuttle/hunter/ship
@@ -898,9 +896,9 @@
 	var/z = SSmapping.empty_space.z_value
 	var/turf/placement_turf = locate(x, y ,z)
 	if(!placement_turf)
-		CRASH("Fugitive Hunters (Created from fugitive event) found no turf to load in")
+		CRASH("Охотники за беглецами (созданные из события беглецов) не нашли подходящего места для появления")
 	if(!ship.load(placement_turf))
-		CRASH("Loading [hunter_backstory] ship failed!")
+		CRASH("Не удалось загрузить корабль [hunter_backstory]!")
 
 	for(var/turf/shuttle_turf in ship.get_affected_turfs(placement_turf))
 		for(var/obj/effect/mob_spawn/ghost_role/human/fugitive/spawner in shuttle_turf)
@@ -909,49 +907,49 @@
 				var/mob/spawned_mob = spawner.create_from_ghost(our_candidate)
 				candidates -= our_candidate
 				notify_ghosts(
-					"[spawner.prompt_name] has awoken: [spawned_mob]!",
+					"[spawner.prompt_name] пробудился: [spawned_mob]!",
 					source = spawned_mob,
-					header = "Come look!",
+					header = "Посмотрите!",
 				)
 			else
 				notify_ghosts(
-					"[spawner.prompt_name] spawner has been created!",
+					"Создан спавнер [spawner.prompt_name]!",
 					source = spawner,
-					header = "Spawn Here!",
+					header = "Возродитесь здесь!",
 				)
 
 	var/list/announcement_text_list = list()
 	var/announcement_title = ""
 	switch(hunter_backstory)
 		if(HUNTER_PACK_COPS)
-			announcement_text_list += "Attention Crew of [station_name()], this is the Police. A wanted criminal has been reported taking refuge on your station."
-			announcement_text_list += "We have a warrant from the SSC authorities to take them into custody. Officers have been dispatched to your location."
-			announcement_text_list += "We demand your cooperation in bringing this criminal to justice."
-			announcement_title += "Spacepol Command"
+			announcement_text_list += "Внимание, экипаж [station_name()], это полиция. На вашей станции укрывается разыскиваемый преступник."
+			announcement_text_list += "У нас есть ордер от властей SSC на его задержание. Офицеры уже направляются к вам."
+			announcement_text_list += "Мы требуем вашего содействия в поимке этого преступника."
+			announcement_title += "Командование Космопола"
 		if(HUNTER_PACK_RUSSIAN)
-			announcement_text_list += "Zdraviya zhelaju, [station_name()] crew. We are coming to your station."
-			announcement_text_list += "There is a criminal aboard. We will arrest them and return them to the gulag. That's good, yes?"
-			announcement_title += "Russian Freighter"
+			announcement_text_list += "Здравствуйте, экипаж [station_name()]. Мы направляемся к вашей станции."
+			announcement_text_list += "На борту находится преступник. Мы его арестуем и отправим в гулаг. Это хорошо, да?"
+			announcement_title += "Российский грузовой корабль"
 		if(HUNTER_PACK_BOUNTY)
-			announcement_text_list += "[station_name()]. One of our bounty marks has ended up on your station. We will be arriving to collect shortly."
-			announcement_text_list += "Let's make this quick. If you don't want trouble, stay the hell out of our way."
-			announcement_title += "Unregistered Signal"
+			announcement_text_list += "[station_name()]. Один из наших разыскиваемых находится на вашей станции. Мы скоро прибудем для его задержания."
+			announcement_text_list += "Давайте быстрее. Если не хотите проблем - не мешайте."
+			announcement_title += "Незарегистрированный сигнал"
 		if(HUNTER_PACK_PSYKER)
-			announcement_text_list += "HEY, CAN YOU HEAR US? We're coming to your station. There's a bad guy down there, really bad guy. We need to arrest them."
-			announcement_text_list += "We're also offering fortune telling services out of the front door if you have paying customers."
-			announcement_title += "Fortune-Telling Entertainment Shuttle"
+			announcement_text_list += "ЭЙ, ВЫ НАС СЛЫШИТЕ? Мы летим к вашей станции. Там очень плохой человек, ну просто ужасный. Нам нужно его арестовать."
+			announcement_text_list += "А еще мы предлагаем услуги гадания у главного входа, если у вас есть платежеспособные клиенты."
+			announcement_title += "Развлекательный шаттл гадалок"
 		if(HUNTER_PACK_MI13)
-			announcement_text_list += "Illegal intrusion detected in the crew monitoring network. Central Command has been informed."
-			announcement_text_list += "Please report any suspicious individuals or behaviour to your local security team."
-			announcement_title += "Nanotrasen Intrusion Countermeasures Electronics"
+			announcement_text_list += "Обнаружено несанкционированное проникновение в сеть мониторинга экипажа. Центральное командование проинформировано."
+			announcement_text_list += "Сообщайте о любых подозрительных личностях или действиях вашей местной службе безопасности."
+			announcement_title += "Электронные средства противодействия проникновению Nanotrasen"
 
 	if(!length(announcement_text_list))
-		announcement_text_list += "Unidentified ship detected near the station."
-		stack_trace("Fugitive hunter announcement was unable to generate an announcement text based on backstory: [hunter_backstory]")
+		announcement_text_list += "Обнаружен неопознанный корабль вблизи станции."
+		stack_trace("Не удалось сгенерировать текст объявления для охотников за беглецами на основе предыстории: [hunter_backstory]")
 
 	if(!length(announcement_title))
-		announcement_title += "Unknown Signal"
-		stack_trace("Fugitive hunter announcement was unable to generate an announcement title based on backstory: [hunter_backstory]")
+		announcement_title += "Неизвестный сигнал"
+		stack_trace("Не удалось сгенерировать заголовок объявления для охотников за беглецами на основе предыстории: [hunter_backstory]")
 
 	priority_announce(jointext(announcement_text_list, " "), announcement_title)
 
@@ -1065,8 +1063,8 @@
 
 /datum/dynamic_ruleset/midround/from_living/traitor/false_alarm()
 	priority_announce(
-		"Attention crew, it appears that someone on your station has hijacked your telecommunications and broadcasted an unknown signal.",
-		"[command_name()] High-Priority Update",
+		"Внимание экипажу, похоже кто-то на вашей станции захватил телекоммуникации и передал неизвестный сигнал.",
+		"Важное сообщение от [command_name()]",
 	)
 
 /datum/dynamic_ruleset/midround/from_living/malf_ai
@@ -1117,9 +1115,9 @@
 /datum/dynamic_ruleset/midround/from_living/blob/assign_role(datum/mind/candidate)
 	candidate.add_antag_datum(/datum/antagonist/blob/infection)
 	notify_ghosts(
-		"[candidate.current.real_name] has become a blob host!",
+		"[candidate.current.real_name] стал носителем блоба!",
 		source = candidate.current,
-		header = "So Bulbous...",
+		header = "Так пузырчато...",
 	)
 
 /datum/dynamic_ruleset/midround/from_living/obsesed
@@ -1148,7 +1146,7 @@
 	var/obj/item/organ/brain/brain = candidate.current.get_organ_by_type(__IMPLIED_TYPE__)
 	brain.brain_gain_trauma(/datum/brain_trauma/special/obsessed)
 	notify_ghosts(
-		"[candidate.current.real_name] has developed an obsession with someone!",
+		"[candidate.current.real_name] развил одержимость к кому-то!",
 		source = candidate.current,
-		header = "Love Can Bloom",
+		header = "Любовь Может Расцвести",
 	)

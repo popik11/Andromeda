@@ -1,23 +1,23 @@
 #define CALLOUT_TIME (5 SECONDS)
 #define CALLOUT_COOLDOWN 3 SECONDS
 
-/// Component that allows its owner/owner's wearer to use callouts system - their pointing is replaced with a fancy radial which allows them to summon glowing markers
+/// Компонент, позволяющий владельцу/носителю использовать систему маркеров - вместо обычного указания создаётся радиальное меню для вызова светящихся маркеров
 /datum/component/callouts
-	/// If parent is clothing, slot on which this component activates
+	/// Если родитель - одежда, слот для активации компонента
 	var/item_slot
-	/// If we are currently active
+	/// Активен ли компонент в данный момент
 	var/active = TRUE
-	/// Current user of this component
+	/// Текущий пользователь компонента
 	var/mob/cur_user
-	/// Whenever the user should shout the voiceline
+	/// Должен ли пользователь озвучивать маркер
 	var/voiceline = FALSE
-	/// If voiceline is true, what prefix the user should use
+	/// Если voiceline TRUE, какой префикс использовать
 	var/radio_prefix = null
-	/// List of all callout options
+	/// Список всех вариантов маркеров
 	var/static/list/callout_options = typecacheof(subtypesof(/datum/callout_option))
-	/// Text displayed when parent is examined
+	/// Текст при осмотре предмета
 	var/examine_text = null
-	/// Cooldown for callouts
+	/// Кулдаун на использование маркеров
 	COOLDOWN_DECLARE(callout_cooldown)
 
 /datum/component/callouts/Initialize(item_slot = null, voiceline = FALSE, radio_prefix = null, examine_text = null)
@@ -69,7 +69,7 @@
 
 	var/obj/item/item_parent = parent
 	active = !active
-	item_parent.balloon_alert(user, active ? "callouts enabled" : "callouts disabled")
+	item_parent.balloon_alert(user, active ? "маркеры включены" : "маркеры выключены")
 
 /datum/component/callouts/proc/on_equipped(datum/source, mob/equipper, slot)
 	SIGNAL_HANDLER
@@ -106,7 +106,7 @@
 		return
 
 	if (!COOLDOWN_FINISHED(src, callout_cooldown))
-		clicked_atom.balloon_alert(user, "callout is on cooldown!")
+		clicked_atom.balloon_alert(user, "маркер на перезарядке!")
 		return COMSIG_MOB_CANCEL_CLICKON
 
 	INVOKE_ASYNC(src, PROC_REF(callout_picker), user, clicked_atom)
@@ -128,7 +128,7 @@
 		user.say((!isnull(radio_prefix) ? radio_prefix : "") + selection::voiceline, forced = src)
 
 /obj/effect/temp_visual/callout
-	name = "callout"
+	name = "маркер"
 	icon = 'icons/effects/callouts.dmi'
 	icon_state = "point"
 	plane = ABOVE_LIGHTING_PLANE
@@ -145,39 +145,39 @@
 	animate(src, pixel_x = (target_loc.x - loc.x) * ICON_SIZE_X + target.pixel_x, pixel_y = (target_loc.y - loc.y) * ICON_SIZE_Y + target.pixel_y, time = 0.2 SECONDS, easing = EASE_OUT)
 
 /datum/callout_option
-	var/name = "ERROR"
+	var/name = "ОШИБКА"
 	var/icon_state = "point"
-	var/voiceline = "Something has gone wrong!"
+	var/voiceline = "Что-то пошло не так!"
 
 /datum/callout_option/point
-	name = "Point"
+	name = "Указать"
 	icon_state = "point"
-	voiceline = "Here!"
+	voiceline = "Сюда!"
 
 /datum/callout_option/danger
-	name = "Danger"
+	name = "Опасность"
 	icon_state = "danger"
-	voiceline = "Danger there!"
+	voiceline = "Там опасно!"
 
 /datum/callout_option/guard
-	name = "Guard"
+	name = "Охранять"
 	icon_state = "guard"
-	voiceline = "Hold this position!"
+	voiceline = "Держать позицию!"
 
 /datum/callout_option/attack
-	name = "Attack"
+	name = "Атака"
 	icon_state = "attack"
-	voiceline = "Attack there!"
+	voiceline = "Атаковать там!"
 
 /datum/callout_option/mine
-	name = "Mine"
+	name = "Добыча"
 	icon_state = "mine"
-	voiceline = "Dig here!"
+	voiceline = "Копать здесь!"
 
 /datum/callout_option/move
-	name = "Move"
+	name = "Перемещение"
 	icon_state = "move"
-	voiceline = "Reposition there!"
+	voiceline = "Передислоцироваться туда!"
 
 #undef CALLOUT_TIME
 #undef CALLOUT_COOLDOWN

@@ -63,7 +63,7 @@ GLOBAL_LIST_EMPTY(GPS_list)
 /datum/component/gps/item/proc/on_examine(datum/source, mob/user, list/examine_list)
 	SIGNAL_HANDLER
 
-	examine_list += span_notice("Alt-click to switch it [tracking ? "off":"on"].")
+	examine_list += span_notice("Alt+ЛКМ чтобы [tracking ? "выключить":"включить"].")
 
 ///Called on COMSIG_ATOM_EMP_ACT
 /datum/component/gps/item/proc/on_emp_act(datum/source, severity, protection)
@@ -91,26 +91,26 @@ GLOBAL_LIST_EMPTY(GPS_list)
 	toggletracking(user)
 	return CLICK_ACTION_SUCCESS
 
-///Toggles the tracking for the gps
+/// Переключает отслеживание для GPS
 /datum/component/gps/item/proc/toggletracking(mob/user)
 	if(!user.can_perform_action(parent, ALLOW_RESTING | ALLOW_PAI))
-		return //user not valid to use gps
+		return // пользователь не может использовать GPS
 	if(emped)
-		to_chat(user, span_warning("It's busted!"))
+		to_chat(user, span_warning("Устройство сломано!"))
 		return
 	var/atom/A = parent
 	if(tracking)
 		A.cut_overlay("working")
-		to_chat(user, span_notice("[parent] is no longer tracking, or visible to other GPS devices."))
+		to_chat(user, span_notice("[parent] больше не отслеживает и не виден другим GPS-устройствам."))
 		tracking = FALSE
 	else
 		A.add_overlay("working")
-		to_chat(user, span_notice("[parent] is now tracking, and visible to other GPS devices."))
+		to_chat(user, span_notice("[parent] теперь отслеживает и виден другим GPS-устройствам."))
 		tracking = TRUE
 
 /datum/component/gps/item/ui_interact(mob/user, datum/tgui/ui)
 	if(emped)
-		to_chat(user, span_hear("[parent] fizzles weakly."))
+		to_chat(user, span_hear("[parent] слабо потрескивает."))
 		return
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
@@ -166,15 +166,15 @@ GLOBAL_LIST_EMPTY(GPS_list)
 	switch(action)
 		if("rename")
 			var/atom/parentasatom = parent
-			var/a = tgui_input_text(usr, "Enter the desired tag", "GPS Tag", gpstag, max_length = 20)
-			if (QDELETED(ui) || ui.status != UI_INTERACTIVE)
+			var/a = tgui_input_text(usr, "Введите желаемый тег", "Тег GPS", gpstag, max_length = 20)
+			if(QDELETED(ui) || ui.status != UI_INTERACTIVE)
 				return
-			if (!a)
+			if(!a)
 				return
 
 			gpstag = a
 			. = TRUE
-			usr.log_message("renamed [parentasatom] to \"[initial(parentasatom.name)] ([gpstag])\".", LOG_GAME)
+			usr.log_message("переименовал [parentasatom] в \"[initial(parentasatom.name)] ([gpstag])\".", LOG_GAME)
 			parentasatom.name = "[initial(parentasatom.name)] ([gpstag])"
 
 		if("power")

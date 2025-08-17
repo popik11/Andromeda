@@ -1,22 +1,22 @@
 /datum/brain_trauma/mild/phobia
-	name = "Phobia"
-	desc = "Patient is unreasonably afraid of something."
-	scan_desc = "phobia"
-	gain_text = span_warning("You start finding default values very unnerving...")
-	lose_text = span_notice("You no longer feel afraid of default values.")
+	name = "Фобия"
+	desc = "Пациент испытывает необоснованный страх перед чем-либо."
+	scan_desc = "фобия"
+	gain_text = span_warning("Вы начинаете находить стандартные значения очень тревожными...")
+	lose_text = span_notice("Вы больше не боитесь стандартных значений.")
 	var/phobia_type
-	/// Cooldown for proximity checks so we don't spam a range 7 view every two seconds.
+	/// Кулдаун проверки близости, чтобы не спамить проверкой радиуса 7 каждые две секунды
 	COOLDOWN_DECLARE(check_cooldown)
-	/// Cooldown for freakouts to prevent permastunning.
+	/// Кулдаун приступов страха, чтобы не пермастанить игрока
 	COOLDOWN_DECLARE(scare_cooldown)
 
-	///What mood event to apply when we see the thing & freak out.
+	/// Какое событие настроения применять при виде объекта страха
 	var/datum/mood_event/mood_event_type = /datum/mood_event/phobia
 
 	var/regex/trigger_regex
-	//instead of cycling every atom, only cycle the relevant types
+	// Вместо перебора всех атомов, проверяем только релевантные типы
 	var/list/trigger_mobs
-	var/list/trigger_objs //also checked in mob equipment
+	var/list/trigger_objs // также проверяется экипировка мобов
 	var/list/trigger_turfs
 	var/list/trigger_species
 
@@ -27,9 +27,9 @@
 	if(!phobia_type)
 		phobia_type = pick(GLOB.phobia_types)
 
-	gain_text = span_warning("You start finding [phobia_type] very unnerving...")
-	lose_text = span_notice("You no longer feel afraid of [phobia_type].")
-	scan_desc += " of [phobia_type]"
+	gain_text = span_warning("Вы начинаете находить [phobia_type] очень тревожными...")
+	lose_text = span_notice("Вы больше не боитесь [phobia_type].")
+	scan_desc += " к [phobia_type]"
 	trigger_regex = GLOB.phobia_regexes[phobia_type]
 	trigger_mobs = GLOB.phobia_mobs[phobia_type]
 	trigger_objs = GLOB.phobia_objs[phobia_type]
@@ -129,17 +129,17 @@
 		speech_args[SPEECH_SPANS] |= SPAN_SMALL_VOICE
 	if (stutter)
 		owner.set_stutter_if_lower(4 SECONDS)
-	to_chat(owner, span_warning("You struggle to say the word \"[span_phobia("[trigger_regex.group[2]]")]\"!"))
+	to_chat(owner, span_warning("Вы с трудом произносите слово \"[span_phobia("[trigger_regex.group[2]]")]\"!"))
 
 /datum/brain_trauma/mild/phobia/proc/freak_out(atom/reason, trigger_word)
 	if(owner.stat == DEAD)
 		return
 
-	var/message = pick("spooks you to the bone", "shakes you up", "terrifies you", "sends you into a panic", "sends chills down your spine")
+	var/message = pick("начинаете паниковать", "ощущаете страх", "ощущаете дрожь своего тела", "ощущаете холодок, что прошол по вашей спине")
 	if(trigger_word)
 		if (owner.has_status_effect(/datum/status_effect/minor_phobia_reaction))
 			return
-		to_chat(owner, span_userdanger("Hearing [span_phobia(trigger_word)] [message]!"))
+		to_chat(owner, span_userdanger("Услышав [span_phobia(trigger_word)], вы [message]!"))
 		owner.apply_status_effect(/datum/status_effect/minor_phobia_reaction)
 		return
 
@@ -148,9 +148,9 @@
 		owner.add_mood_event("phobia_[phobia_type]", mood_event_type)
 
 	if(reason)
-		to_chat(owner, span_userdanger("Seeing [span_phobia(reason.name)] [message]!"))
-	else
-		to_chat(owner, span_userdanger("Something [message]!"))
+		to_chat(owner, span_userdanger("Увидев [span_phobia(reason.name)] [message]!"))
+//	else
+//		to_chat(owner, span_userdanger("Что-то [message]!"))  /// Rewokin: под Русскую локализацию так себе идёт. Если кто-то сможет найти вариант лучше, с использованием этих строчек, то будет круто :)
 
 	if(reason)
 		owner.face_atom(reason)
