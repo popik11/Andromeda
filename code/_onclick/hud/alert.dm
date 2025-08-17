@@ -823,7 +823,7 @@
 	name = "Воскрешение"
 	desc = "Кто-то пытается вас оживить. Вернитесь в своё тело, если хотите быть воскрешённым!"
 	icon_state = "template"
-	timeout = 300
+	timeout = 30 SECONDS
 	clickable_glow = TRUE
 
 /atom/movable/screen/alert/revival/Click()

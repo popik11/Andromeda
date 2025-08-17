@@ -3,7 +3,7 @@
 	button_icon = 'icons/effects/blood.dmi'
 	button_icon_state = "floor1"
 	desc = "Позволяет телепортироваться к крови в выбранном месте."
-	cooldown_time = 0
+	cooldown_time = 0 SECONDS
 	/// Диапазон тайлов для выбора точки телепорта вокруг цели
 	var/pick_range = 5
 	/// Диапазон тайлов при использовании способности клиентом
