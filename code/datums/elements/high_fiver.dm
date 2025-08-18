@@ -22,8 +22,8 @@
 	SIGNAL_HANDLER
 
 	offerer.visible_message(
-		span_notice("[offerer] raises [offerer.p_their()] arm, looking for a high-five!"),
-		span_notice("You post up, looking for a high-five!"),
+		span_notice("[offerer] поднимает [offerer.p_their()] руку, ожидая пятюню!"),
+		span_notice("Ты поднимаешь руку, ожидая пятюню!"),
 		vision_distance = 2,
 	)
 	offerer.apply_status_effect(/datum/status_effect/offering/no_item_received/high_five, source, /atom/movable/screen/alert/give/highfive)
@@ -47,10 +47,10 @@
 			slappers_giver++
 
 	var/high_ten = (slappers_giver >= 2)
-	var/descriptor = "high-[high_ten ? "ten" : "five"]"
+	var/descriptor = "дать-[high_ten ? "десять" : "пять"]"
 
 	if(open_hands_taker <= 0)
-		to_chat(taker, span_warning("You can't [descriptor] [offerer] with no open hands!"))
+		to_chat(taker, span_warning("Ты не можешь [descriptor] [offerer] без свободных рук!"))
 		taker.add_mood_event(descriptor, /datum/mood_event/high_five_full_hand) // not so successful now!
 		return COMPONENT_OFFER_INTERRUPT
 
@@ -59,22 +59,22 @@
 	taker.add_mob_memory(/datum/memory/high_five, deuteragonist = offerer, high_five_type = descriptor, high_ten = high_ten)
 
 	if(high_ten)
-		to_chat(taker, span_nicegreen("You give high-tenning [offerer] your all!"))
+		to_chat(taker, span_nicegreen("Ты со всей силы даёшь десять [offerer]!"))
 		offerer.visible_message(
-			span_notice("[taker] enthusiastically high-tens [offerer]!"),
-			span_nicegreen("Wow! You're high-tenned [taker]!"),
-			span_hear("You hear a sickening sound of flesh hitting flesh!"),
+			span_notice("[taker] восторженно даёт десять [offerer]!"),
+			span_nicegreen("Вау! [taker] дал тебе десять!"),
+			span_hear("Слышен хлопок ладоней!"),
 			ignored_mobs = taker,
 		)
 
 		offerer.add_mood_event(descriptor, /datum/mood_event/high_ten)
 		taker.add_mood_event(descriptor, /datum/mood_event/high_ten)
 	else
-		to_chat(taker, span_nicegreen("You high-five [offerer]!"))
+		to_chat(taker, span_nicegreen("Ты даёшь пять [offerer]!"))
 		offerer.visible_message(
-			span_notice("[taker] high-fives [offerer]!"),
-			span_nicegreen("All right! You're high-fived by [taker]!"),
-			span_hear("You hear a sickening sound of flesh hitting flesh!"),
+			span_notice("[taker] даёт пять [offerer]!"),
+			span_nicegreen("Отлично! [taker] дал тебе пять!"),
+			span_hear("Слышен хлопок ладоней!"),
 			ignored_mobs = taker,
 		)
 

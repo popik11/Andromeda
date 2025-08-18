@@ -22,23 +22,23 @@
 	switch(fry_time)
 		if(0 to FRYING_TIME_FRIED)
 			this_food.add_atom_colour(fried_colors[1], FIXED_COLOUR_PRIORITY)
-			this_food.name = "lightly-fried [this_food.name]"
-			this_food.desc += " It's been lightly fried in a deep fryer."
+			this_food.name = "слегка обжаренный [this_food.name]"
+			this_food.desc += " Был слегка обжарен во фритюре."
 
 		if(FRYING_TIME_FRIED to FRYING_TIME_PERFECT)
 			this_food.add_atom_colour(fried_colors[2], FIXED_COLOUR_PRIORITY)
-			this_food.name = "fried [this_food.name]"
-			this_food.desc += " It's been fried, increasing its tastiness value by [rand(1, 75)]%."
+			this_food.name = "жареный [this_food.name]"
+			this_food.desc += " Был обжарен, что увеличило его вкусовые качества на [rand(1, 75)]%."
 
 		if(FRYING_TIME_PERFECT to FRYING_TIME_BURNT)
 			this_food.add_atom_colour(fried_colors[3], FIXED_COLOUR_PRIORITY)
-			this_food.name = "deep-fried [this_food.name]"
-			this_food.desc += " Deep-fried to perfection."
+			this_food.name = "во фритюре [this_food.name]"
+			this_food.desc += " Идеально приготовлен во фритюре."
 
 		if(FRYING_TIME_BURNT to INFINITY)
 			this_food.add_atom_colour(fried_colors[4], FIXED_COLOUR_PRIORITY)
-			this_food.name = "\proper the physical manifestation of the very concept of fried foods"
-			this_food.desc = "A heavily-fried... something. Who can tell anymore?"
+			this_food.name = "само воплощение концепции жареной еды"
+			this_food.desc = "Сильно обжаренное... что-то. Кто теперь разберёт?"
 
 	ADD_TRAIT(this_food, TRAIT_FOOD_FRIED, ELEMENT_TRAIT(type))
 	// Already edible items will inherent these parameters

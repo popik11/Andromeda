@@ -8,22 +8,22 @@
 
 	var/atom/this_food = target
 
-	switch(grill_time) //no 0-20 to prevent spam
+	switch(grill_time) // диапазон 0-20 исключён для предотвращения спама
 		if(20 SECONDS to 30 SECONDS)
-			this_food.name = "lightly-grilled [this_food.name]"
-			this_food.desc += " It's been lightly grilled."
+			this_food.name = "слегка пожаренный [this_food.name]"
+			this_food.desc += " Был слегка приготовлен на гриле."
 
 		if(30 SECONDS to 80 SECONDS)
-			this_food.name = "grilled [this_food.name]"
-			this_food.desc += " It's been grilled."
+			this_food.name = "пожаренный [this_food.name]"
+			this_food.desc += " Был приготовлен на гриле."
 
 		if(80 SECONDS to 100 SECONDS)
-			this_food.name = "heavily grilled [this_food.name]"
-			this_food.desc += " It's been heavily grilled."
+			this_food.name = "сильно пожаренный [this_food.name]"
+			this_food.desc += " Был тщательно приготовлен на гриле."
 
-		if(100 SECONDS to INFINITY) //grill marks reach max alpha
-			this_food.name = "Powerfully Grilled [this_food.name]"
-			this_food.desc = "A [this_food.name]. Reminds you of your wife, wait, no, it's prettier!"
+		if(100 SECONDS to INFINITY) // гриль-марки достигли максимальной альфа-прозрачности
+			this_food.name = "Пережаренный [this_food.name]"
+			this_food.desc = "[this_food.name]. Напоминает вам о вашей жене, хотя нет, он выглядит лучше!"
 
 	if(grill_time > 30 SECONDS && isnull(this_food.GetComponent(/datum/component/edible)))
 		this_food.AddComponentFrom(SOURCE_EDIBLE_GRILLED, /datum/component/edible, foodtypes = FRIED)

@@ -41,11 +41,11 @@
 	prototype.set_custom_materials(atom_target.custom_materials, 1 / amount_created)
 	var/atom/movable/result = new result_atom_type
 	if(!prototype.compare_materials(result))
-		var/warning = "custom_materials of [result.type] when processed compared to just spawned don't match"
+		var/warning = "custom_materials [result.type] после обработки не совпадают с только что созданными"
 		var/what_it_should_be = prototype.get_materials_english_list()
-		//compose a text string containing the syntax and paths to use for editing the custom_materials var
+		//текстовая строка с синтаксисом и путями для редактирования custom_materials
 		if(result.custom_materials)
-			what_it_should_be += " (you can round values a bit)"
+			what_it_should_be += " (значения можно немного округлить)"
 		stack_trace("[warning]. custom_materials should be [what_it_should_be] (you can round values a bit).")
 	qdel(prototype)
 	qdel(result)
@@ -64,7 +64,7 @@
 		var/found_table = locate(/obj/structure/table) in found_location
 		var/found_tray = locate(/obj/item/storage/bag/tray) in found_location || locate(/obj/item/plate/oven_tray) in found_location
 		if(!found_turf && !istype(found_location, /obj/item/storage/bag/tray) || found_turf && !(found_table || found_tray))
-			to_chat(user, span_notice("You cannot make [initial(result_atom_type.name)] here! You need a table or at least a tray."))
+			to_chat(user, span_notice("Здесь нельзя приготовить [initial(result_atom_type.name)]! Нужен стол или хотя бы поднос."))
 			return
 
 	mutable_recipes += list(list(TOOL_PROCESSING_RESULT = result_atom_type, TOOL_PROCESSING_AMOUNT = amount_created, TOOL_PROCESSING_TIME = time_to_process))
@@ -81,15 +81,15 @@
 	// but at least it's readable?
 	if(amount_created > 1)
 		if(result_gender == PLURAL)
-			examine_list += span_notice("It can be turned into [amount_created] [result_name] with [span_bold(tool_desc)]!")
+			examine_list += span_notice("Можно получить [amount_created] [result_name] с помощью [span_bold(tool_desc)]!")
 		else
-			examine_list += span_notice("It can be turned into [amount_created] [result_name][plural_s(result_name)] with [span_bold(tool_desc)]!")
+			examine_list += span_notice("Можно получить [amount_created] [result_name][plural_s(result_name)] с помощью [span_bold(tool_desc)]!")
 
 	else
 		if(result_gender == PLURAL)
-			examine_list += span_notice("It can be turned into some [result_name] with [span_bold(tool_desc)]!")
+			examine_list += span_notice("Можно получить немного [result_name] с помощью [span_bold(tool_desc)]!")
 		else
-			examine_list += span_notice("It can be turned into \a [result_name] with [span_bold(tool_desc)]!")
+			examine_list += span_notice("Можно получить [result_name] с помощью [span_bold(tool_desc)]!")
 
 /**
  * Adds context sensitivy directly to the processable file for screentips
@@ -108,6 +108,6 @@
 	if (held_item.tool_behaviour != tool_behaviour)
 		return NONE
 
-	context[SCREENTIP_CONTEXT_LMB] = "[screentip_verb] into [initial(result_atom_type.name)]"
+	context[SCREENTIP_CONTEXT_LMB] = "[screentip_verb] в [initial(result_atom_type.name)]"
 
 	return CONTEXTUAL_SCREENTIP_SET

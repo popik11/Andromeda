@@ -79,14 +79,14 @@
 	if (heal_amt > 0)
 		var/healed = heal_amt && eater.health < eater.maxHealth
 		eater.heal_overall_damage(heal_amt)
-		eater.visible_message(span_notice("[eater] [eat_verb]s [target]."), span_notice("You [eat_verb] [target][healed ? ", restoring some health" : ""]."))
+		eater.visible_message(span_notice("[eater] [eat_verb] [target]."), span_notice("Ты [eat_verb] [target][healed ? ", восстанавливая немного здоровья" : ""]."))
 
 	else if (damage_amount > 0 && damage_type)
 		eater.apply_damage(damage_amount, damage_type)
-		eater.visible_message(span_notice("[eater] [eat_verb]s [target], and seems to hurt itself."), span_notice("You [eat_verb] [target], hurting yourself in the process."))
+		eater.visible_message(span_notice("[eater] [eat_verb] [target], причиняя себе боль."), span_notice("Ты [eat_verb] [target], причиняя себе боль."))
 
 	else
-		eater.visible_message(span_notice("[eater] [eat_verb]s [target]."), span_notice("You [eat_verb] [target]."))
+		eater.visible_message(span_notice("[eater] [eat_verb] [target]."), span_notice("Ты [eat_verb] [target]."))
 
 	finish_eating(eater, target, feeder)
 	return TRUE
@@ -104,7 +104,7 @@
 		var/obj/item/stack/food_stack = target
 		final_target = food_stack.split_stack(1)
 
-	eater.log_message("has eaten [target], [add_to_contents ? "swallowing it" : "destroying it"]!", LOG_ATTACK)
+	eater.log_message("съел [target], [add_to_contents ? "проглотив его" : "уничтожив его"]!", LOG_ATTACK)
 
 	if (add_to_contents)
 		var/atom/movable/movable_target = final_target

@@ -28,9 +28,9 @@
 
 	var/atom/result = new result_typepath
 	if(!target.compare_materials(result))
-		var/warning = "custom_materials of [result.type] when microwaved compared to just spawned don't match"
+		var/warning = "custom_materials [result.type] при приготовлении в микроволновке не совпадают с только что созданными"
 		var/what_it_should_be = target.get_materials_english_list()
-		stack_trace("[warning]. custom_materials should be [what_it_should_be].")
+		stack_trace("[warning]. custom_materials должны быть [what_it_should_be].")
 	qdel(result)
 
 /datum/element/microwavable/Detach(datum/source)
@@ -96,6 +96,6 @@
 	SIGNAL_HANDLER
 
 	if(initial(result_typepath.gender) == PLURAL)
-		examine_list += span_notice("[source] can be [span_bold("microwaved")] into some [initial(result_typepath.name)].")
+		examine_list += span_notice("[source] можно [span_bold("приготовить в микроволновке")] и получить [initial(result_typepath.name)].")
 	else
-		examine_list += span_notice("[source] can be [span_bold("microwaved")] into \a [initial(result_typepath.name)].")
+		examine_list += span_notice("[source] можно [span_bold("приготовить в микроволновке")] и получить [initial(result_typepath.name)].")

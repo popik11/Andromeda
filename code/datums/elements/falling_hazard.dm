@@ -42,11 +42,11 @@
 
 	var/target_head_armor = poor_target.run_armor_check(BODY_ZONE_HEAD, MELEE, silent = TRUE)
 
-	if(obeys_hardhats && target_head_armor >= 15) // 15 melee armor is enough that most head items dont have this, but anything above a hardhat should protect you
+	if(obeys_hardhats && target_head_armor >= 15) // 15 брони достаточно - большинство головных уборов не защитят, но всё прочнее каски должно
 		poor_target.visible_message(
-			span_warning("[source] falls on [poor_target], thankfully [poor_target.p_they()] had a helmet on!"),
-			span_userdanger("You are hit on the head by [source], good thing you had a helmet on!"),
-			span_hear("You hear a [crushes_people ? "crash" : "bonk"]!"),
+			span_warning("[source] падает на [poor_target], к счастью [poor_target.p_they()] был(а) в шлеме!"),
+			span_userdanger("[source] ударяет тебя по голове, хорошо что ты в шлеме!"),
+			span_hear("Слышен [crushes_people ? "грохот" : "звонкий удар"]!"),
 		)
 
 		if(crushes_people)
@@ -64,9 +64,9 @@
 		poor_target.apply_damage(fall_damage * levels, forced = TRUE, spread_damage = TRUE, wound_bonus = fall_wound_bonus)
 
 	poor_target.visible_message(
-		span_userdanger("[source] falls on [poor_target], [crushes_people ? "crushing [poor_target.p_them()]" : "hitting [poor_target.p_them()]"] [target_head ? "on the head!" : "!"]"),
-		span_userdanger("You are [crushes_people ? "crushed" : "hit"] by [source]!"),
-		span_hear("You hear a [crushes_people ? "crash" : "bonk"]!"),
+		span_userdanger("[source] падает на [poor_target], [crushes_people ? "раздавливая [poor_target.p_them()]" : "ударяя [poor_target.p_them()]"] [target_head ? "по голове!" : "!"]"),
+		span_userdanger("Тебя [crushes_people ? "раздавило" : "ударило"] [source]!"),
+		span_hear("Слышен [crushes_people ? "грохот" : "звонкий удар"]!"),
 	)
 
 	playsound(poor_target, impact_sound, 50, TRUE)

@@ -22,17 +22,17 @@
 	. = ..()
 	UnregisterSignal(target, list(COMSIG_ITEM_INTERACTING_WITH_ATOM, COMSIG_ATOM_EXAMINE))
 
-///signal called on the parent attacking an item
+///сигнал вызывается при атаке родительским объектом
 /datum/element/envenomable_casing/proc/handle_interaction(obj/item/ammo_casing/casing, mob/user, atom/target, list/modifiers)
 	SIGNAL_HANDLER
 	if(!is_reagent_container(target))
 		return NONE
 	var/obj/item/reagent_containers/venom_container = target
 	if(!casing.loaded_projectile)
-		user.balloon_alert(user, "casing is already spent!")
+		user.balloon_alert(user, "гильза уже использована!")
 		return ITEM_INTERACT_BLOCKING
 	if(!(venom_container.reagent_flags & OPENCONTAINER))
-		user.balloon_alert(user, "open the container!")
+		user.balloon_alert(user, "откройте контейнер!")
 		return ITEM_INTERACT_BLOCKING
 	var/datum/reagent/venom_applied = venom_container.reagents.get_master_reagent()
 	if(!venom_applied)
@@ -47,12 +47,12 @@
 	RegisterSignal(casing, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine_after_dip), override = TRUE)
 	return ITEM_INTERACT_SUCCESS
 
-///signal called on parent being examined while not coated
+///сигнал вызывается при осмотре родительского объекта без покрытия
 /datum/element/envenomable_casing/proc/on_examine_before_dip(obj/item/ammo_casing/casing, mob/user, list/examine_list)
 	SIGNAL_HANDLER
-	examine_list += span_notice("You can dip it in a chemical to deliver a poisonous kick.")
+	examine_list += span_notice("Можно окунуть в химикат для создания отравленного заряда.")
 
-///ditto, but after it's been coated
+///то же самое, но после нанесения покрытия
 /datum/element/envenomable_casing/proc/on_examine_after_dip(obj/item/ammo_casing/casing, mob/user, list/examine_list)
 	SIGNAL_HANDLER
-	examine_list += span_warning("It's coated in some kind of chemical...")
+	examine_list += span_warning("Покрыто каким-то химикатом...")

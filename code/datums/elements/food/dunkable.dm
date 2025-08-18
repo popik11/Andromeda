@@ -19,18 +19,18 @@
 /datum/element/dunkable/proc/get_dunked(datum/source, mob/user, atom/target, params)
 	SIGNAL_HANDLER
 
-	var/obj/item/reagent_containers/container = target // the container we're trying to dunk into
-	if(istype(container) && (container.reagent_flags & DUNKABLE)) // container should be a valid target for dunking
+	var/obj/item/reagent_containers/container = target // контейнер, в который пытаемся макнуть
+	if(istype(container) && (container.reagent_flags & DUNKABLE)) // контейнер подходит для макания
 		if(!container.is_drainable())
-			to_chat(user, span_warning("[container] is unable to be dunked in!"))
+			to_chat(user, span_warning("[container] нельзя макнуть!"))
 			return ITEM_INTERACT_BLOCKING
-		var/obj/item/I = source // the item that has the dunkable element
-		if(container.reagents.trans_to(I, dunk_amount, transferred_by = user)) //if reagents were transferred, show the message
-			to_chat(user, span_notice("You dunk \the [I] into \the [container]."))
+		var/obj/item/I = source // предмет с элементом dunkable
+		if(container.reagents.trans_to(I, dunk_amount, transferred_by = user)) // если реагенты были перенесены, покажем сообщение
+			to_chat(user, span_notice("Ты макаешь [I] в [container]."))
 			return ITEM_INTERACT_SUCCESS
 		if(!container.reagents.total_volume)
-			to_chat(user, span_warning("[container] is empty!"))
+			to_chat(user, span_warning("[container] пуст!"))
 		else
-			to_chat(user, span_warning("[I] is full!"))
+			to_chat(user, span_warning("[I] заполнен!"))
 		return ITEM_INTERACT_BLOCKING
 	return NONE

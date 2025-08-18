@@ -90,14 +90,14 @@
 
 	return return_gases
 
-///Ensures that maploaded mobs are in a safe environment. Unit test stuff.
+/// Гарантирует, что загруженные на карте мобы находятся в безопасной среде. Для юнит-тестов.
 /datum/element/atmos_requirements/proc/check_safe_environment(mob/living/living_mob)
 	if(living_mob.stat == DEAD || is_breathable_atmos(living_mob))
 		return
 	var/turf/open/open_turf = living_mob.loc
 	var/list/gases
-	var/string_text = "No Air"
+	var/string_text = "Нет воздуха"
 	if(open_turf.air)
 		gases = get_atmos_req_list(open_turf)
-		string_text = "O2: [gases["o2"]] - Plasma: [gases["plasma"]] - N2: [gases["n2"]] - CO2: [gases["co2"]]"
-	stack_trace("[living_mob] loaded on a turf with unsafe atmos at \[[open_turf.x], [open_turf.y], [open_turf.z]\] (area : [open_turf.loc]). Turf gases: [string_text]. Check the mob atmos requirements again.")
+		string_text = "O2: [gases["o2"]] - Плазма: [gases["plasma"]] - N2: [gases["n2"]] - CO2: [gases["co2"]]"
+	stack_trace("[living_mob] загружен на тайле с небезопасной атмосферой в \[[open_turf.x], [open_turf.y], [open_turf.z]\] (зона: [open_turf.loc]). Газы тайла: [string_text]. Проверьте требования моба к атмосфере.")

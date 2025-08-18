@@ -30,10 +30,10 @@
 		return
 
 	if(plank.get_amount() < PLANK_BARRICADE_AMOUNT)
-		source.balloon_alert(user, "need [PLANK_BARRICADE_AMOUNT] [plank] sheets!")
+		source.balloon_alert(user, "нужно [PLANK_BARRICADE_AMOUNT] [plank] листов!")
 		return COMPONENT_CANCEL_ATTACK_CHAIN
 
-	source.balloon_alert(user, "constructing barricade...")
+	source.balloon_alert(user, "строительство баррикады...")
 	playsound(source, 'sound/items/hammering_wood.ogg', 50, vary = TRUE)
 	INVOKE_ASYNC(src, PROC_REF(barricade), source, plank, user, params) //signal handlers can't have do_afters inside of them
 	return COMPONENT_CANCEL_ATTACK_CHAIN
@@ -43,7 +43,7 @@
 	if(!do_after(user, 5 SECONDS, target = source) || !plank.use(2) || (locate(/obj/structure/barricade/wooden/crude) in source.loc))
 		return
 
-	source.balloon_alert(user, "barricade constructed")
+	source.balloon_alert(user, "баррикада построена")
 	var/obj/structure/barricade/wooden/crude/barricade = new (source.loc)
 	barricade.add_fingerprint(user)
 
@@ -51,7 +51,7 @@
 	SIGNAL_HANDLER
 
 	if(istype(held_item, /obj/item/stack/sheet/mineral/wood) && source.Adjacent(user))
-		context[SCREENTIP_CONTEXT_LMB] = "Construct barricade"
+		context[SCREENTIP_CONTEXT_LMB] = "Построить баррикаду"
 		return CONTEXTUAL_SCREENTIP_SET
 
 	return NONE

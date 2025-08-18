@@ -22,10 +22,10 @@
 		return ELEMENT_INCOMPATIBLE
 
 	if(isnull(battle_start_barks))
-		battle_start_barks = list("En Garde!",)
+		battle_start_barks = list("К бою!",)
 
 	if(isnull(battle_end_barks))
-		battle_end_barks = list("Never should have come here",)
+		battle_end_barks = list("Не стоило сюда приходить",)
 
 	src.battle_start_barks = battle_start_barks
 	src.battle_end_barks = battle_end_barks

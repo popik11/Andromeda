@@ -53,7 +53,7 @@
 	SIGNAL_HANDLER
 	if(!iscarbon(target) || !target.handcuffed)
 		return NONE
-	context[SCREENTIP_CONTEXT_RMB] = "Cut Restraints"
+	context[SCREENTIP_CONTEXT_RMB] = "Разрезать оковы"
 	return CONTEXTUAL_SCREENTIP_SET
 
 ///signal called on parent being examined
@@ -63,10 +63,10 @@
 	var/examine_string
 	if(isnull(snap_time_weak))
 		return
-	examine_string = "It looks like it could be used to cut zipties or cable restraints off someone in [snap_time_weak] seconds"
+	examine_string = "Похоже, можно срезать стяжки или кабельные стяжки за [snap_time_weak] секунд"
 
 	if(!isnull(snap_time_strong))
-		examine_string += ", and handcuffs in [snap_time_strong] seconds."
+		examine_string += ", а наручники за [snap_time_strong] секунд."
 	else
 		examine_string += "."
 
@@ -87,12 +87,12 @@
 		return
 
 	if(cuffs.restraint_strength && isnull(src.snap_time_strong))
-		cutter_user.visible_message(span_notice("[cutter_user] tries to cut through [target]'s restraints with [cutter], but fails!"))
+		cutter_user.visible_message(span_notice("[cutter_user] пытается разрезать оковы [target] с помощью [cutter], но безуспешно!"))
 		playsound(source = get_turf(cutter), soundin = cutter.usesound ? cutter.usesound : cutter.hitsound, vol = cutter.get_clamped_volume(), vary = TRUE)
 		return COMPONENT_SKIP_ATTACK
 
 	else if(isnull(src.snap_time_weak))
-		cutter_user.visible_message(span_notice("[cutter_user] tries to cut through [target]'s restraints with [cutter], but fails!"))
+		cutter_user.visible_message(span_notice("[cutter_user] пытается разрезать оковы [target] с помощью [cutter], но безуспешно!"))
 		playsound(source = get_turf(cutter), soundin = cutter.usesound ? cutter.usesound : cutter.hitsound, vol = cutter.get_clamped_volume(), vary = TRUE)
 		return COMPONENT_SKIP_ATTACK
 
@@ -104,7 +104,7 @@
 	if(LAZYACCESS(cutter_user.do_afters, cutter))
 		return
 
-	log_combat(cutter_user, target, "cut or tried to cut [target]'s cuffs", cutter)
+	log_combat(cutter_user, target, "разрезал или пыталсяся разрезать наручники [target]", cutter)
 
 	var/snap_time = src.snap_time_weak
 	if(cuffs.restraint_strength)
@@ -112,7 +112,7 @@
 
 	if(snap_time == 0 || do_after(cutter_user, snap_time, target, interaction_key = cutter)) // If 0 just do it. This to bypass the do_after() creating a needless progress bar.
 		cutter_user.do_attack_animation(target, used_item = cutter)
-		cutter_user.visible_message(span_notice("[cutter_user] cuts [target]'s restraints with [cutter]!"))
+		cutter_user.visible_message(span_notice("[cutter_user] разрезает оковы [target] с помощью [cutter]!"))
 		qdel(target.handcuffed)
 		playsound(source = get_turf(cutter), soundin = cutter.usesound ? cutter.usesound : cutter.hitsound, vol = cutter.get_clamped_volume(), vary = TRUE)
 

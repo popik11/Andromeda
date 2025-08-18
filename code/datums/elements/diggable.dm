@@ -44,7 +44,7 @@
 
 	user.visible_message(
 		span_notice("[user] [action_text_third_person] [source]."),
-		span_notice("You [action_text] [source]."),
+		span_notice("Вы [action_text] [source]."),
 	)
 
 	playsound(source, 'sound/effects/shovel_dig.ogg', 50, TRUE)

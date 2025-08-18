@@ -36,4 +36,4 @@
 /datum/element/love_food_buff/proc/on_examine(datum/source, mob/user, list/examine_list)
 	SIGNAL_HANDLER
 
-	examine_list += span_notice("Delivering a chef's kiss to [source] will alter [source.p_their()] effects.")
+	examine_list += span_notice("Шефский поцелуй для [source] изменит [source.p_their()] эффекты.")

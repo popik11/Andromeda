@@ -72,7 +72,7 @@
 /datum/element/food_trash/proc/food_crossed(datum/source, mob/crosser, bitecount)
 	SIGNAL_HANDLER
 
-	if(!isliving(crosser) || bitecount) // can't pop opened chips
+	if(!isliving(crosser) || bitecount) // нельзя лопнуть уже открытую пачку
 		return
 	var/mob/living/popper = crosser
 	if(popper.mob_size < MOB_SIZE_HUMAN)
@@ -80,7 +80,7 @@
 
 	playsound(source, 'sound/effects/chipbagpop.ogg', 100)
 
-	popper.visible_message(span_danger("[popper] steps on \the [source], popping the bag!"), span_danger("You step on \the [source], popping the bag!"), span_danger("You hear a sharp crack!"), COMBAT_MESSAGE_RANGE)
+	popper.visible_message(span_danger("[popper] наступает на [source] и пачка лопается!"), span_danger("Ты наступаешь на [source] и пачка лопается!"), span_danger("Слышишь резкий хлопок!"), COMBAT_MESSAGE_RANGE)
 	INVOKE_ASYNC(src, PROC_REF(async_generate_trash), source)
 	qdel(source)
 
@@ -88,7 +88,7 @@
 /datum/element/food_trash/proc/open_trash(datum/source, mob/user)
 	SIGNAL_HANDLER
 
-	to_chat(user, span_notice("You open the [source], revealing \a [initial(trash.name)]."))
+	to_chat(user, span_notice("Ты открываешь [source], внутри оказывается [initial(trash.name)]."))
 
 	INVOKE_ASYNC(src, PROC_REF(async_generate_trash), source)
 	qdel(source)

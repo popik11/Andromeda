@@ -30,7 +30,7 @@
 /datum/element/easy_ignite/proc/ignite(atom/igniting, mob/user)
 	var/delete_after = TRUE
 
-	igniting.visible_message(span_warning("[igniting] catch[igniting.p_es()] fire!"), span_warning("You ignite into flames!"))
+	igniting.visible_message(span_warning("[igniting] загорает[igniting.p_es()]!"), span_warning("Ты вспыхиваешь пламенем!"))
 	new /obj/effect/hotspot(isturf(igniting) ? igniting : igniting.loc)
 
 	if(isturf(igniting))
@@ -38,13 +38,13 @@
 		parent_turf.ScrapeAway(1, CHANGETURF_INHERIT_AIR)
 		delete_after = FALSE
 
-	// Logging-related
-	var/log_message = "ignited [igniting]"
+	// Логирование
+	var/log_message = "поджёг [igniting]"
 	if(user)
-		user.log_message(log_message, LOG_ATTACK, log_globally = FALSE)//only individual log
+		user.log_message(log_message, LOG_ATTACK, log_globally = FALSE) // только индивидуальный лог
 
 	else
-		log_message = "[key_name(user)] " + log_message + " by fire"
+		log_message = "[key_name(user)] " + log_message + " огнём"
 		log_attack(log_message)
 
 	if(delete_after && !QDELETED(igniting))
@@ -93,14 +93,14 @@
 /datum/element/easy_ignite/proc/item_ignition(obj/item/source, obj/item/tool, mob/user)
 	if(tool.get_temperature() >= required_temp)
 		source.visible_message(
-			span_warning("[user] ignites [source] with [tool]!"),
-			span_warning("You ignite [source] with [tool]!"),
+			span_warning("[user] поджигает [source] с помощью [tool]!"),
+			span_warning("Ты поджигаешь [source] с помощью [tool]!"),
 		)
 		ignite(source, user)
 		return TRUE
 
 	source.visible_message(
-		span_warning("[user] tries to ignite [source] with [tool]!"),
-		span_warning("You try to ignite [source] with [tool], but it's not hot enough!"),
+		span_warning("[user] пытается поджечь [source] с помощью [tool]!"),
+		span_warning("Ты пытаешься поджечь [source] с помощью [tool], но недостаточно горячо!"),
 	)
 	return FALSE

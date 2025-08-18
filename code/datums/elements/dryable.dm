@@ -20,7 +20,7 @@
 
 	var/atom/result = new dry_result
 	if(!atom_target.compare_materials(result))
-		var/warning = "custom_materials of [result.type] when dried compared to just spawned don't match"
+		var/warning = "custom_materials [result.type] после сушки не совпадают с только что созданными"
 		var/what_it_should_be = atom_target.get_materials_english_list()
 		stack_trace("[warning]. custom_materials should be [what_it_should_be].")
 	qdel(result)
