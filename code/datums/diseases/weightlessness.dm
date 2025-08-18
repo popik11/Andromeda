@@ -1,16 +1,16 @@
 /datum/disease/weightlessness
-	name = "Localized Weightloss Malfunction"
+	name = "Локальное нарушение гравитации"
 	max_stages = 4
-	spread_text = "On Contact"
+	spread_text = "При контакте"
 	spread_flags = DISEASE_SPREAD_BLOOD | DISEASE_SPREAD_CONTACT_SKIN | DISEASE_SPREAD_CONTACT_FLUIDS
-	cure_text = "Liquid dark matter"
+	cure_text = "Жидкая тёмная материя"
 	cures = list(/datum/reagent/liquid_dark_matter)
-	agent = "Sub-quantum DNA Repulsion"
+	agent = "Субквантовое ДНК-отталкивание"
 	viable_mobtypes = list(/mob/living/carbon/human)
 	disease_flags = CAN_CARRY|CAN_RESIST|CURABLE
 	spreading_modifier = 0.5
 	cure_chance = 4
-	desc = "This disease results in a low level rewrite of the patient's bioelectric signature, causing them to reject the phenomena of \"weight\". Ingestion of liquid dark matter tends to stabilize the field."
+	desc = "Это заболевание вызывает изменение биоэлектрической сигнатуры пациента, заставляя его отвергать феномен \"веса\". Жидкая тёмная материя стабилизирует поле."
 	severity = DISEASE_SEVERITY_MEDIUM
 	infectable_biotypes = MOB_ORGANIC
 
@@ -23,21 +23,21 @@
 	switch(stage)
 		if(1)
 			if(SPT_PROB(1, seconds_per_tick))
-				to_chat(affected_mob, span_danger("You almost lose your balance for a second."))
+				to_chat(affected_mob, span_danger("На мгновение теряешь равновесие."))
 		if(2)
 			if(SPT_PROB(3, seconds_per_tick) && !HAS_TRAIT_FROM(affected_mob, TRAIT_MOVE_FLOATING, NO_GRAVITY_TRAIT))
-				to_chat(affected_mob, span_danger("You feel yourself lift off the ground."))
+				to_chat(affected_mob, span_danger("Чувствуешь, как отрываешься от земли."))
 				affected_mob.reagents.add_reagent(/datum/reagent/gravitum, 1)
 
 		if(4)
 			if(SPT_PROB(3, seconds_per_tick) && !affected_mob.has_quirk(/datum/quirk/spacer_born))
-				to_chat(affected_mob, span_danger("You feel sick as the world starts moving around you."))
+				to_chat(affected_mob, span_danger("Тошнит, когда мир начинает вращаться вокруг."))
 				affected_mob.adjust_confusion(3 SECONDS)
 			if(SPT_PROB(8, seconds_per_tick) && !HAS_TRAIT_FROM(affected_mob, TRAIT_MOVE_FLOATING, NO_GRAVITY_TRAIT))
-				to_chat(affected_mob, span_danger("You suddenly lift off the ground."))
+				to_chat(affected_mob, span_danger("Внезапно отрываешься от пола."))
 				affected_mob.reagents.add_reagent(/datum/reagent/gravitum, 5)
 
 /datum/disease/weightlessness/cure(add_resistance)
 	. = ..()
 	affected_mob.vomit(VOMIT_CATEGORY_DEFAULT, lost_nutrition = 95, purge_ratio = 0.4)
-	to_chat(affected_mob, span_danger("You fall to the floor as your body stops rejecting gravity."))
+	to_chat(affected_mob, span_danger("Падаешь на пол, когда тело перестаёт отвергать гравитацию."))

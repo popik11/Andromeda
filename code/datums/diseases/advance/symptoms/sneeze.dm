@@ -7,9 +7,9 @@
  * Bonus: Forces a spread type of AIRBORNE with extra range!
 */
 /datum/symptom/sneeze
-	name = "Sneezing"
-	desc = "The virus causes irritation of the nasal cavity, making the host sneeze occasionally. Sneezes from this symptom will spread the virus in a 4 meter cone in front of the host."
-	illness = "Bard Flu"
+	name = "Чихание"
+	desc = "Вирус раздражает носовую полость, заставляя носителя периодически чихать. Чихание распространяет вирус конусом 4 метра перед носителем."
+	illness = "Бард грипп"
 	stealth = -2
 	resistance = 3
 	stage_speed = 0
@@ -20,9 +20,9 @@
 	symptom_delay_max = 35
 	required_organ = ORGAN_SLOT_LUNGS
 	threshold_descs = list(
-		"Transmission 9" = "Increases sneezing range, spreading the virus over 6 meter cone instead of over a 4 meter cone.",
-		"Stealth 4" = "The symptom remains hidden until active.",
-		"Stage Speed 17" = "The force of each sneeze catapults the host backwards, potentially stunning and lightly damaging them if they hit a wall or another person mid-flight."
+		"Заразность 9" = "Увеличивает дальность чихания до 6 метров.",
+		"Скрытность 4" = "Симптом остаётся скрытым до активации.",
+		"Скорость 17" = "Сила чихания отбрасывает носителя назад, потенциально оглушая и нанося лёгкие повреждения при столкновении со стеной или другим человеком."
 	)
 	///Emote cooldowns
 	COOLDOWN_DECLARE(sneeze_cooldown)
@@ -55,7 +55,7 @@
 			affected_mob.emote("sneeze")
 			active_disease.airborne_spread(spread_range = src.spread_range, force_spread = TRUE, require_facing = TRUE)
 			if(cartoon_sneezing) //Yeah, this can fling you around even if you have a space suit helmet on. It's, uh, bluespace snot, yeah.
-				to_chat(affected_mob, span_userdanger("You are launched violently backwards by an all-mighty sneeze!"))
+				to_chat(affected_mob, span_userdanger("Мощнейшее чихание отбрасывает вас назад с огромной силой!"))
 				var/sneeze_distance = rand(2,4) //twice as far as a normal baseball bat strike will fling you
 				var/turf/target = get_ranged_target_turf(affected_mob, REVERSE_DIR(affected_mob.dir), sneeze_distance)
 				affected_mob.throw_at(target, sneeze_distance, rand(1,4)) //with the wounds update, sneezing at 7 speed was causing peoples bones to spontaneously explode, turning cartoonish sneezing into a nightmarishly lethal GBS 2.0 outbreak

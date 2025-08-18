@@ -115,7 +115,7 @@
 			cure_mod = max(cure_chance, DISEASE_MINIMUM_CHEMICAL_CURE_CHANCE)
 		if(disease_flags & CHRONIC && SPT_PROB(cure_mod, seconds_per_tick))
 			update_stage(1)
-			to_chat(affected_mob, span_notice("Your chronic illness is alleviated a little, though it can't be cured!"))
+			to_chat(affected_mob, span_notice("Ваше хроническое заболевание немного ослабло, хотя и не излечилось полностью!"))
 			return
 		if(SPT_PROB(cure_mod, seconds_per_tick))
 			update_stage(max(stage - 1, 1))
@@ -299,7 +299,7 @@
 			LAZYOR(affected_mob.disease_resistances, GetDiseaseID())
 		if(affected_mob.ckey)
 			var/cure_turf = get_turf(affected_mob)
-			log_virus("[key_name(affected_mob)] was cured of virus: [src.admin_details()] at [loc_name(cure_turf)]")
+			log_virus("[key_name(affected_mob)] излечен от вируса: [src.admin_details()] в [loc_name(cure_turf)]")
 	qdel(src)
 
 /datum/disease/proc/IsSame(datum/disease/D)

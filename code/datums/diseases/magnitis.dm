@@ -1,14 +1,14 @@
 /datum/disease/magnitis
-	name = "Magnitis"
+	name = "Магнитис"
 	max_stages = 4
-	spread_text = "Airborne"
-	cure_text = "Iron"
+	spread_text = "Воздушно-капельный"
+	cure_text = "Железо"
 	cures = list(/datum/reagent/iron)
-	agent = "Fukkos Miracos"
+	agent = "Фуккос миракос"
 	viable_mobtypes = list(/mob/living/carbon/human)
 	disease_flags = CAN_CARRY|CAN_RESIST|CURABLE
 	spreading_modifier = 0.75
-	desc = "This disease disrupts the magnetic field of your body, making it act as if a powerful magnet. Injections of iron help stabilize the field."
+	desc = "Эта болезнь нарушает магнитное поле вашего тела, заставляя его вести себя как мощный магнит. Инъекции железа помогают стабилизировать поле."
 	severity = DISEASE_SEVERITY_MEDIUM
 	infectable_biotypes = MOB_ORGANIC|MOB_ROBOTIC
 	bypasses_immunity = TRUE
@@ -23,7 +23,7 @@
 	switch(stage)
 		if(2)
 			if(SPT_PROB(1, seconds_per_tick))
-				to_chat(affected_mob, span_danger("Your skin tingles with energy."))
+				to_chat(affected_mob, span_danger("Твоя кожа покалывает от энергии."))
 			if(SPT_PROB(1, seconds_per_tick))
 				for(var/obj/nearby_object in orange(2, affected_mob))
 					if(nearby_object.anchored || !(nearby_object.obj_flags & CONDUCTS_ELECTRICITY))
@@ -37,9 +37,9 @@
 					nearby_silicon.Move(get_step(nearby_silicon, move_dir), move_dir)
 		if(3)
 			if(SPT_PROB(1, seconds_per_tick))
-				to_chat(affected_mob, span_danger("Your hair stands on end."))
+				to_chat(affected_mob, span_danger("Твои волосы встают дыбом."))
 			if(SPT_PROB(2, seconds_per_tick))
-				to_chat(affected_mob, span_danger("You feel a light shock course through your body."))
+				to_chat(affected_mob, span_danger("Ты чувствуешь легкий разряд, проходящий по телу."))
 				for(var/obj/nearby_object in orange(4, affected_mob))
 					if(nearby_object.anchored || !(nearby_object.obj_flags & CONDUCTS_ELECTRICITY))
 						continue
@@ -52,14 +52,14 @@
 						nearby_silicon.throw_at(affected_mob, 4, 3)
 		if(4)
 			if(SPT_PROB(1, seconds_per_tick))
-				to_chat(affected_mob, span_danger("You query upon the nature of miracles."))
+				to_chat(affected_mob, span_danger("Ты размышляешь о природе чудес."))
 			if(SPT_PROB(4, seconds_per_tick))
-				to_chat(affected_mob, span_danger("You feel a powerful shock course through your body."))
+				to_chat(affected_mob, span_danger("Ты чувствуешь мощный разряд, пронзающий тело."))
 				for(var/obj/nearby_object in orange(6, affected_mob))
 					if(nearby_object.anchored || !(nearby_object.obj_flags & CONDUCTS_ELECTRICITY))
 						continue
 					for(var/i in 1 to rand(1, 3))
-						nearby_object.throw_at(affected_mob, 6, 5) // I really wanted to use addtimers to stagger out when everything gets thrown but it would probably cause a lot of lag.
+						nearby_object.throw_at(affected_mob, 6, 5) // Очень хотелось использовать addtimers для разнесения бросков, но это вызовет лаги.
 				for(var/mob/living/silicon/nearby_silicon in orange(6, affected_mob))
 					if(isAI(nearby_silicon))
 						continue

@@ -1,12 +1,12 @@
 /datum/disease/gbs
-	name = "GBS"
+	name = "ГБС"
 	max_stages = 4
-	spread_text = "On contact"
+	spread_text = "При контакте"
 	spread_flags = DISEASE_SPREAD_BLOOD | DISEASE_SPREAD_CONTACT_SKIN | DISEASE_SPREAD_CONTACT_FLUIDS
-	cure_text = "Synaptizine & Sulfur"
+	cure_text = "Синаптизин и Сера (Synaptizine)"
 	cures = list(/datum/reagent/medicine/synaptizine,/datum/reagent/sulfur)
-	cure_chance = 7.5 //higher chance to cure, since two reagents are required
-	agent = "Gravitokinetic Bipotential SADS+"
+	cure_chance = 7.5 //больший шанс излечения, так как требуются два реагента
+	agent = "Гравитокинетический бипотенциальный САДС+"
 	viable_mobtypes = list(/mob/living/carbon/human)
 	disease_flags = CAN_CARRY|CAN_RESIST|CURABLE
 	spreading_modifier = 1
@@ -26,10 +26,10 @@
 			if(SPT_PROB(2.5, seconds_per_tick))
 				affected_mob.emote("gasp")
 			if(SPT_PROB(5, seconds_per_tick))
-				to_chat(affected_mob, span_danger("Your body hurts all over!"))
+				to_chat(affected_mob, span_danger("Всё тело ломит!"))
 		if(4)
-			to_chat(affected_mob, span_userdanger("Your body feels as if it's trying to rip itself apart!"))
+			to_chat(affected_mob, span_userdanger("Тело будто пытается разорваться изнутри!"))
 			if(SPT_PROB(30, seconds_per_tick))
-				affected_mob.investigate_log("has been gibbed by GBS.", INVESTIGATE_DEATHS)
+				affected_mob.investigate_log("был разорван ГБС.", INVESTIGATE_DEATHS)
 				affected_mob.gib(DROP_ALL_REMAINS)
 				return FALSE

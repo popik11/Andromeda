@@ -8,9 +8,9 @@
 */
 
 /datum/symptom/voice_change
-	name = "Voice Change"
-	desc = "The virus alters the pitch and tone of the host's vocal cords, changing how their voice sounds."
-	illness = "Mime Crisis"
+	name = "Изменение голоса"
+	desc = "Вирус изменяет высоту и тон голосовых связок носителя, искажая звучание голоса."
+	illness = "Кризис мима"
 	stealth = -1
 	resistance = -2
 	stage_speed = -2
@@ -22,9 +22,9 @@
 	symptom_delay_max = 120
 	required_organ = ORGAN_SLOT_TONGUE
 	threshold_descs = list(
-		"Transmission 14" = "The host's language center of the brain is damaged, leading to complete inability to speak or understand any language.",
-		"Stage Speed 7" = "Changes voice more often.",
-		"Stealth 3" = "The symptom remains hidden until active."
+		"Заразность 14" = "Повреждает языковый центр мозга, приводя к полной неспособности говорить или понимать любые языки.",
+		"Скорость 7" = "Голос изменяется чаще.",
+		"Скрытность 3" = "Симптом остаётся скрытым до активации."
 	)
 	var/scramble_language = FALSE
 	var/datum/language/current_language
@@ -50,7 +50,7 @@
 	switch(A.stage)
 		if(1, 2, 3, 4)
 			if(prob(base_message_chance) && !suppress_warning)
-				to_chat(M, span_warning("[pick("Your throat hurts.", "You clear your throat.")]"))
+				to_chat(M, span_warning("[pick("Горло болит.", "Вы прочищаете горло.")]"))
 		else
 			if(ishuman(M))
 				var/mob/living/carbon/human/H = M

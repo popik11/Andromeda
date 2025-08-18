@@ -7,8 +7,8 @@
  * Bonus: Gives the carrier TRAIT_NOBREATH, preventing suffocation and CPR
 */
 /datum/symptom/oxygen
-	name = "Self-Respiration"
-	desc = "The virus rapidly synthesizes oxygen, effectively removing the need for breathing."
+	name = "Автономное дыхание"
+	desc = "Вирус быстро синтезирует кислород, устраняя необходимость в дыхании."
 	stealth = 1
 	resistance = -3
 	stage_speed = -3
@@ -19,7 +19,7 @@
 	symptom_delay_max = 1
 	required_organ = ORGAN_SLOT_LUNGS
 	threshold_descs = list(
-		"Resistance 8" = "Additionally regenerates lost blood."
+		"Устойчивость 8" = "Дополнительно восстанавливает потерянную кровь."
 	)
 	var/regenerate_blood = FALSE
 
@@ -41,12 +41,12 @@
 			infected_mob.losebreath = max(0, infected_mob.losebreath - 4)
 			infected_mob.adjustOxyLoss(-7)
 			if(prob(base_message_chance))
-				to_chat(infected_mob, span_notice("You realize you haven't been breathing."))
+				to_chat(infected_mob, span_notice("Вы понимаете, что не дышали."))
 			if(regenerate_blood && infected_mob.blood_volume < BLOOD_VOLUME_NORMAL)
 				infected_mob.blood_volume += 1
 		else
 			if(prob(base_message_chance))
-				to_chat(infected_mob, span_notice("Your lungs feel great."))
+				to_chat(infected_mob, span_notice("Легкие работают прекрасно."))
 	return
 
 /datum/symptom/oxygen/on_stage_change(datum/disease/advance/advanced_disease)
@@ -57,11 +57,11 @@
 	if(advanced_disease.stage >= 4)
 		ADD_TRAIT(infected_mob, TRAIT_NOBREATH, DISEASE_TRAIT)
 		if(advanced_disease.stage == 4)
-			to_chat(infected_mob, span_notice("You don't feel the need to breathe anymore."))
+			to_chat(infected_mob, span_notice("Вы больше не чувствуете потребности дышать."))
 	else
 		REMOVE_TRAIT(infected_mob, TRAIT_NOBREATH, DISEASE_TRAIT)
 		if(advanced_disease.stage_peaked && advanced_disease.stage == 3)
-			to_chat(infected_mob, span_notice("You feel the need to breathe again."))
+			to_chat(infected_mob, span_notice("Вы снова чувствуете потребность дышать."))
 	return TRUE
 
 /datum/symptom/oxygen/End(datum/disease/advance/advanced_disease)

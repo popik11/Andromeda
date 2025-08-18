@@ -8,9 +8,9 @@
 */
 
 /datum/symptom/genetic_mutation
-	name = "Dormant DNA Activator"
-	desc = "The virus bonds with the DNA of the host, activating random dormant mutations within their DNA. When the virus is cured, the host's genetic alterations are undone."
-	illness = "Lycanthropy"
+	name = "Активатор дремлющей ДНК"
+	desc = "Вирус связывается с ДНК носителя, активируя случайные дремлющие мутации. После излечения генетические изменения исчезают."
+	illness = "Ликантропия"
 	stealth = -2
 	resistance = -3
 	stage_speed = 0
@@ -24,10 +24,10 @@
 	var/no_reset = FALSE
 	var/mutadone_proof = NONE
 	threshold_descs = list(
-		"Resistance 8" = "The negative and mildly negative mutations caused by the virus are mutadone-proof (but will still be undone when the virus is cured if the resistance 14 threshold is not met).",
-		"Resistance 14" = "The host's genetic alterations are not undone when the virus is cured.",
-		"Stage Speed 10" = "The virus activates dormant mutations at a much faster rate.",
-		"Stealth 5" = "Only activates negative mutations in hosts."
+		"Устойчивость 8" = "Негативные и слабо негативные мутации становятся устойчивыми к мутадону (но всё равно исчезнут после излечения, если не достигнут порог устойчивости 14).",
+		"Устойчивость 14" = "Генетические изменения сохраняются после излечения.",
+		"Скорость 10" = "Вирус активирует мутации значительно быстрее.",
+		"Скрытность 5" = "Активирует только негативные мутации."
 	)
 
 /datum/symptom/genetic_mutation/Start(datum/disease/advance/A)
@@ -53,7 +53,7 @@
 		return
 	switch(disease.stage)
 		if(4, 5)
-			to_chat(carbon, span_warning("[pick("Your skin feels itchy.", "You feel light headed.")]"))
+			to_chat(carbon, span_warning("[pick("Кожа чешется.", "Чувствуете лёгкое головокружение.")]"))
 			var/datum/mutation/mutation = carbon.get_random_mutation_path((NEGATIVE|MINOR_NEGATIVE|POSITIVE) & ~excludemuts)
 			if(!mutation)
 				return

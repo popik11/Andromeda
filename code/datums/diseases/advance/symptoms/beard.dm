@@ -1,16 +1,16 @@
-/** Facial Hypertrichosis
- * No change to stealth.
- * Increases resistance.
- * Increases speed.
- * Slighlty increases transmissibility
- * Intense Level.
- * Bonus: Makes the mob grow a massive beard, regardless of gender.
+/** Гипертрихоз лица
+ * Не влияет на скрытность.
+ * Повышает устойчивость.
+ * Увеличивает скорость.
+ * Слегка повышает заразность.
+ * Высокий уровень.
+ * Бонус: Заставляет моба отрастить густую бороду, независимо от пола.
 */
 
 /datum/symptom/beard
-	name = "Facial Hypertrichosis"
-	desc = "The virus increases hair production significantly, causing rapid beard growth."
-	illness = "Man-Mouth"
+	name = "Гипертрихоз лица"
+	desc = "Вирус значительно ускоряет рост волос, вызывая быстрое отрастание бороды."
+	illness = "Бородач"
 	stealth = 0
 	resistance = 3
 	stage_speed = 2
@@ -32,5 +32,5 @@
 		var/mob/living/carbon/human/manly_man = manly_mob
 		var/index = min(max(beard_order.Find(manly_man.facial_hairstyle)+1, disease.stage-1), beard_order.len)
 		if(index > 0 && manly_man.facial_hairstyle != beard_order[index])
-			to_chat(manly_man, span_warning("Your chin itches."))
+			to_chat(manly_man, span_warning("Ваш подбородок чешется."))
 			manly_man.set_facial_hairstyle(beard_order[index], update = TRUE)

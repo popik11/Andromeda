@@ -8,9 +8,9 @@ and your disease can spread via people walking on vomit.
 */
 
 /datum/symptom/vomit
-	name = "Vomiting"
-	desc = "The virus causes nausea and irritates the stomach, causing occasional vomit."
-	illness = "Cyclonic Irritation"
+	name = "Рвота"
+	desc = "Вирус вызывает тошноту и раздражение желудка, приводя к периодической рвоте."
+	illness = "Циклоническое раздражение"
 	stealth = -2
 	resistance = -1
 	stage_speed = -1
@@ -22,9 +22,9 @@ and your disease can spread via people walking on vomit.
 	symptom_delay_max = 80
 	required_organ = ORGAN_SLOT_STOMACH
 	threshold_descs = list(
-		"Resistance 7" = "Host will vomit blood, causing internal damage.",
-		"Transmission 7" = "Host will projectile vomit, increasing vomiting range.",
-		"Stealth 4" = "The symptom remains hidden until active."
+		"Устойчивость 7" = "Носитель будет рвать кровью, нанося внутренние повреждения.",
+		"Заразность 7" = "Рвота становится метательной, увеличивая дальность распространения.",
+		"Скрытность 4" = "Симптом остаётся скрытым до активации."
 	)
 	var/vomit_nebula = FALSE
 	var/vomit_blood = FALSE
@@ -49,7 +49,7 @@ and your disease can spread via people walking on vomit.
 	switch(A.stage)
 		if(1, 2, 3, 4)
 			if(prob(base_message_chance) && !suppress_warning)
-				to_chat(M, span_warning("[pick("You feel nauseated.", "You feel like you're going to throw up!")]"))
+				to_chat(M, span_warning("[pick("Тошнит.", "Сейчас вырвет!")]"))
 		else
 			vomit(M)
 
@@ -70,8 +70,8 @@ and your disease can spread via people walking on vomit.
 	vomiter.vomit(vomit_flags = constructed_flags, vomit_type = type_of_vomit, lost_nutrition = deductable_nutrition, distance = proj_vomit)
 
 /datum/symptom/vomit/nebula
-	name = "Nebula Vomiting"
-	desc = "The condition irritates the stomach, causing occasional vomit with stars that does not stun."
-	illness = "Nebula Nausea"
+	name = "Рвота туманностью"
+	desc = "Состояние раздражает желудок, вызывая периодическую рвоту звёздами без оглушающего эффекта."
+	illness = "Туманностная тошнота"
 	vomit_nebula = TRUE
 	naturally_occuring = FALSE

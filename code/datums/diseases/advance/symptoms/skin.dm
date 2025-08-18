@@ -7,9 +7,9 @@
  * Bonus: Makes the mob gain a random crayon powder colorful reagent.
 */
 /datum/symptom/polyvitiligo
-	name = "Polyvitiligo"
-	desc = "The virus replaces the melanin in the skin with reactive pigment."
-	illness = "Chroma Imbalance"
+	name = "Поливитилиго"
+	desc = "Вирус заменяет меланин в коже реактивным пигментом."
+	illness = "Хроматический дисбаланс"
 	stealth = -1
 	resistance = 3
 	stage_speed = 1
@@ -31,5 +31,5 @@
 			if(M.reagents.total_volume <= (M.reagents.maximum_volume/10)) // no flooding humans with 1000 units of colorful reagent
 				M.reagents.add_reagent(color, 5)
 		else
-			if (prob(50)) // spam
-				M.visible_message(span_warning("[M] looks rather vibrant..."), span_notice("The colors, man, the colors..."))
+			if (prob(50)) // спам
+				M.visible_message(span_warning("[M] выглядит довольно ярко..."), span_notice("Цвета, чувак, цвета..."))

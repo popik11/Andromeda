@@ -6,8 +6,8 @@
  * Critical level
 */
 /datum/symptom/mind_restoration
-	name = "Mind Restoration"
-	desc = "The virus strengthens the bonds between neurons, reducing the duration of any ailments of the mind."
+	name = "Восстановление разума"
+	desc = "Вирус укрепляет связи между нейронами, сокращая продолжительность психических расстройств."
 	stealth = -1
 	resistance = -2
 	stage_speed = 1
@@ -19,9 +19,9 @@
 	var/trauma_heal_mild = FALSE
 	var/trauma_heal_severe = FALSE
 	threshold_descs = list(
-		"Resistance 6" = "Heals minor brain traumas.",
-		"Resistance 9" = "Heals severe brain traumas.",
-		"Transmission 8" = "Purges alcohol in the bloodstream.",
+		"Устойчивость 6" = "Излечивает лёгкие психические травмы.",
+		"Устойчивость 9" = "Излечивает тяжёлые психические травмы.",
+		"Заразность 8" = "Выводит алкоголь из кровотока.",
 	)
 
 /datum/symptom/mind_restoration/Start(datum/disease/advance/A)
@@ -76,8 +76,8 @@
 
 
 /datum/symptom/sensory_restoration
-	name = "Sensory Restoration"
-	desc = "The virus stimulates the production and replacement of sensory tissues, causing the host to regenerate eyes and ears when damaged."
+	name = "Восстановление сенсорики"
+	desc = "Вирус стимулирует производство и замену сенсорных тканей, позволяя носителю восстанавливать глаза и уши при повреждениях."
 	stealth = 0
 	resistance = 1
 	stage_speed = -2
@@ -108,13 +108,13 @@
 			eyes.apply_organ_damage(-2)
 			if(prob(20))
 				if(infected_mob.is_blind_from(EYE_DAMAGE))
-					to_chat(infected_mob, span_warning("Your vision slowly returns..."))
+					to_chat(infected_mob, span_warning("Зрение постепенно возвращается..."))
 					infected_mob.adjust_eye_blur(20 SECONDS)
 
 				else if(infected_mob.is_nearsighted_from(EYE_DAMAGE))
-					to_chat(infected_mob, span_warning("The blackness in your peripheral vision begins to fade."))
+					to_chat(infected_mob, span_warning("Чёрные пятна по краям зрения начинают исчезать."))
 					infected_mob.adjust_eye_blur(5 SECONDS)
 
 		else
 			if(prob(base_message_chance))
-				to_chat(infected_mob, span_notice("[pick("Your eyes feel great.","You feel like your eyes can focus more clearly.", "You don't feel the need to blink.","Your ears feel great.","Your hearing feels more acute.")]"))
+				to_chat(infected_mob, span_notice("[pick("Глаза чувствуют себя отлично.","Зрение стало чётче.", "Не хочется моргать.","Слух обострился.","Вы слышите каждый звук отчётливее.")]"))

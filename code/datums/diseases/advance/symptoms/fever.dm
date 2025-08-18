@@ -9,9 +9,9 @@
  */
 
 /datum/symptom/fever
-	name = "Fever"
-	desc = "The virus causes a febrile response from the host, raising its body temperature."
-	illness = "Burning Desire"
+	name = "Лихорадка"
+	desc = "Вирус вызывает лихорадочную реакцию организма, повышая температуру тела носителя."
+	illness = "Горячее Желание"
 	stealth = 0
 	resistance = 3
 	stage_speed = 3
@@ -21,10 +21,10 @@
 	base_message_chance = 20
 	symptom_delay_min = 10
 	symptom_delay_max = 30
-	var/unsafe = FALSE //over the heat threshold
+	var/unsafe = FALSE // превышает безопасный температурный порог
 	threshold_descs = list(
-		"Resistance 5" = "Increases fever intensity, fever can overheat and harm the host.",
-		"Resistance 10" = "Further increases fever intensity.",
+		"Устойчивость 5" = "Усиливает лихорадку, что может привести к перегреву и вреду для носителя.",
+		"Устойчивость 10" = "Дальнейшее усиление лихорадки.",
 	)
 
 /datum/symptom/fever/Start(datum/disease/advance/A)
@@ -43,9 +43,9 @@
 		return
 	var/mob/living/carbon/M = A.affected_mob
 	if(!unsafe || A.stage < 4)
-		to_chat(M, span_warning("[pick("You feel hot.", "You feel like you're burning.")]"))
+		to_chat(M, span_warning("[pick("Вам жарко.", "Кажется, вы горите.")]"))
 	else
-		to_chat(M, span_userdanger("[pick("You feel too hot.", "You feel like your blood is boiling.")]"))
+		to_chat(M, span_userdanger("[pick("Вам невыносимо жарко.", "Кажется, ваша кровь кипит.")]"))
 	set_body_temp(A.affected_mob, A)
 
 /**

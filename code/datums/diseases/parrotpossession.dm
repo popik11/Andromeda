@@ -1,21 +1,21 @@
 /datum/disease/parrot_possession
-	name = "Parrot Possession"
+	name = "Одержимость попугаем"
 	max_stages = 1
-	spread_text = "Paranormal"
+	spread_text = "Паранормальное"
 	spread_flags = DISEASE_SPREAD_SPECIAL
 	disease_flags = CURABLE
-	cure_text = "Holy Water."
+	cure_text = "Святая вода."
 	cures = list(/datum/reagent/water/holywater)
 	cure_chance = 10
-	agent = "Avian Vengence"
+	agent = "Птичья месть"
 	viable_mobtypes = list(/mob/living/carbon/human)
-	desc = "Subject is possessed by the vengeful spirit of a parrot. Call the priest."
+	desc = "Жертва одержима мстительным духом попугая. Позовите священника."
 	severity = DISEASE_SEVERITY_MEDIUM
 	infectable_biotypes = MOB_ORGANIC|MOB_UNDEAD|MOB_ROBOTIC|MOB_MINERAL
 	bypasses_immunity = TRUE //2spook
-	///chance we speak
+	/// шанс что заговорим
 	var/speak_chance = 5
-	///controller we speak from
+	/// контроллер который говорит через нас
 	var/datum/ai_controller/basic_controller/parrot_controller
 
 
@@ -37,8 +37,8 @@
 		UnregisterSignal(inside_parrot, list(COMSIG_PREQDELETED, COMSIG_MOVABLE_MOVED))
 		inside_parrot.forceMove(affected_mob.drop_location())
 		affected_mob.visible_message(
-			span_danger("[inside_parrot] is violently driven out of [affected_mob]!"),
-			span_userdanger("[inside_parrot] bursts out of your chest!"),
+			span_danger("[inside_parrot] вырывается из [affected_mob]!"),
+			span_userdanger("[inside_parrot] вырывается из твоей груди!"),
 		)
 	parrot_controller = null
 	return ..()

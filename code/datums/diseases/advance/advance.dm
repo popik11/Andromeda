@@ -17,12 +17,12 @@
  */
 
 /datum/disease/advance
-	name = "Unknown" // We will always let our creator name our disease.
-	desc = "An engineered disease which can contain a multitude of symptoms."
-	form = "Advanced Disease" // Will let med-scanners know that this disease was engineered.
-	agent = "advance microbes"
+	name = "Неизвестно" // Название болезни задаётся создателем
+	desc = "Искусственно созданная болезнь, которая может содержать множество симптомов."
+	form = "Продвинутая Болезнь" // Показывает медсканерам, что болезнь искусственная
+	agent = "продвинутые микробы"
 	max_stages = 5
-	spread_text = "Unknown"
+	spread_text = "Неизвестно"
 	viable_mobtypes = list(/mob/living/carbon/human)
 
 	// NEW VARS
@@ -294,27 +294,27 @@
 		CRASH("Our properties were empty or null!")
 
 
-// Assign the spread type and give it the correct description.
+// Устанавливает тип распространения и соответствующее описание
 /datum/disease/advance/proc/set_spread(spread_id)
 	switch(spread_id)
 		if(DISEASE_SPREAD_NON_CONTAGIOUS)
 			update_spread_flags(DISEASE_SPREAD_NON_CONTAGIOUS)
-			spread_text = "None"
+			spread_text = "Нет"
 		if(DISEASE_SPREAD_SPECIAL)
 			update_spread_flags(DISEASE_SPREAD_SPECIAL)
-			spread_text = "None"
+			spread_text = "Нет"
 		if(DISEASE_SPREAD_BLOOD)
 			update_spread_flags(DISEASE_SPREAD_BLOOD)
-			spread_text = "Blood"
+			spread_text = "Кровь"
 		if(DISEASE_SPREAD_CONTACT_FLUIDS)
 			update_spread_flags(DISEASE_SPREAD_BLOOD | DISEASE_SPREAD_CONTACT_FLUIDS)
-			spread_text = "Fluids"
+			spread_text = "Жидкости"
 		if(DISEASE_SPREAD_CONTACT_SKIN)
 			update_spread_flags(DISEASE_SPREAD_BLOOD | DISEASE_SPREAD_CONTACT_FLUIDS | DISEASE_SPREAD_CONTACT_SKIN)
-			spread_text = "Skin contact"
+			spread_text = "Контакт кожи"
 		if(DISEASE_SPREAD_AIRBORNE)
 			update_spread_flags(DISEASE_SPREAD_BLOOD | DISEASE_SPREAD_CONTACT_FLUIDS | DISEASE_SPREAD_CONTACT_SKIN | DISEASE_SPREAD_AIRBORNE)
-			spread_text = "Respiration"
+			spread_text = "Дыхание"
 
 /datum/disease/advance/proc/set_severity(level_sev)
 
@@ -335,7 +335,7 @@
 		if(6 to INFINITY)
 			severity = DISEASE_SEVERITY_BIOHAZARD
 		else
-			severity = "Unknown"
+			severity = "Неизвестно"
 
 
 // Will generate a random cure, the more resistance the symptoms have, the harder the cure.
@@ -381,7 +381,7 @@
 			Refresh(TRUE)
 
 // Name the disease.
-/datum/disease/advance/proc/AssignName(name = "Unknown")
+/datum/disease/advance/proc/AssignName(name = "Неизвестно")
 	var/datum/disease/advance/A = SSdisease.archive_diseases[GetDiseaseID()]
 	A.name = name
 
@@ -418,7 +418,7 @@
 /datum/disease/advance/proc/NeuterSymptom(datum/symptom/S)
 	if(!S.neutered)
 		S.neutered = TRUE
-		S.name += " (neutered)"
+		S.name += " (кастрирован)"
 		S.OnRemove(src)
 
 /*
@@ -481,7 +481,7 @@
 	symptoms += SSdisease.list_symptoms.Copy()
 	do
 		if(user)
-			var/symptom = tgui_input_list(user, "Choose a symptom to add ([i] remaining)", "Choose a Symptom", sort_list(symptoms, GLOBAL_PROC_REF(cmp_typepaths_asc)))
+			var/symptom = tgui_input_list(user, "Выберите симптом для добавления ([i] осталось)", "Выбор Симптома", sort_list(symptoms, GLOBAL_PROC_REF(cmp_typepaths_asc)))
 			if(isnull(symptom))
 				return
 			else if(istext(symptom))
@@ -495,20 +495,20 @@
 
 	if(D.symptoms.len > 0)
 
-		var/new_name = tgui_input_text(user, "Name your new disease", "New Name", max_length = MAX_NAME_LEN)
+		var/new_name = tgui_input_text(user, "Назовите новую болезнь", "Новое Название", max_length = MAX_NAME_LEN)
 		if(!new_name)
 			return
 		D.Refresh()
-		D.AssignName(new_name) //Updates the master copy
-		D.name = new_name //Updates our copy
+		D.AssignName(new_name) //Обновляет мастер-копию
+		D.name = new_name //Обновляет нашу копию
 
-		var/list/targets = list("Random")
+		var/list/targets = list("Случайный")
 		targets += sort_names(GLOB.human_list)
-		var/target = tgui_input_list(user, "Viable human target", "Disease Target", targets)
+		var/target = tgui_input_list(user, "Подходящая человеческая цель", "Цель Заражения", targets)
 		if(isnull(target))
 			return
 		var/mob/living/carbon/human/H
-		if(target == "Random")
+		if(target == "Случайный")
 			for(var/human in shuffle(GLOB.human_list))
 				H = human
 				var/found = FALSE
@@ -518,17 +518,17 @@
 					found = H.ForceContractDisease(D)
 					break
 				if(!found)
-					to_chat(user, "Could not find a valid target for the disease.")
+					to_chat(user, "Не удалось найти подходящую цель для заражения.")
 		else
 			H = target
 			if(istype(H) && D.infectable_biotypes & H.mob_biotypes)
 				H.ForceContractDisease(D)
 			else
-				to_chat(user, "Target could not be infected. Check mob biotype compatibility or resistances.")
+				to_chat(user, "Цель не может быть заражена. Проверьте совместимость биотипов или сопротивляемость.")
 				return
 
-		message_admins("[key_name_admin(user)] has triggered a custom virus outbreak of [D.admin_details()] in [ADMIN_LOOKUPFLW(H)]")
-		log_virus("[key_name(user)] has triggered a custom virus outbreak of [D.admin_details()] in [H]!")
+		message_admins("[key_name_admin(user)] создал кастомный вирус [D.admin_details()] у [ADMIN_LOOKUPFLW(H)]")
+		log_virus("[key_name(user)] создал кастомный вирус [D.admin_details()] у [H]!")
 
 
 /datum/disease/advance/proc/totalStageSpeed()

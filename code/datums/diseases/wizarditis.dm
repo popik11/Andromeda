@@ -1,21 +1,20 @@
 /datum/disease/wizarditis
-	name = "Wizarditis"
+	name = "Волшебнитус"
 	max_stages = 4
-	spread_text = "Airborne"
-	cure_text = "The Manly Dorf"
+	spread_text = "Воздушно-капельный"
+	cure_text = "Мэнли Дорф"
 	cures = list(/datum/reagent/consumable/ethanol/manly_dorf)
 	cure_chance = 100
-	agent = "Rincewindus Vulgaris"
+	agent = "Ринсвинд Вульгарис"
 	viable_mobtypes = list(/mob/living/carbon/human)
 	disease_flags = CAN_CARRY|CAN_RESIST|CURABLE
 	spreading_modifier = 0.75
 	bypasses_immunity = TRUE
-	desc = "Some speculate that this virus is the cause of the Space Wizard Federation's existence. \
-		Subjects affected show the signs of brain damage, yelling obscure sentences or total gibberish. \
-		On late stages subjects sometime express the feelings of inner power, and cite \
-		'the ability to control the forces of cosmos themselves!' \
-		A gulp of strong, manly spirits usually reverts them to normal, humanlike, condition. \
-		A form of magical grounding can help, too, but will not cure it on its own."
+	desc = "Некоторые считают, что этот вирус - причина существования Федерации Космических Волшебников. \
+		Заражённые демонстрируют признаки повреждения мозга, выкрикивая странные фразы или полную бессмыслицу. \
+		На поздних стадиях иногда заявляют о чувстве внутренней силы и 'способности управлять \
+		самими силами космоса!' Глоток крепкого мужского напитка обычно возвращает их в нормальное \
+		человеческое состояние. Магическое заземление тоже может помочь, но не излечит полностью."
 	severity = DISEASE_SEVERITY_HARMFUL
 
 	/// List of random non-targeted spells to pick from to cast
@@ -59,28 +58,28 @@
 	if(stage >= 3 && SPT_PROB(0.15 * stage, seconds_per_tick))
 		var/datum/action/cooldown/spell/picked = pick(random_spells)
 		if(!picked.try_invoke(affected_mob, feedback = FALSE))
-			to_chat(affected_mob, span_danger("You feel something building up inside... but the feeling passes."))
+			to_chat(affected_mob, span_danger("Чувствуешь, как что-то нарастает внутри... но ощущение проходит."))
 			return
 
 		picked.spell_feedback(affected_mob)
 		return
 
 	if(stage <= 3 && SPT_PROB(0.33 * stage, seconds_per_tick))
-		affected_mob.manual_emote("sniffles.")
+		affected_mob.manual_emote("шмыгает носом.")
 
 	switch(stage)
 		if(2)
 			if(SPT_PROB(1, seconds_per_tick))
-				to_chat(affected_mob, span_danger("You feel [pick("that you don't have enough mana", "that the winds of magic are gone", "an urge to summon familiar")]."))
+				to_chat(affected_mob, span_danger("Чувствуешь [pick("нехватку маны", "что магические ветра утихли", "желание призвать фамильяра")]."))
 
 		if(3)
 			if(SPT_PROB(1, seconds_per_tick))
-				to_chat(affected_mob, span_danger("You feel [pick("the magic bubbling in your veins", "that this location gives you a +1 to INT", "an urge to summon familiar")]."))
+				to_chat(affected_mob, span_danger("Чувствуешь [pick("магию, бурлящую в жилах", "что это место даёт +1 к интеллекту", "желание призвать фамильяра")]."))
 				spawn_wizard_clothes(10)
 
 		if(4)
 			if(SPT_PROB(1, seconds_per_tick))
-				to_chat(affected_mob, span_danger("You feel [pick("the tidal wave of raw power building inside", "that this location gives you a +2 to INT and +1 to WIS", "an urge to teleport")]."))
+				to_chat(affected_mob, span_danger("Чувствуешь [pick("нарастающую волну чистой силы", "что это место даёт +2 к интеллекту и +1 к мудрости", "желание телепортироваться")]."))
 				spawn_wizard_clothes(50)
 
 			if(SPT_PROB(0.2, seconds_per_tick))

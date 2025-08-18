@@ -7,9 +7,9 @@
  * Bonus: Spreads the virus in a small square around the host. Can force the affected mob to drop small items!
 */
 /datum/symptom/cough
-	name = "Cough"
-	desc = "The virus irritates the throat of the host, causing occasional coughing. Each cough will try to infect bystanders who are within 1 tile of the host with the virus."
-	illness = "Jest Infection"
+	name = "Кашель"
+	desc = "Вирус раздражает горло носителя, вызывая периодический кашель. Каждый кашлевой позыв может заразить окружающих в радиусе 1 тайла."
+	illness = "Шутливая инфекция"
 	stealth = -1
 	resistance = 3
 	stage_speed = 1
@@ -21,11 +21,11 @@
 	symptom_delay_max = 15
 	required_organ = ORGAN_SLOT_LUNGS
 	threshold_descs = list(
-		"Resistance 11" = "The host will drop small items when coughing.",
-		"Resistance 15" = "Occasionally causes coughing fits that stun the host. The extra coughs do not spread the virus.",
-		"Stage Speed 6" = "Increases cough frequency.",
-		"Transmission 7" = "Coughing will now infect bystanders up to 2 tiles away.",
-		"Stealth 4" = "The symptom remains hidden until active.",
+		"Устойчивость 11" = "Носитель будет ронять мелкие предметы при кашле.",
+		"Устойчивость 15" = "Иногда вызывает приступы кашля, оглушающие носителя. Дополнительные кашлевые позывы не распространяют вирус.",
+		"Скорость 6" = "Увеличивает частоту кашля.",
+		"Заразность 7" = "Кашель теперь заражает окружающих в радиусе до 2 тайлов.",
+		"Скрытность 4" = "Симптом остаётся скрытым до активации.",
 	)
 	///emote cooldowns
 	COOLDOWN_DECLARE(cough_cooldown)
@@ -58,7 +58,7 @@
 	switch(active_disease.stage)
 		if(1, 2, 3)
 			if(prob(base_message_chance) && !suppress_warning)
-				to_chat(affected_mob, span_warning("[pick("You swallow excess mucus.", "You lightly cough.")]"))
+				to_chat(affected_mob, span_warning("[pick("Вы сглатываете слизь.", "Вы слегка кашляете.")]"))
 		else
 			if(COOLDOWN_FINISHED(src, cough_cooldown) || !COOLDOWN_FINISHED(src, cough_cooldown) && prob(60) && !off_cooldown_coughed)
 				affected_mob.emote("cough")
@@ -73,7 +73,7 @@
 				if(held_object && held_object.w_class == WEIGHT_CLASS_TINY)
 					affected_mob.dropItemToGround(held_object)
 			if(power >= 2 && prob(30))
-				to_chat(affected_mob, span_userdanger("[pick("You have a coughing fit!", "You can't stop coughing!")]"))
+				to_chat(affected_mob, span_userdanger("[pick("У вас приступ кашля!", "Вы не можете перестать кашлять!")]"))
 				affected_mob.Immobilize(20)
 				addtimer(CALLBACK(affected_mob, TYPE_PROC_REF(/mob/, emote), "cough"), 0.6 SECONDS)
 				addtimer(CALLBACK(affected_mob, TYPE_PROC_REF(/mob/, emote), "cough"), 1.2 SECONDS)

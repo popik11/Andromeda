@@ -1,43 +1,43 @@
 // Symptoms are the effects that engineered advanced diseases do.
 
 /datum/symptom
-	var/name = "8-bitten bugs"
-	///Basic symptom description
-	var/desc = "If you see this something went very wrong."
-	///Potential illness name caused by the symptom
-	var/illness = "Unidentified"
-	///Descriptions of threshold effects
+	var/name = "8-битные баги"
+	///Базовое описание симптома
+	var/desc = "Если вы это видите, что-то пошло очень не так."
+	///Потенциальное название болезни, вызываемой симптомом
+	var/illness = "Неопознано"
+	///Описание эффектов пороговых значений
 	var/threshold_descs = list()
-	///How the symptom affects the disease's stealth stat, positive values make it less noticeable
+	///Как симптом влияет на скрытность болезни (положительные значения делают её менее заметной)
 	var/stealth = 0
-	///How the symptom affects the disease's resistance stat, positive values make it harder to cure
+	///Как симптом влияет на устойчивость болезни (положительные значения затрудняют лечение)
 	var/resistance = 0
-	///How the symptom affects the disease's stage speed stat, positive values cause faster stage progression
+	///Как симптом влияет на скорость развития стадий болезни (положительные значения ускоряют прогрессирование)
 	var/stage_speed = 0
-	///How the symptom affects the disease's transmissibility
+	///Как симптом влияет на заразность болезни
 	var/transmittable = 0
-	///The type level of the symptom. Higher is harder to generate.
+	///Уровень сложности симптома. Чем выше - тем сложнее создать.
 	var/level = 0
-	///The severity level of the symptom. Higher is more dangerous.
+	///Уровень опасности симптома. Чем выше - тем опаснее.
 	var/severity = 0
-	///The hash tag for our diseases, we will add it up with our other symptoms to get a unique id! ID MUST BE UNIQUE!!!
+	///Хэш-идентификатор для наших болезней (складывается с другими симптомами для получения уникального ID)
 	var/id = ""
-	///Base chance of sending warning messages, so it can be modified
+	///Базовый шанс отправки предупреждающих сообщений (может модифицироваться)
 	var/base_message_chance = 10
-	///If the early warnings are suppressed or not
+	///Подавлять ли ранние предупреждения
 	var/suppress_warning = FALSE
-	///Ticks between each activation
+	///Тики между активациями
 	var/next_activation = 0
 	var/symptom_delay_min = 1
 	var/symptom_delay_max = 1
-	///Can be used to multiply virus effects
+	///Может использоваться для умножения эффектов вируса
 	var/power = 1
-	///A neutered symptom has no effect, and only affects statistics.
+	///"Кастрированный" симптом не имеет эффекта и влияет только на статистику
 	var/neutered = FALSE
 	var/list/thresholds
-	///If this symptom can appear from /datum/disease/advance/GenerateSymptoms()
+	///Может ли симптом появляться при /datum/disease/advance/GenerateSymptoms()
 	var/naturally_occuring = TRUE
-	///If the symptom requires an organ for the effects to function, robotic organs are immune to disease unless inorganic biology symptom is present
+	///Требуется ли орган для работы эффектов (робоорганы иммунны к болезням, если нет симптома неорганической биологии)
 	var/required_organ
 
 /datum/symptom/New()

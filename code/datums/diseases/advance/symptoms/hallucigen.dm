@@ -8,9 +8,9 @@
 */
 
 /datum/symptom/hallucigen
-	name = "Hallucigen"
-	desc = "The virus stimulates the brain, causing occasional hallucinations."
-	illness = "Paranoyance"
+	name = "Галлюциноген"
+	desc = "Вирус стимулирует мозг, вызывая периодические галлюцинации."
+	illness = "Паранойя"
 	stealth = 1
 	resistance = -4
 	stage_speed = 1
@@ -22,8 +22,8 @@
 	symptom_delay_max = 90
 	var/fake_healthy = FALSE
 	threshold_descs = list(
-		"Stage Speed 7" = "Increases the amount of hallucinations.",
-		"Stealth 4" = "The virus mimics positive symptoms.",
+		"Скорость 7" = "Увеличивает количество галлюцинаций.",
+		"Скрытность 4" = "Вирус имитирует положительные симптомы.",
 	)
 
 /datum/symptom/hallucigen/Start(datum/disease/advance/A)
@@ -41,25 +41,25 @@
 	if(!.)
 		return
 	var/mob/living/carbon/M = A.affected_mob
-	var/list/healthy_messages = list("Your lungs feel great.", "You realize you haven't been breathing.", "You don't feel the need to breathe.",\
-					"Your eyes feel great.", "Your ears feel great.", "You don't feel the need to blink.")
+	var/list/healthy_messages = list("Легкие работают прекрасно.", "Вы понимаете, что не дышали.", "Вам не нужно дышать.",\
+					"Глаза чувствуют себя отлично.", "Слух обострился.", "Вам не нужно моргать.")
 	switch(A.stage)
 		if(1, 2)
 			if(prob(base_message_chance))
 				if(!fake_healthy)
-					to_chat(M, span_notice("[pick("Something appears in your peripheral vision, then winks out.", "You hear a faint whisper with no source.", "Your head aches.")]"))
+					to_chat(M, span_notice("[pick("Краем глаза вы что-то заметили, но оно исчезло.", "Слышен тихий шепот без источника.", "Голова болит.")]"))
 				else
 					to_chat(M, span_notice("[pick(healthy_messages)]"))
 		if(3, 4)
 			if(prob(base_message_chance))
 				if(!fake_healthy)
-					to_chat(M, span_danger("[pick("Something is following you.", "You are being watched.", "You hear a whisper in your ear.", "Thumping footsteps slam toward you from nowhere.")]"))
+					to_chat(M, span_danger("[pick("Кто-то преследует вас.", "За вами следят.", "Шёпот прямо в ухо.", "Громкие шаги приближаются из ниоткуда.")]"))
 				else
 					to_chat(M, span_notice("[pick(healthy_messages)]"))
 		else
 			if(prob(base_message_chance))
 				if(!fake_healthy)
-					to_chat(M, span_userdanger("[pick("Oh, your head...", "Your head pounds.", "They're everywhere! Run!", "Something in the shadows...")]"))
+					to_chat(M, span_userdanger("[pick("Ох, голова...", "Голова пульсирует.", "Они повсюду! Бегите!", "Что-то в тенях...")]"))
 				else
 					to_chat(M, span_notice("[pick(healthy_messages)]"))
 			M.adjust_hallucinations(90 SECONDS * power)

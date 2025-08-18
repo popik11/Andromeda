@@ -1,24 +1,24 @@
-// Cold
+// Простуда
 /datum/disease/advance/cold
 	copy_type = /datum/disease/advance
 
 /datum/disease/advance/cold/New()
-	name = "Cold"
+	name = "Простуда"
 	symptoms = list(new/datum/symptom/sneeze)
 	..()
 
-// Flu
+// Грипп
 /datum/disease/advance/flu
 	copy_type = /datum/disease/advance
 
 /datum/disease/advance/flu/New()
-	name = "Flu"
+	name = "Грипп"
 	symptoms = list(new/datum/symptom/cough)
 	..()
 
-//Randomly generated Disease, for virus crates and events
+// Случайно сгенерированная болезнь для ящиков с вирусами и событий
 /datum/disease/advance/random
-	name = "Experimental Disease"
+	name = "Экспериментальная Болезнь"
 	copy_type = /datum/disease/advance
 
 /datum/disease/advance/random/New(max_symptoms, max_level = 8)
@@ -29,7 +29,7 @@
 		var/datum/symptom/S = symptom
 		if(initial(S.level) > max_level)
 			continue
-		if(initial(S.level) <= 0) //unobtainable symptoms
+		if(initial(S.level) <= 0) //недоступные симптомы
 			continue
 		possible_symptoms += S
 	for(var/i in 1 to max_symptoms)
@@ -39,4 +39,4 @@
 			symptoms += S
 	Refresh()
 
-	name = "Sample #[rand(1,10000)]"
+	name = "Образец #[rand(1,10000)]"

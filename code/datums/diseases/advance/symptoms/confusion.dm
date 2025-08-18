@@ -7,9 +7,9 @@
  * Bonus: Makes the affected mob be confused for short periods of time.
  */
 /datum/symptom/confusion
-	name = "Confusion"
-	desc = "The virus interferes with the proper function of the neural system, leading to bouts of confusion and erratic movement."
-	illness = "Shattered Reality"
+	name = "Дезориентация"
+	desc = "Вирус нарушает нормальное функционирование нервной системы, вызывая приступы спутанности сознания и хаотичные движения."
+	illness = "Разбитая реальность"
 	stealth = 1
 	resistance = -1
 	stage_speed = -3
@@ -20,9 +20,9 @@
 	symptom_delay_min = 10
 	symptom_delay_max = 30
 	threshold_descs = list(
-		"Resistance 6" = "Causes brain damage over time.",
-		"Transmission 6" = "Increases confusion duration and strength.",
-		"Stealth 4" = "The symptom remains hidden until active.",
+		"Устойчивость 6" = "Постепенно вызывает повреждение мозга.",
+		"Заразность 6" = "Увеличивает продолжительность и силу дезориентации.",
+		"Скрытность 4" = "Симптом остаётся скрытым до активации.",
 	)
 	var/brain_damage = FALSE
 	var/causes_illiteracy = FALSE
@@ -52,9 +52,9 @@
 	switch(advanced_disease.stage)
 		if(1, 2, 3, 4)
 			if(prob(base_message_chance) && !suppress_warning)
-				to_chat(infected_mob, span_warning("[pick("Your head hurts.", "Your mind blanks for a moment.")]"))
+				to_chat(infected_mob, span_warning("[pick("Голова раскалывается.", "Сознание на мгновение уплывает.")]"))
 		else
-			to_chat(infected_mob, span_userdanger("You can't think straight!"))
+			to_chat(infected_mob, span_userdanger("Мысли путаются!"))
 			infected_mob.adjust_confusion_up_to(16 SECONDS * power, 30 SECONDS)
 			if(brain_damage)
 				infected_mob.adjustOrganLoss(ORGAN_SLOT_BRAIN, 3 * power, 80)
