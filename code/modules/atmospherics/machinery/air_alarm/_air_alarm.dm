@@ -101,6 +101,7 @@ GLOBAL_LIST_EMPTY_TYPED(air_alarms, /obj/machinery/airalarm)
 		set_panel_open(TRUE)
 
 	if(name == initial(name))
+		ru_names_rename(ru_names_toml("air alarm", suffix = " ([get_area_name(src)])", override_base = "[get_area_name(src)] Air Alarm"))
 		name = "[get_area_name(src)] Air Alarm"
 
 	tlv_collection = list()
@@ -181,6 +182,7 @@ GLOBAL_LIST_EMPTY_TYPED(air_alarms, /obj/machinery/airalarm)
 
 /obj/machinery/airalarm/update_name(updates)
 	. = ..()
+	ru_names_rename(ru_names_toml("air alarm", suffix = " ([get_area_name(my_area)])", override_base = "[get_area_name(my_area)] Air Alarm"))
 	name = "[get_area_name(my_area)] Air Alarm"
 
 /obj/machinery/airalarm/on_exit_area(datum/source, area/area_to_unregister)
@@ -267,17 +269,17 @@ GLOBAL_LIST_EMPTY_TYPED(air_alarms, /obj/machinery/airalarm)
 	data["envData"] = list()
 	if(connected_sensor)
 		data["envData"] += list(list(
-			"name" = "Linked area",
+			"name" = "Связанная область",
 			"value" = my_area.name
 		))
 	data["envData"] += list(list(
-		"name" = "Pressure",
-		"value" = "[round(pressure, 0.01)] kPa",
+		"name" = "Давление",
+		"value" = "[round(pressure, 0.01)] кПа",
 		"danger" = tlv_collection["pressure"].check_value(pressure)
 	))
 	data["envData"] += list(list(
-		"name" = "Temperature",
-		"value" = "[round(temp, 0.01)] Kelvin / [round(temp, 0.01) - T0C] Celcius",
+		"name" = "Температура",
+		"value" = "[round(temp, 0.01)] Келвин / [round(temp, 0.01) - T0C] Цельсия",
 		"danger" = tlv_collection["temperature"].check_value(temp),
 	))
 	if(total_moles)
@@ -286,7 +288,7 @@ GLOBAL_LIST_EMPTY_TYPED(air_alarms, /obj/machinery/airalarm)
 			var/portion = moles / total_moles
 			data["envData"] += list(list(
 				"name" = GLOB.meta_gas_info[gas_path][META_GAS_NAME],
-				"value" = "[round(moles, 0.01)] moles / [round(100 * portion, 0.01)] % / [round(portion * pressure, 0.01)] kPa",
+				"value" = "[round(moles, 0.01)] моль / [round(100 * portion, 0.01)] % / [round(portion * pressure, 0.01)] кПа",
 				"danger" = tlv_collection[gas_path].check_value(portion * pressure),
 			))
 
@@ -295,14 +297,14 @@ GLOBAL_LIST_EMPTY_TYPED(air_alarms, /obj/machinery/airalarm)
 		var/datum/tlv/tlv = tlv_collection[threshold]
 		var/list/singular_tlv = list()
 		if(threshold == "pressure")
-			singular_tlv["name"] = "Pressure"
-			singular_tlv["unit"] = "kPa"
+			singular_tlv["name"] = "Давление"
+			singular_tlv["unit"] = "кПа"
 		else if (threshold == "temperature")
-			singular_tlv["name"] = "Temperature"
-			singular_tlv["unit"] = "K"
+			singular_tlv["name"] = "Температура"
+			singular_tlv["unit"] = "К"
 		else
 			singular_tlv["name"] = GLOB.meta_gas_info[threshold][META_GAS_NAME]
-			singular_tlv["unit"] = "kPa"
+			singular_tlv["unit"] = "кПа"
 		singular_tlv["id"] = threshold
 		singular_tlv["warning_min"] = tlv.warning_min
 		singular_tlv["hazard_min"] = tlv.hazard_min
@@ -603,28 +605,28 @@ GLOBAL_LIST_EMPTY_TYPED(air_alarms, /obj/machinery/airalarm)
 		var/is_low_temp = tlv_collection["temperature"].hazard_min != TLV_VALUE_IGNORE && temp <= tlv_collection["temperature"].hazard_min
 
 		if(is_low_pressure && is_low_temp)
-			warning_message = "Danger! Low pressure and temperature detected."
+			warning_message = "Тревога! Обнаружено низкое давление и температура."
 			return
 		if(is_low_pressure && is_high_temp)
-			warning_message = "Danger! Low pressure and high temperature detected."
+			warning_message = "Тревога! Обнаружено низкое давление и высокая температура."
 			return
 		if(is_high_pressure && is_high_temp)
-			warning_message = "Danger! High pressure and temperature detected."
+			warning_message = "Тревога! Обнаружены высокое давление и высокая температура."
 			return
 		if(is_high_pressure && is_low_temp)
-			warning_message = "Danger! High pressure and low temperature detected."
+			warning_message = "Тревога! Обнаружено высокое давление и низкая температура."
 			return
 		if(is_low_pressure)
-			warning_message = "Danger! Low pressure detected."
+			warning_message = "Тревога! Обнаружено низкое давление."
 			return
 		if(is_high_pressure)
-			warning_message = "Danger! High pressure detected."
+			warning_message = "Тревога! Обнаружено высокое давление."
 			return
 		if(is_low_temp)
-			warning_message = "Danger! Low temperature detected."
+			warning_message = "Тревога! Обнаружена низкая температура."
 			return
 		if(is_high_temp)
-			warning_message = "Danger! High temperature detected."
+			warning_message = "Тревога! Обнаружена высокая температура."
 			return
 		else
 			warning_message = null

@@ -563,6 +563,7 @@ Possible to do for anyone motivated enough:
 		hologram.layer = FLY_LAYER //Above all the other objects/mobs. Or the vast majority of them.
 		SET_PLANE_EXPLICIT(hologram, ABOVE_GAME_PLANE, src)
 		hologram.set_anchored(TRUE)//So space wind cannot drag it.
+		hologram.ru_names_rename(ru_names_toml("hologram", suffix = " [user.declent_ru(GENITIVE)]", override_base = "[user.name] (Hologram)"))
 		hologram.name = "[user.name] (Hologram)"//If someone decides to right click.
 		set_holo(user, hologram)
 
@@ -796,7 +797,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 		return
 	//make this command so you can have multiple languages in single record
 	if((!disk.record.caller_name || disk.record.caller_name == "Unknown") && istype(speaker))
-		disk.record.caller_name = speaker.name
+		disk.record.caller_name = speaker.declent_ru(GENITIVE)
 	if(!disk.record.language)
 		disk.record.language = language
 	else if(language != disk.record.language)

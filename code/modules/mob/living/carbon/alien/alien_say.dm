@@ -8,7 +8,7 @@
 	var/hivemind_spans = "alien"
 	if(big_voice)
 		hivemind_spans += " big"
-	var/rendered = "<i><span class='[hivemind_spans]'>Hivemind, [span_name("[shown_name]")] <span class='message'>[message_a]</span></span></i>"
+	var/rendered = "<i><span class='[hivemind_spans]'>Связь улья, [span_name("[shown_name]")] <span class='message'>[message_a]</span></span></i>"
 	for(var/mob/player in GLOB.player_list)
 		if(!player.stat && player.hivecheck())
 			to_chat(player, rendered, type = MESSAGE_TYPE_RADIO, avoid_highlighting = player == src)
@@ -16,8 +16,8 @@
 			var/link = FOLLOW_LINK(player, src)
 			to_chat(player, "[link] [rendered]", type = MESSAGE_TYPE_RADIO)
 
-/mob/living/carbon/alien/adult/royal/queen/alien_talk(message, list/spans = list(), list/message_mods = list(), shown_name = name, big_voice = TRUE)
-	..(message, spans, message_mods, shown_name, TRUE)
+/mob/living/carbon/alien/adult/royal/queen/alien_talk(message, shown_name = declent_ru(NOMINATIVE))
+	..(message, shown_name, TRUE)
 
 /mob/living/carbon/hivecheck()
 	var/obj/item/organ/alien/hivenode/N = get_organ_by_type(/obj/item/organ/alien/hivenode)

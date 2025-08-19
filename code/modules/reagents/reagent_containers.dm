@@ -85,9 +85,9 @@
 	. = ..()
 	if(has_variable_transfer_amount)
 		if(possible_transfer_amounts.len > 1)
-			. += span_notice("Left-click or right-click in-hand to increase or decrease its transfer amount. It is currently set to [amount_per_transfer_from_this] units.")
+			. += span_notice("Кликни ЛКМ или ПКМ в руке, чтобы увеличить или уменьшить объём переноса. Сейчас установлено на [amount_per_transfer_from_this] юнитов.")
 		else if(possible_transfer_amounts.len)
-			. += span_notice("Left-click or right-click in-hand to view its transfer amount.")
+			. += span_notice("Кликни ЛКМ или ПКМ в руке, чтобы посмотреть объём переноса.")
 	if(isliving(user) && HAS_TRAIT(user, TRAIT_REMOTE_TASTING))
 		var/mob/living/living_user = user
 		living_user.taste_container(reagents)

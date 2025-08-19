@@ -39,7 +39,7 @@
 	SIGNAL_HANDLER
 
 	if(item.force >= 5 || item.throwforce >= 5 || item.override_notes || item.offensive_notes || attached_proc) /// Only show this tag for items that could feasibly be weapons, shields, or those that have special notes
-		examine_texts += span_notice("<a href='byond://?src=[REF(item)];examine=1'>See combat information.</a>")
+		examine_texts += span_notice("<a href='byond://?src=[REF(item)];examine=1'>Смотреть боевую информацию.</a>")
 
 /**
  *
@@ -69,26 +69,26 @@
  *  * source - The object whose stats are being examined
  */
 /datum/element/weapon_description/proc/build_label_text(obj/item/source)
-	var/list/readout = list() // Readout is used to store the text block output to the user so it all can be sent in one message
+	var/list/readout = list() // readout хранит текст для вывода игроку одним сообщением
 
-	// Doesn't show the base notes for items that have the override notes variable set to true
+	// Не показывать стандартные заметки для предметов с override_notes
 	if(!source.override_notes)
 		if (source.get_sharpness() & SHARP_EDGED)
-			readout += "It's sharp and could cause bleeding wounds."
+			readout += "Оно острое и может наносить режущие раны."
 		if (source.get_sharpness() & SHARP_POINTY)
-			readout += "It's pointy and could cause piercing wounds."
-		// Make sure not to divide by 0 on accident
+			readout += "Оно колющее и может наносить проникающие раны."
+		// Чтобы случайно не делить на 0
 		if(source.force > 0)
-			readout += "It takes about [span_warning("[HITS_TO_CRIT(source.force)] melee hit\s")] to take down an enemy."
+			readout += "Потребуется примерно [span_warning("[HITS_TO_CRIT(source.force)] ударов")] в ближнем бою, чтобы вывести врага из строя."
 		else
-			readout += "It does not deal noticeable melee damage."
+			readout += "Оно не наносит заметного урона в ближнем бою."
 
 		if(source.throwforce > 0)
-			readout += "It takes about [span_warning("[HITS_TO_CRIT(source.throwforce)] throwing hit\s")] to take down an enemy."
+			readout += "Потребуется примерно [span_warning("[HITS_TO_CRIT(source.throwforce)] бросков")], чтобы вывести врага из строя."
 		else
-			readout += "It does not deal noticeable throwing damage."
+			readout += "Оно не наносит заметного урона при броске."
 		if(source.armour_penetration > 0 || source.block_chance > 0)
-			readout += "It has [span_warning("[weapon_tag_convert(source.armour_penetration)]")] armor-piercing capability and [span_warning("[weapon_tag_convert(source.block_chance)]")] blocking capability."
+			readout += "Имеет [span_warning("[weapon_tag_convert(source.armour_penetration)]")] пробитие брони и [span_warning("[weapon_tag_convert(source.block_chance)]")] шанс блока."
 	// Custom manual notes
 	if(source.offensive_notes)
 		readout += source.offensive_notes

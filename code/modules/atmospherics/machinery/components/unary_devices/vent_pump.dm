@@ -316,6 +316,7 @@
 	. = ..()
 	if(override_naming)
 		return
+	ru_names_rename(ru_names_toml(src::name, suffix = " ([get_area_name(src)]) - (ID:[id_tag])", override_base = "\proper [get_area_name(src)] [name] [id_tag]"))
 	name = "\proper [get_area_name(src)] [name] [id_tag]"
 
 /obj/machinery/atmospherics/components/unary/vent_pump/welder_act(mob/living/user, obj/item/welder)

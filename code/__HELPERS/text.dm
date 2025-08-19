@@ -1178,17 +1178,17 @@ GLOBAL_LIST_INIT(binary, list("0","1"))
 /proc/weight_class_to_text(w_class)
 	switch(w_class)
 		if(WEIGHT_CLASS_TINY)
-			. = "tiny"
+			. = "крохотного размера"
 		if(WEIGHT_CLASS_SMALL)
-			. = "small"
+			. = "маленького размера"
 		if(WEIGHT_CLASS_NORMAL)
-			. = "normal-sized"
+			. = "обычного размера"
 		if(WEIGHT_CLASS_BULKY)
-			. = "bulky"
+			. = "громоздкого размера"
 		if(WEIGHT_CLASS_HUGE)
-			. = "huge"
+			. = "огромного размера"
 		if(WEIGHT_CLASS_GIGANTIC)
-			. = "gigantic"
+			. = "гигантского размера"
 		else
 			. = ""
 

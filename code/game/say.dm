@@ -1,7 +1,7 @@
 /*
 Miauw's big Say() rewrite.
 This file has the basic atom/movable level speech procs.
-And the base of the send_speech() proc, which is the core of saycode.
+And the base of the send_speech() proc, which is the core of saycode. /// Rewokin заметка: для себя, а то потеряю этот файл и не буду знать где свои частоты сделать.
 */
 GLOBAL_LIST_INIT(freqtospan, list(
 	"[FREQ_COMMON]" = "radio",
@@ -179,7 +179,7 @@ GLOBAL_LIST_INIT(freqtospan, list(
 	var/messagepart = speaker.generate_messagepart(raw_message, spans, message_mods)
 	messagepart = " <span class='message'>[messagepart]</span></span>"
 
-	return "[spanpart1][spanpart2][freqpart][languageicon][compose_track_href(speaker, namepart)][namepart][compose_job(speaker, message_language, raw_message, radio_freq)][endspanpart][messagepart]"
+	return "[spanpart1][spanpart2][freqpart][languageicon][compose_track_href(speaker, namepart)]["<span style='color: [speaker.chat_color]'>[namepart]</span>"][compose_job(speaker, message_language, raw_message, radio_freq)][endspanpart][messagepart]"
 
 /atom/movable/proc/compose_track_href(atom/movable/speaker, message_langs, raw_message, radio_freq)
 	return ""
@@ -214,7 +214,7 @@ GLOBAL_LIST_INIT(freqtospan, list(
  * like human_say.dm's tongue-based verb_say changes.
  */
 /atom/movable/proc/get_default_say_verb()
-	return verb_say
+	return ru_say_verb(verb_say)
 
 /**
  * This proc is used to generate the 'message' part of a chat message.
@@ -334,7 +334,7 @@ GLOBAL_LIST_INIT(freqtospan, list(
 	return "0"
 
 /atom/proc/GetVoice()
-	return "[src]" //Returns the atom's name, prepended with 'The' if it's not a proper noun
+	return "[capitalize(declent_ru(NOMINATIVE))]" //Returns the atom's name, prepended with 'The' if it's not a proper noun
 
 //HACKY VIRTUALSPEAKER STUFF BEYOND THIS POINT
 //these exist mostly to deal with the AIs hrefs and job stuff.

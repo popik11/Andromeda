@@ -152,7 +152,7 @@
 	///fontawesome icon name to use in to display the user's balance in the vendor UI
 	var/displayed_currency_icon = "coins"
 	///String of the used currency to display in the vendor UI
-	var/displayed_currency_name = " cr"
+	var/displayed_currency_name = " кр"
 	///Whether our age check is currently functional
 	var/age_restrictions = TRUE
 	/// How many credits does this vending machine have? 20% of all sales go to this pool, and are given freely when the machine is restocked, or successfully tilted. Lost on deconstruction.
@@ -309,27 +309,27 @@
 /obj/machinery/vending/add_context(atom/source, list/context, obj/item/held_item, mob/user)
 	. = NONE
 	if(tilted && !held_item)
-		context[SCREENTIP_CONTEXT_LMB] = "Right machine"
+		context[SCREENTIP_CONTEXT_LMB] = "Выровнять аппарат"
 		return CONTEXTUAL_SCREENTIP_SET
 
 	if(held_item?.tool_behaviour == TOOL_SCREWDRIVER)
-		context[SCREENTIP_CONTEXT_LMB] = "[panel_open ? "Close" : "Open"] Panel"
+		context[SCREENTIP_CONTEXT_LMB] = "[panel_open ? "Закрыть" : "Открыть"] панель"
 		return CONTEXTUAL_SCREENTIP_SET
 
 	if(panel_open && held_item?.tool_behaviour == TOOL_WRENCH)
-		context[SCREENTIP_CONTEXT_LMB] = anchored ? "Unsecure" : "Secure"
+		context[SCREENTIP_CONTEXT_LMB] = anchored ? "Открепить" : "Закрепить"
 		return CONTEXTUAL_SCREENTIP_SET
 
 	if(panel_open && held_item?.tool_behaviour == TOOL_CROWBAR)
-		context[SCREENTIP_CONTEXT_LMB] = "Deconstruct"
+		context[SCREENTIP_CONTEXT_LMB] = "Разобрать"
 		return CONTEXTUAL_SCREENTIP_SET
 
 	if(!isnull(held_item) && canLoadItem(held_item, user, send_message = FALSE))
-		context[SCREENTIP_CONTEXT_LMB] = "Load item"
+		context[SCREENTIP_CONTEXT_LMB] = "Загрузить предмет"
 		return CONTEXTUAL_SCREENTIP_SET
 
 	if(panel_open && istype(held_item, refill_canister))
-		context[SCREENTIP_CONTEXT_LMB] = "Restock vending machine[credits_contained ? " and collect credits" : null]"
+		context[SCREENTIP_CONTEXT_LMB] = "Пополнить запасы[credits_contained ? " и собрать кредиты" : null]"
 		return CONTEXTUAL_SCREENTIP_SET
 
 /**
@@ -356,22 +356,22 @@
 /obj/machinery/vending/examine(mob/user)
 	. = ..()
 	if(isnull(refill_canister))
-		return // you can add the comment here instead
+		return // здесь можно добавить комментарий
 
-	. += span_notice("Its maintainence panel can be [EXAMINE_HINT("screwed")] [panel_open ? "closed" : "open"]")
+	. += span_notice("Его сервисная панель может быть [EXAMINE_HINT("отвинчена")] [panel_open ? "закрыта" : "открыта"]")
 	if(panel_open)
-		. += span_notice("The machine may be [EXAMINE_HINT("pried")] apart.")
+		. += span_notice("Аппарат можно [EXAMINE_HINT("вскрыть")].")
 
 	var/list/total_stock = total_stock()
 	if(total_stock[2])
 		if(total_stock[1] < total_stock[2])
-			. += span_notice("\The [src] can be restocked with [span_boldnotice("\a [initial(refill_canister.machine_name)] [initial(refill_canister.name)]")] with the panel open.")
+			. += span_notice("[src] можно пополнить с помощью [span_boldnotice("[initial(refill_canister.machine_name)] [initial(refill_canister.name)]")] при открытой панели.")
 		else
-			. += span_notice("\The [src] is fully stocked.")
+			. += span_notice("[src] полностью заполнен.")
 	if(credits_contained < CREDITS_DUMP_THRESHOLD && credits_contained > 0)
-		. += span_notice("It should have a handfull of credits stored based on the missing items.")
+		. += span_notice("Судя по недостающим предметам, внутри должно быть немного кредитов.")
 	else if (credits_contained > PAYCHECK_CREW)
-		. += span_notice("It should have at least a full paycheck worth of credits inside!")
+		. += span_notice("Там должно быть кредитов как минимум на полную зарплату!")
 
 /obj/machinery/vending/update_appearance(updates = ALL)
 	. = ..()
@@ -418,7 +418,7 @@
 	if(obj_flags & EMAGGED)
 		return FALSE
 	obj_flags |= EMAGGED
-	balloon_alert(user, "product lock disabled")
+	balloon_alert(user, "защита товаров отключена")
 	return TRUE
 
 
@@ -464,14 +464,14 @@
 	say(message)
 
 /datum/aas_config_entry/vendomat_age_control
-	name = "Security Alert: Underaged Substance Abuse"
+	name = "Оповещение СБ: Несовершеннолетний и вещества"
 	announcement_lines_map = list(
-		"Message" = "SECURITY ALERT: Underaged crewmember %PERSON recorded attempting to purchase %PRODUCT in %LOCATION by %VENDOR. Please watch for substance abuse."
+		"Message" = "ТРЕВОГА СБ: Несовершеннолетний член экипажа %PERSON зафиксирован при попытке покупки %PRODUCT в %LOCATION через %VENDOR. Рекомендуется проверить на злоупотребление веществами."
 	)
 	vars_and_tooltips_map = list(
-		"PERSON" = "will be replaced with the name of the crewmember",
-		"PRODUCT" = "with the product, he attempted to purchase",
-		"LOCATION" = "with place of purchase",
-		"VENDOR" = "with the vending machine"
+		"PERSON" = "будет заменено именем члена экипажа",
+		"PRODUCT" = "названием товара, который пытались купить",
+		"LOCATION" = "местом покупки",
+		"VENDOR" = "названием торгового автомата"
 	)
 //=============================================================================
