@@ -36,13 +36,13 @@
 /area/misc/testroom
 	requires_power = FALSE
 	default_gravity = STANDARD_GRAVITY
-	// Mobs should be able to see inside the testroom
+	// Мобы должны видеть внутри тестовой комнаты
 	static_lighting = FALSE
 	base_lighting_alpha = 255
-	name = "Test Room"
+	name = "Тестовая комната"
 	icon_state = "test_room"
 
 /area/misc/testroom/gateway_room
-	name = "Gateway Room"
+	name = "Комната врат"
 	icon = 'icons/area/areas_station.dmi'
 	icon_state = "gateway"

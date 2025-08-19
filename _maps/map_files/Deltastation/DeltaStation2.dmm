@@ -4372,6 +4372,13 @@
 	},
 /turf/open/floor/iron,
 /area/station/maintenance/department/chapel)
+"bdh" = (
+/obj/structure/lattice,
+/obj/item/reagent_containers/cup/glass/bottle/beer{
+	name = "топливо ревокина"
+	},
+/turf/open/space/basic,
+/area/space/nearstation)
 "bdn" = (
 /obj/structure/table,
 /obj/effect/turf_decal/trimline/neutral/filled/corner{
@@ -92817,6 +92824,9 @@
 	},
 /turf/open/floor/carpet/green,
 /area/station/service/library)
+"wVS" = (
+/turf/open/space/basic,
+/area/awaymission)
 "wVU" = (
 /obj/structure/cable,
 /obj/effect/spawner/structure/window/reinforced,
@@ -135766,7 +135776,7 @@ jDi
 hup
 iyy
 qYo
-qYo
+bdh
 oCs
 dmq
 xaP
@@ -138336,7 +138346,7 @@ jDi
 hup
 iyy
 qYo
-qYo
+bdh
 oCs
 hHQ
 uJm
@@ -159160,7 +159170,7 @@ aaa
 aaa
 aaa
 aaa
-aaa
+wVS
 aaa
 aaa
 aaa
@@ -159425,7 +159435,7 @@ aaa
 aaa
 aaa
 aaa
-aaa
+wVS
 aaa
 aaa
 aaa

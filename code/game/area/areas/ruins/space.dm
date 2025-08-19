@@ -27,215 +27,212 @@
 	sound_environment = SOUND_AREA_SPACE
 
 /area/ruin/space/way_home
-	name = "\improper Salvation"
+	name = "\improper Спасение"
 	always_unpowered = FALSE
 
-// Ruins of "onehalf" ship
+// Руины корабля "onehalf"
 
 /area/ruin/space/has_grav/onehalf/hallway
-	name = "\improper Half-Station Hallway"
+	name = "\improper Коридор Полустанции"
 
 /area/ruin/space/has_grav/onehalf/drone_bay
-	name = "\improper Mining Drone Bay"
+	name = "\improper Ангар Дронов"
 
 /area/ruin/space/has_grav/onehalf/dorms_med
-	name = "\improper Crew Quarters"
+	name = "\improper Жилые помещения"
 
 /area/ruin/space/has_grav/onehalf/bridge
-	name = "\improper Half-Station Bridge"
+	name = "\improper Мостик Полустанции"
 
 /area/ruin/space/has_grav/powered/dinner_for_two
-	name = "Dinner for Two"
+	name = "Ужин на двоих"
 
 /area/ruin/space/has_grav/powered/cat_man
-	name = "\improper Kitty Den"
+	name = "\improper Кошачье логово"
 
 /area/ruin/space/has_grav/powered/authorship
-	name = "\improper Authorship"
+	name = "\improper Авторство"
 
 /area/ruin/space/has_grav/powered/aesthetic
-	name = "Aesthetic"
+	name = "Эстетика"
 	ambientsounds = list('sound/ambience/misc/ambivapor1.ogg')
 
 
-//Ruin of Hotel
+//Руины Отеля
 
 /area/ruin/space/has_grav/hotel
-	name = "\improper Hotel"
+	name = "\improper Отель"
 
 /area/ruin/space/has_grav/hotel/guestroom
-	name = "\improper Hotel Guest Room"
+	name = "\improper Гостевой Номер Отеля"
 
 /area/ruin/space/has_grav/hotel/guestroom/room_1
-	name = "\improper Hotel Guest Room 1"
+	name = "\improper Гостевой Номер 1"
 
 /area/ruin/space/has_grav/hotel/guestroom/room_2
-	name = "\improper Hotel Guest Room 2"
+	name = "\improper Гостевой Номер 2"
 
 /area/ruin/space/has_grav/hotel/guestroom/room_3
-	name = "\improper Hotel Guest Room 3"
+	name = "\improper Гостевой Номер 3"
 
 /area/ruin/space/has_grav/hotel/guestroom/room_4
-	name = "\improper Hotel Guest Room 4"
+	name = "\improper Гостевой Номер 4"
 
 /area/ruin/space/has_grav/hotel/guestroom/room_5
-	name = "\improper Hotel Guest Room 5"
+	name = "\improper Гостевой Номер 5"
 
 /area/ruin/space/has_grav/hotel/guestroom/room_6
-	name = "\improper Hotel Guest Room 6"
+	name = "\improper Гостевой Номер 6"
 
 /area/ruin/space/has_grav/hotel/security
-	name = "\improper Hotel Security Post"
+	name = "\improper Пост Охраны Отеля"
 
 /area/ruin/space/has_grav/hotel/pool
-	name = "\improper Hotel Pool Room"
+	name = "\improper Бассейн Отеля"
 
 /area/ruin/space/has_grav/hotel/bar
-	name = "\improper Hotel Bar"
+	name = "\improper Бар Отеля"
 
 /area/ruin/space/has_grav/hotel/power
-	name = "\improper Hotel Power Room"
+	name = "\improper Генераторная Отеля"
 
 /area/ruin/space/has_grav/hotel/custodial
-	name = "\improper Hotel Custodial Closet"
+	name = "\improper Хозяйственная Комната Отеля"
 
 /area/ruin/space/has_grav/hotel/shuttle
-	name = "\improper Hotel Shuttle"
+	name = "\improper Шаттл Отеля"
 	requires_power = FALSE
 
 /area/ruin/space/has_grav/hotel/dock
-	name = "\improper Hotel Shuttle Dock"
+	name = "\improper Док Шаттла Отеля"
 
 /area/ruin/space/has_grav/hotel/workroom
-	name = "\improper Hotel Staff Room"
+	name = "\improper Комната Персонала"
 
 /area/ruin/space/has_grav/hotel/storeroom
-	name = "\improper Hotel Staff Storage"
+	name = "\improper Склад Персонала"
 
-//Ruin of Derelict Oupost
+//Руины Заброшенного Аванпоста
 
 /area/ruin/space/has_grav/derelictoutpost
-	name = "\improper Derelict Outpost"
+	name = "\improper Заброшенный Аванпост"
 
 /area/ruin/space/has_grav/derelictoutpost/cargostorage
-	name = "\improper Derelict Outpost Cargo Storage"
+	name = "\improper Склад Грузов Аванпоста"
 
 /area/ruin/space/has_grav/derelictoutpost/cargobay
-	name = "\improper Derelict Outpost Cargo Bay"
+	name = "\improper Грузовой Отсек Аванпоста"
 
 /area/ruin/space/has_grav/derelictoutpost/powerstorage
-	name = "\improper Derelict Outpost Power Storage"
+	name = "\improper Энергохранилище Аванпоста"
 
 /area/ruin/space/has_grav/derelictoutpost/dockedship
-	name = "\improper Derelict Outpost Docked Ship"
+	name = "\improper Пристыкованный Корабль"
 
-//Ruin of turretedoutpost
+//Руины Турельного Аванпоста
 
 /area/ruin/space/has_grav/turretedoutpost
-	name = "\improper Turreted Outpost"
+	name = "\improper Турельный Аванпост"
 
-
-//Ruin of old teleporter
+//Руины Старого Телепорта
 
 /area/ruin/space/oldteleporter
-	name = "\improper Old Teleporter"
+	name = "\improper Старый Телепорт"
 
-
-//Ruin of mech transport
+//Руины Транспорта Мехов
 
 /area/ruin/space/has_grav/powered/mechtransport
-	name = "\improper Mech Transport"
+	name = "\improper Транспорт Мехов"
 
-
-//Ruin of The Lizard's Gas (Station)
+//Руины Газ Ящера (Станция)
 
 /area/ruin/space/has_grav/thelizardsgas
-	name = "\improper The Lizard's Gas"
+	name = "\improper Газ Ящера"
 
 
-//Ruin of Deep Storage
+//Руины Глубокого Хранилища
 
 /area/ruin/space/has_grav/deepstorage
-	name = "Deep Storage"
+	name = "Глубокое Хранилище"
 
 /area/ruin/space/has_grav/deepstorage/airlock
-	name = "\improper Deep Storage Airlock"
+	name = "\improper Шлюз Глубокого Хранилища"
 
 /area/ruin/space/has_grav/deepstorage/power
-	name = "\improper Deep Storage Power and Atmospherics Room"
+	name = "\improper Энергетический и Атмосферный Отсек"
 
 /area/ruin/space/has_grav/deepstorage/hydroponics
-	name = "Deep Storage Hydroponics"
+	name = "Гидропоника Хранилища"
 
 /area/ruin/space/has_grav/deepstorage/armory
-	name = "\improper Deep Storage Secure Storage"
+	name = "\improper Оружейная Хранилища"
 
 /area/ruin/space/has_grav/deepstorage/storage
-	name = "\improper Deep Storage Storage"
+	name = "\improper Склад Хранилища"
 
 /area/ruin/space/has_grav/deepstorage/dorm
-	name = "\improper Deep Storage Dormitory"
+	name = "\improper Жилые Помещения"
 
 /area/ruin/space/has_grav/deepstorage/kitchen
-	name = "\improper Deep Storage Kitchen"
+	name = "\improper Кухня Хранилища"
 
 /area/ruin/space/has_grav/deepstorage/crusher
-	name = "\improper Deep Storage Recycler"
+	name = "\improper Утилизатор Хранилища"
 
 /area/ruin/space/has_grav/deepstorage/pharmacy
-	name = "\improper Deep Storage Pharmacy"
+	name = "\improper Аптека Хранилища"
 
-//Ruin of Abandoned Zoo
+//Руины Заброшенного Зоопарка
 
 /area/ruin/space/has_grav/abandonedzoo
-	name = "\improper Abandoned Zoo"
+	name = "\improper Заброшенный Зоопарк"
 
-//Ruin of Dangerous Research
+//Руины Опасных Исследований
 
 /area/ruin/space/has_grav/dangerous_research
-	name = "\improper ASRC Lobby"
+	name = "\improper Лобби ASRC"
 
 /area/ruin/space/has_grav/dangerous_research/medical
-	name = "\improper ASRC Medical Facilities"
+	name = "\improper Медблок ASRC"
 
 /area/ruin/space/has_grav/dangerous_research/dorms
-	name = "\improper ASRC Dorms"
+	name = "\improper Жилые Отсеки ASRC"
 
 /area/ruin/space/has_grav/dangerous_research/lab
-	name = "\improper ASRC Laboratory"
+	name = "\improper Лаборатория ASRC"
 
 /area/ruin/space/has_grav/dangerous_research/maint
-	name = "\improper ASRC Maintenance"
+	name = "\improper Техтоннели ASRC"
 
-//Interdyne Ruin
+//Руины Interdyne
 
 /area/ruin/space/has_grav/interdyne
-	name = "\improper Interdyne Research Base"
+	name = "\improper Исследовательская база Interdyne"
 
-//Ruin of Crashed Ship
+//Руины Разбитого Корабля
 
 /area/ruin/space/has_grav/crashedship/aft
-	name = "\improper Crashed Ship's Aft"
+	name = "\improper Кормовая часть корабля"
 
 /area/ruin/space/has_grav/crashedship/midship
-	name = "\improper Crashed Ship's Midship"
+	name = "\improper Центральная часть корабля"
 
 /area/ruin/space/has_grav/crashedship/fore
-	name = "\improper Crashed Ship's Fore"
+	name = "\improper Носовая часть корабля"
 
 /area/ruin/space/has_grav/crashedship/big_asteroid
-	name = "\improper Asteroid"
+	name = "\improper Астероид"
 
 /area/ruin/space/has_grav/crashedship/small_asteroid
-	name = "\improper Asteroid"
+	name = "\improper Астероид"
 
-//Ruin of ancient Space Station (OldStation)
+//Руины Древней Космической Станции (OldStation)
 
 /area/ruin/space/ancientstation
 	icon_state = "oldstation"
 
 /area/ruin/space/ancientstation/powered
-	name = "Powered Tile"
+	name = "Энергопитаемая зона"
 	icon_state = "teleporter"
 	requires_power = FALSE
 
@@ -243,456 +240,454 @@
 	icon_state = "betastation"
 
 /area/ruin/space/ancientstation/beta/atmos
-	name = "Beta Station Atmospherics"
+	name = "Атмосфера станции Бета"
 	icon_state = "os_beta_atmos"
 	ambience_index = AMBIENCE_ENGI
 
 /area/ruin/space/ancientstation/beta/supermatter
-	name = "Beta Station Supermatter chamber"
+	name = "Камера суперматерии станции Бета"
 	icon_state = "os_beta_engine"
 
 /area/ruin/space/ancientstation/beta/hall
-	name = "Beta Station Main Corridor"
+	name = "Главный коридор станции Бета"
 	icon_state = "os_beta_hall"
 
 /area/ruin/space/ancientstation/beta/gravity
-	name = "Beta Station Gravity Generator"
+	name = "Генератор гравитации станции Бета"
 	icon_state = "os_beta_gravity"
 
 /area/ruin/space/ancientstation/beta/mining
-	name = "Beta Station Mining Equipment"
+	name = "Шахтерское оборудование станции Бета"
 	icon_state = "os_beta_mining"
 	ambience_index = AMBIENCE_MINING
 
 /area/ruin/space/ancientstation/beta/medbay
-	name = "Beta Station Medbay"
+	name = "Медблок станции Бета"
 	icon_state = "os_beta_medbay"
 	ambience_index = AMBIENCE_MEDICAL
 
 /area/ruin/space/ancientstation/beta/storage
-	name = "\improper Beta Station Storage"
+	name = "\improper Хранилище станции Бета"
 	icon_state = "os_beta_storage"
 
 /area/ruin/space/ancientstation/charlie
 	icon_state = "charliestation"
 
 /area/ruin/space/ancientstation/charlie/hall
-	name = "Charlie Station Main Corridor"
+	name = "Главный коридор станции Чарли"
 	icon_state = "os_charlie_hall"
 
 /area/ruin/space/ancientstation/charlie/engie
-	name = "Charlie Station Engineering"
+	name = "Инженерный отсек станции Чарли"
 	icon_state = "os_charlie_engine"
 	ambience_index = AMBIENCE_ENGI
 
 /area/ruin/space/ancientstation/charlie/bridge
-	name = "Charlie Station Command"
+	name = "Командный мостик станции Чарли"
 	icon_state = "os_charlie_bridge"
 
 /area/ruin/space/ancientstation/charlie/hydro
-	name = "Charlie Station Hydroponics"
+	name = "Гидропоника станции Чарли"
 	icon_state = "os_charlie_hydro"
 
 /area/ruin/space/ancientstation/charlie/kitchen
-	name = "\improper Charlie Station Kitchen"
+	name = "\improper Кухня станции Чарли"
 	icon_state = "os_charlie_kitchen"
 
 /area/ruin/space/ancientstation/charlie/sec
-	name = "Charlie Station Security"
+	name = "Служба безопасности станции Чарли"
 	icon_state = "os_charlie_sec"
 
 /area/ruin/space/ancientstation/charlie/dorms
-	name = "Charlie Station Dorms"
+	name = "Жилые помещения станции Чарли"
 	icon_state = "os_charlie_dorms"
 
 /area/ruin/space/solars/ancientstation/charlie/solars
-	name = "\improper Charlie Station Solar Array"
-	icon = 'icons/area/areas_ruins.dmi' // Solars inheriet areas_misc.dmi, not areas_ruin.dmi
+	name = "\improper Солнечные панели станции Чарли"
+	icon = 'icons/area/areas_ruins.dmi'
 	icon_state = "os_charlie_solars"
 	requires_power = FALSE
 	area_flags = UNIQUE_AREA
 	sound_environment = SOUND_AREA_SPACE
 
 /area/ruin/space/ancientstation/charlie/storage
-	name = "Charlie Station Storage"
+	name = "Хранилище станции Чарли"
 	icon_state = "os_charlie_storage"
 
 /area/ruin/space/ancientstation/delta
 	icon_state = "deltastation"
 
 /area/ruin/space/ancientstation/delta/hall
-	name = "Delta Station Main Corridor"
+	name = "Главный коридор станции Дельта"
 	icon_state = "os_delta_hall"
 
 /area/ruin/space/ancientstation/delta/proto
-	name = "\improper Delta Station Prototype Lab"
+	name = "\improper Лаборатория прототипов станции Дельта"
 	icon_state = "os_delta_protolab"
 
 /area/ruin/space/ancientstation/delta/rnd
-	name = "Delta Station Research and Development"
+	name = "Исследовательский отдел станции Дельта"
 	icon_state = "os_delta_rnd"
 
 /area/ruin/space/ancientstation/delta/ai
-	name = "\improper Delta Station AI Core"
+	name = "\improper Ядро ИИ станции Дельта"
 	icon_state = "os_delta_ai"
 	ambientsounds = list('sound/ambience/misc/ambimalf.ogg', 'sound/ambience/engineering/ambitech.ogg', 'sound/ambience/engineering/ambitech2.ogg', 'sound/ambience/engineering/ambiatmos.ogg', 'sound/ambience/engineering/ambiatmos2.ogg')
 
 /area/ruin/space/ancientstation/delta/storage
-	name = "\improper Delta Station Storage"
+	name = "\improper Хранилище станции Дельта"
 	icon_state = "os_delta_storage"
 
 /area/ruin/space/ancientstation/delta/biolab
-	name = "Delta Station Biolab"
+	name = "Биолаборатория станции Дельта"
 	icon_state = "os_delta_biolab"
 
-//KC13, aka TheDerelict.dmm
+//KC13, также известный как TheDerelict.dmm
 
 /area/ruin/space/ks13
-	name = "\improper Derelict Station 13"
+	name = "\improper Заброшенная Станция 13"
 	icon_state = "ks13"
 
-// Area define for organization
+// Области для организации
 /area/ruin/space/ks13/hallway
 
 /area/ruin/space/ks13/hallway/central
-	name = "\improper Derelict Central Hallway"
+	name = "\improper Центральный коридор станции"
 	icon_state = "ks13_cent_hall"
 
 /area/ruin/space/ks13/hallway/aft
-	name = "\improper Derelict Aft Hallway"
+	name = "\improper Южный коридор станции"
 	icon_state = "ks13_aft_hall"
 
 /area/ruin/space/ks13/hallway/starboard_bow
-	name = "\improper Derelict Starboard Bow Hallway"
+	name = "\improper Восточный северный коридор"
 	icon_state = "ks13_sb_bow_hall"
 
-// Area define for organization
+// Инженерные помещения
 /area/ruin/space/ks13/engineering
 
 /area/ruin/space/ks13/engineering/supermatter
-	name = "\improper Derelict Supermatter Engine"
+	name = "\improper Суперматериальный двигатель"
 	icon_state = "ks13_supermatter"
 
 /area/ruin/space/ks13/engineering/atmos
-	name = "\improper Derelict Atmospherics"
+	name = "\improper Атмосферный отсек"
 	icon_state = "ks13_atmos"
 
 /area/ruin/space/ks13/engineering/secure_storage
-	name = "\improper Derelict Secure Storage"
+	name = "\improper Защищенное хранилище"
 	icon_state = "ks13_secure_storage"
 
 /area/ruin/space/ks13/engineering/tech_storage
-	name = "\improper Derelict Tech Storage"
+	name = "\improper Техническое хранилище"
 	icon_state = "ks13_tech_storage"
 
 /area/ruin/space/ks13/engineering/aux_storage
-	name = "\improper Derelict Aux Storage"
+	name = "\improper Вспомогательное хранилище"
 	icon_state = "ks13_aux_storage"
 
 /area/ruin/space/ks13/engineering/grav_gen
-	name = "\improper Derelict Gravity Generator"
+	name = "\improper Генератор гравитации"
 	icon_state = "ks13_grav_gen"
 
 /area/ruin/space/ks13/engineering/sb_bow_solars_control
-	name = "\improper Derelict Starboard Bow Solars Control Room"
+	name = "\improper Контроль восточных солнечных батарей"
 	icon_state = "ks13_sb_bow_solars_control"
 
 /area/ruin/space/ks13/engineering/aft_solars_control
-	name = "\improper Derelict Aft Solars Control Room"
+	name = "\improper Контроль южных солнечных батарей"
 	icon_state = "ks13_aft_solars_control"
 
-// Area define for organization
+// Медицинские помещения
 /area/ruin/space/ks13/medical
 
 /area/ruin/space/ks13/medical/morgue
-	name = "\improper Derelict Morgue"
+	name = "\improper Морг"
 	icon_state = "ks13_morgue"
 
 /area/ruin/space/ks13/medical/medbay
-	name = "\improper Derelict Medbay"
+	name = "\improper Медблок"
 	icon_state = "ks13_med"
 
-// Area define for organization
+// Сервисные помещения
 /area/ruin/space/ks13/service
 
 /area/ruin/space/ks13/service/kitchen
-	name = "\improper Derelict Kitchen"
+	name = "\improper Кухня"
 	icon_state = "ks13_kitchen"
 
 /area/ruin/space/ks13/service/bar
-	name = "\improper Derelict Bar"
+	name = "\improper Бар"
 	icon_state = "ks13_bar"
 
 /area/ruin/space/ks13/service/chapel
-	name = "\improper Derelict Chapel"
+	name = "\improper Часовня"
 	icon_state = "ks13_chapel"
 
 /area/ruin/space/ks13/service/chapel_office
-	name = "\improper Derelict Chapel Office"
+	name = "\improper Офис часовни"
 	icon_state = "ks13_chapel_office"
 
 /area/ruin/space/ks13/service/cafe
-	name = "\improper Derelict Cafe"
+	name = "\improper Кафе"
 	icon_state = "ks13_cafe"
 
 /area/ruin/space/ks13/service/hydro
-	name = "\improper Derelict Hydroponics"
+	name = "\improper Гидропоника"
 	icon_state = "ks13_hydro"
 
 /area/ruin/space/ks13/service/jani
-	name = "\improper Derelict Janitor Closet"
+	name = "\improper Кладовая уборщика"
 	icon_state = "ks13_jani"
 
-// Area define for organization
+// Научные помещения
 /area/ruin/space/ks13/science
 
 /area/ruin/space/ks13/science/rnd
-	name = "\improper Derelict Research and Development"
+	name = "\improper Исследовательский отдел"
 	icon_state = "ks13_sci"
 
 /area/ruin/space/ks13/science/genetics
-	name = "\improper Derelict Genetics"
+	name = "\improper Генетическая лаборатория"
 	icon_state = "ks13_gen"
 
 /area/ruin/space/ks13/science/ordnance
-	name = "\improper Derelict Ordnance Department"
+	name = "\improper Отдел вооружений"
 	icon_state = "ks13_ord"
 
 /area/ruin/space/ks13/science/ordnance_hall
-	name = "\improper Derelict Ordnance Hallway"
+	name = "\improper Коридор отдела вооружений"
 	icon_state = "ks13_ord_hall"
 
-// Area define for organization
+// Зоны безопасности
 /area/ruin/space/ks13/security
 
 /area/ruin/space/ks13/security/sec
-	name = "\improper Derelict Security"
+	name = "\improper Служба безопасности"
 	icon_state = "ks13_sec"
 
 /area/ruin/space/ks13/security/cell
-	name = "\improper Derelict Security Cell"
+	name = "\improper Караульная"
 	icon_state = "ks13_sec_cell"
 
 /area/ruin/space/ks13/security/court
-	name = "\improper Derelict Courtroom"
+	name = "\improper Зал суда"
 	icon_state = "ks13_court"
 
 /area/ruin/space/ks13/security/court_hall
-	name = "\improper Derelict Courtroom Hallway"
+	name = "\improper Коридор зала суда"
 	icon_state = "ks13_court_hall"
 
-// Area define for organization
+// Командные помещения
 /area/ruin/space/ks13/command
 
 /area/ruin/space/ks13/command/bridge
-	name = "\improper Derelict Bridge"
+	name = "\improper Мостик"
 	icon_state = "ks13_bridge"
 
 /area/ruin/space/ks13/command/bridge_hall
-	name = "\improper Derelict Bridge Hallway"
+	name = "\improper Коридор мостика"
 	icon_state = "ks13_bridge_hall"
 
 /area/ruin/space/ks13/command/eva
-	name = "\improper Derelict E.V.A"
+	name = "\improper Отсек E.V.A"
 	icon_state = "ks13_eva"
 
-// Area define for organization
+// Помещения ИИ
 /area/ruin/space/ks13/ai
 
 /area/ruin/space/ks13/ai/vault
-	name = "\improper Derelict AI Vault"
+	name = "\improper Хранилище ИИ"
 	icon_state = "ks13_ai_vault"
 
 /area/ruin/space/ks13/ai/corridor
-	name = "\improper Derelict AI Corridor"
+	name = "\improper Коридор ИИ"
 	icon_state = "ks13_ai_corridor"
 
-// Misc areas that don't belong to a department, general purpose or what may have you
+// Разные помещения
 /area/ruin/space/ks13/tool_storage
-	name = "\improper Derelict Tool Storage"
+	name = "\improper Кладовая инструментов"
 	icon_state = "ks13_tool_storage"
 
 /area/ruin/space/ks13/dorms
-	name = "\improper Derelict Dorms"
+	name = "\improper Жилые помещения"
 	icon_state = "ks13_dorms"
 
 /area/ruin/space/solars/ks13/sb_bow_solars
-	name = "\improper Derelict Starboard Bow Solars"
+	name = "\improper Солнечные восточные батареи"
 	icon_state = "ks13_sb_bow_solars"
 
 /area/ruin/space/solars/ks13/aft_solars
-	name = "\improper Derelict Aft Solars"
+	name = "\improper Южные солнечные батареи"
 	icon_state = "ks13_aft_solars"
 
-//DJSTATION
+//DJ СТАНЦИЯ
 
 /area/ruin/space/djstation
-	name = "\improper Ruskie DJ Station"
+	name = "\improper DJ станция 'Русская'"
 	icon_state = "DJ"
 	default_gravity = STANDARD_GRAVITY
 
 /area/ruin/space/djstation/solars
-	name = "\improper DJ Station Solars"
+	name = "\improper Солнечные панели DJ станции"
 	icon_state = "DJ"
 	area_flags = UNIQUE_AREA
 	default_gravity = ZERO_GRAVITY
 
 /area/ruin/space/djstation/service
-	name = "\improper DJ Station Service"
+	name = "\improper Сервис DJ станции"
 	icon_state = "DJ"
 	default_gravity = STANDARD_GRAVITY
 
-//ABANDONED TELEPORTER
+//ЗАБРОШЕННЫЙ ТЕЛЕПОРТ
 
 /area/ruin/space/abandoned_tele
-	name = "\improper Abandoned Teleporter"
+	name = "\improper Заброшенный телепорт"
 	ambientsounds = list('sound/ambience/misc/ambimalf.ogg', 'sound/ambience/misc/signal.ogg')
 
-//OLD AI SAT
+//СТАРЫЙ СПУТНИК ИИ
 
-/area/ruin/space/tcommsat_oldaisat // Since tcommsat was moved to /area/station/, this turf doesn't inhereit its properties anymore
-	name = "\improper Abandoned Satellite"
+/area/ruin/space/tcommsat_oldaisat
+	name = "\improper Заброшенный спутник"
 	ambientsounds = list('sound/ambience/engineering/ambisin2.ogg', 'sound/ambience/misc/signal.ogg', 'sound/ambience/misc/signal.ogg', 'sound/ambience/general/ambigen9.ogg', 'sound/ambience/engineering/ambitech.ogg',\
 											'sound/ambience/engineering/ambitech2.ogg', 'sound/ambience/engineering/ambitech3.ogg', 'sound/ambience/misc/ambimystery.ogg')
 	airlock_wires = /datum/wires/airlock/engineering
 
-// CRASHED PRISON SHUTTLE
+// РАЗБИВШИЙСЯ ТЮРЕМНЫЙ ШАТТЛ
 /area/ruin/space/prison_shuttle
-	name = "\improper Crashed Prisoner Shuttle"
+	name = "\improper Разбившийся тюремный шаттл"
 
-
-//ABANDONED BOX WHITESHIP
+//ЗАБРОШЕННЫЙ БЕЛЫЙ КОРАБЛЬ
 
 /area/ruin/space/has_grav/whiteship/box
+	name = "\improper Заброшенный корабль"
 
-	name = "\improper Abandoned Ship"
 
-
-//SYNDICATE LISTENING POST STATION
+//СТАНЦИЯ ПРОСЛУШКИ СИНДИКАТА
 
 /area/ruin/space/has_grav/listeningstation
-	name = "\improper Listening Post"
+	name = "\improper Станция прослушки"
 
 /area/ruin/space/has_grav/powered/ancient_shuttle
-	name = "\improper Ancient Shuttle"
+	name = "\improper Древний шаттл"
 
-//HELL'S FACTORY OPERATING FACILITY
+//ПРОИЗВОДСТВЕННЫЙ ЦЕНТР "АДСКАЯ ФАБРИКА"
 /area/ruin/space/has_grav/hellfactory
-	name = "\improper Hell Factory"
+	name = "\improper Адская Фабрика"
 
 /area/ruin/space/has_grav/hellfactoryoffice
-	name = "\improper Hell Factory Office"
+	name = "\improper Офис Адской Фабрики"
 	area_flags = VALID_TERRITORY | BLOBS_ALLOWED | UNIQUE_AREA | NOTELEPORT
 
-//Ruin of Spinward Smoothies
+//Руины Spinward Smoothies
 
 /area/ruin/space/has_grav/spinwardsmoothies
 	name = "Spinward Smoothies"
 
-// The planet of the clowns
+// Планета клоунов
 /area/ruin/space/has_grav/powered/clownplanet
-	name = "\improper Clown Planet"
+	name = "\improper Планета Клоунов"
 	ambientsounds = list('sound/music/lobby_music/clown.ogg')
 
-//DERELICT SULACO
+//ЗАБРОШЕННЫЙ СУЛАКО
 /area/ruin/space/has_grav/derelictsulaco
-	name = "\improper Derelict Sulaco"
+	name = "\improper Заброшенный Сулако"
 
 /area/ruin/space/has_grav/powered/biooutpost
-	name = "\improper Bioresearch Outpost"
+	name = "\improper Биоисследовательский аванпост"
 	area_flags = UNIQUE_AREA | NOTELEPORT
 
 /area/ruin/space/has_grav/powered/biooutpost/vault
-	name = "\improper Bioresearch Outpost Secure Testing"
+	name = "\improper Сектор испытаний аванпоста"
 
-// Space Ghost Kitchen
+// Космическое Приведение Кухня
 /area/ruin/space/space_ghost_restaurant
-	name = "\improper Space Ghost Restaurant"
+	name = "\improper Ресторан 'Космическое Приведение'"
 
-//Mass-driver hub ruin
+//Руины хаба масс-драйверов
 /area/ruin/space/massdriverhub
-	name = "\improper Mass Driver Router"
+	name = "\improper Маршрутизатор масс-драйверов"
 	always_unpowered = FALSE
 
-// The abandoned capsule 'The Traveler's Rest'
+// Заброшенная капсула 'Приют Путешественника'
 /area/ruin/space/has_grav/travelers_rest
-	name = "\improper Traveler's Rest"
+	name = "\improper Приют Путешественника"
 
-// The Phonebooth
+// Телефонная будка
 /area/ruin/space/has_grav/powered/space_phone_booth
-	name = "\improper Phonebooth"
+	name = "\improper Телефонная будка"
 
-// Botnanical Haven
+// Ботанический рай
 /area/ruin/space/has_grav/powered/botanical_haven
-	name = "\improper Botanical Haven"
+	name = "\improper Ботанический рай"
 
-// Ruin of Derelict Construction
+// Руины заброшенной стройки
 /area/ruin/space/has_grav/derelictconstruction
-	name = "\improper Derelict Construction Site"
+	name = "\improper Заброшенная стройплощадка"
 
-/// The Atmos Asteroid Ruin, has a subtype for rapid identification since this has some unique atmospherics properties and we can easily detect it if something goes wonky.
+/// Астероид с атмосферой, имеет подтип для быстрой идентификации из-за уникальных атмосферных свойств
 /area/ruin/space/has_grav/atmosasteroid
 
-// Ruin of Waystation
+// Руины станции Waystation
 /area/ruin/space/has_grav/waystation
-	name = "Waystation Maintenance"
+	name = "Техтоннели Waystation"
 
 /area/ruin/space/has_grav/waystation/qm
-	name = "Waystation Quartermaster Office"
+	name = "Офис квартирмейстера Waystation"
 
 /area/ruin/space/has_grav/waystation/dorms
-	name = "Waystation Living Space"
+	name = "Жилые помещения Waystation"
 
 /area/ruin/space/has_grav/waystation/kitchen
-	name = "Waystation Kitchen"
+	name = "Кухня Waystation"
 
 /area/ruin/space/has_grav/waystation/cargobay
-	name = "Waystation Cargo Bay"
+	name = "Грузовой отсек Waystation"
 
 /area/ruin/space/has_grav/waystation/securestorage
-	name = "Waystation Secure Storage"
+	name = "Хранилище Waystation"
 
 /area/ruin/space/has_grav/waystation/cargooffice
-	name = "Waystation Cargo Office"
+	name = "Офис карго Waystation"
 
 /area/ruin/space/has_grav/powered/waystation/assaultpod
-	name = "Waystation Assault Pod"
+	name = "Штурмовая капсула Waystation"
 
 /area/ruin/space/has_grav/waystation/power
-	name = "Waystation Electrical"
+	name = "Энергоотсек Waystation"
 
-// Ruin of The All-American Diner
+// Руины "Американской Закусочной"
 /area/ruin/space/has_grav/allamericandiner
-	name = "\improper The All-American Diner"
+	name = "\improper Американская Закусочная"
 
-// Transit Booth
+// Транзитная будка
 /area/ruin/space/has_grav/transit_booth
-	name = "transit_booth"
+	name = "Транзитная будка"
 	icon = 'icons/area/areas_ruins.dmi'
 	icon_state = "ruins"
 	requires_power = FALSE
 	ambientsounds = list('sound/ambience/general/ambigen12.ogg','sound/ambience/general/ambigen13.ogg','sound/ambience/medical/ambinice.ogg')
 
-// the outlet
+// Торговый центр
 /area/ruin/space/has_grav/the_outlet/storefront
-	name = "\improper outlet storefront"
+	name = "\improper Торговая зона"
 
 /area/ruin/space/has_grav/the_outlet/employeesection
-	name = "\improper outlet employees only"
+	name = "\improper Служебные помещения"
 
 /area/ruin/space/has_grav/the_outlet/researchrooms
-	name = "\improper outlet research rooms"
+	name = "\improper Исследовательские лаборатории"
 
 /area/ruin/space/has_grav/the_outlet/cultinfluence
-	name = "\improper outlet cult corruption"
+	name = "\improper Зона культового влияния"
 
-//SYN-C Brutus, derelict frigate
+//SYN-C Брутус, заброшенный фрегат
 /area/ruin/space/has_grav/infested_frigate
-	name = "SYN-C Brutus"
+	name = "SYN-C Брутус"
 
-//garbage trucks
+//Мусоровозы
 /area/ruin/space/has_grav/garbagetruck
-	name = "Decommissioned Garbage Truck"
+	name = "Списанный мусоровоз"
 	sound_environment = SOUND_AREA_SMALL_ENCLOSED
 	ambience_index = AMBIENCE_MAINT
 
@@ -704,37 +699,37 @@
 
 /area/ruin/space/has_grav/garbagetruck/toystore
 
-//Donk Co trading outpost
+//Торговая застава Donk Co
 /area/ruin/space/has_grav/hauntedtradingpost
-	name = "\improper Donk Co. Trading Outpost"
+	name = "\improper Торговая застава Donk Co."
 	icon_state = "donk_public"
 	sound_environment = SOUND_AREA_STANDARD_STATION
 
 /area/ruin/space/has_grav/hauntedtradingpost/public
-	name = "\improper Donk Co. Trading Outpost Public Meeting Area And Cafeteria"
+	name = "\improper Общая зона и кафетерий заставы Donk Co."
 
 /area/ruin/space/has_grav/hauntedtradingpost/public/corridor
-	name = "\improper Donk Co. Trading Outpost Public Docks And Corridors"
+	name = "\improper Доки и коридоры заставы Donk Co."
 	sound_environment = SOUND_AREA_LARGE_ENCLOSED
 
 /area/ruin/space/has_grav/hauntedtradingpost/employees
-	name = "\improper Donk Co. Trading Outpost Employees Lounge"
+	name = "\improper Комната отдыха персонала Donk Co."
 	icon_state = "donk_employees"
 	airlock_wires = /datum/wires/airlock/engineering
 	sound_environment = SOUND_AREA_MEDIUM_SOFTFLOOR
 
 /area/ruin/space/has_grav/hauntedtradingpost/employees/workstation
-	name = "\improper Donk Co. Trading Outpost Engineering Station"
+	name = "\improper Инженерный пост Donk Co."
 
 /area/ruin/space/has_grav/hauntedtradingpost/employees/corridor
-	name = "\improper Donk Co. Trading Outpost Secure Corridor"
+	name = "\improper Защищенный коридор Donk Co."
 	icon_state = "donk_command"
 
 /area/ruin/space/has_grav/hauntedtradingpost/employees/breakroom
-	name = "\improper Donk Co. Trading Outpost Break Room"
+	name = "\improper Комната отдыха Donk Co."
 
 /area/ruin/space/has_grav/hauntedtradingpost/maint
-	name = "\improper Donk Co. Trading Outpost Auxiliary Storage Room"
+	name = "\improper Вспомогательное хранилище Donk Co."
 	icon_state = "donk_maints"
 	airlock_wires = /datum/wires/airlock/maint
 	sound_environment = SOUND_AREA_TUNNEL_ENCLOSED
@@ -745,43 +740,43 @@
 /area/ruin/space/has_grav/hauntedtradingpost/maint/toystorage
 
 /area/ruin/space/has_grav/hauntedtradingpost/maint/disposals
-	name = "\improper Donk Co. Trading Outpost Waste Management Station"
+	name = "\improper Станция утилизации отходов Donk Co."
 	sound_environment = SOUND_AREA_SMALL_ENCLOSED
 
 /area/ruin/space/has_grav/hauntedtradingpost/office
-	name = "\improper Donk Co. Trading Outpost Captains Office"
+	name = "\improper Кабинет капитана Donk Co."
 	icon_state = "donk_command"
 	airlock_wires = /datum/wires/airlock/cargo
 	sound_environment = SOUND_ENVIRONMENT_ROOM
 
 /area/ruin/space/has_grav/hauntedtradingpost/office/meetingroom
-	name = "\improper Donk Co. Trading Outpost Board Room"
+	name = "\improper Переговорная Donk Co."
 
 /area/ruin/space/has_grav/hauntedtradingpost/aicore
-	name = "\improper Cybersun AI Core"
+	name = "\improper Ядро ИИ Cybersun"
 	icon_state = "donk_command"
 	airlock_wires = /datum/wires/airlock/security
 	sound_environment = SOUND_AREA_SMALL_ENCLOSED
 	ambience_index = AMBIENCE_DANGER
 
-//Film studio
+//Киностудия
 /area/ruin/space/has_grav/film_studio
-	name = "\improper Film Studio Generator Room"
+	name = "\improper Генераторная киностудии"
 
 /area/ruin/space/has_grav/film_studio/dorms
-	name = "\improper Film Studio Living Quarters"
+	name = "\improper Жилые помещения киностудии"
 
 /area/ruin/space/has_grav/film_studio/stage
-	name = "\improper Film Studio Main Set Area"
+	name = "\improper Основная съёмочная площадка"
 
 /area/ruin/space/has_grav/film_studio/backstage
-	name = "\improper Film Studio Backstage"
+	name = "\improper Закулисье киностудии"
 
 /area/ruin/space/has_grav/film_studio/director
-	name = "\improper Film Studio Director Room"
+	name = "\improper Кабинет режиссёра"
 
 /area/ruin/space/has_grav/film_studio/solars
-	name = "\improper Film Studio Maintenance Solars"
+	name = "\improper Сервисные солнечные панели"
 
 /area/ruin/space/has_grav/film_studio/starboard
-	name = "\improper Film Studio Starboard Wing"
+	name = "\improper Восточный корпус киностудии"

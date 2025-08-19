@@ -1,5 +1,5 @@
 /*
-* External Solar Areas
+* Внешние солнечные зоны
 */
 
 /area/station/solars
@@ -13,91 +13,90 @@
 	default_gravity = ZERO_GRAVITY
 
 /area/station/solars/fore
-	name = "\improper Fore Solar Array"
+	name = "\improper Северная солнечная батарея"
 	icon_state = "panelsF"
 	sound_environment = SOUND_AREA_STANDARD_STATION
 
 /area/station/solars/aft
-	name = "\improper Aft Solar Array"
+	name = "\improper Южная солнечная батарея"
 	icon_state = "panelsAF"
 
 /area/station/solars/aux/port
-	name = "\improper Port Bow Auxiliary Solar Array"
+	name = "\improper Западная вспомогательная солнечная батарея"
 	icon_state = "panelsA"
 
 /area/station/solars/aux/starboard
-	name = "\improper Starboard Bow Auxiliary Solar Array"
+	name = "\improper Восточная вспомогательная солнечная батарея"
 	icon_state = "panelsA"
 
 /area/station/solars/starboard
-	name = "\improper Starboard Solar Array"
+	name = "\improper Восточная солнечная батарея"
 	icon_state = "panelsS"
 
 /area/station/solars/starboard/aft
-	name = "\improper Starboard Quarter Solar Array"
+	name = "\improper Восточная южная солнечная батарея"
 	icon_state = "panelsAS"
 
 /area/station/solars/starboard/fore
-	name = "\improper Starboard Bow Solar Array"
+	name = "\improper Восточная северная солнечная батарея"
 	icon_state = "panelsFS"
 
 /area/station/solars/starboard/fore/asteriod
-	name = "\improper Starboard Bow Asteriod Solar Array"
+	name = "\improper Восточная северная солнечная батарея на астероиде"
 	icon_state = "panelsFS"
-	area_flags = UNIQUE_AREA // solar areas directly on asteriod have gravity
+	area_flags = UNIQUE_AREA // солнечные панели на астероиде имеют гравитацию
 
 /area/station/solars/port
-	name = "\improper Port Solar Array"
+	name = "\improper Западная солнечная батарея"
 	icon_state = "panelsP"
 
 /area/station/solars/port/asteriod
-	name = "\improper Port Asteriod Solar Array"
+	name = "\improper Западная солнечная батарея на астероиде"
 	icon_state = "panelsP"
-	area_flags = UNIQUE_AREA // solar areas directly on asteriod have gravity
+	area_flags = UNIQUE_AREA // солнечные панели на астероиде имеют гравитацию
 
 /area/station/solars/port/aft
-	name = "\improper Port Quarter Solar Array"
+	name = "\improper Западная южная солнечная батарея"
 	icon_state = "panelsAP"
 
 /area/station/solars/port/fore
-	name = "\improper Port Bow Solar Array"
+	name = "\improper Западная северная солнечная батарея"
 	icon_state = "panelsFP"
 
 /area/station/solars/aisat
-	name = "\improper AI Satellite Solars"
+	name = "\improper Солнечные панели ИИ спутника"
 	icon_state = "panelsAI"
 
-
 /*
-* Internal Solar Areas
-* The rooms where the SMES and computer are
-* Not in the maintenance file just so we can keep these organized with other the external solar areas
+* Внутренние солнечные зоны
+* Помещения с СМЕС и компьютерами
+* Размещены не в файле техобслуживания для удобства организации с внешними солнечными зонами
 */
 
 /area/station/maintenance/solars
-	name = "Solar Maintenance"
+	name = "Техобслуживание солнечных батарей"
 	icon_state = "yellow"
 
 /area/station/maintenance/solars/port
-	name = "Port Solar Maintenance"
+	name = "Техобслуживание западных солнечных батарей"
 	icon_state = "SolarcontrolP"
 
 /area/station/maintenance/solars/port/aft
-	name = "Port Quarter Solar Maintenance"
+	name = "Техобслуживание западных южных солнечных батарей"
 	icon_state = "SolarcontrolAP"
 
 /area/station/maintenance/solars/port/fore
-	name = "Port Bow Solar Maintenance"
+	name = "Техобслуживание западных северных солнечных батарей"
 	icon_state = "SolarcontrolFP"
 
 /area/station/maintenance/solars/starboard
-	name = "Starboard Solar Maintenance"
+	name = "Техобслуживание восточных солнечных батарей"
 	icon_state = "SolarcontrolS"
 
 /area/station/maintenance/solars/starboard/aft
-	name = "Starboard Quarter Solar Maintenance"
+	name = "Техобслуживание восточных южных солнечных батарей"
 	icon_state = "SolarcontrolAS"
 
 /area/station/maintenance/solars/starboard/fore
-	name = "Starboard Bow Solar Maintenance"
+	name = "Техобслуживание восточных северных солнечных батарей"
 	icon_state = "SolarcontrolFS"

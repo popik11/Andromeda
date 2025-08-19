@@ -1,5 +1,5 @@
 /*
-* Telecommunications Satellite Areas
+* Зоны телекоммуникационного спутника
 */
 
 /area/station/tcommsat
@@ -17,27 +17,27 @@
 	airlock_wires = /datum/wires/airlock/engineering
 
 /area/station/tcommsat/computer
-	name = "\improper Telecomms Control Room"
+	name = "\improper Диспетчерская телекоммуникаций"
 	icon_state = "tcomsatcomp"
 	sound_environment = SOUND_AREA_MEDIUM_SOFTFLOOR
 
 /area/station/tcommsat/server
-	name = "\improper Telecomms Server Room"
+	name = "\improper Серверная телекоммуникаций"
 	icon_state = "tcomsatcham"
 
 /area/station/tcommsat/server/upper
-	name = "\improper Upper Telecomms Server Room"
+	name = "\improper Верхняя серверная телекоммуникаций"
 
 /*
-* On-Station Telecommunications Areas
+* Станционные телекоммуникационные зоны
 */
 
 /area/station/comms
-	name = "\improper Communications Relay"
+	name = "\improper Коммуникационный ретранслятор"
 	icon_state = "tcomsatcham"
 	sound_environment = SOUND_AREA_STANDARD_STATION
 
 /area/station/server
-	name = "\improper Messaging Server Room"
+	name = "\improper Серверная сообщений"
 	icon_state = "server"
 	sound_environment = SOUND_AREA_STANDARD_STATION

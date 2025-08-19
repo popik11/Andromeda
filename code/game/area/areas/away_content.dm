@@ -3,9 +3,9 @@ Unused icons for new areas are "awaycontent1" ~ "awaycontent30"
 */
 
 
-// Away Missions
+// Миссии вне станции
 /area/awaymission
-	name = "Strange Location"
+	name = "Странное место"
 	icon = 'icons/area/areas_away_missions.dmi'
 	icon_state = "away"
 	default_gravity = STANDARD_GRAVITY
@@ -14,7 +14,7 @@ Unused icons for new areas are "awaycontent1" ~ "awaycontent30"
 	area_flags = UNIQUE_AREA
 
 /area/awaymission/museum
-	name = "Nanotrasen Museum"
+	name = "Музей NanoTrasen"
 	icon_state = "awaycontent28"
 	sound_environment = SOUND_ENVIRONMENT_CONCERT_HALL
 
@@ -26,11 +26,11 @@ Unused icons for new areas are "awaycontent1" ~ "awaycontent30"
 	ambientsounds = list('sound/ambience/beach/shore.ogg', 'sound/ambience/misc/ambiodd.ogg','sound/ambience/medical/ambinice.ogg')
 
 /area/awaymission/museum/cafeteria
-	name = "Nanotrasen Museum Cafeteria"
+	name = "Кафетерий музея NanoTrasen"
 	sound_environment = SOUND_ENVIRONMENT_ROOM
 
 /area/awaymission/errorroom
-	name = "Super Secret Room"
+	name = "Сверхсекретная комната"
 	static_lighting = FALSE
 	base_lighting_alpha = 255
 	area_flags = UNIQUE_AREA|NOTELEPORT

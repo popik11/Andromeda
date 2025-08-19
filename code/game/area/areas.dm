@@ -4,7 +4,7 @@
  * A grouping of tiles into a logical space, mostly used by map editors
  */
 /area
-	name = "Space"
+	name = "Космос"
 	icon = 'icons/area/areas_misc.dmi'
 	icon_state = "unknown"
 	layer = AREA_LAYER
@@ -65,7 +65,7 @@
 	/// Bonus mood for being in this area
 	var/mood_bonus = 0
 	/// Mood message for being here, only shows up if mood_bonus != 0
-	var/mood_message = "This area is pretty nice!"
+	var/mood_message = "Эта зона довольно приятная!"
 	/// Does the mood bonus require a trait?
 	var/mood_trait
 

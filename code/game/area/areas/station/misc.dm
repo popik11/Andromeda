@@ -9,20 +9,20 @@
 * It keeps the work tree in SDMM nice and pretty :)
 */
 /area/station
-	name = "Station Areas"
+	name = "Зоны станции"
 	icon = 'icons/area/areas_station.dmi'
 	icon_state = "station"
 
 /*
-* Tramstation unique areas
+* Уникальные зоны Tramstation
 */
 
 /area/station/escapepodbay
-	name = "\improper Pod Bay"
+	name = "\improper Ангар спасательных капсул"
 	icon_state = "podbay"
 
 /area/station/asteroid
-	name = "\improper Station Asteroid"
+	name = "\improper Станционный астероид"
 	icon_state = "station_asteroid"
 	always_unpowered = TRUE
 	power_environ = FALSE

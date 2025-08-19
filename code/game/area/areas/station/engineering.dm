@@ -5,137 +5,136 @@
 	sound_environment = SOUND_AREA_LARGE_ENCLOSED
 
 /area/station/engineering/engine_smes
-	name = "\improper Engineering SMES"
+	name = "\improper Инженерные СМЕС"
 	icon_state = "engine_smes"
 
 /area/station/engineering/main
-	name = "Engineering"
+	name = "Инженерный отдел"
 	icon_state = "engine"
 
 /area/station/engineering/hallway
-	name = "Engineering Hallway"
+	name = "Коридор инженерного отдела"
 	icon_state = "engine_hallway"
 
 /area/station/engineering/atmos
-	name = "Atmospherics"
+	name = "Атмосферный отдел"
 	icon_state = "atmos"
 
 /area/station/engineering/atmos/upper
-	name = "Upper Atmospherics"
+	name = "Верхний атмосферный отдел"
 
-/*outside atmos*/
+/*внешние атмосферные помещения*/
 /area/station/engineering/atmos/space_catwalk
-	name = "\improper Atmospherics Space Catwalk"
+	name = "\improper Атмосферный космический трап"
 	area_flags = BLOBS_ALLOWED | UNIQUE_AREA | CULT_PERMITTED
-
 	sound_environment = SOUND_AREA_SPACE
 	ambience_index = AMBIENCE_SPACE
-	ambient_buzz = null //Space is deafeningly quiet
+	ambient_buzz = null //Космос оглушительно тихий
 
 /area/station/engineering/atmos/project
-	name = "\improper Atmospherics Project Room"
+	name = "\improper Проектная комната атмосферного отдела"
 	icon_state = "atmos_projectroom"
 
 /area/station/engineering/atmos/pumproom
-	name = "\improper Atmospherics Pumping Room"
+	name = "\improper Насосная атмосферного отдела"
 	icon_state = "atmos_pump_room"
 
 /area/station/engineering/atmos/mix
-	name = "\improper Atmospherics Mixing Room"
+	name = "\improper Смесительная атмосферного отдела"
 	icon_state = "atmos_mix"
 
 /area/station/engineering/atmos/storage
-	name = "\improper Atmospherics Storage Room"
+	name = "\improper Склад атмосферного отдела"
 	icon_state = "atmos_storage"
 
 /area/station/engineering/atmos/storage/gas
-	name = "\improper Atmospherics Gas Storage"
+	name = "\improper Газовый склад атмосферного отдела"
 	icon_state = "atmos_storage_gas"
 
 /area/station/engineering/atmos/office
-	name = "\improper Atmospherics Office"
+	name = "\improper Офис атмосферного отдела"
 	icon_state = "atmos_office"
 
 /area/station/engineering/atmos/hfr_room
-	name = "\improper Atmospherics HFR Room"
+	name = "\improper Комната ВТР атмосферного отдела"
 	icon_state = "atmos_HFR"
 
 /area/station/engineering/atmospherics_engine
-	name = "\improper Atmospherics Engine"
+	name = "\improper Атмосферный двигатель"
 	icon_state = "atmos_engine"
 	area_flags = BLOBS_ALLOWED | UNIQUE_AREA | CULT_PERMITTED
 
 /area/station/engineering/lobby
-	name = "\improper Engineering Lobby"
+	name = "\improper Лобби инженерного отдела"
 	icon_state = "engi_lobby"
 
 /area/station/engineering/supermatter
-	name = "\improper Supermatter Engine"
+	name = "\improper Суперматериальный двигатель"
 	icon_state = "engine_sm"
 	area_flags = BLOBS_ALLOWED | UNIQUE_AREA | CULT_PERMITTED
 	sound_environment = SOUND_AREA_SMALL_ENCLOSED
 
 /area/station/engineering/supermatter/waste
-	name = "\improper Supermatter Waste Chamber"
+	name = "\improper Камера отходов суперматерии"
 	icon_state = "engine_sm_waste"
 
 /area/station/engineering/supermatter/room
-	name = "\improper Supermatter Engine Room"
+	name = "\improper Комната суперматерии"
 	icon_state = "engine_sm_room"
 	sound_environment = SOUND_AREA_LARGE_ENCLOSED
 
 /area/station/engineering/supermatter/room/upper
-	name = "\improper Upper Supermatter Engine Room"
+	name = "\improper Верхняя комната суперматерии"
 	icon_state = "engine_sm_room_upper"
 	sound_environment = SOUND_AREA_LARGE_ENCLOSED
 
 /area/station/engineering/break_room
-	name = "\improper Engineering Foyer"
+	name = "\improper Фойе инженерного отдела"
 	icon_state = "engine_break"
 	sound_environment = SOUND_AREA_SMALL_ENCLOSED
 
 /area/station/engineering/gravity_generator
-	name = "\improper Gravity Generator Room"
+	name = "\improper Комната гравитационного генератора"
 	icon_state = "grav_gen"
 	sound_environment = SOUND_AREA_SMALL_ENCLOSED
 
 /area/station/engineering/storage
-	name = "Engineering Storage"
+	name = "Инженерный склад"
 	icon_state = "engine_storage"
 	sound_environment = SOUND_AREA_SMALL_ENCLOSED
 
 /area/station/engineering/storage_shared
-	name = "Shared Engineering Storage"
+	name = "Общий инженерный склад"
 	icon_state = "engine_storage_shared"
 
 /area/station/engineering/transit_tube
-	name = "\improper Transit Tube"
+	name = "\improper Транзитная труба"
 	icon_state = "transit_tube"
 
 /area/station/engineering/storage/tech
-	name = "Technical Storage"
+	name = "Технический склад"
 	icon_state = "tech_storage"
 
 /area/station/engineering/storage/tcomms
-	name = "Telecomms Storage"
+	name = "Склад телекоммуникаций"
 	icon_state = "tcom_storage"
 	area_flags = BLOBS_ALLOWED | UNIQUE_AREA | CULT_PERMITTED
 
 /*
-* Construction Areas
+* Строительные зоны
 */
 
 /area/station/construction
-	name = "\improper Construction Area"
+	name = "\improper Строительная зона"
 	icon_state = "construction"
 	ambience_index = AMBIENCE_ENGI
 	sound_environment = SOUND_AREA_STANDARD_STATION
 
 /area/station/construction/mining/aux_base
-	name = "Auxiliary Base Construction"
+	name = "Строительство вспомогательной базы"
 	icon_state = "aux_base_construction"
 	sound_environment = SOUND_AREA_MEDIUM_SOFTFLOOR
 
 /area/station/construction/storage_wing
-	name = "\improper Storage Wing"
+	name = "\improper Складское крыло"
 	icon_state = "storage_wing"

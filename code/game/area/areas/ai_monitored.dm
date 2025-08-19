@@ -11,12 +11,12 @@
 	sound_environment = SOUND_AREA_STANDARD_STATION
 
 /area/station/ai_monitored/aisat/exterior
-	name = "\improper AI Satellite Exterior"
+	name = "\improper Внешняя зона ИИ-Спутника"
 	icon_state = "ai"
 	airlock_wires = /datum/wires/airlock/ai
 
 /area/station/ai_monitored/command/storage/satellite
-	name = "\improper AI Satellite Maint"
+	name = "\improper Технические помещения ИИ-Спутника"
 	icon_state = "ai_storage"
 	ambience_index = AMBIENCE_DANGER
 	airlock_wires = /datum/wires/airlock/ai
@@ -34,96 +34,96 @@
 		ambientsounds += ai_will_not_hear_this
 
 /area/station/ai_monitored/turret_protected/ai_upload
-	name = "\improper AI Upload Chamber"
+	name = "\improper Камера загрузки ИИ"
 	icon_state = "ai_upload"
 	sound_environment = SOUND_AREA_SMALL_ENCLOSED
 
 /area/station/ai_monitored/turret_protected/ai_upload_foyer
-	name = "\improper AI Upload Access"
+	name = "\improper Шлюз загрузки ИИ"
 	icon_state = "ai_upload_foyer"
 	sound_environment = SOUND_AREA_SMALL_ENCLOSED
 
 /area/station/ai_monitored/turret_protected/ai
-	name = "\improper AI Chamber"
+	name = "\improper Ядро ИИ"
 	icon_state = "ai_chamber"
 	ai_will_not_hear_this = null
 
 /area/station/ai_monitored/turret_protected/aisat
-	name = "\improper AI Satellite"
+	name = "\improper Спутник ИИ"
 	icon_state = "ai"
 	sound_environment = SOUND_ENVIRONMENT_ROOM
 
 /area/station/ai_monitored/turret_protected/aisat/atmos
-	name = "\improper AI Satellite Atmos"
+	name = "\improper Атмосфера спутника ИИ"
 	icon_state = "ai"
 
 /area/station/ai_monitored/turret_protected/aisat/foyer
-	name = "\improper AI Satellite Foyer"
+	name = "\improper Вестибюль спутника ИИ"
 	icon_state = "ai_foyer"
 
 /area/station/ai_monitored/turret_protected/aisat/service
-	name = "\improper AI Satellite Service"
+	name = "\improper Сервисный отсек спутника ИИ"
 	icon_state = "ai"
 
 /area/station/ai_monitored/turret_protected/aisat/hallway
-	name = "\improper AI Satellite Hallway"
+	name = "\improper Коридор спутника ИИ"
 	icon_state = "ai"
 
 /area/station/ai_monitored/turret_protected/aisat/teleporter
-	name ="\improper AI Satellite Teleporter"
+	name ="\improper Телепорт спутника ИИ"
 	icon_state = "ai"
 
 /area/station/ai_monitored/turret_protected/aisat/equipment
-	name ="\improper AI Satellite Equipment"
+	name ="\improper Оборудование спутника ИИ"
 	icon_state = "ai"
 
 /area/station/ai_monitored/turret_protected/aisat/maint
-	name = "\improper AI Satellite Maintenance"
+	name = "\improper Техтоннели спутника ИИ"
 	icon_state = "ai_maint"
 
 /area/station/ai_monitored/turret_protected/aisat/uppernorth
-	name = "\improper AI Satellite Upper Fore"
+	name = "\improper Верхний северный отсек спутника ИИ"
 	icon_state = "ai"
 
 /area/station/ai_monitored/turret_protected/aisat/uppersouth
-	name = "\improper AI Satellite Upper Aft"
+	name = "\improper Верхний южный отсек спутника ИИ"
 	icon_state = "ai"
 
 /area/station/ai_monitored/turret_protected/aisat_interior
-	name = "\improper AI Satellite Antechamber"
+	name = "\improper Предбанник спутника ИИ"
 	icon_state = "ai_interior"
 	sound_environment = SOUND_AREA_LARGE_ENCLOSED
 
 /area/station/ai_monitored/turret_protected/ai_sat_ext_as
-	name = "\improper AI Sat Ext"
+	name = "\improper Внешняя зона ИИ Спутника"
 	icon_state = "ai_sat_east"
 
 /area/station/ai_monitored/turret_protected/ai_sat_ext_ap
-	name = "\improper AI Sat Ext"
+	name = "\improper Внешняя зона ИИ Спутника"
 	icon_state = "ai_sat_west"
 
-// Station specific ai monitored rooms, move here for consistency
+// Станционные помещения под наблюдением ИИ, перенесены сюда для единообразия
 
-//Command - AI Monitored
+//Командные - под наблюдением ИИ
 /area/station/ai_monitored/command/storage/eva
-	name = "EVA Storage"
+	name = "Хранилище EVA"
 	icon_state = "eva"
 	ambience_index = AMBIENCE_DANGER
 
 /area/station/ai_monitored/command/storage/eva/upper
-	name = "Upper EVA Storage"
+	name = "Верхнее хранилище EVA"
 
 /area/station/ai_monitored/command/nuke_storage
-	name = "\improper Vault"
+	name = "\improper Хранилище"
 	icon_state = "nuke_storage"
 	airlock_wires = /datum/wires/airlock/command
 
-//Security - AI Monitored
+//Служба безопасности - под наблюдением ИИ
 /area/station/ai_monitored/security/armory
-	name = "\improper Armory"
+	name = "\improper Оружейная"
 	icon_state = "armory"
 	ambience_index = AMBIENCE_DANGER
 	airlock_wires = /datum/wires/airlock/security
 
 /area/station/ai_monitored/security/armory/upper
-	name = "Upper Armory"
+	name = "Верхняя оружейная"

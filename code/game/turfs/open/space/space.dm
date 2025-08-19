@@ -45,7 +45,7 @@ GLOBAL_LIST_EMPTY(starlight)
 /turf/open/space
 	icon = 'icons/turf/space.dmi'
 	MAP_SWITCH(icon_state = "space", icon_state = "space_map")
-	name = "\proper space"
+	name = "\proper космос"
 	overfloor_placed = FALSE
 	underfloor_accessibility = UNDERFLOOR_INTERACTABLE
 	rust_resistance = RUST_RESISTANCE_ABSOLUTE

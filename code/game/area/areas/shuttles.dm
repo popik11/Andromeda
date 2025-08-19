@@ -3,7 +3,7 @@
 //Multi area shuttles are a thing now, use subtypes! ~ninjanomnom
 
 /area/shuttle
-	name = "Shuttle"
+	name = "Шаттл"
 	requires_power = FALSE
 	static_lighting = TRUE
 	default_gravity = STANDARD_GRAVITY
@@ -31,99 +31,99 @@
 /area/shuttle/custom
 	requires_power = TRUE
 
-////////////////////////////Multi-area shuttles//////////////////////////////
+////////////////////////////Многосекционные шаттлы////////////////////////////
 
-////////////////////////////Syndicate infiltrator////////////////////////////
+////////////////////////////Инфильтратор Синдиката////////////////////////////
 
 /area/shuttle/syndicate
-	name = "Syndicate Infiltrator"
+	name = "Шаттл Синдиката"
 	ambience_index = AMBIENCE_DANGER
 	area_limited_icon_smoothing = /area/shuttle/syndicate
 
 /area/shuttle/syndicate/bridge
-	name = "Syndicate Infiltrator Control"
+	name = "Мост шаттла Синдиката"
 
 /area/shuttle/syndicate/medical
-	name = "Syndicate Infiltrator Medbay"
+	name = "Медблок шаттла Синдиката"
 
 /area/shuttle/syndicate/armory
-	name = "Syndicate Infiltrator Armory"
+	name = "Оружейная шаттла Синдиката"
 
 /area/shuttle/syndicate/eva
-	name = "Syndicate Infiltrator EVA"
+	name = "Отсек EVA шаттла Синдиката"
 
 /area/shuttle/syndicate/hallway
-	name = "Syndicate Infiltrator Hall"
+	name = "Коридор шаттла Синдиката"
 
 /area/shuttle/syndicate/engineering
-	name = "Syndicate Infiltrator Engineering"
+	name = "Инженерный отсек шаттла Синдиката"
 
 /area/shuttle/syndicate/airlock
-	name = "Syndicate Infiltrator Airlock"
+	name = "Шлюз шаттла Синдиката"
 
-////////////////////////////Pirate Shuttle////////////////////////////
+////////////////////////////Пиратский шаттл////////////////////////////
 
 /area/shuttle/pirate
-	name = "Pirate Shuttle"
+	name = "Пиратский шаттл"
 	requires_power = TRUE
 
 /area/shuttle/pirate/flying_dutchman
-	name = "Flying Dutchman"
+	name = "Летучий Голландец"
 	requires_power = FALSE
 
-////////////////////////////Bounty Hunter Shuttles////////////////////////////
+////////////////////////////Шаттлы охотников за головами////////////////////////////
 
 /area/shuttle/hunter
-	name = "Hunter Shuttle"
+	name = "Шаттл охотника"
 
 /area/shuttle/hunter/russian
-	name = "Russian Cargo Hauler"
+	name = "Российский грузовой перевозчик"
 	requires_power = TRUE
 
 /area/shuttle/hunter/mi13_foodtruck
-	name = "Perfectly Ordinary Food Truck"
+	name = "Совершенно обычный фудтрак"
 	requires_power = TRUE
 	ambience_index = AMBIENCE_DANGER
 
-////////////////////////////White Ship////////////////////////////
+////////////////////////////Заброшенный корабль////////////////////////////
 
 /area/shuttle/abandoned
-	name = "Abandoned Ship"
+	name = "Заброшенный корабль"
 	requires_power = TRUE
 	area_limited_icon_smoothing = /area/shuttle/abandoned
 
 /area/shuttle/abandoned/bridge
-	name = "Abandoned Ship Bridge"
+	name = "Мост заброшенного корабля"
 
 /area/shuttle/abandoned/engine
-	name = "Abandoned Ship Engine"
+	name = "Двигатель заброшенного корабля"
 
 /area/shuttle/abandoned/bar
-	name = "Abandoned Ship Bar"
+	name = "Бар заброшенного корабля"
 
 /area/shuttle/abandoned/crew
-	name = "Abandoned Ship Crew Quarters"
+	name = "Жилые помещения заброшенного корабля"
 
 /area/shuttle/abandoned/cargo
-	name = "Abandoned Ship Cargo Bay"
+	name = "Грузовой отсек заброшенного корабля"
 
 /area/shuttle/abandoned/medbay
-	name = "Abandoned Ship Medbay"
+	name = "Медблок заброшенного корабля"
 
 /area/shuttle/abandoned/pod
-	name = "Abandoned Ship Pod"
+	name = "Спасательная капсула заброшенного корабля"
 
-////////////////////////////Single-area shuttles////////////////////////////
+////////////////////////////Односекционные шаттлы////////////////////////////
 /area/shuttle/transit
-	name = "Hyperspace"
-	desc = "Weeeeee"
+	name = "Гиперпространство"
+	desc = "Уиииии"
 	static_lighting = FALSE
 	base_lighting_alpha = 255
 
 
 /area/shuttle/arrival
-	name = "Arrival Shuttle"
-	area_flags = UNIQUE_AREA// SSjob refers to this area for latejoiners
+	name = "Шаттл прибытия"
+	area_flags = UNIQUE_AREA // SSjob использует эту зону для позднего присоединения
 
 
 /area/shuttle/arrival/on_joining_game(mob/living/boarder)
@@ -135,139 +135,138 @@
 
 
 /area/shuttle/pod_1
-	name = "Escape Pod One"
+	name = "Спасательная капсула №1"
 	area_flags = NONE
 
 /area/shuttle/pod_2
-	name = "Escape Pod Two"
+	name = "Спасательная капсула №2"
 	area_flags = NONE
 
 /area/shuttle/pod_3
-	name = "Escape Pod Three"
+	name = "Спасательная капсула №3"
 	area_flags = NONE
 
 /area/shuttle/pod_4
-	name = "Escape Pod Four"
+	name = "Спасательная капсула №4"
 	area_flags = NONE
 
 /area/shuttle/mining
-	name = "Mining Shuttle"
+	name = "Шахтерский шаттл"
 
 /area/shuttle/mining/large
-	name = "Mining Shuttle"
+	name = "Большой шахтерский шаттл"
 	requires_power = TRUE
 
 /area/shuttle/labor
-	name = "Labor Camp Shuttle"
+	name = "Шаттл трудового лагеря"
 
 /area/shuttle/supply
-	name = "Supply Shuttle"
+	name = "Грузовой шаттл"
 	area_flags = NOTELEPORT
 
 /area/shuttle/escape
-	name = "Emergency Shuttle"
+	name = "Эвакуационный шаттл"
 	area_flags = BLOBS_ALLOWED
 	area_limited_icon_smoothing = /area/shuttle/escape
 	flags_1 = CAN_BE_DIRTY_1
 	area_flags = CULT_PERMITTED
 
 /area/shuttle/escape/backup
-	name = "Backup Emergency Shuttle"
+	name = "Резервный эвакуационный шаттл"
 
 /area/shuttle/escape/brig
-	name = "Escape Shuttle Brig"
+	name = "Бриг эвакуационного шаттла"
 	icon_state = "shuttlered"
 
 /area/shuttle/escape/luxury
-	name = "Luxurious Emergency Shuttle"
+	name = "Роскошный эвакуационный шаттл"
 	area_flags = NOTELEPORT
 
 /area/shuttle/escape/simulation
-	name = "Medieval Reality Simulation Dome"
+	name = "Купол симуляции средневековья"
 	icon_state = "shuttlectf"
 	area_flags = NOTELEPORT
 	static_lighting = FALSE
 	base_lighting_alpha = 255
 
 /area/shuttle/escape/arena
-	name = "The Arena"
+	name = "Арена"
 	area_flags = NOTELEPORT
 
 /area/shuttle/escape/meteor
-	name = "\proper a meteor with engines strapped to it"
+	name = "\proper метеор с прикрученными двигателями"
 	luminosity = NONE
 
 /area/shuttle/escape/engine
-	name = "Escape Shuttle Engine"
+	name = "Двигатель эвакуационного шаттла"
 
 /area/shuttle/transport
-	name = "Transport Shuttle"
+	name = "Транспортный шаттл"
 
 /area/shuttle/assault_pod
-	name = "Steel Rain"
+	name = "Стальной дождь"
 
 /area/shuttle/sbc_starfury
-	name = "SBC Starfury"
+	name = "Звездный гнев СБК"
 
 /area/shuttle/sbc_fighter1
-	name = "SBC Fighter 1"
+	name = "Истребитель СБК 1"
 
 /area/shuttle/sbc_fighter2
-	name = "SBC Fighter 2"
+	name = "Истребитель СБК 2"
 
 /area/shuttle/sbc_fighter3
-	name = "SBC Fighter 3"
+	name = "Истребитель СБК 3"
 
 /area/shuttle/sbc_corvette
-	name = "SBC corvette"
+	name = "Корвет СБК"
 
 /area/shuttle/syndicate_scout
-	name = "Syndicate Scout"
+	name = "Разведчик Синдиката"
 
 /area/shuttle/ruin
-	name = "Ruined Shuttle"
+	name = "Разрушенный шаттл"
 
-/// Special shuttles made for the Caravan Ambush ruin.
+/// Специальные шаттлы для руин "Засада каравана"
 /area/shuttle/ruin/caravan
 	requires_power = TRUE
-	name = "Ruined Caravan Shuttle"
+	name = "Разрушенный шаттл каравана"
 
 /area/shuttle/ruin/caravan/syndicate1
-	name = "Syndicate Fighter"
+	name = "Истребитель Синдиката"
 
 /area/shuttle/ruin/caravan/syndicate2
-	name = "Syndicate Fighter"
+	name = "Истребитель Синдиката"
 
 /area/shuttle/ruin/caravan/syndicate3
-	name = "Syndicate Drop Ship"
+	name = "Десантный корабль Синдиката"
 
 /area/shuttle/ruin/caravan/pirate
-	name = "Pirate Cutter"
+	name = "Пиратский катер"
 
 /area/shuttle/ruin/caravan/freighter1
-	name = "Small Freighter"
+	name = "Малый грузовик"
 
 /area/shuttle/ruin/caravan/freighter2
-	name = "Tiny Freighter"
+	name = "Крошечный грузовик"
 
 /area/shuttle/ruin/caravan/freighter3
-	name = "Tiny Freighter"
+	name = "Крошечный грузовик"
 
-// ----------- Cyborg Mothership
-
+// ----------- Материнский корабль киборгов
 /area/shuttle/ruin/cyborg_mothership
-	name = "Cyborg Mothership"
+	name = "Материнский корабль киборгов"
 	requires_power = TRUE
 	area_limited_icon_smoothing = /area/shuttle/ruin/cyborg_mothership
 
-// ----------- Arena Shuttle
+// ----------- Аренный шаттл
 /area/shuttle/shuttle_arena
-	name = "arena"
+	name = "Арена"
 	default_gravity = STANDARD_GRAVITY
 	requires_power = FALSE
 
 /obj/effect/forcefield/arena_shuttle
-	name = "portal"
+	name = "портал"
 	initial_duration = 0
 	var/list/warp_points = list()
 
@@ -282,29 +281,29 @@
 
 	var/mob/living/L = AM
 	if(L.pulling && istype(L.pulling, /obj/item/bodypart/head))
-		to_chat(L, span_notice("Your offering is accepted. You may pass."), confidential = TRUE)
+		to_chat(L, span_notice("Ваша жертва принята. Вы можете пройти."), confidential = TRUE)
 		qdel(L.pulling)
 		var/turf/LA = get_turf(pick(warp_points))
 		L.forceMove(LA)
 		L.remove_status_effect(/datum/status_effect/hallucination)
-		to_chat(L, "<span class='reallybig redtext'>The battle is won. Your bloodlust subsides.</span>", confidential = TRUE)
+		to_chat(L, "<span class='reallybig redtext'>Битва выиграна. Ваша жажда крови утихает.</span>", confidential = TRUE)
 		for(var/obj/item/chainsaw/doomslayer/chainsaw in L)
 			qdel(chainsaw)
 		var/obj/item/skeleton_key/key = new(L)
 		L.put_in_hands(key)
 	else
-		to_chat(L, span_warning("You are not yet worthy of passing. Drag a severed head to the barrier to be allowed entry to the hall of champions."), confidential = TRUE)
+		to_chat(L, span_warning("Вы еще не достойны пройти. Притащите отрубленную голову к барьеру, чтобы получить доступ в зал чемпионов."), confidential = TRUE)
 
 /obj/effect/landmark/shuttle_arena_safe
-	name = "hall of champions"
-	desc = "For the winners."
+	name = "зал чемпионов"
+	desc = "Для победителей."
 
 /obj/effect/landmark/shuttle_arena_entrance
-	name = "\proper the arena"
-	desc = "A lava filled battlefield."
+	name = "\proper арена"
+	desc = "Поле битвы, заполненное лавой."
 
 /obj/effect/forcefield/arena_shuttle_entrance
-	name = "portal"
+	name = "портал"
 	initial_duration = 0
 	var/list/warp_points = list()
 
@@ -319,5 +318,5 @@
 	var/obj/effect/landmark/LA = pick(warp_points)
 	var/mob/living/M = AM
 	M.forceMove(get_turf(LA))
-	to_chat(M, "<span class='reallybig redtext'>You're trapped in a deadly arena! To escape, you'll need to drag a severed head to the escape portals.</span>", confidential = TRUE)
+	to_chat(M, "<span class='reallybig redtext'>Вы заперты на смертельной арене! Чтобы сбежать, вам нужно притащить отрубленную голову к порталам выхода.</span>", confidential = TRUE)
 	M.apply_status_effect(/datum/status_effect/mayhem)

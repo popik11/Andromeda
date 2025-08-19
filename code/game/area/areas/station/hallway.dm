@@ -3,152 +3,153 @@
 	sound_environment = SOUND_AREA_STANDARD_STATION
 
 /area/station/hallway/primary
-	name = "\improper Primary Hallway"
+	name = "\improper Главный коридор"
 	icon_state = "primaryhall"
 
 /area/station/hallway/primary/aft
-	name = "\improper Aft Primary Hallway"
+	name = "\improper Южный главный коридор"
 	icon_state = "afthall"
 
 /area/station/hallway/primary/fore
-	name = "\improper Fore Primary Hallway"
+	name = "\improper Северный главный коридор"
 	icon_state = "forehall"
 
 /area/station/hallway/primary/starboard
-	name = "\improper Starboard Primary Hallway"
+	name = "\improper Восточный главный коридор"
 	icon_state = "starboardhall"
 
 /area/station/hallway/primary/port
-	name = "\improper Port Primary Hallway"
+	name = "\improper Западный главный коридор"
 	icon_state = "porthall"
 
 /area/station/hallway/primary/central
-	name = "\improper Central Primary Hallway"
+	name = "\improper Центральный главный коридор"
 	icon_state = "centralhall"
 
 /area/station/hallway/primary/central/fore
-	name = "\improper Fore Central Primary Hallway"
+	name = "\improper Северный центральный коридор"
 	icon_state = "hallCF"
 
 /area/station/hallway/primary/central/aft
-	name = "\improper Aft Central Primary Hallway"
+	name = "\improper Южный центральный коридор"
 	icon_state = "hallCA"
 
 /area/station/hallway/primary/upper
-	name = "\improper Upper Central Primary Hallway"
+	name = "\improper Верхний центральный коридор"
 	icon_state = "centralhall"
 
 /area/station/hallway/primary/tram
-	name = "\improper Primary Tram"
+	name = "\improper Главный коридор док шаттлов"
 
 /area/station/hallway/primary/tram/left
-	name = "\improper Port Tram Dock"
+	name = "\improper Западный док шаттлов"
 	icon_state = "halltramL"
 
 /area/station/hallway/primary/tram/center
-	name = "\improper Central Tram Dock"
+	name = "\improper Центральный док шаттлов"
 	icon_state = "halltramM"
 
 /area/station/hallway/primary/tram/right
-	name = "\improper Starboard Tram Dock"
+	name = "\improper Восточный док шаттлов"
 	icon_state = "halltramR"
 
-// This shouldn't be used, but it gives an icon for the enviornment tree in the map editor
+// Не должно использоваться, но дает иконку для редактора карт
 /area/station/hallway/secondary
 	icon_state = "secondaryhall"
 
 /area/station/hallway/secondary/command
-	name = "\improper Command Hallway"
+	name = "\improper Командный коридор"
 	icon_state = "bridge_hallway"
 
 /area/station/hallway/secondary/construction
-	name = "\improper Construction Area"
+	name = "\improper Строительная зона"
 	icon_state = "construction"
 
 /area/station/hallway/secondary/construction/engineering
-	name = "\improper Engineering Hallway"
+	name = "\improper Инженерный коридор"
 
 /area/station/hallway/secondary/exit
-	name = "\improper Escape Shuttle Hallway"
+	name = "\improper Коридор эвакуационного шаттла"
 	icon_state = "escape"
 
 /area/station/hallway/secondary/exit/escape_pod
-	name = "\improper Escape Pod Bay"
+	name = "\improper Отсек спасательных капсул"
 	icon_state = "escape_pods"
 
 /area/station/hallway/secondary/exit/departure_lounge
-	name = "\improper Departure Lounge"
+	name = "\improper Зал ожидания отбытия"
 	icon_state = "escape_lounge"
 
 /area/station/hallway/secondary/entry
-	name = "\improper Arrival Shuttle Hallway"
+	name = "\improper Коридор прибывающего шаттла"
 	icon_state = "entry"
 	area_flags = UNIQUE_AREA | EVENT_PROTECTED
 
 /area/station/hallway/secondary/dock
-	name = "\improper Secondary Station Dock Hallway"
+	name = "\improper Вторичный док станции"
 	icon_state = "hall"
 
 /area/station/hallway/secondary/service
-	name = "\improper Service Hallway"
+	name = "\improper Сервисный коридор"
 	icon_state = "hall_service"
 
 /area/station/hallway/secondary/spacebridge
-	name = "\improper Space Bridge"
+	name = "\improper Космический мост"
 	icon_state = "hall"
 
 /area/station/hallway/secondary/recreation
-	name = "\improper Recreation Hallway"
+	name = "\improper Рекреационный коридор"
 	icon_state = "hall"
 
 /*
-* Station Specific Areas
-* If another station gets added, and you make specific areas for it
-* Please make its own section in this file
-* The areas below belong to North Star's Hallways
+* Уникальные зоны станции
+* Ниже приведены коридоры для станции North Star
 */
 
-//1
+//1 этаж
 /area/station/hallway/floor1
-	name = "\improper First Floor Hallway"
+	name = "\improper Коридор 1 этажа"
 
 /area/station/hallway/floor1/aft
-	name = "\improper First Floor Aft Hallway"
+	name = "\improper Южный коридор 1 этажа"
 	icon_state = "1_aft"
 
 /area/station/hallway/floor1/fore
-	name = "\improper First Floor Fore Hallway"
+	name = "\improper Северный коридор 1 этажа"
 	icon_state = "1_fore"
-//2
+
+//2 этаж
 /area/station/hallway/floor2
-	name = "\improper Second Floor Hallway"
+	name = "\improper Коридор 2 этажа"
 
 /area/station/hallway/floor2/aft
-	name = "\improper Second Floor Aft Hallway"
+	name = "\improper Южный коридор 2 этажа"
 	icon_state = "2_aft"
 
 /area/station/hallway/floor2/fore
-	name = "\improper Second Floor Fore Hallway"
+	name = "\improper Северный коридор 2 этажа"
 	icon_state = "2_fore"
-//3
+
+//3 этаж
 /area/station/hallway/floor3
-	name = "\improper Third Floor Hallway"
+	name = "\improper Коридор 3 этажа"
 
 /area/station/hallway/floor3/aft
-	name = "\improper Third Floor Aft Hallway"
+	name = "\improper Южный коридор 3 этажа"
 	icon_state = "3_aft"
 
 /area/station/hallway/floor3/fore
-	name = "\improper Third Floor Fore Hallway"
+	name = "\improper Северный коридор 3 этажа"
 	icon_state = "3_fore"
-//4
+
+//4 этаж
 /area/station/hallway/floor4
-	name = "\improper Fourth Floor Hallway"
+	name = "\improper Коридор 4 этажа"
 
 /area/station/hallway/floor4/aft
-	name = "\improper Fourth Floor Aft Hallway"
+	name = "\improper Южный коридор 4 этажа"
 	icon_state = "4_aft"
 
 /area/station/hallway/floor4/fore
-	name = "\improper Fourth Floor Fore Hallway"
+	name = "\improper Северный коридор 4 этажа"
 	icon_state = "4_fore"

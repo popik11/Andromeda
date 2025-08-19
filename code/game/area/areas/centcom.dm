@@ -2,7 +2,7 @@
 // CENTCOM
 // CentCom itself
 /area/centcom
-	name = "CentCom"
+	name = "ЦентКом"
 	icon = 'icons/area/areas_centcom.dmi'
 	icon_state = "centcom"
 	static_lighting = TRUE
@@ -11,80 +11,80 @@
 	area_flags = UNIQUE_AREA | NOTELEPORT
 	flags_1 = NONE
 
-// This is just to define the category
+// Категория для зон ЦентКома
 /area/centcom/central_command_areas
-	name = "Central Command Areas"
+	name = "Зоны Центрального Командования"
 
 /area/centcom/central_command_areas/control
-	name = "CentCom Central Control"
+	name = "Центральный контроль ЦентКома"
 	icon_state = "centcom_control"
 
 /area/centcom/central_command_areas/evacuation
-	name = "CentCom Recovery Wing"
+	name = "Эвакуационное крыло ЦентКома"
 	icon_state = "centcom_evacuation"
 
 /area/centcom/central_command_areas/evacuation/ship
-	name = "CentCom Recovery Ship"
+	name = "Эвакуационный корабль ЦентКома"
 	icon_state = "centcom_evacuation_ship"
 
 /area/centcom/central_command_areas/fore
-	name = "Fore CentCom Dock"
+	name = "Северный док ЦентКома"
 	icon_state = "centcom_fore"
 
 /area/centcom/central_command_areas/supply
-	name = "CentCom Supply Wing"
+	name = "Снабженческое крыло ЦентКома"
 	icon_state = "centcom_supply"
 
 /area/centcom/central_command_areas/ferry
-	name = "CentCom Transport Shuttle Dock"
+	name = "Док транспортных шаттлов ЦентКома"
 	icon_state = "centcom_ferry"
 
 /area/centcom/central_command_areas/briefing
-	name = "CentCom Briefing Room"
+	name = "Брифинг-зал ЦентКома"
 	icon_state = "centcom_briefing"
 
 /area/centcom/central_command_areas/armory
-	name = "CentCom Armory"
+	name = "Оружейная ЦентКома"
 	icon_state = "centcom_armory"
 
 /area/centcom/central_command_areas/admin
-	name = "CentCom Administrative Office"
+	name = "Административный офис ЦентКома"
 	icon_state = "centcom_admin"
 
 /area/centcom/central_command_areas/admin/storage
-	name = "CentCom Administrative Office Storage"
+	name = "Склад административного офиса ЦентКома"
 	icon_state = "centcom_admin_storage"
 
 /area/centcom/central_command_areas/prison
-	name = "Admin Prison"
+	name = "Тюрьма ЦентКома"
 	icon_state = "centcom_prison"
 
 /area/centcom/central_command_areas/prison/cells
-	name = "Admin Prison Cells"
+	name = "Камеры тюрьмы ЦентКома"
 	icon_state = "centcom_cells"
 
 /area/centcom/central_command_areas/courtroom
-	name = "Nanotrasen Grand Courtroom"
+	name = "Верховный суд NanoTrasen"
 	icon_state = "centcom_court"
 
 /area/centcom/central_command_areas/holding
-	name = "Holding Facility"
+	name = "Следственный изолятор"
 	icon_state = "centcom_holding"
 
 /area/centcom/central_command_areas/supplypod/supplypod_temp_holding
-	name = "Supplypod Shipping Lane"
+	name = "Транспортный коридор грузовых капсул"
 	icon_state = "supplypod_flight"
 
 /area/centcom/central_command_areas/supplypod
-	name = "Supplypod Facility"
+	name = "Комплекс грузовых капсул"
 	icon_state = "supplypod"
 
 /area/centcom/central_command_areas/supplypod/pod_storage
-	name = "Supplypod Storage"
+	name = "Хранилище грузовых капсул"
 	icon_state = "supplypod_holding"
 
 /area/centcom/central_command_areas/supplypod/loading
-	name = "Supplypod Loading Facility"
+	name = "Загрузочный комплекс грузовых капсул"
 	icon_state = "supplypod_loading"
 	var/loading_id = ""
 
@@ -97,57 +97,56 @@
 	GLOB.supplypod_loading_bays[loading_id] = src
 
 /area/centcom/central_command_areas/supplypod/loading/one
-	name = "Bay #1"
+	name = "Док #1"
 	loading_id = "1"
 
 /area/centcom/central_command_areas/supplypod/loading/two
-	name = "Bay #2"
+	name = "Док #2"
 	loading_id = "2"
 
 /area/centcom/central_command_areas/supplypod/loading/three
-	name = "Bay #3"
+	name = "Док #3"
 	loading_id = "3"
 
 /area/centcom/central_command_areas/supplypod/loading/four
-	name = "Bay #4"
+	name = "Док #4"
 	loading_id = "4"
 
 /area/centcom/central_command_areas/supplypod/loading/ert
-	name = "ERT Bay"
+	name = "Док ОБР"
 	loading_id = "5"
 
 //THUNDERDOME
 /area/centcom/tdome
-	name = "Thunderdome"
+	name = "Громодром"
 	icon_state = "thunder"
 
 /area/centcom/tdome/arena
-	name = "Thunderdome Arena"
+	name = "Арена Громодрома"
 	icon_state = "thunder"
-	area_flags = parent_type::area_flags | UNLIMITED_FISHING //for possible testing purposes
+	area_flags = parent_type::area_flags | UNLIMITED_FISHING
 
 /area/centcom/tdome/tdome1
-	name = "Thunderdome (Team 1)"
+	name = "Громодром (Команда 1)"
 	icon_state = "thunder_team_one"
 
 /area/centcom/tdome/tdome2
-	name = "Thunderdome (Team 2)"
+	name = "Громодром (Команда 2)"
 	icon_state = "thunder_team_two"
 
 /area/centcom/tdome/administration
-	name = "Thunderdome Administration"
+	name = "Администрация Громодрома"
 	icon_state = "thunder_admin"
 
 /area/centcom/tdome/observation
-	name = "Thunderdome Observation"
+	name = "Наблюдательная Громодрома"
 	icon_state = "thunder_observe"
 
+// ВРАЖДЕБНЫЕ
 
-// ENEMY
-
-// Wizard
+// Колдуны
 /area/centcom/wizard_station
-	name = "Wizard's Den"
+	name = "Логово Колдуна"
 	icon_state = "wizards_den"
 	static_lighting = TRUE
 	requires_power = FALSE
@@ -155,10 +154,9 @@
 	area_flags = UNIQUE_AREA | NOTELEPORT
 	flags_1 = NONE
 
-
-//Abductors
+// Похитители
 /area/centcom/abductor_ship
-	name = "Abductor Ship"
+	name = "Корабль Похитителей"
 	icon_state = "abductor_ship"
 	requires_power = FALSE
 	area_flags = UNIQUE_AREA | NOTELEPORT
@@ -167,9 +165,9 @@
 	default_gravity = STANDARD_GRAVITY
 	flags_1 = NONE
 
-//Syndicates
+// Синдикат
 /area/centcom/syndicate_mothership
-	name = "Syndicate Mothership"
+	name = "Флагман Синдиката"
 	icon_state = "syndie-ship"
 	requires_power = FALSE
 	default_gravity = STANDARD_GRAVITY
@@ -178,56 +176,55 @@
 	ambience_index = AMBIENCE_DANGER
 
 /area/centcom/syndicate_mothership/control
-	name = "Syndicate Control Room"
+	name = "Командный центр Синдиката"
 	icon_state = "syndie-control"
 	static_lighting = TRUE
 
 /area/centcom/syndicate_mothership/expansion_bombthreat
-	name = "Syndicate Ordnance Laboratory"
+	name = "Лаборатория боеприпасов Синдиката"
 	icon_state = "syndie-elite"
 	static_lighting = TRUE
 	ambience_index = AMBIENCE_ENGI
 
 /area/centcom/syndicate_mothership/expansion_bioterrorism
-	name = "Syndicate Bio-Weapon Laboratory"
+	name = "Лаборатория биологического оружия Синдиката"
 	icon_state = "syndie-elite"
 	static_lighting = TRUE
 	ambience_index = AMBIENCE_MEDICAL
 
 /area/centcom/syndicate_mothership/expansion_chemicalwarfare
-	name = "Syndicate Chemical Weapon Manufacturing Plant"
+	name = "Завод химического оружия Синдиката"
 	icon_state = "syndie-elite"
 	static_lighting = TRUE
 	ambience_index = AMBIENCE_REEBE
 
 /area/centcom/syndicate_mothership/expansion_fridgerummage
-	name = "Syndicate Perishables and Foodstuffs Storage"
+	name = "Хранилище скоропортящихся продуктов Синдиката"
 	icon_state = "syndie-elite"
 	static_lighting = TRUE
 
 /area/centcom/syndicate_mothership/elite_squad
-	name = "Syndicate Elite Squad"
+	name = "Элитный отряд Синдиката"
 	icon_state = "syndie-elite"
 
 /area/centcom/syndicate_mothership/expansion_custodialcloset
-	name = "Syndicate Custodial Closet"
+	name = "Подсобка уборщика Синдиката"
 	icon_state = "syndie-elite"
 
-//MAFIA
+// МАФИЯ
 /area/centcom/mafia
-	name = "Mafia Minigame"
+	name = "Мини-игра Мафия"
 	icon_state = "mafia"
 	static_lighting = FALSE
-
 	base_lighting_alpha = 255
 	requires_power = FALSE
 	default_gravity = STANDARD_GRAVITY
 	flags_1 = NONE
 	area_flags = BLOCK_SUICIDE | UNIQUE_AREA
 
-//CAPTURE THE FLAG
+// ЗАХВАТ ФЛАГА
 /area/centcom/ctf
-	name = "Capture the Flag"
+	name = "Захват Флага"
 	icon_state = "ctf"
 	requires_power = FALSE
 	static_lighting = FALSE
@@ -237,44 +234,44 @@
 	area_flags = UNIQUE_AREA | NOTELEPORT | NO_DEATH_MESSAGE | BLOCK_SUICIDE
 
 /area/centcom/ctf/control_room
-	name = "Control Room A"
+	name = "Комната управления A"
 	icon_state = "ctf_room_a"
 
 /area/centcom/ctf/control_room2
-	name = "Control Room B"
+	name = "Комната управления B"
 	icon_state = "ctf_room_b"
 
 /area/centcom/ctf/central
-	name = "Central"
+	name = "Центральная зона"
 	icon_state = "ctf_central"
 
 /area/centcom/ctf/main_hall
-	name = "Main Hall A"
+	name = "Главный зал A"
 	icon_state = "ctf_hall_a"
 
 /area/centcom/ctf/main_hall2
-	name = "Main Hall B"
+	name = "Главный зал B"
 	icon_state = "ctf_hall_b"
 
 /area/centcom/ctf/corridor
-	name = "Corridor A"
+	name = "Коридор A"
 	icon_state = "ctf_corr_a"
 
 /area/centcom/ctf/corridor2
-	name = "Corridor B"
+	name = "Коридор B"
 	icon_state = "ctf_corr_b"
 
 /area/centcom/ctf/flag_room
-	name = "Flag Room A"
+	name = "Комната флага A"
 	icon_state = "ctf_flag_a"
 
 /area/centcom/ctf/flag_room2
-	name = "Flag Room B"
+	name = "Комната флага B"
 	icon_state = "ctf_flag_b"
 
-// Asteroid area stuff
+// Зоны астероидов
 /area/centcom/asteroid
-	name = "\improper Asteroid"
+	name = "\improper Астероид"
 	icon_state = "asteroid"
 	requires_power = FALSE
 	default_gravity = STANDARD_GRAVITY
@@ -291,4 +288,4 @@
 	area_flags = UNIQUE_AREA | BLOBS_ALLOWED
 
 /area/centcom/asteroid/nearstation/bomb_site
-	name = "\improper Bomb Testing Asteroid"
+	name = "\improper Астероид для испытаний бомб"

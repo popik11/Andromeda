@@ -1,4 +1,4 @@
-/**********************Mine areas**************************/
+/**********************Шахтёрские зоны**************************/
 /area/mine
 	icon = 'icons/area/areas_station.dmi'
 	icon_state = "mining"
@@ -7,125 +7,123 @@
 	ambient_buzz = 'sound/ambience/lavaland/magma.ogg'
 
 /area/mine/lobby
-	name = "Mining Station"
+	name = "Шахтёрская станция"
 	icon_state = "mining_lobby"
 
 /area/mine/storage
-	name = "Mining Station Production Storage"
+	name = "Производственное хранилище шахты"
 	icon_state = "mining_storage"
 
 /area/mine/storage/public
-	name = "Mining Station Public Storage"
+	name = "Общественное хранилище шахты"
 	icon_state = "mining_storage"
 
 /area/mine/lobby/raptor
-	name = "Nanotrasen Raptor Farm"
+	name = "Ферма рапторов NanoTrasen"
 	icon_state = "mining_storage"
 
 /area/mine/production
-	name = "Mining Station Production Wing"
+	name = "Производственный отсек шахты"
 	icon_state = "mining_production"
 
 /area/mine/abandoned
-	name = "Abandoned Mining Station"
+	name = "Заброшенная шахта"
 
 /area/mine/living_quarters
-	name = "Mining Station Living Quarters"
+	name = "Жилые помещения шахты"
 	icon_state = "mining_living"
 
 /area/mine/eva
-	name = "Mining Station EVA"
+	name = "EVA шахты"
 	icon_state = "mining_eva"
 
 /area/mine/eva/lower
-	name = "Mining Station Lower EVA"
+	name = "Нижний EVA шахты"
 	icon_state = "mining_eva"
 
 /area/mine/maintenance
-	name = "Mining Station Maintenance"
+	name = "Техтоннели шахты"
 
 /area/mine/maintenance/production
-	name = "Mining Station Production Maintenance"
+	name = "Техтоннели производства шахты"
 
 /area/mine/maintenance/living
-	name = "Mining Station Living Quarters Maintenance"
+	name = "Техтоннели жилых помещений"
 
 /area/mine/maintenance/living/north
-	name = "Mining Station Living Quarters North Maintenance"
+	name = "Северные техтоннели жилых помещений"
 
 /area/mine/maintenance/living/south
-	name = "Mining Station Living Quarters South Maintenance"
+	name = "Южные техтоннели жилых помещений"
 
 /area/mine/maintenance/public
-	name = "Mining Station Public Maintenance"
+	name = "Общественные техтоннели шахты"
 
 /area/mine/maintenance/public/north
-	name = "Mining Station Public North Maintenance"
+	name = "Северные общественные техтоннели"
 
 /area/mine/maintenance/public/south
-	name = "Mining Station Public South Maintenance"
+	name = "Южные общественные техтоннели"
 
 /area/mine/maintenance/service
-	name = "Mining Station Service Maintenance"
+	name = "Сервисные техтоннели шахты"
 
 /area/mine/maintenance/service/disposals
-	name = "Mining Station Disposals"
+	name = "Утилизатор шахты"
 
 /area/mine/maintenance/service/comms
-	name = "Mining Station Communications"
+	name = "Коммуникации шахты"
 
 /area/mine/maintenance/labor
-	name = "Labor Camp Maintenance"
+	name = "Техтоннели трудового лагеря"
 
 /area/mine/cafeteria
-	name = "Mining Station Cafeteria"
+	name = "Кафетерий шахты"
 	icon_state = "mining_cafe"
 
 /area/mine/cafeteria/labor
-	name = "Labor Camp Cafeteria"
+	name = "Кафетерий трудового лагеря"
 	icon_state = "mining_labor_cafe"
 
 /area/mine/hydroponics
-	name = "Mining Station Hydroponics"
+	name = "Гидропоника шахты"
 	icon_state = "mining_hydro"
 
 /area/mine/medical
-	name = "Mining Station Emergency Medbay"
+	name = "Медблок шахты"
 
 /area/mine/mechbay
-	name = "Mining Station Mech Bay"
+	name = "Ангар мехов шахты"
 	icon_state = "mechbay"
 
 /area/mine/lounge
-	name = "Mining Station Public Lounge"
+	name = "Зона отдыха шахты"
 	icon_state = "mining_lounge"
 
 /area/mine/laborcamp
-	name = "Labor Camp"
+	name = "Трудовой лагерь"
 	icon_state = "mining_labor"
 
 /area/mine/laborcamp/quarters
-	name = "Labor Camp Quarters"
+	name = "Жилые помещения лагеря"
 	icon_state = "mining_labor_quarters"
 
 /area/mine/laborcamp/production
-	name = "Labor Camp Production"
+	name = "Производство лагеря"
 	icon_state = "mining_labor_production"
 
 /area/mine/laborcamp/security
-	name = "Labor Camp Security"
+	name = "Охрана лагеря"
 	icon_state = "labor_camp_security"
 	ambience_index = AMBIENCE_DANGER
 
 /area/mine/laborcamp/security/maintenance
-	name = "Labor Camp Security Maintenance"
+	name = "Техтоннели охраны лагеря"
 	icon_state = "labor_camp_security"
 	ambience_index = AMBIENCE_DANGER
 
 
-
-
-/**********************Lavaland Areas**************************/
+/**********************Лаваленд**************************/
 
 /area/lavaland
 	icon = 'icons/area/areas_station.dmi'
@@ -138,7 +136,7 @@
 	allow_shuttle_docking = TRUE
 
 /area/lavaland/surface
-	name = "Lavaland"
+	name = "Лаваленд"
 	icon_state = "explored"
 	always_unpowered = TRUE
 	power_environ = FALSE
@@ -149,7 +147,7 @@
 	area_flags = VALID_TERRITORY | UNIQUE_AREA
 
 /area/lavaland/underground
-	name = "Lavaland Caves"
+	name = "Пещеры Лаваленда"
 	icon_state = "unexplored"
 	always_unpowered = TRUE
 	requires_power = TRUE
@@ -160,15 +158,15 @@
 	area_flags = VALID_TERRITORY | UNIQUE_AREA | FLORA_ALLOWED
 
 /area/lavaland/surface/outdoors
-	name = "Lavaland Wastes"
+	name = "Пустоши Лаваленда"
 	outdoors = TRUE
 
-/area/lavaland/surface/outdoors/unexplored //monsters and ruins spawn here
+/area/lavaland/surface/outdoors/unexplored //здесь спавнятся монстры и руины
 	icon_state = "unexplored"
 	area_flags = VALID_TERRITORY | UNIQUE_AREA | CAVES_ALLOWED | FLORA_ALLOWED | MOB_SPAWN_ALLOWED
 	map_generator = /datum/map_generator/cave_generator/lavaland
 
-/area/lavaland/surface/outdoors/unexplored/danger //megafauna will also spawn here
+/area/lavaland/surface/outdoors/unexplored/danger //здесь также спавнится мегафауна
 	icon_state = "danger"
 	area_flags = VALID_TERRITORY | UNIQUE_AREA | CAVES_ALLOWED | FLORA_ALLOWED | MOB_SPAWN_ALLOWED | MEGAFAUNA_SPAWN_ALLOWED
 
@@ -177,12 +175,11 @@
 	map_generator = /datum/map_generator/cave_generator/lavaland/ruin_version
 
 /area/lavaland/surface/outdoors/explored
-	name = "Lavaland Labor Camp"
+	name = "Трудовой лагерь Лаваленда"
 	area_flags = VALID_TERRITORY | UNIQUE_AREA
 
 
-
-/**********************Ice Moon Areas**************************/
+/**********************Ледяная луна**************************/
 
 /area/icemoon
 	icon = 'icons/area/areas_station.dmi'
@@ -196,7 +193,7 @@
 	allow_shuttle_docking = TRUE
 
 /area/icemoon/surface
-	name = "Icemoon"
+	name = "Ледяная луна"
 	icon_state = "explored"
 	always_unpowered = TRUE
 	power_environ = FALSE
@@ -205,8 +202,8 @@
 	requires_power = TRUE
 	area_flags = UNIQUE_AREA | FLORA_ALLOWED
 
-/area/icemoon/surface/outdoors // parent that defines if something is on the exterior of the station.
-	name = "Icemoon Wastes"
+/area/icemoon/surface/outdoors
+	name = "Пустоши ледяной луны"
 	outdoors = TRUE
 
 /area/icemoon/surface/outdoors/Initialize(mapload)
@@ -239,23 +236,23 @@
 	map_generator = /datum/map_generator/cave_generator/icemoon/surface/rocky
 	area_flags = MOB_SPAWN_ALLOWED | FLORA_ALLOWED | CAVES_ALLOWED
 
-/area/icemoon/surface/outdoors/noteleport // for places like the cursed spring water
+/area/icemoon/surface/outdoors/noteleport
 	area_flags = UNIQUE_AREA | FLORA_ALLOWED | NOTELEPORT
 
-/area/icemoon/surface/outdoors/noruins // when you want random generation without the chance of getting ruins
+/area/icemoon/surface/outdoors/noruins
 	icon_state = "noruins"
 	area_flags = UNIQUE_AREA | FLORA_ALLOWED | MOB_SPAWN_ALLOWED | CAVES_ALLOWED
-	map_generator =  /datum/map_generator/cave_generator/icemoon/surface/noruins
+	map_generator = /datum/map_generator/cave_generator/icemoon/surface/noruins
 
 /area/icemoon/surface/outdoors/labor_camp
-	name = "Icemoon Labor Camp"
+	name = "Трудовой лагерь ледяной луны"
 	area_flags = UNIQUE_AREA
 
-/area/icemoon/surface/outdoors/unexplored //monsters and ruins spawn here
+/area/icemoon/surface/outdoors/unexplored
 	icon_state = "unexplored"
 	area_flags = UNIQUE_AREA | FLORA_ALLOWED | MOB_SPAWN_ALLOWED | CAVES_ALLOWED
 
-/area/icemoon/surface/outdoors/unexplored/rivers // rivers spawn here
+/area/icemoon/surface/outdoors/unexplored/rivers
 	icon_state = "danger"
 	map_generator = /datum/map_generator/cave_generator/icemoon/surface
 
@@ -263,13 +260,13 @@
 	. = ..()
 	if(HAS_TRAIT(SSstation, STATION_TRAIT_FORESTED))
 		map_generator = /datum/map_generator/cave_generator/icemoon/surface/forested
-		area_flags |= MOB_SPAWN_ALLOWED //flip this on, the generator has already disabled dangerous fauna
+		area_flags |= MOB_SPAWN_ALLOWED
 
 /area/icemoon/surface/outdoors/unexplored/rivers/no_monsters
 	area_flags = UNIQUE_AREA | FLORA_ALLOWED | CAVES_ALLOWED
 
 /area/icemoon/underground
-	name = "Icemoon Caves"
+	name = "Пещеры ледяной луны"
 	outdoors = TRUE
 	always_unpowered = TRUE
 	requires_power = TRUE
@@ -278,37 +275,37 @@
 	power_light = FALSE
 	area_flags = UNIQUE_AREA | FLORA_ALLOWED
 
-/area/icemoon/underground/unexplored // mobs and megafauna and ruins spawn here
-	name = "Icemoon Caves"
+/area/icemoon/underground/unexplored
+	name = "Пещеры ледяной луны"
 	icon_state = "unexplored"
 	area_flags = CAVES_ALLOWED | FLORA_ALLOWED | MOB_SPAWN_ALLOWED | MEGAFAUNA_SPAWN_ALLOWED
 
 /area/icemoon/underground/unexplored/no_rivers
 	icon_state = "norivers"
-	area_flags = CAVES_ALLOWED | FLORA_ALLOWED // same rules as "shoreline" turfs since we might need this to pull double-duty
+	area_flags = CAVES_ALLOWED | FLORA_ALLOWED
 	map_generator = /datum/map_generator/cave_generator/icemoon
 
-/area/icemoon/underground/unexplored/rivers // rivers spawn here
+/area/icemoon/underground/unexplored/rivers
 	icon_state = "danger"
 	map_generator = /datum/map_generator/cave_generator/icemoon
 
 /area/icemoon/underground/unexplored/rivers/deep
 	map_generator = /datum/map_generator/cave_generator/icemoon/deep
 
-/area/icemoon/underground/unexplored/rivers/deep/shoreline //use this for when you don't want mobs to spawn in certain areas in the "deep" portions. Think adjacent to rivers or station structures.
+/area/icemoon/underground/unexplored/rivers/deep/shoreline
 	icon_state = "shore"
 	area_flags = UNIQUE_AREA | CAVES_ALLOWED | FLORA_ALLOWED
 
-/area/icemoon/underground/explored // ruins can't spawn here
-	name = "Icemoon Underground"
+/area/icemoon/underground/explored
+	name = "Подземелья ледяной луны"
 	area_flags = UNIQUE_AREA
 
 /area/icemoon/underground/explored/graveyard
-	name = "Graveyard"
+	name = "Кладбище"
 	area_flags = UNIQUE_AREA
 	ambience_index = AMBIENCE_SPOOKY
 	icon = 'icons/area/areas_station.dmi'
 	icon_state = "graveyard"
 
 /area/icemoon/underground/explored/graveyard/chapel
-	name = "Chapel Graveyard"
+	name = "Часовня кладбища"

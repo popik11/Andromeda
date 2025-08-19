@@ -1,86 +1,86 @@
-// When adding a new area to the security areas, make sure to add it to /datum/bounty/item/security/paperwork as well!
+// При добавлении новых зон безопасности не забудьте добавить их в /datum/bounty/item/security/paperwork!
 
 /area/station/security
-	name = "Security"
+	name = "Служба безопасности"
 	icon_state = "security"
 	ambience_index = AMBIENCE_DANGER
 	airlock_wires = /datum/wires/airlock/security
 	sound_environment = SOUND_AREA_STANDARD_STATION
 
 /area/station/security/office
-	name = "\improper Security Office"
+	name = "\improper Офис безопасности"
 	icon_state = "security"
 
 /area/station/security/breakroom
-	name = "\improper Security Break Room"
+	name = "\improper Комната отдыха брига"
 	icon_state = "brig"
 
 /area/station/security/tram
-	name = "\improper Security Transfer Tram"
+	name = "\improper Транспортный шаттл брига"
 	icon_state = "security"
 
 /area/station/security/lockers
-	name = "\improper Security Locker Room"
+	name = "\improper Раздевалка брига"
 	icon_state = "securitylockerroom"
 
 /area/station/security/brig
-	name = "\improper Brig"
+	name = "\improper Бриг"
 	icon_state = "brig"
 
 /area/station/security/holding_cell
-	name = "\improper Holding Cell"
+	name = "\improper Камера временного содержания"
 	icon_state = "holding_cell"
 
 /area/station/security/medical
-	name = "\improper Security Medical"
+	name = "\improper Медпункт брига"
 	icon_state = "security_medical"
 
 /area/station/security/brig/upper
-	name = "\improper Brig Overlook"
+	name = "\improper Обзорная брига"
 	icon_state = "upperbrig"
 
 /area/station/security/brig/lower
-	name = "\improper Lower Brig"
+	name = "\improper Нижний бриг"
 	icon_state = "lower_brig"
 
 /area/station/security/brig/entrance
-	name = "\improper Brig Entrance"
+	name = "\improper Вход в бриг"
 	icon_state = "brigentry"
 
 /area/station/security/courtroom
-	name = "\improper Courtroom"
+	name = "\improper Зал суда"
 	icon_state = "courtroom"
 	sound_environment = SOUND_AREA_LARGE_ENCLOSED
 
 /area/station/security/courtroom/holding
-	name = "\improper Courtroom Prisoner Holding Room"
+	name = "\improper Комната содержания подсудимых"
 
 /area/station/security/processing
-	name = "\improper Labor Shuttle Dock"
+	name = "\improper Док трудового шаттла"
 	icon_state = "sec_labor_processing"
 
 /area/station/security/processing/cremation
-	name = "\improper Security Crematorium"
+	name = "\improper Крематорий брига"
 	icon_state = "sec_cremation"
 	sound_environment = SOUND_AREA_SMALL_ENCLOSED
 
 /area/station/security/interrogation
-	name = "\improper Interrogation Room"
+	name = "\improper Допросная"
 	icon_state = "interrogation"
 	sound_environment = SOUND_AREA_SMALL_ENCLOSED
 
 /area/station/security/warden
-	name = "Brig Control"
+	name = "Контроль брига"
 	icon_state = "warden"
 	sound_environment = SOUND_AREA_SMALL_SOFTFLOOR
 
 /area/station/security/evidence
-	name = "Evidence Storage"
+	name = "Хранилище улик"
 	icon_state = "evidence"
 	sound_environment = SOUND_AREA_SMALL_ENCLOSED
 
 /area/station/security/detectives_office
-	name = "\improper Detective's Office"
+	name = "\improper Кабинет детектива"
 	icon_state = "detective"
 	ambientsounds = list(
 		'sound/ambience/security/ambidet1.ogg',
@@ -88,143 +88,142 @@
 		)
 
 /area/station/security/detectives_office/private_investigators_office
-	name = "\improper Private Investigator's Office"
+	name = "\improper Кабинет частного детектива"
 	icon_state = "investigate_office"
 	sound_environment = SOUND_AREA_SMALL_SOFTFLOOR
 
 /area/station/security/range
-	name = "\improper Firing Range"
+	name = "\improper Стрельбище"
 	icon_state = "firingrange"
 
 /area/station/security/eva
-	name = "\improper Security EVA"
+	name = "\improper EVA брига"
 	icon_state = "sec_eva"
 
 /area/station/security/execution
 	icon_state = "execution_room"
 
 /area/station/security/execution/transfer
-	name = "\improper Transfer Centre"
+	name = "\improper Трансферный центр"
 	icon_state = "sec_processing"
 
 /area/station/security/execution/education
-	name = "\improper Prisoner Education Chamber"
+	name = "\improper Камера перевоспитания"
 
 /area/station/security/mechbay
-	name = "Security Mechbay"
+	name = "Ангар мехов брига"
 	icon_state = "sec_mechbay"
 
 /*
-* Security Checkpoints
+* Контрольно-пропускные пункты
 */
 
 /area/station/security/checkpoint
-	name = "\improper Security Checkpoint"
+	name = "\improper КПП брига"
 	icon_state = "checkpoint"
 
 /area/station/security/checkpoint/escape
-	name = "\improper Departures Security Checkpoint"
+	name = "\improper КПП убытия"
 	icon_state = "checkpoint_esc"
 
 /area/station/security/checkpoint/arrivals
-	name = "\improper Arrivals Security Checkpoint"
+	name = "\improper КПП прибытия"
 	icon_state = "checkpoint_arr"
 
 /area/station/security/checkpoint/supply
-	name = "Security Post - Cargo Bay"
+	name = "Пост брига - Карго"
 	icon_state = "checkpoint_supp"
 
 /area/station/security/checkpoint/engineering
-	name = "Security Post - Engineering"
+	name = "Пост брига - Инженерный"
 	icon_state = "checkpoint_engi"
 
 /area/station/security/checkpoint/medical
-	name = "Security Post - Medbay"
+	name = "Пост брига - Медотсек"
 	icon_state = "checkpoint_med"
 
 /area/station/security/checkpoint/medical/medsci
-	name = "Security Post - Medsci"
+	name = "Пост брига - Меднаука"
 
 /area/station/security/checkpoint/science
-	name = "Security Post - Science"
+	name = "Пост брига - Наука"
 	icon_state = "checkpoint_sci"
 
 /area/station/security/checkpoint/science/research
-	name = "Security Post - Research Division"
+	name = "Пост брига - Исследования"
 	icon_state = "checkpoint_res"
 
 /area/station/security/checkpoint/customs
-	name = "Customs"
+	name = "Таможня"
 	icon_state = "customs_point"
 
 /area/station/security/checkpoint/customs/auxiliary
-	name = "Auxiliary Customs"
+	name = "Вспомогательная таможня"
 	icon_state = "customs_point_aux"
 
 /area/station/security/checkpoint/customs/fore
-	name = "Fore Customs"
+	name = "Северная таможня"
 	icon_state = "customs_point_fore"
 
 /area/station/security/checkpoint/customs/aft
-	name = "Aft Customs"
+	name = "Южная таможня"
 	icon_state = "customs_point_aft"
 
 /area/station/security/checkpoint/first
-	name = "Security Post - First Floor"
+	name = "Пост брига - 1 этаж"
 	icon_state = "checkpoint_1"
 
 /area/station/security/checkpoint/second
-	name = "Security Post - Second Floor"
+	name = "Пост брига - 2 этаж"
 	icon_state = "checkpoint_2"
 
 /area/station/security/checkpoint/third
-	name = "Security Post - Third Floor"
+	name = "Пост брига - 3 этаж"
 	icon_state = "checkpoint_3"
 
-
 /area/station/security/prison
-	name = "\improper Prison Wing"
+	name = "\improper Тюремный блок"
 	icon_state = "sec_prison"
 	area_flags = VALID_TERRITORY | BLOBS_ALLOWED | UNIQUE_AREA | CULT_PERMITTED | PERSISTENT_ENGRAVINGS
 
-//Rad proof
+// Защищено от радиации
 /area/station/security/prison/toilet
-	name = "\improper Prison Toilet"
+	name = "\improper Тюремный туалет"
 	icon_state = "sec_prison_safe"
 
-// Rad proof
+// Защищено от радиации
 /area/station/security/prison/safe
-	name = "\improper Prison Wing Cells"
+	name = "\improper Тюремные камеры"
 	icon_state = "sec_prison_safe"
 
 /area/station/security/prison/upper
-	name = "\improper Upper Prison Wing"
+	name = "\improper Верхний тюремный блок"
 	icon_state = "prison_upper"
 
 /area/station/security/prison/visit
-	name = "\improper Prison Visitation Area"
+	name = "\improper Комната свиданий"
 	icon_state = "prison_visit"
 
 /area/station/security/prison/rec
-	name = "\improper Prison Rec Room"
+	name = "\improper Тюремная комната отдыха"
 	icon_state = "prison_rec"
 
 /area/station/security/prison/mess
-	name = "\improper Prison Mess Hall"
+	name = "\improper Тюремная столовая"
 	icon_state = "prison_mess"
 
 /area/station/security/prison/work
-	name = "\improper Prison Work Room"
+	name = "\improper Тюремная рабочая зона"
 	icon_state = "prison_work"
 
 /area/station/security/prison/shower
-	name = "\improper Prison Shower"
+	name = "\improper Тюремный душ"
 	icon_state = "prison_shower"
 
 /area/station/security/prison/workout
-	name = "\improper Prison Gym"
+	name = "\improper Тюремный спортзал"
 	icon_state = "prison_workout"
 
 /area/station/security/prison/garden
-	name = "\improper Prison Garden"
+	name = "\improper Тюремный сад"
 	icon_state = "prison_garden"

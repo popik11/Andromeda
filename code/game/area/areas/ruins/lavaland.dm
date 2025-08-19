@@ -1,95 +1,95 @@
-//Lavaland Ruins
-//NOTICE: /unpowered means you never get power. Thanks Fikou
+//Руины Лаваленда
+//ВАЖНО: /unpowered означает, что питание никогда не появится. Спасибо Fikou
 
 /area/ruin/powered/beach
 
 /area/ruin/powered/lavaland_phone_booth
-	name = "\improper Phone Booth"
+	name = "\improper Телефонная будка"
 
 /area/ruin/powered/clownplanet
-	name = "\improper Clown Biodome"
+	name = "\improper Биодом Клоунов"
 	ambientsounds = list('sound/music/lobby_music/clown.ogg')
 
 /area/ruin/unpowered/gaia
-	name = "\improper Patch of Eden"
+	name = "\improper Уголок Эдема"
 
 /area/ruin/powered/snow_biodome
 
 /area/ruin/powered/gluttony
 
 /area/ruin/powered/golem_ship
-	name = "\improper Free Golem Ship"
+	name = "\improper Корабль Свободных Големов"
 
 /area/ruin/powered/greed
 
 /area/ruin/unpowered/hierophant
-	name = "\improper Hierophant's Arena"
+	name = "\improper Арена Иерофанта"
 
 /area/ruin/powered/pride
 
 /area/ruin/powered/seedvault
 
 /area/ruin/unpowered/elephant_graveyard
-	name = "\improper Elephant Graveyard"
+	name = "\improper Кладбище Слонов"
 
 /area/ruin/powered/graveyard_shuttle
-	name = "\improper Elephant Graveyard"
+	name = "\improper Кладбище Слонов"
 
 /area/ruin/syndicate_lava_base
-	name = "\improper Secret Base"
+	name = "\improper Секретная База"
 	ambience_index = AMBIENCE_DANGER
 	ambient_buzz = 'sound/ambience/lavaland/magma.ogg'
 
 /area/ruin/unpowered/cultaltar
-	name = "\improper Cult Altar"
+	name = "\improper Алтарь Культа"
 	area_flags = CULT_PERMITTED
 	ambience_index = AMBIENCE_SPOOKY
 
 /area/ruin/thelizardsgas_lavaland
-	name = "\improper The Lizard's Gas"
+	name = "\improper Газ Ящера"
 	icon_state = "lizardgas"
 	sound_environment = SOUND_ENVIRONMENT_ROOM
 	ambient_buzz = 'sound/ambience/lavaland/magma.ogg'
 
-//Syndicate lavaland base
+//База Синдиката на Лаваленде
 
 /area/ruin/syndicate_lava_base/engineering
-	name = "Syndicate Lavaland Engineering"
+	name = "Инженерный отсек Синдиката"
 
 /area/ruin/syndicate_lava_base/medbay
-	name = "Syndicate Lavaland Medbay"
+	name = "Медбей Синдиката"
 
 /area/ruin/syndicate_lava_base/arrivals
-	name = "Syndicate Lavaland Arrivals"
+	name = "Зона прибытия Синдиката"
 
 /area/ruin/syndicate_lava_base/bar
-	name = "\improper Syndicate Lavaland Bar"
+	name = "\improper Бар Синдиката"
 
 /area/ruin/syndicate_lava_base/main
-	name = "\improper Syndicate Lavaland Primary Hallway"
+	name = "\improper Главный коридор базы Синдиката"
 
 /area/ruin/syndicate_lava_base/cargo
-	name = "\improper Syndicate Lavaland Cargo Bay"
+	name = "\improper Карго-отсек Синдиката"
 
 /area/ruin/syndicate_lava_base/chemistry
-	name = "Syndicate Lavaland Chemistry"
+	name = "Химическая лаборатория Синдиката"
 
 /area/ruin/syndicate_lava_base/virology
-	name = "Syndicate Lavaland Virology"
+	name = "Вирусология Синдиката"
 
 /area/ruin/syndicate_lava_base/testlab
-	name = "\improper Syndicate Lavaland Experimentation Lab"
+	name = "\improper Лаборатория испытаний Синдиката"
 
 /area/ruin/syndicate_lava_base/dormitories
-	name = "\improper Syndicate Lavaland Dormitories"
+	name = "\improper Жилые помещения Синдиката"
 
 /area/ruin/syndicate_lava_base/telecomms
-	name = "\improper Syndicate Lavaland Telecommunications"
+	name = "\improper Телекоммуникации Синдиката"
 
-//Xeno Nest
+//Гнездо Ксеносов
 
 /area/ruin/unpowered/xenonest
-	name = "The Hive"
+	name = "Улей"
 	always_unpowered = TRUE
 	power_environ = FALSE
 	power_equip = FALSE
