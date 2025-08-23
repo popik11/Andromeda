@@ -37,7 +37,7 @@ GLOBAL_DATUM_INIT(communications_controller, /datum/communciations_controller, n
 	if(!can_announce(user, is_silicon))
 		return FALSE
 	if(is_silicon)
-		minor_announce(html_decode(input),"[user.name] announces:", players = players)
+		minor_announce(html_decode(input),"[user.name] объявляет:", players = players)
 		COOLDOWN_START(src, silicon_message_cooldown, COMMUNICATION_COOLDOWN_AI)
 	else
 		var/list/message_data = user.treat_message(input)
@@ -47,7 +47,7 @@ GLOBAL_DATUM_INIT(communications_controller, /datum/communciations_controller, n
 			priority_announce(html_decode(message_data["message"]), null, 'sound/announcer/announcement/announce.ogg', ANNOUNCEMENT_TYPE_CAPTAIN, has_important_message = TRUE, players = players)
 		COOLDOWN_START(src, nonsilicon_message_cooldown, COMMUNICATION_COOLDOWN)
 	user.log_talk(input, LOG_SAY, tag="priority announcement")
-	message_admins("[ADMIN_LOOKUPFLW(user)] has made a priority announcement.")
+	message_admins("[ADMIN_LOOKUPFLW(user)] сделал приоритетное объявление.")
 
 /datum/communciations_controller/proc/send_message(datum/comm_message/sending,print = TRUE,unique = FALSE)
 	for(var/obj/machinery/computer/communications/C in GLOB.shuttle_caller_list)
@@ -59,7 +59,7 @@ GLOBAL_DATUM_INIT(communications_controller, /datum/communciations_controller, n
 				C.add_message(M)
 			if(print)
 				var/obj/item/paper/printed_paper = new /obj/item/paper(C.loc)
-				printed_paper.name = "paper - '[sending.title]'"
+				printed_paper.name = "документ - '[sending.title]'"
 				printed_paper.add_raw_text(sending.content)
 				printed_paper.update_appearance()
 
@@ -76,14 +76,14 @@ GLOBAL_DATUM_INIT(communications_controller, /datum/communciations_controller, n
 	if(isnull(greenshift)) // if we're not forced to be greenshift or not - check if we are an actual greenshift
 		greenshift = SSdynamic.current_tier.tier == 0 && dynamic_report == /datum/dynamic_tier/greenshift::advisory_report
 
-	. = "<b><i>Nanotrasen Department of Intelligence Threat Advisory, Spinward Sector, TCD [time2text(world.realtime, "DDD, MMM DD")], [CURRENT_STATION_YEAR]:</i></b><hr>"
+	. = "<b><i>Департамент Разведки Нанотрейзен, Консультация по Угрозам, Спинвард Сектор, ТСД [time2text(world.realtime, "DDD, MMM DD")], [CURRENT_STATION_YEAR]:</i></b><hr>"
 	. += dynamic_report
 
 	SSstation.generate_station_goals(greenshift ? INFINITY : CONFIG_GET(number/station_goal_budget))
 
 	var/list/datum/station_goal/goals = SSstation.get_station_goals()
 	if(length(goals))
-		var/list/texts = list("<hr><b>Special Orders for [station_name()]:</b><br>")
+		var/list/texts = list("<hr><b>Специальные Приказы для [station_name()]:</b><br>")
 		for(var/datum/station_goal/station_goal as anything in goals)
 			station_goal.on_report()
 			texts += station_goal.get_report()
@@ -95,7 +95,7 @@ GLOBAL_DATUM_INIT(communications_controller, /datum/communciations_controller, n
 			continue
 		trait_list_strings += "[station_trait.get_report()]<BR>"
 	if(trait_list_strings.len > 0)
-		. += "<hr><b>Identified shift divergencies:</b><BR>" + trait_list_strings.Join()
+		. += "<hr><b>Выявленные отклонения смены:</b><BR>" + trait_list_strings.Join()
 
 	if(length(command_report_footnotes))
 		var/footnote_pile = ""
@@ -105,16 +105,16 @@ GLOBAL_DATUM_INIT(communications_controller, /datum/communciations_controller, n
 			footnote_pile += "<i>[footnote.signature]</i><BR>"
 			footnote_pile += "<BR>"
 
-		. += "<hr><b>Additional Notes: </b><BR><BR>" + footnote_pile
+		. += "<hr><b>Дополнительные Примечания: </b><BR><BR>" + footnote_pile
 
 #ifndef MAP_TEST
-	print_command_report(., "[command_name()] Status Summary", announce=FALSE)
+	print_command_report(., "[command_name()] Сводка Статуса", announce=FALSE)
 	if(greenshift)
 		priority_announce(
-			"Thanks to the tireless efforts of our security and intelligence divisions, \
-				there are currently no credible threats to [station_name()]. \
-				All station construction projects have been authorized. Have a secure shift!",
-			"Security Report",
+			"Благодаря неустанным усилиям наших служб безопасности и разведки, \
+				в настоящее время нет угроз для [station_name()]. \
+				Все строительные проекты станции авторизованы. Удачной смены!",
+			"Отчёт Безопасности",
 			SSstation.announcer.get_rand_report_sound(),
 			color_override = "green",
 		)
@@ -123,15 +123,15 @@ GLOBAL_DATUM_INIT(communications_controller, /datum/communciations_controller, n
 			SSsecurity_level.set_level(SEC_LEVEL_BLUE, announce = FALSE)
 		priority_announce(
 			"[SSsecurity_level.current_security_level.elevating_to_announcement]\n\n\
-				A summary has been copied and printed to all communications consoles.",
-			"Security level elevated.",
+				Сводка была скопирована и распечатана на всех консолях связи.",
+			"Уровень безопасности повышен.",
 			ANNOUNCER_INTERCEPT,
 			color_override = SSsecurity_level.current_security_level.announcement_color,
 		)
 	else
 		priority_announce(
-			"A summary of the station's situation has been copied and printed to all communications consoles.",
-			"Security Report",
+			"Сводка ситуации на станции была скопирована и распечатана на всех консолях связи.",
+			"Отчёт Безопасности",
 			SSstation.announcer.get_rand_report_sound(),
 		)
 

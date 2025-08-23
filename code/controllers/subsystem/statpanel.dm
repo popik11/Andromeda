@@ -37,6 +37,7 @@ SUBSYSTEM_DEF(statpanels)
 
 		global_data += list(
 			"Раунд ID: [GLOB.round_id ? GLOB.round_id : "NULL"]",
+			"Игроков: [LAZYLEN(GLOB.clients)]",
 			"Серверное время: [time2text(world.timeofday, "YYYY-MM-DD hh:mm:ss", world.timezone)]",
 			"Время с начала смены: [ROUND_TIME()]",
 			"Станционное время: [station_time_timestamp()]",
