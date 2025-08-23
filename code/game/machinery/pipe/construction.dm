@@ -9,7 +9,7 @@ Buildable meters
 
 /obj/item/pipe
 	name = "pipe"
-	desc = "A pipe."
+	desc = "Это обычная труба."
 	var/pipe_type
 	var/pipename
 	force = 7
@@ -271,9 +271,9 @@ Buildable meters
 
 	wrench.play_tool_sound(src)
 	user.visible_message( \
-		span_notice("[user] fastens \the [src]."), \
-		span_notice("You fasten \the [src]."), \
-		span_hear("You hear ratcheting."))
+		span_notice("[user.declent_ru(NOMINATIVE)] закрепляет [(declent_ru(ACCUSATIVE))]."), \
+		span_notice("Вы закрепляете [(declent_ru(ACCUSATIVE))]."), \
+		span_hear("Слышите трещотку."))
 
 	qdel(src)
 
@@ -288,9 +288,9 @@ Buildable meters
 	if(welder.use_tool(src, user, 2 SECONDS, volume=2))
 		new /obj/item/sliced_pipe(drop_location())
 		user.visible_message( \
-			"[user] welds \the [src] in two.", \
-			span_notice("You weld \the [src] in two."), \
-			span_hear("You hear welding."))
+			"[user.declent_ru(NOMINATIVE)] разрезает [(declent_ru(ACCUSATIVE))] пополам сваркой.", \
+			span_notice("Вы разрезаете [(declent_ru(ACCUSATIVE))] пополам сваркой."), \
+			span_hear("Слышите сварку."))
 
 		qdel(src)
 

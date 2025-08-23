@@ -1,11 +1,11 @@
-// Priority-type announcement messages for `priority_announcement()`
-/// Prefix this announcement with "Priority Announcement"
-#define ANNOUNCEMENT_TYPE_PRIORITY "Priority"
-/// Make it sound like it's coming from the Captain
-#define ANNOUNCEMENT_TYPE_CAPTAIN "Captain"
-/// Make it sound like it's coming from the Syndicate
-#define ANNOUNCEMENT_TYPE_SYNDICATE "Syndicate"
+// Приоритетные типы сообщений для `priority_announcement()`
+/// Добавляет префикс "Приоритетное сообщение" к объявлению
+#define ANNOUNCEMENT_TYPE_PRIORITY "Приоритетное"
+/// Сообщение звучит так, будто оно от Капитана
+#define ANNOUNCEMENT_TYPE_CAPTAIN "Капитана"
+/// Сообщение звучит так, будто оно от Синдиката
+#define ANNOUNCEMENT_TYPE_SYNDICATE "Синдиката"
 
-//Defines for newscaster news stations, the defined thing is what it'll be called in the Newscaster.
-#define NEWSCASTER_STATION_ANNOUNCEMENTS "Station Announcements"
-#define NEWSCASTER_SPACE_BETTING "SpaceBet"
+// Определения для станций новостей в Newscaster, название будет отображаться в системе
+#define NEWSCASTER_STATION_ANNOUNCEMENTS "Объявления Станции"
+#define NEWSCASTER_SPACE_BETTING "Космоставки"

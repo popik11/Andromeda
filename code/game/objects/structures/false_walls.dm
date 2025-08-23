@@ -3,7 +3,7 @@
  */
 /obj/structure/falsewall
 	name = "wall"
-	desc = "A huge chunk of metal used to separate rooms."
+	desc = "Огромный кусок железа, используемый для разделения комнат и удержания вас от космоса. Или космоса от вас."
 	anchored = TRUE
 	icon = 'icons/turf/walls/false_walls.dmi'
 	icon_state = "wall-open"
@@ -96,22 +96,21 @@
 /obj/structure/falsewall/tool_act(mob/living/user, obj/item/tool, list/modifiers)
 	if(!opening || !tool.tool_behaviour)
 		return ..()
-	to_chat(user, span_warning("You must wait until the door has stopped moving!"))
+	to_chat(user, span_warning("Нужно подождать, пока дверь не остановится!"))
 	return ITEM_INTERACT_BLOCKING
 
 /obj/structure/falsewall/screwdriver_act(mob/living/user, obj/item/tool)
 	if(!density)
-		to_chat(user, span_warning("You can't reach, close it first!"))
+		to_chat(user, span_warning("Не достать, сначала закройте!"))
 		return
 	var/turf/loc_turf = get_turf(src)
 	if(loc_turf.density)
-		to_chat(user, span_warning("[src] is blocked!"))
+		to_chat(user, span_warning("[src] заблокировано!"))
 		return ITEM_INTERACT_SUCCESS
 	if(!isfloorturf(loc_turf))
-		to_chat(user, span_warning("[src] bolts must be tightened on the floor!"))
+		to_chat(user, span_warning("Болты [src] должны быть затянуты на полу!"))
 		return ITEM_INTERACT_SUCCESS
-	user.visible_message(span_notice("[user] tightens some bolts on the wall."), span_notice("You tighten the bolts on the wall."))
-	ChangeToWall()
+	user.visible_message(span_notice("[user] затягивает болты на стене."), span_notice("Вы затягиваете болты на стене."))
 	return ITEM_INTERACT_SUCCESS
 
 
@@ -124,11 +123,11 @@
 /obj/structure/falsewall/attackby(obj/item/W, mob/user, list/modifiers, list/attack_modifiers)
 	if(!opening)
 		return ..()
-	to_chat(user, span_warning("You must wait until the door has stopped moving!"))
+	to_chat(user, span_warning("Нужно подождать, пока дверь не остановится!"))
 	return
 
 /obj/structure/falsewall/proc/dismantle(mob/user, disassembled=TRUE, obj/item/tool = null)
-	user.visible_message(span_notice("[user] dismantles the false wall."), span_notice("You dismantle the false wall."))
+	user.visible_message(span_notice("[user] разбирает фальшстену."), span_notice("Вы разбираете фальшстену."))
 	if(tool)
 		tool.play_tool_sound(src, 100)
 	else
@@ -145,8 +144,8 @@
 /obj/structure/falsewall/get_dumping_location()
 	return null
 
-/obj/structure/falsewall/examine_status(mob/user) //So you can't detect falsewalls by examine.
-	to_chat(user, span_notice("The outer plating is <b>welded</b> firmly in place."))
+/obj/structure/falsewall/examine_status(mob/user) //Чтобы нельзя было обнаружить фальшстены через осмотр.
+	to_chat(user, span_notice("Внешняя обшивка намертво <b>приварена</b>."))
 	return null
 
 /obj/structure/falsewall/mouse_drop_receive(mob/living/dropping, mob/user, params)
@@ -159,7 +158,7 @@
 
 /obj/structure/falsewall/reinforced
 	name = "reinforced wall"
-	desc = "A huge chunk of reinforced metal used to separate rooms."
+	desc = "Огромный кусок железа, используемый для разделения комнат и удержания вас от космоса. Или космоса от вас."
 	fake_icon = 'icons/turf/walls/reinforced_wall.dmi'
 	icon_state = "reinforced_wall-open"
 	base_icon_state = "reinforced_wall"
@@ -168,7 +167,7 @@
 	smoothing_flags = SMOOTH_BITMASK
 
 /obj/structure/falsewall/reinforced/examine_status(mob/user)
-	to_chat(user, span_notice("The outer <b>grille</b> is fully intact."))
+	to_chat(user, span_notice("Внешняя <b>решётка</b> полностью цела."))
 	return null
 
 /obj/structure/falsewall/reinforced/attackby(obj/item/tool, mob/user)
@@ -182,7 +181,7 @@
 
 /obj/structure/falsewall/uranium
 	name = "uranium wall"
-	desc = "A wall with uranium plating. This is probably a bad idea."
+	desc = "Стена с урановой обшивкой. Это, вероятно, плохая идея. Так сказал счётчик гейгера."
 	fake_icon = 'icons/turf/walls/uranium_wall.dmi'
 	icon_state = "uranium_wall-open"
 	base_icon_state = "uranium_wall"
@@ -233,7 +232,7 @@
 
 /obj/structure/falsewall/gold
 	name = "gold wall"
-	desc = "A wall with gold plating. Swag!"
+	desc = "Таки Изя это стена моя! Откуда? А таки Изя у меня всё в ажуре."
 	fake_icon = 'icons/turf/walls/gold_wall.dmi'
 	icon_state = "gold_wall-open"
 	base_icon_state = "gold_wall"
@@ -245,7 +244,7 @@
 
 /obj/structure/falsewall/silver
 	name = "silver wall"
-	desc = "A wall with silver plating. Shiny."
+	desc = "Стена с серебряной обшивкой.. А, нет, полностью из серебра. Блестит."
 	fake_icon = 'icons/turf/walls/silver_wall.dmi'
 	icon_state = "silver_wall-open"
 	base_icon_state = "silver_wall"
@@ -257,7 +256,7 @@
 
 /obj/structure/falsewall/diamond
 	name = "diamond wall"
-	desc = "A wall with diamond plating. You monster."
+	desc = "Я бы построил из этого дом, но я уже давно взрослый."
 	fake_icon = 'icons/turf/walls/diamond_wall.dmi'
 	icon_state = "diamond_wall-open"
 	base_icon_state = "diamond_wall"
@@ -270,7 +269,7 @@
 
 /obj/structure/falsewall/plasma
 	name = "plasma wall"
-	desc = "A wall with plasma plating. This is definitely a bad idea."
+	desc = "Стена с плазменной обшивкой. Это определённо плохая идея."
 	fake_icon = 'icons/turf/walls/plasma_wall.dmi'
 	icon_state = "plasma_wall-open"
 	base_icon_state = "plasma_wall"
@@ -282,7 +281,7 @@
 
 /obj/structure/falsewall/bananium
 	name = "bananium wall"
-	desc = "A wall with bananium plating. Honk!"
+	desc = "Стена с бананиумовой обшивкой. Хонк!"
 	fake_icon = 'icons/turf/walls/bananium_wall.dmi'
 	icon_state = "bananium_wall-open"
 	base_icon_state = "bananium_wall"
@@ -295,7 +294,7 @@
 
 /obj/structure/falsewall/sandstone
 	name = "sandstone wall"
-	desc = "A wall with sandstone plating. Rough."
+	desc = "Стена с песчаниковой обшивкой. Шершавая."
 	fake_icon = 'icons/turf/walls/sandstone_wall.dmi'
 	icon_state = "sandstone_wall-open"
 	base_icon_state = "sandstone_wall"
@@ -307,7 +306,7 @@
 
 /obj/structure/falsewall/wood
 	name = "wooden wall"
-	desc = "A wall with wooden plating. Stiff."
+	desc = "Стена с деревянной обшивкой. Жёсткая."
 	fake_icon = 'icons/turf/walls/wood_wall.dmi'
 	icon_state = "wood_wall-open"
 	base_icon_state = "wood_wall"
@@ -319,7 +318,7 @@
 
 /obj/structure/falsewall/bamboo
 	name = "bamboo wall"
-	desc = "A wall with bamboo finish. Zen."
+	desc = "Стена с бамбуковой отделкой. Дзен."
 	fake_icon = 'icons/turf/walls/bamboo_wall.dmi'
 	icon_state = "bamboo_wall-open"
 	base_icon_state = "bamboo_wall"
@@ -331,7 +330,7 @@
 
 /obj/structure/falsewall/iron
 	name = "rough iron wall"
-	desc = "A wall with rough metal plating."
+	desc = "Стена с грубой металлической обшивкой."
 	fake_icon = 'icons/turf/walls/iron_wall.dmi'
 	icon_state = "iron_wall-open"
 	base_icon_state = "iron_wall"
@@ -345,7 +344,7 @@
 
 /obj/structure/falsewall/abductor
 	name = "alien wall"
-	desc = "A wall with alien alloy plating."
+	desc = "Стена с обшивкой из инопланетного сплава."
 	fake_icon = 'icons/turf/walls/abductor_wall.dmi'
 	icon_state = "abductor_wall-open"
 	base_icon_state = "abductor_wall"
@@ -357,7 +356,7 @@
 
 /obj/structure/falsewall/titanium
 	name = "wall"
-	desc = "A light-weight titanium wall used in shuttles."
+	desc = "Лёгкая титановая стена, используемая в шаттлах."
 	fake_icon = 'icons/turf/walls/shuttle_wall.dmi'
 	icon_state = "shuttle_wall-open"
 	base_icon_state = "shuttle_wall"
@@ -369,7 +368,7 @@
 
 /obj/structure/falsewall/plastitanium
 	name = "wall"
-	desc = "An evil wall of plasma and titanium."
+	desc = "Зловещая стена из плазмы и титана."
 	fake_icon = 'icons/turf/walls/plastitanium_wall.dmi'
 	icon_state = "plastitanium_wall-open"
 	base_icon_state = "plastitanium_wall"
@@ -381,7 +380,7 @@
 
 /obj/structure/falsewall/material
 	name = "wall"
-	desc = "A huge chunk of material used to separate rooms."
+	desc = "Огромный кусок железа, используемый для разделения комнат и удержания вас от космоса. Или космоса от вас."
 	fake_icon = 'icons/turf/walls/material_wall.dmi'
 	icon_state = "material_wall-open"
 	base_icon_state = "material_wall"
@@ -400,7 +399,7 @@
 
 /obj/structure/falsewall/material/finalize_material_effects(list/materials)
 	. = ..()
-	desc = "A huge chunk of [get_material_english_list(materials)] used to separate rooms."
+	desc = "Огромный кусок [get_material_english_list(materials)], используемый для разделения комнат и удержания вас от космоса. Или космоса от вас."
 
 /obj/structure/falsewall/material/toggle_open()
 	if(!QDELETED(src))

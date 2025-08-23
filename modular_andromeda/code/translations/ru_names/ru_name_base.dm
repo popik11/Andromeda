@@ -49,7 +49,7 @@ GLOBAL_LIST_EMPTY(ru_names)
 
 /datum/proc/ru_names_rename(list/new_list)
 	SHOULD_CALL_PARENT(FALSE)
-	CRASH("Использовался нереализованный  proc/ru_names_rename()")
+	CRASH("Использовался нереализованный proc/ru_names_rename()")
 
 /// Необходимо использовать ПЕРЕД изменением var/name, и использовать только этот прок для изменения в рантайме склонений
 /atom/ru_names_rename(list/new_list)

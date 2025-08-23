@@ -1,15 +1,15 @@
-// Any power past this number will be clamped down
+// Любая мощность сверх этого числа будет ограничена
 #define MAX_ACCEPTED_POWER_OUTPUT 5000
 
-// At the highest power output, assuming no integrity changes, the threshold will be 0.
+// При максимальной выходной мощности, при условии отсутствия изменений целостности, порог будет равен 0.
 #define THRESHOLD_EQUATION_SLOPE (-1 / MAX_ACCEPTED_POWER_OUTPUT)
 
-// The higher this number, the faster low integrity will drop threshold
-// I would've named this "power", but y'know. :P
+// Чем выше это число, тем быстрее низкая целостность будет снижать порог
+// Я бы назвал это "мощностью", но, знаете ли. :P
 #define INTEGRITY_EXPONENTIAL_DEGREE 2
 
-// At INTEGRITY_MIN_NUDGABLE_AMOUNT, the power will be treated as, at most, INTEGRITY_MAX_POWER_NUDGE.
-// Any lower integrity will result in INTEGRITY_MAX_POWER_NUDGE.
+// При INTEGRITY_MIN_NUDGABLE_AMOUNT, мощность будет рассматриваться как максимум INTEGRITY_MAX_POWER_NUDGE.
+// Любая более низкая целостность приведет к INTEGRITY_MAX_POWER_NUDGE.
 #define INTEGRITY_MAX_POWER_NUDGE 1500
 #define INTEGRITY_MIN_NUDGABLE_AMOUNT 0.7
 
@@ -18,23 +18,23 @@
 #define CHANCE_EQUATION_SLOPE (RADIATION_CHANCE_AT_ZERO_INTEGRITY - RADIATION_CHANCE_AT_FULL_INTEGRITY)
 
 /obj/machinery/power/supermatter_crystal/proc/emit_radiation()
-	// As power goes up, rads go up.
-	// A standard N2 SM seems to produce a value of around 1,500.
+	// С ростом мощности растёт и радиация.
+	// Стандартный СМ на N2, кажется, выдаёт значение около 1500.
 	var/power_factor = min(internal_energy, MAX_ACCEPTED_POWER_OUTPUT)
 
 	var/integrity = 1 - CLAMP01(damage / explosion_point)
 
-	// When integrity goes down, the threshold (from an observable point of view, rads) go up.
-	// However, the power factor must go up as well, otherwise turning off the emitters
-	// on a delaminating SM would stop radiation from escaping.
-	// To fix this, lower integrities raise the power factor to a minimum.
+	// При снижении целостности порог (с точки зрения наблюдателя, радиация) повышается.
+	// Однако коэффициент мощности также должен расти, иначе отключение эмиттеров
+	// на делимитирующем СМ остановило бы утечку радиации.
+	// Чтобы это исправить, низкая целостность повышает коэффициент мощности до минимума.
 	var/integrity_power_nudge = LERP(INTEGRITY_MAX_POWER_NUDGE, 0, CLAMP01((integrity - INTEGRITY_MIN_NUDGABLE_AMOUNT) / (1 - INTEGRITY_MIN_NUDGABLE_AMOUNT)))
 
 	power_factor = max(power_factor, integrity_power_nudge)
 
-	// At the "normal" N2 power output (with max integrity), this is 0.7, which is enough to be stopped
-	// by the walls or the radation shutters.
-	// As integrity does down, rads go up.
+	// При "нормальной" выходной мощности N2 (с максимальной целостностью) это 0.7, что достаточно для остановки
+	// стенами или радиационными ставнями.
+	// При снижении целостности радиация растёт.
 	var/threshold
 	switch(integrity)
 		if(0)
@@ -44,7 +44,7 @@
 		else
 			threshold = (THRESHOLD_EQUATION_SLOPE * power_factor + 1) ** ((1 / integrity) ** INTEGRITY_EXPONENTIAL_DEGREE)
 
-	// Calculating chance is done entirely on integrity, so that actively delaminating SMs feel more dangerous
+	// Расчёт шанса полностью зависит от целостности, чтобы активно делимитирующие СМ ощущались опаснее.
 	var/chance = (CHANCE_EQUATION_SLOPE * (1 - integrity)) + RADIATION_CHANCE_AT_FULL_INTEGRITY
 
 	radiation_pulse(
@@ -62,7 +62,7 @@
 	else
 		soundloop.mid_sounds = list('sound/machines/sm/loops/calm.ogg' = 1)
 
-	//We play delam/neutral sounds at a rate determined by power and damage
+	//Мы проигрываем звуки делимитации/нейтральные с частотой, определяемой мощностью и уроном.
 	if(last_accent_sound >= world.time || !prob(20))
 		return
 	var/aggression = min(((damage / 800) * (internal_energy / 2500)), 1.0) * 100
@@ -74,11 +74,11 @@
 	last_accent_sound = world.time + max(SUPERMATTER_ACCENT_SOUND_MIN_COOLDOWN, next_sound)
 
 /obj/machinery/power/supermatter_crystal/proc/psychological_examination()
-	// Defaults to a value less than 1. Over time the psy_coeff goes to 0 if
-	// no supermatter soothers are nearby.
+	// По умолчанию значение меньше 1. Со временем psy_coeff стремится к 0, если
+	// поблизости нет суперматериальных успокоителей.
 	var/psy_coeff_diff = -0.05
 	for(var/mob/living/carbon/human/seen_by_sm in view(src, SM_HALLUCINATION_RANGE(internal_energy)))
-		// Someone (generally a Psychologist), when looking at the SM within hallucination range makes it easier to manage.
+		// Кто-то (обычно психолог), смотрящий на СМ в пределах радиуса галлюцинаций, облегчает управление им.
 		if(HAS_MIND_TRAIT(seen_by_sm, TRAIT_SUPERMATTER_SOOTHER))
 			psy_coeff_diff = 0.05
 	visible_hallucination_pulse(
@@ -90,8 +90,8 @@
 	psy_coeff = clamp(psy_coeff + psy_coeff_diff, 0, 1)
 
 /obj/machinery/power/supermatter_crystal/proc/handle_high_power()
-	if(internal_energy <= POWER_PENALTY_THRESHOLD && damage <= danger_point) //If the power is above 5000 or if the damage is above 550
-		last_high_energy_accumulation_perspective_machines = SSmachines.times_fired //Prevent oddly high initial zap due to high energy zaps not getting triggered via too low energy.
+	if(internal_energy <= POWER_PENALTY_THRESHOLD && damage <= danger_point) //Если мощность выше 5000 или урон выше 550
+		last_high_energy_accumulation_perspective_machines = SSmachines.times_fired //Предотвращаем аномально высокий начальный разряд из-за того, что высокоэнергетические разряды не срабатывают при слишком низкой энергии.
 		return
 	var/range = 4
 	zap_cutoff = 1500
@@ -99,31 +99,31 @@
 	var/pressure = absorbed_gasmix.return_pressure()
 	var/temp = absorbed_gasmix.temperature
 	if(pressure > 0 && temp > 0)
-		//You may be able to freeze the zapstate of the engine with good planning, we'll see
-		zap_cutoff = clamp(1.2e6 - (internal_energy * total_moles * 40) / temp, 1.4e5, 1.2e6)//If the core is cold, it's easier to jump, ditto if there are a lot of mols
-		//We should always be able to zap our way out of the default enclosure
-		//See supermatter_zap() for more details
+		//Возможно, хорошим планированием можно заморозить состояние разряда двигателя, посмотрим
+		zap_cutoff = clamp(1.2e6 - (internal_energy * total_moles * 40) / temp, 1.4e5, 1.2e6)//Если ядро холодное, прыжок проще, то же самое, если много молей
+		//Мы всегда должны иметь возможность вырваться из стандартного корпуса
+		//Подробнее см. supermatter_zap()
 		range = clamp(internal_energy / pressure * 10, 2, 7)
 	var/flags = ZAP_SUPERMATTER_FLAGS
 	var/zap_count = 0
-	//Deal with power zaps
+	//Разбираемся с силовыми разрядами
 	switch(internal_energy)
 		if(POWER_PENALTY_THRESHOLD to SEVERE_POWER_PENALTY_THRESHOLD)
 			zap_icon = DEFAULT_ZAP_ICON_STATE
 			zap_count = 2
 		if(SEVERE_POWER_PENALTY_THRESHOLD to CRITICAL_POWER_PENALTY_THRESHOLD)
 			zap_icon = SLIGHTLY_CHARGED_ZAP_ICON_STATE
-			//Uncaps the zap damage, it's maxed by the input power
-			//Objects take damage now
+			//Снимает ограничение с урона от разряда, он ограничен входной мощностью
+			//Объекты теперь получают урон
 			flags |= (ZAP_MOB_DAMAGE | ZAP_OBJ_DAMAGE)
 			zap_count = 3
 		if(CRITICAL_POWER_PENALTY_THRESHOLD to INFINITY)
 			zap_icon = OVER_9000_ZAP_ICON_STATE
-			//It'll stun more now, and damage will hit harder, gloves are no garentee.
-			//Machines go boom
+			//Теперь оглушает сильнее, и урон будет выше, перчатки не гарантия.
+			//Машины взрываются
 			flags |= (ZAP_MOB_STUN | ZAP_MACHINE_EXPLOSIVE | ZAP_MOB_DAMAGE | ZAP_OBJ_DAMAGE)
 			zap_count = 4
-	//Now we deal with damage shit
+	//Теперь разбираемся с уроном
 	if (damage > danger_point && prob(20))
 		zap_count += 1
 
@@ -148,7 +148,7 @@
 /obj/machinery/power/supermatter_crystal/proc/supermatter_pull(turf/center, pull_range = 3)
 	playsound(center, 'sound/items/weapons/marauder.ogg', 100, TRUE, extrarange = pull_range - world.view)
 	for(var/atom/movable/movable_atom in orange(pull_range,center))
-		if((movable_atom.anchored || movable_atom.move_resist >= MOVE_FORCE_EXTREMELY_STRONG)) //move resist memes.
+		if((movable_atom.anchored || movable_atom.move_resist >= MOVE_FORCE_EXTREMELY_STRONG)) //мемы сопротивления движению.
 			if(istype(movable_atom, /obj/structure/closet))
 				var/obj/structure/closet/closet = movable_atom
 				closet.open(force = TRUE)
@@ -156,7 +156,7 @@
 		if(ismob(movable_atom))
 			var/mob/pulled_mob = movable_atom
 			if(pulled_mob.mob_negates_gravity())
-				continue //You can't pull someone nailed to the deck
+				continue //Нельзя тянуть того, кто прибит к палубе.
 		step_towards(movable_atom,center)
 
 /proc/supermatter_anomaly_gen(turf/anomalycenter, type = FLUX_ANOMALY, anomalyrange = 5, has_changed_lifespan = TRUE)

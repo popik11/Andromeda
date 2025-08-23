@@ -1,6 +1,6 @@
 /obj/structure/scanner_gate_shell
 	name = "circuit scanner gate"
-	desc = "A gate able to perform mid-depth scans on any organisms who pass under it."
+	desc = "Врата, способные проводить сканирование средней глубины любых организмов, проходящих под ними."
 	icon = 'icons/obj/machines/scangate.dmi'
 	icon_state = "scangate_black"
 	var/locked = FALSE
@@ -22,7 +22,7 @@
 		return
 	set_anchored(!anchored)
 	tool.play_tool_sound(src)
-	balloon_alert(user, anchored ? "secured" : "unsecured")
+	balloon_alert(user, anchored ? "закреплено" : "откреплено")
 	return TRUE
 
 /obj/structure/scanner_gate_shell/proc/on_entered(datum/source, atom/movable/AM)
@@ -38,7 +38,7 @@
 
 /obj/item/circuit_component/scanner_gate
 	display_name = "Scanner Gate"
-	desc = "A gate able to perform mid-depth scans on any object that pass through it."
+	desc = "Врата, способные проводить сканирование средней глубины любых организмов, проходящих под ними."
 
 	var/datum/port/output/scanned
 

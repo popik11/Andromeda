@@ -195,7 +195,7 @@
 
 ///Prefs menu
 /atom/movable/screen/lobby/button/character_setup
-	name = "View Character Setup"
+	name = "Просмотр Настройки Персонажа"
 	screen_loc = "TOP:-70,CENTER:-54"
 	icon = 'icons/hud/lobby/character_setup.dmi'
 	icon_state = "character_setup_disabled"
@@ -232,7 +232,7 @@
 
 ///Button that appears before the game has started
 /atom/movable/screen/lobby/button/ready
-	name = "Toggle Readiness"
+	name = "Переключить Готовность"
 	screen_loc = "TOP:-8,CENTER:-65"
 	icon = 'icons/hud/lobby/ready.dmi'
 	icon_state = "not_ready"
@@ -281,7 +281,7 @@
 
 ///Shown when the game has started
 /atom/movable/screen/lobby/button/join
-	name = "Join Game"
+	name = "Присоединиться к Игре"
 	screen_loc = "TOP:-13,CENTER:-58"
 	icon = 'icons/hud/lobby/join.dmi'
 	icon_state = "" //Default to not visible
@@ -306,7 +306,7 @@
 		return
 
 	if(!SSticker?.IsRoundInProgress())
-		to_chat(hud.mymob, span_boldwarning("The round is either not ready, or has already finished..."))
+		to_chat(hud.mymob, span_boldwarning("Раунд либо не готов, либо уже завершился..."))
 		return
 
 	//Determines Relevent Population Cap
@@ -325,12 +325,12 @@
 
 		var/queue_position = SSticker.queued_players.Find(new_player)
 		if(queue_position == 1)
-			to_chat(new_player, span_notice("You are next in line to join the game. You will be notified when a slot opens up."))
+			to_chat(new_player, span_notice("Вы следующий в очереди на вход в игру. Вы будете уведомлены, когда откроется слот."))
 		else if(queue_position)
-			to_chat(new_player, span_notice("There are [queue_position-1] players in front of you in the queue to join the game."))
+			to_chat(new_player, span_notice("Перед вами в очереди на вход в игру [queue_position-1] игроков."))
 		else
 			SSticker.queued_players += new_player
-			to_chat(new_player, span_notice("You have been added to the queue to join the game. Your position in queue is [SSticker.queued_players.len]."))
+			to_chat(new_player, span_notice("Вы добавлены в очередь на вход в игру. Ваша позиция в очереди: [SSticker.queued_players.len]."))
 		return
 
 	new_player.auto_deadmin_on_ready_or_latejoin()
@@ -338,7 +338,7 @@
 	if(!LAZYACCESS(params2list(params), CTRL_CLICK))
 		GLOB.latejoin_menu.ui_interact(new_player)
 	else
-		to_chat(new_player, span_warning("Opening emergency fallback late join menu! If THIS doesn't show, ahelp immediately!"))
+		to_chat(new_player, span_warning("Открываю аварийное меню позднего присоединения! Если ЭТО не покажется, немедленно пишите в ахелп!"))
 		GLOB.latejoin_menu.fallback_ui(new_player)
 
 
@@ -355,7 +355,7 @@
 	RegisterSignal(SSticker, COMSIG_TICKER_ENTER_SETTING_UP, PROC_REF(show_join_button))
 
 /atom/movable/screen/lobby/button/observe
-	name = "Observe"
+	name = "Наблюдать"
 	screen_loc = "TOP:-40,CENTER:-54"
 	icon = 'icons/hud/lobby/observe.dmi'
 	icon_state = "observe_disabled"
@@ -389,7 +389,7 @@
 	icon = 'icons/hud/lobby/bottom_buttons.dmi'
 
 /atom/movable/screen/lobby/button/bottom/settings
-	name = "View Game Preferences"
+	name = "Просмотр Игровых Настроек"
 	icon_state = "settings_disabled"
 	base_icon_state = "settings"
 	screen_loc = "TOP:-122,CENTER:+29"
@@ -422,7 +422,7 @@
 	UnregisterSignal(SSatoms, COMSIG_SUBSYSTEM_POST_INITIALIZE)
 
 /atom/movable/screen/lobby/button/bottom/changelog_button
-	name = "View Changelog"
+	name = "Просмотр Журнала Изменений"
 	icon_state = "changelog"
 	base_icon_state = "changelog"
 	screen_loc ="TOP:-122,CENTER:+57"
@@ -432,7 +432,7 @@
 	usr.client?.changelog()
 
 /atom/movable/screen/lobby/button/bottom/crew_manifest
-	name = "View Crew Manifest"
+	name = "Просмотр Манифеста Экипажа"
 	icon_state = "crew_manifest"
 	base_icon_state = "crew_manifest"
 	screen_loc = "TOP:-122,CENTER:+2"
@@ -445,7 +445,7 @@
 	new_player.ViewManifest()
 
 /atom/movable/screen/lobby/button/bottom/poll
-	name = "View Available Polls"
+	name = "Просмотр Доступных Опросов"
 	icon_state = "poll"
 	base_icon_state = "poll"
 	screen_loc = "TOP:-122,CENTER:-26"
@@ -526,7 +526,7 @@
 	closeToolTip(usr)
 
 /atom/movable/screen/lobby/button/collapse
-	name = "Collapse Lobby Menu"
+	name = "Свернуть Меню Лобби"
 	icon = 'icons/hud/lobby/collapse_expand.dmi'
 	icon_state = "collapse"
 	base_icon_state = "collapse"
@@ -564,7 +564,7 @@
 		return
 	var/datum/hud/new_player/our_hud = hud
 	base_icon_state = our_hud.menu_hud_status ? "expand" : "collapse"
-	name = "[our_hud.menu_hud_status ? "Expand" : "Collapse"] Lobby Menu"
+	name = "[our_hud.menu_hud_status ? "Развернуть" : "Свернуть"] Меню Лобби"
 	set_button_status(FALSE)
 
 	//get the shutter object used by our hud
@@ -654,7 +654,7 @@
 
 /// LOCALHOST ONLY - Start Now button
 /atom/movable/screen/lobby/button/start_now
-	name = "Start Now (LOCALHOST ONLY)"
+	name = "Начать Сейчас (ТОЛЬКО ЛОКАЛЬНЫЙ ХОСТ)"
 	screen_loc = "TOP:-146,CENTER:-54"
 	icon = 'icons/hud/lobby/start_now.dmi'
 	icon_state = "start_now"
@@ -669,14 +669,14 @@
 	SEND_SOUND(hud.mymob, sound('sound/effects/cartoon_sfx/cartoon_splat.ogg', volume = 50))
 	SSticker.start_immediately = TRUE
 	if(SSticker.current_state == GAME_STATE_STARTUP)
-		to_chat(usr, span_admin("The server is still setting up, but the round will be started as soon as possible."))
+		to_chat(usr, span_admin("Сервер всё ещё настраивается, но раунд будет запущен как можно скорее."))
 
 #define OVERLAY_X_DIFF 12
 #define OVERLAY_Y_DIFF 5
 
 ///Lobby screen that appears before the game has started showing how many players there are and who is ready.
 /atom/movable/screen/lobby/new_player_info
-	name = "New Player Info"
+	name = "Информация для Новых Игроков"
 	screen_loc = "EAST-3,CENTER:140"
 	icon = 'icons/hud/lobby/newplayer.dmi'
 	icon_state = null //we only show up when we get update appearance called, cause we need our overlay to not look bad.
@@ -738,10 +738,10 @@
 		maptext = null
 		return
 	if(!MC_RUNNING())
-		maptext = MAPTEXT("<span style='text-align: center; vertical-align: middle'>Loading...</span>")
+		maptext = MAPTEXT("<span style='text-align: center; vertical-align: middle'>Загрузка...</span>")
 		return
 	if(SSticker.IsPostgame())
-		maptext = MAPTEXT("<span style='text-align: center; vertical-align: middle'>Game ended, <br /> \
+		maptext = MAPTEXT("<span style='text-align: center; vertical-align: middle'>Игра окончена, <br /> \
 			restart soon</span>")
 		return
 
@@ -749,29 +749,29 @@
 	var/round_started = SSticker.HasRoundStarted()
 	if(round_started)
 		new_maptext = "<span style='text-align: center; vertical-align: middle'>[SSmapping.current_map.map_name]<br /> \
-			[LAZYLEN(GLOB.clients)] player\s online<br /> \
-			[ROUND_TIME()] in<br />"
+			[LAZYLEN(GLOB.clients)] игрок/ов онлайн<br /> \
+			[ROUND_TIME()] от начала смены<br />"
 		var/datum/station_trait/overflow_job_bureaucracy/overflow = locate() in SSstation.station_traits
 		if(overflow)
-			new_maptext += "[overflow.chosen_job_name] overflow"
+			new_maptext += "[overflow.chosen_job_name] переполнение"
 		new_maptext += "</span>"
 	else
 		var/time_remaining = SSticker.GetTimeLeft()
 		if(time_remaining > 0)
-			time_remaining = "[round(time_remaining/10)]s"
+			time_remaining = "[round(time_remaining/10)]с"
 		else if(time_remaining == -10)
-			time_remaining = "DELAYED"
+			time_remaining = "ЗАДЕРЖАНО"
 		else
-			time_remaining = "SOON"
+			time_remaining = "СКОРО"
 
 		if(hud.mymob.client?.holder)
-			new_maptext = "<span style='text-align: center; vertical-align: middle'>Starting in [time_remaining]<br /> \
-				[LAZYLEN(GLOB.clients)] player\s<br /> \
-				[SSticker.totalPlayersReady] players ready<br /> \
-				[SSticker.total_admins_ready] / [length(GLOB.admins)] admins ready</span>"
+			new_maptext = "<span style='text-align: center; vertical-align: middle'>Начало через [time_remaining]<br /> \
+				[LAZYLEN(GLOB.clients)] игрок/ов<br /> \
+				[SSticker.totalPlayersReady] игрок/ов готово<br /> \
+				[SSticker.total_admins_ready] / [length(GLOB.admins)] админ/ов готово</span>"
 		else
 			new_maptext = "<span style='text-align: center; vertical-align: middle; font-size: 18px'>[time_remaining]</span><br /> \
-				<span style='text-align: center; vertical-align: middle'>[LAZYLEN(GLOB.clients)] player\s</span>"
+				<span style='text-align: center; vertical-align: middle'>[LAZYLEN(GLOB.clients)] игрок/ов</span>"
 
 	maptext = MAPTEXT(new_maptext)
 

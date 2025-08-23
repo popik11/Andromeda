@@ -280,29 +280,29 @@
 	if(machine_stat & BROKEN)
 		return FALSE
 	if(connected_port)
-		investigate_log("was disconnected from [connected_port] by [key_name(user)].", INVESTIGATE_ATMOS)
+		investigate_log("был отключен от [connected_port] пользователем [key_name(user)].", INVESTIGATE_ATMOS)
 		disconnect()
 		wrench.play_tool_sound(src)
 		user.visible_message( \
-			"[user] disconnects [src].", \
-			span_notice("You unfasten [src] from the port."), \
-			span_hear("You hear a ratchet."))
+			"[user.declent_ru(NOMINATIVE)] отключает [(declent_ru(ACCUSATIVE))].", \
+			span_notice("Вы открепляете [(declent_ru(ACCUSATIVE))] от порта."), \
+			span_hear("Слышите трещотку."))
 		update_appearance()
 		return TRUE
 	var/obj/machinery/atmospherics/components/unary/portables_connector/possible_port = locate(/obj/machinery/atmospherics/components/unary/portables_connector) in loc
 	if(!possible_port)
-		to_chat(user, span_notice("Nothing happens."))
+		to_chat(user, span_notice("Ничего не происходит."))
 		return FALSE
 	if(!connect(possible_port))
-		to_chat(user, span_notice("[name] failed to connect to the port."))
+		to_chat(user, span_notice("[(declent_ru(ACCUSATIVE))] не удалось подключиться к порту."))
 		return FALSE
 	wrench.play_tool_sound(src)
 	user.visible_message( \
-		"[user] connects [src].", \
-		span_notice("You fasten [src] to the port."), \
-		span_hear("You hear a ratchet."))
+		"[user.declent_ru(NOMINATIVE)] подключает [(declent_ru(ACCUSATIVE))].", \
+		span_notice("Вы закрепляете [(declent_ru(ACCUSATIVE))] к порту."), \
+		span_hear("Слышите трещотку."))
 	update_appearance()
-	investigate_log("was connected to [possible_port] by [key_name(user)].", INVESTIGATE_ATMOS)
+	investigate_log("был подключен к [possible_port] пользователем [key_name(user)].", INVESTIGATE_ATMOS)
 	return TRUE
 
 /obj/machinery/portable_atmospherics/atom_break(damage_flag)

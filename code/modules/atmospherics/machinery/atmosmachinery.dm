@@ -453,10 +453,10 @@
 
 	if(I.use_tool(src, user, empty_pipe ? 0 : 2 SECONDS, volume = 50))
 		user.visible_message( \
-			"[user] unfastens \the [src].", \
-			span_notice("You unfasten \the [src]."), \
-			span_hear("You hear ratchet."))
-		investigate_log("was [span_warning("REMOVED")] by [key_name(usr)]", INVESTIGATE_ATMOS)
+			"[user.declent_ru(NOMINATIVE)] открепляет [(declent_ru(ACCUSATIVE))].", \
+			span_notice("Вы открепляете [(declent_ru(ACCUSATIVE))]."), \
+			span_hear("Слышите трещотку."))
+		investigate_log("был [span_warning("УДАЛЁН")] пользователем [key_name(usr)]", INVESTIGATE_ATMOS)
 
 		//You unwrenched a pipe full of pressure? Let's splat you into the wall, silly.
 		if(unsafe_wrenching)
@@ -551,7 +551,7 @@
 
 /obj/machinery/atmospherics/update_name()
 	if(!override_naming && !HAS_TRAIT(src, TRAIT_WAS_RENAMED))
-		name = "[GLOB.pipe_color_name[pipe_color]] [initial(name)]"
+		name = "[declent_ru(NOMINATIVE)]"
 	return ..()
 
 /obj/machinery/atmospherics/vv_edit_var(vname, vval)

@@ -69,7 +69,7 @@
 	icon_state = "engi_lobby"
 
 /area/station/engineering/supermatter
-	name = "\improper Суперматериальный двигатель"
+	name = "\improper Камера Суперматерии"
 	icon_state = "engine_sm"
 	area_flags = BLOBS_ALLOWED | UNIQUE_AREA | CULT_PERMITTED
 	sound_environment = SOUND_AREA_SMALL_ENCLOSED

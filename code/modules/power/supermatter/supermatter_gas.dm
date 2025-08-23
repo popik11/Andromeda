@@ -5,8 +5,8 @@
 		gas_list[sm_gas.gas_path] = sm_gas
 	return gas_list
 
-/// Return a list info of the SM gases.
-/// Can only run after init_sm_gas
+/// Возвращает список информации о газах СМ.
+/// Может работать только после init_sm_gas
 /proc/sm_gas_data()
 	var/list/data = list()
 	for (var/gas_path in GLOB.sm_gas_behavior)
@@ -14,41 +14,41 @@
 		var/list/singular_gas_data = list()
 		singular_gas_data["desc"] = sm_gas.desc
 
-		// Positive is true if more of the amount is a good thing.
+		// Positive равен true, если большее количество газа является положительным эффектом.
 		var/list/numeric_data = list()
 		if(sm_gas.power_transmission)
-			var/list/si_derived_data = siunit_isolated(sm_gas.power_transmission * BASE_POWER_TRANSMISSION_RATE, "W/MeV", 2)
+			var/list/si_derived_data = siunit_isolated(sm_gas.power_transmission * BASE_POWER_TRANSMISSION_RATE, "Вт/МэВ", 2)
 			numeric_data += list(list(
-				"name" = "Power Transmission Bonus",
+				"name" = "Бонус передачи энергии",
 				"amount" = si_derived_data["coefficient"],
 				"unit" = si_derived_data["unit"],
 				"positive" = TRUE,
 			))
 		if(sm_gas.heat_modifier)
 			numeric_data += list(list(
-				"name" = "Waste Multiplier",
+				"name" = "Множитель отходов",
 				"amount" = 100 * sm_gas.heat_modifier,
 				"unit" = "%",
 				"positive" = FALSE,
 			))
 		if(sm_gas.heat_resistance)
 			numeric_data += list(list(
-				"name" = "Heat Resistance",
+				"name" = "Термостойкость",
 				"amount" = 100 * sm_gas.heat_resistance,
 				"unit" = "%",
 				"positive" = TRUE,
 			))
 		if(sm_gas.heat_power_generation)
-			var/list/si_derived_data = siunit_isolated(sm_gas.heat_power_generation * GAS_HEAT_POWER_SCALING_COEFFICIENT MEGA SECONDS / SSair.wait, "eV/K/s", 2)
+			var/list/si_derived_data = siunit_isolated(sm_gas.heat_power_generation * GAS_HEAT_POWER_SCALING_COEFFICIENT MEGA SECONDS / SSair.wait, "эВ/К/с", 2)
 			numeric_data += list(list(
-				"name" = "Heat Power Gain",
+				"name" = "Прирост энергии от тепла",
 				"amount" = si_derived_data["coefficient"],
 				"unit" = si_derived_data["unit"],
 				"positive" = TRUE,
 			))
 		if(sm_gas.powerloss_inhibition)
 			numeric_data += list(list(
-				"name" = "Power Decay Negation",
+				"name" = "Подавление потерь энергии",
 				"amount" = 100 * sm_gas.powerloss_inhibition,
 				"unit" = "%",
 				"positive" = TRUE,
@@ -57,26 +57,26 @@
 		data[gas_path] = singular_gas_data
 	return data
 
-/// Assoc of sm_gas_behavior[/datum/gas (path)] = datum/sm_gas (instance)
+/// Ассоциативный массив sm_gas_behavior[/datum/gas (путь)] = datum/sm_gas (экземпляр)
 GLOBAL_LIST_INIT(sm_gas_behavior, init_sm_gas())
 
-/// Contains effects of gases when absorbed by the sm.
-/// If the gas has no effects you do not need to add another sm_gas subtype,
-/// We already guard for nulls in [/obj/machinery/power/supermatter_crystal/proc/calculate_gases]
+/// Содержит эффекты газов при поглощении СМ.
+/// Если газ не имеет эффектов, вам не нужно добавлять другой подтип sm_gas,
+/// Мы уже проверяем на null в [/obj/machinery/power/supermatter_crystal/proc/calculate_gases]
 /datum/sm_gas
-	/// Path of the [/datum/gas] involved with this interaction.
+	/// Путь [/datum/gas], участвующего в этом взаимодействии.
 	var/gas_path
-	/// Influences zap power without interfering with the crystal's own energy. Gets scaled by [BASE_POWER_TRANSMISSION_RATE].
+	/// Влияет на мощность разряда, не вмешиваясь в собственную энергию кристалла. Масштабируется через [BASE_POWER_TRANSMISSION_RATE].
 	var/power_transmission = 0
-	/// How much more waste heat and gas the SM generates.
+	/// Насколько больше побочного тепла и газа генерирует СМ.
 	var/heat_modifier = 0
-	/// How extra hot the SM can run before taking damage
+	/// Насколько горячее может работать СМ до получения урона.
 	var/heat_resistance = 0
-	/// Lets the sm generate extra power from heat. Yeah...
+	/// Позволяет СМ генерировать дополнительную энергию из тепла. Да...
 	var/heat_power_generation = 0
-	/// How much powerloss do we get rid of.
+	/// Насколько снижаются потери энергии.
 	var/powerloss_inhibition = 0
-	/// Give a short description of the gas if needed. If the gas have extra effects describe it here.
+	/// Дайте краткое описание газа, если нужно. Если газ имеет дополнительные эффекты, опишите их здесь.
 	var/desc
 
 /datum/sm_gas/proc/extra_effects(obj/machinery/power/supermatter_crystal/sm)
@@ -97,9 +97,9 @@ GLOBAL_LIST_INIT(sm_gas_behavior, init_sm_gas())
 	heat_modifier = 1
 	heat_power_generation = 1
 	powerloss_inhibition = 1
-	desc = "When absorbed by the Supermatter and exposed to oxygen, Pluoxium will be generated."
+	desc = "При поглощении Суперматерией и контакте с кислородом, будет генерироваться Плюоксиум."
 
-/// Can be on Oxygen or CO2, but better lump it here since CO2 is rarer.
+/// Может быть на Кислороде или CO2, но лучше объединить здесь, так как CO2 встречается реже.
 /datum/sm_gas/carbon_dioxide/extra_effects(obj/machinery/power/supermatter_crystal/sm)
 	if(!sm.gas_percentage[/datum/gas/carbon_dioxide] || !sm.gas_percentage[/datum/gas/oxygen])
 		return
@@ -151,9 +151,9 @@ GLOBAL_LIST_INIT(sm_gas_behavior, init_sm_gas())
 	heat_modifier = 4
 	power_transmission = -0.2
 	heat_power_generation = 1
-	desc = "Will emit nuclear particles at compositions above 40%"
+	desc = "Будет испускать ядерные частицы (излуччение) при составе выше 40%"
 
-/// Start to emit radballs at a maximum of 30% chance per tick
+/// Начинает испускать радиационные шары с максимальным шансом 30% за тик.
 /datum/sm_gas/bz/extra_effects(obj/machinery/power/supermatter_crystal/sm)
 	if(sm.gas_percentage[/datum/gas/bz] > 0.4 && prob(30 * sm.gas_percentage[/datum/gas/bz]))
 		sm.fire_nuclear_particle()
@@ -167,9 +167,9 @@ GLOBAL_LIST_INIT(sm_gas_behavior, init_sm_gas())
 /datum/sm_gas/miasma
 	gas_path = /datum/gas/miasma
 	heat_power_generation = 0.5
-	desc = "Will be consumed by the Supermatter to generate power."
+	desc = "Будет поглощаться Суперматерией для генерации энергии."
 
-///Miasma is really just microscopic particulate. It gets consumed like anything else that touches the crystal.
+///Миазма - это действительно просто микроскопические частицы. Она поглощается, как и всё остальное, что касается кристалла.
 /datum/sm_gas/miasma/extra_effects(obj/machinery/power/supermatter_crystal/sm)
 	if(!sm.gas_percentage[/datum/gas/miasma])
 		return
@@ -213,7 +213,7 @@ GLOBAL_LIST_INIT(sm_gas_behavior, init_sm_gas())
 	heat_modifier = 7
 	power_transmission = 2
 	heat_power_generation = 1
-	desc = "Will generate electrical zaps."
+	desc = "Будет генерировать электрические разряды."
 
 /datum/sm_gas/zauker/extra_effects(obj/machinery/power/supermatter_crystal/sm)
 	if(!prob(sm.gas_percentage[/datum/gas/zauker] * 100))

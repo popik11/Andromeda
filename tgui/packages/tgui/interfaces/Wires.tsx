@@ -37,7 +37,7 @@ export const Wires = (props) => {
           {!!proper_name && (
             <Stack.Item>
               <NoticeBox textAlign="center">
-                {proper_name} Wire Configuration
+                {proper_name} Конфигурация Проводов
               </NoticeBox>
             </Stack.Item>
           )}
@@ -78,7 +78,7 @@ const WireMap = (props) => {
           buttons={
             <>
               <Button
-                content={wire.cut ? 'Mend' : 'Cut'}
+                content={wire.cut ? 'Соед.' : 'Резать'}
                 onClick={() =>
                   act('cut', {
                     wire: wire.color,
@@ -86,7 +86,7 @@ const WireMap = (props) => {
                 }
               />
               <Button
-                content="Pulse"
+                content="Пульс"
                 onClick={() =>
                   act('pulse', {
                     wire: wire.color,
@@ -94,7 +94,7 @@ const WireMap = (props) => {
                 }
               />
               <Button
-                content={wire.attached ? 'Detach' : 'Attach'}
+                content={wire.attached ? 'Отсоединить' : 'Устр-во'}
                 onClick={() =>
                   act('attach', {
                     wire: wire.color,

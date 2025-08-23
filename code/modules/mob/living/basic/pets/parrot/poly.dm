@@ -11,22 +11,22 @@
 /// haunt filter color we apply to who we possess
 #define POLY_POSSESS_GLOW "#522059"
 
-/// The classically famous compadre to the Chief Engineer, Poly.
+/// Классически знаменитый компаньон старшего инженера, Полли.
 /mob/living/basic/parrot/poly
 	name = "Poly"
-	desc = "Poly the Parrot. An expert on quantum cracker theory."
+	desc = "Попугай Полли. Эксперт по квантовой теории крекеров. Любимая птичка адмирала 13 сектора."
 	gold_core_spawnable = NO_SPAWN
 	speech_probability_rate = 13
 
-	/// Callback to save our memory at the end of the round.
+	/// Колбэк (Callback) для сохранения нашей памяти в конце раунда.
 	var/datum/callback/roundend_callback = null
-	/// Did we write the memory to disk?
+	/// Сохранили ли мы память на диск?
 	var/memory_saved = FALSE
-	/// How long has this bird been alive for?
+	/// Как долго эта птица была жива?
 	var/rounds_survived = 0
-	/// How long have we survived for at max?
+	/// Как долго мы выживали максимально?
 	var/longest_survival = 0
-	/// How many rounds in a row have we been dead for?
+	/// Сколько раундов подряд мы были мертвы?
 	var/longest_deathstreak = 0
 
 /mob/living/basic/parrot/poly/Initialize(mapload)
@@ -76,23 +76,24 @@
 		return phrases_to_return
 
 	phrases_to_return += read_memory() // must come first!!!
-	// now add some valuable lines every poly should have
+	// теперь добавим несколько ценных фраз, которые должны быть у каждой полли
 	phrases_to_return += list(
-		":e Check the crystal, you chucklefucks!",
-		":e OH GOD ITS ABOUT TO DELAMINATE CALL THE SHUTTLE",
-		":e WHO TOOK THE DAMN MODSUITS?",
-		":e Wire the solars, you lazy bums!",
-		"Poly wanna cracker!",
+		":e Проверьте кристалл, йобаны!",
+		":e О БОЖЕ, ОН СЕЙЧАС ДЕЛАМИНИРУЕТ, ВЫЗЫВАЙТЕ ШАТТЛ",
+		":e КТО ВЗЯЛ ЧЁРТОВЫ СКАФАНДРЫ?",
+		":e Подключите солнечные панели, ленивые ублюдки!",
+		"Полли хочет крекер!",
+		"Полли хочет пиво!",
 	)
 	switch(determine_special_poly())
 		if(POLY_DEFAULT)
-			phrases_to_return += pick("...alive?", "This isn't parrot heaven!", "I live, I die, I live again!", "The void fades!")
+			phrases_to_return += pick("...жив?", "Это не рай для попугаев!", "Я живу, я умираю, я снова живу!", "Бездна исчезает!")
 		if(POLY_LONGEST_SURVIVAL)
-			phrases_to_return += pick("...[longest_survival].", "The things I've seen!", "I have lived many lives!", "What are you before me?")
+			phrases_to_return += pick("...[longest_survival].", "Вещи, которые я видел!", "Я прожил много жизней!", "Стоп, это опять ты?")
 		if(POLY_BEATING_DEATHSTREAK)
-			phrases_to_return += pick("What are you waiting for!", "Violence breeds violence!", "Blood! Blood!", "Strike me down if you dare!")
+			phrases_to_return += pick("Чего ты ждёшь!", "Насилие порождает насилие!", "Кровь! Кровь!", "Попробуй срази меня, если осмелишься!")
 		if(POLY_CONSECUTIVE_ROUND)
-			phrases_to_return += pick("...again?", "No, It was over!", "Let me out!", "It never ends!")
+			phrases_to_return += pick("...снова?", "Нет, всё было кончено!", "Выпустите меня!", "Это никогда не кончается!")
 
 	return phrases_to_return
 
@@ -100,11 +101,11 @@
 	. = ..()
 	switch(determine_special_poly())
 		if(POLY_LONGEST_SURVIVAL)
-			desc += " Old as sin, and just as loud. Claimed to be [rounds_survived]."
+			desc += " Стара как грех и всё такая же громкая. Утверждает, что ей [rounds_survived]."
 		if(POLY_BEATING_DEATHSTREAK)
-			desc += " The squawks of [-rounds_survived] dead parrots ring out in your ears..."
+			desc += " Крики [-rounds_survived] мёртвых попугаев звонят в ушах..."
 		if(POLY_CONSECUTIVE_ROUND)
-			desc += " Over [rounds_survived] shifts without a \"terrible\" \"accident\"!"
+			desc += " Уже [rounds_survived] смен без \"убийства\" прекрасной птички!"
 
 /mob/living/basic/parrot/poly/update_icon()
 	. = ..()
@@ -138,7 +139,7 @@
 
 	return returnable_list
 
-/// Determines the type of Poly we might have here based on the statistics we got from the memory.
+/// Определяет тип Полли, который у нас может быть, на основе статистики из памяти.
 /mob/living/basic/parrot/poly/proc/determine_special_poly()
 	if(rounds_survived == longest_survival)
 		return POLY_LONGEST_SURVIVAL
@@ -189,7 +190,7 @@
 
 /mob/living/basic/parrot/poly/ghost
 	name = "The Ghost of Poly"
-	desc = "Doomed to squawk the Earth."
+	desc = "Обречёна щебетать ВЕЧНО."
 	color = "#FFFFFF77"
 	sentience_type = SENTIENCE_BOSS //This is so players can't mindswap into ghost poly to become a literal god
 	incorporeal_move = INCORPOREAL_MOVE_BASIC
@@ -212,7 +213,7 @@
 		forceMove(get_turf(target))
 		return FALSE
 	if(ishuman(loc))
-		balloon_alert(src, "already possessing!")
+		balloon_alert(src, "уже одержим!")
 		return FALSE
 	forceMove(target)
 	return TRUE

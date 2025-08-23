@@ -209,7 +209,7 @@ export function JobSelection(props) {
             <>
               {shuttle_status && <NoticeBox info>{shuttle_status}</NoticeBox>}
               <Box as="span" color="label">
-                It is currently {round_duration} into the shift.
+                Сейчас {round_duration} с начала смены.
               </Box>
             </>
           }

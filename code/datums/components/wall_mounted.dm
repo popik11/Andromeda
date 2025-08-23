@@ -42,7 +42,7 @@
 /datum/component/wall_mounted/proc/on_examine(datum/source, mob/user, list/examine_list)
 	SIGNAL_HANDLER
 	if (parent in view(user.client?.view || world.view, user))
-		examine_list += span_notice("[hanging_wall_turf] сейчас поддерживает [span_bold("[parent]")]. Разрушение или значительные повреждения приведут к [span_bold("падению на пол")].")
+		examine_list += span_notice("На [hanging_wall_turf] вмонтирована [span_bold("[parent]")]. Разрушение или значительные повреждения приведут к [span_bold("падению на пол")].")
 
 /**
  * When the type of turf changes, if it is changing into a floor we should drop our contents

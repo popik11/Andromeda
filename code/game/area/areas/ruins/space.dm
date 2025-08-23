@@ -367,7 +367,7 @@
 /area/ruin/space/ks13/engineering
 
 /area/ruin/space/ks13/engineering/supermatter
-	name = "\improper Суперматериальный двигатель"
+	name = "\improper Камера Суперматерии"
 	icon_state = "ks13_supermatter"
 
 /area/ruin/space/ks13/engineering/atmos

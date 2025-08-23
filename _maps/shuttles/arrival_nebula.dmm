@@ -76,8 +76,8 @@
 /area/shuttle/arrival)
 "p" = (
 /obj/machinery/requests_console/directional/south{
-	department = "Arrival shuttle";
-	name = "Arrival Shuttle Requests Console"
+	department = "Транспортный шаттл";
+	name = "Консоль транспортного шаттла"
 	},
 /obj/effect/turf_decal/siding/wood/corner{
 	dir = 1

@@ -26048,3 +26048,93 @@ accusative = "ящик с инструментами для механики"
 instrumental = "ящиком с инструментами для механики"
 prepositional = "ящике с инструментами для механики"
 gender = "male"
+
+["external airlock pump"]
+nominative = "вентиляция стыковочного порта"
+genitive = "вентиляции стыковочного порта"
+dative = "вентиляции стыковочного порта"
+accusative = "вентиляцию стыковочного порта"
+instrumental = "вентиляцией стыковочного порта"
+prepositional = "вентиляции стыковочного порта"
+gender = "female"
+
+["pipe"]
+nominative = "труба"
+genitive = "трубы"
+dative = "трубе"
+accusative = "трубу"
+instrumental = "трубой"
+prepositional = "трубе"
+gender = "female"
+
+["pipe fitting"]
+nominative = "труба"
+genitive = "трубы"
+dative = "трубе"
+accusative = "трубу"
+instrumental = "трубой"
+prepositional = "трубе"
+gender = "female"
+
+["barometric monitor"]
+nominative = "барометрический монитор"
+genitive = "барометрического монитора"
+dative = "барометрическому монитору"
+accusative = "барометрический монитор"
+instrumental = "барометрическим монитором"
+prepositional = "барометрическом мониторе"
+gender = "male"
+
+["requests console"]
+nominative = "диспетчерская консоль"
+genitive = "диспетчерской консоли"
+dative = "диспетчерской консоли"
+accusative = "диспетчерскую консоль"
+instrumental = "диспетчерской консолью"
+prepositional = "диспетчерской консоли"
+gender = "female"
+
+["supermatter crystal"]
+nominative = "кристалл суперматерии"
+genitive = "кристалла суперматерии"
+dative = "кристаллу суперматерии"
+accusative = "кристалл суперматерии"
+instrumental = "кристаллом суперматерии"
+prepositional = "кристалле суперматерии"
+gender = "male"
+
+["machine frame"]
+nominative = "каркас машины"
+genitive = "каркаса машины"
+dative = "каркасу машины"
+accusative = "каркас машины"
+instrumental = "каркасом машины"
+prepositional = "каркасе машины"
+gender = "male"
+
+["computer frame"]
+nominative = "каркас компьютера"
+genitive = "каркаса компьютера"
+dative = "каркасу компьютера"
+accusative = "каркас компьютера"
+instrumental = "каркасом компьютера"
+prepositional = "каркасе компьютера"
+gender = "male"
+
+["Poly"]
+nominative = "Полли"
+genitive = "Полли"
+dative = "Полли"
+accusative = "Полли"
+instrumental = "Полли"
+prepositional = "Полли"
+gender = "female"
+
+["power cable"]
+nominative = "силовой кабель"
+genitive = "силового кабеля"
+dative = "силовому кабелю"
+accusative = "силовой кабель"
+instrumental = "силовым кабелем"
+prepositional = "силовом кабеле"
+gender = "male"

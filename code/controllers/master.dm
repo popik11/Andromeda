@@ -334,7 +334,7 @@ ADMIN_VERB(cmd_controller_view_ui, R_SERVER|R_DEBUG, "Controller Overview", "Vie
 	init_stage_completed = 0
 	var/mc_started = FALSE
 
-	to_chat(world, span_boldannounce("Инициализация подсистем..."), MESSAGE_TYPE_DEBUG)
+	to_chat(world, span_boldannounce("Инициализация подсистем... Убираем пиво Ревокина от серверов."), MESSAGE_TYPE_DEBUG)
 
 	var/list/stage_sorted_subsystems = new(INITSTAGE_MAX)
 	for (var/i in 1 to INITSTAGE_MAX)

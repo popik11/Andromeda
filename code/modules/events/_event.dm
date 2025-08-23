@@ -93,11 +93,11 @@
 	triggering = TRUE
 
 	// We sleep HERE, in pre-event setup (because there's no sense doing it in run_event() since the event is already running!) for the given amount of time to make an admin has enough time to cancel an event un-fitting of the present round or at least reroll it.
-	message_admins("Random Event triggering in [DisplayTimeText(RANDOM_EVENT_ADMIN_INTERVENTION_TIME)]: [name]. (<a href='byond://?src=[REF(src)];cancel=1'>CANCEL</a>) (<a href='byond://?src=[REF(src)];different_event=1'>SOMETHING ELSE</a>)")
+	message_admins("Случайное событие запустится через [DisplayTimeText(RANDOM_EVENT_ADMIN_INTERVENTION_TIME)]: [name]. (<a href='byond://?src=[REF(src)];cancel=1'>ОТМЕНИТЬ</a>) (<a href='byond://?src=[REF(src)];different_event=1'>ПОМЕНЯТЬ НА ДРУГОЙ!</a>)")
 	sleep(RANDOM_EVENT_ADMIN_INTERVENTION_TIME)
 	var/players_amt = get_active_player_count(alive_check = TRUE, afk_check = TRUE, human_check = TRUE)
 	if(!can_spawn_event(players_amt))
-		message_admins("Second pre-condition check for [name] failed, rerolling...")
+		message_admins("Вторая проверка предварительных условий для [name] провалена, перебрасываю...")
 		SSevents.spawnEvent(excluded_event = src)
 		return EVENT_INTERRUPTED
 
@@ -110,19 +110,19 @@
 	..()
 	if(href_list["cancel"])
 		if(!triggering)
-			to_chat(usr, span_admin("You are too late to cancel that event"))
+			to_chat(usr, span_admin("Вы опоздали, чтобы отменить это событие"))
 			return
 		triggering = FALSE
-		message_admins("[key_name_admin(usr)] cancelled event [name].")
-		log_admin_private("[key_name(usr)] cancelled event [name].")
+		message_admins("[key_name_admin(usr)] отменил событие [name].")
+		log_admin_private("[key_name(usr)] отменил событие [name].")
 		SSblackbox.record_feedback("tally", "event_admin_cancelled", 1, typepath)
 	if(href_list["different_event"])
 		if(!triggering)
-			to_chat(usr, span_admin("Too late to change events now!"))
+			to_chat(usr, span_admin("Слишком поздно менять события сейчас!"))
 			return
 		triggering = FALSE
-		message_admins("[key_name_admin(usr)] chose to have event [name] rolled into a different event.")
-		log_admin_private("[key_name(usr)] rerolled event [name].")
+		message_admins("[key_name_admin(usr)] выбрал замену события [name] на другое событие.")
+		log_admin_private("[key_name(usr)] замену событие [name].")
 		SSblackbox.record_feedback("tally", "event_admin_rerolled", 1, typepath)
 		SSevents.spawnEvent(excluded_event = src)
 
@@ -162,7 +162,7 @@ Runs the event
 		return round_event
 
 	triggering = FALSE
-	log_game("[random ? "Random" : "Forced"] Event triggering: [name] ([typepath]).")
+	log_game("[random ? "Случайное" : "Принудительное"] событие запускается: [name] ([typepath]).")
 
 	if(alert_observers)
 		round_event.announce_deadchat(random, event_cause)
@@ -211,9 +211,9 @@ Runs the event
 	SHOULD_CALL_PARENT(FALSE)
 	return
 
-///Announces the event name to deadchat, override this if what an event should show to deadchat is different to its event name.
+///Объявляет название события в мёртвый чат, переопределите это, если событие должно показывать в мёртвый чат нечто отличное от своего названия.
 /datum/round_event/proc/announce_deadchat(random, cause)
-	deadchat_broadcast(" has just been[random ? " randomly" : ""] triggered[cause ? " by [cause]" : ""]!", "<b>[control.name]</b>", message_type=DEADCHAT_ANNOUNCEMENT) //STOP ASSUMING IT'S BADMINS!
+	deadchat_broadcast(" только что был[random ? " случайно" : ""] запущен[cause ? " по причине [cause]" : ""]!", "<b>[control.name]</b>", message_type=DEADCHAT_ANNOUNCEMENT) //ХВАТИТ ДУМАТЬ ЧТО ЭТО БАДМИНЫ!
 
 //Called when the tick is equal to the start_when variable.
 //Allows you to start before announcing or vice versa.
@@ -222,14 +222,14 @@ Runs the event
 	SHOULD_CALL_PARENT(FALSE)
 	return
 
-//Called after something followable has been spawned by an event
-//Provides ghosts a follow link to an atom if possible
-//Only called once.
+//Вызывается после того, как событие заспавнило что-то, за чем можно следовать
+//Предоставляет призракам ссылку для следования за атомом, если возможно
+//Вызывается только один раз.
 /datum/round_event/proc/announce_to_ghosts(atom/atom_of_interest)
 	if(control.alert_observers)
 		if (atom_of_interest)
 			notify_ghosts(
-				"[control.name] has an object of interest: [atom_of_interest]!",
+				"[control.name] имеет объект интереса: [atom_of_interest]!",
 				source = atom_of_interest,
 			)
 	return

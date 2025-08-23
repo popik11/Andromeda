@@ -2,7 +2,7 @@
 
 /obj/machinery/newscaster
 	name = "newscaster"
-	desc = "A standard Nanotrasen-licensed newsfeed handler for use in commercial space stations. All the news you absolutely have no use for, in one place!"
+	desc = "Стандартный обработчик новостных лент с лицензией Nanotrasen для использования на коммерческих космических станциях. Все новости, которые вам абсолютно не нужны, в одном месте!"
 	icon = 'icons/obj/machines/wallmounts.dmi'
 	icon_state = "newscaster_off"
 	base_icon_state = "newscaster"
@@ -636,7 +636,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/newscaster, 30)
 /obj/machinery/newscaster/proc/news_alert(channel, update_alert = TRUE)
 	if(channel)
 		if(update_alert)
-			say("Breaking news from [channel]!")
+			say("Экстренное сообщение от [channel]!")
 			playsound(loc, 'sound/machines/beep/twobeep_high.ogg', 75, TRUE)
 		alert = TRUE
 		update_appearance()

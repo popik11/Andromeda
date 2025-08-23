@@ -1,8 +1,8 @@
 /datum/job/research_director
 	title = JOB_RESEARCH_DIRECTOR
-	description = "Supervise research efforts, ensure Robotics is in working \
-		order, make sure the AI and its Cyborgs aren't rogue, replacing them if \
-		they are."
+	description = "Руководите научным отделом, удостоверьтесь, что отдел робототехники \
+		штатно функционирует, следите, чтобы ИИ и киборги не были сбойными, в противном случае \
+		замените их."
 	auto_deadmin_role_flags = DEADMIN_POSITION_HEAD
 	department_head = list(JOB_CAPTAIN)
 	head_announce = list("Science")

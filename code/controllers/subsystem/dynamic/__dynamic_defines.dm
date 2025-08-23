@@ -45,11 +45,11 @@
 #define RULESET_ADMIN_CONFIGURABLE (1<<2)
 
 /// Href for cancelling midround rulesets before execution
-#define MIDROUND_CANCEL_HREF(...) "(<a href='byond://?src=[REF(src)];admin_cancel_midround=[REF(picked_ruleset)]'>CANCEL</a>)"
+#define MIDROUND_CANCEL_HREF(...) "(<a href='byond://?src=[REF(src)];admin_cancel_midround=[REF(picked_ruleset)]'>ОТМЕНА</a>)"
 /// Href for rerolling midround rulesets before execution
 #define MIDROUND_REROLL_HREF(rulesets) "[length(rulesets) \
-	? "(<a href='byond://?src=[REF(src)];admin_reroll=[REF(picked_ruleset)]'>SOMETHING ELSE</a>)" \
-	: "([span_tooltip("There are no more rulesets to pick from!", "NOTHING ELSE")])"\
+	? "(<a href='byond://?src=[REF(src)];admin_reroll=[REF(picked_ruleset)]'>ПОМЕНЯТЬ НА ДРУГОЙ!</a>)" \
+	: "([span_tooltip("Больше не осталось правил для выбора!", "НИЧЕГО ДРУГОГО")])"\
 ]"
 
 #define RULESET_CONFIG_CANCEL "Cancel"

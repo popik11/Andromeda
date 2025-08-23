@@ -1,6 +1,6 @@
-// Singulo, tesla, and explosive delam
+// Сингуло, тесла и взрывная делимитация
 
-/// When we have too much gas.
+/// Когда у нас слишком много газа.
 /datum/sm_delam/singularity
 
 /datum/sm_delam/singularity/can_select(obj/machinery/power/supermatter_crystal/sm)
@@ -11,14 +11,14 @@
 		return FALSE
 	sm.radio.talk_into(
 		sm,
-		"Warning: Critical coolant mass reached.",
+		"Предупреждение: Достигнута критическая масса охладителя.",
 		sm.damage > sm.emergency_point ? sm.emergency_channel : sm.warning_channel
 	)
 	return TRUE
 
 /datum/sm_delam/singularity/delaminate(obj/machinery/power/supermatter_crystal/sm)
-	message_admins("Supermatter [sm] at [ADMIN_VERBOSEJMP(sm)] triggered a singularity delam.")
-	sm.investigate_log("triggered a singularity delam.", INVESTIGATE_ENGINE)
+	message_admins("Суперматерия [sm] в [ADMIN_VERBOSEJMP(sm)] вызвала сингулярную делимитацию.")
+	sm.investigate_log("вызвала сингулярную делимитацию.", INVESTIGATE_ENGINE)
 
 	effect_irradiate(sm)
 	effect_demoralize(sm)
@@ -61,7 +61,7 @@
 	..()
 	sm.set_light_color(SUPERMATTER_SINGULARITY_LIGHT_COLOUR)
 
-/// When we have too much power.
+/// Когда у нас слишком много энергии.
 /datum/sm_delam/tesla
 
 /datum/sm_delam/tesla/can_select(obj/machinery/power/supermatter_crystal/sm)
@@ -72,14 +72,14 @@
 		return FALSE
 	sm.radio.talk_into(
 		sm,
-		"DANGER: CHARGE INERTIA CHAIN REACTION IN PROGRESS.",
+		"ОПАСНОСТЬ: ИДЁТ ЦЕПНАЯ РЕАКЦИЯ ИНЕРЦИИ ЗАРЯДА.",
 		sm.damage > sm.emergency_point ? sm.emergency_channel : sm.warning_channel
 	)
 	return TRUE
 
 /datum/sm_delam/tesla/delaminate(obj/machinery/power/supermatter_crystal/sm)
-	message_admins("Supermatter [sm] at [ADMIN_VERBOSEJMP(sm)] triggered a tesla delam.")
-	sm.investigate_log("triggered a tesla delam.", INVESTIGATE_ENGINE)
+	message_admins("Суперматерия [sm] в [ADMIN_VERBOSEJMP(sm)] вызвала тесла-делимитацию.")
+	sm.investigate_log("вызвала тесла-делимитацию.", INVESTIGATE_ENGINE)
 
 	effect_irradiate(sm)
 	effect_demoralize(sm)
@@ -111,16 +111,23 @@
 	..()
 	sm.set_light_color(SUPERMATTER_TESLA_COLOUR)
 
-/// Default delam.
+/// Дефолтная делимитация.
 /datum/sm_delam/explosive
 
 /datum/sm_delam/explosive/can_select(obj/machinery/power/supermatter_crystal/sm)
 	return TRUE
 
 /datum/sm_delam/explosive/delaminate(obj/machinery/power/supermatter_crystal/sm)
-	message_admins("Supermatter [sm] at [ADMIN_VERBOSEJMP(sm)] triggered a normal delam.")
-	sm.investigate_log("triggered a normal delam.", INVESTIGATE_ENGINE)
-
+	message_admins("Суперматерия [sm] в [ADMIN_VERBOSEJMP(sm)] вызвала обычную делимитацию.")
+	sm.investigate_log("вызвала обычную делимитацию.", INVESTIGATE_ENGINE)
+	/// ADD Andromeda-13
+	priority_announce(
+				title = "Техногенная авария",
+		text = "Кристалл суперматерии подвергся делимитации, выжившим членам экипажа немедленно покинуть зону отчуждения.",
+		sound =  'modular_andromeda/sound/announcer/announcements/man_made_disaster.ogg',
+		color_override = "red",
+	)
+	/// END Andromeda-13
 	effect_irradiate(sm)
 	effect_demoralize(sm)
 	if(sm.is_main_engine)

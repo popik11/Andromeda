@@ -153,24 +153,24 @@
 		return
 
 	if(held_item.tool_behaviour == TOOL_WRENCH)
-		context[SCREENTIP_CONTEXT_LMB] = "[connected_port ? "Disconnect" : "Connect"]"
+		context[SCREENTIP_CONTEXT_LMB] = "[connected_port ? "Отключить" : "Подключить"]"
 		return CONTEXTUAL_SCREENTIP_SET
 	if(held_item.tool_behaviour == TOOL_SCREWDRIVER)
-		context[SCREENTIP_CONTEXT_LMB] = "[panel_open ? "Close" : "Open"] Panel"
+		context[SCREENTIP_CONTEXT_LMB] = "[panel_open ? "Закрыть" : "Открыть"] Панель"
 		return CONTEXTUAL_SCREENTIP_SET
 	if(held_item.tool_behaviour == TOOL_CROWBAR && panel_open && !connected_port)
-		context[SCREENTIP_CONTEXT_LMB] = "Deconstruct"
+		context[SCREENTIP_CONTEXT_LMB] = "Разобрать"
 		return CONTEXTUAL_SCREENTIP_SET
 
 /obj/machinery/smesbank/examine(user)
 	. = ..()
-	. += span_notice("its maintenance panel can be [EXAMINE_HINT("screwed")] [panel_open ? "closed" : "open"].")
+	. += span_notice("Его техническую панель можно [EXAMINE_HINT("открутить")] [panel_open ? "закрытой" : "открытой"].")
 	if(connected_port)
-		. += span_notice("You need to [EXAMINE_HINT("unwrench")] from the port before deconstructing.")
+		. += span_notice("Нужно [EXAMINE_HINT("открутить")] от порта перед разборкой.")
 	else
 		if(panel_open)
-			. += span_notice("It can be [EXAMINE_HINT("pried")] apart.")
-		. += span_notice("It should be [EXAMINE_HINT("wrenched")] onto a connector port to operate.")
+			. += span_notice("Можно [EXAMINE_HINT("разобрать")] на части.")
+		. += span_notice("Нужно [EXAMINE_HINT("прикрутить")] к коннектору для работы.")
 
 /obj/machinery/smesbank/Destroy()
 	disconnect_port()
@@ -192,37 +192,37 @@
 	. = ..()
 	connected_port?.interact(user)
 
-// adapted from portable atmos connection code
+// адаптировано из кода подключения портативной атмосферы
 /obj/machinery/smesbank/wrench_act(mob/living/user, obj/item/wrench)
 	if(connected_port)
 		wrench.play_tool_sound(src)
 		if(!wrench.use_tool(src, user, 8 SECONDS))
 			return ITEM_INTERACT_BLOCKING
 		user.visible_message( \
-			"[user] disconnects [src].", \
-			span_notice("You unfasten [src] from [connected_port]."), \
-			span_hear("You hear a ratchet."))
-		investigate_log("was disconnected from [connected_port] by [key_name(user)].", INVESTIGATE_ENGINE)
+			"[user.declent_ru(NOMINATIVE)] отключает [(declent_ru(ACCUSATIVE))].", \
+			span_notice("Вы открепляете [(declent_ru(ACCUSATIVE))] от [connected_port]."), \
+			span_hear("Слышите трещотку."))
+		investigate_log("был отключен от [connected_port] пользователем [key_name(user)].", INVESTIGATE_ENGINE)
 		disconnect_port()
 		update_appearance(UPDATE_OVERLAYS)
 		return ITEM_INTERACT_SUCCESS
 
 	var/obj/machinery/power/smes/connector/possible_connector = locate(/obj/machinery/power/smes/connector) in loc
 	if(!possible_connector)
-		to_chat(user, span_notice("There's no power connector to connect to."))
+		to_chat(user, span_notice("Нет силового коннектора для подключения."))
 		return ITEM_INTERACT_BLOCKING
 	wrench.play_tool_sound(src)
 	if(!wrench.use_tool(src, user, 4 SECONDS))
 		return ITEM_INTERACT_BLOCKING
 	if(!connect_port(possible_connector))
-		to_chat(user, span_notice("[src] failed to connect to [possible_connector]."))
+		to_chat(user, span_notice("[(declent_ru(ACCUSATIVE))] не удалось подключиться к [possible_connector]."))
 		return ITEM_INTERACT_BLOCKING
 	user.visible_message( \
-		"[user] connects [src].", \
-		span_notice("You fasten [src] to [possible_connector]."), \
-		span_hear("You hear a ratchet."))
+		"[user.declent_ru(NOMINATIVE)] подключает [(declent_ru(ACCUSATIVE))].", \
+		span_notice("Вы закрепляете [(declent_ru(ACCUSATIVE))] на [possible_connector]."), \
+		span_hear("Слышите трещотку."))
 	update_appearance(UPDATE_OVERLAYS)
-	investigate_log("was connected to [possible_connector] by [key_name(user)].", INVESTIGATE_ENGINE)
+	investigate_log("был подключен к [possible_connector] пользователем [key_name(user)].", INVESTIGATE_ENGINE)
 	return ITEM_INTERACT_SUCCESS
 
 /obj/machinery/smesbank/screwdriver_act(mob/living/user, obj/item/tool)
@@ -233,7 +233,7 @@
 
 /obj/machinery/smesbank/default_deconstruction_crowbar(obj/item/crowbar/crowbar)
 	if(istype(crowbar) && connected_port)
-		balloon_alert(usr, "disconnect from [connected_port] first!")
+		balloon_alert(usr, "сначала отключите от [connected_port]!")
 		return ITEM_INTERACT_FAILURE
 	return ..()
 

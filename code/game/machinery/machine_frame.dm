@@ -1,12 +1,12 @@
 /obj/structure/frame/machine
 	name = "machine frame"
-	desc = "The standard frame for most station appliances. Its appearance and function is controlled by the inserted board."
+	desc = "Стандартный каркас для большинства станционных устройств. Его внешний вид и функции контролируются установленной платой."
 	board_type = /obj/item/circuitboard/machine
-	/// List of all compnents inside the frame contributing to its construction
+	/// Список всех компонентов внутри каркаса, участвующих в его строительстве
 	var/list/components
-	/// List of all components required to construct the frame
+	/// Список всех компонентов, необходимых для строительства каркаса
 	var/list/req_components
-	/// User-friendly list of names of required components
+	/// Пользовательский список названий требуемых компонентов
 	var/list/req_component_names
 
 /obj/structure/frame/machine/Initialize(mapload)
@@ -29,30 +29,30 @@
 		return
 
 	if(held_item.tool_behaviour == TOOL_WRENCH && !circuit?.needs_anchored)
-		context[SCREENTIP_CONTEXT_LMB] = "[anchored ? "Un" : ""]anchor"
+		context[SCREENTIP_CONTEXT_LMB] = "[anchored ? "От" : ""]крепить"
 		return CONTEXTUAL_SCREENTIP_SET
 
 	switch(state)
 		if(FRAME_STATE_EMPTY)
 			if(istype(held_item, /obj/item/stack/cable_coil))
-				context[SCREENTIP_CONTEXT_LMB] = "Wire Frame"
+				context[SCREENTIP_CONTEXT_LMB] = "Обмотать каркас"
 				return CONTEXTUAL_SCREENTIP_SET
 			else if(held_item.tool_behaviour == TOOL_WELDER)
-				context[SCREENTIP_CONTEXT_LMB] = "Unweld frame"
+				context[SCREENTIP_CONTEXT_LMB] = "Разварить каркас"
 				return CONTEXTUAL_SCREENTIP_SET
 			else if(held_item.tool_behaviour == TOOL_SCREWDRIVER)
-				context[SCREENTIP_CONTEXT_LMB] = "Disassemble frame"
+				context[SCREENTIP_CONTEXT_LMB] = "Разобрать каркас"
 				return CONTEXTUAL_SCREENTIP_SET
 		if(FRAME_STATE_WIRED)
 			if(held_item.tool_behaviour == TOOL_WIRECUTTER)
-				context[SCREENTIP_CONTEXT_LMB] = "Cut wires"
+				context[SCREENTIP_CONTEXT_LMB] = "Перерезать провода"
 				return CONTEXTUAL_SCREENTIP_SET
 			else if(istype(held_item, board_type))
-				context[SCREENTIP_CONTEXT_LMB] = "Insert board"
+				context[SCREENTIP_CONTEXT_LMB] = "Вставить плату"
 				return CONTEXTUAL_SCREENTIP_SET
 		if(FRAME_STATE_BOARD_INSTALLED)
 			if(held_item.tool_behaviour == TOOL_CROWBAR)
-				context[SCREENTIP_CONTEXT_LMB] = "Pry out components"
+				context[SCREENTIP_CONTEXT_LMB] = "Выдернуть компоненты"
 				return CONTEXTUAL_SCREENTIP_SET
 			else if(held_item.tool_behaviour == TOOL_SCREWDRIVER)
 				var/needs_components = FALSE
@@ -62,7 +62,7 @@
 					needs_components = TRUE
 					break
 				if(!needs_components)
-					context[SCREENTIP_CONTEXT_LMB] = "Complete frame"
+					context[SCREENTIP_CONTEXT_LMB] = "Завершить каркас"
 					return CONTEXTUAL_SCREENTIP_SET
 			else if(!istype(held_item, /obj/item/storage/part_replacer))
 				for(var/component in req_components)
@@ -75,37 +75,37 @@
 						var/datum/stock_part/stock_part_datum_type = component
 						stock_part_path = initial(stock_part_datum_type.physical_object_type)
 					if(istype(held_item, stock_part_path))
-						context[SCREENTIP_CONTEXT_LMB] = "Insert part"
+						context[SCREENTIP_CONTEXT_LMB] = "Вставить деталь"
 						return CONTEXTUAL_SCREENTIP_SET
 
 /obj/structure/frame/machine/examine(user)
 	. = ..()
 	if(!circuit?.needs_anchored)
-		. += span_notice("It can be [EXAMINE_HINT("anchored")] [anchored ? "loose." : "into place."]")
+		. += span_notice("Можно [EXAMINE_HINT("закрепить")] [anchored ? "ослабить." : "на месте."]")
 	if(state == FRAME_STATE_EMPTY)
 		if(!anchored)
-			. += span_notice("It can be [EXAMINE_HINT("welded")] or [EXAMINE_HINT("screwed")] apart.")
-		. += span_info("It should be [EXAMINE_HINT("wired")] with 5 cables.")
+			. += span_notice("Можно [EXAMINE_HINT("сварить")] или [EXAMINE_HINT("открутить")].")
+		. += span_info("Нужно [EXAMINE_HINT("обмотать")] 5 кабелями.")
 		return
 	if(state == FRAME_STATE_WIRED)
-		. += span_notice("Its wires can be [EXAMINE_HINT("cut")].")
+		. += span_notice("Провода можно [EXAMINE_HINT("перерезать")].")
 	if(state != FRAME_STATE_BOARD_INSTALLED)
-		. += span_warning("It's missing a circuit board!")
+		. += span_warning("Не хватает платы!")
 		return
 	if(!length(req_components))
-		. += span_info("It requires no components.")
+		. += span_info("Не требует компонентов.")
 		return
 
 	var/list/nice_list = list()
 	for(var/component in req_components)
 		if(!req_components[component])
 			continue
-		nice_list += list("[req_components[component]] [req_component_names[component]]\s")
-	. += span_info("It requires [english_list(nice_list, "no more components")].")
+		nice_list += list("[req_components[component]] [req_component_names[component]]") 	/// TODO от Rewokin: придумать, как сделать перевод компонентов в описании при сборке машины/компьютера
+	. += span_info("Требует [english_list(nice_list, "сборки для завершения")].")
 
-	. += span_notice("All the components can be [EXAMINE_HINT("pried")] out.")
+	. += span_notice("Все компоненты можно [EXAMINE_HINT("выдернуть")].")
 	if(!length(nice_list))
-		. += span_info("The frame should be [EXAMINE_HINT("screwed")] to complete it.")
+		. += span_info("Каркас нужно [EXAMINE_HINT("закрутить")] для завершения.")
 
 /obj/structure/frame/machine/dump_contents()
 	var/atom/drop_loc = drop_location()
@@ -139,13 +139,13 @@
 
 /obj/structure/frame/machine/install_board(mob/living/user, obj/item/circuitboard/machine/board, by_hand = TRUE)
 	if(state == FRAME_STATE_EMPTY)
-		balloon_alert(user, "needs wiring!")
+		balloon_alert(user, "нужна обмотка!")
 		return FALSE
 	if(state == FRAME_STATE_BOARD_INSTALLED)
-		balloon_alert(user, "circuit already installed!")
+		balloon_alert(user, "плата уже установлена!")
 		return FALSE
 	if(!anchored && istype(board) && board.needs_anchored)
-		balloon_alert(user, "frame must be anchored!")
+		balloon_alert(user, "каркас должен быть закреплён!")
 		return FALSE
 
 	return ..()
@@ -241,8 +241,8 @@
 				if(!used_amt || !S.use(used_amt))
 					continue
 				req_components[path] -= used_amt
-				// No balloon alert here so they can look back and see what they added
-				to_chat(user, span_notice("You add [used_amt] [stack_name] to [src]."))
+				// Без баллун-оповещения здесь, чтобы можно было посмотреть, что добавили
+				to_chat(user, span_notice("Вы добавляете [used_amt] [stack_name] в [src]."))
 				play_sound = TRUE
 			else if(replacer.atom_storage.attempt_remove(part, src))
 				var/stock_part_datum = GLOB.stock_part_datums_per_object[part.type]
@@ -253,8 +253,8 @@
 					components += part
 					part.forceMove(src)
 				req_components[path]--
-				// No balloon alert here so they can look back and see what they added
-				to_chat(user, span_notice("You add [part] to [src]."))
+				// Без баллун-оповещения здесь, чтобы можно было посмотреть, что добавили
+				to_chat(user, span_notice("Вы добавляете [part] в [src]."))
 				play_sound = TRUE
 
 	if(play_sound && !no_sound)
@@ -268,7 +268,7 @@
 		return .
 
 	if(circuit?.needs_anchored)
-		balloon_alert(user, "frame must be anchored!")
+		balloon_alert(user, "каркас должен быть закреплён!")
 		return FAILED_UNFASTEN
 
 	return .
@@ -290,7 +290,7 @@
 	if(state != FRAME_STATE_WIRED)
 		return ITEM_INTERACT_BLOCKING
 
-	balloon_alert(user, "removing cables...")
+	balloon_alert(user, "удаление кабелей...")
 	if(!tool.use_tool(src, user, 2 SECONDS, volume = 50) || state != FRAME_STATE_WIRED)
 		return ITEM_INTERACT_BLOCKING
 
@@ -308,7 +308,7 @@
 	tool.play_tool_sound(src)
 	var/list/leftover_components = components.Copy() - circuit
 	dump_contents()
-	balloon_alert(user, "circuit board[length(leftover_components) ? " and components" : ""] removed")
+	balloon_alert(user, "плата[length(leftover_components) ? " и компоненты" : ""] извлечены")
 	// Circuit exited handles updating state
 	return ITEM_INTERACT_SUCCESS
 
@@ -351,7 +351,7 @@
 			if(used_amt && S.use(used_amt))
 				req_components[stock_part_path] -= used_amt
 				// No balloon alert here so they can look back and see what they added
-				to_chat(user, span_notice("You add [tool] to [src]."))
+				to_chat(user, span_notice("Вы добавляете [tool] в [src]."))
 			return
 
 		// We might end up qdel'ing the part if it's a stock part datum.
@@ -380,11 +380,11 @@
 			break
 
 		// No balloon alert here so they can look back and see what they added
-		to_chat(user, span_notice("You add [part_name] to [src]."))
+		to_chat(user, span_notice("Вы добавляете [part_name] в [src]."))
 		req_components[stock_part_base]--
 		return TRUE
 
-	balloon_alert(user, "can't add that!")
+	balloon_alert(user, "нельзя добавить это!")
 	return FALSE
 
 /obj/structure/frame/machine/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
@@ -398,7 +398,7 @@
 				if(!tool.tool_start_check(user, amount = 5))
 					return ITEM_INTERACT_BLOCKING
 
-				balloon_alert(user, "adding cables...")
+				balloon_alert(user, "добавление кабелей...")
 				if(!tool.use_tool(src, user, 2 SECONDS, volume = 50, amount = 5) || state != FRAME_STATE_EMPTY)
 					return ITEM_INTERACT_BLOCKING
 
@@ -438,11 +438,11 @@
  */
 /obj/structure/frame/machine/finalize_construction(mob/living/user, obj/item/tool)
 	if(locate(circuit.build_path) in loc)
-		balloon_alert(user, "identical machine present!")
+		balloon_alert(user, "идентичная машина уже присутствует!")
 		return FALSE
 	for(var/component in req_components)
 		if(req_components[component] > 0)
-			user.balloon_alert(user, "missing components!")
+			user.balloon_alert(user, "не хватает компонентов!")
 			return FALSE
 
 	tool.play_tool_sound(src)

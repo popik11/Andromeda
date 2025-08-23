@@ -17,7 +17,7 @@ GLOBAL_LIST_INIT(channel_tokens, list(
 
 /obj/item/radio/headset
 	name = "radio headset"
-	desc = "An updated, modular intercom that fits over the head. Takes encryption keys."
+	desc = "Обновлённый модульный интерком, надеваемый на голову. Принимает ключи шифрования."
 	icon = 'icons/obj/clothing/headsets.dmi'
 	icon_state = "headset"
 	inhand_icon_state = "headset"
@@ -43,21 +43,21 @@ GLOBAL_LIST_INIT(channel_tokens, list(
 	overlay_mic_active = null
 
 /obj/item/radio/headset/suicide_act(mob/living/carbon/user)
-	user.visible_message(span_suicide("[user] begins putting \the [src]'s antenna up [user.p_their()] nose! It looks like [user.p_theyre()] trying to give [user.p_them()]self cancer!"))
+	user.visible_message(span_suicide("[user] начинает засовывать антенну \the [src] в [user.p_their()] нос! Похоже, [user.p_theyre()] пытается заработать себе рак!"))
 	return TOXLOSS
 
 /obj/item/radio/headset/examine(mob/user)
 	. = ..()
 
 	if(!(item_flags & IN_INVENTORY) || loc != user)
-		. += span_notice("A small screen on the headset flashes, it's too small to read without holding or wearing the headset.")
+		. += span_notice("На гарнитуре мигает маленький экран, он слишком мал, чтобы читать без удержания или ношения гарнитуры.")
 		return
 
-	// construction of frequency description
+	// формирование описания частот
 	var/list/available_channels = list()
-	available_channels += "<li><b>[span_radio(RADIO_KEY_COMMON)]</b> for the currently tuned frequency</li>"
+	available_channels += "<li><b>[span_radio(RADIO_KEY_COMMON)]</b> для текущей настроенной частоты</li>"
 	if(special_channels & RADIO_SPECIAL_BINARY)
-		available_channels += "<li><b>[span_binarysay(MODE_TOKEN_BINARY)] for [span_binarysay(capitalize(MODE_BINARY))]</b></li>"
+		available_channels += "<li><b>[span_binarysay(MODE_TOKEN_BINARY)] для [span_binarysay(capitalize(MODE_BINARY))]</b></li>"
 
 	for(var/i in 1 to length(channels))
 		var/channel_name = channels[i]
@@ -65,15 +65,15 @@ GLOBAL_LIST_INIT(channel_tokens, list(
 		var/channel_span_class = get_radio_span(GLOB.default_radio_channels[channel_name])
 
 		if(i == 1)
-			available_channels += "<li><b>[span_class(channel_span_class, MODE_TOKEN_DEPARTMENT)]</b> or <b>[span_class(channel_span_class, channel_token)]</b> for <b>[span_class(channel_span_class, channel_name)]</b></li>"
+			available_channels += "<li><b>[span_class(channel_span_class, MODE_TOKEN_DEPARTMENT)]</b> или <b>[span_class(channel_span_class, channel_token)]</b> для <b>[span_class(channel_span_class, channel_name)]</b></li>"
 		else
-			available_channels += "<li><b>[span_class(channel_span_class, channel_token)]</b> for <b>[span_class(channel_span_class, channel_name)]</b></li>"
+			available_channels += "<li><b>[span_class(channel_span_class, channel_token)]</b> для <b>[span_class(channel_span_class, channel_name)]</b></li>"
 
-	. += span_notice("A small screen on the headset displays the following available frequencies:")
+	. += span_notice("На маленьком экране гарнитуры отображаются следующие доступные частоты:")
 	. += span_notice("<ul style='display:inline-block; margin: 0; list-style: square;'>[available_channels.Join()]</ul>")
 
 	if(command)
-		. += span_info("<b>Alt-click</b> to toggle the high-volume mode.")
+		. += span_info("<b>Alt-клик</b> для переключения режима высокой громкости.")
 
 /obj/item/radio/headset/Initialize(mapload)
 	. = ..()
@@ -461,17 +461,17 @@ GLOBAL_LIST_INIT(channel_tokens, list(
 			keyslot2 = null
 
 		recalculateChannels()
-		to_chat(user, span_notice("You pop out the encryption keys in the headset."))
+		to_chat(user, span_notice("Вы извлекаете ключи шифрования из гарнитуры."))
 
 	else
-		to_chat(user, span_warning("This headset doesn't have any unique encryption keys! How useless..."))
+		to_chat(user, span_warning("В этой гарнитуре нет уникальных ключей шифрования! Как бесполезно..."))
 	tool.play_tool_sound(src, 10)
 	return TRUE
 
 /obj/item/radio/headset/attackby(obj/item/W, mob/user, list/modifiers, list/attack_modifiers)
 	if(istype(W, /obj/item/encryptionkey))
 		if(keyslot && keyslot2)
-			to_chat(user, span_warning("The headset can't hold another key!"))
+			to_chat(user, span_warning("Гарнитура не может вместить ещё один ключ!"))
 			return
 
 		if(!keyslot)
@@ -511,5 +511,5 @@ GLOBAL_LIST_INIT(channel_tokens, list(
 	if(!istype(user) || !command)
 		return CLICK_ACTION_BLOCKING
 	use_command = !use_command
-	to_chat(user, span_notice("You toggle high-volume mode [use_command ? "on" : "off"]."))
+	to_chat(user, span_notice("Вы переключаете режим высокой громкости [use_command ? "вкл" : "выкл"]."))
 	return CLICK_ACTION_SUCCESS

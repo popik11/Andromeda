@@ -1,7 +1,7 @@
 /datum/job/psychologist
 	title = JOB_PSYCHOLOGIST
-	description = "Advocate sanity, self-esteem, and teamwork in a station \
-		staffed with headcases."
+	description = "Следите за рассудком экипажа, а также за своим, и помогайте экипажу \
+		с их бедами с бошкой."
 	department_head = list(JOB_HEAD_OF_PERSONNEL)
 	faction = FACTION_STATION
 	total_positions = 1

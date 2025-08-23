@@ -1,7 +1,7 @@
 #define DOOR_CLOSE_WAIT 60 ///Default wait until doors autoclose
 /obj/machinery/door
 	name = "door"
-	desc = "It opens and closes."
+	desc = "Он открывается и закрывается."
 	icon = 'icons/obj/doors/doorint.dmi'
 	icon_state = "door_closed"
 	base_icon_state = "door"
@@ -132,11 +132,11 @@
 	. = ..()
 	if(red_alert_access)
 		if(SSsecurity_level.get_current_level_as_number() >= SEC_LEVEL_RED)
-			. += span_notice("Due to a security threat, its access requirements have been lifted!")
+			. += span_notice("В связи с угрозой безопасности требования доступа сняты!")
 		else
-			. += span_notice("In the event of a red alert, its access requirements will automatically lift.")
+			. += span_notice("В случае красного уровня тревоги требования доступа будут автоматически сняты.")
 	if(has_access_panel)
-		. += span_notice("Its maintenance panel is [panel_open ? "open" : "<b>screwed</b> in place"].")
+		. += span_notice("Его техническая панель [panel_open ? "открыта" : "<b>прикручена</b> на месте"].")
 
 /obj/machinery/door/add_context(atom/source, list/context, obj/item/held_item, mob/user)
 	. = ..()
@@ -148,7 +148,7 @@
 		return .
 
 	if(isnull(held_item) && Adjacent(user))
-		context[SCREENTIP_CONTEXT_LMB] = "Open"
+		context[SCREENTIP_CONTEXT_LMB] = "Открыть"
 		return CONTEXTUAL_SCREENTIP_SET
 
 /obj/machinery/door/check_access_list(list/access_list)
@@ -223,7 +223,7 @@
 		return
 	if(!red_alert_access)
 		return
-	audible_message(span_notice("[src] whirr[p_s()] as [p_they()] automatically lift[p_s()] access requirements!"))
+	audible_message(span_notice("[src] жужжит и автоматически снимает требования доступа!"))
 	playsound(src, 'sound/machines/airlock/boltsup.ogg', 50, TRUE)
 
 /obj/machinery/door/proc/try_safety_unlock(mob/user)
@@ -583,7 +583,7 @@
 /obj/machinery/door/proc/crush()
 	for(var/turf/checked_turf in locs)
 		for(var/mob/living/future_pancake in checked_turf)
-			future_pancake.visible_message(span_warning("[src] closes on [future_pancake], crushing [future_pancake.p_them()]!"), span_userdanger("[src] closes on you and crushes you!"))
+			future_pancake.visible_message(span_warning("[src] закрывается на [future_pancake], раздавливая [future_pancake.p_them()]!"), span_userdanger("[src] закрывается на тебе и раздавливает тебя!"))
 			var/sig_return = SEND_SIGNAL(future_pancake, COMSIG_LIVING_DOORCRUSHED, src)
 			future_pancake.add_splatter_floor(loc)
 			log_combat(src, future_pancake, "crushed")

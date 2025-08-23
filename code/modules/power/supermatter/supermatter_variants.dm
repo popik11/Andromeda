@@ -1,18 +1,18 @@
-/// Normal SM with it's processing disabled.
+/// Обычный СМ с отключенной обработкой.
 /obj/machinery/power/supermatter_crystal/hugbox
 	disable_damage = TRUE
 	disable_gas =  TRUE
 	disable_power_change = TRUE
 	disable_process = SM_PROCESS_DISABLED
 
-/// Normal SM designated as main engine.
+/// Обычный СМ, назначенный главным двигателем.
 /obj/machinery/power/supermatter_crystal/engine
 	is_main_engine = TRUE
 
-/// Shard SM.
+/// Осколок СМ.
 /obj/machinery/power/supermatter_crystal/shard
 	name = "supermatter shard"
-	desc = "A strangely translucent and iridescent crystal that looks like it used to be part of a larger structure."
+	desc = "Странно прозрачный и переливающийся кристалл, похожий на часть большего сооружения."
 	base_icon_state = "sm_shard"
 	icon_state = "sm_shard"
 	anchored = FALSE
@@ -32,11 +32,11 @@
 	. = ..()
 
 	if(held_item?.tool_behaviour == TOOL_WRENCH)
-		context[SCREENTIP_CONTEXT_LMB] = anchored ? "Unanchor" : "Anchor"
+		context[SCREENTIP_CONTEXT_LMB] = anchored ? "Открепить" : "Закрепить"
 		return CONTEXTUAL_SCREENTIP_SET
 
 
-/// Shard SM with it's processing disabled.
+/// Осколок СМ с отключенной обработкой.
 /obj/machinery/power/supermatter_crystal/shard/hugbox
 	name = "anchored supermatter shard"
 	disable_damage = TRUE
@@ -46,17 +46,17 @@
 	moveable = FALSE
 	anchored = TRUE
 
-/// Shard SM designated as the main engine.
+/// Осколок СМ, назначенный главным двигателем.
 /obj/machinery/power/supermatter_crystal/shard/engine
 	name = "anchored supermatter shard"
 	is_main_engine = TRUE
 	anchored = TRUE
 	moveable = FALSE
 
-/// Normal sm but small (sm sword recipe element) (wiz only) and adamantine pedestal for it
+/// Обычный СМ, но маленький (элемент рецепта меча СМ) (только для визардов) и адамантиновый постамент для него
 /obj/machinery/power/supermatter_crystal/small
 	name = "strangely small supermatter crystal"
-	desc = "A strangely translucent and iridescent crystal on an adamantine pedestal. It looks like it should be a bit bigger..."
+	desc = "Странно прозрачный и переливающийся кристалл на адамантиновом постаменте. Выглядит так, будто должен быть немного больше..."
 	base_icon_state = "sm_small"
 	icon_state = "sm_small"
 	moveable = TRUE
@@ -65,11 +65,11 @@
 /obj/machinery/power/supermatter_crystal/small/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/gps, "Adamantium Signal")
-	priority_announce("Anomalous crystal detected onboard. Location is marked on every GPS device.", "Nanotrasen Anomaly Department Announcement")
+	priority_announce("На борту обнаружен аномальный кристалл. Местоположение отмечено на каждом GPS устройстве.", "Объявление Отдела Аномалий Nanotrasen")
 
 /obj/item/adamantine_pedestal
 	name = "adamantine pedestal"
-	desc = "An adamantine pedestal. It looks like it should have something small but massive on top."
+	desc = "Адамантиновый постамент. Похоже, на нём должно что-то стоять — маленькое, но массивное."
 	icon = 'icons/obj/machines/engine/supermatter.dmi'
 	icon_state = "pedestal"
 	w_class = WEIGHT_CLASS_HUGE

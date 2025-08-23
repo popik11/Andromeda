@@ -4,7 +4,7 @@
  */
 /obj/item/wallframe/camera
 	name = "camera assembly"
-	desc = "The basic construction for Nanotrasen-Always-Watching-You cameras."
+	desc = "Базовая конструкция для камер Nanotrasen-Всегда-Следят-За-Тобой."
 	icon = 'icons/obj/machines/camera.dmi'
 	icon_state = "cameracase"
 	custom_materials = list(
@@ -16,7 +16,7 @@
 
 /obj/machinery/camera
 	name = "security camera"
-	desc = "It's used to monitor rooms."
+	desc = "Она используется для наблюдения за помещениями. Большой брат следит за тобой."
 	icon = 'icons/obj/machines/camera.dmi'
 	icon_state = "camera"
 	base_icon_state = "camera"
@@ -188,30 +188,30 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/camera/xray, 0)
 /obj/machinery/camera/examine(mob/user)
 	. = ..()
 
-	if(isEmpProof(TRUE)) //don't reveal it's upgraded if was done via MALF AI Upgrade Camera Network ability
-		. += span_info("It has electromagnetic interference shielding installed.")
+	if(isEmpProof(TRUE)) //не раскрывать улучшение, если было сделано через способность ИИ МАЛФа улучшить сеть камер
+		. += span_info("Установлена защита от электромагнитных помех.")
 	else
-		. += span_info("It can be shielded against electromagnetic interference with some <b>plasma</b>.")
+		. += span_info("Может быть защищена от электромагнитных помех с помощью <b>плазмы</b>.")
 
-	if(isXRay(TRUE)) //don't reveal it's upgraded if was done via MALF AI Upgrade Camera Network ability
-		. += span_info("It has an X-ray photodiode installed.")
+	if(isXRay(TRUE)) //не раскрывать улучшение, если было сделано через способность ИИ МАЛФа улучшить сеть камер
+		. += span_info("Установлен рентгеновский фотодиод.")
 	else
-		. += span_info("It can be upgraded with an X-ray photodiode with an <b>analyzer</b>.")
+		. += span_info("Может быть улучшена рентгеновским фотодиодом с помощью <b>анализатора</b>.")
 
 	if(isMotion())
-		. += span_info("It has a proximity sensor installed.")
+		. += span_info("Установлен датчик движения.")
 	else
-		. += span_info("It can be upgraded with a <b>proximity sensor</b>.")
+		. += span_info("Может быть улучшена <b>датчиком движения</b>.")
 
 	if(!camera_enabled)
-		. += span_info("It's currently deactivated.")
+		. += span_info("В настоящее время деактивирована.")
 		if(!panel_open && powered())
-			. += span_notice("You'll need to open its maintenance panel with a <b>screwdriver</b> to turn it back on.")
+			. += span_notice("Чтобы включить её обратно, потребуется открыть техническую панель <b>отвёрткой</b>.")
 
 	if(panel_open)
-		. += span_info("Its maintenance panel is currently open.")
+		. += span_info("Её техническая панель в настоящее время открыта.")
 		if(!camera_enabled && powered())
-			. += span_info("It can reactivated with <b>wirecutters</b>.")
+			. += span_info("Может быть реактивирована с помощью <b>кусачек</b>.")
 
 /obj/machinery/camera/emp_act(severity, reset_time = 90 SECONDS)
 	. = ..()
@@ -231,7 +231,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/camera/xray, 0)
 	for(var/mob/M as anything in GLOB.player_list)
 		if (M.client?.eye == src)
 			M.reset_perspective(null)
-			to_chat(M, span_warning("The screen bursts into static!"))
+			to_chat(M, span_warning("Экран взрывается статикой!"))
 
 /obj/machinery/camera/on_saboteur(datum/source, disrupt_duration)
 	. = ..()
@@ -353,9 +353,9 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/camera/xray, 0)
 	// We are not guarenteed that the camera will be on a turf. account for that
 	var/turf/our_turf = get_turf(src)
 	GLOB.cameranet.updateChunk(our_turf.x, our_turf.y, our_turf.z)
-	var/change_msg = "deactivates"
+	var/change_msg = "деактивирует"
 	if(camera_enabled)
-		change_msg = "reactivates"
+		change_msg = "реактивирует"
 		triggerCameraAlarm()
 		if(!QDELETED(src)) //We'll be doing it anyway in destroy
 			addtimer(CALLBACK(src, PROC_REF(cancelCameraAlarm)), 10 SECONDS)
@@ -364,7 +364,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/camera/xray, 0)
 			visible_message(span_danger("[user] [change_msg] [src]!"))
 			add_hiddenprint(user)
 		else
-			visible_message(span_danger("\The [src] [change_msg]!"))
+			visible_message(span_danger("[src] [change_msg]!"))
 
 		playsound(src, 'sound/items/tools/wirecutter.ogg', 100, TRUE)
 	update_appearance() //update Initialize() if you remove this.
@@ -375,7 +375,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/camera/xray, 0)
 	for(var/mob/O as anything in GLOB.player_list)
 		if (O.client?.eye == src)
 			O.reset_perspective(null)
-			to_chat(O, span_warning("The screen bursts into static!"))
+			to_chat(O, span_warning("Экран взрывается статикой!"))
 
 /obj/machinery/camera/proc/triggerCameraAlarm()
 	alarm_on = TRUE

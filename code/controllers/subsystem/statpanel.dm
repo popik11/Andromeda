@@ -23,24 +23,24 @@ SUBSYSTEM_DEF(statpanels)
 		var/datum/map_config/cached = SSmap_vote.next_map_config
 
 		if(isnull(SSmapping.current_map))
-			global_data = list("Loading")
+			global_data = list("Загрузка")
 		else if(SSmapping.current_map.feedback_link)
-			global_data = list(list("Map: [SSmapping.current_map.map_name]", " (Feedback)", "action=openLink&link=[SSmapping.current_map.feedback_link]"))
+			global_data = list(list("Карта: [SSmapping.current_map.map_name]", " (Feedback)", "action=openLink&link=[SSmapping.current_map.feedback_link]"))
 		else
-			global_data = list("Map: [SSmapping.current_map?.map_name]")
+			global_data = list("Карта: [SSmapping.current_map?.map_name]")
 
 		if(SSmapping.current_map?.mapping_url)
 			global_data += list(list("same_line", " | (View in Browser)", "action=openWebMap"))
 
 		if(cached)
-			global_data += "Next Map: [cached.map_name]"
+			global_data += "Следующая Карта: [cached.map_name]"
 
 		global_data += list(
-			"Round ID: [GLOB.round_id ? GLOB.round_id : "NULL"]",
-			"Server Time: [time2text(world.timeofday, "YYYY-MM-DD hh:mm:ss", world.timezone)]",
-			"Round Time: [ROUND_TIME()]",
-			"Station Time: [station_time_timestamp()]",
-			"Time Dilation: [round(SStime_track.time_dilation_current,1)]% AVG:([round(SStime_track.time_dilation_avg_fast,1)]%, [round(SStime_track.time_dilation_avg,1)]%, [round(SStime_track.time_dilation_avg_slow,1)]%)",
+			"Раунд ID: [GLOB.round_id ? GLOB.round_id : "NULL"]",
+			"Серверное время: [time2text(world.timeofday, "YYYY-MM-DD hh:mm:ss", world.timezone)]",
+			"Время с начала смены: [ROUND_TIME()]",
+			"Станционное время: [station_time_timestamp()]",
+			"Замедление времени: [round(SStime_track.time_dilation_current,1)]% В среднем:([round(SStime_track.time_dilation_avg_fast,1)]%, [round(SStime_track.time_dilation_avg,1)]%, [round(SStime_track.time_dilation_avg_slow,1)]%)",
 		)
 
 		if(SSshuttle.emergency)
@@ -124,7 +124,7 @@ SUBSYSTEM_DEF(statpanels)
 		return
 	target.stat_panel.send_message("update_stat", list(
 		"global_data" = global_data,
-		"ping_str" = "Ping: [round(target.lastping, 1)]ms (Average: [round(target.avgping, 1)]ms)",
+		"ping_str" = "Пинг: [round(target.lastping, 1)]мс (В средднем: [round(target.avgping, 1)]мс)",
 		"other_str" = target.mob?.get_status_tab_items(),
 	))
 

@@ -1,6 +1,6 @@
 /obj/structure/frame
 	name = "frame"
-	desc = "A generic looking construction frame. One day this will be something greater."
+	desc = "Обычный строительный каркас. Однажды он станет чем-то большим."
 	icon = 'icons/obj/devices/stock_parts.dmi'
 	icon_state = "box_0"
 	base_icon_state = "box_"
@@ -20,7 +20,7 @@
 /obj/structure/frame/examine(user)
 	. = ..()
 	if(circuit)
-		. += "It has \a [circuit] installed."
+		. += "На нём установлена [circuit.declent_ru(NOMINATIVE)]."
 
 /obj/structure/frame/CanAllowThrough(atom/movable/mover, border_dir)
 	if(isprojectile(mover))
@@ -64,16 +64,16 @@
 	if(state != FRAME_STATE_EMPTY)
 		return NONE
 	if(anchored && state == FRAME_STATE_EMPTY) //when using a screwdriver on an incomplete frame(missing components) no point checking for this
-		balloon_alert(user, "must be unanchored first!")
+		balloon_alert(user, "сначала нужно открепить!")
 		return ITEM_INTERACT_BLOCKING
 	if(!tool.tool_start_check(user, amount = (tool.tool_behaviour == TOOL_WELDER ? 1 : 0)))
 		return ITEM_INTERACT_BLOCKING
 
-	balloon_alert(user, "disassembling...")
+	balloon_alert(user, "разборка...")
 	user.visible_message(
-		span_warning("[user] begins disassembling [src]."),
-		span_notice("You start to disassemble [src]..."),
-		span_hear("You hear banging and clanking."),
+		span_warning("[user] начинает разбирать [src]."),
+		span_notice("Вы начинаете разбирать [src]..."),
+		span_hear("Слышите стук и лязг."),
 	)
 	if(!tool.use_tool(src, user, disassemble_time, amount = (tool.tool_behaviour == TOOL_WELDER ? 1 : 0), volume = 50) || state != FRAME_STATE_EMPTY)
 		return ITEM_INTERACT_BLOCKING
@@ -140,7 +140,7 @@
  */
 /obj/structure/frame/proc/install_board(mob/living/user, obj/item/circuitboard/board, by_hand = FALSE)
 	if(!istype(board, board_type) || !board.build_path)
-		balloon_alert(user, "invalid board!")
+		balloon_alert(user, "неверная плата!")
 		return FALSE
 	if(by_hand && !user.transferItemToLoc(board, src))
 		return FALSE
@@ -148,7 +148,7 @@
 		return FALSE
 
 	playsound(src, 'sound/items/deconstruct.ogg', 50, TRUE)
-	balloon_alert(user, "circuit installed")
+	balloon_alert(user, "плата установлена")
 	circuit = board
 	if(by_hand)
 		circuit.add_fingerprint(user)
@@ -182,7 +182,7 @@
 			target_board = circuit_boards[board_name]
 
 	else
-		var/option = tgui_input_list(user, "Select Circuitboard To Install"," Available Boards", circuit_boards)
+		var/option = tgui_input_list(user, "Выберите Плату Для Установки"," Доступные Платы", circuit_boards)
 		target_board = circuit_boards[option]
 		// Everything still where it should be after the UI closed?
 		if(QDELETED(target_board) || QDELETED(src) || QDELETED(user) || !(target_board in replacer) || !user.is_holding(replacer))

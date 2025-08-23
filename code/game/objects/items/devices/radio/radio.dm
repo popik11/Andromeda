@@ -8,7 +8,7 @@
 	lefthand_file = 'icons/mob/inhands/items/devices_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/items/devices_righthand.dmi'
 	worn_icon_state = "radio"
-	desc = "A basic handheld radio that communicates with local telecommunication networks."
+	desc = "Базовое портативное радио для связи с локальными телекоммуникационными сетями."
 	dog_fashion = /datum/dog_fashion/back
 	interaction_flags_atom = parent_type::interaction_flags_atom | INTERACT_ATOM_ALLOW_USER_LOCATION | INTERACT_ATOM_IGNORE_MOBILITY
 
@@ -540,11 +540,11 @@
 /obj/item/radio/examine(mob/user)
 	. = ..()
 	if (frequency && in_range(src, user))
-		. += span_notice("It is set to broadcast over the [span_radio("[frequency/10]")] frequency.")
+		. += span_notice("Настроена на вещание на частоте [span_radio("[frequency/10]")].")
 	if (unscrewed)
-		. += span_notice("It can be attached and modified.")
+		. += span_notice("Может быть прикреплена и модифицирована.")
 	else
-		. += span_notice("It cannot be modified or attached.")
+		. += span_notice("Не может быть модифицирована или прикреплена.")
 
 /obj/item/radio/update_overlays()
 	. = ..()
@@ -564,9 +564,9 @@
 	add_fingerprint(user)
 	unscrewed = !unscrewed
 	if(unscrewed)
-		to_chat(user, span_notice("The radio can now be attached and modified!"))
+		to_chat(user, span_notice("Радио теперь можно прикреплять и модифицировать!"))
 	else
-		to_chat(user, span_notice("The radio can no longer be modified or attached!"))
+		to_chat(user, span_notice("Радио больше нельзя модифицировать или прикреплять!"))
 
 /obj/item/radio/emp_act(severity)
 	. = ..()
@@ -575,14 +575,14 @@
 	emped++ //There's been an EMP; better count it
 	var/curremp = emped //Remember which EMP this was
 	if (listening && ismob(loc)) // if the radio is turned on and on someone's person they notice
-		to_chat(loc, span_warning("\The [src] overloads."))
+		to_chat(loc, span_warning("[src] перегружается."))
 	for (var/ch_name in channels)
 		channels[ch_name] = 0
 	set_on(FALSE)
 	addtimer(CALLBACK(src, PROC_REF(end_emp_effect), curremp), 20 SECONDS)
 
 /obj/item/radio/suicide_act(mob/living/user)
-	user.visible_message(span_suicide("[user] starts bouncing [src] off [user.p_their()] head! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] начинает стучать [src] по [user.p_their()] голове! Похоже, [user.p_theyre()] пытается покончить с собой!"))
 	return BRUTELOSS
 
 /obj/item/radio/proc/end_emp_effect(curremp)

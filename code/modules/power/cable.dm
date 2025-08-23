@@ -16,7 +16,7 @@ GLOBAL_LIST_INIT(wire_node_generating_types, typecacheof(list(
 ////////////////////////////////
 /obj/structure/cable
 	name = "power cable"
-	desc = "A flexible, superconducting insulated cable for heavy-duty power transfer."
+	desc = "Гибкий сверхпроводящий изолированный кабель для передачи электроэнергии в тяжелых условиях."
 	icon = 'icons/obj/pipes_n_cables/layer_cable.dmi'
 	icon_state = "l2-1-2-4-8-node"
 	color = CABLE_HEX_COLOR_YELLOW
@@ -211,9 +211,9 @@ GLOBAL_LIST_INIT(wire_node_generating_types, typecacheof(list(
 
 /obj/structure/cable/proc/get_power_info()
 	if(powernet?.avail > 0)
-		return span_danger("Total power: [display_power(powernet.avail)]\nLoad: [display_power(powernet.load)]\nExcess power: [display_power(surplus())]")
+		return span_danger("Общая мощность: [display_power(powernet.avail)]\nНагрузка: [display_power(powernet.load)]\nИзбыточная мощность: [display_power(surplus())]")
 	else
-		return span_danger("The cable is not powered.")
+		return span_danger("Кабель не подключен к сети.")
 
 
 // Items usable on a cable :

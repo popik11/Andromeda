@@ -106,7 +106,7 @@
 				SSeconomy.bank_accounts_by_id -= "[account_id]"
 				SSeconomy.bank_accounts_by_job[account_job.type] -= src
 		if(NAMEOF(src, account_balance))
-			add_log_to_history(var_value - old_balance, "Nanotrasen: Moderator Action")
+			add_log_to_history(var_value - old_balance, "Nanotrasen: Действие модератора")
 
 /**
  * Sets the bank_account to behave as though a CRAB-17 event is happening.
@@ -146,11 +146,11 @@
 /datum/bank_account/proc/pay_debt(amount, is_payment = TRUE)
 	var/amount_to_pay = min(amount, account_debt)
 	if(is_payment)
-		if(!adjust_money(-amount, "Other: Debt Payment"))
+		if(!adjust_money(-amount, "Прочее: Погашение долга"))
 			return 0
 	else
-		add_log_to_history(-amount, "Other: Debt Collection")
-	log_econ("[amount_to_pay] credits were removed from [account_holder]'s bank account to pay a debt of [account_debt]")
+		add_log_to_history(-amount, "Прочее: Взыскание долга")
+	log_econ("[amount_to_pay] кредитов было списано с банковского счета [account_holder] для погашения долга в размере [account_debt]")
 	account_debt -= amount_to_pay
 	SEND_SIGNAL(src, COMSIG_BANK_ACCOUNT_DEBT_PAID)
 	return amount_to_pay
@@ -164,11 +164,11 @@
  */
 /datum/bank_account/proc/transfer_money(datum/bank_account/from, amount, transfer_reason)
 	if(from.has_money(amount))
-		var/reason_to = "Transfer: From [from.account_holder]"
-		var/reason_from = "Transfer: To [account_holder]"
+		var/reason_to = "Перевод: От [from.account_holder]"
+		var/reason_from = "Перевод: Кому [account_holder]"
 
 		if(IS_DEPARTMENTAL_ACCOUNT(from))
-			reason_to = "Nanotrasen: Salary"
+			reason_to = "Nanotrasen: Зарплата"
 			reason_from = ""
 
 		if(transfer_reason)
@@ -178,7 +178,7 @@
 		adjust_money(amount, reason_to)
 		from.adjust_money(-amount, reason_from)
 		SSblackbox.record_feedback("amount", "credits_transferred", amount)
-		log_econ("[amount] credits were transferred from [from.account_holder]'s account to [src.account_holder]")
+		log_econ("[amount] кредитов переведено со счета [from.account_holder] на счет [src.account_holder]")
 		return TRUE
 	return FALSE
 
@@ -194,23 +194,23 @@
 		return
 	var/money_to_transfer = round(account_job.paycheck * payday_modifier * amount_of_paychecks)
 	if(amount_of_paychecks == 1)
-		money_to_transfer = clamp(money_to_transfer, 0, PAYCHECK_CREW) //We want to limit single, passive paychecks to regular crew income.
+		money_to_transfer = clamp(money_to_transfer, 0, PAYCHECK_CREW) //Одиночные пассивные выплаты ограничиваем стандартной зарплатой экипажа
 	if(free)
-		adjust_money(money_to_transfer, "Nanotrasen: Shift Payment")
+		adjust_money(money_to_transfer, "Nanotrasen: Зарплата за смену")
 		SSblackbox.record_feedback("amount", "free_income", money_to_transfer)
 		SSeconomy.station_target += money_to_transfer
-		log_econ("[money_to_transfer] credits were given to [src.account_holder]'s account from income.")
+		log_econ("[money_to_transfer] кредитов зачислено на счет [src.account_holder] в качестве зарплаты.")
 		return TRUE
 	else
 		var/datum/bank_account/department_account = SSeconomy.get_dep_account(account_job.paycheck_department)
 		if(department_account)
 			if(!transfer_money(department_account, money_to_transfer))
-				bank_card_talk("ERROR: Payday aborted, departmental funds insufficient.")
+				bank_card_talk("ОШИБКА: Выплата отменена, недостаточно средств в департаменте.")
 				return FALSE
 			else
-				bank_card_talk("Payday processed, account now holds [account_balance] cr.")
+				bank_card_talk("Зарплата выплачена, на счету теперь [account_balance] кр.")
 				return TRUE
-	bank_card_talk("ERROR: Payday aborted, unable to contact departmental account.")
+	bank_card_talk("ОШИБКА: Выплата отменена, не удалось связаться с департаментским счетом.")
 	return FALSE
 
 /**
@@ -277,7 +277,7 @@
 		var/datum/bounty/reagent/chemical = civilian_bounty
 		return "[chemical.shipped_volume]/[chemical.required_volume] u"
 	if(istype(civilian_bounty, /datum/bounty/virus))
-		return "At least 1u"
+		return "Как минимум 1 юнит"
 
 /**
  * Produces the value of the account's civilian bounty reward, if able.
@@ -295,7 +295,7 @@
 	COOLDOWN_RESET(src, bounty_timer)
 
 /datum/bank_account/department
-	account_holder = "Guild Credit Agency"
+	account_holder = "Кредитное Агентство Гильдии"
 	var/department_id = "REPLACE_ME"
 	add_to_accounts = FALSE
 

@@ -1,13 +1,13 @@
 ////////////////////////////////
 /proc/message_admins(msg)
-	msg = "<span class=\"admin\"><span class=\"prefix\">ADMIN LOG:</span> <span class=\"message\">[msg]</span></span>"
+	msg = "<span class=\"admin\"><span class=\"prefix\">ЛОГИ АДМИНИСТРАТОРА:</span> <span class=\"message\">[msg]</span></span>"
 	to_chat(GLOB.admins,
 		type = MESSAGE_TYPE_ADMINLOG,
 		html = msg,
 		confidential = TRUE)
 
 /proc/relay_msg_admins(msg)
-	msg = "<span class=\"admin\"><span class=\"prefix\">RELAY:</span> <span class=\"message\">[msg]</span></span>"
+	msg = "<span class=\"admin\"><span class=\"prefix\">НАПРАВЛЕННО:</span> <span class=\"message\">[msg]</span></span>"
 	to_chat(GLOB.admins,
 		type = MESSAGE_TYPE_ADMINLOG,
 		html = msg,
@@ -40,7 +40,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////ADMIN HELPER PROCS
 
-ADMIN_VERB(spawn_atom, R_SPAWN, "Spawn", "Spawn an atom.", ADMIN_CATEGORY_DEBUG, object as text)
+ADMIN_VERB(spawn_atom, R_SPAWN, "Спавн", "Заспавнить атом.", ADMIN_CATEGORY_DEBUG, object as text)
 	if(!object)
 		return
 	var/list/preparsed = splittext(object,":")
@@ -61,10 +61,10 @@ ADMIN_VERB(spawn_atom, R_SPAWN, "Spawn", "Spawn an atom.", ADMIN_CATEGORY_DEBUG,
 			var/atom/A = new chosen(T)
 			A.flags_1 |= ADMIN_SPAWNED_1
 
-	log_admin("[key_name(user)] spawned [amount] x [chosen] at [AREACOORD(user.mob)]")
-	BLACKBOX_LOG_ADMIN_VERB("Spawn Atom")
+	log_admin("[key_name(user)] заспавнил [amount] x [chosen] в [AREACOORD(user.mob)]")
+	BLACKBOX_LOG_ADMIN_VERB("Спавн Атома")
 
-ADMIN_VERB(spawn_atom_pod, R_SPAWN, "PodSpawn", "Spawn an atom via supply drop.", ADMIN_CATEGORY_DEBUG, object as text)
+ADMIN_VERB(spawn_atom_pod, R_SPAWN, "Спавн (Под)", "Заспавнить атом через сброс припасов.", ADMIN_CATEGORY_DEBUG, object as text)
 	var/chosen = pick_closest_path(object)
 	if(!chosen)
 		return
@@ -81,10 +81,10 @@ ADMIN_VERB(spawn_atom_pod, R_SPAWN, "PodSpawn", "Spawn an atom via supply drop."
 		var/atom/A = new chosen(pod)
 		A.flags_1 |= ADMIN_SPAWNED_1
 
-	log_admin("[key_name(user)] pod-spawned [chosen] at [AREACOORD(user.mob)]")
-	BLACKBOX_LOG_ADMIN_VERB("Podspawn Atom")
+	log_admin("[key_name(user)] заспавнил под [chosen] в [AREACOORD(user.mob)]")
+	BLACKBOX_LOG_ADMIN_VERB("Спавн Под Атома")
 
-ADMIN_VERB(spawn_cargo, R_SPAWN, "Spawn Cargo", "Spawn a cargo crate.", ADMIN_CATEGORY_DEBUG, object as text)
+ADMIN_VERB(spawn_cargo, R_SPAWN, "Спавн Ящика", "Заспавнить грузовой ящик.", ADMIN_CATEGORY_DEBUG, object as text)
 	var/chosen = pick_closest_path(object, make_types_fancy(subtypesof(/datum/supply_pack)))
 	if(!chosen)
 		return
@@ -92,10 +92,10 @@ ADMIN_VERB(spawn_cargo, R_SPAWN, "Spawn Cargo", "Spawn a cargo crate.", ADMIN_CA
 	S.admin_spawned = TRUE
 	S.generate(get_turf(user.mob))
 
-	log_admin("[key_name(user)] spawned cargo pack [chosen] at [AREACOORD(user.mob)]")
-	BLACKBOX_LOG_ADMIN_VERB("Spawn Cargo")
+	log_admin("[key_name(user)] заспавнил грузовой пакет [chosen] в [AREACOORD(user.mob)]")
+	BLACKBOX_LOG_ADMIN_VERB("Спавн Ящика")
 
-ADMIN_VERB(create_or_modify_area, R_DEBUG, "Create Or Modify Area", "Create of modify an area. wow.", ADMIN_CATEGORY_DEBUG)
+ADMIN_VERB(create_or_modify_area, R_DEBUG, "Создать Или Изменить Зону", "Создать или изменить зону. вау.", ADMIN_CATEGORY_DEBUG)
 	create_area(user.mob)
 
 //Kicks all the clients currently in the lobby. The second parameter (kick_only_afk) determins if an is_afk() check is ran, or if all clients are kicked
@@ -126,17 +126,17 @@ ADMIN_VERB(create_or_modify_area, R_DEBUG, "Create Or Modify Area", "Create of m
 
 	var/question = ""
 	if (tomob.ckey)
-		question = "This mob already has a user ([tomob.key]) in control of it! "
-	question += "Are you sure you want to place [frommob.name]([frommob.key]) in control of [tomob.name]?"
+		question = "Это моб уже имеет пользователя ([tomob.key]) под контролем! "
+	question += "Вы уверены, что хотите поместить [frommob.name]([frommob.key]) под контроль [tomob.name]?"
 
-	var/ask = tgui_alert(usr, question, "Place ghost in control of mob?", list("Yes", "No"))
-	if (ask != "Yes")
+	var/ask = tgui_alert(usr, question, "Поместить призрака под контроль моба?", list("Да", "Нет"))
+	if (ask != "Да")
 		return TRUE
 
-	if (!frommob || !tomob) //make sure the mobs don't go away while we waited for a response
+	if (!frommob || !tomob) //убедиться, что мобы не исчезли, пока мы ждали ответа
 		return TRUE
 
-	// Disassociates observer mind from the body mind
+	// Отсоединяет разум наблюдателя от разума тела
 	if(tomob.client)
 		tomob.ghostize(FALSE)
 	else
@@ -144,9 +144,9 @@ ADMIN_VERB(create_or_modify_area, R_DEBUG, "Create Or Modify Area", "Create of m
 			if(tomob.mind == ghost.mind)
 				ghost.mind = null
 
-	message_admins(span_adminnotice("[key_name_admin(usr)] has put [frommob.key] in control of [tomob.name]."))
-	log_admin("[key_name(usr)] stuffed [frommob.key] into [tomob.name].")
-	BLACKBOX_LOG_ADMIN_VERB("Ghost Drag Control")
+	message_admins(span_adminnotice("[key_name_admin(usr)] поместил [frommob.key] под контроль [tomob.name]."))
+	log_admin("[key_name(usr)] поместил [frommob.key] в [tomob.name].")
+	BLACKBOX_LOG_ADMIN_VERB("Поместил Призрака В Моба")
 
 	tomob.PossessByPlayer(frommob.key)
 	tomob.client?.init_verbs()
@@ -154,16 +154,16 @@ ADMIN_VERB(create_or_modify_area, R_DEBUG, "Create Or Modify Area", "Create of m
 
 	return TRUE
 
-/// Sends a message to adminchat when anyone with a holder logs in or logs out.
-/// Is dependent on admin preferences and configuration settings, which means that this proc can fire without sending a message.
+/// Отправляет сообщение в админ-чат при входе или выходе любого пользователя с правами.
+/// Зависит от предпочтений админов и настроек конфигурации, что означает, что этот прок может сработать без отправки сообщения.
 /client/proc/adminGreet(logout = FALSE)
 	if(!SSticker.HasRoundStarted())
 		return
 
 	if(logout && CONFIG_GET(flag/announce_admin_logout))
-		message_admins("Admin logout: [key_name(src)]")
+		message_admins("Выход админа: [key_name(src)]")
 		return
 
 	if(!logout && CONFIG_GET(flag/announce_admin_login) && (prefs.toggles & ANNOUNCE_LOGIN))
-		message_admins("Admin login: [key_name(src)]")
+		message_admins("Вход админа: [key_name(src)]")
 		return

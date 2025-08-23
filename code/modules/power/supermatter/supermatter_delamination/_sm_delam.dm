@@ -1,4 +1,4 @@
-/// Priority is top to bottom.
+/// Приоритет сверху вниз.
 GLOBAL_LIST_INIT(sm_delam_list, list(
 	/datum/sm_delam/cascade = new /datum/sm_delam/cascade,
 	/datum/sm_delam/singularity = new /datum/sm_delam/singularity,
@@ -6,18 +6,18 @@ GLOBAL_LIST_INIT(sm_delam_list, list(
 	/datum/sm_delam/explosive = new /datum/sm_delam/explosive,
 ))
 
-/// Logic holder for supermatter delaminations, goes off the strategy design pattern.
-/// Selected by [/obj/machinery/power/supermatter_crystal/proc/set_delam]
+/// Держатель логики для делимитации суперматерии, использует стратегический шаблон проектирования.
+/// Выбирается через [/obj/machinery/power/supermatter_crystal/proc/set_delam]
 /datum/sm_delam
 
-/// Whether we are eligible for this delamination or not. TRUE if valid, FALSE if not.
+/// Подходим ли мы для этой делимитации или нет. TRUE если valid, FALSE если нет.
 /// [/obj/machinery/power/supermatter_crystal/proc/set_delam]
 /datum/sm_delam/proc/can_select(obj/machinery/power/supermatter_crystal/sm)
 	return FALSE
 
 #define ROUNDCOUNT_ENGINE_JUST_EXPLODED -1
 
-/// Called when the count down has been finished, do the nasty work.
+/// Вызывается, когда отсчёт завершён, выполняет грязную работу.
 /// [/obj/machinery/power/supermatter_crystal/proc/count_down]
 /datum/sm_delam/proc/delaminate(obj/machinery/power/supermatter_crystal/sm)
 	if (sm.is_main_engine)
@@ -29,27 +29,27 @@ GLOBAL_LIST_INIT(sm_delam_list, list(
 
 #undef ROUNDCOUNT_ENGINE_JUST_EXPLODED
 
-/// Whatever we're supposed to do when a delam is currently in progress.
-/// Mostly just to tell people how useless engi is, and play some alarm sounds.
-/// Returns TRUE if we just told people a delam is going on. FALSE if its healing or we didnt say anything.
+/// Что мы должны делать, когда делимитация в процессе.
+/// В основном просто сообщаем людям о бесполезности инженеров и проигрываем тревожные звуки.
+/// Возвращает TRUE, если мы только что сообщили о делимитации. FALSE, если происходит восстановление или мы ничего не сказали.
 /// [/obj/machinery/power/supermatter_crystal/proc/process_atmos]
 /datum/sm_delam/proc/delam_progress(obj/machinery/power/supermatter_crystal/sm)
-	if(sm.damage <= sm.warning_point) // Damage is too low, lets not
+	if(sm.damage <= sm.warning_point) // Урон слишком низкий, давайте не будем
 		return FALSE
 
 	if (sm.damage >= sm.emergency_point && sm.damage_archived < sm.emergency_point)
-		sm.investigate_log("has entered the emergency point.", INVESTIGATE_ENGINE)
-		message_admins("[sm] has entered the emergency point [ADMIN_VERBOSEJMP(sm)].")
+		sm.investigate_log("достиг аварийной точки.", INVESTIGATE_ENGINE)
+		message_admins("[sm] достиг аварийной точки [ADMIN_VERBOSEJMP(sm)].")
 
 	if((REALTIMEOFDAY - sm.lastwarning) < SUPERMATTER_WARNING_DELAY)
 		return FALSE
 	sm.lastwarning = REALTIMEOFDAY
 
-	if(sm.damage_archived - sm.damage > SUPERMATTER_FAST_HEALING_RATE && sm.damage_archived >= sm.emergency_point) // Fast healing, engineers probably have it all sorted
-		if(sm.should_alert_common()) // We alert common once per cooldown period, otherwise alert engineering
-			sm.radio.talk_into(sm,"Crystalline hyperstructure returning to safe operating parameters. Integrity: [round(sm.get_integrity_percent(), 0.01)]%", sm.emergency_channel)
+	if(sm.damage_archived - sm.damage > SUPERMATTER_FAST_HEALING_RATE && sm.damage_archived >= sm.emergency_point) // Быстрое восстановление, инженеры скорее всего всё починили
+		if(sm.should_alert_common()) // Оповещаем общий канал раз за период кулдауна, иначе инженерный
+			sm.radio.talk_into(sm,"Кристаллическая гиперструктура возвращается к безопасным рабочим параметрам. Целостность: [round(sm.get_integrity_percent(), 0.01)]%", sm.emergency_channel)
 		else
-			sm.radio.talk_into(sm,"Crystalline hyperstructure returning to safe operating parameters. Integrity: [round(sm.get_integrity_percent(), 0.01)]%", sm.warning_channel)
+			sm.radio.talk_into(sm,"Кристаллическая гиперструктура возвращается к безопасным рабочим параметрам. Целостность: [round(sm.get_integrity_percent(), 0.01)]%", sm.warning_channel)
 		playsound(sm, 'sound/machines/terminal/terminal_alert.ogg', 75)
 		return FALSE
 
@@ -63,41 +63,41 @@ GLOBAL_LIST_INIT(sm_delam_list, list(
 		if(SUPERMATTER_WARNING)
 			playsound(sm, 'sound/machines/terminal/terminal_alert.ogg', 75)
 
-	if(sm.damage >= sm.emergency_point) // In emergency
-		sm.radio.talk_into(sm, "CRYSTAL DELAMINATION IMMINENT! Integrity: [round(sm.get_integrity_percent(), 0.01)]%", sm.emergency_channel)
-		sm.lastwarning = REALTIMEOFDAY - (SUPERMATTER_WARNING_DELAY / 2) // Cut the time to next announcement in half.
-	else if(sm.damage_archived > sm.damage) // Healing, in warning
-		sm.radio.talk_into(sm,"Crystalline hyperstructure returning to safe operating parameters. Integrity: [round(sm.get_integrity_percent(), 0.01)]%", sm.warning_channel)
+	if(sm.damage >= sm.emergency_point) // В аварийном режиме
+		sm.radio.talk_into(sm, "ДЕЛИМИТАЦИЯ КРИСТАЛЛА НЕИЗБЕЖНА! Целостность: [round(sm.get_integrity_percent(), 0.01)]%", sm.emergency_channel)
+		sm.lastwarning = REALTIMEOFDAY - (SUPERMATTER_WARNING_DELAY / 2) // Уменьшаем время до следующего объявления вдвое.
+	else if(sm.damage_archived > sm.damage) // Восстановление, в режиме предупреждения
+		sm.radio.talk_into(sm,"Кристаллическая гиперструктура возвращается к безопасным рабочим параметрам. Целостность: [round(sm.get_integrity_percent(), 0.01)]%", sm.warning_channel)
 		return FALSE
-	else // Taking damage, in warning
-		sm.radio.talk_into(sm, "Danger! Crystal hyperstructure integrity faltering! Integrity: [round(sm.get_integrity_percent(), 0.01)]%", sm.warning_channel)
+	else // Получение урона, в режиме предупреждения
+		sm.radio.talk_into(sm, "Опасность! Целостность кристаллической гиперструктуры нарушена! Целостность: [round(sm.get_integrity_percent(), 0.01)]%", sm.warning_channel)
 
 	SEND_SIGNAL(sm, COMSIG_SUPERMATTER_DELAM_ALARM)
 	return TRUE
 
-/// Called when a supermatter switches its strategy from another one to us.
+/// Вызывается, когда суперматерия переключает свою стратегию с другой на нас.
 /// [/obj/machinery/power/supermatter_crystal/proc/set_delam]
 /datum/sm_delam/proc/on_select(obj/machinery/power/supermatter_crystal/sm)
 	return
 
-/// Called when a supermatter switches its strategy from us to something else.
+/// Вызывается, когда суперматерия переключает свою стратегию с нас на другую.
 /// [/obj/machinery/power/supermatter_crystal/proc/set_delam]
 /datum/sm_delam/proc/on_deselect(obj/machinery/power/supermatter_crystal/sm)
 	return
 
-/// Added to an examine return value.
+/// Добавлено к возвращаемому значению examine.
 /// [/obj/machinery/power/supermatter_crystal/examine]
 /datum/sm_delam/proc/examine(obj/machinery/power/supermatter_crystal/sm)
 	return list()
 
-/// Add whatever overlay to the sm.
+/// Добавляет любой оверлей к СМ.
 /// [/obj/machinery/power/supermatter_crystal/update_overlays]
 /datum/sm_delam/proc/overlays(obj/machinery/power/supermatter_crystal/sm)
 	if(sm.final_countdown)
 		return list(mutable_appearance(icon = sm.icon, icon_state = "causality_field", layer = FLOAT_LAYER))
 	return list()
 
-/// Applies filters to the SM.
+/// Применяет фильтры к СМ.
 /// [/obj/machinery/power/supermatter_crystal/process_atmos]
 /datum/sm_delam/proc/filters(obj/machinery/power/supermatter_crystal/sm)
 	var/new_filter = isnull(sm.get_filter("ray"))
@@ -110,13 +110,13 @@ GLOBAL_LIST_INIT(sm_delam_list, list(
 		density = clamp(sm.damage, 12, 100)
 	))
 
-	// Filter animation persists even if the filter itself is changed externally.
-	// Probably prone to breaking. Treat with suspicion.
+	// Анимация фильтра сохраняется, даже если сам фильтр изменён извне.
+	// Вероятно, склонно к поломкам. Относитесь с подозрением.
 	if(new_filter)
 		animate(sm.get_filter("ray"), offset = 10, time = 10 SECONDS, loop = -1)
 		animate(offset = 0, time = 10 SECONDS)
 
-// Change how bright the rock is.
+// Изменяет яркость камня.
 /// [/obj/machinery/power/supermatter_crystal/process_atmos]
 /datum/sm_delam/proc/lights(obj/machinery/power/supermatter_crystal/sm)
 	sm.set_light(
@@ -126,11 +126,11 @@ GLOBAL_LIST_INIT(sm_delam_list, list(
 		l_on = !!sm.internal_energy,
 	)
 
-/// Returns a set of messages to be spouted during delams
-/// First message is start of count down, second message is quitting of count down (if sm healed), third is 5 second intervals
+/// Возвращает набор сообщений для озвучивания во время делимитации
+/// Первое сообщение - начало отсчета, второе - отмена отсчета (если СМ восстановлен), третье - 5-секундные интервалы
 /datum/sm_delam/proc/count_down_messages(obj/machinery/power/supermatter_crystal/sm)
 	var/list/messages = list()
-	messages += "CRYSTAL DELAMINATION IMMINENT. The supermatter has reached critical integrity failure. Emergency causality destabilization field has been activated."
-	messages += "Crystalline hyperstructure returning to safe operating parameters. Failsafe has been disengaged."
-	messages += "remain before causality stabilization."
+	messages += "ДЕЛИМИТАЦИЯ КРИСТАЛЛА НЕИЗБЕЖНА! Суперматерия достигла критического уровня целостности!"
+	messages += "Кристаллическая гиперструктура возвращается к безопасным рабочим параметрам."
+	messages += "до полной делимитации."
 	return messages

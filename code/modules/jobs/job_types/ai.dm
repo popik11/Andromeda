@@ -1,6 +1,6 @@
 /datum/job/ai
 	title = JOB_AI
-	description = "Assist the crew, follow your laws, coordinate your cyborgs."
+	description = "Помогайте экипажу, следуйте в соответствии с вашим сводом законов, координируйте киборгов."
 	auto_deadmin_role_flags = DEADMIN_POSITION_SILICON
 	faction = FACTION_STATION
 	total_positions = 1

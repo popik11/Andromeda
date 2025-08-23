@@ -2149,7 +2149,7 @@
 	if(!scribbled_name)
 		name = initial(name)
 		return
-	name = "[scribbled_name]'s ID Card ([scribbled_assignment])"
+	name = "[scribbled_name] ID Карта ([scribbled_assignment])"
 
 /obj/item/card/cardboard/update_overlays()
 	. = ..()

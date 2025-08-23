@@ -8,7 +8,7 @@
 
 /obj/machinery/scanner_gate
 	name = "scanner gate"
-	desc = "A gate able to perform mid-depth scans on any organisms who pass under it."
+	desc = "Врата, способные проводить сканирование средней глубины любых организмов, проходящих под ними."
 	icon = 'icons/obj/machines/scangate.dmi'
 	icon_state = "scangate"
 	layer = ABOVE_MOB_LAYER
@@ -106,11 +106,11 @@
 /obj/machinery/scanner_gate/examine(mob/user)
 	. = ..()
 
-	. += span_notice("It's set to scan for [span_boldnotice(scangate_mode)].")
+	. += span_notice("Настроено на сканирование [span_boldnotice(scangate_mode)].")
 	if(locked)
-		. += span_notice("The control panel is ID-locked. Swipe a valid ID to unlock it.")
+		. += span_notice("Панель управления заблокирована ID. Приложите действительный ID для разблокировки.")
 	else
-		. += span_notice("The control panel is unlocked. Swipe an ID to lock it.")
+		. += span_notice("Панель управления разблокирована. Приложите ID для блокировки.")
 
 /obj/machinery/scanner_gate/proc/on_entered(datum/source, atom/movable/thing)
 	SIGNAL_HANDLER
@@ -152,14 +152,14 @@
 			if(allowed(user))
 				locked = FALSE
 				req_access = list()
-				to_chat(user, span_notice("You unlock [src]."))
+				to_chat(user, span_notice("Вы разблокируете [src]."))
 		else if(!(obj_flags & EMAGGED))
-			to_chat(user, span_notice("You lock [src] with [attacking_item]."))
+			to_chat(user, span_notice("Вы блокируете [src] с помощью [attacking_item]."))
 			var/list/access = attacking_item.GetAccess()
 			req_access = access
 			locked = TRUE
 		else
-			to_chat(user, span_warning("You try to lock [src] with [attacking_item], but nothing happens."))
+			to_chat(user, span_warning("Вы пытаетесь заблокировать [src] с помощью [attacking_item], но ничего не происходит."))
 	else
 		if(!locked && default_deconstruction_screwdriver(user, "[initial(icon_state)]_open", initial(icon_state), attacking_item))
 			return
@@ -173,7 +173,7 @@
 	locked = FALSE
 	req_access = list()
 	obj_flags |= EMAGGED
-	balloon_alert(user, "id checker disabled")
+	balloon_alert(user, "проверка ID отключена")
 	return TRUE
 
 /obj/machinery/scanner_gate/proc/perform_scan(atom/movable/thing)
@@ -187,20 +187,20 @@
 			return
 		if(SCANGATE_WANTED)
 			if(ishuman(thing))
-				detected_thing = "Warrant"
+				detected_thing = "Ордер"
 				var/mob/living/carbon/human/scanned_human = thing
 				var/perpname = scanned_human.get_face_name(scanned_human.get_id_name())
 				var/datum/record/crew/target = find_record(perpname)
 				if(!target || (target.wanted_status == WANTED_ARREST))
 					beep = TRUE
 		if(SCANGATE_MINDSHIELD)
-			detected_thing = "Mindshield"
+			detected_thing = "Щит разума"
 			if(ishuman(thing))
 				var/mob/living/carbon/human/scanned_human = thing
 				if(HAS_TRAIT(scanned_human, TRAIT_MINDSHIELD))
 					beep = TRUE
 		if(SCANGATE_DISEASE)
-			detected_thing = "[disease_threshold] infection"
+			detected_thing = "[disease_threshold] инфекция"
 			if(iscarbon(thing))
 				var/mob/living/carbon/scanned_carbon = thing
 				if(get_disease_severity_value(scanned_carbon.check_virus()) >= get_disease_severity_value(disease_threshold))
@@ -215,11 +215,11 @@
 				if(is_species(scanned_human, scan_species))
 					beep = TRUE
 				if(detect_species_id == SPECIES_ZOMBIE) //Can detect dormant zombies
-					detected_thing = "Romerol infection"
+					detected_thing = "Инфекция ромерола"
 					if(scanned_human.get_organ_slot(ORGAN_SLOT_ZOMBIE))
 						beep = TRUE
 		if(SCANGATE_GUNS)
-			detected_thing = "Weapons"
+			detected_thing = "Оружие"
 			if(isgun(thing))
 				beep = TRUE
 			else if(ishuman(thing))
@@ -242,10 +242,10 @@
 				var/mob/living/carbon/human/scanned_human = thing
 				if(scanned_human.nutrition <= detect_nutrition && detect_nutrition == NUTRITION_LEVEL_STARVING)
 					beep = TRUE
-					detected_thing = "Starvation"
+					detected_thing = "Голодание"
 				if(scanned_human.nutrition >= detect_nutrition && detect_nutrition == NUTRITION_LEVEL_FAT)
 					beep = TRUE
-					detected_thing = "Obesity"
+					detected_thing = "Ожирение"
 
 	if(reverse)
 		beep = !beep
@@ -263,7 +263,7 @@
 	else
 		SEND_SIGNAL(src, COMSIG_SCANGATE_PASS_NO_TRIGGER, thing)
 		if(bypassed)
-			say("[detected_thing] detection bypassed.")
+			say("Обнаружение [detected_thing] обойдено.")
 		if(!ignore_signals)
 			color = wires.get_color_of_wire(WIRE_DENY)
 			var/obj/item/assembly/assembly = wires.get_attached(color)
@@ -277,7 +277,7 @@
 		return
 
 	if(detected_thing)
-		say("[detected_thing][reverse ? " not " : " "]detected!!")
+		say("[detected_thing][reverse ? " не " : " "]обнаружено!!")
 
 	COOLDOWN_START(src, next_beep, 2 SECONDS)
 	playsound(source = src, soundin = 'sound/machines/scanner/scanbuzz.ogg', vol = 30, vary = FALSE, extrarange = MEDIUM_RANGE_SOUND_EXTRARANGE, falloff_distance = 4)

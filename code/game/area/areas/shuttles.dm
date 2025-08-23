@@ -122,7 +122,7 @@
 
 
 /area/shuttle/arrival
-	name = "Шаттл прибытия"
+	name = "Транспортный шаттл"
 	area_flags = UNIQUE_AREA // SSjob использует эту зону для позднего присоединения
 
 

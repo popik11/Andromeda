@@ -495,8 +495,8 @@
 /obj/item/storage/toolbox/emergency,
 /obj/effect/turf_decal/bot,
 /obj/machinery/requests_console/directional/south{
-	name = "Arrival Shuttle Requests Console";
-	department = "Arrival Shuttle"
+	name = "Консоль транспортного шаттла";
+	department = "Транспортный шаттл"
 	},
 /obj/effect/turf_decal/tile/neutral/half/contrasted,
 /obj/machinery/light/small/red/directional/south,
