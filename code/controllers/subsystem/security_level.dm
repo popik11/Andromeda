@@ -1,6 +1,7 @@
 SUBSYSTEM_DEF(security_level)
 	name = "Security Level"
 	can_fire = FALSE // We will control when we fire in this subsystem
+	var/set_timer_id = null // ADD ANDROMEDA
 	/// Currently set security level
 	var/datum/security_level/current_security_level
 	/// A list of initialised security level datums.
@@ -8,11 +9,24 @@ SUBSYSTEM_DEF(security_level)
 	/// A list of alert icon states for use in [/obj/machinery/status_display/evac] (to differentiate them from other display images)
 	var/list/alert_level_icons = list()
 
+// ADD ANDROMEDA
+/proc/cmp_security_levels(datum/security_level/a, datum/security_level/b)
+	return cmp_numeric_asc(a.number_level, b.number_level)
+// END ANDROMEDA
+
 /datum/controller/subsystem/security_level/Initialize()
+	// ADD ANDROMEDA
+	var/list/levels = list()
 	for(var/iterating_security_level_type in subtypesof(/datum/security_level))
-		var/datum/security_level/new_security_level = new iterating_security_level_type
-		available_levels[new_security_level.name] = new_security_level
-		alert_level_icons += new_security_level.status_display_icon_state
+		levels += new iterating_security_level_type
+
+	sortTim(levels, GLOBAL_PROC_REF(cmp_security_levels))
+
+	for(var/datum/security_level/level as anything in levels)
+		available_levels[level.name] = level
+		alert_level_icons += level.status_display_icon_state
+	// END ANDROMEDA
+
 	current_security_level = available_levels[number_level_to_text(SEC_LEVEL_GREEN)]
 	return SS_INIT_SUCCESS
 
@@ -31,8 +45,9 @@ SUBSYSTEM_DEF(security_level)
  * Arguments:
  * * new_level - The new security level that will become our current level
  * * announce - Play the announcement, set FALSE if you're doing your own custom announcement to prevent duplicates
+ * * mob/user - Mob which set the security level. Optional // ADD ANDROMEDA
  */
-/datum/controller/subsystem/security_level/proc/set_level(new_level, announce = TRUE)
+/datum/controller/subsystem/security_level/proc/set_level(new_level, announce = TRUE, mob/user) // ADD ANDROMEDA
 	new_level = istext(new_level) ? new_level : number_level_to_text(new_level)
 	if(new_level == current_security_level.name) // If we are already at the desired level, do nothing
 		return
@@ -41,6 +56,21 @@ SUBSYSTEM_DEF(security_level)
 
 	if(!selected_level)
 		CRASH("set_level was called with an invalid security level([new_level])")
+
+	// ADD ANDROMEDA
+	if(!isnull(set_timer_id))
+		deltimer(set_timer_id)
+		set_timer_id = null
+
+	selected_level.pre_set_security_level(user)
+	if(selected_level.set_delay > 0)
+		set_timer_id = addtimer(CALLBACK(src, PROC_REF(set_level_instantly), selected_level, announce, user), selected_level.set_delay)
+	else
+		set_level_instantly(selected_level, announce, user)
+
+/datum/controller/subsystem/security_level/proc/set_level_instantly(datum/security_level/selected_level, announce = TRUE, mob/user)
+	PRIVATE_PROC(TRUE)
+	// END ANDROMEDA
 
 	if(SSnightshift.can_fire && (selected_level.number_level >= SEC_LEVEL_RED || current_security_level.number_level >= SEC_LEVEL_RED))
 		SSnightshift.next_fire = world.time + 7 SECONDS // Fire nightshift after the security level announcement is complete
@@ -58,7 +88,9 @@ SUBSYSTEM_DEF(security_level)
 
 	if(SSshuttle.emergency.mode == SHUTTLE_CALL || SSshuttle.emergency.mode == SHUTTLE_RECALL) // By god this is absolutely shit
 		SSshuttle.emergency.alert_coeff_change(selected_level.shuttle_call_time_mod)
-
+	// ADD ANDROMEDA
+	selected_level.post_set_security_level(user)
+	// END ANDROMEDA
 	SEND_SIGNAL(src, COMSIG_SECURITY_LEVEL_CHANGED, selected_level.number_level)
 	SSblackbox.record_feedback("tally", "security_level_changes", 1, selected_level.name)
 

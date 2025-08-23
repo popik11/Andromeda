@@ -12,7 +12,7 @@
 	if (value == "Random")
 		return uni_icon('icons/mob/silicon/ai.dmi', "questionmark")
 	else
-		return uni_icon('icons/obj/machines/status_display.dmi', GLOB.ai_status_display_emotes[value])
+		return uni_icon('modular_andromeda/icons/obj/machines/status_display.dmi', GLOB.ai_status_display_emotes[value])
 
 /datum/preference/choiced/ai_emote_display/is_accessible(datum/preferences/preferences)
 	if (!..(preferences))

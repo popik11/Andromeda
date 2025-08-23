@@ -34,7 +34,7 @@
 /obj/machinery/computer/security/telescreen/entertainment
 	name = "entertainment monitor"
 	desc = "Damn, they better have the /tg/ channel on these things."
-	icon = 'icons/obj/machines/status_display.dmi'
+	icon = 'modular_andromeda/icons/obj/machines/status_display.dmi'
 	icon_state = "entertainment_frame"
 	icon_screen = "entertainment_blank"
 	network = list()
@@ -60,7 +60,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/computer/security/telescreen/entertai
 
 /obj/item/wallframe/telescreen/entertainment
 	name = "entertainment telescreen frame"
-	icon = 'icons/obj/machines/status_display.dmi'
+	icon = 'modular_andromeda/icons/obj/machines/status_display.dmi'
 	icon_state = "entertainment_frame"
 	result_path = /obj/machinery/computer/security/telescreen/entertainment
 

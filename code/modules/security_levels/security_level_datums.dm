@@ -1,58 +1,58 @@
 /**
- * Security levels
+ * Уровни безопасности
  *
- * These are used by the security level subsystem. Each one of these represents a security level that a player can set.
+ * Используются подсистемой уровней безопасности. Каждый из них представляет уровень безопасности, который может установить игрок.
  *
- * Base type is abstract
+ * Базовый тип является абстрактным
  */
 
 /datum/security_level
-	/// The name of this security level.
-	var/name = "not set"
-	/// A three-letter shortform of the security level.
-	var/name_shortform = "not set"
-	/// The color of our announcement divider.
+	/// Название этого уровня безопасности.
+	var/name = "не назначен"
+	/// Трёхбуквенное сокращение уровня безопасности.
+	var/name_shortform = "не установлен"
+	/// Цвет разделителя нашего объявления.
 	var/announcement_color = "default"
-	/// The numerical level of this security level, see defines for more information.
+	/// Числовой уровень этого уровня безопасности, см. defines для дополнительной информации.
 	var/number_level = -1
-	/// Icon state that will be displayed on displays during this security level
+	/// Состояние иконки, которое будет отображаться на дисплеях во время этого уровня безопасности
 	var/status_display_icon_state
-	/// The color of the fire alarm light set when changed to this security level
+	/// Цвет света пожарной тревоги, устанавливаемый при изменении на этот уровень безопасности
 	var/fire_alarm_light_color
-	/// The sound that we will play when this security level is set
+	/// Звук, который будет воспроизведён при установке этого уровня безопасности
 	var/sound
-	/// The looping sound that will be played while the security level is set
+	/// Зацикленный звук, который будет воспроизводиться пока установлен уровень безопасности
 	var/looping_sound
-	/// The looping sound interval
+	/// Интервал зацикленного звука
 	var/looping_sound_interval
-	/// The shuttle call time modification of this security level
+	/// Модификатор времени вызова шаттла для этого уровня безопасности
 	var/shuttle_call_time_mod = 0
-	/// Our announcement when lowering to this level
+	/// Наше объявление при понижении до этого уровня
 	var/lowering_to_announcement
-	/// Our announcement when elevating to this level
+	/// Наше объявление при повышении до этого уровня
 	var/elevating_to_announcement
-	/// Our configuration key for lowering to text, if set, will override the default lowering to announcement.
+	/// Ключ конфигурации для текста понижения, если установлен, переопределит стандартное объявление понижения.
 	var/lowering_to_configuration_key
-	/// Our configuration key for elevating to text, if set, will override the default elevating to announcement.
+	/// Ключ конфигурации для текста повышения, если установлен, переопределит стандартное объявление повышения.
 	var/elevating_to_configuration_key
-	/// if TRUE, stops mail shipments from being sent during this security level
+	/// если TRUE, блокирует отправку почтовых отправлений во время этого уровня безопасности
 	var/disables_mail = FALSE
 
 /datum/security_level/New()
 	. = ..()
-	if(lowering_to_configuration_key) // I'm not sure about you, but isn't there an easier way to do this?
+	if(lowering_to_configuration_key) // Не уверен насчёт вас, но разве нет более простого способа сделать это?
 		lowering_to_announcement = global.config.Get(lowering_to_configuration_key)
 	if(elevating_to_configuration_key)
 		elevating_to_announcement = global.config.Get(elevating_to_configuration_key)
 
 /**
- * GREEN
+ * ЗЕЛЁНЫЙ
  *
- * No threats
+ * Никаких угроз
  */
 /datum/security_level/green
-	name = "green"
-	name_shortform = "GRN"
+	name = "зелёный"
+	name_shortform = "GRE"
 	announcement_color = "green"
 	sound = 'sound/announcer/notice/notice2.ogg' // Friendly beep
 	number_level = SEC_LEVEL_GREEN
@@ -62,12 +62,12 @@
 	shuttle_call_time_mod = ALERT_COEFF_GREEN
 
 /**
- * BLUE
+ * СИНИЙ
  *
- * Caution advised
+ * Рекомендуется соблюдать осторожность
  */
 /datum/security_level/blue
-	name = "blue"
+	name = "синий"
 	name_shortform = "BLU"
 	announcement_color = "blue"
 	sound = 'sound/announcer/notice/notice1.ogg' // Angry alarm
@@ -79,12 +79,12 @@
 	shuttle_call_time_mod = ALERT_COEFF_BLUE
 
 /**
- * RED
+ * КРАСНЫЙ
  *
- * Hostile threats
+ * Враждебные угрозы
  */
 /datum/security_level/red
-	name = "red"
+	name = "красный"
 	name_shortform = "RED"
 	announcement_color = "red"
 	sound = 'sound/announcer/notice/notice3.ogg' // More angry alarm
@@ -94,15 +94,15 @@
 	lowering_to_configuration_key = /datum/config_entry/string/alert_red_downto
 	elevating_to_configuration_key = /datum/config_entry/string/alert_red_upto
 	shuttle_call_time_mod = ALERT_COEFF_RED
-	disables_mail = TRUE
+
 /**
- * DELTA
+ * ДЕЛЬТА
  *
- * Station destruction is imminent
+ * Уничтожение станции неизбежно
  */
 /datum/security_level/delta
-	name = "delta"
-	name_shortform = "Δ"
+	name = "дельта"
+	name_shortform = "DEL"
 	announcement_color = "purple"
 	sound = 'sound/announcer/alarm/airraid.ogg' // Air alarm to signify importance
 	number_level = SEC_LEVEL_DELTA
