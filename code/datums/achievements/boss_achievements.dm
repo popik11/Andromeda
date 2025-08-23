@@ -8,7 +8,7 @@
 	icon_state = "tendril"
 
 /datum/award/achievement/boss/boss_killer
-	name = "Убийца босса"
+	name = "Убийца Босса"
 	desc = "Ты прошел долгий путь от вопроса о том, как менять руки."
 	database_id = "Boss Killer"
 	icon_state = "firstboss"
