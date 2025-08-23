@@ -1068,23 +1068,27 @@
 		return stored_files
 	return stored_files + inserted_disk.stored_files
 
-/// Returns how relevant the current security level is:
-#define ALERT_RELEVANCY_SAFE 0 /// * 0: User is not in immediate danger and not needed for some station-critical task.
-#define ALERT_RELEVANCY_WARN 1 /// * 1: Danger is around, but the user is not directly needed to handle it.
-#define ALERT_RELEVANCY_PERTINENT 2/// * 2: Danger is around and the user is responsible for handling it.
+/// Возвращает актуальность текущего уровня безопасности:
+#define ALERT_RELEVANCY_SAFE 0 /// * 0: Пользователь не в непосредственной опасности и не нужен для критически важных задач станции.
+#define ALERT_RELEVANCY_WARN 1 /// * 1: Опасность рядом, но пользователь не нужен напрямую для её устранения.
+#define ALERT_RELEVANCY_PERTINENT 2/// * 2: Опасность рядом и пользователь ответственен за её устранение.
 /obj/item/modular_computer/proc/get_security_level_relevancy()
 	switch(SSsecurity_level.get_current_level_as_number())
 		if(SEC_LEVEL_DELTA)
 			return ALERT_RELEVANCY_PERTINENT
-		if(SEC_LEVEL_RED) // all-hands-on-deck situations, everyone is responsible for combatting a threat
+		if(SEC_LEVEL_RED) // ситуации "все на палубу", все ответственны за борьбу с угрозой
 			return ALERT_RELEVANCY_PERTINENT
-		if(SEC_LEVEL_BLUE) // suspected threat. security needs to be alert and possibly preparing for it, no further concerns
+		if(SEC_LEVEL_BLUE) // предполагаемая угроза. охрана должна быть настороже и возможно готовиться к ней, дальнейших проблем нет
 			if(ACCESS_SECURITY in stored_id?.access)
 				return ALERT_RELEVANCY_PERTINENT
 			else
 				return ALERT_RELEVANCY_WARN
-		if(SEC_LEVEL_GREEN) // no threats, no concerns
+		if(SEC_LEVEL_GREEN) // нет угроз, нет проблем
 			return ALERT_RELEVANCY_SAFE
+		if(SEC_LEVEL_GAMMA)
+			return ALERT_RELEVANCY_PERTINENT
+		if(SEC_LEVEL_EPSILON)
+			return ALERT_RELEVANCY_PERTINENT
 
 	return 0
 
