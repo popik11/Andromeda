@@ -70,7 +70,7 @@
 	sound_environment = SOUND_AREA_SMALL_ENCLOSED
 
 /area/station/security/warden
-	name = "Контроль брига"
+	name = "Пост Смотрителя"
 	icon_state = "warden"
 	sound_environment = SOUND_AREA_SMALL_SOFTFLOOR
 

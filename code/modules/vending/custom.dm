@@ -1,8 +1,8 @@
-///This unique key decides how items are stacked on the UI. We separate them based on name,price & type
+///Этот уникальный ключ определяет, как предметы складываются в интерфейсе. Мы разделяем их по имени, цене и типу
 #define ITEM_HASH(item)("[item.name][item.custom_price][item.type]")
 
 /obj/machinery/vending/custom
-	name = "Custom Vendor"
+	name = "Кастомный ТоргоМат"
 	icon_state = "custom"
 	icon_deny = "custom-deny"
 	max_integrity = 400
@@ -13,47 +13,47 @@
 	refill_canister = /obj/item/vending_refill/custom
 	fish_source_path = /datum/fish_source/vending/custom
 
-	/// max number of items that the custom vendor can hold
+	/// максимальное количество предметов, которое может вместить кастомный торговец
 	var/max_loaded_items = 20
-	/// where the money is sent
+	/// куда отправляются деньги
 	VAR_PRIVATE/datum/bank_account/linked_account
-	/// Base64 cache of custom icons.
+	/// Кэш Base64 кастомных иконок.
 	VAR_PRIVATE/static/list/base64_cache = list()
 
 /obj/machinery/vending/custom/on_deconstruction(disassembled)
 	var/obj/item/vending_refill/custom/installed_refill = locate() in component_parts
 
 	if(linked_account)
-		//we delete the canister so players don't resell our products as their own
+		//мы удаляем канистру, чтобы игроки не перепродавали наши продукты как свои
 		component_parts -= installed_refill
 		qdel(installed_refill)
 
-		//self destruct protocol for unauthorized destruction
+		//протокол самоуничтожения при несанкционированном разрушении
 		explosion(get_turf(src), devastation_range = -1, light_impact_range = 3)
 
 		return
 
-	//copy product hash keys
+	//копируем хэш-ключи продуктов
 	installed_refill.products.Cut()
 	installed_refill.products += products
 
-	//move products to canister
+	//перемещаем продукты в канистру
 	for(var/obj/item/stored_item in contents - component_parts)
 		stored_item.forceMove(installed_refill)
 
 /obj/machinery/vending/custom/add_context(atom/source, list/context, obj/item/held_item, mob/user)
 	if(panel_open && istype(held_item, refill_canister))
-		context[SCREENTIP_CONTEXT_LMB] = "Restock vending machine"
+		context[SCREENTIP_CONTEXT_LMB] = "Пополнить торговый автомат"
 		return CONTEXTUAL_SCREENTIP_SET
 
 	if(isliving(user) && istype(held_item, /obj/item/card/id))
 		var/obj/item/card/id/card_used = held_item
 		if(card_used?.registered_account)
 			if(!linked_account)
-				context[SCREENTIP_CONTEXT_LMB] = "Link account"
+				context[SCREENTIP_CONTEXT_LMB] = "Привязать аккаунт"
 				return ITEM_INTERACT_SUCCESS
 			else if(linked_account == card_used.registered_account)
-				context[SCREENTIP_CONTEXT_LMB] = "Unlink account"
+				context[SCREENTIP_CONTEXT_LMB] = "Отвязать аккаунт"
 				return ITEM_INTERACT_SUCCESS
 
 	return ..()
@@ -61,7 +61,7 @@
 /obj/machinery/vending/custom/examine(mob/user)
 	. = ..()
 	if(linked_account)
-		. += span_warning("Machine is ID locked. Be sure to unlink before deconstructing the machine.")
+		. += span_warning("Автомат заблокирован ID. Не забудьте отвязать перед разборкой аппарата.")
 
 /obj/machinery/vending/custom/Exited(obj/item/gone, direction)
 	. = ..()
@@ -75,7 +75,7 @@
 		else
 			products[hash_key] = new_amount
 
-///Returns the number of products loaded in this machine
+///Возвращает количество продуктов, загруженных в этот аппарат
 /obj/machinery/vending/custom/proc/loaded_items()
 	PRIVATE_PROC(TRUE)
 	SHOULD_BE_PURE(TRUE)
@@ -87,15 +87,15 @@
 /obj/machinery/vending/custom/canLoadItem(obj/item/loaded_item, mob/user, send_message = TRUE)
 	if(loaded_item.flags_1 & HOLOGRAM_1)
 		if(send_message)
-			speak("This vendor cannot accept nonexistent items.")
+			speak("Этот торговец не принимает несуществующие предметы.")
 		return FALSE
 	if(isstack(loaded_item))
 		if(send_message)
-			speak("Loose items may cause problems, try to use it inside wrapping paper.")
+			speak("Сыпучие предметы могут вызвать проблемы, попробуйте использовать их в упаковочной бумаге.")
 		return FALSE
 	if(!loaded_item.custom_price)
 		if(send_message)
-			speak("Item needs to have a custom price set.")
+			speak("Предмету нужно установить кастомную цену.")
 		return FALSE
 	return TRUE
 
@@ -104,14 +104,14 @@
 		return FALSE
 
 	if(loaded_items() == max_loaded_items)
-		speak("There are too many items in stock.")
+		speak("Слишком много предметов в наличии.")
 		return FALSE
 
 	if(!user.transferItemToLoc(inserted_item, src))
-		to_chat(user, span_warning("[inserted_item] is stuck in your hand!"))
+		to_chat(user, span_warning("[inserted_item] прилип к вашей руке!"))
 		return FALSE
 
-	//the hash key decides how items stack in the UI. We diffrentiate them based on name & price
+	//хэш-ключ определяет, как предметы складываются в интерфейсе. Мы различаем их по имени и цене
 	var/hash_key = ITEM_HASH(inserted_item)
 	if(products[hash_key])
 		products[hash_key]++
@@ -135,20 +135,20 @@
 	var/update_static_data = FALSE
 	var/available_load = max_loaded_items - loaded_items()
 	for(var/product_hash in canister.products)
-		//get available space
+		//получаем доступное пространство
 		var/load_count = min(canister.products[product_hash], available_load)
 		if(!load_count)
 			break
-		//update canister record
+		//обновляем запись в канистре
 		canister.products[product_hash] -= load_count
 		if(!canister.products[product_hash])
 			canister.products -= product_hash
-		//update vendor record
+		//обновляем запись вендора
 		products[product_hash] += load_count
-		//reduce from available space
+		//уменьшаем доступное пространство
 		available_load -= load_count
 
-		//update product
+		//обновляем продукт
 		for(var/obj/item/product in canister)
 			if(!load_count)
 				break
@@ -163,23 +163,23 @@
 
 /obj/machinery/vending/custom/post_restock(mob/living/user, restocked)
 	if(!restocked)
-		to_chat(user, span_warning("There's nothing to restock!"))
+		to_chat(user, span_warning("Нечего пополнять!"))
 		return
 
-	to_chat(user, span_notice("You loaded [restocked] items in [src]"))
+	to_chat(user, span_notice("Вы загрузили [restocked] предметов в [src]"))
 
 /obj/machinery/vending/custom/crowbar_act(mob/living/user, obj/item/attack_item)
 	if(linked_account)
 		visible_message(
-			span_warning("Security warning"),
-			span_warning("Unauthorized deconstruction of vending machine is prohibited. Please read the warning alert")
+			span_warning("Предупреждение безопасности"),
+			span_warning("Несанкционированная разборка торгового автомата запрещена. Пожалуйста, ознакомьтесь с предупреждением")
 		)
-		if(tgui_alert(user, "Vending machine is ID locked.\
-		Deconstruction will result in an catrostrophic self destruct.\
-		If you are the owner of this machine please unlink your account with an ID swipe before proceeding.\
-		Still proceed?",
-		"Vandalism protection protocol",
-		list("Yes", "No")) == "No")
+		if(tgui_alert(user, "Торговый автомат заблокирован ID.\
+		Разборка приведёт к катастрофическому самоуничтожению.\
+		Если вы владелец этого аппарата, пожалуйста, отвяжите свой аккаунт с помощью ID перед продолжением.\
+		Всё равно продолжить?",
+		"Протокол защиты от вандализма",
+		list("Да", "Нет")) == "Нет")
 			return ITEM_INTERACT_FAILURE
 
 	return ..()
@@ -199,29 +199,29 @@
 		if(card_used?.registered_account)
 			if(!linked_account)
 				linked_account = card_used.registered_account
-				speak("\The [src] has been linked to [card_used].")
+				speak("[src] был привязан к [card_used].")
 			else if(linked_account == card_used.registered_account)
 				linked_account = null
-				speak("account unlinked.")
+				speak("Аккаунт отвязан.")
 			else
-				to_chat(user, "verification failed. unlinking process has been cancelled.")
+				to_chat(user, "Ошибка верификации. Процесс отвязки отменён.")
 			return ITEM_INTERACT_SUCCESS
 
 	if(!compartmentLoadAccessCheck(user) || !IS_WRITING_UTENSIL(attack_item))
 		return ..()
 
 	. ITEM_INTERACT_FAILURE
-	var/new_name = reject_bad_name(tgui_input_text(user, "Set name", "Name", name, max_length = 20), allow_numbers = TRUE, strict = TRUE, cap_after_symbols = FALSE)
+	var/new_name = reject_bad_name(tgui_input_text(user, "Установить название", "Название", name, max_length = 20), allow_numbers = TRUE, strict = TRUE, cap_after_symbols = FALSE)
 	if(!user.can_perform_action(src, FORBID_TELEKINESIS_REACH))
 		return
 	if (new_name)
 		name = new_name
-	var/new_desc = reject_bad_text(tgui_input_text(user, "Set description", "Description", desc, max_length = 60))
+	var/new_desc = reject_bad_text(tgui_input_text(user, "Установить описание", "Описание", desc, max_length = 60))
 	if(!user.can_perform_action(src, FORBID_TELEKINESIS_REACH))
 		return
 	if (new_desc)
 		desc = new_desc
-	var/new_slogan = reject_bad_text(tgui_input_text(user, "Set slogan", "Slogan", "Epic", max_length = 60))
+	var/new_slogan = reject_bad_text(tgui_input_text(user, "Установить слоган", "Слоган", "Эпично", max_length = 60))
 	if(!user.can_perform_action(src, FORBID_TELEKINESIS_REACH))
 		return
 	if (new_slogan)
@@ -231,7 +231,7 @@
 
 /obj/machinery/vending/custom/collect_records_for_static_data(list/records, list/categories, premium)
 	. = list()
-	if(records != product_records) //no coin or hidden stuff only product records
+	if(records != product_records) //только товарные записи, без монет или скрытых вещей
 		return
 
 	categories["Products"] = list("icon" = "cart-shopping")
@@ -241,7 +241,7 @@
 		for(var/obj/item/stored_item in contents - component_parts)
 			if(ITEM_HASH(stored_item) == stocked_hash)
 				base64 = base64_cache[stocked_hash]
-				if(!base64) //generate an icon of the item to use in UI
+				if(!base64) //генерируем иконку предмета для использования в интерфейсе
 					base64 = icon2base64(getFlatIcon(stored_item, no_anim = TRUE))
 					base64_cache[stocked_hash] = base64
 				target = stored_item
@@ -260,7 +260,7 @@
 
 /obj/machinery/vending/custom/ui_interact(mob/user, datum/tgui/ui)
 	if(!linked_account)
-		balloon_alert(user, "no registered owner!")
+		balloon_alert(user, "нет зарегистрированного владельца!")
 		return FALSE
 	return ..()
 
@@ -290,29 +290,29 @@
 
 	var/obj/item/card/id/id_card = user.get_idcard(TRUE)
 	if(!id_card || !id_card.registered_account || !id_card.registered_account.account_job)
-		balloon_alert(user, "no card found!")
+		balloon_alert(user, "карта не найдена!")
 		flick(icon_deny, src)
 		return
 
-	/// Charges the user if its not the owner
+	/// Списание средств, если это не владелец
 	var/datum/bank_account/payee = id_card.registered_account
 	if(!compartmentLoadAccessCheck(user))
 		if(!payee.has_money(dispensed_item.custom_price))
-			balloon_alert(user, "insufficient funds!")
+			balloon_alert(user, "недостаточно средств!")
 			return
-		/// Make the transaction
-		payee.adjust_money(-dispensed_item.custom_price, , "Vending: [dispensed_item]")
-		linked_account.adjust_money(dispensed_item.custom_price, "Vending: [dispensed_item] Bought")
-		linked_account.bank_card_talk("[payee.account_holder] made a [dispensed_item.custom_price] \
-		cr purchase at your custom vendor.")
-		/// Log the transaction
+		/// Совершаем транзакцию
+		payee.adjust_money(-dispensed_item.custom_price, , "ТоргоМат: [dispensed_item]")
+		linked_account.adjust_money(dispensed_item.custom_price, "ТоргоМат: [dispensed_item] Куплено")
+		linked_account.bank_card_talk("[payee.account_holder] совершил покупку на [dispensed_item.custom_price] \
+		кр в вашем кастомном торгомате.")
+		/// Логируем транзакцию
 		SSblackbox.record_feedback("amount", "vending_spent", dispensed_item.custom_price)
-		log_econ("[dispensed_item.custom_price] credits were spent on [src] buying a \
-		[dispensed_item] by [payee.account_holder], owned by [linked_account.account_holder].")
-		/// Make an alert
+		log_econ("[dispensed_item.custom_price] кредитов было потрачено в [src] на покупку \
+		[dispensed_item] от [payee.account_holder], владелец: [linked_account.account_holder].")
+		/// Создаём оповещение
 		var/ref = REF(user)
 		if(last_shopper != ref || purchase_message_cooldown < world.time)
-			speak("Thank you for your patronage [user]!")
+			speak("Спасибо за покупку, [user]!")
 			purchase_message_cooldown = world.time + 5 SECONDS
 			last_shopper = ref
 
@@ -322,7 +322,7 @@
 	return TRUE
 
 /obj/item/vending_refill/custom
-	machine_name = "Custom Vendor"
+	machine_name = "ТоргоМат"
 	icon_state = "refill_custom"
 	custom_premium_price = PAYCHECK_CREW
 
@@ -332,7 +332,7 @@
 		. += products[key]
 
 /obj/machinery/vending/custom/unbreakable
-	name = "Indestructible Vendor"
+	name = "Неразрушимый ТоргоМат"
 	resistance_flags = INDESTRUCTIBLE
 	allow_custom = FALSE
 
@@ -348,13 +348,13 @@
 
 /obj/machinery/vending/custom/greed/Initialize(mapload)
 	. = ..()
-	//starts in a state where you can move it
+	//начинает в состоянии, когда его можно перемещать
 	set_anchored(FALSE)
 	set_panel_open(TRUE)
-	//and references the deity
-	name = "[GLOB.deity]'s Consecrated Vendor"
-	desc = "A vending machine created by [GLOB.deity]."
-	slogan_list = list("[GLOB.deity] says: It's your divine right to buy!")
+	//и ссылается на божество
+	name = "Освящённый Торговец [GLOB.deity]"
+	desc = "Торговый автомат, созданный [GLOB.deity]."
+	slogan_list = list("[GLOB.deity] говорит: Это ваше божественное право - покупать!")
 	add_filter("vending_outline", 9, list("type" = "outline", "color" = COLOR_VERY_SOFT_YELLOW))
 	add_filter("vending_rays", 10, list("type" = "rays", "size" = 35, "color" = COLOR_VIVID_YELLOW))
 

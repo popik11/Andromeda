@@ -1,7 +1,7 @@
 [
     {
         "code": "NT-CMD-AR",
-        "category": "Command Department",
+        "category": "Командование",
         "name": "Запрос на доступ",
         "info": [
             "<h1><table bgcolor=\"royalblue\" width=\"100%\"><th><div align=\"center\"><font color=\"white\">Запрос на доступ</font></div></th></table></h1>",
@@ -64,7 +64,7 @@
     },
     {
         "code": "NT-CMD-JA",
-        "category": "Command Department",
+        "category": "Командование",
         "name": "Заявление на работу",
         "info": [
             "<h1><table bgcolor=\"royalblue\" width=\"100%\"><th><div align=\"center\"><font color=\"white\">Заявление на работу</font></div></th></table></h1>",
@@ -106,7 +106,7 @@
     },
     {
         "code": "NT-CMD-JT",
-        "category": "Command Department",
+        "category": "Командование",
         "name": "Увольнение",
         "info": [
             "<h1><table bgcolor=\"royalblue\" width=\"100%\"><th><font color=\"white\"><div align=\"center\">Увольнение</font></div></th></table></h1>",
@@ -146,7 +146,7 @@
     },
     {
         "code": "NT-CMD-JR",
-        "category": "Command Department",
+        "category": "Командование",
         "name": "Перевод на другую должность",
         "info": [
             "<h1><table bgcolor=\"royalblue\" width=\"100%\"><th><div align=\"center\"><font color=\"white\">Перевод на другую должность</font></div></th></table></h1>",
@@ -185,7 +185,7 @@
     },
     {
         "code": "NT-CMD-C",
-        "category": "Command Department",
+        "category": "Командование",
         "name": "Форма жалобы",
         "info": [
             "<h1><table bgcolor=\"royalblue\" width=\"100%\"><th><div align=\"center\"><font color=\"white\">Форма жалобы</font></div></th></table></h1>",
@@ -221,7 +221,7 @@
     },
     {
         "code": "NT-CMD-O",
-        "category": "Command Department",
+        "category": "Командование",
         "name": "Форма приказа",
         "info": [
             "<h1><table bgcolor=\"royalblue\" width=\"100%\"><th><div align=\"center\"><font color=\"white\">Форма приказа</font></div></th></table></h1>",
@@ -262,7 +262,7 @@
     },
     {
         "code": "NT-CMD-PH",
-        "category": "Command Department",
+        "category": "Командование",
         "name": "Разрешение на опасные работы",
         "info": [
             "<h1><table bgcolor=\"royalblue\" width=\"100%\"><th><div align=\"center\"><font color=\"white\">Разрешение на опасные работы</font></div></th></table></h1>",
@@ -291,7 +291,7 @@
     },
     {
         "code": "NT-SCR-W",
-        "category": "Security Department",
+        "category": "Отдел безопасности",
         "name": "Ордер на арест",
         "info": [
             "<h1><table bgcolor=\"firebrick\" width=\"100%\"><th><div align=\"center\"><font color=\"white\">Ордер на арест</font></div></th></table></h1>",
@@ -317,7 +317,7 @@
     },
     {
         "code": "NT-SCR-SW",
-        "category": "Security Department",
+        "category": "Отдел безопасности",
         "name": "Ордер на обыск",
         "info": [
             "<h1><table bgcolor=\"firebrick\" width=\"100%\"><th><div align=\"center\"><font color=\"white\">Ордер на обыск</font></div></th></table></h1>",
@@ -343,7 +343,7 @@
     },
     {
         "code": "NT-SCR-IR",
-        "category": "Security Department",
+        "category": "Отдел безопасности",
         "name": "Протокол допроса",
         "info": [
             "<h1><table bgcolor=\"firebrick\" width=\"100%\"><th><div align=\"center\"><font color=\"white\">Протокол допроса</font></div></th></table></h1>",
@@ -388,7 +388,7 @@
     },
     {
         "code": "NT-SCR-SR",
-        "category": "Security Department",
+        "category": "Отдел безопасности",
         "name": "Отчёт службы безопасности",
         "info": [
             "<h1><table bgcolor=\"firebrick\" width=\"100%\"><th><div align=\"center\"><font color=\"white\">Отчёт службы безопасности</font></div></th></table></h1>",
@@ -426,7 +426,7 @@
     },
     {
         "code": "NT-SCR-EO",
-        "category": "Security Department",
+        "category": "Отдел безопасности",
         "name": "Приказ о казни",
         "info": [
             "<h1><table bgcolor=\"firebrick\" width=\"100%\"><th><div align=\"center\"><font color=\"white\">Приказ о казни</font></div></th></table></h1>",
@@ -458,7 +458,7 @@
     },
     {
         "code": "NT-SCR-PP",
-        "category": "Security Department",
+        "category": "Отдел безопасности",
         "name": "Разрешение на хранение",
         "info": [
             "<h1><table bgcolor=\"firebrick\" width=\"100%\"><th><div align=\"center\"><font color=\"white\">Разрешение на хранение</font></div></th></table></h1>",
@@ -495,7 +495,7 @@
     },
     {
         "code": "NT-SCR-CS",
-        "category": "Security Department",
+        "category": "Отдел безопасности",
         "name": "Судебная повестка",
         "info": [
             "<h1><table bgcolor=\"firebrick\" width=\"100%\"><th><div align=\"center\"><font color=\"white\">Судебный приказ</font></div></th></table></h1>",
@@ -515,7 +515,7 @@
     },
     {
         "code": "NT-SCR-LRF",
-        "category": "Security Department",
+        "category": "Отдел безопасности",
         "name": "Форма запроса на судебный иск",
         "info": [
             "<h1><table bgcolor=\"firebrick\" width=\"100%\"><th><div align=\"center\"><font color=\"white\">Форма запроса на судебный иск</font></div></th></table></h1>",
@@ -562,7 +562,7 @@
     },
     {
         "code": "NT-ENG-PW",
-        "category": "Engineering Department",
+        "category": "Инженерный отдел",
         "name": "Разрешение на нестандартные работы",
         "info": [
             "<h1><table bgcolor=\"darkorange\" width=\"100%\"><th><div align=\"center\"><font color=\"white\">Разрешение на нестандартные работы</font></div></th></table></h1>",
@@ -603,7 +603,7 @@
     },
     {
         "code": "NT-ENG-PE",
-        "category": "Engineering Department",
+        "category": "Инженерный отдел",
         "name": "Разрешение на выдачу инженерного оборудования",
         "info": [
             "<h1><table bgcolor=\"darkorange\" width=\"100%\"><th><div align=\"center\"><font color=\"white\">Разрешение на выдачу инженерного оборудования</font></div></th></table></h1>",
@@ -648,7 +648,7 @@
     },
     {
         "code": "NT-RSH-PR",
-        "category": "Research Department",
+        "category": "Исследовательский отдел",
         "name": "Разрешение на нестандартные исследования",
         "info": [
             "<h1><table bgcolor=\"darkviolet\" width=\"100%\"><th><div align=\"center\"><font color=\"white\">Разрешение на нестандартные исследования</font></div></th></table></h1>",
@@ -689,7 +689,7 @@
     },
     {
         "code": "NT-RSH-PE",
-        "category": "Research Department",
+        "category": "Исследовательский отдел",
         "name": "Разрешение на выдачу исследовательского оборудования",
         "info": [
             "<h1><table bgcolor=\"darkviolet\" width=\"100%\"><th><div align=\"center\"><font color=\"white\">Разрешение на выдачу исследовательского оборудования</font></div></th></table></h1>",
@@ -734,7 +734,7 @@
     },
     {
         "code": "NT-MDC-MP",
-        "category": "Medical Department",
+        "category": "Медицинский отдел",
         "name": "Медицинский рецепт",
         "info": [
             "<h1><table bgcolor=\"steelblue\" width=\"100%\"><th><div align=\"center\"><font color=\"white\">Медицинский рецепт</font></div></th></table></h1>",
@@ -771,7 +771,7 @@
     },
     {
         "code": "NT-MDC-AR",
-        "category": "Medical Department",
+        "category": "Медицинский отдел",
         "name": "Акт вскрытия",
         "info": [
             "<h1><table bgcolor=\"steelblue\" width=\"100%\"><th><div align=\"center\"><font color=\"white\">Акт вскрытия</font></div></th></table></h1>",
@@ -805,7 +805,7 @@
     },
     {
         "code": "NT-MDC-DC",
-        "category": "Medical Department",
+        "category": "Медицинский отдел",
         "name": "Свидетельство о смерти",
         "info": [
             "<h1><table bgcolor=\"steelblue\" width=\"100%\"><th><div align=\"center\"><font color=\"white\">Свидетельство о смерти</font></div></th></table></h1>",
@@ -836,7 +836,7 @@
     },
     {
         "code": "NT-SPL-PO",
-        "category": "Supply Department",
+        "category": "Отдел снабжения",
         "name": "Разрешение на выполнение нестандартного заказа",
         "info": [
             "<h1><table bgcolor=\"darkgoldenrod\" width=\"100%\"><th><div align=\"center\"><font color=\"white\">Разрешение на выполнение нестандартного заказа</font></div></th></table></h1>",
@@ -881,7 +881,7 @@
     },
     {
         "code": "NT-LB",
-        "category": "Other",
+        "category": "Разное",
         "name": "Счёт за обед",
         "info": [
             "<h1><table bgcolor=\"slategray\" width=\"100%\"><th><div align=\"center\"><font color=\"white\">Счёт за обед</font></div></th></table></h1>",
@@ -913,7 +913,7 @@
     },
     {
         "code": "NT-PS",
-        "category": "Other",
+        "category": "Разное",
         "name": "Оказание платных услуг",
         "info": [
             "<h1><table bgcolor=\"slategray\" width=\"100%\"><th><div align=\"center\"><font color=\"white\">Оказание платных услуг</font></div></th></table></h1>",

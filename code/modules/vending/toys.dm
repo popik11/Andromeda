@@ -1,11 +1,11 @@
 /obj/machinery/vending/donksofttoyvendor
-	name = "\improper Donksoft Toy Vendor"
-	desc = "Ages 8 and up approved vendor that dispenses toys."
+	name = "ТоргоМат Той"
+	desc = "Одобренный для возрастов 8+ автомат, выдающий игрушки."
 	icon_state = "nt-donk"
 	panel_type = "panel18"
-	product_slogans = "Get your cool toys today!;Trigger a valid hunter today!;Quality toy weapons for cheap prices!;Give them to HoPs for all access!;Give them to HoS to get permabrigged!"
-	product_ads = "Feel robust with your toys!;Express your inner child today!;Toy weapons don't kill people, but valid hunters do!;Who needs responsibilities when you have toy weapons?;Make your next murder FUN!"
-	vend_reply = "Come back for more!"
+	product_slogans = "Получи крутые игрушки сегодня!;Затриггерь валидного хантера сегодня!;Качественные игрушечные оружием по низким ценам!;Дайте их ГП для полного доступа!;Дайте их ГСБ для пермабрига!"
+	product_ads = "Почувствуй себя робастным с нашими игрушками!;Вырази своего внутреннего ребёнка сегодня!;Игрушечные оружие не убивают людей, но валидные хантеры — да!;Кому нужна ответственность, когда есть игрушечные weapon?;Сделай своё следующее убийство ВЕСЁЛЫМ!"
+	vend_reply = "Возвращайтесь за новыми!"
 	light_mask = "donksoft-light-mask"
 	circuit = /obj/item/circuitboard/machine/vending/donksofttoyvendor
 	products = list(
@@ -36,5 +36,5 @@
 	payment_department = NO_FREEBIES
 
 /obj/item/vending_refill/donksoft
-	machine_name = "Donksoft Toy Vendor"
+	machine_name = "ТоргоМат Той"
 	icon_state = "refill_donksoft"

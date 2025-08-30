@@ -1,8 +1,8 @@
 /obj/machinery/vending/donksnack
-	name = "\improper Donk Co Vendor"
-	desc = "A snack machine courtesy of Donk Co."
-	product_slogans = "Just microwave and eat!;The original home of the Donk Pocket!"
-	product_ads = "The original!;You wanna put a bangin' Donk on it!;The best!;The seasoned traitor's food of choice!;Now with 12% more omnizine!;Eat DONK or DIE!;The galaxy's most popular microwavable snack food!*;Try our NEW Ready-Donk Meals!"
+	name = "ДонкКоМат"
+	desc = "Снековый автомат от Донк Ко."
+	product_slogans = "Просто разогрей и ешь!;Оригинальный дом Донк Покета!"
+	product_ads = "Оригинальный!;Ты хочешь замутить крутой Донк!;Лучший!;Еда выбора опытного предателя!;Теперь на 12% больше омнизина!;Ешь ДОНК или СДОХНИ!;Самый популярный в галактике микроволновый снек!*;Попробуйте наши НОВЫЕ Готовые-Донк Блюда!"
 	icon_state = "snackdonk"
 	panel_type = "panel18"
 	light_mask = "donksoft-light-mask"
@@ -38,5 +38,5 @@
 	payment_department = NO_FREEBIES
 
 /obj/item/vending_refill/donksnackvendor
-	machine_name = "Donk Co Snack Vendor"
+	machine_name = "ДонкКоСнекоМат"
 	icon_state = "refill_donksnack"

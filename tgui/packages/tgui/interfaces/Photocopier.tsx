@@ -124,19 +124,19 @@ const Status = (props: StatusProps) => {
   return (
     <Section
       fill
-      title="Status"
+      title="Статус"
       buttons={
         <Button
           icon="eject"
           disabled={!has_toner}
           onClick={() => act('remove_toner')}
         >
-          Eject Toner
+          Извлечь тонер
         </Button>
       }
     >
       <LabeledList>
-        <LabeledList.Item label="Toner">
+        <LabeledList.Item label="Тонер">
           {has_toner ? (
             <ProgressBar
               minValue={0}
@@ -149,11 +149,11 @@ const Status = (props: StatusProps) => {
             />
           ) : (
             <ProgressBar color="bad" minValue={0} value={0} maxValue={1}>
-              No Cartridge
+              Без картриджа
             </ProgressBar>
           )}
         </LabeledList.Item>
-        <LabeledList.Item label="Paper Stored">
+        <LabeledList.Item label="Бумага">
           <ProgressBar
             minValue={0}
             value={paper_count}
@@ -166,21 +166,21 @@ const Status = (props: StatusProps) => {
             {paper_count} / {max_paper_count}
           </ProgressBar>
         </LabeledList.Item>
-        <LabeledList.Item label="Queue">
+        <LabeledList.Item label="Очередь">
           <ProgressBar
             verticalAlign="middle"
             minValue={0}
             value={copies_left}
             maxValue={num_copies}
           >
-            {copies_left ? `${copies_left} / ${num_copies}` : 'Empty'}
+            {copies_left ? `${copies_left} / ${num_copies}` : 'Пусто'}
           </ProgressBar>
         </LabeledList.Item>
-        <LabeledList.Item label="Blank" textAlign="center">
-          <b>{selectedBlank ? selectedBlank : 'Not Selected'}</b>
+        <LabeledList.Item label="Бланк" textAlign="center">
+          <b>{selectedBlank ? selectedBlank : 'Не Выбрана'}</b>
         </LabeledList.Item>
 
-        <LabeledList.Item label="Paper Type">
+        <LabeledList.Item label="Тип Бумаги">
           <Stack align="center">
             {paper_types.map((paper) => (
               <Stack.Item grow key={paper.type}>
@@ -188,7 +188,7 @@ const Status = (props: StatusProps) => {
                   fluid
                   dmIcon={paper.icon}
                   dmIconState={paper.icon_state}
-                  tooltip={`${paper.name} amount is ${paper.amount}`}
+                  tooltip={`${paper.name} составляет ${paper.amount}`}
                   imageSize={32}
                   disabled={!paper.amount}
                   selected={created_paper === paper.type && paper.amount}
@@ -225,12 +225,12 @@ const Actions = (props: ActionsProps) => {
   } = data;
 
   return (
-    <Section fill title="Actions">
+    <Section fill title="Действия">
       <Stack fill vertical textAlign="center">
         <Stack.Item>
           <Stack align="center" textAlign="left">
             <Stack.Item grow color="label">
-              Copies:
+              Копии:
             </Stack.Item>
             <Stack.Item grow>
               <Slider
@@ -256,7 +256,7 @@ const Actions = (props: ActionsProps) => {
               disabled={!can_AI_print}
               onClick={() => act('ai_photo', { code: selectedBlank })}
             >
-              Print photo from database
+              Распечатать фото из базы данных
             </Button>
           </Stack.Item>
         )}
@@ -269,7 +269,7 @@ const Actions = (props: ActionsProps) => {
                 disabled={!selectedBlank}
                 onClick={() => act('print_blank', { code: selectedBlank })}
               >
-                Print
+                Распечатать
               </Button>
             </Stack.Item>
             <Stack.Item grow>
@@ -279,7 +279,7 @@ const Actions = (props: ActionsProps) => {
                 disabled={!has_item}
                 onClick={() => act('make_copy')}
               >
-                Copy
+                Копировать
               </Button>
             </Stack.Item>
           </Stack>
@@ -298,7 +298,7 @@ const Actions = (props: ActionsProps) => {
                     })
                   }
                 >
-                  Color
+                  Цвет
                 </Button>
               </Stack.Item>
               <Stack.Item grow>
@@ -312,7 +312,7 @@ const Actions = (props: ActionsProps) => {
                     })
                   }
                 >
-                  Greyscale
+                  Оттенки серого
                 </Button>
               </Stack.Item>
             </Stack>
@@ -325,7 +325,7 @@ const Actions = (props: ActionsProps) => {
             disabled={!has_item}
             onClick={() => act('remove')}
           >
-            Eject Item
+            Извлечь
           </Button>
         </Stack.Item>
       </Stack>
@@ -346,7 +346,7 @@ const Categories = (props: CategoriesProps) => {
     <Section
       fill
       scrollable
-      title="Blanks"
+      title="Бланки "
       buttons={
         <Button
           icon="times"
@@ -369,7 +369,7 @@ const Categories = (props: CategoriesProps) => {
               setSelectedCategory('All Blanks');
             }}
           >
-            All Blanks
+            Все бланки
           </Button>
         </Stack.Item>
         {data.categories.map((category) => (
@@ -421,7 +421,7 @@ const Blanks = (props: BlanksProps) => {
         <Input
           width={8.75}
           value={searchText}
-          placeholder="Search blank..."
+          placeholder="Поиск..."
           onChange={setSearchText}
         />
       }

@@ -1,25 +1,25 @@
 #define PULSE_DISTANCE_RANGE 2
 
 /obj/machinery/vending/runic_vendor
-	name = "\improper Runic Vending Machine"
-	desc = "This vending machine was designed for warfare! A perfect bait for Nanotrasen's crew thirst for consumerism."
+	name = "Рунический ТоргоМат"
+	desc = "Этот торговый автомат был создан для войны! Идеальная приманка для жажды консьюмеризма экипажа Нанотрейзен."
 	icon_state = "RunicVendor"
 	panel_type = "panel10"
-	product_slogans = "Come get free magic!;50% off on Mjollnirs today!; Buy a warp whistle and get another one free!"
-	vend_reply = "Please, stand still near the vending machine for your special package!"
+	product_slogans = "Получи бесплатную магию!;50% скидка на Мьёльниры сегодня!;Купи свист варп и получи второй бесплатно!"
+	vend_reply = "Пожалуйста, оставайтесь рядом с торговым автоматом для получения специального пакета!"
 	resistance_flags = FIRE_PROOF
 	light_mask = "RunicVendor-light-mask"
 	obj_flags = parent_type::obj_flags | NO_DEBRIS_AFTER_DECONSTRUCTION
-	/// How long the vendor stays up before it decays.
+	/// Как долго вендор стоит перед распадом.
 	var/time_to_decay = 30 SECONDS
-	/// Area around the vendor that will pushback nearby mobs.
+	/// Область вокруг вендора, которая будет отталкивать ближайших мобов.
 	var/pulse_distance = PULSE_DISTANCE_RANGE
 
 
 /obj/machinery/vending/runic_vendor/Initialize(mapload)
 	if(mapload)
-		log_mapping("[type] is not supposed to be mapped it, it decays after a set time")
-		stack_trace("Someone mapped in the meme vending machine the wizard scepter spawns, please remove it")
+		log_mapping("[type] не предназначен для маппинга, он распадается через установленное время")
+		stack_trace("Кто-то замапил мемный торговый автомат, который создаёт скипетр волшебника, пожалуйста, удалите его")
 
 	addtimer(CALLBACK(src, PROC_REF(decay)), time_to_decay, TIMER_STOPPABLE)
 	INVOKE_ASYNC(src, PROC_REF(runic_pulse))
@@ -54,8 +54,8 @@
 
 	if(held_item)
 		if(istype(held_item, /obj/item/runic_vendor_scepter))
-			context[SCREENTIP_CONTEXT_LMB] = "Detonate"
-			context[SCREENTIP_CONTEXT_RMB] = "Force push"
+			context[SCREENTIP_CONTEXT_LMB] = "Детонировать"
+			context[SCREENTIP_CONTEXT_RMB] = "Силовой толчок"
 
 		return CONTEXTUAL_SCREENTIP_SET
 
@@ -64,7 +64,7 @@
 /obj/machinery/vending/runic_vendor/handle_deconstruct(disassembled)
 	SHOULD_NOT_OVERRIDE(TRUE)
 
-	visible_message(span_warning("[src] flickers and disappears!"))
+	visible_message(span_warning("[src] мерцает и исчезает!"))
 	playsound(src,'sound/items/weapons/resonator_blast.ogg',25,TRUE)
 	return ..()
 
@@ -79,7 +79,7 @@
 		for(var/mob/living/mob_to_be_pulsed_back in pulsing_turf.contents)
 			hit_things += mob_to_be_pulsed_back
 			var/atom/target = get_edge_target_turf(mob_to_be_pulsed_back, get_dir(src, get_step_away(mob_to_be_pulsed_back, src)))
-			to_chat(mob_to_be_pulsed_back, span_userdanger("The field repels you with tremendous force!"))
+			to_chat(mob_to_be_pulsed_back, span_userdanger("Поле отталкивает вас с огромной силой!"))
 			playsound(src, 'sound/effects/gravhit.ogg', 50, TRUE)
 			mob_to_be_pulsed_back.throw_at(target, 4, 4)
 

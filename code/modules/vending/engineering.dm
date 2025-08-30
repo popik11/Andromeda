@@ -1,7 +1,7 @@
-//This one's from bay12
+//Этот из bay12
 /obj/machinery/vending/engineering
-	name = "\improper Robco Tool Maker"
-	desc = "Everything you need for do-it-yourself station repair."
+	name = "РобкоИнструментоМат"
+	desc = "Всё, что нужно для самостоятельного ремонта станции."
 	icon_state = "engi"
 	icon_deny = "engi-deny"
 	panel_type = "panel10"
@@ -38,5 +38,5 @@
 	allow_custom = TRUE
 
 /obj/item/vending_refill/engineering
-	machine_name = "Robco Tool Maker"
+	machine_name = "РобкоИнструментоМат"
 	icon_state = "refill_engi"

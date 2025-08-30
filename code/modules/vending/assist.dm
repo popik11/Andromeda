@@ -1,6 +1,6 @@
 /obj/machinery/vending/assist
-	name = "\improper Part-Mart"
-	desc = "All the finest of miscellaneous electronics one could ever need! Not responsible for any injuries caused by reckless misuse of parts."
+	name = "ЗапчастиМат"
+	desc = "Все самые лучшие электронные компоненты, которые только могут понадобиться! Не несём ответственности за травмы, вызванные безрассудным использованием деталей."
 	icon_state = "parts"
 	icon_deny = "parts-deny"
 	panel_type = "panel10"
@@ -37,12 +37,12 @@
 	allow_custom = TRUE
 
 	refill_canister = /obj/item/vending_refill/assist
-	product_ads = "Only the finest!;Have some tools.;The most robust equipment.;The finest gear in space!"
+	product_ads = "Только лучшее!;Вот тебе инструменты.;Самое надёжное оборудование.;Лучшая экипировка в космосе!"
 	default_price = PAYCHECK_CREW * 0.7 //Default of 35.
 	extra_price = PAYCHECK_CREW
 	payment_department = NO_FREEBIES
 	light_mask = "parts-light-mask"
 
 /obj/item/vending_refill/assist
-	machine_name = "Part-Mart"
+	machine_name = "ЗапчастьМат"
 	icon_state = "refill_parts"

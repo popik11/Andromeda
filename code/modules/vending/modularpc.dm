@@ -1,12 +1,12 @@
 /obj/machinery/vending/modularpc
-	name = "\improper Deluxe Silicate Selections"
-	desc = "All the parts you need to build your own custom pc."
+	name = "Делюкс Силикат Селекшнс"
+	desc = "Все детали, необходимые для сборки собственного кастомного ПК."
 	icon_state = "modularpc"
 	icon_deny = "modularpc-deny"
 	panel_type = "panel21"
 	light_mask = "modular-light-mask"
-	product_ads = "Get your gamer gear!;The best GPUs for all of your space-crypto needs!;The most robust cooling!;The finest RGB in space!"
-	vend_reply = "Game on!"
+	product_ads = "Получи свой геймерский набор!;Лучшие видеокарты для всех ваших космо-крипто нужд!;Самое робмастное охлаждение!;Лучший RGB в космосе!"
+	vend_reply = "Игра началась!"
 	products = list(
 		/obj/item/computer_disk = 8,
 		/obj/item/modular_computer/laptop = 4,
@@ -22,5 +22,5 @@
 	allow_custom = TRUE
 
 /obj/item/vending_refill/modularpc
-	machine_name = "Deluxe Silicate Selections"
+	machine_name = "Делюкс Силикат Селекшнс"
 	icon_state = "refill_engi"

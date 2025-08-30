@@ -1,12 +1,12 @@
 /obj/machinery/vending/dinnerware
-	name = "\improper Plasteel Chef's Dinnerware Vendor"
-	desc = "A kitchen and restaurant equipment vendor."
-	product_ads = "Mm, food stuffs!;Food and food accessories.;Get your plates!;You like forks?;I like forks.;Woo, utensils.;You don't really need these..."
+	name = "КухаркаМат"
+	desc = "Торговый автомат с кухонным и ресторанным оборудованием."
+	product_ads = "Мм, продукты питания!;Еда и аксессуары для еды.;Возьмите свои тарелки!;Вам нравятся вилки?;Мне нравятся вилки.;Ура, столовые приборы.;Вам не особо нужно это..."
 	icon_state = "dinnerware"
 	panel_type = "panel4"
 	product_categories = list(
 		list(
-			"name" = "Kitchen Utensils",
+			"name" = "Кухонные принадлежности",
 			"icon" = FA_ICON_KITCHEN_SET,
 			"products" = list(
 				/obj/item/storage/bag/tray = 8,
@@ -19,7 +19,7 @@
 			),
 		),
 		list(
-			"name" = "Eating Utensils",
+			"name" = "Столовые приборы",
 			"icon" = FA_ICON_UTENSILS,
 			"products" = list(
 				/obj/item/kitchen/fork = 6,
@@ -27,7 +27,7 @@
 			),
 		),
 		list(
-			"name" = "Dinnerware",
+			"name" = "Посуда",
 			"icon" = FA_ICON_PLATE_WHEAT,
 			"products" = list(
 				/obj/item/plate/small = 5,
@@ -38,7 +38,7 @@
 			),
 		),
 		list(
-			"name" = "Condiments",
+			"name" = "Приправы",
 			"icon" = FA_ICON_BOTTLE_DROPLET,
 			"products" = list(
 				/obj/item/reagent_containers/condiment/pack/ketchup = 5,
@@ -49,7 +49,7 @@
 			),
 		),
 		list(
-			"name" = "Recipes",
+			"name" = "Рецепты",
 			"icon" = FA_ICON_BOOK_OPEN_READER,
 			"products" = list(
 				/obj/item/book/granter/crafting_recipe/cooking_sweets_101 = 2,
@@ -72,5 +72,5 @@
 	allow_custom = TRUE
 
 /obj/item/vending_refill/dinnerware
-	machine_name = "Plasteel Chef's Dinnerware Vendor"
+	machine_name = "КухаркаМат"
 	icon_state = "refill_smoke"

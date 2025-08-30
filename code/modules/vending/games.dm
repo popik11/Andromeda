@@ -1,12 +1,12 @@
 /obj/machinery/vending/games
-	name = "\improper Good Clean Fun"
-	desc = "Vends things that the Captain and Head of Personnel are probably not going to appreciate you fiddling with instead of your job..."
-	product_ads = "Escape to a fantasy world!;Fuel your gambling addiction!;Ruin your friendships!;Roll for initiative!;Elves and dwarves!;Paranoid computers!;Totally not satanic!;Fun times forever!"
+	name = "Чистое Веселье"
+	desc = "Продаёт вещи, которые Капитану и Главе Персонала вряд ли понравится, если вы будете возиться с ними вместо работы..."
+	product_ads = "Сбеги в мир фэнтези!;Подпиши свою gambling addiction!;Разрушь дружбу!;Кидай на инициативу!;Эльфы и дварфы!;Параноидальные компьютеры!;Точно не сатанинское!;Вечное веселье!"
 	icon_state = "games"
 	panel_type = "panel4"
 	product_categories = list(
 		list(
-			"name" = "Cards",
+			"name" = "Карты",
 			"icon" = "diamond",
 			"products" = list(
 				/obj/item/toy/cards/deck = 5,
@@ -20,7 +20,7 @@
 			),
 		),
 		list(
-			"name" = "Toys",
+			"name" = "Игрушки",
 			"icon" = "hat-wizard",
 			"products" = list(
 				/obj/item/toy/captainsaid = 1,
@@ -29,7 +29,7 @@
 			),
 		),
 		list(
-			"name" = "Art",
+			"name" = "Искусство",
 			"icon" = "palette",
 			"products" = list(
 				/obj/item/storage/crayons = 2,
@@ -46,7 +46,7 @@
 			),
 		),
 		list(
-			"name" = "Fishing",
+			"name" = "Рыбалка",
 			"icon" = "fish",
 			"products" = list(
 				/obj/item/storage/toolbox/fishing = 2,
@@ -63,7 +63,7 @@
 			),
 		),
 		list(
-			"name" = "Skillchips",
+			"name" = "Скиллчипы",
 			"icon" = "floppy-disk",
 			"products" = list(
 				/obj/item/skillchip/appraiser = 2,
@@ -79,12 +79,12 @@
 			),
 		),
 		list(
-			"name" = "Other",
+			"name" = "Другое",
 			"icon" = "star",
 			"products" = list(
 				/obj/item/camera = 3,
 				/obj/item/camera_film = 5,
-				/obj/item/cardpack/resin = 20, //Both card packs have had their count raised to 20 from 10 until card persistence is implemented.
+				/obj/item/cardpack/resin = 20, //Обе колоды карт увеличены до 20 вместо 10 до внедрения сохранения карт.
 				/obj/item/cardpack/series_one = 20,
 				/obj/item/dyespray = 3,
 				/obj/item/hourglass = 2,
@@ -99,7 +99,7 @@
 		/obj/item/dice/fudge = 9,
 		/obj/item/clothing/shoes/wheelys/skishoes = 4,
 		/obj/item/instrument/musicalmoth = 1,
-		/obj/item/gun/ballistic/revolver/russian = 1, //the most dangerous game
+		/obj/item/gun/ballistic/revolver/russian = 1, //самая опасная игра
 		/obj/item/skillchip/acrobatics = 1,
 	)
 	premium = list(
@@ -118,5 +118,5 @@
 	allow_custom = TRUE
 
 /obj/item/vending_refill/games
-	machine_name = "\improper Good Clean Fun"
+	machine_name = "Чистое Веселье"
 	icon_state = "refill_games"

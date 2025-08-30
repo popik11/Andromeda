@@ -155,10 +155,10 @@
 		if(!extended_inventory)
 			return
 	else if (!(item_record in record_to_check))
-		message_admins("Vending machine exploit attempted by [ADMIN_LOOKUPFLW(user)]!")
+		message_admins("Попытка эксплуатации торгового автомата от [ADMIN_LOOKUPFLW(user)]!")
 		return
 	if (item_record.amount <= 0)
-		speak("Sold out of [item_record.name].")
+		speak("Распродано [item_record.name].")
 		flick(icon_deny, src)
 		return
 	if(onstation)
@@ -169,7 +169,7 @@
 			living_user = user
 			card_used = living_user.get_idcard(TRUE)
 		if(age_restrictions && item_record.age_restricted && (!card_used.registered_age || card_used.registered_age < AGE_MINOR))
-			speak("You are not of legal age to purchase [item_record.name].")
+			speak("Отойди от торгомата, малолетка, а то я позвоню твоей маме [item_record.name].")
 			if(!(user in GLOB.narcd_underages))
 				aas_config_announce(/datum/aas_config_entry/vendomat_age_control, list(
 					"PERSON" = usr.name,
@@ -185,7 +185,7 @@
 			return
 
 	if(last_shopper != REF(user) || purchase_message_cooldown < world.time)
-		var/vend_response = vend_reply || "Thank you for shopping with [src]!"
+		var/vend_response = vend_reply || "Спасибо за покупки в [src]!"
 		speak(vend_response)
 		purchase_message_cooldown = world.time + 5 SECONDS
 		//This is not the best practice, but it's safe enough here since the chances of two people using a machine with the same ref in 5 seconds is fuck low
@@ -202,10 +202,10 @@
 	if(greyscale_colors)
 		vended_item.set_greyscale(colors=greyscale_colors)
 	if(user.CanReach(src) && user.put_in_hands(vended_item))
-		to_chat(user, span_notice("You take [item_record.name] out of the slot."))
+		to_chat(user, span_notice("Вы достаёте [item_record.name] из слота."))
 		vended_item.do_pickup_animation(user, src)
 	else
-		to_chat(user, span_warning("[capitalize(format_text(item_record.name))] falls onto the floor!"))
+		to_chat(user, span_warning("[capitalize(format_text(item_record.name))] падает на пол!"))
 	SSblackbox.record_feedback("nested tally", "vending_machine_usage", 1, list("[type]", "[item_record.product_path]"))
 
 /**
@@ -263,7 +263,7 @@
 	PROTECTED_PROC(TRUE)
 
 	if(QDELETED(paying_id_card)) //not available(null) or somehow is getting destroyed
-		speak("You do not possess an ID to purchase [product_to_vend.name].")
+		speak("У вас нет ID для покупки [product_to_vend.name].")
 		return FALSE
 	var/datum/bank_account/account = paying_id_card.registered_account
 	if(account.account_job && account.account_job.paycheck_department == payment_department && !discountless)
@@ -271,7 +271,7 @@
 	if(LAZYLEN(product_to_vend.returned_products))
 		price_to_use = 0 //returned items are free
 	if(price_to_use && (attempt_charge(src, mob_paying, price_to_use) & COMPONENT_OBJ_CANCEL_CHARGE))
-		speak("You do not possess the funds to purchase [product_to_vend.name].")
+		speak("У вас недостаточно средств для покупки [product_to_vend.name].")
 		flick(icon_deny,src)
 		return FALSE
 	//actual payment here
@@ -279,6 +279,6 @@
 	if(paying_id_account)
 		SSblackbox.record_feedback("amount", "vending_spent", price_to_use)
 		SSeconomy.track_purchase(account, price_to_use, name)
-		log_econ("[price_to_use] credits were inserted into [src] by [account.account_holder] to buy [product_to_vend].")
+		log_econ("[price_to_use] кредитов было внесено в [src] пользователем [account.account_holder] для покупки [product_to_vend].")
 	credits_contained += round(price_to_use * VENDING_CREDITS_COLLECTION_AMOUNT)
 	return TRUE

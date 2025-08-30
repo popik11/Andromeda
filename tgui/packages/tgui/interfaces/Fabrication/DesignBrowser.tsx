@@ -227,7 +227,7 @@ export const DesignBrowser = <T extends Design = Design>(
                   >
                     <div className="FabricatorTabs__Label">
                       <div className="FabricatorTabs__CategoryName">
-                        All Designs
+                        Все категории
                       </div>
                       <div className="FabricatorTabs__CategoryCount">
                         ({Object.entries(root.descendants).length})

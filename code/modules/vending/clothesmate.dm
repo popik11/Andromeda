@@ -1,14 +1,14 @@
 /obj/machinery/vending/clothing
-	name = "ClothesMate"
-	desc = "A vending machine for clothing."
+	name = "СтильноМат"
+	desc = "Торговый автомат с одеждой."
 	icon_state = "clothes"
 	icon_deny = "clothes-deny"
 	panel_type = "panel15"
-	product_slogans = "Dress for success!;Prepare to look swagalicious!;Look at all this swag!;Why leave style up to fate? Use the ClothesMate!"
-	vend_reply = "Thank you for using the ClothesMate!"
+	product_slogans = "Оденься для успеха!;Приготовься выглядеть стильно!;Взгляни на весь этот стиль!;Зачем доверять стиль судьбе? Используй СтильноМат!"
+	vend_reply = "Спасибо за использование СтильноМат!"
 	product_categories = list(
 		list(
-			"name" = "Head",
+			"name" = "Голова",
 			"icon" = "hat-cowboy",
 			"products" = list(
 				/obj/item/clothing/head/wig/natural = 4,
@@ -45,7 +45,7 @@
 		),
 
 		list(
-			"name" = "Accessories",
+			"name" = "Аксессуары",
 			"icon" = "glasses",
 			"products" = list(
 				/obj/item/clothing/accessory/pride = 15,
@@ -65,7 +65,7 @@
 		),
 
 		list(
-			"name" = "Under",
+			"name" = "Нижнее",
 			"icon" = "shirt",
 			"products" = list(
 				/obj/item/clothing/under/pants/slacks = 5,
@@ -92,7 +92,7 @@
 		),
 
 		list(
-			"name" = "Suits & Skirts",
+			"name" = "Костюмы и Юбки",
 			"icon" = "vest",
 			"products" = list(
 				/obj/item/clothing/suit/toggle/jacket/sweater = 4,
@@ -137,7 +137,7 @@
 		),
 
 		list(
-			"name" = "Shoes",
+			"name" = "Обувь",
 			"icon" = "socks",
 			"products" = list(
 				/obj/item/clothing/shoes/sneakers/black = 4,
@@ -153,7 +153,7 @@
 		),
 
 		list(
-			"name" = "Special",
+			"name" = "Особое",
 			"icon" = "star",
 			"products" = list(
 				/obj/item/clothing/head/costume/football_helmet = 6,
@@ -235,5 +235,5 @@
 	allow_custom = TRUE
 
 /obj/item/vending_refill/clothing
-	machine_name = "ClothesMate"
+	machine_name = "СтильноМат"
 	icon_state = "refill_clothes"

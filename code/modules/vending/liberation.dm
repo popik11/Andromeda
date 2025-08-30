@@ -1,10 +1,10 @@
 /obj/machinery/vending/liberationstation
-	name = "\improper Liberation Station"
-	desc = "An overwhelming amount of <b>ancient patriotism</b> washes over you just by looking at the machine."
+	name = "Станция Освобождения"
+	desc = "Подавляющее чувство <b>древнего патриотизма</b> накрывает вас при одном взгляде на этот аппарат."
 	icon_state = "liberationstation"
-	product_slogans = "Liberation Station: Your one-stop shop for all things second amendment!;Be a patriot today, pick up a gun!;Quality weapons for cheap prices!;Better dead than red!"
-	product_ads = "Float like an astronaut, sting like a bullet!;Express your second amendment today!;Guns don't kill people, but you can!;Who needs responsibilities when you have guns?"
-	vend_reply = "Remember the name: Liberation Station!"
+	product_slogans = "Станция Освобождения: Ваш универсальный магазин для всего, что связано со второй поправкой!;Будь патриотом сегодня — возьми оружие!;Качественное пушки по низким ценам!;Лучше мёртв, чем красный!"
+	product_ads = "Паря как астронавт, жаль как пуля!;Вырази свою вторую поправку сегодня!;Оружие не убивают людей, но ты можешь!;Кому нужна ответственность, когда есть оружие?"
+	vend_reply = "Запомни название: Станция Освобождения!"
 	panel_type = "panel17"
 	products = list(
 		/obj/item/food/burger/plain = 5, //O say can you see, by the dawn's early light

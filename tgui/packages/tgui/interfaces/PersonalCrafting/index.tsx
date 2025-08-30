@@ -125,9 +125,9 @@ export function PersonalCrafting(props) {
                     autoFocus
                     expensive
                     placeholder={
-                      'Search in ' +
+                      'Искать в ' +
                       data.recipes.length +
-                      (mode === MODE.cooking ? ' recipes...' : ' designs...')
+                      (mode === MODE.cooking ? ' рецептах...' : ' крафтах...')
                     }
                     value={searchText}
                     onChange={(value) => {
@@ -149,12 +149,12 @@ export function PersonalCrafting(props) {
                         setPages(1);
                         setCategory(
                           Object.keys(craftability).length
-                            ? 'Can Make'
+                            ? 'Можно сделать'
                             : data.categories[0],
                         );
                       }}
                     >
-                      Category
+                      Категория
                     </Tabs.Tab>
                     {mode === MODE.cooking && (
                       <Tabs.Tab
@@ -167,12 +167,12 @@ export function PersonalCrafting(props) {
                           setPages(1);
                           setFoodType(
                             Object.keys(craftability).length
-                              ? 'Can Make'
+                              ? 'Можно сделать'
                               : data.foodtypes[0],
                           );
                         }}
                       >
-                        Type
+                        Тип
                       </Tabs.Tab>
                     )}
                     <Tabs.Tab
@@ -186,7 +186,7 @@ export function PersonalCrafting(props) {
                         setMaterial(material_occurences[0].atom_id);
                       }}
                     >
-                      {mode === MODE.cooking ? 'Ingredient' : 'Material'}
+                      {mode === MODE.cooking ? 'Ингредиент' : 'Материал'}
                     </Tabs.Tab>
                   </Tabs>
                 </Stack.Item>
@@ -267,7 +267,7 @@ export function PersonalCrafting(props) {
                               <Stack.Item width="14px" textAlign="center">
                                 <Icon
                                   color={
-                                    category === 'Blood Cult'
+                                    category === 'Кровавый культ'
                                       ? 'red'
                                       : 'default'
                                   }
@@ -277,12 +277,12 @@ export function PersonalCrafting(props) {
                               <Stack.Item
                                 grow
                                 color={
-                                  category === 'Blood Cult' ? 'red' : 'default'
+                                  category === 'Кровавый культ' ? 'red' : 'default'
                                 }
                               >
                                 {category}
                               </Stack.Item>
-                              {category === 'Can Make' && (
+                              {category === 'Можно сделать' && (
                                 <Stack.Item>
                                   {Object.keys(craftability).length}
                                 </Stack.Item>
@@ -302,14 +302,14 @@ export function PersonalCrafting(props) {
                       act('toggle_recipes');
                     }}
                   >
-                    Can make only
+                    Доступные крафты
                   </Button.Checkbox>
                   <Button.Checkbox
                     fluid
                     checked={display_compact}
                     onClick={() => act('toggle_compact')}
                   >
-                    Compact list
+                    Компактный список
                   </Button.Checkbox>
                 </Stack.Item>
                 {!forced_mode && (
@@ -335,7 +335,7 @@ export function PersonalCrafting(props) {
                             act('toggle_mode');
                           }}
                         >
-                          Craft
+                          Крафт
                         </Button.Checkbox>
                       </Stack.Item>
                       <Stack.Item grow>
@@ -358,7 +358,7 @@ export function PersonalCrafting(props) {
                             act('toggle_mode');
                           }}
                         >
-                          Cook
+                          Готовка
                         </Button.Checkbox>
                       </Stack.Item>
                     </Stack>
@@ -408,7 +408,7 @@ export function PersonalCrafting(props) {
                 </VirtualList>
               ) : (
                 <NoticeBox m={1} p={1}>
-                  No recipes found.
+                  Рецепты не найдены.
                 </NoticeBox>
               )}
               {recipes.length > displayLimit && (
@@ -418,8 +418,8 @@ export function PersonalCrafting(props) {
                   style={{ cursor: 'pointer' }}
                   onClick={() => setPages(pages + 1)}
                 >
-                  Load {Math.min(pageSize, recipes.length - displayLimit)}{' '}
-                  more...
+                  Загрузить {Math.min(pageSize, recipes.length - displayLimit)}{' '}
+                  ещё...
                 </Section>
               )}
             </Box>

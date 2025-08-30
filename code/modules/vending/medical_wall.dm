@@ -1,6 +1,6 @@
 /obj/machinery/vending/wallmed
-	name = "\improper Emergency NanoMed"
-	desc = "Wall-mounted Medical Equipment dispenser, Meant to be used in medical emergencies."
+	name = "Экстренный НаноМед"
+	desc = "Настенный диспенсер медицинского оборудования. Предназначен для использования в медицинских чрезвычайных ситуациях."
 	icon_state = "wallmed"
 	icon_deny = "wallmed-deny"
 	panel_type = "wallmed-panel"
@@ -21,7 +21,7 @@
 		/obj/item/reagent_containers/applicator/patch/aiuri = 1,
 	)
 	refill_canister = /obj/item/vending_refill/wallmed
-	default_price = PAYCHECK_CREW * 0.3 // Cheap since crew should be able to affort it in emergency situations
+	default_price = PAYCHECK_CREW * 0.3 // Дёшево, так как экипаж должен быть способен позволить это в чрезвычайных ситуациях
 	extra_price = PAYCHECK_COMMAND
 	payment_department = ACCOUNT_MED
 	tiltable = FALSE
@@ -34,5 +34,5 @@
 MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/vending/wallmed, 32)
 
 /obj/item/vending_refill/wallmed
-	machine_name = "Emergency NanoMed"
+	machine_name = "Экстренный НаноМед"
 	icon_state = "refill_medical"

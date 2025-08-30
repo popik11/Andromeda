@@ -1,8 +1,8 @@
-//This one's from bay12
+//Этот из bay12
 /obj/machinery/vending/cart
-	name = "\improper PTech"
-	desc = "Cartridges for PDAs."
-	product_slogans = "Carts to go!"
+	name = "ПКТех"
+	desc = "Картриджи для КПК."
+	product_slogans = "Картриджи с собой!"
 	icon_state = "cart"
 	icon_deny = "cart-deny"
 	panel_type = "panel6"
@@ -23,5 +23,5 @@
 	allow_custom = TRUE
 
 /obj/item/vending_refill/cart
-	machine_name = "PTech"
+	machine_name = "ПКТех"
 	icon_state = "refill_smoke"

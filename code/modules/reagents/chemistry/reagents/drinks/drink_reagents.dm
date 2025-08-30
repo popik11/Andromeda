@@ -603,7 +603,7 @@
 
 /datum/reagent/consumable/shamblers
 	name = "Shambler's Juice"
-	description = "~Shake me up some of that Shambler's Juice!~"
+	description = "~Взболтай мне немного Сока Шамблера!~"
 	color = "#f00060" // rgb: 94, 0, 38
 	taste_description = "carbonated metallic soda"
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED

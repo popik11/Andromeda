@@ -1,7 +1,7 @@
 /obj/machinery/vending/security
-	name = "\improper SecTech"
-	desc = "A security equipment vendor."
-	product_ads = "Crack communist skulls!;Beat some heads in!;Don't forget - harm is good!;Your weapons are right here.;Handcuffs!;Freeze, scumbag!;Don't tase me bro!;Tase them, bro.;Why not have a donut?"
+	name = "ОхранТех"
+	desc = "Торговый автомат с охранным оборудованием."
+	product_ads = "Круши коммунистические черепа!;Набей несколько голов!;Не забывай - вред это хорошо!;Твоё weapon прямо здесь.;Наручники!;Замри, подонок!;Не тэйзи меня, бро!;Тэйзи их, бро.;Почему бы не съесть пончик?"
 	icon_state = "sec"
 	icon_deny = "sec-deny"
 	panel_type = "panel6"
@@ -49,5 +49,5 @@
 		thrown_flashlight.update_brightness()
 
 /obj/item/vending_refill/security
-	machine_name = "SecTech"
+	machine_name = "ОхранТех"
 	icon_state = "refill_sec"

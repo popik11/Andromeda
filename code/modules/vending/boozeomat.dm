@@ -1,13 +1,13 @@
 /obj/machinery/vending/boozeomat
-	name = "\improper Booze-O-Mat"
-	desc = "A technological marvel, supposedly able to mix just the mixture you'd like to drink the moment you ask for one."
+	name = "БухлоМат"
+	desc = "Технологическое чудо, предположительно способное смешать именно тот напиток, который ты захочешь, в момент твоего запроса."
 	icon_state = "boozeomat"
 	icon_deny = "boozeomat-deny"
 	panel_type = "panel22"
 
 	product_categories = list(
 		list(
-			"name" = "Alcoholic",
+			"name" = "Алкоголь",
 			"icon" = "wine-bottle",
 			"products" = list(
 				/obj/item/reagent_containers/cup/glass/bottle/curacao = 5,
@@ -41,7 +41,7 @@
 		),
 
 		list(
-			"name" = "Non-Alcoholic",
+			"name" = "Безалкогольное",
 			"icon" = "bottle-water",
 			"products" = list(
 				/obj/item/reagent_containers/cup/glass/ice = 10,
@@ -60,7 +60,7 @@
 		),
 
 		list(
-			"name" = "Glassware",
+			"name" = "Посуда",
 			"icon" = "wine-glass",
 			"products" = list(
 				/obj/item/reagent_containers/cup/glass/drinkingglass = 30,
@@ -83,8 +83,8 @@
 		/obj/item/reagent_containers/cup/glass/bottle/bitters = 5,
 	)
 
-	product_slogans = "I hope nobody asks me for a bloody cup o' tea...;Alcohol is humanity's friend. Would you abandon a friend?;Quite delighted to serve you!;Is nobody thirsty on this station?"
-	product_ads = "Drink up!;Booze is good for you!;Alcohol is humanity's best friend.;Quite delighted to serve you!;Care for a nice, cold beer?;Nothing cures you like booze!;Have a sip!;Have a drink!;Have a beer!;Beer is good for you!;Only the finest alcohol!;Best quality booze since 2053!;Award-winning wine!;Maximum alcohol!;Man loves beer.;A toast for progress!"
+	product_slogans = "Надеюсь, никто не попросит у меня чёртову чашку чая...;Алкоголь — друг человечества. Ты бросишь друга?;Рады обслужить вас!;Неужели на этой станции никто не испытывает жажды?"
+	product_ads = "Пейте!;Бухло полезно для вас!;Алкоголь — лучший друг человечества.;Рады обслужить вас!;Не желаете хорошего холодного пива?;Ничто не лечит лучше бухла!;Сделайте глоток!;Выпейте!;Выпейте пивка!;Пиво полезно для вас!;Только лучший алкоголь!;Бухло высшего качества с 2053 года!;Отмеченное наградами вино!;Максимум алкоголя!;Мужчины любят пиво.;Тост за прогресс!; Новый лучший напиток, это Пивокин!"
 	refill_canister = /obj/item/vending_refill/boozeomat
 	default_price = PAYCHECK_CREW * 0.9
 	extra_price = PAYCHECK_COMMAND
@@ -98,5 +98,5 @@
 	allow_custom = FALSE
 
 /obj/item/vending_refill/boozeomat
-	machine_name = "Booze-O-Mat"
+	machine_name = "БухлоМат"
 	icon_state = "refill_booze"

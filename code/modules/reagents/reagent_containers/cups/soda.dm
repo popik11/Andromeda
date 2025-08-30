@@ -251,7 +251,7 @@
 
 /obj/item/reagent_containers/cup/soda_cans/shamblers
 	name = "Shambler's juice"
-	desc = "~Shake me up some of that Shambler's Juice!~"
+	desc = "~Взболтай мне немного Сока Шамблера!~"
 	icon_state = "shamblers"
 	list_reagents = list(/datum/reagent/consumable/shamblers = 30)
 	drink_type = SUGAR | JUNKFOOD

@@ -1,6 +1,6 @@
 /obj/machinery/vending/tool
-	name = "\improper YouTool"
-	desc = "Tools for tools."
+	name = "МультиСтрой"
+	desc = "Инструменты для мастеров."
 	icon_state = "tool"
 	icon_deny = "tool-deny"
 	panel_type = "panel11"
@@ -36,5 +36,5 @@
 	allow_custom = TRUE
 
 /obj/item/vending_refill/youtool
-	machine_name = "YouTool"
+	machine_name = "МультиСтрой"
 	icon_state = "refill_engi"

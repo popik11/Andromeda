@@ -1,8 +1,8 @@
 /obj/machinery/vending/cytopro
-	name = "\improper CytoPro"
-	desc = "For all your cytology needs!"
-	product_slogans = "Cloning? Don't be ridiculous.;Don't be uncultured, get some cells growing!;Who needs farms when we got vats?"
-	product_ads = "Grow your own little creatures!;Biology, at your fingertips!"
+	name = "ЦитоПро"
+	desc = "Для всех ваших цитологических нужд!"
+	product_slogans = "Клонирование? Не смешите.;Не будьте некультурными, выращивайте клетки!;Кому нужны фермы, когда есть чаны?"
+	product_ads = "Вырастите своих собственных маленьких существ!;Биология у вас под рукой!"
 	icon_state = "cytopro"
 	icon_deny = "cytopro-deny"
 	panel_type = "panel2"
@@ -32,5 +32,5 @@
 	allow_custom = TRUE
 
 /obj/item/vending_refill/cytopro
-	machine_name = "CytoPro"
+	machine_name = "ЦитоПро"
 	icon_state = "refill_plant"

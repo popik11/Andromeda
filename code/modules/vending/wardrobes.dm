@@ -38,11 +38,11 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 		roach.forceMove(drop_location())
 
 /obj/machinery/vending/wardrobe/sec_wardrobe
-	name = "\improper SecDrobe"
-	desc = "A vending machine for security and security-related clothing!"
+	name = "Офицерский Стиль"
+	desc = "Торговый автомат для офицеров и связанной с офицерской одежды!"
 	icon_state = "secdrobe"
-	product_ads = "Beat perps in style!;It's red so you can't see the blood!;You have the right to be fashionable!;Now you can be the fashion police you always wanted to be!"
-	vend_reply = "Thank you for using the SecDrobe!"
+	product_ads = "Бей преступников со стилем!;Он красный, так что кровь не видно!;Вы имеете право быть модным!;Теперь вы можете быть модной полицией, которой всегда хотели быть!"
+	vend_reply = "Спасибо за использование СекДроб!"
 	products = list(
 		/obj/item/clothing/head/beret/sec = 3,
 		/obj/item/clothing/head/soft/sec = 3,
@@ -74,14 +74,14 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 	allow_custom = TRUE
 
 /obj/item/vending_refill/wardrobe/sec_wardrobe
-	machine_name = "SecDrobe"
+	machine_name = "Офицерский Стиль"
 
 /obj/machinery/vending/wardrobe/medi_wardrobe
-	name = "\improper MediDrobe"
-	desc = "A vending machine rumoured to be capable of dispensing clothing for medical personnel."
+	name = "Доктор Стиль"
+	desc = "Торговый автомат, который, по слухам, способен выдавать одежду для медицинского персонала."
 	icon_state = "medidrobe"
-	product_ads = "Make those blood stains look fashionable!!"
-	vend_reply = "Thank you for using the MediDrobe!"
+	product_ads = "Сделай эти кровавые пятна модными!!"
+	vend_reply = "Спасибо за использование Доктор Стиль!"
 	products = list(
 		/obj/item/clothing/accessory/pocketprotector = 4,
 		/obj/item/clothing/head/costume/nursehat = 4,
@@ -121,14 +121,14 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 	allow_custom = TRUE
 
 /obj/item/vending_refill/wardrobe/medi_wardrobe
-	machine_name = "MediDrobe"
+	machine_name = "Доктор Стиль"
 
 /obj/machinery/vending/wardrobe/engi_wardrobe
-	name = "EngiDrobe"
-	desc = "A vending machine renowned for vending industrial grade clothing."
+	name = "Технарь Стиль"
+	desc = "Торговый автомат, известный продажей производственной одежды."
 	icon_state = "engidrobe"
-	product_ads = "Guaranteed to protect your feet from industrial accidents!;Afraid of radiation? Then wear yellow!"
-	vend_reply = "Thank you for using the EngiDrobe!"
+	product_ads = "Гарантированно защитит ваши ноги от промышленных травм!;Боитесь радиации? Тогда носите жёлтое!"
+	vend_reply = "Спасибо за использование Технарь Стиль!"
 	products = list(
 		/obj/item/clothing/accessory/pocketprotector = 3,
 		/obj/item/clothing/head/utility/hardhat = 3,
@@ -152,14 +152,14 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 	allow_custom = TRUE
 
 /obj/item/vending_refill/wardrobe/engi_wardrobe
-	machine_name = "EngiDrobe"
+	machine_name = "Технарь Стиль"
 
 /obj/machinery/vending/wardrobe/atmos_wardrobe
-	name = "AtmosDrobe"
-	desc = "This relatively unknown vending machine delivers clothing for Atmospherics Technicians, an equally unknown job."
+	name = "Атмос Стиль"
+	desc = "Этот относительно неизвестный торговый автомат выдаёт одежду для Атмосферных Техников, столь же неизвестной профессии."
 	icon_state = "atmosdrobe"
-	product_slogans = "Get your inflammable clothing right here!!!"
-	vend_reply = "Thank you for using the AtmosDrobe!"
+	product_slogans = "Получите свою огнестойкую одежду прямо здесь!!!"
+	vend_reply = "Спасибо за использование Атмос Стиль!"
 	products = list(
 		/obj/item/clothing/accessory/pocketprotector = 3,
 		/obj/item/clothing/under/rank/engineering/atmospheric_technician = 3,
@@ -178,14 +178,14 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 	allow_custom = TRUE
 
 /obj/item/vending_refill/wardrobe/atmos_wardrobe
-	machine_name = "AtmosDrobe"
+	machine_name = "Атмос Стиль"
 
 /obj/machinery/vending/wardrobe/cargo_wardrobe
-	name = "CargoDrobe"
-	desc = "A highly advanced vending machine for buying cargo related clothing for free."
+	name = "Карго Стиль"
+	desc = "Высокотехнологичный торговый автомат, позволяющий бесплатно купить одежду, связанную с карго."
 	icon_state = "cargodrobe"
-	product_ads = "Upgraded Assistant Style! Pick yours today!;These shorts are comfy and easy to wear, get yours now!"
-	vend_reply = "Thank you for using the CargoDrobe!"
+	product_ads = "Улучшенный стиль помощника! Выбери свой сегодня!;Эти шорты удобные и легко носятся, получи свои сейчас!"
+	vend_reply = "Спасибо за использование Карго Стиль!"
 	products = list(
 		/obj/item/clothing/head/beret/cargo = 3,
 		/obj/item/clothing/mask/bandana/striped/cargo = 3,
@@ -222,14 +222,14 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 	allow_custom = TRUE
 
 /obj/item/vending_refill/wardrobe/cargo_wardrobe
-	machine_name = "CargoDrobe"
+	machine_name = "Карго Стиль"
 
 /obj/machinery/vending/wardrobe/robo_wardrobe
-	name = "RoboDrobe"
-	desc = "A vending machine designed to dispense clothing known only to roboticists."
+	name = "Робо Стиль"
+	desc = "Торговый автомат, предназначенный для выдачи одежды, известный только робототехникам."
 	icon_state = "robodrobe"
-	product_ads = "You turn me TRUE, use defines!;0110001101101100011011110111010001101000011001010111001101101000011001010111001001100101"
-	vend_reply = "Thank you for using the RoboDrobe!"
+	product_ads = "Ты делаешь меня TRUE, используй определения!;0110001101101100011011110111010001101000011001010111001101101000011001010111001001100101"
+	vend_reply = "Спасибо за использование Робо Стиль!"
 	products = list(
 		/obj/item/clothing/glasses/hud/diagnostic = 2,
 		/obj/item/clothing/head/soft/black = 2,
@@ -257,14 +257,14 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 	allow_custom = TRUE
 
 /obj/item/vending_refill/wardrobe/robo_wardrobe
-	machine_name = "RoboDrobe"
+	machine_name = "Робо Стиль"
 
-/obj/machinery/vending/wardrobe/science_wardrobe
-	name = "SciDrobe"
-	desc = "A simple vending machine suitable to dispense well tailored science clothing. Endorsed by Space Cubans."
+/obj/machinery/vending/scidrobe
+	name = "Научный Стиль"
+	desc = "Простая торговая машина, подходящая для выдачи хорошо скроенной научной одежды. Одобрено Космическими Кубинцами."
 	icon_state = "scidrobe"
-	product_ads = "Longing for the smell of plasma burnt flesh? Buy your science clothing now!;Made with 10% Auxetics, so you don't have to worry about losing your arm!"
-	vend_reply = "Thank you for using the SciDrobe!"
+	product_ads = "Томление по запаху плазменной опалённой плоти? Покупайте нашу научную одежду сейчас!;Сделано с 10% ауксетиков, так что вам не придётся беспокоиться о потере руки!"
+	vend_reply = "Спасибо за использование Научный Стиль!"
 	products = list(
 		/obj/item/clothing/accessory/pocketprotector = 3,
 		/obj/item/clothing/head/beret/science = 3,
@@ -287,14 +287,14 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 	allow_custom = TRUE
 
 /obj/item/vending_refill/wardrobe/science_wardrobe
-	machine_name = "SciDrobe"
+	machine_name = "Научный Стиль"
 
 /obj/machinery/vending/wardrobe/hydro_wardrobe
-	name = "Hydrobe"
-	desc = "A machine with a catchy name. It dispenses botany related clothing and gear."
+	name = "Агроном Стиль"
+	desc = "Машина с запоминающимся названием. Выдаёт одежду и снаряжение, связанное с ботаникой."
 	icon_state = "hydrobe"
-	product_ads = "Do you love soil? Then buy our clothes!;Get outfits to match your green thumb here!"
-	vend_reply = "Thank you for using the Hydrobe!"
+	product_ads = "Вы любите почву? Тогда покупайте нашу одежду!;Получите комплекты одежды, подходящие для ваших зелёных пальцев, здесь!"
+	vend_reply = "Спасибо за использование Агроном Стиль!"
 	products = list(
 		/obj/item/clothing/accessory/armband/hydro = 3,
 		/obj/item/clothing/mask/bandana/striped/botany = 3,
@@ -316,14 +316,14 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 	allow_custom = TRUE
 
 /obj/item/vending_refill/wardrobe/hydro_wardrobe
-	machine_name = "HyDrobe"
+	machine_name = "Агроном Стиль"
 
 /obj/machinery/vending/wardrobe/curator_wardrobe
-	name = "CuraDrobe"
-	desc = "A low-stock vendor only capable of vending clothing for curators and librarians."
+	name = "Чтивый Стиль"
+	desc = "Торговый автомат со скудным ассортиментом, способный продавать только одежду для кураторов и библиотекарей."
 	icon_state = "curadrobe"
-	product_slogans = "Glasses for your eyes and literature for your soul, Curadrobe has it all!; Impress & enthrall your library guests with Curadrobe's extended line of pens!"
-	vend_reply = "Thank you for using the CuraDrobe!"
+	product_slogans = "Очки для ваших глаз и литература для вашей души, у Чтивый Стиль есть всё!; Впечатлите и очаруйте гостей вашей библиотеки расширенной линейкой ручек от Чтивый Стиль!"
+	vend_reply = "Спасибо за использование Чтивый Стиль!"
 	products = list(
 		/obj/item/clothing/accessory/pocketprotector = 2,
 		/obj/item/pen = 4,
@@ -350,14 +350,14 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 	allow_custom = TRUE
 
 /obj/item/vending_refill/wardrobe/curator_wardrobe
-	machine_name = "CuraDrobe"
+	machine_name = "Чтивый Стиль"
 
 /obj/machinery/vending/wardrobe/coroner_wardrobe
-	name = "MortiDrobe"
-	desc = "A favorite among nihilists."
+	name = "Некро Стиль"
+	desc = "Любимица нигилистов."
 	icon_state = "coroner_drobe"
-	product_ads = "Any day above ground is a good one!;My day starts when yours ends!;And they call this a dying business!;See you when you're dead!"
-	vend_reply = "Don't forget your \"Buy one get one free\" burial deal!"
+	product_ads = "Любой день на земле — хороший день!;Мой день начинается, когда ваш заканчивается!;И они называют это умирающим бизнесом!;Увидимся, когда ты умрёшь!"
+	vend_reply = "Не забудьте нашу акцию \"Купи один — получи второй по цене захоронения бесплатно\"!"
 	products = list(
 		/obj/item/clothing/head/utility/surgerycap/black = 1,
 		/obj/item/clothing/mask/surgical = 1,
@@ -400,14 +400,14 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 	allow_custom = TRUE
 
 /obj/item/vending_refill/wardrobe/coroner_wardrobe
-	machine_name = "MortiDrobe"
+	machine_name = "Некро Стиль"
 
 /obj/machinery/vending/wardrobe/bar_wardrobe
-	name = "BarDrobe"
-	desc = "A stylish vendor to dispense the most stylish bar clothing!"
+	name = "Барный Стиль"
+	desc = "Стильный торговый автомат для выдачи самой стильной барной одежды!"
 	icon_state = "bardrobe"
-	product_ads = "Guaranteed to prevent stains from spilled drinks!"
-	vend_reply = "Thank you for using the BarDrobe!"
+	product_ads = "Гарантированно защищает от пятен от пролитых напитков!"
+	vend_reply = "Спасибо за использование Барный Стиль!"
 	products = list(
 		/obj/item/clothing/glasses/sunglasses/reagent = 1,
 		/obj/item/clothing/accessory/waistcoat = 2,
@@ -438,14 +438,14 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 	allow_custom = TRUE
 
 /obj/item/vending_refill/wardrobe/bar_wardrobe
-	machine_name = "BarDrobe"
+	machine_name = "Барный Стиль"
 
 /obj/machinery/vending/wardrobe/chef_wardrobe
-	name = "ChefDrobe"
-	desc = "This vending machine might not dispense meat, but it certainly dispenses chef related clothing."
+	name = "Мишлен Стиль"
+	desc = "Этот торговый автомат может и не выдаёт мясо, но он точно выдаёт одежду для поваров."
 	icon_state = "chefdrobe"
-	product_ads = "Our clothes are guaranteed to protect you from food splatters!"
-	vend_reply = "Thank you for using the ChefDrobe!"
+	product_ads = "Наша одежда гарантированно защитит вас от брызг еды!"
+	vend_reply = "Спасибо за использование Мишлен Стиль!"
 	products = list(
 		/obj/item/clothing/accessory/waistcoat = 2,
 		/obj/item/clothing/head/soft/mime = 2,
@@ -469,14 +469,14 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 	allow_custom = TRUE
 
 /obj/item/vending_refill/wardrobe/chef_wardrobe
-	machine_name = "ChefDrobe"
+	machine_name = "Мишлен Стиль"
 
 /obj/machinery/vending/wardrobe/jani_wardrobe
-	name = "JaniDrobe"
-	desc = "A self cleaning vending machine capable of dispensing clothing for janitors."
+	name = "Чистый Стиль"
+	desc = "Самомоющаяся торговая машина, способная выдавать одежду для уборщиков."
 	icon_state = "janidrobe"
-	product_ads = "Come and get your janitorial clothing, now endorsed by lizard janitors everywhere!"
-	vend_reply = "Thank you for using the JaniDrobe!"
+	product_ads = "Приходите и заберите свою уборочную одежду, одобренную ящеро-уборщиками по всей вселенной!"
+	vend_reply = "Спасибо за использование Чистый Стиль!"
 	products = list(
 		/obj/item/clothing/head/soft/purple = 2,
 		/obj/item/clothing/mask/bandana/purple = 2,
@@ -509,14 +509,14 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 	allow_custom = TRUE
 
 /obj/item/vending_refill/wardrobe/jani_wardrobe
-	machine_name = "JaniDrobe"
+	machine_name = "Чистый Стиль"
 
 /obj/machinery/vending/wardrobe/law_wardrobe
-	name = "LawDrobe"
-	desc = "Objection! This wardrobe dispenses the rule of law... and lawyer clothing."
+	name = "Справедливый Стиль"
+	desc = "Возражение! Этот гардероб выдаёт верховенство закона... и одежду для адвокатов."
 	icon_state = "lawdrobe"
-	product_ads = "OBJECTION! Get the rule of law for yourself!"
-	vend_reply = "Thank you for using the LawDrobe!"
+	product_ads = "ПРОТЕСТУЮ! Получите верховенство закона для себя!"
+	vend_reply = "Спасибо за использование Справедливый Стиль!"
 	products = list(
 		/obj/item/clothing/accessory/lawyers_badge = 2,
 		/obj/item/clothing/neck/tie = 3,
@@ -552,14 +552,14 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 	allow_custom = TRUE
 
 /obj/item/vending_refill/wardrobe/law_wardrobe
-	machine_name = "LawDrobe"
+	machine_name = "Справедливый Стиль"
 
 /obj/machinery/vending/wardrobe/chap_wardrobe
-	name = "DeusVend"
-	desc = "God wills your purchase."
+	name = "Святой Стиль"
+	desc = "Бог желает вашей покупки."
 	icon_state = "chapdrobe"
-	product_ads = "Are you being bothered by cultists or pesky revenants? Then come and dress like the holy man!;Clothes for men of the cloth!"
-	vend_reply = "Thank you for using the DeusVend!"
+	product_ads = "Вас беспокоят культисты или надоедливые ревенанты? Тогда приходите и оденьтесь как святой человек!;Одежда для служителей и культа!"
+	vend_reply = "Спасибо за использование Святой Стиль!"
 	products = list(
 		/obj/item/choice_beacon/holy = 1,
 		/obj/item/clothing/accessory/pocketprotector/cosmetology = 1,
@@ -599,14 +599,14 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 	allow_custom = TRUE
 
 /obj/item/vending_refill/wardrobe/chap_wardrobe
-	machine_name = "DeusVend"
+	machine_name = "Святой Стиль"
 
 /obj/machinery/vending/wardrobe/chem_wardrobe
-	name = "ChemDrobe"
-	desc = "A vending machine for dispensing chemistry related clothing."
+	name = "Менделеевский Стиль"
+	desc = "Торговый автомат для выдачи одежды, связанной с химией."
 	icon_state = "chemdrobe"
-	product_ads = "Our clothes are 0.5% more resistant to acid spills! Get yours now!"
-	vend_reply = "Thank you for using the ChemDrobe!"
+	product_ads = "Наша одежда на 0.5% более устойчива к разливам кислот! Получите свою сейчас!;Официальный производитель Хайзенберг Корп.; Твой \"Синий Лёд\" не будет продаваться, если производитель выглядит как торчёк."
+	vend_reply = "Спасибо за использование Менделеевский Стиль!"
 	products = list(
 		/obj/item/clothing/head/beret/medical = 2,
 		/obj/item/clothing/under/rank/medical/chemist = 2,
@@ -631,14 +631,14 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 	allow_custom = TRUE
 
 /obj/item/vending_refill/wardrobe/chem_wardrobe
-	machine_name = "ChemDrobe"
+	machine_name = "Менделеевский Стиль"
 
 /obj/machinery/vending/wardrobe/gene_wardrobe
-	name = "GeneDrobe"
-	desc = "A machine for dispensing clothing related to genetics."
+	name = "Генный Стиль"
+	desc = "Стиль заложен у нас в генах, но иногда бывают мутации..."
 	icon_state = "genedrobe"
-	product_ads = "Perfect for the mad scientist in you!"
-	vend_reply = "Thank you for using the GeneDrobe!"
+	product_ads = "Идеально для безумного учёного в вас!"
+	vend_reply = "Спасибо за использование Генный Стиль!"
 	products = list(
 		/obj/item/clothing/under/rank/rnd/geneticist = 2,
 		/obj/item/clothing/under/rank/rnd/geneticist/skirt = 2,
@@ -657,14 +657,14 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 	allow_custom = TRUE
 
 /obj/item/vending_refill/wardrobe/gene_wardrobe
-	machine_name = "GeneDrobe"
+	machine_name = "Генный Стиль"
 
 /obj/machinery/vending/wardrobe/viro_wardrobe
-	name = "ViroDrobe"
-	desc = "An unsterilized machine for dispensing virology related clothing."
+	name = "Патогенный Стиль"
+	desc = "Зарази их всех! Зарази их своей модой!"
 	icon_state = "virodrobe"
-	product_slogans = " Viruses getting you down? Then upgrade to sterilized clothing today!"
-	vend_reply = "Thank you for using the ViroDrobe"
+	product_slogans = "Вирусы донимают? Тогда переходите на стерилизованную одежду уже сегодня!"
+	vend_reply = "Спасибо за использование Патогенный Стиль"
 	products = list(
 		/obj/item/clothing/mask/surgical = 2,
 		/obj/item/clothing/under/rank/medical/virologist = 2,
@@ -685,14 +685,14 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 	allow_custom = TRUE
 
 /obj/item/vending_refill/wardrobe/viro_wardrobe
-	machine_name = "ViroDrobe"
+	machine_name = "Патогенный Стиль"
 
 /obj/machinery/vending/wardrobe/det_wardrobe
-	name = "\improper DetDrobe"
-	desc = "A machine for all your detective needs, as long as you need clothes."
+	name = "Расследовательский Стиль"
+	desc = "Автомат для всех ваших детективных нужд, пока вам нужна одежда."
 	icon_state = "detdrobe"
-	product_ads = "Apply your brilliant deductive methods in style!"
-	vend_reply = "Thank you for using the DetDrobe!"
+	product_ads = "Применяйте свои блестящие дедуктивные методы со стилем!"
+	vend_reply = "Спасибо за использование Расследовательский Стиль!"
 	products = list(
 		/obj/item/clothing/head/fedora/det_hat = 2,
 		/obj/item/clothing/under/rank/security/detective = 2,
@@ -732,14 +732,14 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 	allow_custom = TRUE
 
 /obj/item/vending_refill/wardrobe/det_wardrobe
-	machine_name = "DetDrobe"
+	machine_name = "Расследовательский Стиль"
 
 /obj/machinery/vending/wardrobe/cent_wardrobe
-	name = "\improper CentDrobe"
-	desc = "A one-of-a-kind vending machine for all your centcom aesthetic needs!"
+	name = "Центком Стиль"
+	desc = "Уникальный торговый автомат для всех ваших эстетических потребностей в стиле ЦентКом!"
 	icon_state = "centdrobe"
-	product_ads = "Show those ERTs who's the most stylish in the briefing room!"
-	vend_reply = "Thank you for using the CentDrobe!"
+	product_ads = "Покажите этим ОБР, кто самый стильный в комнате для брифингов!"
+	vend_reply = "Спасибо за использование Центком Стиль!"
 	products = list(
 		/obj/item/clothing/glasses/sunglasses = 3,
 		/obj/item/clothing/head/hats/centcom_cap = 3,
@@ -761,7 +761,7 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 	refill_canister = /obj/item/vending_refill/wardrobe/cent_wardrobe
 
 /obj/item/vending_refill/wardrobe/cent_wardrobe
-	machine_name = "CentDrobe"
+	machine_name = "Центком Стиль"
 	light_color = LIGHT_COLOR_ELECTRIC_GREEN
 
 #undef MOTHROACH_START_CHANCE

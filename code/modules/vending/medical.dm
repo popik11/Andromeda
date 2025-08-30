@@ -1,10 +1,10 @@
 /obj/machinery/vending/medical
-	name = "\improper NanoMed Plus"
-	desc = "Medical drug dispenser."
+	name = "НаноМед Плюс"
+	desc = "Диспенсер медицинских препаратов."
 	icon_state = "med"
 	icon_deny = "med-deny"
 	panel_type = "panel11"
-	product_ads = "Go save some lives!;The best stuff for your medbay.;Only the finest tools.;Natural chemicals!;This stuff saves lives.;Don't you want some?;Ping!"
+	product_ads = "Иди спасать жизни!;Лучшие припасы для вашего медбея.;Только лучшие инструменты.;Натуральные химикаты!;Этот спасает жизни.;Не хочешь немного?;Пинг!"
 	products = list(
 		/obj/item/stack/medical/gauze = 8,
 		/obj/item/reagent_containers/syringe = 12,
@@ -42,11 +42,11 @@
 	allow_custom = TRUE
 
 /obj/item/vending_refill/medical
-	machine_name = "NanoMed Plus"
+	machine_name = "НаноМед Плюс"
 	icon_state = "refill_medical"
 
 /obj/machinery/vending/medical/syndicate
-	name = "\improper SyndiMed Plus"
+	name = "СиндиМед Плюс"
 	initial_language_holder = /datum/language_holder/syndicate
 	allow_custom = FALSE
 
@@ -70,12 +70,12 @@
 
 //Created out of a necessity to get these dumb chems out of the medical tools vendor.
 /obj/machinery/vending/drugs
-	name = "\improper NanoDrug Plus"
-	desc = "Medical drugs dispenser."
+	name = "НаноХим Плюс"
+	desc = "Диспенсер медицинских препаратов."
 	icon_state = "drug"
 	icon_deny = "drug-deny"
 	panel_type = "panel11"
-	product_ads = "Go save some lives!;The best stuff for your medbay.;Only the finest tools.;Natural chemicals!;This stuff saves lives.;Don't you want some?;Ping!"
+	product_ads = "Иди спасать жизни!;Лучшие припасы для вашего медбея.;Только лучшие инструменты.;Натуральные химикаты!;Этот спасает жизни.;Не хочешь немного?;Пинг!"
 	products = list(
 		/obj/item/reagent_containers/applicator/patch/libital = 5,
 		/obj/item/reagent_containers/applicator/patch/aiuri = 5,
@@ -109,5 +109,5 @@
 	allow_custom = TRUE
 
 /obj/item/vending_refill/drugs
-	machine_name = "NanoDrug Plus"
+	machine_name = "НаноХим Плюс"
 	icon_state = "refill_medical"

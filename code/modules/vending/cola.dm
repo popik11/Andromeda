@@ -1,11 +1,11 @@
 
 /obj/machinery/vending/cola
-	name = "\improper Robust Softdrinks"
-	desc = "A soft drinks vendor provided by Robust Industries, LLC."
+	name = "Робастные Напитки"
+	desc = "Торговый автомат с напитками от Робастная Промышленность, ООО."
 	icon_state = "Cola_Machine"
 	panel_type = "panel2"
-	product_slogans = "Robust Softdrinks: More robust than a toolbox to the head!"
-	product_ads = "Refreshing!;Hope you're thirsty!;Over 1 million drinks sold!;Thirsty? Why not cola?;Please, have a drink!;Drink up!;The best drinks in space."
+	product_slogans = "Робастные Напитки: надёжнее, чем удар ящиком с тулбоксом по голове!"
+	product_ads = "Освежает!;Надеемся, вы испытываете жажду!;Продано более 1 миллиона напитков!;Жажда? Почему бы не колы?;Пожалуйста, выпейте!;Пейте на здоровье!;Лучшие напитки в космосе."
 	products = list(
 		/obj/item/reagent_containers/cup/soda_cans/cola = 10,
 		/obj/item/reagent_containers/cup/soda_cans/space_mountain_wind = 10,
@@ -75,7 +75,7 @@
 	REMOVE_TRAIT(vended_item, TRAIT_SILENT_REACTIONS, VENDING_MACHINE_TRAIT)
 
 /obj/item/vending_refill/cola
-	machine_name = "Robust Softdrinks"
+	machine_name = "Робастные Напитки"
 	icon_state = "refill_cola"
 
 /obj/machinery/vending/cola/blue
@@ -91,27 +91,27 @@
 
 /obj/machinery/vending/cola/red
 	icon_state = "red_cola"
-	name = "\improper Space Cola Vendor"
-	desc = "It vends cola, in space."
-	product_slogans = "Cola in space!"
+	name = "Космическая Коля"
+	desc = "Продаёт колу. В космосе."
+	product_slogans = "Кола в космосе!"
 	light_mask = "red_cola-light-mask"
 	light_color = COLOR_DARK_RED
 	allow_custom = FALSE
 
 /obj/machinery/vending/cola/space_up
 	icon_state = "space_up"
-	name = "\improper Space-up! Vendor"
-	desc = "Indulge in an explosion of flavor."
-	product_slogans = "Space-up! Like a hull breach in your mouth."
+	name = "Космо Сок!"
+	desc = "Погрузитесь во взрыв сверхновых вкусов."
+	product_slogans = "Космо-Сок! Как разгерметизация в твоём рту."
 	light_mask = "space_up-light-mask"
 	light_color = COLOR_DARK_MODERATE_LIME_GREEN
 	allow_custom = FALSE
 
 /obj/machinery/vending/cola/starkist
 	icon_state = "starkist"
-	name = "\improper Star-kist Vendor"
-	desc = "The taste of a star in liquid form."
-	product_slogans = "Drink the stars! Star-kist!"
+	name = "Звёздный Сок"
+	desc = "Вкус звезды в жидкой форме."
+	product_slogans = "Выпей звёзды! Звёздный Сок!"
 	panel_type = "panel7"
 	light_mask = "starkist-light-mask"
 	light_color = COLOR_LIGHT_ORANGE
@@ -126,16 +126,16 @@
 
 /obj/machinery/vending/cola/pwr_game
 	icon_state = "pwr_game"
-	name = "\improper Pwr Game Vendor"
-	desc = "You want it, we got it. Brought to you in partnership with Vlad's Salads."
-	product_slogans = "The POWER that gamers crave! PWR GAME!"
+	name = "Павер Гейм"
+	desc = "Ты хочешь это, у нас это есть. При поддержке Салатов Влада."
+	product_slogans = "МОЩЬ, которую жаждут геймеры! ПАВЕР ГЕЙМ!"
 	light_mask = "pwr_game-light-mask"
 	light_color = COLOR_STRONG_VIOLET
 	allow_custom = FALSE
 
 /obj/machinery/vending/cola/shamblers
-	name = "\improper Shambler's Vendor"
-	desc = "~Shake me up some of that Shambler's Juice!~"
+	name = "Шамблер Джюс"
+	desc = "~Взболтай мне немного Сока Шамблера!~"
 	icon_state = "shamblers_juice"
 	products = list(
 		/obj/item/reagent_containers/cup/soda_cans/cola = 10,
@@ -149,8 +149,8 @@
 		/obj/item/reagent_containers/cup/soda_cans/shamblers = 10,
 		/obj/item/reagent_containers/cup/soda_cans/wellcheers = 5,
 		)
-	product_slogans = "~Shake me up some of that Shambler's Juice!~"
-	product_ads = "Refreshing!;Thirsty for DNA? Satiate your craving!;Over 1 trillion souls drank!;Made with real DNA!;The hivemind demands your thirst!;Drink up!;Absorb your thirst."
+	product_slogans = "~Взболтай мне немного Сока Шамблера!~"
+	product_ads = "Освежает!;Жаждишь ДНК? Утоли свою жажду!;Выпито более триллиона душ!;Сделано из настоящей ДНК!;Рой требует твоей жажды!;Пей!;Поглоти свою жажду."
 	light_mask = "shamblers-light-mask"
 	light_color = COLOR_MOSTLY_PURE_PINK
 	allow_custom = FALSE

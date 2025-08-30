@@ -298,7 +298,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/robust_softdri
 
 /obj/structure/sign/poster/contraband/shamblers_juice
 	name = "Shambler's Juice"
-	desc = "~Shake me up some of that Shambler's Juice!~"
+	desc = "~Взболтай мне немного Сока Шамблера!~"
 	icon_state = "shamblers_juice"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/shamblers_juice, 32)

@@ -217,13 +217,13 @@ GLOBAL_VAR_INIT(all_autodrobe_items, (autodrobe_costumes_items +\
 ))
 
 /obj/machinery/vending/autodrobe
-	name = "\improper AutoDrobe"
-	desc = "A vending machine for costumes."
+	name = "Большой Театр"
+	desc = "Торговый автомат с костюмами."
 	icon_state = "theater"
 	icon_deny = "theater-deny"
 	panel_type = "panel16"
-	product_slogans = "Dress for success!;Suited and booted!;It's show time!;Why leave style up to fate? Use AutoDrobe!"
-	vend_reply = "Thank you for using AutoDrobe!"
+	product_slogans = "Оденься для успеха!;При полном параде!;Начинаем шоу!;Зачем доверять стиль судьбе? Используй Большой Театр!"
+	vend_reply = "Спасибо за использование Большой Театр!"
 
 	/**
 	 * Categories are filled in Initialize!
@@ -239,37 +239,37 @@ GLOBAL_VAR_INIT(all_autodrobe_items, (autodrobe_costumes_items +\
 /obj/machinery/vending/autodrobe/Initialize(mapload)
 	product_categories = list(
 		list(
-			"name" = "Costumes",
+			"name" = "Костюмы",
 			"icon" = "mask",
 			"products" = GLOB.autodrobe_costumes_items
 		),
 		list(
-			"name" = "Supernatural",
+			"name" = "Паранормальное",
 			"icon" = "hand-sparkles",
 			"products" = GLOB.autodrobe_supernatural_items
 		),
 		list(
-			"name" = "Entertainers",
+			"name" = "Артисты",
 			"icon" = "masks-theater",
 			"products" = GLOB.autodrobe_entretainers_items
 		),
 		list(
-			"name" = "Fancy",
+			"name" = "Формальная одежда",
 			"icon" = "user-tie",
 			"products" = GLOB.autodrobe_fancy_items
 		),
 		list(
-			"name" = "Animals",
+			"name" = "Животные",
 			"icon" = "paw",
 			"products" = GLOB.autodrobe_animal_items
 		),
 		list(
-			"name" = "Service",
+			"name" = "Сервис",
 			"icon" = "kitchen-set",
 			"products" = GLOB.autodrobe_service_items
 		),
 		list(
-			"name" = "Other",
+			"name" = "Другое",
 			"icon" = "star",
 			"products" = GLOB.autodrobe_other_items
 		),
@@ -280,5 +280,5 @@ GLOBAL_VAR_INIT(all_autodrobe_items, (autodrobe_costumes_items +\
 	. = ..()
 
 /obj/item/vending_refill/autodrobe
-	machine_name = "AutoDrobe"
+	machine_name = "Большой Театр"
 	icon_state = "refill_costume"

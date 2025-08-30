@@ -1,6 +1,6 @@
 /obj/machinery/vending/engivend
-	name = "\improper Engi-Vend"
-	desc = "Spare tool vending. What? Did you expect some witty description?"
+	name = "ИнжеМат"
+	desc = "Торговый автомат с запасными инструментами и запчастями. Что? Ты ожидал остроумного описания?"
 	icon_state = "engivend"
 	icon_deny = "engivend-deny"
 	panel_type = "panel10"
@@ -35,5 +35,5 @@
 	allow_custom = TRUE
 
 /obj/item/vending_refill/engivend
-	machine_name = "Engi-Vend"
+	machine_name = "ИнжеМат"
 	icon_state = "refill_engi"

@@ -1,7 +1,7 @@
-//This one's from bay12
+//Этот из bay12
 /obj/machinery/vending/robotics
-	name = "\improper Robotech Deluxe"
-	desc = "All the tools you need to create your own robot army."
+	name = "Роботех Делюкс"
+	desc = "Все инструменты, необходимые для создания собственной робастной армии."
 	icon_state = "robotics"
 	icon_deny = "robotics-deny"
 	panel_type = "panel14"
@@ -29,5 +29,5 @@
 	allow_custom = TRUE
 
 /obj/item/vending_refill/robotics
-	machine_name = "Robotech Deluxe"
+	machine_name = "Роботех Делюкс"
 	icon_state = "refill_engi"

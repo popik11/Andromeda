@@ -18,7 +18,7 @@
 		default_deconstruction_screwdriver(user, icon_state, icon_state, attack_item)
 		return ITEM_INTERACT_SUCCESS
 	else
-		to_chat(user, span_warning("You must first secure [src]."))
+		to_chat(user, span_warning("Вы должны сначала закрепить [src]."))
 		return ITEM_INTERACT_FAILURE
 
 /obj/machinery/vending/on_set_panel_open(old_value)
@@ -49,7 +49,7 @@
 	if(!length(loaded_item.contents) && (products[loaded_item.type] || premium[loaded_item.type] || contraband[loaded_item.type]))
 		return TRUE
 	if(send_message)
-		to_chat(user, span_warning("[src] does not accept [loaded_item]!"))
+		to_chat(user, span_warning("[src] не принимает [loaded_item]!"))
 	return FALSE
 
 
@@ -65,18 +65,18 @@
 
 	. = TRUE
 	if(!canLoadItem(inserted_item, user))
-		to_chat(user, span_warning("[src] does not accept [inserted_item]!"))
+		to_chat(user, span_warning("[src] не принимает [inserted_item]!"))
 		return FALSE
 
-	to_chat(user, span_notice("You insert [inserted_item] into [src]'s input compartment."))
+	to_chat(user, span_notice("Вы вставляете [inserted_item] в входной отсек [src]."))
 	for(var/datum/data/vending_product/product_datum in product_records + coin_records + hidden_records)
 		if(inserted_item.type == product_datum.product_path)
 			if(product_datum.amount == product_datum.max_amount)
-				to_chat(user, span_warning("no space for any more [product_datum.category || "Products"]!"))
+				to_chat(user, span_warning("нет места для дополнительных [product_datum.category || "Продуктов"]!"))
 				return FALSE
 
 			if(!user.transferItemToLoc(inserted_item, src))
-				to_chat(user, span_warning("[inserted_item] is stuck in your hand!"))
+				to_chat(user, span_warning("[inserted_item] застрял в вашей руке!"))
 				return FALSE
 
 			product_datum.amount++
@@ -92,13 +92,13 @@
 	if(refill_canister && istype(attack_item, refill_canister))
 		. = ITEM_INTERACT_FAILURE
 		if (!panel_open)
-			to_chat(user, span_warning("You should probably unscrew the service panel first!"))
+			to_chat(user, span_warning("Вам следует сначала открутить сервисную панель!"))
 		else if (!is_operational)
-			to_chat(user, span_warning("[src] does not respond."))
+			to_chat(user, span_warning("[src] не отвечает."))
 		else
 			var/obj/item/vending_refill/canister = attack_item
 			if(canister.get_part_rating() == 0)
-				to_chat(user, span_warning("[canister] is empty!"))
+				to_chat(user, span_warning("[canister] пуст!"))
 			else
 				post_restock(user, restock(canister))
 				return ITEM_INTERACT_SUCCESS
@@ -106,8 +106,8 @@
 	if(compartmentLoadAccessCheck(user) && !user.combat_mode)
 		. = ITEM_INTERACT_FAILURE
 		if (!is_operational)
-			to_chat(user, span_warning("[src] does not respond."))
-		else if(istype(attack_item, /obj/item/storage/bag)) //trays USUALLY
+			to_chat(user, span_warning("[src] не отвечает."))
+		else if(istype(attack_item, /obj/item/storage/bag)) //обычно подносы
 			var/obj/item/storage/storage_item = attack_item
 			var/loaded = 0
 			var/denied_items = 0
@@ -117,9 +117,9 @@
 				else
 					denied_items++
 			if(denied_items)
-				to_chat(user, span_warning("[src] refuses some items!"))
+				to_chat(user, span_warning("[src] отказывается принимать некоторые предметы!"))
 			if(loaded)
-				to_chat(user, span_notice("You insert [loaded] dishes into [src]'s compartment."))
+				to_chat(user, span_notice("Вы вставляете [loaded] блюд в отсек [src]."))
 				return ITEM_INTERACT_SUCCESS
 		else
 			return loadingAttempt(attack_item, user) ? ITEM_INTERACT_SUCCESS : ITEM_INTERACT_FAILURE
@@ -138,12 +138,12 @@
 	PROTECTED_PROC(TRUE)
 
 	if(!restocked)
-		to_chat(user, span_warning("There's nothing to restock!"))
+		to_chat(user, span_warning("Нечего пополнять!"))
 		return
 
-	to_chat(user, span_notice("You loaded [restocked] items in [src][credits_contained > 0 ? ", and are rewarded [credits_contained] credits." : "."]"))
+	to_chat(user, span_notice("Вы загрузили [restocked] предметов в [src][credits_contained > 0 ? " и получаете [credits_contained] кредитов." : "."]"))
 	var/datum/bank_account/cargo_account = SSeconomy.get_dep_account(ACCOUNT_CAR)
-	cargo_account.adjust_money(round(credits_contained * 0.5), "Vending: Restock")
+	cargo_account.adjust_money(round(credits_contained * 0.5), "ТоргоМат: Пополнение запасов")
 	var/obj/item/holochip/payday = new(src, credits_contained)
 	try_put_in_hand(payday, user)
 	credits_contained = 0
@@ -179,7 +179,7 @@
 /obj/machinery/vending/proc/freebie(freebies)
 	PRIVATE_PROC(TRUE)
 
-	visible_message(span_notice("[src] yields [freebies > 1 ? "several free goodies" : "a free goody"][credits_contained > 0 ? " and some credits" : ""]!"))
+	visible_message(span_notice("[src] выдаёт [freebies > 1 ? "несколько бесплатных плюшек" : "бесплатную плюшку"][credits_contained > 0 ? " и немного кредитов" : ""]!"))
 
 	for(var/i in 1 to freebies)
 		playsound(src, 'sound/machines/machine_vend.ogg', 50, TRUE, extrarange = -3)
@@ -219,7 +219,7 @@
 			tilt(user)
 
 /obj/machinery/vending/attack_tk_grab(mob/user)
-	to_chat(user, span_warning("[src] seems to resist your mental grasp!"))
+	to_chat(user, span_warning("[src], кажется, сопротивляется вашему ментальному захвату!"))
 
 /obj/machinery/vending/attack_robot_secondary(mob/user, list/modifiers)
 	. = ..()
