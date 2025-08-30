@@ -526,18 +526,25 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 		parts += "[venue] обслужил [venue.customers_served] посетителей и заработал [venue.total_income] кредитов.<br>"
 	parts += "Общий доход составил [tourist_income] кредитов[tourist_income ? "!" : "..."]<br>"
 	log_econ("Доход сервиса за раунд: [tourist_income] кредитов.")
+
+	// Award service achievements based on tourist income
+	switch(tourist_income)
+		if(1 to 2000)
+			award_service(/datum/award/achievement/jobs/service_bad)
+		if(2001 to 4999)
+			award_service(/datum/award/achievement/jobs/service_okay)
+		if(5000 to INFINITY)
+			award_service(/datum/award/achievement/jobs/service_good)
+
 	switch(tourist_income)
 		if(0)
 			parts += "[span_redtext("Сервис не заработал ни кредита...")]<br>"
 		if(1 to 2000)
 			parts += "[span_redtext("Центком недоволен. Сервис, вы можете лучше!")]<br>"
-			award_service(/datum/award/achievement/jobs/service_bad)
 		if(2001 to 4999)
 			parts += "[span_greentext("Центком удовлетворен работой сервиса сегодня.")]<br>"
-			award_service(/datum/award/achievement/jobs/service_okay)
 		else
 			parts += "<span class='reallybig greentext'>Центком в восторге от работы сервиса сегодня! Великолепная команда!</span><br>"
-			award_service(/datum/award/achievement/jobs/service_good)
 
 	parts += "<b>Общая статистика:</b><br>"
 	parts += "Экипаж собрал [station_vault] кредитов за смену.<br>"
@@ -548,7 +555,7 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 		parts += "Самый богатый член экипажа: <b>[mr_moneybags.account_holder] с [mr_moneybags.account_balance]</b> кредитов!</div>"
 	else
 		parts += "Как ни странно, никто не заработал ни кредита! Это приведет к сокращению бюджета...</div>"
-	return parts
+	return parts.Join()
 
 /**
  * Awards the service department an achievement and updates the chef and bartender's highscore for tourists served.

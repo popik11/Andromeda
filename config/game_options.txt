@@ -59,6 +59,11 @@ HUMANS_NEED_SURNAMES
 ## Раскомментируйте, чтобы включить автоматическое повторное открытие роли игрока, если он совершает суицид в начале раунда
 REOPEN_ROUNDSTART_SUICIDE_ROLES
 
+## Количество времени после начала раунда, через которое выходит отчёт об отключении игрока, рандомизируется ROUNDSTART_LOGOUT_REPORT_TIME_VARIANCE как нижний и верхний возможный таймер
+## Установка ROUNDSTART_LOGOUT_REPORT_TIME_VARIANCE в 0 приведёт к отсутствию вариативности и будет отображаться только время из ROUNDSTART_LOGOUT_REPORT_TIME_AVERAGE
+ROUNDSTART_LOGOUT_REPORT_TIME_VARIANCE 1800
+ROUNDSTART_LOGOUT_REPORT_TIME_AVERAGE 6000
+
 ## Раскомментируйте, чтобы включить повторное открытие командных позиций
 REOPEN_ROUNDSTART_SUICIDE_ROLES_COMMAND_POSITIONS
 

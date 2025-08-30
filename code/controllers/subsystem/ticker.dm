@@ -313,7 +313,11 @@ SUBSYSTEM_DEF(ticker)
 	if(!CONFIG_GET(flag/no_intercept_report))
 		GLOB.communications_controller.queue_roundstart_report()
 	// Queue admin logout report
-	addtimer(CALLBACK(src, PROC_REF(display_roundstart_logout_report)), ROUNDSTART_LOGOUT_REPORT_TIME)
+	var/roundstart_logout_timer = CONFIG_GET(number/roundstart_logout_report_time_average)
+	var/roundstart_report_variance = CONFIG_GET(number/roundstart_logout_report_time_variance)
+	var/randomized_callback_timer = rand((roundstart_logout_timer - roundstart_report_variance), (roundstart_logout_timer + roundstart_report_variance))
+	addtimer(CALLBACK(src, PROC_REF(display_roundstart_logout_report)), randomized_callback_timer)
+	GLOB.logout_timer_set = randomized_callback_timer
 	// Queue suicide slot handling
 	if(CONFIG_GET(flag/reopen_roundstart_suicide_roles))
 		var/delay = (CONFIG_GET(number/reopen_roundstart_suicide_roles_delay) * 1 SECONDS) || 4 MINUTES
@@ -367,6 +371,7 @@ SUBSYSTEM_DEF(ticker)
 
 /datum/controller/subsystem/ticker/proc/display_roundstart_logout_report()
 	var/list/msg = list("[span_boldnotice("Отчет о выходе в начале раунда")]\n\n")
+
 	for(var/i in GLOB.mob_living_list)
 		var/mob/living/L = i
 		var/mob/living/carbon/C = L
@@ -379,7 +384,7 @@ SUBSYSTEM_DEF(ticker)
 
 		if(L.ckey && L.client)
 			var/failed = FALSE
-			if(L.client.inactivity >= ROUNDSTART_LOGOUT_AFK_THRESHOLD) // Подключен, но неактивен (alt+tab и т.п.)
+			if(L.client.inactivity >= GLOB.logout_timer_set) // Подключен, но неактивен (alt+tab и т.п.)
 				msg += "<b>[L.name]</b> ([L.key]), [L.job] (<font color='#ffcc00'><b>Подключен, Неактивен</b></font>)\n"
 				failed = TRUE // AFK-клиент
 			if(!failed && L.stat)
@@ -409,6 +414,8 @@ SUBSYSTEM_DEF(ticker)
 					else
 						msg += "<b>[L.name]</b> ([ckey(D.mind.key)]), [L.job] ([span_bolddanger("Призрак")])\n"
 						continue // Стал призраком живым
+
+	msg += "[span_boldnotice("Выход в начале раунда зафиксирован в: [DisplayTimeText(GLOB.logout_timer_set)]")]\n"
 
 	var/concatenated_message = msg.Join()
 	log_admin(concatenated_message)
