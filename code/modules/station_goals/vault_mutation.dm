@@ -1,9 +1,9 @@
 
 /datum/mutation/breathless
-	name = "Breathless"
-	desc = "A mutation within the skin that allows for filtering and absorption of oxygen from the skin."
-	text_gain_indication = span_notice("Your lungs feel great.")
-	text_lose_indication = span_warning("Your lungs feel normal again.")
+	name = "Бездыханность"
+	desc = "Мутация кожи, позволяющая фильтровать и поглощать кислород через кожу."
+	text_gain_indication = span_notice("Ваши лёгкие чувствуют себя прекрасно.")
+	text_lose_indication = span_warning("Ваши лёгкие снова чувствуют себя нормально.")
 	locked = TRUE
 
 /datum/mutation/breathless/on_acquiring(mob/living/carbon/human/acquirer)
@@ -15,10 +15,10 @@
 	REMOVE_TRAIT(owner, TRAIT_NOBREATH, GENETIC_MUTATION)
 
 /datum/mutation/quick
-	name = "Quick"
-	desc = "A mutation within the leg muscles that allows it to operate at 20% more than the usual capacity."
-	text_gain_indication = span_notice("Your legs feel faster and stronger.")
-	text_lose_indication = span_warning("Your legs feel weaker and slower.")
+	name = "Проворство"
+	desc = "Мутация мышц ног, позволяющая им работать на 20% больше обычной мощности."
+	text_gain_indication = span_notice("Ваши ноги чувствуют себя быстрее и сильнее.")
+	text_lose_indication = span_warning("Ваши ноги чувствуют себя слабее и медленнее.")
 	locked = TRUE
 
 /datum/mutation/quick/on_acquiring(mob/living/carbon/human/acquirer)
@@ -30,10 +30,10 @@
 	owner.remove_movespeed_modifier(/datum/movespeed_modifier/dna_vault_speedup)
 
 /datum/mutation/tough
-	name = "Tough"
-	desc = "A mutation within the epidermis that makes it more resistant to tear."
-	text_gain_indication = span_notice("Your skin feels tougher.")
-	text_lose_indication = span_warning("Your skin feels weaker.")
+	name = "Крепость"
+	desc = "Мутация эпидермиса, делающая его более устойчивым к разрывам."
+	text_gain_indication = span_notice("Ваша кожа кажется более прочной.")
+	text_lose_indication = span_warning("Ваша кожа кажется более слабой.")
 	locked = TRUE
 
 /datum/mutation/tough/on_acquiring(mob/living/carbon/human/acquirer)
@@ -47,10 +47,10 @@
 	REMOVE_TRAIT(owner, TRAIT_PIERCEIMMUNE, GENETIC_MUTATION)
 
 /datum/mutation/dextrous
-	name = "Dextrous"
-	desc = "A mutation within the nerve system that allows for more responsive and quicker action."
-	text_gain_indication = span_notice("Your limbs feel more dextrous and responsive.")
-	text_lose_indication = span_warning("Your limbs feel less dextrous and responsive.")
+	name = "Ловкость"
+	desc = "Мутация нервной системы, позволяющая совершать более быстрые и отзывчивые действия."
+	text_gain_indication = span_notice("Ваши конечности чувствуют себя более ловкими и отзывчивыми.")
+	text_lose_indication = span_warning("Ваши конечности чувствуют себя менее ловкими и отзывчивыми.")
 	locked = TRUE
 
 /datum/mutation/dextrous/on_acquiring(mob/living/carbon/human/acquirer)
@@ -62,10 +62,10 @@
 	owner.next_move_modifier /= 0.5
 
 /datum/mutation/fire_immunity
-	name = "Fire Immunity"
-	desc = "A mutation within the body that allows it to become nonflammable and withstand higher temperature."
-	text_gain_indication = span_notice("Your body feels like it can withstand fire.")
-	text_lose_indication = span_warning("Your body feels vulnerable to fire again.")
+	name = "Иммунитет к Огню"
+	desc = "Мутация тела, позволяющая стать негорючим и выдерживать более высокие температуры."
+	text_gain_indication = span_notice("Ваше тело чувствует, что может выдержать огонь.")
+	text_lose_indication = span_warning("Ваше тело снова чувствует уязвимость к огню.")
 	locked = TRUE
 
 /datum/mutation/fire_immunity/on_acquiring(mob/living/carbon/human/acquirer)
@@ -79,10 +79,10 @@
 	owner.remove_traits(list(TRAIT_RESISTHEAT, TRAIT_NOFIRE), GENETIC_MUTATION)
 
 /datum/mutation/quick_recovery
-	name = "Quick Recovery"
-	desc = "A mutation within the nervous system that allows it to recover from being knocked down."
-	text_gain_indication = span_notice("You feel like you can recover from a fall easier.")
-	text_lose_indication = span_warning("You feel like recovering from a fall is a challenge again.")
+	name = "Быстрое Восстановление"
+	desc = "Мутация нервной системы, позволяющая быстрее восстанавливаться после падений."
+	text_gain_indication = span_notice("Вы чувствуете, что сможете легче оправиться от падения.")
+	text_lose_indication = span_warning("Вы чувствуете, что восстановление после падения снова стало сложной задачей.")
 	locked = TRUE
 
 /datum/mutation/quick_recovery/on_acquiring(mob/living/carbon/human/acquirer)
@@ -94,10 +94,10 @@
 	owner.physiology.stun_mod /= 0.5
 
 /datum/mutation/plasmocile
-	name = "Plasmocile"
-	desc = "A mutation in the lungs that provides it immunity to plasma's toxic nature."
-	text_gain_indication = span_notice("Your lungs feel resistant to airborne contaminant.")
-	text_lose_indication = span_warning("Your lungs feel vulnerable to airborne contaminant again.")
+	name = "Плазмосайл"
+	desc = "Мутация лёгких, обеспечивающая иммунитет к токсичной природе плазмы."
+	text_gain_indication = span_notice("Ваши лёгкие чувствуют себя устойчивыми к воздушным загрязнителям.")
+	text_lose_indication = span_warning("Ваши лёгкие снова чувствуют уязвимость к воздушным загрязнителям.")
 	locked = TRUE
 
 /datum/mutation/plasmocile/on_acquiring(mob/living/carbon/human/acquirer)

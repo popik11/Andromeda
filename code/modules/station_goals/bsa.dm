@@ -7,15 +7,15 @@ GLOBAL_VAR_INIT(bsa_unlock, FALSE)
 // Requires high amount of power
 // Requires high level stock parts
 /datum/station_goal/bluespace_cannon
-	name = "Bluespace Artillery"
+	name = "Блюспейс Артиллерия"
 
 /datum/station_goal/bluespace_cannon/get_report()
 	return list(
-		"<blockquote>Our military presence is inadequate in your sector.",
-		"We need you to construct BSA-[rand(1,99)] Artillery position aboard your station.",
+		"<blockquote>Требуется увеличение военной мощи корпорации.",
+		"Нам требуется, чтобы вы построили БСА-[rand(1,99)] на вашей станции.",
 		"",
-		"Base parts are available for shipping via cargo.",
-		"-Nanotrasen Naval Command</blockquote>",
+		"Базовые компоненты доступны для доставки через карго.",
+		"-Военное Командование Нанотрейзен</blockquote>",
 	).Join("\n")
 
 /datum/station_goal/bluespace_cannon/on_report()
@@ -43,7 +43,7 @@ GLOBAL_VAR_INIT(bsa_unlock, FALSE)
 
 /obj/machinery/bsa/back
 	name = "Bluespace Artillery Generator"
-	desc = "Generates cannon pulse. Needs to be linked with a fusor."
+	desc = "Генерирует импульс орудия. Требует подключения к фузору."
 	icon_state = "power_box"
 
 /obj/machinery/bsa/back/Initialize(mapload)
@@ -52,12 +52,12 @@ GLOBAL_VAR_INIT(bsa_unlock, FALSE)
 
 /obj/machinery/bsa/back/multitool_act(mob/living/user, obj/item/multitool/M)
 	M.set_buffer(src)
-	balloon_alert(user, "saved to multitool buffer")
+	balloon_alert(user, "сохранено в буфер мультитула")
 	return ITEM_INTERACT_SUCCESS
 
 /obj/machinery/bsa/front
 	name = "Bluespace Artillery Bore"
-	desc = "Do not stand in front of cannon during operation. Needs to be linked with a fusor."
+	desc = "Не стойте перед орудием во время работы. Требует подключения к фузору."
 	icon_state = "emitter_center"
 
 /obj/machinery/bsa/front/Initialize(mapload)
@@ -66,12 +66,12 @@ GLOBAL_VAR_INIT(bsa_unlock, FALSE)
 
 /obj/machinery/bsa/front/multitool_act(mob/living/user, obj/item/multitool/M)
 	M.set_buffer(src)
-	balloon_alert(user, "saved to multitool buffer")
+	balloon_alert(user, "сохранено в буфер мультитула")
 	return ITEM_INTERACT_SUCCESS
 
 /obj/machinery/bsa/middle
 	name = "Bluespace Artillery Fusor"
-	desc = "Contents classified by Nanotrasen Naval Command. Needs to be linked with the other BSA parts using a multitool."
+	desc = "Содержимое засекречено Военным Командованием Нанотрейзен. Требует подключения к другим частям БСА с помощью мультитула."
 	icon_state = "fuel_chamber"
 	var/datum/weakref/back_ref
 	var/datum/weakref/front_ref
@@ -85,12 +85,12 @@ GLOBAL_VAR_INIT(bsa_unlock, FALSE)
 
 	if(istype(tool.buffer, /obj/machinery/bsa/back))
 		back_ref = WEAKREF(tool.buffer)
-		to_chat(user, span_notice("You link [src] with [tool.buffer]."))
+		to_chat(user, span_notice("Вы соединяете [src] с [tool.buffer]."))
 		tool.set_buffer(null)
 		return ITEM_INTERACT_SUCCESS
 	else if(istype(tool.buffer, /obj/machinery/bsa/front))
 		front_ref = WEAKREF(tool.buffer)
-		to_chat(user, span_notice("You link [src] with [tool.buffer]."))
+		to_chat(user, span_notice("Вы соединяете [src] с [tool.buffer]."))
 		tool.set_buffer(null)
 		return ITEM_INTERACT_SUCCESS
 
@@ -98,13 +98,13 @@ GLOBAL_VAR_INIT(bsa_unlock, FALSE)
 	var/obj/machinery/bsa/front/front = front_ref?.resolve()
 	var/obj/machinery/bsa/back/back = back_ref?.resolve()
 	if(!front || !back)
-		return "No linked parts detected!"
+		return "Связанные части не обнаружены!"
 	if(!front.anchored || !back.anchored || !anchored)
-		return "Linked parts unwrenched!"
+		return "Связанные части не закреплены!"
 	if(front.y != y || back.y != y || !(front.x > x && back.x < x || front.x < x && back.x > x) || front.z != z || back.z != z)
-		return "Parts misaligned!"
+		return "Части неправильно выровнены!"
 	if(!has_space())
-		return "Not enough free space!"
+		return "Недостаточно свободного места!"
 
 /obj/machinery/bsa/middle/proc/has_space()
 	var/cannon_dir = get_cannon_direction()
@@ -137,7 +137,7 @@ GLOBAL_VAR_INIT(bsa_unlock, FALSE)
 
 /obj/machinery/bsa/full
 	name = "Bluespace Artillery"
-	desc = "Long range bluespace artillery."
+	desc = "Дальнобойная блюспейс артиллерия."
 	icon = 'icons/obj/machines/cannon.dmi'
 	icon_state = "cannon_west"
 	var/static/mutable_appearance/top_layer
@@ -232,19 +232,19 @@ GLOBAL_VAR_INIT(bsa_unlock, FALSE)
 	new /obj/effect/temp_visual/bsa_splash(point, dir)
 
 	notify_ghosts(
-		"The Bluespace Artillery has been fired!",
+		"Блюспейс Артиллерия была запущена!",
 		source = bullseye,
-		header = "KABOOM!",
+		header = "КАБУМ!",
 	)
 
 	if(!blocker)
-		message_admins("[ADMIN_LOOKUPFLW(user)] has launched a bluespace artillery strike targeting [ADMIN_VERBOSEJMP(bullseye)].")
-		user.log_message("has launched a bluespace artillery strike targeting [AREACOORD(bullseye)].", LOG_GAME)
+		message_admins("[ADMIN_LOOKUPFLW(user)] запустил(а) удар блюспейс артиллерии по цели [ADMIN_VERBOSEJMP(bullseye)].")
+		user.log_message("запустил(а) удар блюспейс артиллерии по цели [AREACOORD(bullseye)].", LOG_GAME)
 		explosion(bullseye, devastation_range = ex_power, heavy_impact_range = ex_power*2, light_impact_range = ex_power*4, explosion_cause = src)
 		new /obj/effect/temp_visual/bsa_impact(bullseye)
 	else
-		message_admins("[ADMIN_LOOKUPFLW(user)] has launched a bluespace artillery strike targeting [ADMIN_VERBOSEJMP(bullseye)] but it was blocked by [blocker] at [ADMIN_VERBOSEJMP(target)].")
-		user.log_message("has launched a bluespace artillery strike targeting [AREACOORD(bullseye)] but it was blocked by [blocker] at [AREACOORD(target)].", LOG_GAME)
+		message_admins("[ADMIN_LOOKUPFLW(user)] запустил(а) удар блюспейс артиллерии по цели [ADMIN_VERBOSEJMP(bullseye)], но он был заблокирован [blocker] в [ADMIN_VERBOSEJMP(target)].")
+		user.log_message("запустил(а) удар блюспейс артиллерии по цели [AREACOORD(bullseye)], но он был заблокирован [blocker] в [AREACOORD(target)].", LOG_GAME)
 
 
 /obj/machinery/bsa/full/proc/reload()
@@ -328,13 +328,13 @@ GLOBAL_VAR_INIT(bsa_unlock, FALSE)
 	var/list/options = gps_locators
 	if(area_aim)
 		options += GLOB.teleportlocs
-	var/victim = tgui_input_list(user, "Select target", "Artillery Targeting", options)
+	var/victim = tgui_input_list(user, "Выберите цель", "Наведение Артиллерии", options)
 	if(isnull(victim))
 		return
 	if(isnull(options[victim]))
 		return
 	target = options[victim]
-	log_game("[key_name(user)] has aimed the bluespace artillery strike at [target].")
+	log_game("[key_name(user)] навёл удар блюспейс артиллерии на [target].")
 
 
 /obj/machinery/computer/bsa_control/proc/get_target_name()
@@ -356,10 +356,10 @@ GLOBAL_VAR_INIT(bsa_unlock, FALSE)
 /obj/machinery/computer/bsa_control/proc/fire(mob/user)
 	var/obj/machinery/bsa/full/cannon = cannon_ref?.resolve()
 	if(!cannon)
-		notice = "No Cannon Exists!"
+		notice = "Пушка не существует!"
 		return
 	if(cannon.machine_stat)
-		notice = "Cannon unpowered!"
+		notice = "Пушка без питания!"
 		return
 	notice = null
 	var/turf/target_turf = get_impact_turf()
@@ -372,7 +372,7 @@ GLOBAL_VAR_INIT(bsa_unlock, FALSE)
 
 	var/obj/machinery/bsa/middle/centerpiece = locate() in range(7)
 	if(!centerpiece)
-		notice = "No BSA parts detected nearby."
+		notice = "Рядом не обнаружено частей БСА."
 		return null
 	notice = centerpiece.check_completion()
 	if(notice)
@@ -390,6 +390,6 @@ GLOBAL_VAR_INIT(bsa_unlock, FALSE)
 	if(obj_flags & EMAGGED)
 		return FALSE
 	obj_flags |= EMAGGED
-	balloon_alert(user, "rigged to explode")
-	to_chat(user, span_warning("You emag [src] and hear the focusing crystal short out. You get the feeling it wouldn't be wise to stand near [src] when the BSA fires..."))
+	balloon_alert(user, "подготовлено к взрыву")
+	to_chat(user, span_warning("Вы эмэджите [src] и слышите, как перегорает фокусирующий кристалл. У вас возникает ощущение, что находиться рядом с [src] при выстреле БСА будет не лучшей идеей..."))
 	return TRUE

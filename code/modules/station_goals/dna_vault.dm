@@ -3,16 +3,16 @@
 // DNA vault requires x animals, y plants, z human dna
 // DNA vaults require high tier stock parts
 // After completion each crewmember can receive single upgrade chosen out of 2 for the mob.
-#define VAULT_TOXIN "Toxin Adaptation"
-#define VAULT_NOBREATH "Lung Enhancement"
-#define VAULT_FIREPROOF "Thermal Regulation"
-#define VAULT_STUNTIME "Neural Repathing"
-#define VAULT_ARMOUR "Bone Reinforcement"
-#define VAULT_SPEED "Leg Muscle Stimulus"
-#define VAULT_QUICK "Arm Muscle Stimulus"
+#define VAULT_TOXIN "Адаптация к Токсинам"
+#define VAULT_NOBREATH "Улучшение Лёгких"
+#define VAULT_FIREPROOF "Терморегуляция"
+#define VAULT_STUNTIME "Нейронное Перепрограммирование"
+#define VAULT_ARMOUR "Укрепление Костей"
+#define VAULT_SPEED "Стимуляция Мышц Ног"
+#define VAULT_QUICK "Стимуляция Мышц Рук"
 
 /datum/station_goal/dna_vault
-	name = "DNA Vault"
+	name = "Хранилище ДНК"
 	var/animal_count
 	var/human_count
 	var/plant_count
@@ -33,15 +33,15 @@
 
 /datum/station_goal/dna_vault/get_report()
 	return list(
-		"<blockquote>Our long term prediction systems indicate a 99% chance of system-wide cataclysm in the near future.",
-		"We need you to construct a DNA Vault aboard your station.",
+		"<blockquote>Наши системы долгосрочного прогнозирования указывают на 99% вероятность общесистемного катаклизма в ближайшем будущем.",
+		"Нам требуется, чтобы вы построили Хранилище ДНК на вашей станции.",
 		"",
-		"The DNA Vault needs to contain samples of:",
-		"* [animal_count] unique animal data",
-		"* [plant_count] unique non-standard plant data",
-		"* [human_count] unique sapient humanoid DNA data",
+		"Хранилище ДНК должно содержать образцы:",
+		"* [animal_count] уникальных данных животных",
+		"* [plant_count] уникальных данных нестандартных растений",
+		"* [human_count] уникальных данных ДНК разумных гуманоидов",
 		"",
-		"Base vault parts are available for shipping via cargo.</blockquote>",
+		"Базовые компоненты хранилища доступны для доставки через карго.</blockquote>",
 	).Join("\n")
 
 
@@ -62,7 +62,7 @@
 
 /obj/machinery/dna_vault
 	name = "DNA Vault"
-	desc = "Break glass in case of apocalypse."
+	desc = "Разбейте стекло в случае апокалипсиса."
 	icon = 'icons/obj/machines/dna_vault.dmi'
 	icon_state = "vault"
 	density = TRUE
@@ -181,13 +181,13 @@
 /obj/machinery/dna_vault/proc/upgrade(mob/living/carbon/human/target, upgrade_type)
 	var/datum/weakref/human_weakref = WEAKREF(target)
 	var/static/list/associated_mutation = list(
-		"Breathless" = /datum/mutation/breathless,
-		"Dextrous" = /datum/mutation/dextrous,
-		"Quick" = /datum/mutation/quick,
-		"Fire Immunity" = /datum/mutation/fire_immunity,
-		"Plasmocile" = /datum/mutation/plasmocile,
-		"Quick Recovery" = /datum/mutation/quick_recovery,
-		"Tough" = /datum/mutation/tough,
+		"Бездыханность" = /datum/mutation/breathless,
+		"Ловкость" = /datum/mutation/dextrous,
+		"Проворство" = /datum/mutation/quick,
+		"Иммунитет к Огню" = /datum/mutation/fire_immunity,
+		"Плазмосайл" = /datum/mutation/plasmocile,
+		"Быстрое Восстановление" = /datum/mutation/quick_recovery,
+		"Крепость" = /datum/mutation/tough,
 	)
 	if(!(associated_mutation[upgrade_type] in power_lottery[human_weakref]) || (HAS_TRAIT(target, TRAIT_USED_DNA_VAULT)))
 		return

@@ -13,17 +13,17 @@
 // A chain of satellites encircles the station
 // Satellites be actived to generate a shield that will block unorganic matter from passing it.
 /datum/station_goal/station_shield
-	name = "Station Shield"
+	name = "Орбитальная Защита Станции"
 	requires_space = TRUE
 	var/coverage_goal = 500
 	VAR_PRIVATE/cached_coverage_length
 
 /datum/station_goal/station_shield/get_report()
 	return list(
-		"<blockquote>The station is located in a zone full of space debris.",
-		"We have a prototype shielding system you must deploy to reduce collision-related accidents.",
+		"<blockquote>Станция расположена в зоне, полной космического мусора.",
+		"Вы должны развернуть прототип системы защиты для сокращения аварий, связанных со столкновениями.",
 		"",
-		"You can order the satellites and control systems at cargo.</blockquote>",
+		"Вы можете заказать спутники и системы управления через карго.</blockquote>",
 	).Join("\n")
 
 
@@ -58,8 +58,8 @@
 	cached_coverage_length = length(coverage)
 
 /obj/machinery/satellite/meteor_shield
-	name = "\improper Meteor Shield Satellite"
-	desc = "A meteor point-defense satellite."
+	name = "Meteor Shield Satellite"
+	desc = "Спутник противометеоритной обороны."
 	mode = "M-SHIELD"
 	/// the range a meteor shield sat can destroy meteors
 	var/kill_range = 14
@@ -79,15 +79,15 @@
 /obj/machinery/satellite/meteor_shield/examine(mob/user)
 	. = ..()
 	if(active)
-		. += span_notice("It is currently active. You can interact with it to shut it down.")
+		. += span_notice("В настоящее время активен. Вы можете взаимодействовать с ним, чтобы отключить.")
 		if(obj_flags & EMAGGED)
-			. += span_warning("Rather than the usual sounds of beeps and pings, it produces a weird and constant hiss of white noise…")
+			. += span_warning("Вместо обычных звуков бипов и пингов, он издаёт странное и постоянное шипение белого шума…")
 		else
-			. += span_notice("It emits periodic beeps and pings as it communicates with the satellite network.")
+			. += span_notice("Он периодически издаёт бипы и пинги, общаясь со спутниковой сетью.")
 	else
-		. += span_notice("It is currently disabled. You can interact with it to set it up.")
+		. += span_notice("В настоящее время отключён. Вы можете взаимодействовать с ним, чтобы настроить.")
 		if(obj_flags & EMAGGED)
-			. += span_warning("But something seems off about it...?")
+			. += span_warning("Но что-то в нём кажется не таким...?")
 
 /obj/machinery/satellite/meteor_shield/proc/space_los(meteor)
 	for(var/turf/T in get_line(src,meteor))
@@ -112,7 +112,7 @@
 
 /obj/machinery/satellite/meteor_shield/toggle(user)
 	if(user)
-		balloon_alert(user, "looking for [active ? "off" : "on"] button")
+		balloon_alert(user, "ищу кнопку включения [active ? "выключения" : "включения"]")
 	if(user && !do_after(user, 2 SECONDS, src, IGNORE_HELD_ITEM))
 		return FALSE
 	if(!..(user))
@@ -138,19 +138,19 @@
 
 /obj/machinery/satellite/meteor_shield/emag_act(mob/user, obj/item/card/emag/emag_card)
 	if(obj_flags & EMAGGED)
-		balloon_alert(user, "already emagged!")
+		balloon_alert(user, "уже емагнут!")
 		return FALSE
 	if(!COOLDOWN_FINISHED(src, shared_emag_cooldown))
-		balloon_alert(user, "on cooldown!")
-		to_chat(user, span_warning("The last satellite emagged needs [DisplayTimeText(COOLDOWN_TIMELEFT(src, shared_emag_cooldown))] to recalibrate first. Emagging another so soon could damage the satellite network."))
+		balloon_alert(user, "на перезарядке!")
+		to_chat(user, span_warning("Последнему емагнотому спутнику требуется [DisplayTimeText(COOLDOWN_TIMELEFT(src, shared_emag_cooldown))] для перекалибровки. Слишком ранний эмэг другого может повредить спутниковую сеть."))
 		return FALSE
 	var/cooldown_applied = METEOR_SHIELD_EMAG_COOLDOWN
 	COOLDOWN_START(src, shared_emag_cooldown, cooldown_applied)
 	obj_flags |= EMAGGED
-	to_chat(user, span_notice("You access the satellite's debug mode and it begins emitting a strange signal, increasing the chance of meteor strikes."))
-	AddComponent(/datum/component/gps, "Corrupted Meteor Shield Attraction Signal")
-	say("Recalibrating... ETA:[DisplayTimeText(cooldown_applied)].")
-	if(active) //if we allowed inactive updates a sat could be worth -1 active meteor shields on first emag
+	to_chat(user, span_notice("Вы получаете доступ к режиму отладки спутника, и он начинает излучать странный сигнал, увеличивая вероятность метеоритных ударов."))
+	AddComponent(/datum/component/gps, "Сигнал Привлечения Испорченного Метеоритного Щита")
+	say("Перекалибровка... Примерное время:[DisplayTimeText(cooldown_applied)].")
+	if(active) //если бы мы разрешали обновления неактивных, спутник мог бы стоить -1 активных метеоритных щитов при первом эмэге
 		update_emagged_meteor_sat(user)
 	return TRUE
 
@@ -159,12 +159,12 @@
 		change_meteor_chance(0.5)
 		emagged_active_meteor_shields--
 		if(user)
-			balloon_alert(user, "meteor probability halved")
+			balloon_alert(user, "вероятность метеоров уменьшена вдвое")
 		return
 	change_meteor_chance(2)
 	emagged_active_meteor_shields++
 	if(user)
-		balloon_alert(user, "meteor probability doubled")
+		balloon_alert(user, "вероятность метеоров удвоена")
 	if(emagged_active_meteor_shields > highest_emagged_threshold_reached)
 		highest_emagged_threshold_reached = emagged_active_meteor_shields
 		handle_new_emagged_shield_threshold()
@@ -172,15 +172,15 @@
 /obj/machinery/satellite/meteor_shield/proc/handle_new_emagged_shield_threshold()
 	switch(highest_emagged_threshold_reached)
 		if(EMAGGED_METEOR_SHIELD_THRESHOLD_ONE)
-			say("Warning. Meteor strike probability entering dangerous ranges for more exotic meteors.")
+			say("Предупреждение. Вероятность метеоритных ударов входит в опасный диапазон для более экзотических метеоров.")
 		if(EMAGGED_METEOR_SHIELD_THRESHOLD_TWO)
-			say("Warning. Risk of dark matter congealment entering existent ranges. Further tampering will be reported.")
+			say("Предупреждение. Риск сгущения тёмной материи входит в существующие диапазоны. Дальнейшие вмешательства будут сообщены.")
 		if(EMAGGED_METEOR_SHIELD_THRESHOLD_THREE)
-			say("Warning. Further tampering has been reported.")
-			priority_announce("Warning. Tampering of meteor satellites puts the station at risk of exotic, deadly meteor collisions. Please intervene by checking your GPS devices for strange signals, and dismantling the tampered meteor shields.", "Strange Meteor Signal Warning")
+			say("Предупреждение. Дальнейшие вмешательства были сообщены.")
+			priority_announce("Внимание. Вмешательство в работу метеорных спутников подвергает станцию риску экзотических, смертоносных метеорных столкновений. Пожалуйста, примите меры, проверив ваши GPS-устройства на наличие странных сигналов и демонтировав повреждённые метеорные щиты.", "Странный Сигнал")
 		if(EMAGGED_METEOR_SHIELD_THRESHOLD_FOUR)
-			say("Warning. Warning. Dark Matt-eor on course for station.")
-			force_event_async(/datum/round_event_control/dark_matteor, "an array of tampered meteor satellites")
+			say("Предупреждение. Предупреждение. Тёмный Мат-теор на курсе к станции.")
+			force_event_async(/datum/round_event_control/dark_matteor, "массив повреждённых метеорных спутников")
 
 /obj/machinery/satellite/meteor_shield/proc/change_meteor_chance(mod)
 	// Update the weight of all meteor events

@@ -3,7 +3,7 @@ This subsystem exists to serve as a holder for important info for the restaurant
 */
 
 SUBSYSTEM_DEF(restaurant)
-	name = "Restaurant"
+	name = "Ресторан"
 	wait = 20 SECONDS //Roll for new guests but don't do it too fast.
 	flags = SS_NO_FIRE
 	///All venues that exist, assoc list of type - reference

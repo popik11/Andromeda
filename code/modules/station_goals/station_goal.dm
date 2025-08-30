@@ -1,18 +1,18 @@
 /datum/station_goal
-	var/name = "Generic Goal"
-	var/weight = 1 //In case of multiple goals later.
+	var/name = "Общая Цель"
+	var/weight = 1 //На случай нескольких целей в будущем.
 	var/required_crew = 10
 	var/requires_space = FALSE
 	var/completed = FALSE
-	var/report_message = "Complete this goal."
+	var/report_message = "Выполните эту цель."
 
 /datum/station_goal/proc/send_report()
-	priority_announce("Priority Nanotrasen directive received. Project \"[name]\" details inbound.", "Incoming Priority Message", SSstation.announcer.get_rand_report_sound())
-	print_command_report(get_report(),"Nanotrasen Directive [pick(GLOB.phonetic_alphabet)] \Roman[rand(1,50)]", announce=FALSE)
+	priority_announce("Получена приоритетная директива Нанотрейзен. Поступают детали проекта \"[name]\".", "Входящее Приоритетное Сообщение", SSstation.announcer.get_rand_report_sound())
+	print_command_report(get_report(),"Директива Нанотрейзен [pick(GLOB.phonetic_alphabet)] \Roman[rand(1,50)]", announce=FALSE)
 	on_report()
 
 /datum/station_goal/proc/on_report()
-	//Additional unlocks/changes go here
+	//Дополнительные разблокировки/изменения здесь
 	return
 
 /datum/station_goal/proc/get_report()
@@ -23,9 +23,9 @@
 
 /datum/station_goal/proc/get_result()
 	if(check_completion())
-		return "<li>[name] : [span_greentext("Completed!")]</li>"
+		return "<li>[name] : [span_greentext("Выполнено!")]</li>"
 	else
-		return "<li>[name] : [span_redtext("Failed!")]</li>"
+		return "<li>[name] : [span_redtext("Провалено!")]</li>"
 
 /datum/station_goal/Topic(href, href_list)
 	..()
@@ -40,7 +40,7 @@
 
 /datum/station_goal/New()
 	if(type in SSstation.goals_by_type)
-		stack_trace("Creating a new station_goal of type [type] when one already exists in SSstation.goals_by_type this is not supported anywhere. I trust you tho")
+		stack_trace("Создание новой station_goal типа [type], когда она уже существует в SSstation.goals_by_type, нигде не поддерживается. Но я доверяю тебе")
 	else
 		SSstation.goals_by_type[type] = src
 	return ..()
