@@ -368,8 +368,8 @@ GLOBAL_VAR(restart_counter)
 
 	var/list/features = list()
 
-	if(LAZYACCESS(SSlag_switch.measures, DISABLE_NON_OBSJOBS))
-		features += "closed"
+//	if(LAZYACCESS(SSlag_switch.measures, DISABLE_NON_OBSJOBS))
+//		features += "closed"
 
 	var/new_status = ""
 	var/hostedby
@@ -377,43 +377,43 @@ GLOBAL_VAR(restart_counter)
 		var/server_name = CONFIG_GET(string/servername)
 		if (server_name)
 			new_status += "<b>[server_name]</b> "
-			features += " — server for Russian community. — (<a href=\"https://discord.gg/NxTZeUPtRf\">Discord</a>)<br>"
-		if(CONFIG_GET(flag/allow_respawn))
-			features += "respawn" // показывать «respawn» независимо от «respawn as char» или «free respawn»
-		if(!CONFIG_GET(flag/allow_ai))
-			features += "AI disabled"
+			features += " - CEPBEP PYCCKOGO HAPODA. — (<a href=\"https://discord.gg/NxTZeUPtRf\">Discord</a>)<br>"
+//		if(CONFIG_GET(flag/allow_respawn))
+//			features += "respawn" // показывать «respawn» независимо от «respawn as char» или «free respawn»
+//		if(!CONFIG_GET(flag/allow_ai))
+//		features += "AI disabled"
 		hostedby = CONFIG_GET(string/hostedby)
 
-	if (CONFIG_GET(flag/station_name_in_hub_entry))
-		new_status += " &#8212; <b>[station_name()]</b>"
+//	if (CONFIG_GET(flag/station_name_in_hub_entry))
+//		new_status += " &#8212; <b>[station_name()]</b>"
 
 	var/players = GLOB.clients.len
 
 	game_state = (CONFIG_GET(number/extreme_popcap) && players >= CONFIG_GET(number/extreme_popcap)) //tells the hub if we are full
 
 	if (!host && hostedby)
-		features += "hosted by <b>[hostedby]</b>"
+		features += "XOCT: <b>[hostedby]</b>"
 
 	if(length(features))
-		new_status += ": [jointext(features, ", ")]"
+		new_status += "[jointext(features, ", ")]"
 
-	if(!SSticker || SSticker?.current_state == GAME_STATE_STARTUP)
-		new_status += "<br><b>STARTING</b>"
-	else if(SSticker)
-		if(SSticker.current_state == GAME_STATE_PREGAME && SSticker.GetTimeLeft() > 0)
-			new_status += "<br>Starting: <b>[round((SSticker.GetTimeLeft())/10)]</b>"
-		else if(SSticker.current_state == GAME_STATE_SETTING_UP)
-			new_status += "<br>Starting: <b>Now</b>"
-		else if(SSticker.IsRoundInProgress())
-			new_status += "<br>Time: <b>[time2text(STATION_TIME_PASSED(), "hh:mm", NO_TIMEZONE)]</b>"
-			if(SSshuttle?.emergency && SSshuttle?.emergency?.mode != (SHUTTLE_IDLE || SHUTTLE_ENDGAME))
-				new_status += " | Shuttle: <b>[SSshuttle.emergency.getModeStr()] [SSshuttle.emergency.getTimerStr()]</b>"
-		else if(SSticker.current_state == GAME_STATE_FINISHED)
-			new_status += "<br><b>RESTARTING</b>"
-	if(SSmapping.current_map)
-		new_status += "<br>Map: <b>[SSmapping.current_map.map_path == CUSTOM_MAP_PATH ? "Uncharted Territory" : SSmapping.current_map.map_name]</b>"
-	if(SSmap_vote.next_map_config)
-		new_status += "[SSmapping.current_map ? " | " : "<br>"]Next: <b>[SSmap_vote.next_map_config.map_path == CUSTOM_MAP_PATH ? "Uncharted Territory" : SSmap_vote.next_map_config.map_name]</b>"
+//	if(!SSticker || SSticker?.current_state == GAME_STATE_STARTUP)
+//		new_status += "<br><b>STARTING</b>"
+//	else if(SSticker)
+//		if(SSticker.current_state == GAME_STATE_PREGAME && SSticker.GetTimeLeft() > 0)
+//			new_status += "<br>Starting: <b>[round((SSticker.GetTimeLeft())/10)]</b>"
+//		else if(SSticker.current_state == GAME_STATE_SETTING_UP)
+//			new_status += "<br>Starting: <b>Now</b>"
+//		else if(SSticker.IsRoundInProgress())
+//			new_status += "<br>Time: <b>[time2text(STATION_TIME_PASSED(), "hh:mm", NO_TIMEZONE)]</b>"
+//			if(SSshuttle?.emergency && SSshuttle?.emergency?.mode != (SHUTTLE_IDLE || SHUTTLE_ENDGAME))
+//				new_status += " | Shuttle: <b>[SSshuttle.emergency.getModeStr()] [SSshuttle.emergency.getTimerStr()]</b>"
+//		else if(SSticker.current_state == GAME_STATE_FINISHED)
+//			new_status += "<br><b>RESTARTING</b>"
+//	if(SSmapping.current_map)
+//		new_status += "<br>Map: <b>[SSmapping.current_map.map_path == CUSTOM_MAP_PATH ? "Uncharted Territory" : SSmapping.current_map.map_name]</b>"
+//	if(SSmap_vote.next_map_config)
+//		new_status += "[SSmapping.current_map ? " | " : "<br>"]Next: <b>[SSmap_vote.next_map_config.map_path == CUSTOM_MAP_PATH ? "Uncharted Territory" : SSmap_vote.next_map_config.map_name]</b>"
 
 	status = new_status
 
