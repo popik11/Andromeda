@@ -1,6 +1,6 @@
 /// Head Slot Items (Deletes overrided items)
 /datum/loadout_category/head
-	category_name = "Head"
+	category_name = "Голова"
 	category_ui_icon = FA_ICON_HAT_COWBOY
 	type_to_generate = /datum/loadout_item/head
 	tab_order = 1
@@ -11,7 +11,7 @@
 /datum/loadout_item/head/insert_path_into_outfit(datum/outfit/outfit, mob/living/carbon/human/equipper, visuals_only = FALSE)
 	if(equipper.dna?.species?.outfit_important_for_life)
 		if(!visuals_only)
-			to_chat(equipper, "Your loadout helmet was not equipped directly due to your species outfit.")
+			to_chat(equipper, "Ваш головной убор не был экипирован напрямую из-за особенностей экипировки вашего вида.")
 			LAZYADD(outfit.backpack_contents, item_path)
 	else
 		outfit.head = item_path
@@ -56,9 +56,9 @@
 	name = "Cap (Purple)"
 	item_path = /obj/item/clothing/head/soft/purple
 
-/datum/loadout_item/head/rainbow_cap
-	name = "Cap (Rainbow)"
-	item_path = /obj/item/clothing/head/soft/rainbow
+//datum/loadout_item/head/rainbow_cap
+//	name = "Cap (Rainbow)"
+//	item_path = /obj/item/clothing/head/soft/rainbow
 
 /datum/loadout_item/head/red_cap
 	name = "Cap (Red)"

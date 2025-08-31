@@ -74,7 +74,7 @@ function JobEntry(props: JobEntryProps) {
         (job.prioritized ? (
           <>
             <p style={{ marginTop: '0px' }}>
-              <b>The HoP wants more people in this job!</b>
+              <b>Глава Персонала хочет больше людей на этой должности!</b>
             </p>
             {job.description}
           </>
@@ -139,8 +139,8 @@ function DepartmentEntry(props: DepartmentEntryProps) {
               }}
             >
               {department.open_slots +
-                (department.open_slots === 1 ? ' slot' : ' slots') +
-                ' available'}
+                (department.open_slots === 1 ? ' место' : ' мест') +
+                ' доступно'}
             </span>
           </>
         }
@@ -198,9 +198,9 @@ export function JobSelection(props) {
           buttons={
             <Button
               onClick={() => act('select_job', { job: 'Random' })}
-              tooltip="Roll target random job. You can re-roll or cancel your random job if you don't like it."
+              tooltip="Выбрать случайную должность. Вы можете перебросить или отменить свою случайную должность, если она вам не нравится."
             >
-              Random Job!
+              Рандом!
             </Button>
           }
           fill

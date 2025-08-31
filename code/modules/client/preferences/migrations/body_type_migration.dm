@@ -5,4 +5,4 @@
 /datum/preferences/proc/migrate_body_types(list/save_data)
 	var/current_gender = save_data["gender"]
 	if (current_gender == MALE || current_gender == FEMALE)
-		save_data["body_type"] = "Use gender"
+		save_data["body_type"] = "Использовать пол"

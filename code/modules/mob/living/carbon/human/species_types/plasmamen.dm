@@ -83,31 +83,31 @@
 	)
 
 /datum/species/plasmaman/get_physical_attributes()
-	return "Plasmamen literally breathe and live plasma. They spontaneously combust on contact with oxygen, and besides all the quirks that go with that, \
-		they're very vulnerable to all kinds of physical damage due to their brittle structure."
+	return "Плазмалюди буквально дышат и живут плазмой. Они самовоспламеняются при контакте с кислородом, и помимо всех связанных с этим особенностей, \
+		они очень уязвимы ко всем видам физического урона из-за своей хрупкой структуры."
 
 /datum/species/plasmaman/get_species_description()
-	return "Found on the Icemoon of Freyja, plasmamen consist of colonial \
-		fungal organisms which together form a sentient being. In human space, \
-		they're usually attached to skeletons to afford a human touch."
+	return "Обнаруженные на ледяной луне Фрейя, плазмалюди состоят из колониальных \
+		грибковых организмов, которые вместе образуют разумное существо. В человеческом пространстве \
+		они обычно прикреплены к скелетам, чтобы придать человеческий облик."
 
 /datum/species/plasmaman/get_species_lore()
 	return list(
-		"A confusing species, plasmamen are truly \"a fungus among us\". \
-		What appears to be a singular being is actually a colony of millions of organisms \
-		surrounding a found (or provided) skeletal structure.",
+		"Запутанный вид, плазмалюди действительно \"грибы среди нас\". \
+		То, что кажется единым существом, на самом деле является колонией миллионов организмов, \
+		окружающих найденную (или предоставленную) скелетную структуру.",
 
-		"Originally discovered by NT when a researcher \
-		fell into an open tank of liquid plasma, the previously unnoticed fungal colony overtook the body creating \
-		the first \"true\" plasmaman. The process has since been streamlined via generous donations of convict corpses and plasmamen \
-		have been deployed en masse throughout NT to bolster the workforce.",
+		"Изначально обнаружены Нанотрейзен, когда исследователь \
+		упал в открытый резервуар с жидкой плазмой, ранее незамеченная грибковая колония захватила тело, создав \
+		первого \"настоящего\" плазмачеловека. С тех пор процесс был упрощён за счёт щедрых пожертвований трупов заключённых, и плазмалюди \
+		были массово размещены по всей NT для усиления рабочей силы.",
 
-		"New to the galactic stage, plasmamen are a blank slate. \
-		Their appearance, generally regarded as \"ghoulish\", inspires a lot of apprehension in their crewmates. \
-		It might be the whole \"flammable purple skeleton\" thing.",
+		"Новые на галактической сцене, плазмалюди - чистый лист. \
+		Их внешность, бычно считающийся \"жутковатой\", вызывает много опасений у сослуживцев. \
+		Возможно, дело в целом в \"воспламеняющемся фиолетовом скелете\".",
 
-		"The colonids that make up plasmamen require the plasma-rich atmosphere they evolved in. \
-		Their psuedo-nervous system runs with externalized electrical impulses that immediately ignite their plasma-based bodies when oxygen is present.",
+		"Колониды, из которых состоят плазмалюди, требуют богатую плазмой атмосферу, в которой они эволюционировали. \
+		Их псевдо-нервная система работает с экстернализированными электрическими импульсами, которые немедленно воспламеняют их плазменные тела при наличии кислорода.",
 	)
 
 /datum/species/plasmaman/create_pref_unique_perks()
@@ -117,40 +117,40 @@
 		list(
 			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
 			SPECIES_PERK_ICON = "user-shield",
-			SPECIES_PERK_NAME = "Protected",
-			SPECIES_PERK_DESC = "Plasmamen are immune to radiation, poisons, and most diseases.",
+			SPECIES_PERK_NAME = "Защищённость",
+			SPECIES_PERK_DESC = "Плазмалюди иммунны к радиации, ядам и большинству болезней.",
 		),
 		list(
 			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
 			SPECIES_PERK_ICON = "bone",
-			SPECIES_PERK_NAME = "Wound Resistance",
-			SPECIES_PERK_DESC = "Plasmamen have higher tolerance for damage that would wound others.",
+			SPECIES_PERK_NAME = "Устойчивость к Ранам",
+			SPECIES_PERK_DESC = "Плазмалюди имеют более высокую переносимость урона, который ранил бы других.",
 		),
 		list(
 			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
 			SPECIES_PERK_ICON = "wind",
-			SPECIES_PERK_NAME = "Plasma Healing",
-			SPECIES_PERK_DESC = "Plasmamen can heal wounds by consuming plasma.",
+			SPECIES_PERK_NAME = "Плазменное Исцеление",
+			SPECIES_PERK_DESC = "Плазмалюди могут залечивать раны, потребляя плазму.",
 		),
 		list(
 			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
 			SPECIES_PERK_ICON = "hard-hat",
-			SPECIES_PERK_NAME = "Protective Helmet",
-			SPECIES_PERK_DESC = "Plasmamen's helmets provide them shielding from the flashes of welding, as well as an inbuilt flashlight.",
+			SPECIES_PERK_NAME = "Защитный Шлем",
+			SPECIES_PERK_DESC = "Шлемы плазмалюдей обеспечивают им защиту от вспышек сварки, а также встроенный фонарик.",
 		),
 		list(
 			SPECIES_PERK_TYPE = SPECIES_NEGATIVE_PERK,
 			SPECIES_PERK_ICON = "fire",
-			SPECIES_PERK_NAME = "Living Torch",
-			SPECIES_PERK_DESC = "Plasmamen instantly ignite when their body makes contact with oxygen.",
+			SPECIES_PERK_NAME = "Живой Факел",
+			SPECIES_PERK_DESC = "Плазмалюди мгновенно воспламеняются, когда их тело контактирует с кислородом.",
 		),
 		list(
 			SPECIES_PERK_TYPE = SPECIES_NEGATIVE_PERK,
 			SPECIES_PERK_ICON = "briefcase-medical",
-			SPECIES_PERK_NAME = "Complex Biology",
-			SPECIES_PERK_DESC = "Plasmamen take specialized medical knowledge to be \
-				treated. Do not expect speedy revival, if you are lucky enough to get \
-				one at all.",
+			SPECIES_PERK_NAME = "Сложная Биология",
+			SPECIES_PERK_DESC = "Плазмалюди требуют специализированных медицинских знаний для \
+				лечения. Не ожидайте быстрого оживления, если вам вообще повезёт \
+				получить его.",
 		),
 	)
 

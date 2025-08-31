@@ -2,6 +2,6 @@ import type { FeatureChoiced } from '../base';
 import { FeatureDropdownInput } from '../dropdowns';
 
 export const silicon_gender: FeatureChoiced = {
-  name: 'Gender (Silicon)',
+  name: 'Пол (Синтетик)',
   component: FeatureDropdownInput,
 };

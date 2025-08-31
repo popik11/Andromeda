@@ -175,7 +175,7 @@ export function LoadoutTabDisplay(props: TabProps) {
   if (!category) {
     return (
       <NoticeBox>
-        Erroneous category detected! This is a bug, please report it.
+        Обнаружена ошибочная категория! Это ошибка, пожалуйста, сообщите о ней.
       </NoticeBox>
     );
   }
@@ -202,7 +202,7 @@ export function SearchDisplay(props: SearchProps) {
     .sort((a, b) => (a.name > b.name ? 1 : -1));
 
   if (validLoadoutItems.length === 0) {
-    return <NoticeBox>No items found!</NoticeBox>;
+    return <NoticeBox>Ничего не найдено!</NoticeBox>;
   }
 
   return <ItemListDisplay items={validLoadoutItems} />;

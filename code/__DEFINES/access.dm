@@ -413,15 +413,15 @@
 )
 
 /// Name for the Global region.
-#define REGION_ALL_GLOBAL "All"
+#define REGION_ALL_GLOBAL "Всё"
 /// Used to seed the accesses_by_region list in SSid_access. A list of every single access in the game.
 #define REGION_ACCESS_ALL_GLOBAL REGION_ACCESS_ALL_STATION + CENTCOM_ACCESS + SYNDICATE_ACCESS + AWAY_ACCESS + CULT_ACCESS
 /// Name for the Station All Access region.
-#define REGION_ALL_STATION "Station"
+#define REGION_ALL_STATION "Станция"
 /// Used to seed the accesses_by_region list in SSid_access. A list of all station accesses.
 #define REGION_ACCESS_ALL_STATION COMMON_ACCESS + COMMAND_ACCESS + PRIVATE_COMMAND_ACCESS + CAPTAIN_ACCESS
 /// Name for the General region.
-#define REGION_GENERAL "General"
+#define REGION_GENERAL "Общее"
 /// Used to seed the accesses_by_region list in SSid_access. A list of general service accesses that are overseen by the HoP.
 #define REGION_ACCESS_GENERAL list( \
 	ACCESS_BAR, \
@@ -436,7 +436,7 @@
 	ACCESS_THEATRE, \
 )
 /// Name for the Security region.
-#define REGION_SECURITY "Security"
+#define REGION_SECURITY "Безопасность"
 /// Used to seed the accesses_by_region list in SSid_access. A list of all security regional accesses that are overseen by the HoS.
 #define REGION_ACCESS_SECURITY list( \
 	ACCESS_ARMORY, \
@@ -450,7 +450,7 @@
 	ACCESS_WEAPONS, \
 )
 /// Name for the Medbay region.
-#define REGION_MEDBAY "Medbay"
+#define REGION_MEDBAY "Медицина"
 /// Used to seed the accesses_by_region list in SSid_access. A list of all medbay regional accesses that are overseen by the CMO.
 #define REGION_ACCESS_MEDBAY list( \
 	ACCESS_CMO, \
@@ -465,7 +465,7 @@
 	ACCESS_VIROLOGY, \
 )
 /// Name for the Research region.
-#define REGION_RESEARCH "Research"
+#define REGION_RESEARCH "Иследование"
 /// Used to seed the accesses_by_region list in SSid_access. A list of all research regional accesses that are overseen by the RD.
 #define REGION_ACCESS_RESEARCH list( \
 	ACCESS_AI_UPLOAD, \
@@ -482,7 +482,7 @@
 	ACCESS_XENOBIOLOGY, \
 )
 /// Name for the Engineering region.
-#define REGION_ENGINEERING "Engineering"
+#define REGION_ENGINEERING "Инженерия"
 /// Used to seed the accesses_by_region list in SSid_access. A list of all engineering regional accesses that are overseen by the CE.
 #define REGION_ACCESS_ENGINEERING list( \
 	ACCESS_ATMOSPHERICS, \
@@ -499,7 +499,7 @@
 	ACCESS_TECH_STORAGE, \
 )
 /// Name for the Supply region.
-#define REGION_SUPPLY "Supply"
+#define REGION_SUPPLY "Снабжение"
 /// Used to seed the accesses_by_region list in SSid_access. A list of all cargo regional accesses that are overseen by the HoP.
 #define REGION_ACCESS_SUPPLY list( \
 	ACCESS_BIT_DEN, \
@@ -513,7 +513,7 @@
 	ACCESS_VAULT, \
 )
 /// Name for the Command region.
-#define REGION_COMMAND "Command"
+#define REGION_COMMAND "Командование"
 /// Used to seed the accesses_by_region list in SSid_access. A list of all command regional accesses that are overseen by the Captain.
 #define REGION_ACCESS_COMMAND list( \
 	ACCESS_AI_UPLOAD, \
@@ -530,7 +530,7 @@
 	ACCESS_VAULT, \
 )
 /// Name for the Centcom region.
-#define REGION_CENTCOM "Central Command"
+#define REGION_CENTCOM "Центральное Командование"
 /// Used to seed the accesses_by_region list in SSid_access. A list of all CENTCOM_ACCESS regional accesses.
 #define REGION_ACCESS_CENTCOM CENTCOM_ACCESS
 

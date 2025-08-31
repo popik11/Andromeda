@@ -468,7 +468,7 @@ export class KeybindingsPage extends Component<any, KeybindingsPageState> {
 
           <Stack.Item align="center">
             <Button.Confirm onClick={() => act('reset_all_keybinds')}>
-              Reset all keybindings
+              Сбросить до базовых
             </Button.Confirm>
           </Stack.Item>
         </Stack>

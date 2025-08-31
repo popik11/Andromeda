@@ -122,32 +122,32 @@
 	return 'sound/mobs/humanoids/lizard/lizard_hiss.ogg'
 
 /datum/species/lizard/get_physical_attributes()
-	return "Lizardpeople can withstand slightly higher temperatures than most species, but they are very vulnerable to the cold \
-		and can't regulate their body-temperature internally, making the vacuum of space extremely deadly to them."
+	return "Унатхи могут выдерживать немного более высокие температуры, чем большинство видов, но они очень уязвимы к холоду \
+		и не могут регулировать температуру тела внутренне, что делает вакуум космоса крайне смертоносным для них."
 
 /datum/species/lizard/get_species_description()
-	return "The militaristic Lizardpeople hail originally from Tizira, but have grown \
-		throughout their centuries in the stars to possess a large spacefaring \
-		empire: though now they must contend with their younger, more \
-		technologically advanced Human neighbours."
+	return "Милитаристские Унатхи изначально происходят с Тизиры, но расширились \
+		за свои столетия среди звёзд, обладая большой космической \
+		империей: хотя теперь они должны соперничать со своими более молодыми, \
+		технологически продвинутыми соседями-людьми."
 
 /datum/species/lizard/get_species_lore()
 	return list(
-		"The face of conspiracy theory was changed forever the day mankind met the lizards.",
+		"Лицо теории заговора изменилось навсегда в тот день, когда человечество встретило ящеров.",
 
-		"Hailing from the arid world of Tizira, lizards were travelling the stars back when mankind was first discovering how neat trains could be. \
-		However, much like the space-fable of the space-tortoise and space-hare, lizards have rejected their kin's motto of \"slow and steady\" \
-		in favor of resting on their laurels and getting completely surpassed by 'bald apes', due in no small part to their lack of access to plasma.",
+		"Происходящие с засушливого мира Тизира, ящеры путешествовали по звёздам ещё тогда, когда человечество впервые открывало, насколько крутыми могут быть поезда. \
+		Однако, подобно космической басне о космической черепахе и космическом зайце, ящеры отвергли девиз своих сородичей \"тише едешь - дальше будешь\" \
+		в пользу почивания на лаврах и полного превосходства над ними 'лысых обезьян', не в последнюю очередь из-за их отсутствия доступа к плазме.",
 
-		"The history between lizards and humans has resulted in many conflicts that lizards ended on the losing side of, \
-		with the finale being an explosive remodeling of their moon. Today's lizard-human relations are seeing the continuance of a record period of peace.",
+		"История между ящерами и людьми привела ко многим конфликтам, в которых ящеры оказывались на проигрывающей стороне, \
+		с финалом в виде взрывного ремоделирования их луны. Сегодняшние отношения между ящерами и людьми переживают продолжение рекордного периода мира.",
 
-		"Lizard culture is inherently militaristic, though the influence the military has on lizard culture \
-		begins to lessen the further colonies lie from their homeworld - \
-		with some distanced colonies finding themselves subsumed by the cultural practices of other species nearby.",
+		"Культура ящеров по своей природе милитаристская, хотя влияние военных на культуру ящеров \
+		начинает ослабевать по мере удаления колоний от их родного мира - \
+		причём некоторые удалённые колонии оказываются поглощены культурными практиками других видов поблизости.",
 
-		"On their homeworld, lizards celebrate their 16th birthday by enrolling in a mandatory 5 year military tour of duty. \
-		Roles range from combat to civil service and everything in between. As the old slogan goes: \"Your place will be found!\"",
+		"На своей родной планете ящеры празднуют своё 16-летие, записываясь на обязательную 5-летнюю военную службу. \
+		Роли варьируются от боевых до гражданских и всего между ними. Как гласит старый лозунг: \"Ваше место будет найдено!\"",
 	)
 
 // Override for the default temperature perks, so we can give our specific "cold blooded" perk.
@@ -157,10 +157,10 @@
 	to_add += list(list(
 		SPECIES_PERK_TYPE = SPECIES_NEUTRAL_PERK,
 		SPECIES_PERK_ICON = "thermometer-empty",
-		SPECIES_PERK_NAME = "Cold-blooded",
-		SPECIES_PERK_DESC = "Lizardpeople have higher tolerance for hot temperatures, but lower \
-			tolerance for cold temperatures. Additionally, they cannot self-regulate their body temperature - \
-			they are as cold or as warm as the environment around them is. Stay warm!",
+		SPECIES_PERK_NAME = "Хладнокровность",
+		SPECIES_PERK_DESC = "Унатхи имеют более высокую переносимость жарких температур, но более низкую \
+			переносимость холодных температур. Кроме того, они не могут самостоятельно регулировать температуру тела - \
+			они такие же холодные или тёплые, как и окружающая их среда. Оставайтесь в тепле!",
 	))
 
 	return to_add
@@ -192,8 +192,8 @@ Lizard subspecies: ASHWALKERS
 	)
 
 /datum/species/lizard/ashwalker/get_physical_attributes()
-	return "Ash Walkers are identical to lizardpeople in almost all aspects. \
-		Unlike them, they're always digitigrade, they can breathe Lavaland's often noxious atmosphere and resist viruses. They are usually illiterate."
+	return "Пеплоходцы идентичны Унатхам почти во всех аспектах. \
+		В отличие от них, они всегда ходят на цыпочках, могут дышать часто ядовитой атмосферой Лаваленда и устойчивы к вирусам. Обычно они неграмотны."
 
 /*
 Lizard subspecies: SILVER SCALED
@@ -221,9 +221,9 @@ Lizard subspecies: SILVER SCALED
 	var/old_mutcolor
 
 /datum/species/lizard/silverscale/get_physical_attributes()
-	return "Silver Scales are to lizardpeople what angels are to humans. \
-		Mostly identical, they are holy, don't breathe, don't get viruses, their hide cannot be pierced, love the taste of wine, \
-		and their tongue allows them to turn into a statue, for some reason."
+	return "Серебряная Чешуя для Унатхов - то же, что ангелы для людей. \
+		В основном идентичны, они святы, не дышат, не подвержены вирусам, их шкуру нельзя пронзить, обожают вкус вина, \
+		и их язык позволяет им превращаться в статую, по какой-то причине."
 
 /datum/species/lizard/silverscale/on_species_gain(mob/living/carbon/human/new_silverscale, datum/species/old_species, pref_load, regenerate_icons)
 	old_mutcolor = new_silverscale.dna.features[FEATURE_MUTANT_COLOR]

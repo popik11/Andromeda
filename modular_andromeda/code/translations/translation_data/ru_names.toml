@@ -26138,3 +26138,12 @@ accusative = "силовой кабель"
 instrumental = "силовым кабелем"
 prepositional = "силовом кабеле"
 gender = "male"
+
+["Human"]
+nominative = "Человек"
+genitive = "Человека"
+dative = "Человеку"
+accusative = "Человека"
+instrumental = "Человеком"
+prepositional = "Человеке"
+gender = "male"

@@ -58,7 +58,7 @@ function CharacterControls(props: CharacterControlsProps) {
           onClick={props.handleRotate}
           fontSize="22px"
           icon="undo"
-          tooltip="Rotate"
+          tooltip="Повернуть"
           tooltipPosition="top"
         />
       </Stack.Item>
@@ -68,7 +68,7 @@ function CharacterControls(props: CharacterControlsProps) {
           onClick={props.handleOpenSpecies}
           fontSize="22px"
           icon="paw"
-          tooltip="Species"
+          tooltip="Вид"
           tooltipPosition="top"
         />
       </Stack.Item>
@@ -88,7 +88,7 @@ function CharacterControls(props: CharacterControlsProps) {
           fontSize="22px"
           icon="trash"
           color="red"
-          tooltip="Delete Character"
+          tooltip="Удалить персонажа"
           tooltipPosition="top"
           disabled={!props.canDeleteCharacter}
         />
@@ -111,7 +111,7 @@ function ChoicedSelection(props: ChoicedSelectionProps) {
   const [searchText, setSearchText] = useState('');
 
   if (!catalog.icons) {
-    return <Box color="red">Provided catalog had no icons!</Box>;
+    return <Box color="red">В предоставленном каталоге не было иконок!</Box>;
   }
 
   return (
@@ -128,7 +128,7 @@ function ChoicedSelection(props: ChoicedSelectionProps) {
         <Stack.Item>
           <Section
             fill
-            title={`Select ${props.name.toLowerCase()}`}
+            title={`Выбрать ${props.name.toLowerCase()}`}
             buttons={
               supplementalFeature && (
                 <FeatureValueInput
@@ -143,7 +143,7 @@ function ChoicedSelection(props: ChoicedSelectionProps) {
             <Input
               autoFocus
               fluid
-              placeholder="Search..."
+              placeholder="Поиск..."
               onChange={setSearchText}
             />
           </Section>
@@ -212,7 +212,7 @@ function GenderButton(props: GenderButtonProps) {
       placement="right"
       content={
         <Stack backgroundColor="white" p={0.3}>
-          {[Gender.Male, Gender.Female, Gender.Other, Gender.Other2].map(
+          {[Gender.Male, Gender.Female].map(
             (gender) => {
               return (
                 <Stack.Item key={gender}>
@@ -237,7 +237,7 @@ function GenderButton(props: GenderButtonProps) {
         <Button
           fontSize="22px"
           icon={GENDERS[props.gender].icon}
-          tooltip="Gender"
+          tooltip="Пол"
           tooltipPosition="top"
         />
       </div>

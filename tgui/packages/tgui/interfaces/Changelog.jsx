@@ -184,26 +184,26 @@ export class Changelog extends Component {
 
     const header = (
       <Section>
-        <h1>Traditional Games Space Station 13</h1>
+        <h1>Космическая Станция 13</h1>
         <p>
-          <b>Thanks to: </b>
-          Baystation 12, /vg/station, NTstation, CDK Station devs,
-          FacepunchStation, GoonStation devs, the original Space Station 13
-          developers, Invisty for the title image and the countless others who
-          have contributed to the game, issue tracker or wiki over the years.
+          <b>Благодарности: </b>
+          разработчикам Baystation 12, /vg/station, NTstation, CDK Station,
+          FacepunchStation, GoonStation, оригинальным разработчикам Space Station 13,
+          Invisty за изображение заголовка и бесчисленным другим, кто
+          внёс вклад в игру, трекер задач или вики на протяжении многих лет.
         </p>
         <p>
-          {'Current organization members can be found '}
-          <a href="https://github.com/orgs/tgstation/people">here</a>
-          {', recent GitHub contributors can be found '}
+          {'Текущих членов организации можно найти '}
+          <a href="https://github.com/orgs/tgstation/people">здесь</a>
+          {', недавних контрибьюторов GitHub можно найти '}
           <a href="https://github.com/tgstation/tgstation/pulse/monthly">
-            here
+            здесь
           </a>
           .
         </p>
         <p>
-          {'You can also join our discord '}
-          <a href="https://tgstation13.org/phpBB/viewforum.php?f=60">here</a>.
+          {'Вы также можете присоединиться к нашему дискорд серверу Андромеды-13 '}
+          <a href="https://discord.gg/NxTZeUPtRf">здесь</a>.
         </p>
         {dateDropdown}
       </Section>
@@ -347,7 +347,7 @@ export class Changelog extends Component {
         ));
 
     return (
-      <Window title="Changelog" width={675} height={650}>
+      <Window title="Журнал изменений" width={675} height={650}>
         <Window.Content scrollable>
           {header}
           {changes}

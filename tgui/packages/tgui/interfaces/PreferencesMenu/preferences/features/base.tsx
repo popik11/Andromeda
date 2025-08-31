@@ -90,7 +90,7 @@ export function FeatureColorInput(props: FeatureValueProps<string>) {
           />
         </Stack.Item>
 
-        {!shrink && <Stack.Item>Change</Stack.Item>}
+        {!shrink && <Stack.Item>Изменить</Stack.Item>}
       </Stack>
     </Button>
   );

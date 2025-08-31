@@ -36,7 +36,7 @@ export function LoadoutPage(props) {
   );
 
   if (!serverData) {
-    return <NoticeBox>Loading...</NoticeBox>;
+    return <NoticeBox>Загрузка...</NoticeBox>;
   }
 
   return (
@@ -55,7 +55,7 @@ export function LoadoutPage(props) {
             <Input
               width="200px"
               onChange={setSearchLoadout}
-              placeholder="Search for an item..."
+              placeholder="Поиск предмета..."
               value={searchLoadout}
             />
           }
@@ -136,7 +136,7 @@ function LoadoutTabs(props: LoadoutTabsProps) {
       <Stack.Item grow>
         {searching || activeCategory?.contents ? (
           <Section
-            title={searching ? 'Search results' : 'Catalog'}
+            title={searching ? 'Результаты поиска' : 'Каталог'}
             fill
             scrollable
             buttons={
@@ -162,7 +162,7 @@ function LoadoutTabs(props: LoadoutTabsProps) {
           </Section>
         ) : (
           <Section fill>
-            <Box>No contents for selected tab.</Box>
+            <Box>Нет содержимого для выбранной вкладки.</Box>
           </Section>
         )}
       </Stack.Item>
@@ -248,7 +248,7 @@ function LoadoutSelectedSection(props: LoadoutSelectedSectionProps) {
 
   return (
     <Section
-      title="Selected Items"
+      title="Выбранное"
       scrollable
       fill
       buttons={
@@ -257,10 +257,10 @@ function LoadoutSelectedSection(props: LoadoutSelectedSectionProps) {
           color="red"
           align="center"
           disabled={!loadout_list || Object.keys(loadout_list).length === 0}
-          tooltip="Clears ALL selected items from all categories."
+          tooltip="Очищает ВСЕ выбранные предметы из всех категорий."
           onClick={() => act('clear_all_items')}
         >
-          Clear All
+          Очистить ВСЁ
         </Button.Confirm>
       }
     >
@@ -286,14 +286,14 @@ function LoadoutPreviewSection() {
   return (
     <Section
       fill
-      title="Preview"
+      title="Осмотреть"
       buttons={
         <Button.Checkbox
           align="center"
           checked={data.job_clothes}
           onClick={() => act('toggle_job_clothes')}
         >
-          Job Clothes
+          Рабочая Одежда
         </Button.Checkbox>
       }
     >

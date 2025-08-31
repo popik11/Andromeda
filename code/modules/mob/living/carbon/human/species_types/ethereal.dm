@@ -242,20 +242,20 @@
 	return 'sound/mobs/humanoids/ethereal/ethereal_hiss.ogg'
 
 /datum/species/ethereal/get_physical_attributes()
-	return "Ethereals process electricity as their power supply, not food, and are somewhat resistant to it.\
-		They do so via their crystal core, their equivalent of a human heart, which will also encase them in a reviving crystal if they die.\
-		However, their skin is very thin and easy to pierce with brute weaponry."
+	return "Эфиреалы используют электричество как источник энергии, а не пищу, и несколько устойчивы к нему.\
+		Они делают это через своё кристальное ядро, эквивалент человеческого сердца, которое также заключит их в оживляющий кристалл в случае смерти.\
+		Однако их кожа очень тонкая и её легко пронзить оружием, наносящим физический урон."
 
 /datum/species/ethereal/get_species_description()
-	return "Coming from the planet of Sprout, the theocratic ethereals are \
-		separated socially by caste, and espouse a dogma of aiding the weak and \
-		downtrodden."
+	return "Происходящие с планеты Росток, теократические эфиреалы \
+		разделены социально по кастам и проповедуют догму помощи слабым и \
+		угнетённым."
 
 /datum/species/ethereal/get_species_lore()
 	return list(
-		"Ethereals are a species native to the planet Sprout. \
-		When they were originally discovered, they were at a medieval level of technological progression, \
-		but due to their natural acclimation with electricity, they felt easy among the large Nanotrasen installations.",
+		"Эфиреалы - вид, родом с планеты Росток. \
+		Когда их впервые обнаружили, они находились на средневековом уровне технологического развития, \
+		но благодаря своей естественной склонности к электричеству, они чувствовали себя комфортно среди крупных установок Нанотрейзен.",
 	)
 
 /datum/species/ethereal/create_pref_unique_perks()
@@ -265,33 +265,33 @@
 		list(
 			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
 			SPECIES_PERK_ICON = "bolt",
-			SPECIES_PERK_NAME = "Shockingly Tasty",
-			SPECIES_PERK_DESC = "Ethereals can feed on electricity from APCs, and do not otherwise need to eat.",
+			SPECIES_PERK_NAME = "Шокирующе Вкусно",
+			SPECIES_PERK_DESC = "Эфиреалы могут питаться электричеством из ЛКП и не нуждаются в другой пище.",
 		),
 		list(
 			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
 			SPECIES_PERK_ICON = "lightbulb",
-			SPECIES_PERK_NAME = "Disco Ball",
-			SPECIES_PERK_DESC = "Ethereals passively generate their own light.",
+			SPECIES_PERK_NAME = "Диско-шар",
+			SPECIES_PERK_DESC = "Эфиреалы пассивно генерируют собственный свет.",
 		),
 		list(
 			SPECIES_PERK_TYPE = SPECIES_NEUTRAL_PERK,
 			SPECIES_PERK_ICON = "gem",
-			SPECIES_PERK_NAME = "Crystal Core",
-			SPECIES_PERK_DESC = "The Ethereal's heart will encase them in crystal should they die, returning them to life after a time - \
-				at the cost of a permanent brain trauma.",
+			SPECIES_PERK_NAME = "Кристальное Ядро",
+			SPECIES_PERK_DESC = "Сердце эфиреала заключит их в кристалл в случае смерти, возвращая к жизни через некоторое время - \
+				ценой постоянной черепно-мозговой травмы.",
 		),
 		list(
 			SPECIES_PERK_TYPE = SPECIES_NEUTRAL_PERK,
 			SPECIES_PERK_ICON = "fist-raised",
-			SPECIES_PERK_NAME = "Elemental Attacker",
-			SPECIES_PERK_DESC = "Ethereals deal burn damage with their punches instead of brute.",
+			SPECIES_PERK_NAME = "Стихийный Атакующий",
+			SPECIES_PERK_DESC = "Эфиреалы наносят урон ожогами вместо физического своими ударами.",
 		),
 		list(
 			SPECIES_PERK_TYPE = SPECIES_NEGATIVE_PERK,
 			SPECIES_PERK_ICON = "biohazard",
-			SPECIES_PERK_NAME = "Starving Artist",
-			SPECIES_PERK_DESC = "Ethereals take toxin damage while starving.",
+			SPECIES_PERK_NAME = "Голодающий Художник",
+			SPECIES_PERK_DESC = "Эфиреалы получают урон токсинами во время голодания.",
 		),
 	)
 
@@ -322,8 +322,8 @@
 	)
 
 /datum/species/ethereal/lustrous/get_physical_attributes()
-	return "Lustrous are what remains of an Ethereal after freebasing esoteric drugs. \
-		They are pressure immune, virus immune, can see bluespace tears in reality, and have a really weird scream. They remain vulnerable to physical damage."
+	return "Блестящие - это то, что остаётся от Эфиреала после свободного употребления эзотерических наркотиков. \
+		Они неуязвимы к давлению, иммунны к вирусам, могут видеть разрывы блюспейса в реальности и имеют очень странный крик. Они остаются уязвимыми к физическому урону."
 
 /datum/species/ethereal/lustrous/get_scream_sound(mob/living/carbon/human/ethereal)
 	return pick(

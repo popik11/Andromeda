@@ -31,12 +31,12 @@ GLOBAL_DATUM_INIT(latejoin_menu, /datum/latejoin_menu, new)
 			user.jobs_menu_mounted = FALSE
 			addtimer(CALLBACK(src, PROC_REF(scream_at_player), user), 5 SECONDS)
 
-		ui = new(user, src, "JobSelection", "Latejoin Menu")
+		ui = new(user, src, "JobSelection", "Меню позднего присоединения")
 		ui.open()
 
 /datum/latejoin_menu/proc/scream_at_player(mob/dead/new_player/player)
 	if(!player.jobs_menu_mounted)
-		to_chat(player, span_notice("If the late join menu isn't showing, hold CTRL while clicking the join button!"))
+		to_chat(player, span_notice("Если меню позднего присоединения не отображается, удерживайте клавишу CTRL при нажатии кнопки присоединения!"))
 
 /datum/latejoin_menu/ui_data(mob/user)
 	var/mob/dead/new_player/owner = user

@@ -97,11 +97,11 @@ function AntagSelection(props: AntagSelectionProps) {
       buttons={
         <>
           <Button color="good" onClick={() => enableAntags(antagonistKeys)}>
-            Enable All
+            Включить ВСЕХ
           </Button>
 
           <Button color="bad" onClick={() => disableAntags(antagonistKeys)}>
-            Disable All
+            Отключить ВСЕХ
           </Button>
         </>
       }
@@ -143,7 +143,7 @@ function AntagSelection(props: AntagSelectionProps) {
                   <Tooltip
                     content={
                       isBanned
-                        ? `You are banned from ${antagonist.name}.`
+                        ? `У вас блокировка (Бан) ${antagonist.name}.`
                         : antagonist.description.map((text, index) => {
                             return (
                               <div key={antagonist.key + index}>
@@ -184,7 +184,7 @@ function AntagSelection(props: AntagSelectionProps) {
 
                       {daysLeft > 0 && (
                         <Box className="antagonist-days-left">
-                          <b>{daysLeft}</b> days left
+                          <b>{daysLeft}</b> осталось дней
                         </Box>
                       )}
                     </Box>
@@ -203,17 +203,17 @@ export function AntagsPage() {
   return (
     <Box className="PreferencesMenu__Antags">
       <AntagSelection
-        name="Roundstart"
+        name="Начало раунда"
         antagonists={antagsByCategory.get(Category.Roundstart)!}
       />
 
       <AntagSelection
-        name="Midround"
+        name="Середина раунда"
         antagonists={antagsByCategory.get(Category.Midround)!}
       />
 
       <AntagSelection
-        name="Latejoin"
+        name="Позднее присоединение"
         antagonists={antagsByCategory.get(Category.Latejoin)!}
       />
     </Box>

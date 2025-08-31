@@ -104,27 +104,27 @@
 	return 'sound/mobs/humanoids/human/sniff/male_sniff.ogg'
 
 /datum/species/moth/get_physical_attributes()
-	return "Moths have large and fluffy wings, which help them navigate the station if gravity is offline by pushing the air around them. \
-		Due to that, it isn't of much use out in space. Their eyes are very sensitive."
+	return "Нианы имеют большие и пушистые крылья, которые помогают им ориентироваться на станции, если гравитация отключена, путем отталкивания воздуха вокруг себя. \
+		Из-за этого они не очень полезны в открытом космосе. Их глаза очень чувствительны."
 
 /datum/species/moth/get_species_description()
-	return "Hailing from a planet that was lost long ago, the moths travel \
-		the galaxy as a nomadic people aboard a colossal fleet of ships, seeking a new homeland."
+	return "Происходящие с планеты, потерянной давным-давно, Нианы путешествуют \
+		по галактике как кочевой народ на борту колоссального флота кораблей, в поисках новой родины."
 
 /datum/species/moth/get_species_lore()
 	return list(
-		"Their homeworld lost to the ages, the moths live aboard the Grand Nomad Fleet. \
-		Made up of what could be found, bartered, repaired, or stolen the armada is a colossal patchwork \
-		built on a history of politely flagging travelers down and taking their things. Occasionally a moth \
-		will decide to leave the fleet, usually to strike out for fortunes to send back home.",
+		"Их родной мир утерян в веках, Нианы живут на борту Великого Кочевого Флота. \
+		Состоящий из того, что можно было найти, выменять, починить или украсть, армада представляет собой колоссальное лоскутное одеяло, \
+		построенное на истории вежливого останавливания путешественников и забирания их вещей. Иногда мотылёк \
+		решает покинуть флот, обычно чтобы отправиться на поиски состояний, чтобы отправить домой.",
 
-		"Nomadic life produces a tight-knit culture, with moths valuing their friends, family, and vessels highly. \
-		Moths are gregarious by nature and do best in communal spaces. This has served them well on the galactic stage, \
-		maintaining a friendly and personable reputation even in the face of hostile encounters. \
-		It seems that the galaxy has come to accept these former pirates.",
+		"Кочевая жизнь порождает тесно сплоченную культуру, где Нианы высоко ценят своих друзей, семью и корабли. \
+		Нианы по натуре общительны и лучше всего чувствуют себя в коммунальных пространствах. Это хорошо послужило им на галактической сцене, \
+		поддерживая дружелюбную и приятную репутацию даже перед лицом враждебных встреч. \
+		Кажется, галактика приняла этих бывших пиратов.",
 
-		"Surprisingly, living together in a giant fleet hasn't flattened variance in dialect and culture. \
-		These differences are welcomed and encouraged within the fleet for the variety that they bring.",
+		"Удивительно, но жизнь вместе в гигантском флоте не унифицировала различия в диалектах и культуре. \
+		Эти различия приветствуются и поощряются в составе флота за разнообразие, которое они приносят.",
 	)
 
 /datum/species/moth/create_pref_unique_perks()
@@ -134,28 +134,28 @@
 		list(
 			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
 			SPECIES_PERK_ICON = "feather-alt",
-			SPECIES_PERK_NAME = "Precious Wings",
-			SPECIES_PERK_DESC = "Moths can fly in pressurized, zero-g environments and safely land short falls using their wings.",
+			SPECIES_PERK_NAME = "Драгоценные Крылья",
+			SPECIES_PERK_DESC = "Нианы могут летать в условиях повышенного давления, невесомости и безопасно приземляться при коротких падениях, используя свои крылья.",
 		),
 		list(
 			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
 			SPECIES_PERK_ICON = "tshirt",
-			SPECIES_PERK_NAME = "Meal Plan",
-			SPECIES_PERK_DESC = "Moths can eat clothes for temporary nourishment.",
+			SPECIES_PERK_NAME = "План Питания",
+			SPECIES_PERK_DESC = "Нианы могут есть одежду для временного насыщения.",
 		),
 		list(
 			SPECIES_PERK_TYPE = SPECIES_NEGATIVE_PERK,
 			SPECIES_PERK_ICON = "fire",
-			SPECIES_PERK_NAME = "Ablazed Wings",
-			SPECIES_PERK_DESC = "Moth wings are fragile, and can be easily burnt off.",
+			SPECIES_PERK_NAME = "Опалённые Крылья",
+			SPECIES_PERK_DESC = "Крылья Ниан хрупкие и могут быть легко сожжены.",
 		),
 		list(
 			SPECIES_PERK_TYPE = SPECIES_NEGATIVE_PERK,
 			SPECIES_PERK_ICON = "sun",
-			SPECIES_PERK_NAME = "Bright Lights",
-			SPECIES_PERK_DESC = "Moths need an extra layer of flash protection to protect \
-				themselves, such as against security officers or when welding. Welding \
-				masks will work.",
+			SPECIES_PERK_NAME = "Яркий Свет",
+			SPECIES_PERK_DESC = "Нианам нужен дополнительный слой защиты от вспышек, чтобы защитить \
+				себя, например, от сотрудников службы безопасности или при сварке. Сварочные \
+				маски подойдут.",
 		),
 	)
 

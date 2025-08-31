@@ -2,7 +2,7 @@
 	savefile_key = "feature_ethcolor"
 	savefile_identifier = PREFERENCE_CHARACTER
 	category = PREFERENCE_CATEGORY_FEATURES
-	main_feature_name = "Ethereal color"
+	main_feature_name = "Эфирный цвет"
 	should_generate_icons = TRUE
 
 /datum/preference/choiced/ethereal_color/has_relevant_feature(datum/preferences/preferences)

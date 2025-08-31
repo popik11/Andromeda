@@ -103,16 +103,16 @@
 #define PDA_THEME_LIGHT_MODE "ntos_lightmode"
 #define PDA_THEME_SPOOKY "ntos_spooky"
 
-//Defines for the names of all the themes
+//Определения для названий всех тем
 #define PDA_THEME_NTOS_NAME "NtOS"
-#define PDA_THEME_DARK_MODE_NAME "NtOS Dark Mode"
-#define PDA_THEME_RETRO_NAME "Retro"
-#define PDA_THEME_SYNTH_NAME "Synth"
-#define PDA_THEME_TERMINAL_NAME "Terminal"
-#define SYNDICATE_THEME_NAME "Syndicate"
-#define CAT_THEME_NAME "Cat"
-#define LIGHT_THEME_NAME "NtOS Light Mode"
-#define ELDRITCH_THEME_NAME "Eldritch"
+#define PDA_THEME_DARK_MODE_NAME "NtOS Тёмная Тема"
+#define PDA_THEME_RETRO_NAME "Ретро"
+#define PDA_THEME_SYNTH_NAME "Синт"
+#define PDA_THEME_TERMINAL_NAME "Терминал"
+#define SYNDICATE_THEME_NAME "Синдикат"
+#define CAT_THEME_NAME "Кот"
+#define LIGHT_THEME_NAME "NtOS Светлый Тема"
+#define ELDRITCH_THEME_NAME "Мистический"
 
 ///List of PDA themes that are accessible to everyone by default.
 GLOBAL_LIST_INIT(default_pda_themes, list(

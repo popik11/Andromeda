@@ -232,7 +232,7 @@ export function LoadoutModifyDimmer(props: DimmerProps) {
                 act('close_greyscale_menu');
               }}
             >
-              Done
+              Готово
             </Button>
           </Stack>
         </Stack.Item>
