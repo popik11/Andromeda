@@ -108,7 +108,7 @@
 				SSeconomy.bank_accounts_by_id -= "[account_id]"
 				SSeconomy.bank_accounts_by_job[account_job.type] -= src
 		if(NAMEOF(src, account_balance))
-			add_log_to_history(var_value - old_balance, "Nanotrasen: Действие модератора")
+			add_log_to_history(var_value - old_balance, "Нанотрейзен: Действие модератора")
 
 /**
  * Sets the bank_account to behave as though a CRAB-17 event is happening.
@@ -193,7 +193,7 @@
  * * skippable - if TRUE, this proc may pay out nothing if the account has paydays_to_skip
  * * event - the name of the event that is being processed, used for bank card messages.
  */
-/datum/bank_account/proc/payday(amount_of_paychecks, free = FALSE, skippable = FALSE, event = "Payday")
+/datum/bank_account/proc/payday(amount_of_paychecks, free = FALSE, skippable = FALSE, event = "Зарплата")
 	if(!account_job)
 		return FALSE
 
@@ -216,12 +216,12 @@
 		return TRUE
 	var/datum/bank_account/department_account = SSeconomy.get_dep_account(account_job.paycheck_department)
 	if(isnull(department_account))
-		bank_card_talk("ОШИБКА: [event] прервано, не удалось связаться со счетом.")
+		bank_card_talk("ОШИБКА: [event] прервана, не удалось связаться со счетом.")
 		return FALSE
 	if(!transfer_money(department_account, money_to_transfer))
-		bank_card_talk("ОШИБКА: [event] прервано, недостаточно средств.")
+		bank_card_talk("ОШИБКА: [event] прервана, недостаточно средств.")
 		return FALSE
-	bank_card_talk("[event] обработано, на счету теперь [account_balance] кр.")
+	bank_card_talk("[event] получена, на счету теперь [account_balance] кр.")
 	return TRUE
 
 /**
