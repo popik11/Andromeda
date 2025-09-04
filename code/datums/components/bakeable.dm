@@ -86,15 +86,16 @@
 	var/atom/original_object = parent
 	var/obj/item/plate/oven_tray/used_tray = original_object.loc
 	var/atom/baked_result = new bake_result(used_tray)
-	if(baked_result.reagents && positive_result) //Освобождаем место и переносим реагенты, если они есть, и результат не является испорченной едой или другим плохим результатом выпечки
+	if(positive_result && istype(original_object, /obj/item/food) && istype(baked_result, /obj/item/food))
+		var/obj/item/food/original_food = original_object
+		var/obj/item/food/baked_food = baked_result
+		LAZYADD(baked_food.intrinsic_food_materials, original_food.intrinsic_food_materials)
+	//make space and tranfer reagents if it has any, also let any bad result handle removing or converting the transferred reagents on its own terms
+	if(baked_result.reagents && original_object.reagents)
 		baked_result.reagents.clear_reagents()
 		original_object.reagents.trans_to(baked_result, original_object.reagents.total_volume)
 		if(added_reagents) //Добавляем новые реагенты, если нужно
 			baked_result.reagents.add_reagent_list(added_reagents)
-		if(istype(original_object, /obj/item/food) && istype(baked_result, /obj/item/food))
-			var/obj/item/food/original_food = original_object
-			var/obj/item/food/baked_food = baked_result
-			LAZYADD(baked_food.intrinsic_food_materials, original_food.intrinsic_food_materials)
 
 	if(who_baked_us)
 		ADD_TRAIT(baked_result, TRAIT_FOOD_CHEF_MADE, who_baked_us)
