@@ -47,7 +47,7 @@
 /datum/shuttle_event/simple_spawner/player_controlled/human/greytide/interns/activate()
 	..()
 
-	minor_announce("We're sending you our bravest interns, please let them in when they arrive.",
+	minor_announce("Отправляем к вам наших самых храбрых операторов, пожалуйста, впустите их, когда они прибудут..",
 		title = "Emergency Shuttle", alert = TRUE)
 
 /datum/shuttle_event/simple_spawner/player_controlled/human/greytide/interns/armed
