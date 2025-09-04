@@ -24,18 +24,18 @@
 	var/datum/map_template/shuttle/new_shuttle
 
 /datum/round_event/shuttle_catastrophe/announce(fake)
-	var/cause = pick("was attacked by [syndicate_name()] Operatives", "mysteriously teleported away", "had its refuelling crew mutiny",
-		"was found with its engines stolen", "\[REDACTED\]", "flew into the sunset, and melted", "learned something from a very wise cow, and left on its own",
-		"had cloning devices on it", "had its shuttle inspector put the shuttle in reverse instead of park, causing the shuttle to crash into the hangar")
-	var/message = "Your emergency shuttle [cause]. "
+	var/cause = pick("был атакован оперативниками [syndicate_name()]", "таинственным образом телепортировался", "столкнулся с мятежом дозаправочной команды",
+		"был обнаружен с украденными двигателями", "\[УДАЛЕНО\]", "улетел в закат и растаял", "узнал что-то от очень мудрой коровы и ушёл самостоятельно",
+		"имел на борту устройства клонирования", "имел инспектора шаттла, который включил заднюю передачу вместо парковки, что привело к крушению шаттла в ангаре")
+	var/message = "Ваш аварийный шаттл [cause]. "
 
 	if(SSshuttle.shuttle_insurance)
-		message += "Luckily, your shuttle insurance has covered the costs of repair!"
+		message += "К счастью, ваша страховка шаттла покрыла расходы на ремонт!"
 		if(SSeconomy.get_dep_account(ACCOUNT_CAR))
-			message += " You have been awarded a bonus from [command_name()] for smart spending."
+			message += " Вам была начислена премия от [command_name()] за разумные траты."
 	else
-		message += "Your replacement shuttle will be the [new_shuttle.name] until further notice."
-	priority_announce(message, "[command_name()] Spacecraft Engineering")
+		message += "Вашим заменяющим шаттлом до дальнейшего уведомления будет [new_shuttle.name]."
+	priority_announce(message, "Космическое машиностроение [command_name()]")
 
 /datum/round_event/shuttle_catastrophe/setup()
 	if(SSshuttle.shuttle_insurance || !isnull(new_shuttle)) //If an admin has overridden it don't re-roll it

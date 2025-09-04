@@ -59,17 +59,17 @@
 		nation.add_member(separatist_mind)
 		possible_separatist.log_message("was made into a separatist, long live [nation.name]!", LOG_ATTACK, color="red")
 
-	//if we didn't convert anyone we just kill the team datum, otherwise cleanup and make official
+	//если мы никого не обратили, мы просто удаляем датум нации, иначе проводим очистку и делаем её официальной
 	if(!citizens.len)
 		qdel(nation)
 		if(message_admins)
-			message_admins("The nation of [nation.name] did not have enough potential members to be created.")
+			message_admins("Нация [nation.name] не имела достаточного количества потенциальных членов для создания.")
 		return
 	var/jobs_english_list = english_list(jobs_to_revolt)
 	if(message_admins)
-		message_admins("The nation of [nation.name] has been formed. Affected jobs are [jobs_english_list]. Any new crewmembers with these jobs will join the secession.")
+		message_admins("Нация [nation.name] была сформирована. Затронутые профессии: [jobs_english_list]. Любые новые члены экипажа с этими профессиями присоединятся к сецессии.")
 	if(announcement)
-		var/announce_text = "The new independent state of [nation.name] has formed from the ashes of the [department.department_name] department!"
-		if(istype(department, /datum/job_department/assistant)) //the text didn't really work otherwise
-			announce_text = "The assistants of the station have risen to form the new independent state of [nation.name]!"
-		priority_announce(announce_text, "Secession from [GLOB.station_name]",  has_important_message = TRUE)
+		var/announce_text = "Новое независимое государство [nation.name] сформировалось из пепла департамента [department.department_name]!"
+		if(istype(department, /datum/job_department/assistant)) //текст просто не работал иначе
+			announce_text = "Ассистенты станции поднялись, чтобы сформировать новое независимое государство [nation.name]!"
+		priority_announce(announce_text, "Сецессия от [GLOB.station_name]",  has_important_message = TRUE)

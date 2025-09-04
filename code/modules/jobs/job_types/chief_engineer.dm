@@ -43,7 +43,7 @@
 		/obj/item/stack/sheet/mineral/gold = 15,
 		/obj/effect/spawner/random/engineering/tool_advanced = 3
 	)
-	rpg_title = "Head Crystallomancer"
+	rpg_title = "Главный Кристалломант"
 	job_flags = STATION_JOB_FLAGS | HEAD_OF_STAFF_JOB_FLAGS
 
 	human_authority = JOB_AUTHORITY_HUMANS_ONLY
@@ -56,11 +56,11 @@
 	spawned.add_mob_memory(/datum/memory/key/message_server_key, decrypt_key = GLOB.preset_station_message_server_key)
 
 /datum/job/chief_engineer/get_captaincy_announcement(mob/living/captain)
-	return "Due to staffing shortages, newly promoted Acting Captain [captain.real_name] on deck!"
+	return "Из-за крайней нехватки персонала был назначенный временно исполняющий обязанности Капитана, [captain.real_name] прибывает на станцию!"
 
 
 /datum/outfit/job/ce
-	name = "Chief Engineer"
+	name = "Старший Инженер"
 	jobtype = /datum/job/chief_engineer
 
 	id = /obj/item/card/id/advanced/silver
@@ -88,7 +88,7 @@
 	pda_slot = ITEM_SLOT_LPOCKET
 
 /datum/outfit/job/ce/mod
-	name = "Chief Engineer (MODsuit)"
+	name = "Старший Инженер (MОД)"
 
 	suit_store = /obj/item/tank/internals/oxygen
 	back = /obj/item/mod/control/pre_equipped/advanced

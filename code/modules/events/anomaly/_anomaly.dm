@@ -1,12 +1,12 @@
 /datum/round_event_control/anomaly
-	name = "Anomaly: Energetic Flux"
+	name = "Аномалия: Энергетический поток"
 	typepath = /datum/round_event/anomaly
 
 	min_players = 1
-	max_occurrences = 0 //This one probably shouldn't occur! It'd work, but it wouldn't be very fun.
+	max_occurrences = 0 //Эта аномалия probably shouldn't occur! Она бы работала, но это было бы не очень весело.
 	weight = 15
 	category = EVENT_CATEGORY_ANOMALIES
-	description = "This anomaly shocks and explodes. This is the base type."
+	description = "Эта аномалия бьёт током и взрывается. Это базовый тип."
 	admin_setup = list(/datum/event_admin_setup/set_location/anomaly)
 
 /datum/round_event/anomaly
@@ -50,7 +50,7 @@
 	return
 
 /datum/event_admin_setup/set_location/anomaly
-	input_text = "Spawn anomaly at your current location?"
+	input_text = "Создать аномалию в вашем текущем местоположении?"
 
 /datum/event_admin_setup/set_location/anomaly/apply_to_event(datum/round_event/anomaly/event)
 	event.spawn_location = chosen_turf

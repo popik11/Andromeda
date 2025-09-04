@@ -374,7 +374,7 @@
 	priority_announce(
 		text = "[cultist.real_name] призывает образы древнего бога в [summon_location.get_original_area_name()] из неизвестного измерения. Прервите ритуал любой ценой!",
 		sound = cult_music_played ? 'sound/announcer/notice/notice3.ogg' : 'sound/music/antag/bloodcult/bloodcult_scribe.ogg',
-		sender_override = "[command_name()] Отдел Высших Измерений",
+		sender_override = "[command_name()]",
 		has_important_message = TRUE,
 	)
 	cult_music_played = TRUE

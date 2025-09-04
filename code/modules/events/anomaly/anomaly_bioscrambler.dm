@@ -1,5 +1,5 @@
 /datum/round_event_control/anomaly/anomaly_bioscrambler
-	name = "Anomaly: Bioscrambler"
+	name = "Аномалия: Биоскремблер"
 	typepath = /datum/round_event/anomaly/anomaly_bioscrambler
 
 	min_players = 10
@@ -17,4 +17,4 @@
 /datum/round_event/anomaly/anomaly_bioscrambler/announce(fake)
 	if(isnull(impact_area))
 		impact_area = placer.findValidArea()
-	priority_announce("Биологический агент замены конечностей обнаружен на [ANOMALY_ANNOUNCE_MEDIUM_TEXT] [impact_area.declent_ru(NOMINATIVE)]. Используйте биокостюмы или другое защитное снаряжение, чтобы противостоять последствиям.", "Обнаружена аномалия")
+	priority_announce("Биоскремблер обнаружен на [ANOMALY_ANNOUNCE_MEDIUM_TEXT] [impact_area.declent_ru(NOMINATIVE)]. Используйте биокостюмы или другое защитное снаряжение, чтобы противостоять последствиям.", "Обнаружена аномалия")

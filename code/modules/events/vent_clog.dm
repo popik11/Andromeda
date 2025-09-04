@@ -1,12 +1,12 @@
 #define MOB_SPAWN_MINIMUM 3
 
 /datum/round_event_control/vent_clog
-	name = "Ventilation Clog: Minor"
+	name = "Засорение вентиляции: Незначительное"
 	typepath = /datum/round_event/vent_clog
 	weight = 25
 	earliest_start = 5 MINUTES
 	category = EVENT_CATEGORY_JANITORIAL
-	description = "Harmless mobs climb out of a vent."
+	description = "Безопасные мобы вылезают из вентиляции."
 
 /datum/round_event_control/vent_clog/can_spawn_event(players_amt, allow_magic = FALSE)
 	. = ..()
@@ -39,7 +39,7 @@
 
 /datum/round_event/vent_clog/announce(fake)
 	var/area/event_area = fake ? pick(GLOB.teleportlocs) : get_area_name(vent)
-	priority_announce("Minor biological obstruction detected in the ventilation network. Blockage is believed to be in the [event_area].", "Custodial Notification")
+	priority_announce("Обнаружена незначительная биологическая преграда в вентиляционной сети. Засор предположительно находится в [event_area].", "Уведомление службы уборки")
 
 /datum/round_event/vent_clog/setup()
 	vent = get_vent()
@@ -133,7 +133,7 @@
 	clog_vent()
 
 	announce_to_ghosts(vent)
-	priority_announce("Lifesign readings have moved to a new location in the ventilation network. New Location: [prob(50) ? "Unknown.":"[get_area_name(vent)]."]", "Lifesign Notification")
+	priority_announce("Показания форм жизни переместились в новое место в вентиляционной сети. Новое местоположение: [prob(50) ? "Неизвестно.":"[get_area_name(vent)]."]", "Уведомление о формах жизни")
 
 /**
  * Handles the production of our mob and adds it to our living_mobs list
@@ -153,7 +153,7 @@
 
 	var/mob/new_mob = new spawned_mob(vent_loc) // we spawn it early so we can actually use is_blocked_turf
 	living_mobs += WEAKREF(new_mob)
-	vent.visible_message(span_warning("[new_mob] crawls out of [vent]!"))
+	vent.visible_message(span_warning("[new_mob] выползает из [vent]!"))
 
 	var/list/potential_locations = list(vent_loc) // already confirmed to be accessable via the 2nd if check of the proc
 
@@ -175,15 +175,15 @@
 	INVOKE_ASYNC(src, PROC_REF(attempt_unclog), user)
 	return COMPONENT_NO_AFTERATTACK
 
-///Handles the actual unclogging action and ends the event on completion.
+///Обрабатывает непосредственно действие по прочистке и завершает событие при успехе.
 /datum/round_event/vent_clog/proc/attempt_unclog(mob/user)
 	if(vent.welded)
-		to_chat(user, span_notice("You cannot pump [vent] if it's welded shut!"))
+		to_chat(user, span_notice("Нельзя прочистить [vent], если он заварен!"))
 		return
 
-	user.balloon_alert_to_viewers("plunging vent...", "plunging clogged vent...")
+	user.balloon_alert_to_viewers("прочищает вентиляцию...", "прочищает засоренную вентиляцию...")
 	if(do_after(user, 6 SECONDS, target = vent))
-		user.balloon_alert_to_viewers("finished plunging")
+		user.balloon_alert_to_viewers("прочистка завершена")
 		clear_signals()
 		kill()
 
@@ -203,12 +203,12 @@
 	UnregisterSignal(vent, list(COMSIG_QDELETING, COMSIG_PLUNGER_ACT))
 
 /datum/round_event_control/vent_clog/major
-	name = "Ventilation Clog: Major"
+	name = "Засорение вентиляции: Крупное"
 	typepath = /datum/round_event/vent_clog/major
 	weight = 12
 	max_occurrences = 5
 	earliest_start = 10 MINUTES
-	description = "Dangerous mobs climb out of a vent."
+	description = "Опасные мобы вылезают из вентиляции."
 	min_wizard_trigger_potency = 0
 	max_wizard_trigger_potency = 4
 
@@ -234,16 +234,16 @@
 
 /datum/round_event/vent_clog/major/announce(fake)
 	var/area/event_area = fake ? pick(GLOB.teleportlocs) : get_area_name(vent)
-	priority_announce("Major biological obstruction detected in the ventilation network. Blockage is believed to be in the [event_area] area.", "Infestation Alert")
+	priority_announce("Обнаружено крупное биологическое засорение в вентиляционной сети. Засор предположительно находится в зоне [event_area].", "Оповещение о заражении")
 
 /datum/round_event_control/vent_clog/critical
-	name = "Ventilation Clog: Critical"
+	name = "Засорение вентиляции: Критическое"
 	typepath = /datum/round_event/vent_clog/critical
 	weight = 8
 	min_players = 15
 	max_occurrences = 3
 	earliest_start = 25 MINUTES
-	description = "Really dangerous mobs climb out of a vent."
+	description = "Очень опасные мобы вылезают из вентиляции."
 	min_wizard_trigger_potency = 3
 	max_wizard_trigger_potency = 6
 
@@ -258,7 +258,7 @@
 
 /datum/round_event/vent_clog/critical/announce(fake)
 	var/area/event_area = fake ? pick(GLOB.teleportlocs) : get_area_name(vent)
-	priority_announce("Potentially hazardous lifesigns detected in the [event_area] ventilation network.", "Security Alert")
+	priority_announce("Обнаружены потенциально опасные формы жизни в вентиляционной сети [event_area].", "Оповещение безопасности")
 
 /datum/round_event/vent_clog/critical/get_mob()
 	var/static/list/mob_list = list(
@@ -269,11 +269,11 @@
 	return pick(mob_list)
 
 /datum/round_event_control/vent_clog/strange
-	name = "Ventilation Clog: Strange"
+	name = "Засорение вентиляции: Странное"
 	typepath = /datum/round_event/vent_clog/strange
 	weight = 5
 	max_occurrences = 2
-	description = "Strange mobs climb out of a vent, harmfulness varies."
+	description = "Странные мобы вылезают из вентиляции, степень опасности варьируется."
 	min_wizard_trigger_potency = 0
 	max_wizard_trigger_potency = 7
 
@@ -291,7 +291,7 @@
 
 /datum/round_event/vent_clog/strange/announce(fake)
 	var/area/event_area = fake ? pick(GLOB.teleportlocs) : get_area_name(vent)
-	priority_announce("Unusual lifesign readings detected in the [event_area] ventilation network.", "Lifesign Alert", ANNOUNCER_ALIENS)
+	priority_announce("Обнаружены необычные показания форм жизни в вентиляционной сети [event_area].", "Оповещение о формах жизни", ANNOUNCER_ALIENS)
 
 /datum/round_event/vent_clog/strange/get_mob()
 	var/static/list/mob_list = list(

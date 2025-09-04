@@ -6,7 +6,7 @@
 	return isliving(user.mob)
 
 /datum/keybinding/living/resist
-	hotkey_keys = list("B")
+	hotkey_keys = list("R")
 	name = "resist"
 	full_name = "Сопротивляться"
 	description = "Освободиться от текущего состояния. В наручниках? Вы горите? Сопротивляйтесь!"
@@ -73,7 +73,7 @@
 	return TRUE
 
 /datum/keybinding/living/rest
-	hotkey_keys = list("U")
+	hotkey_keys = list("B")
 	name = "rest"
 	full_name = "Лечь/встать"
 	description = "Нажмите, чтобы лечь или встать."
@@ -103,7 +103,7 @@
 	user_mob.set_combat_mode(!user_mob.combat_mode, FALSE)
 
 /datum/keybinding/living/enable_combat_mode
-	hotkey_keys = list("4")
+	hotkey_keys = list("2")
 	name = "enable_combat_mode"
 	full_name = "Включить Combat Mode"
 	description = "Включает боевой режим."
@@ -131,7 +131,7 @@
 	user_mob.set_combat_mode(FALSE, silent = FALSE)
 
 /datum/keybinding/living/toggle_move_intent
-	hotkey_keys = list("C")
+	hotkey_keys = list("ctrl")
 	name = "toggle_move_intent"
 	full_name = "Удерживайте, чтобы переключить намерение перемещения"
 	description = "Удерживайте нажатой кнопку, чтобы перейти к другому намерению движения, отпустите, чтобы вернуться назад."
@@ -167,7 +167,7 @@
 	return TRUE
 
 /datum/keybinding/living/toggle_throw_mode
-	hotkey_keys = list("Southwest") // END
+	hotkey_keys = list("`") // END
 	name = "toggle_throw_mode"
 	full_name = "Режим броска"
 	description = "Переключить бросок текущего предмета."

@@ -1,11 +1,11 @@
 /datum/round_event_control/bitrunning_glitch
-	name = "Spawn Bitrunning Glitch"
+	name = "Создать Глитч Битраннинга"
 	admin_setup = list(
 		/datum/event_admin_setup/minimum_candidate_requirement/bitrunning_glitch,
 		/datum/event_admin_setup/listed_options/bitrunning_glitch,
 	)
 	category = EVENT_CATEGORY_INVASION
-	description = "Causes a short term antagonist to spawn in the virtual domain."
+	description = "Создаёт кратковременного антагониста в виртуальном домене."
 	min_players = 1
 	max_occurrences = 0
 	typepath = /datum/round_event/ghost_role/bitrunning_glitch
@@ -35,22 +35,22 @@
 	return length(active_servers) > 0
 
 /datum/event_admin_setup/listed_options/bitrunning_glitch
-	input_text = "Select a role to spawn."
+	input_text = "Выберите роль для создания."
 
 /datum/event_admin_setup/listed_options/bitrunning_glitch/get_list()
-	var/list/available = list("Random")
+	var/list/available = list("Случайная")
 	available += subtypesof(/datum/antagonist/bitrunning_glitch)
 
 	return available
 
 /datum/event_admin_setup/listed_options/bitrunning_glitch/apply_to_event(datum/round_event/ghost_role/bitrunning_glitch/event)
-	if(chosen == "Random")
+	if(chosen == "Случайная")
 		event.forced_role = null
 	else
 		event.forced_role = chosen
 
 /datum/event_admin_setup/minimum_candidate_requirement/bitrunning_glitch
-	output_text = "There must be valid mobs to mutate!"
+	output_text = "Должны быть валидные мобы для мутации!"
 
 /datum/event_admin_setup/minimum_candidate_requirement/bitrunning_glitch/count_candidates()
 	var/datum/round_event_control/bitrunning_glitch/cyber_control = event_control
@@ -69,7 +69,7 @@
 
 /datum/round_event/ghost_role/bitrunning_glitch
 	minimum_required = 1
-	role_name = "Bitrunning Glitch"
+	role_name = "Глитч Битраннинга"
 	fakeable = FALSE
 	/// Admin customization: What to spawn
 	var/forced_role

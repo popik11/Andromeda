@@ -1,9 +1,9 @@
 /datum/round_event_control/communications_blackout
-	name = "Communications Blackout"
+	name = "Коммуникационный сбой"
 	typepath = /datum/round_event/communications_blackout
 	weight = 30
 	category = EVENT_CATEGORY_ENGINEERING
-	description = "Heavily EMPs all telecommunication machines, blocking all communication for a while."
+	description = "Сильно ЭМИрует все телекоммуникационные машины, блокируя всю связь на некоторое время."
 	min_wizard_trigger_potency = 0
 	max_wizard_trigger_potency = 3
 
@@ -11,20 +11,20 @@
 	announce_when = 1
 
 /datum/round_event/communications_blackout/announce(fake)
-	var/alert = pick( "Ionospheric anomalies detected. Temporary telecommunication failure imminent. Please contact you*%fj00)`5vc-BZZT",
-		"Ionospheric anomalies detected. Temporary telecommunication failu*3mga;b4;'1v¬-BZZZT",
-		"Ionospheric anomalies detected. Temporary telec#MCi46:5.;@63-BZZZZT",
-		"Ionospheric anomalies dete'fZ\\kg5_0-BZZZZZT",
-		"Ionospheri:%£ MCayj^j<.3-BZZZZZZT",
-		"#4nd%;f4y6,>£%-BZZZZZZZT",
+	var/alert = pick( "Обнаружены ионосферные аномалии. Неминуем временный сбой телекоммуникаций. Пожалуйста, свяжитесь с ва*%fj00)`5вк-БЗЗТ",
+		"Обнаружены ионосферные аномалии. Неминуем временный сбой телекоммуникац*3мга;б4;'1в¬-БЗЗЗТ",
+		"Обнаружены ионосферные аномалии. Неминуем временный телек#MСи46:5.;@63-БЗЗЗЗЗТ",
+		"Обнаружены ионосферные аномалии 'fZ\\кг5_0-БЗЗЗЗЗТ",
+		"Ионосфери:%£ MКаюй^й<.3-БЗЗЗЗЗТ",
+		"#4нд%;ф4й6,>£%-БЗЗЗЗЗЗЗТ",
 	)
 
-	for(var/mob/living/silicon/ai/A in GLOB.ai_list) //AIs are always aware of communication blackouts.
+	for(var/mob/living/silicon/ai/A in GLOB.ai_list) //ИИ всегда знают о коммуникационных сбоях.
 		to_chat(A, "<br>[span_warning("<b>[alert]</b>")]<br>")
-		to_chat(A, span_notice("Remember, you can transmit over holopads by right clicking on them, and can speak through them with \".[/datum/saymode/holopad::key]\"."))
+		to_chat(A, span_notice("Помните, вы можете передавать данные через голопады, нажав на них правой кнопкой мыши, и говорить через них с помощью \".[/datum/saymode/holopad::key]\"."))
 
-	if(prob(30) || fake) //most of the time, we don't want an announcement, so as to allow AIs to fake blackouts.
-		priority_announce(alert, "Anomaly Alert")
+	if(prob(30) || fake) //большую часть времени мы не хотим объявления, чтобы позволить ИИ имитировать сбои.
+		priority_announce(alert, "Обнаружена аномалия")
 
 
 /datum/round_event/communications_blackout/start()

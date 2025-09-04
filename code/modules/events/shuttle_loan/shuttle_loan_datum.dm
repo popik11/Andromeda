@@ -26,10 +26,10 @@
 	CRASH("Unimplemented get_spawned_items() on [src.type].")
 
 /datum/shuttle_loan_situation/antidote
-	sender = "CentCom Research Initiatives"
-	announcement_text = "Your station has been chosen for an epidemiological research project. Send us your cargo shuttle to receive your research samples."
-	shuttle_transit_text = "Virus samples incoming."
-	logging_desc = "Virus shuttle"
+	sender = "Исследовательские инициативы ЦентКома"
+	announcement_text = "Ваша станция выбрана для эпидемиологического исследовательского проекта. Отправьте нам ваш грузовой шаттл для получения исследовательских образцов."
+	shuttle_transit_text = "Образцы вирусов в пути."
+	logging_desc = "Вирусный шаттл"
 
 /datum/shuttle_loan_situation/antidote/spawn_items(list/spawn_list, list/empty_shuttle_turfs, list/blocked_shutte_turfs)
 	var/obj/effect/mob_spawn/corpse/human/assistant/infected_assistant = pick(list(
@@ -51,12 +51,12 @@
 	spawn_list.Add(/obj/item/reagent_containers/cup/bottle/magnitis)
 
 /datum/shuttle_loan_situation/department_resupply
-	sender = "CentCom Supply Department"
-	announcement_text = "Seems we've ordered doubles of our department resupply packages this month. Can we send them to you?"
-	shuttle_transit_text = "Department resupply incoming."
-	thanks_msg = "The cargo shuttle should return in five minutes."
+	sender = "Снабженческий департамент ЦентКома"
+	announcement_text = "Похоже, мы в этом месяце заказали двойные наборы пополнения для департаментов. Можем отправить их вам?"
+	shuttle_transit_text = "Пополнение для департаментов в пути."
+	thanks_msg = "Грузовой шаттл должен вернуться через пять минут."
 	bonus_points = 0
-	logging_desc = "Resupply packages"
+	logging_desc = "Наборы пополнения"
 
 /datum/shuttle_loan_situation/department_resupply/spawn_items(list/spawn_list, list/empty_shuttle_turfs, list/blocked_shutte_turfs)
 	var/list/crate_types = list(
@@ -79,10 +79,10 @@
 		new decal(pick_n_take(empty_shuttle_turfs))
 
 /datum/shuttle_loan_situation/syndiehijacking
-	sender = "CentCom Counterintelligence"
-	announcement_text = "The syndicate are trying to infiltrate your station. If you let them hijack your cargo shuttle, you'll save us a headache."
-	shuttle_transit_text = "Syndicate hijack team incoming."
-	logging_desc = "Syndicate boarding party"
+	sender = "Контрразведка ЦентКома"
+	announcement_text = "Синдикат пытается проникнуть на вашу станцию. Если вы позволите им угнать ваш грузовой шаттл, вы избавите нас от головной боли."
+	shuttle_transit_text = "Группа захвата Синдиката в пути."
+	logging_desc = "Группа захвата Синдиката"
 
 /datum/shuttle_loan_situation/syndiehijacking/spawn_items(list/spawn_list, list/empty_shuttle_turfs, list/blocked_shutte_turfs)
 	var/datum/supply_pack/pack = SSshuttle.supply_packs[/datum/supply_pack/imports/specialops]
@@ -96,11 +96,11 @@
 		spawn_list.Add(/mob/living/basic/trooper/syndicate/ranged/infiltrator)
 
 /datum/shuttle_loan_situation/lots_of_bees
-	sender = "CentCom Janitorial Division"
-	announcement_text = "One of our freighters carrying a bee shipment has been attacked by eco-terrorists. Can you clean up the mess for us?"
-	shuttle_transit_text = "Biohazard cleanup incoming."
-	bonus_points = CARGO_CRATE_VALUE * 100 //Toxin bees can be unbeelievably lethal
-	logging_desc = "Shuttle full of bees"
+	sender = "Хозяйственный департамент ЦентКома"
+	announcement_text = "Один из наших грузовых кораблей, перевозивший партию пчёл, был атакован эко-террористами. Можете убрать этот беспорядок за нас?"
+	shuttle_transit_text = "Зачистка биологической угрозы в пути."
+	bonus_points = CARGO_CRATE_VALUE * 100 //Токсичные пчёлы могут быть невероятно смертоносны
+	logging_desc = "Шаттл полный пчёл"
 
 /datum/shuttle_loan_situation/lots_of_bees/spawn_items(list/spawn_list, list/empty_shuttle_turfs, list/blocked_shutte_turfs)
 	var/datum/supply_pack/pack = SSshuttle.supply_packs[/datum/supply_pack/organic/hydroponics/beekeeping_fullkit]
@@ -131,12 +131,12 @@
 		new casing(pick_n_take(empty_shuttle_turfs))
 
 /datum/shuttle_loan_situation/jc_a_bomb
-	sender = "CentCom Security Division"
-	announcement_text = "We have discovered an active Syndicate bomb near our VIP shuttle's fuel lines. If you feel up to the task, we will pay you for defusing it."
-	shuttle_transit_text = "Live explosive ordnance incoming. Exercise extreme caution."
-	thanks_msg = "Live explosive ordnance incoming via supply shuttle. Evacuating cargo bay is recommended."
-	bonus_points = CARGO_CRATE_VALUE * 225 //If you mess up, people die and the shuttle gets turned into swiss cheese
-	logging_desc = "Shuttle with a ticking bomb"
+	sender = "Служба безопасности ЦентКома"
+	announcement_text = "Мы обнаружили активную бомбу Синдиката рядом с топливными магистралями нашего шаттла для ВИП-персон. Если вы чувствуете себя готовыми к задаче, мы заплатим вам за её обезвреживание."
+	shuttle_transit_text = "Боевое взрывное устройство в пути. Соблюдайте крайнюю осторожность."
+	thanks_msg = "Боевое взрывное устройство доставляется грузовым шаттлом. Рекомендуется эвакуировать грузовой отсек."
+	bonus_points = CARGO_CRATE_VALUE * 225 //Если вы ошибётесь, люди погибнут, а шаттл превратится в решето
+	logging_desc = "Шаттл с тикающей бомбой"
 
 /datum/shuttle_loan_situation/jc_a_bomb/spawn_items(list/spawn_list, list/empty_shuttle_turfs, list/blocked_shutte_turfs)
 	spawn_list.Add(/obj/machinery/syndicatebomb/shuttle_loan)
@@ -146,23 +146,23 @@
 		spawn_list.Add(/obj/item/paper/fluff/cargo/bomb/allyourbase)
 
 /datum/shuttle_loan_situation/papers_please
-	sender = "CentCom Paperwork Division"
-	announcement_text = "A neighboring station needs some help handling some paperwork. Could you help process it for us?"
-	shuttle_transit_text = "Paperwork incoming."
-	thanks_msg = "The cargo shuttle should return in five minutes. Payment will be rendered when the paperwork is processed and returned."
-	bonus_points = 0 //Payout is made when the stamped papers are returned
-	logging_desc = "Paperwork shipment"
+	sender = "Делопроизводственный департамент ЦентКома"
+	announcement_text = "Соседней станции требуется помощь в обработке документов. Не могли бы вы помочь нам с этим?"
+	shuttle_transit_text = "Документация в пути."
+	thanks_msg = "Грузовой шаттл должен вернуться через пять минут. Оплата будет произведена после обработки и возврата документов."
+	bonus_points = 0 //Выплата производится при возврате заверенных документов
+	logging_desc = "Партия документов"
 
 /datum/shuttle_loan_situation/papers_please/spawn_items(list/spawn_list, list/empty_shuttle_turfs, list/blocked_shutte_turfs)
 	spawn_list += subtypesof(/obj/item/paperwork) - typesof(/obj/item/paperwork/photocopy) - typesof(/obj/item/paperwork/ancient)
 
 /datum/shuttle_loan_situation/pizza_delivery
-	sender = "CentCom Spacepizza Division"
-	announcement_text = "It looks like a neighbouring station accidentally delivered their pizza to you instead."
-	shuttle_transit_text = "Pizza delivery!"
-	thanks_msg = "The cargo shuttle should return in five minutes."
+	sender = "Космическая пицца ЦентКома"
+	announcement_text = "Похоже, соседняя станция случайно доставила свою пиццу вам."
+	shuttle_transit_text = "Доставка пиццы!"
+	thanks_msg = "Грузовой шаттл должен вернуться через пять минут."
 	bonus_points = 0
-	logging_desc = "Pizza delivery"
+	logging_desc = "Доставка пиццы"
 
 /datum/shuttle_loan_situation/pizza_delivery/spawn_items(list/spawn_list, list/empty_shuttle_turfs, list/blocked_shutte_turfs)
 	var/naughtypizza = list(/obj/item/pizzabox/bomb, /obj/item/pizzabox/margherita/robo) //oh look another blacklist, for pizza nonetheless!
@@ -171,10 +171,10 @@
 		spawn_list.Add(pick(prob(5) ? naughtypizza : nicepizza))
 
 /datum/shuttle_loan_situation/russian_party
-	sender = "CentCom Russian Outreach Program"
-	announcement_text = "A group of angry Russians want to have a party. Can you send them your cargo shuttle then make them disappear?"
-	shuttle_transit_text = "Partying Russians incoming."
-	logging_desc = "Russian party squad"
+	sender = "Программа по работе с русскими ЦентКома"
+	announcement_text = "Группа злых русских хочет устроить вечеринку. Можете отправить им ваш грузовой шаттл, а затем избавиться от них?"
+	shuttle_transit_text = "Веселящиеся русские в пути."
+	logging_desc = "Русская вечериночная группа"
 
 /datum/shuttle_loan_situation/russian_party/spawn_items(list/spawn_list, list/empty_shuttle_turfs, list/blocked_shutte_turfs)
 	var/datum/supply_pack/pack = SSshuttle.supply_packs[/datum/supply_pack/service/party]
@@ -189,10 +189,10 @@
 		spawn_list.Add(/mob/living/basic/bear/russian)
 
 /datum/shuttle_loan_situation/spider_gift
-	sender = "CentCom Diplomatic Corps"
-	announcement_text = "The Spider Clan has sent us a mysterious gift. Can we ship it to you to see what's inside?"
-	shuttle_transit_text = "Spider Clan gift incoming."
-	logging_desc = "Shuttle full of spiders"
+	sender = "Дипломатический корпус ЦентКома"
+	announcement_text = "Клан Пауков прислал нам загадочный подарок. Можем отправить его вам, чтобы посмотреть, что внутри?"
+	shuttle_transit_text = "Подарок Клана Пауков в пути."
+	logging_desc = "Шаттл полный пауков"
 
 /datum/shuttle_loan_situation/spider_gift/spawn_items(list/spawn_list, list/empty_shuttle_turfs, list/blocked_shutte_turfs)
 	var/datum/supply_pack/pack = SSshuttle.supply_packs[/datum/supply_pack/imports/specialops]
@@ -227,12 +227,12 @@
  * It sends back a lot of mail to the station, at the cost of wrecking the cargo shuttle a little.
  */
 /datum/shuttle_loan_situation/mail_strike
-	sender = "Spinward Mail Workers Union"
-	announcement_text = "The Mail Workers Union wants to borrow your cargo shuttle to employ \"advanced union strike tactics\" with. Payment is strictly in mails."
+	sender = "Профсоюз почтовых работников Спинварда"
+	announcement_text = "Профсоюз почтовых работников хочет одолжить ваш грузовой шаттл для применения \"передовых профсоюзных тактик забастовки\". Оплата строго почтой."
 	bonus_points = 0
-	thanks_msg = "The cargo shuttle should return in five minutes."
-	shuttle_transit_text = "Nothing stops the mail."
-	logging_desc = "Shuttle full of shady mail"
+	thanks_msg = "Грузовой шаттл должен вернуться через пять минут."
+	shuttle_transit_text = "Ничто не остановит почту."
+	logging_desc = "Шаттл полный сомнительной почты"
 
 /datum/shuttle_loan_situation/mail_strike/spawn_items(list/spawn_list, list/empty_shuttle_turfs, list/blocked_shutte_turfs)
 	for(var/i in 1 to rand(7, 12))

@@ -39,7 +39,7 @@
 	)
 
 	family_heirlooms = list(/obj/item/reagent_containers/cup/glass/trophy/silver_cup)
-	rpg_title = "Guild Questgiver"
+	rpg_title = "Квестодатель Гильдии"
 	job_flags = STATION_JOB_FLAGS | HEAD_OF_STAFF_JOB_FLAGS
 
 	human_authority = JOB_AUTHORITY_HUMANS_ONLY
@@ -48,7 +48,7 @@
 
 
 /datum/job/head_of_personnel/get_captaincy_announcement(mob/living/captain)
-	return "Due to staffing shortages, newly promoted Acting Captain [captain.real_name] on deck!"
+	return "Из-за крайней нехватки персонала был назначенный временно исполняющий обязанности Капитана, [captain.real_name] прибывает на станцию!"
 
 /datum/job/head_of_personnel/generate_traitor_objective()
 	var/datum/objective/assassinate/captain_replacement/promotion = new()
@@ -60,14 +60,14 @@
 	promotion.update_explanation_text()
 	return promotion
 
-/// Special assassination objective to kill the cap, take their id, and become the new captain
+/// Специальная цель убийства для устранения капитана, взятия его ID и становления новым капитаном
 /datum/objective/assassinate/captain_replacement
-	name = "replace the captain"
+	name = "заменить капитана"
 	admin_grantable = FALSE
 
 /datum/objective/assassinate/captain_replacement/update_explanation_text()
 	. = ..()
-	explanation_text = "Assassinate [target.name], the Captain, and steal [target.p_their()] ID card."
+	explanation_text = "Устраните [target.name], Капитана, и похитите [target.p_their()] ID карту."
 
 /datum/objective/assassinate/captain_replacement/check_completion()
 	if(completed)
@@ -91,7 +91,7 @@
 	return null
 
 /datum/outfit/job/hop
-	name = "Head of Personnel"
+	name = "Глава Персонала"
 	jobtype = /datum/job/head_of_personnel
 
 	id = /obj/item/card/id/advanced/platinum

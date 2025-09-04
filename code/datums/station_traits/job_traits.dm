@@ -6,7 +6,7 @@
 	sign_up_button = TRUE
 	abstract_type = /datum/station_trait/job
 	/// What tooltip to show on the button
-	var/button_desc = "Sign up to gain some kind of unusual job, not available in most rounds."
+	var/button_desc = "Зарегистрируйтесь, чтобы получить необычную должность, недоступную в большинстве раундов."
 	/// How many positions to spawn?
 	var/position_amount = 1
 	/// Type of job to enable
@@ -71,8 +71,8 @@
 
 /// Adds a gorilla to the cargo department, replacing the sloth and the mech
 /datum/station_trait/job/cargorilla
-	name = "Cargo Gorilla"
-	button_desc = "Sign up to become the Cargo Gorilla, a peaceful shepherd of boxes."
+	name = "Горилла Карго"
+	button_desc = "Зарегистрируйтесь, чтобы стать Гориллой Карго, мирным пастухом коробок."
 	weight = 1
 	show_in_report = FALSE // Selective attention test. Did you spot the gorilla?
 	job_to_add = /datum/job/cargo_gorilla
@@ -102,10 +102,10 @@
 		qdel(GLOB.cargo_ripley)
 
 /datum/station_trait/job/bridge_assistant
-	name = "Bridge Assistant"
-	button_desc = "Sign up to become the Bridge Assistant and watch over the Bridge."
+	name = "Помощник на Мостике"
+	button_desc = "Зарегистрируйтесь, чтобы стать Помощником на Мостике и наблюдать за Мостиком."
 	weight = 2
-	report_message = "We have installed a Bridge Assistant on your station."
+	report_message = "Мы установили Помощника на Мостике на вашей станции."
 	show_in_report = TRUE
 	job_to_add = /datum/job/bridge_assistant
 
@@ -155,10 +155,10 @@
 	new /obj/item/storage/box/coffeepack(picked_turf)
 
 /datum/station_trait/job/veteran_advisor
-	name = "Veteran Advisor"
-	button_desc = "Sign up to become a DISABLED but hard boiled Veteran Advisor of Nanotrasen Security Force. Advise HoS and Captain, train Officers, all while fighting your PTSD."
+	name = "Ветеран"
+	button_desc = "Зарегистрируйтесь, чтобы стать ИНВАЛИДОМ, но закалённым Ветераном Службы Безопасности Нанотрейзен. Консультируйте ГСБ и Капитана, обучайте Офицеров, всё время сражаясь со своей ПТСР."
 	weight = 2
-	report_message = "Veteran Security Advisor has been assigned to your station to help with Security matters."
+	report_message = "Ветеран Службы Безопасности был назначен на вашу станцию для помощи в вопросах безопасности."
 	show_in_report = TRUE
 	job_to_add = /datum/job/veteran_advisor
 
@@ -167,11 +167,11 @@
 	overlays += "veteran_advisor"
 
 /datum/station_trait/job/human_ai
-	name = "Human AI"
-	button_desc = "Sign up to become the \"AI\"."
+	name = "Человек ИИ"
+	button_desc = "Зарегистрируйтесь, чтобы стать \"ИИ\"."
 	weight = 1
 	trait_flags = parent_type::trait_flags | STATION_TRAIT_REQUIRES_AI
-	report_message = "Our recent technological advancements in machine Artificial Intelligence has proven futile. In the meantime, we're sending an Intern to help out."
+	report_message = "Наши недавние технологические достижения в области машинного Искусственного Интеллекта оказались тщетными. Тем временем, мы отправляем Интерна для помощи."
 	show_in_report = TRUE
 	job_to_add = /datum/job/human_ai
 	trait_to_give = STATION_TRAIT_HUMAN_AI
@@ -233,10 +233,10 @@
 	new /obj/machinery/fax/auto_name(picked_turf)
 
 /datum/station_trait/job/pun_pun
-	name = "Pun Pun is a Crewmember"
-	button_desc = "Ook ook ah ah, sign up to play as the bartender's monkey."
-	weight = 0 //Unrollable by default, available all day during monkey day.
-	report_message = "We've evaluated the bartender's monkey to have the mental capacity of the average crewmember. As such, we made them one."
+	name = "Пун Пун"
+	button_desc = "Ук ук а а, зарегистрируйтесь, чтобы играть за обезьяну бармена."
+	weight = 0 //По умолчанию недоступно для выбора, доступно весь день в День Обезьяны.
+	report_message = "Мы оценили, что обезьяна бармена обладает умственными способностями среднего члена экипажа. Как таковую, мы сделали её им."
 	show_in_report = TRUE
 	job_to_add = /datum/job/pun_pun
 

@@ -27,20 +27,20 @@
 #define DECEMBER 12
 
 //Select holiday names -- If you test for a holiday in the code, make the holiday's name a define and test for that instead
-#define NEW_YEAR "New Year"
-#define VALENTINES "Valentine's Day"
-#define APRIL_FOOLS "April Fool's Day"
-#define EASTER "Easter"
-#define HALLOWEEN "Halloween"
-#define CHRISTMAS "Christmas"
-#define FESTIVE_SEASON "Festive Season"
-#define GARBAGEDAY "Garbage Day"
-#define MONKEYDAY "Monkey Day"
-#define PRIDE_WEEK "Pride Week"
-#define MOTH_WEEK "Moth Week"
-#define IAN_HOLIDAY "Ian's Birthday"
-#define HOTDOG_DAY "National Hot Dog Day"
-#define ICE_CREAM_DAY "National Ice Cream Day"
+#define NEW_YEAR "Новый Год"
+#define VALENTINES "День Святого Валентина"
+#define APRIL_FOOLS "День Дурака"
+#define EASTER "Пасха"
+#define HALLOWEEN "Хэллоуин"
+#define CHRISTMAS "Рождество"
+#define FESTIVE_SEASON "Праздничный Сезон"
+#define GARBAGEDAY "День Мусора"
+#define MONKEYDAY "День Обезьяны"
+#define PRIDE_WEEK "Неделя Прайда" /// Rewokin: Хуесосов
+#define MOTH_WEEK "Неделя Мотыльков"
+#define IAN_HOLIDAY "День Рождения Иана"
+#define HOTDOG_DAY "Национальный День Хот-Дога"
+#define ICE_CREAM_DAY "Национальный День Мороженого"
 /*
 
 Days of the week to make it easier to reference them.
@@ -49,13 +49,13 @@ When using time2text(), please use "DDD" to find the weekday. Refrain from using
 
 */
 
-#define MONDAY "Mon"
-#define TUESDAY "Tue"
-#define WEDNESDAY "Wed"
-#define THURSDAY "Thu"
-#define FRIDAY "Fri"
-#define SATURDAY "Sat"
-#define SUNDAY "Sun"
+#define MONDAY "Пн"
+#define TUESDAY "Вт"
+#define WEDNESDAY "Ср"
+#define THURSDAY "Чт"
+#define FRIDAY "Пт"
+#define SATURDAY "Сб"
+#define SUNDAY "Вс"
 
 #define MILLISECONDS *0.01
 

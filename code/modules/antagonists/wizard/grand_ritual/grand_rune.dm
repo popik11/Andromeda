@@ -81,14 +81,14 @@
 	announce_rune()
 	ADD_TRAIT(src, TRAIT_MOPABLE, INNATE_TRAIT)
 
-/// I cast Summon Security
+/// Я вызываю безопасность
 /obj/effect/grand_rune/proc/announce_rune()
 	var/area/created_area = get_area(src)
 	if (potency >= GRAND_RITUAL_IMMINENT_FINALE_POTENCY)
-		priority_announce("Major anomalous fluctuations to local spacetime detected in: [created_area.name].", "Anomaly Alert")
+		priority_announce("Обнаружены крупные аномальные колебания локального пространства-времени в: [created_area.name].", "Обнаружена аномалия")
 		return
 	if (potency >= GRAND_RITUAL_RUNES_WARNING_POTENCY)
-		priority_announce("Unusual anomalous energy fluctuations detected in: [created_area.name].", "Anomaly Alert")
+		priority_announce("Обнаружены необычные аномальные энергетические колебания в: [created_area.name].", "Обнаружена аномалия")
 		return
 
 /obj/effect/grand_rune/examine(mob/user)
@@ -295,13 +295,13 @@
 	var/announce = null
 	switch (dire_warnings_given)
 		if (0)
-			announce = "Large anomalous energy spike detected in: [created_area.name]."
+			announce = "Обнаружен крупный аномальный энергетический всплеск в: [created_area.name]."
 		if (1)
-			announce = "Automatic causality stabilisation failed, recommend urgent intervention in: [created_area.name]."
+			announce = "Автоматическая стабилизация причинности не удалась, рекомендуется срочное вмешательство в: [created_area.name]."
 		if (2)
-			announce = "Imminent local reality failure in: [created_area.name]. All crew please prepare to evacuate."
+			announce = "Неминуемый коллапс локальной реальности в: [created_area.name]. Весь экипаж, приготовьтесь к эвакуации."
 	if (announce)
-		priority_announce(announce, "Anomaly Alert")
+		priority_announce(announce, "Обнаружена аномалия")
 	dire_warnings_given++
 	return ..()
 

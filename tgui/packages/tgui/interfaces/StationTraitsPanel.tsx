@@ -59,7 +59,7 @@ const FutureStationTraitsPage = (props) => {
           <Dropdown
             onSelected={setSelectedTrait}
             options={traitNames}
-            placeholder="Select trait to add..."
+            placeholder="Выберите трейт для добавления..."
             selected={selectedTrait}
             width="100%"
           />
@@ -96,7 +96,7 @@ const FutureStationTraitsPage = (props) => {
               });
             }}
           >
-            Add
+            Добавить
           </Button>
         </Stack.Item>
       </Stack>
@@ -124,7 +124,7 @@ const FutureStationTraitsPage = (props) => {
                         });
                       }}
                     >
-                      Delete
+                      Удалить
                     </Button>
                   </Stack.Item>
                 </Stack>
@@ -133,23 +133,23 @@ const FutureStationTraitsPage = (props) => {
           </Stack>
         ) : (
           <>
-            <Box>No station traits will run next round.</Box>
+            <Box>В следующем раунде не будет запущено ни одного станционного трейта.</Box>
 
             <Box>
               <Button
                 color="red"
                 icon="times"
-                tooltip="The next round will roll station traits randomly, just like normal"
+                tooltip="Следующий раунд будет случайным образом выбирать станционные трейты, как обычно."
                 onClick={() => act('clear_future_traits')}
               >
-                Run Station Traits Normally
+                Запускать станционные трейты - Обычно
               </Button>
             </Box>
           </>
         )
       ) : (
         <>
-          <Box>No future station traits are planned.</Box>
+          <Box>Будущие станционные трейты не запланированы.</Box>
 
           <Box>
             <Button
@@ -161,7 +161,7 @@ const FutureStationTraitsPage = (props) => {
                 })
               }
             >
-              Prevent station traits from running next round
+              Запретить запуск станционных трейтов в следующем раунде
             </Button>
           </Box>
         </>
@@ -182,14 +182,14 @@ const ViewStationTraitsPage = (props) => {
 
             <Stack.Item>
               <Button.Confirm
-                content="Revert"
+                content="Отменить"
                 color="red"
                 disabled={data.too_late_to_revert || !stationTrait.can_revert}
                 tooltip={
                   (!stationTrait.can_revert &&
-                    'This trait is not revertable.') ||
+                    'Этот трейт нельзя отменить.') ||
                   (data.too_late_to_revert &&
-                    "It's too late to revert station traits, the round has already started.")
+                    "Слишком поздно отменять станционные трейты, раунд уже начался.")
                 }
                 icon="times"
                 onClick={() =>
@@ -204,7 +204,7 @@ const ViewStationTraitsPage = (props) => {
       ))}
     </Stack>
   ) : (
-    <Box>There are no active station traits.</Box>
+    <Box>Нет активных станционных трейтов.</Box>
   );
 };
 
@@ -225,7 +225,7 @@ export const StationTraitsPanel = (props) => {
   }
 
   return (
-    <Window title="Modify Station Traits" height={500} width={500}>
+    <Window title="Изменить Станционные Трейты" height={500} width={500}>
       <Window.Content scrollable>
         <Tabs>
           <Tabs.Tab
@@ -233,7 +233,7 @@ export const StationTraitsPanel = (props) => {
             selected={currentTab === Tab.ViewStationTraits}
             onClick={() => setCurrentTab(Tab.ViewStationTraits)}
           >
-            View
+            Просмотреть
           </Tabs.Tab>
 
           <Tabs.Tab
@@ -241,7 +241,7 @@ export const StationTraitsPanel = (props) => {
             selected={currentTab === Tab.SetupFutureStationTraits}
             onClick={() => setCurrentTab(Tab.SetupFutureStationTraits)}
           >
-            Edit
+            Редактировать
           </Tabs.Tab>
         </Tabs>
 

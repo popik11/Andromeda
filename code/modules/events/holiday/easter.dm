@@ -1,28 +1,28 @@
 /datum/round_event_control/easter
-	name = "Easter Eggselence"
+	name = "Пасхальное Великолепие"
 	holidayID = EASTER
 	typepath = /datum/round_event/easter
 	weight = -1
 	max_occurrences = 1
 	earliest_start = 0 MINUTES
 	category = EVENT_CATEGORY_HOLIDAY
-	description = "Hides surprise filled easter eggs in maintenance."
+	description = "Прячет сюрпризы в виде пасхальных яиц в технических тоннелях."
 
 /datum/round_event/easter/announce(fake)
-	priority_announce(pick("Hip-hop into Easter!","Find some Bunny's stash!","Today is National 'Hunt a Wabbit' Day.","Be kind, give Chocolate Eggs!"))
+	priority_announce(pick("Скачите на Пасху!","Найдите заначку Кролика!","Сегодня национальный день 'Охоты на Кролика'.","Будьте добры, дарите Шоколадные Яйца!"))
 
 
 /datum/round_event_control/rabbitrelease
-	name = "Release the Rabbits!"
+	name = "Выпустить Кроликов!"
 	holidayID = EASTER
 	typepath = /datum/round_event/rabbitrelease
 	weight = 5
 	max_occurrences = 10
 	category = EVENT_CATEGORY_HOLIDAY
-	description = "Summons a wave of cute rabbits."
+	description = "Призывает волну милых кроликов."
 
 /datum/round_event/rabbitrelease/announce(fake)
-	priority_announce("Unidentified furry objects detected coming aboard [station_name()]. Beware of Adorable-ness.", "Fluffy Alert", ANNOUNCER_ALIENS)
+	priority_announce("На борту [station_name()] обнаружены неопознанные пушистые объекты. Остерегайтесь милоты.", "Тревога: пушистость", ANNOUNCER_ALIENS)
 
 
 /datum/round_event/rabbitrelease/start()

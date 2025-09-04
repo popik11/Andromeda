@@ -7,7 +7,7 @@
 	var/report_message = "Выполните эту цель."
 
 /datum/station_goal/proc/send_report()
-	priority_announce("Получена приоритетная директива Нанотрейзен. Поступают детали проекта \"[name]\".", "Входящее Приоритетное Сообщение", SSstation.announcer.get_rand_report_sound())
+	priority_announce("Получена приоритетная директива Нанотрейзен. Поступают детали проекта \"[name]\".", "Входящее приоритетное сообщение", SSstation.announcer.get_rand_report_sound())
 	print_command_report(get_report(),"Директива Нанотрейзен [pick(GLOB.phonetic_alphabet)] \Roman[rand(1,50)]", announce=FALSE)
 	on_report()
 

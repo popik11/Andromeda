@@ -70,9 +70,9 @@
 	else
 		to_chat(user,span_notice("There's nothing to withdraw."))
 
-/// Alerts the crew about the siphon
+/// Оповещает экипаж о сифоне
 /obj/machinery/shuttle_scrambler/proc/send_notification()
-	priority_announce("Data theft signal detected; source registered on local GPS units.")
+	priority_announce("Обнаружен сигнал кражи данных; источник зарегистрирован на местных GPS-устройствах.")
 
 /// Switches off the siphon
 /obj/machinery/shuttle_scrambler/proc/toggle_off(mob/user)

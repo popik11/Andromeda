@@ -1,5 +1,5 @@
 /datum/vote/map_vote
-	name = "Карта"
+	name = "Ротация карт"
 	default_message = "Голосуйте за карту следующего раунда!"
 	count_method = VOTE_COUNT_METHOD_SINGLE
 	winner_method = VOTE_WINNER_METHOD_NONE

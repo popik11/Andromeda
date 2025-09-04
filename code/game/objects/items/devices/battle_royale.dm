@@ -232,15 +232,15 @@ GLOBAL_DATUM_INIT(battle_royale_master, /datum/battle_royale_master, new)
 		return FALSE // Well there's not much point is there
 
 	priority_announce(
-		text = "Congratulations [station_name()], you have been chosen as the next site of the Rumble Royale! \n\
-			Viewers across the sector will watch our [convert_integer_to_words(length(contestant_implants))] lucky contestants battle their way into your [chosen_area] and fight until only one is left standing! \n\
-			If they don't make it in five minutes, they'll be disqualified. If you see one of our players struggling to get in, do lend them a hand... or don't, if you can live with the consequences!  \n\
-			As a gesture of gratitude, we will be providing our premium broadcast to your entertainment monitors at no cost so that you can watch the excitement. \n\
-			Bystanders are advised not to intervene... but if you do, make it look good for the camera!",
-		title = "Rumble Royale Beginning",
+		text = "Поздравляем [station_name()], вы выбраны следующей площадкой для Грохочущего Рояля! \n\
+			Зрители по всему сектору будут наблюдать, как наши [convert_integer_to_words(length(contestant_implants))] счастливчиков пробиваются в ваш [chosen_area] и сражаются до последнего выжившего! \n\
+			Если они не успеют за пять минут, они будут дисквалифицированы. Если вы увидите, что один из наших игроков пытается пробраться внутрь, помогите ему... или не помогайте, если готовы жить с последствиями!  \n\
+			В знак благодарности мы предоставляем нашу премиальную трансляцию на ваши развлекательные мониторы бесплатно, чтобы вы могли наслаждаться зрелищем. \n\
+			Сторонним наблюдателям не рекомендуется вмешиваться... но если вмешаетесь, сделайте это зрелищно для камер!",
+		title = "Начало Грохочущего Рояля",
 		sound = 'sound/announcer/alarm/nuke_alarm.ogg',
 		has_important_message = TRUE,
-		sender_override = "Rumble Royale Pirate Broadcast Station",
+		sender_override = "Пиратская Вещательная Станция",
 		color_override = "red",
 	)
 
@@ -267,10 +267,10 @@ GLOBAL_DATUM_INIT(battle_royale_master, /datum/battle_royale_master, new)
 			message = "[implant.imp_in.real_name] [pick(euphemisms)] [pick(condolences)]"
 		priority_announce(
 			text = message,
-			title = "Rumble Royale Casualty Report",
+			title = "Отчёт о жертвах Грохочущего Рояля",
 			sound = 'sound/announcer/notice/notice1.ogg',
 			has_important_message = TRUE,
-			sender_override = "Rumble Royale Pirate Broadcast Station",
+			sender_override = "Пиратская Вещательная Станция",
 			color_override = "red",
 		)
 
@@ -301,10 +301,10 @@ GLOBAL_DATUM_INIT(battle_royale_master, /datum/battle_royale_master, new)
 
 	priority_announce(
 		text = message,
-		title = "Rumble Royale Winner",
+		title = "Победитель Грохочущего Рояля",
 		sound = 'sound/announcer/notice/notice1.ogg',
 		has_important_message = TRUE,
-		sender_override = "Rumble Royale Pirate Broadcast Station",
+		sender_override = "Пиратская Вещательная Станция",
 		color_override = "red",
 	)
 
@@ -315,11 +315,11 @@ GLOBAL_DATUM_INIT(battle_royale_master, /datum/battle_royale_master, new)
 /// Called halfway through the battle, if you've not made it to the designated battle zone we kill you
 /datum/battle_royale_controller/proc/limit_area()
 	priority_announce(
-		text = "We're halfway done folks! And bad news to anyone who hasn't made it to the [chosen_area]... you're out!",
-		title = "Rumble Royale Update",
+		text = "Мы на полпути, народ! И плохие новости для тех, кто не добрался до [chosen_area]... вы выбыли!",
+		title = "Обновление Грохочущего Рояля",
 		sound = 'sound/announcer/notice/notice1.ogg',
 		has_important_message = TRUE,
-		sender_override = "Rumble Royale Pirate Broadcast Station",
+		sender_override = "Пиратская Вещательная Станция",
 		color_override = "red",
 	)
 
@@ -331,13 +331,13 @@ GLOBAL_DATUM_INIT(battle_royale_master, /datum/battle_royale_master, new)
 	battle_running = FALSE
 
 	priority_announce(
-		text = "Sorry remaining contestants, your time is up. \
-			We're sorry to announce that this edition of Royal Rumble has no winner. \n\
-			Better luck next time!",
-		title = "Rumble Royale Concluded",
+		text = "Сожалеем, оставшиеся участники, ваше время вышло. \
+			Мы с сожалением сообщаем, что в этом выпуске Грохочущего Рояля нет победителя. \n\
+			Удачи в следующий раз!",
+		title = "Завершение Грохочущего Рояля",
 		sound = 'sound/announcer/notice/notice1.ogg',
 		has_important_message = TRUE,
-		sender_override = "Rumble Royale Pirate Broadcast Station",
+		sender_override = "Пиратская Вещательная Станция",
 		color_override = "red",
 	)
 

@@ -2,7 +2,7 @@
 	title = JOB_CAPTAIN
 	description = "Будьте ответственны за станцию, руководите главами, \
 		сохраните жизнь экипажу, будьте готовы сделать всё возможное или умрите."
-	auto_deadmin_role_flags = DEADMIN_POSITION_HEAD|DEADMIN_POSITION_SECURITY
+	auto_deadmin_role_flags = DEADMIN_POSITION_HEAD
 	department_head = list("CentCom")
 	faction = FACTION_STATION
 	total_positions = 1
@@ -44,7 +44,7 @@
 	)
 
 	job_flags = STATION_JOB_FLAGS | HEAD_OF_STAFF_JOB_FLAGS | JOB_ANTAG_PROTECTED
-	rpg_title = "Star Duke"
+	rpg_title = "Звёздный Герцог"
 
 	human_authority = JOB_AUTHORITY_HUMANS_ONLY
 
@@ -52,14 +52,14 @@
 
 
 /datum/job/captain/get_captaincy_announcement(mob/living/captain)
-	return "Captain [captain.real_name] on deck!"
+	return "Капитан [captain.real_name] прибывает на станцию!"
 
 /datum/job/captain/get_radio_information()
 	. = ..()
-	. += "\nYou have access to all radio channels, but they are not automatically tuned. Check your radio for more information."
+	. += "\nУ вас есть доступ ко всем радиоканалам, но они не настроены автоматически. Проверьте вашу рацию для получения дополнительной информации."
 
 /datum/outfit/job/captain
-	name = "Captain"
+	name = "Капитан"
 	jobtype = /datum/job/captain
 
 	id = /obj/item/card/id/advanced/gold
@@ -119,7 +119,7 @@
 	celestial_charter.name_type = special_charter
 
 /datum/outfit/job/captain/mod
-	name = "Captain (MODsuit)"
+	name = "Капитан (МОД)"
 
 	suit_store = /obj/item/tank/internals/oxygen
 	back = /obj/item/mod/control/pre_equipped/magnate

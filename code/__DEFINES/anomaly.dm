@@ -1,40 +1,40 @@
 /**
- *  # Anomaly Defines
- *  This file contains defines for the random event anomaly subtypes.
+ *  # Определения Аномалий
+ *  Этот файл содержит определения для подтипов аномалий случайных событий.
  */
 
-///Time in ticks before the anomaly goes poof/explodes depending on type.
+///Время в тиках до исчезновения/взрыва аномалии в зависимости от типа.
 #define ANOMALY_COUNTDOWN_TIMER (120 SECONDS)
 
 /**
- * Nuisance/funny anomalies
+ * Назойливые/забавные аномалии
  */
 
-///Time in seconds before anomaly spawns
+///Время в секундах до появления аномалии
 #define ANOMALY_START_MEDIUM_TIME (6 EVENT_SECONDS)
-///Time in seconds before anomaly is announced
+///Время в секундах до оповещения об аномалии
 #define ANOMALY_ANNOUNCE_MEDIUM_TIME (2 EVENT_SECONDS)
-///Let them know how far away the anomaly is
-#define ANOMALY_ANNOUNCE_MEDIUM_TEXT "long range scanners. Expected location:"
+///Сообщить, как далеко находится аномалия
+#define ANOMALY_ANNOUNCE_MEDIUM_TEXT "дальних сканерах. Предполагаемое местоположение:"
 
 /**
- * Chaotic but not harmful anomalies. Give the station a chance to find it on their own.
+ * Хаотичные, но не опасные аномалии. Дают станции шанс обнаружить их самостоятельно.
  */
 
-///Time in seconds before anomaly spawns
+///Время в секундах до появления аномалии
 #define ANOMALY_START_HARMFUL_TIME (2 EVENT_SECONDS)
-///Time in seconds before anomaly is announced
+///Время в секундах до оповещения об аномалии
 #define ANOMALY_ANNOUNCE_HARMFUL_TIME (30 EVENT_SECONDS)
-///Let them know how far away the anomaly is
-#define ANOMALY_ANNOUNCE_HARMFUL_TEXT "localized scanners. Detected location:"
+///Сообщить, как далеко находится аномалия
+#define ANOMALY_ANNOUNCE_HARMFUL_TEXT "локальных сканерах. Обнаруженное местоположение:"
 
 /**
- * Anomalies that can fuck you up. Give them a bit of warning.
+ * Аномалии, которые могут вас подставить. Дают немного предупреждения.
  */
 
-///Time in seconds before anomaly spawns
+///Время в секундах до появления аномалии
 #define ANOMALY_START_DANGEROUS_TIME (2 EVENT_SECONDS)
-///Time in seconds before anomaly is announced
+///Время в секундах до оповещения об аномалии
 #define ANOMALY_ANNOUNCE_DANGEROUS_TIME (30 EVENT_SECONDS)
-///Let them know how far away the anomaly is
-#define ANOMALY_ANNOUNCE_DANGEROUS_TEXT "localized scanners. Detected location:"
+///Сообщить, как далеко находится аномалия
+#define ANOMALY_ANNOUNCE_DANGEROUS_TEXT "локальных сканерах. Обнаруженное местоположение:"

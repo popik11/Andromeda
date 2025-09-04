@@ -100,8 +100,8 @@ GLOBAL_DATUM(revolution_handler, /datum/revolution_handler)
 		if(!isnull(head_of_staff))
 			add_memory_in_range(head_of_staff, 5, /datum/memory/revolution_heads_victory, protagonist = head_of_staff)
 
-	priority_announce("It appears the mutiny has been quelled. Please return yourself and your incapacitated colleagues to work. \
-		We have remotely blacklisted the head revolutionaries in your medical records to prevent accidental revival.", null, null, null, "[command_name()] Loyalty Monitoring Division")
+	priority_announce("Похоже, мятеж был подавлен. Пожалуйста, вернитесь к работе и доставьте ваших коллег к их рабочим местам. \
+		Мы удалённо внесли главарей революционеров в чёрный список ваших медицинских записей, чтобы предотвратить их случайное воскрешение.", null, null, null, "[command_name()]")
 
 	result = STATION_VICTORY
 

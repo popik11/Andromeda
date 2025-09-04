@@ -59,11 +59,11 @@
 	if(last_taste_time + 50 >= world.time)
 		return TRUE
 
-	// Sometimes, try send a replacement message if we're hallucinating
+	// Иногда пытаемся отправить сообщение-замену, если мы галлюцинируем
 	if(get_timed_status_effect_duration(/datum/status_effect/hallucination) > 100 SECONDS && prob(25))
-		var/text_output = pick("spiders","dreams","nightmares","the future","the past","victory",\
-			"defeat","pain","bliss","revenge","poison","time","space","death","life","truth","lies","justice","memory",\
-			"regrets","your soul","suffering","music","noise","blood","hunger","the american way")
+		var/text_output = pick("пауков","сны","кошмары","будущее","прошлое","победу",\
+			"поражение","боль","блаженство","месть","яд","время","пространство","смерть","жизнь","правду","ложь","справедливость","память",\
+			"сожаления","свою душу","страдания","музыку","шум","кровь","голод","американский образ жизни")
 		send_taste_message(text_output)
 		return TRUE
 
@@ -76,7 +76,7 @@
 	if(tastes_text == last_taste_text && last_taste_time + 100 >= world.time)
 		return
 
-	to_chat(src, span_notice("You can taste [tastes_text]."))
+	to_chat(src, span_notice("Вы чувствуете вкус [tastes_text]."))
 	// "something indescribable" -> too many tastes, not enough flavor.
 
 	last_taste_time = world.time
@@ -154,7 +154,7 @@
 	if(!prob(chance))
 		return FALSE
 	if(ForceContractDisease(new /datum/disease/anaphylaxis(), make_copy = FALSE, del_on_fail = TRUE))
-		to_chat(src, span_warning("You feel your throat start to itch."))
+		to_chat(src, span_warning("Вы чувствуете, как у вас начинает зудить горло."))
 		add_mood_event("allergic_food", /datum/mood_event/allergic_food)
 	else if(histamine_add)
 		reagents.add_reagent(/datum/reagent/toxin/histamine, histamine_add)

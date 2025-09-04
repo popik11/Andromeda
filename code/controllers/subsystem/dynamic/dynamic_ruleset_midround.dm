@@ -53,7 +53,7 @@
 	addtimer(CALLBACK(src, PROC_REF(announce_spiders)), rand(375, 600) SECONDS)
 
 /datum/dynamic_ruleset/midround/spiders/proc/announce_spiders()
-	priority_announce("Обнаружены неопознанные формы жизни на борту [station_name()]. Заблокируйте все внешние доступы, включая вентиляцию и технические тоннели.", "Тревога: формы жизни", ANNOUNCER_ALIENS)
+	priority_announce("Обнаружены неопознанные формы жизни на борту [station_name()]. Заблокируйте все внешние доступы, включая вентиляцию и технические тоннели.", "Неопознанные формы жизни", ANNOUNCER_ALIENS)
 /datum/dynamic_ruleset/midround/spiders/false_alarm()
 	announce_spiders()
 
@@ -404,7 +404,7 @@
 	return pick(GLOB.blobstart)
 
 /datum/dynamic_ruleset/midround/from_ghosts/blob/false_alarm()
-	priority_announce("Подтверждена вспышка биологической угрозы 5 уровня на борту [station_name()]. Весь персонал должен сдержать распространение.", "Биологическая тревога", ANNOUNCER_OUTBREAK5)
+	priority_announce("Подтверждена вспышка биологической угрозы 5 уровня на борту [station_name()]. Весь персонал должен сдержать распространение.", "Биологическая угроза", ANNOUNCER_OUTBREAK5)
 /datum/dynamic_ruleset/midround/from_ghosts/xenomorph
 	name = "Alien Infestation"
 	config_tag = "Xenomorph"
@@ -437,7 +437,7 @@
 	addtimer(CALLBACK(src, PROC_REF(announce_xenos)), rand(375, 600) SECONDS)
 
 /datum/dynamic_ruleset/midround/from_ghosts/xenomorph/proc/announce_xenos()
-	priority_announce("Обнаружены неопознанные формы жизни на борту [station_name()]. Заблокируйте все внешние доступы, включая вентиляционные шахты и технические тоннели.", "Тревога: биологические формы", ANNOUNCER_ALIENS)
+	priority_announce("Обнаружены неопознанные формы жизни на борту [station_name()]. Заблокируйте все внешние доступы, включая вентиляционные шахты и технические тоннели.", "Неопознанные формы жизни", ANNOUNCER_ALIENS)
 
 /datum/dynamic_ruleset/midround/from_ghosts/xenomorph/false_alarm()
 	announce_xenos()
@@ -527,7 +527,7 @@
 	addtimer(CALLBACK(src, PROC_REF(announce_space_dragon)), rand(5, 10) SECONDS)
 
 /datum/dynamic_ruleset/midround/from_ghosts/space_dragon/proc/announce_space_dragon()
-	priority_announce("Зафиксирован мощный органический энергопоток вблизи [station_name()]. Приготовьтесь.", "Тревога: биологические формы")
+	priority_announce("Зафиксирован мощный органический энергопоток вблизи [station_name()]. Приготовьтесь.", "Неопознанные формы жизни")
 
 /datum/dynamic_ruleset/midround/from_ghosts/space_dragon/false_alarm()
 	announce_space_dragon()

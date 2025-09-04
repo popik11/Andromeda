@@ -406,37 +406,37 @@
 /obj/machinery/atmospherics/components/unary/hypertorus/core/proc/countdown()
 	set waitfor = FALSE
 
-	if(final_countdown) // We're already doing it go away
+	if(final_countdown) // Мы уже это делаем, уходим
 		return
 	final_countdown = TRUE
 
 	var/critical = selected_fuel.meltdown_flags & HYPERTORUS_FLAG_CRITICAL_MELTDOWN
 	if(critical)
-		priority_announce("WARNING - The explosion will likely cover a big part of the station and the coming EMP will wipe out most of the electronics. \
-				Get as far away as possible from the reactor or find a way to shut it down.", "Alert", 'sound/announcer/notice/notice3.ogg')
-	var/speaking = "[emergency_alert] The Hypertorus fusion reactor has reached critical integrity failure. Emergency magnetic dampeners online."
+		priority_announce("ВНИМАНИЕ - Взрыв, вероятно, охватит большую часть станции, а последовавший ЭМИ уничтожит большую часть электроники. \
+				Отойдите как можно дальше от реактора или найдите способ его отключить.", "Тревога", 'sound/announcer/notice/notice3.ogg')
+	var/speaking = "[emergency_alert] Термоядерный реактор достиг критического нарушения целостности. Аварийные магнитные демпферы активированы."
 	radio.talk_into(src, speaking, common_channel)
 
 	notify_ghosts(
-		"The [src] has begun melting down!",
+		"[src] начал плавиться!",
 		source = src,
-		header = "Meltdown Incoming",
+		header = "Начинается расплавление",
 		ghost_sound = 'sound/machines/warning-buzzer.ogg',
 		notify_volume = 75,
 	)
 
 	for(var/i in HYPERTORUS_COUNTDOWN_TIME to 0 step -10)
-		if(critical_threshold_proximity < melting_point) // Cutting it a bit close there engineers
-			radio.talk_into(src, "[safe_alert] Failsafe has been disengaged.", common_channel)
+		if(critical_threshold_proximity < melting_point) // Инженеры, это слишком близко к краю
+			radio.talk_into(src, "[safe_alert] Аварийная защита отключена.", common_channel)
 			final_countdown = FALSE
 			return
-		else if((i % 50) != 0 && i > 50) // A message once every 5 seconds until the final 5 seconds which count down individually
+		else if((i % 50) != 0 && i > 50) // Сообщение раз в 5 секунд до последних 5 секунд, которые отсчитываются индивидуально
 			sleep(1 SECONDS)
 			continue
 		else if(i > 50)
 			if(i == 10 SECONDS && critical)
 				sound_to_playing_players('sound/machines/hypertorus/HFR_critical_explosion.ogg')
-			speaking = "[DisplayTimeText(i, TRUE)] remain before total integrity failure."
+			speaking = "Осталось [DisplayTimeText(i, TRUE)] до полного нарушения целостности."
 		else
 			speaking = "[i*0.1]..."
 		radio.talk_into(src, speaking, common_channel)

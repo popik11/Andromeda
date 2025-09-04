@@ -41,7 +41,7 @@
 	)
 
 	family_heirlooms = list(/obj/item/toy/plush/slimeplushie)
-	rpg_title = "Archmagister"
+	rpg_title = "Архимагистр"
 	job_flags = STATION_JOB_FLAGS | HEAD_OF_STAFF_JOB_FLAGS
 
 	human_authority = JOB_AUTHORITY_HUMANS_ONLY
@@ -50,11 +50,11 @@
 
 
 /datum/job/research_director/get_captaincy_announcement(mob/living/captain)
-	return "Due to staffing shortages, newly promoted Acting Captain [captain.real_name] on deck!"
+	return "Из-за крайней нехватки персонала был назначенный временно исполняющий обязанности Капитана, [captain.real_name] прибывает на станцию!"
 
 
 /datum/outfit/job/rd
-	name = JOB_RESEARCH_DIRECTOR
+	name = "Директор Исследований"
 	jobtype = /datum/job/research_director
 
 	id = /obj/item/card/id/advanced/silver
@@ -81,7 +81,7 @@
 	skillchips = list(/obj/item/skillchip/research_director, /obj/item/skillchip/job/roboticist)
 
 /datum/outfit/job/rd/mod
-	name = "Research Director (MODsuit)"
+	name = "Директор Исследований (МОД)"
 
 	suit_store = /obj/item/tank/internals/oxygen
 	back = /obj/item/mod/control/pre_equipped/research

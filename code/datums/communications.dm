@@ -76,14 +76,14 @@ GLOBAL_DATUM_INIT(communications_controller, /datum/communciations_controller, n
 	if(isnull(greenshift)) // if we're not forced to be greenshift or not - check if we are an actual greenshift
 		greenshift = SSdynamic.current_tier.tier == 0 && dynamic_report == /datum/dynamic_tier/greenshift::advisory_report
 
-	. = "<b><i>Департамент Разведки Нанотрейзен, Консультация по Угрозам, Спинвард Сектор, ТСД [time2text(world.realtime, "DDD, MMM DD")], [CURRENT_STATION_YEAR]:</i></b><hr>"
+	. = "<b><i>Главное Разведывательное Управление Нанотрейзен. [time2text(world.realtime, "DDD, MMM DD")], [CURRENT_STATION_YEAR]:</i></b><hr>"
 	. += dynamic_report
 
 	SSstation.generate_station_goals(greenshift ? INFINITY : CONFIG_GET(number/station_goal_budget))
 
 	var/list/datum/station_goal/goals = SSstation.get_station_goals()
 	if(length(goals))
-		var/list/texts = list("<hr><b>Специальные Приказы для [station_name()]:</b><br>")
+		var/list/texts = list("<hr><b>Основная ЦЕЛЬ для [station_name()]:</b><br>")
 		for(var/datum/station_goal/station_goal as anything in goals)
 			station_goal.on_report()
 			texts += station_goal.get_report()
@@ -95,7 +95,7 @@ GLOBAL_DATUM_INIT(communications_controller, /datum/communciations_controller, n
 			continue
 		trait_list_strings += "[station_trait.get_report()]<BR>"
 	if(trait_list_strings.len > 0)
-		. += "<hr><b>Выявленные отклонения смены:</b><BR>" + trait_list_strings.Join()
+		. += "<hr><b>Дополнительная информация смены:</b><BR>" + trait_list_strings.Join()
 
 	if(length(command_report_footnotes))
 		var/footnote_pile = ""
@@ -105,10 +105,10 @@ GLOBAL_DATUM_INIT(communications_controller, /datum/communciations_controller, n
 			footnote_pile += "<i>[footnote.signature]</i><BR>"
 			footnote_pile += "<BR>"
 
-		. += "<hr><b>Дополнительные Примечания: </b><BR><BR>" + footnote_pile
+		. += "<hr><b>Дополнительные примечания: </b><BR><BR>" + footnote_pile
 
 #ifndef MAP_TEST
-	print_command_report(., "[command_name()] Сводка Статуса", announce=FALSE)
+	print_command_report(., "Сводка на смену от [command_name()]", announce=FALSE)
 	if(greenshift)
 		priority_announce(
 			"Благодаря неустанным усилиям наших служб безопасности и разведки, \

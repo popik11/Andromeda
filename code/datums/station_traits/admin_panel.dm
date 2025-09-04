@@ -1,4 +1,4 @@
-ADMIN_VERB(station_traits_panel, R_FUN, "Modify Station Traits", "Modify the station traits for the next round.", ADMIN_CATEGORY_EVENTS)
+ADMIN_VERB(station_traits_panel, R_FUN, "Изменить Станционные Трейты", "Изменить станционные трейты для следующего раунда.", ADMIN_CATEGORY_EVENTS)
 	var/static/datum/station_traits_panel/station_traits_panel = new
 	station_traits_panel.ui_interact(user.mob)
 
@@ -55,14 +55,14 @@ ADMIN_VERB(station_traits_panel, R_FUN, "Modify Station Traits", "Modify the sta
 				return TRUE
 
 			if (too_late_to_revert())
-				to_chat(usr, span_warning("It's too late to revert station traits, the round has already started!"))
+				to_chat(usr, span_warning("Слишком поздно отменять станционные трейты, раунд уже начался!"))
 				return TRUE
 
 			if (!station_trait.can_revert)
-				stack_trace("[station_trait.type] can't be reverted, but was requested anyway.")
+				stack_trace("[station_trait.type] нельзя отменить, но запрос был выполнен.")
 				return TRUE
 
-			var/message = "[key_name(usr)] reverted the station trait [station_trait.name] ([station_trait.type])"
+			var/message = "[key_name(usr)] отменил станционный трейт [station_trait.name] ([station_trait.type])"
 			log_admin(message)
 			message_admins(message)
 
@@ -71,7 +71,7 @@ ADMIN_VERB(station_traits_panel, R_FUN, "Modify Station Traits", "Modify the sta
 			return TRUE
 		if ("setup_future_traits")
 			if (too_late_for_future_traits())
-				to_chat(usr, span_warning("It's too late to add future station traits, the round is already over!"))
+				to_chat(usr, span_warning("Слишком поздно добавлять будущие станционные трейты, раунд уже завершён!"))
 				return TRUE
 
 			var/list/new_future_traits = list()
@@ -80,8 +80,8 @@ ADMIN_VERB(station_traits_panel, R_FUN, "Modify Station Traits", "Modify the sta
 			for (var/station_trait_text in params["station_traits"])
 				var/datum/station_trait/station_trait_path = text2path(station_trait_text)
 				if (!ispath(station_trait_path, /datum/station_trait) || station_trait_path == /datum/station_trait)
-					log_admin("[key_name(usr)] tried to set an invalid future station trait: [station_trait_text]")
-					to_chat(usr, span_warning("Invalid future station trait: [station_trait_text]"))
+					log_admin("[key_name(usr)] попытался установить невалидный будущий станционный трейт: [station_trait_text]")
+					to_chat(usr, span_warning("Невалидный будущий станционный трейт: [station_trait_text]"))
 					return TRUE
 
 				station_trait_names += initial(station_trait_path.name)
@@ -91,7 +91,7 @@ ADMIN_VERB(station_traits_panel, R_FUN, "Modify Station Traits", "Modify the sta
 					"path" = station_trait_path,
 				))
 
-			var/message = "[key_name(usr)] has prepared the following station traits for next round: [station_trait_names.Join(", ") || "None"]"
+			var/message = "[key_name(usr)] подготовил следующие станционные трейты для следующего раунда: [station_trait_names.Join(", ") || "Нет"]"
 			log_admin(message)
 			message_admins(message)
 
@@ -101,10 +101,10 @@ ADMIN_VERB(station_traits_panel, R_FUN, "Modify Station Traits", "Modify the sta
 			return TRUE
 		if ("clear_future_traits")
 			if (!future_traits)
-				to_chat(usr, span_warning("There are no future station traits."))
+				to_chat(usr, span_warning("Нет будущих станционных трейтов."))
 				return TRUE
 
-			var/message = "[key_name(usr)] has cleared the station traits for next round."
+			var/message = "[key_name(usr)] очистил станционные трейты для следующего раунда."
 			log_admin(message)
 			message_admins(message)
 

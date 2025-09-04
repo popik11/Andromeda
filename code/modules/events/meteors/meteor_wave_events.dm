@@ -50,7 +50,7 @@
 			kill()
 
 /datum/round_event/meteor_wave/announce(fake)
-	priority_announce("Meteors have been detected on collision course with the station.", "Meteor Alert", ANNOUNCER_METEORS)
+	priority_announce("Обнаружены метеоры на курсе столкновения со станцией.", "Метеорная тревога", ANNOUNCER_METEORS)
 
 /datum/round_event/meteor_wave/tick()
 	if(ISMULTIPLE(activeFor, 3))
@@ -91,7 +91,7 @@
 	wave_name = "meaty"
 
 /datum/round_event/meteor_wave/meaty/announce(fake)
-	priority_announce("Meaty ores have been detected on collision course with the station.", "Oh crap, get the mop.", ANNOUNCER_METEORS)
+	priority_announce("Обнаружены мясные руды на курсе столкновения со станцией.", "О чёрт, принесите швабру.", ANNOUNCER_METEORS)
 
 /datum/round_event_control/meteor_wave/dust_storm
 	name = "Major Space Dust"
@@ -109,24 +109,24 @@
 /datum/round_event/meteor_wave/dust_storm/announce(fake)
 	var/list/reasons = list()
 
-	reasons += "[station_name()] is passing through a debris cloud, expect minor damage \
-		to external fittings and fixtures."
+	reasons += "[station_name()] проходит через облако обломков, ожидайте незначительных повреждений \
+		внешнего оборудования и креплений."
 
-	reasons += "Nanotrasen Superweapons Division is testing a new prototype \
-		[pick("field","projection","nova","super-colliding","reactive")] \
-		[pick("cannon","artillery","tank","cruiser","\[REDACTED\]")], \
-		some mild debris is expected."
+	reasons += "Военный Космический Флот Нанотрейзен тестирует новый прототип \
+		[pick("полевой","проекционный","новый","суперколлайдерный","реактивный")] \
+		[pick("пушки","артиллерии","крейсера","\[УДАЛЕНО\]")], \
+		ожидается незначительное количество обломков."
 
-	reasons += "A neighbouring station is throwing rocks at you. (Perhaps they've \
-		grown tired of your messages.)"
+	reasons += "Соседняя станция бросает в вас камни. (Возможно, они \
+		устали от ваших сообщений.)"
 
-	reasons += "[station_name()]'s orbit is passing through a cloud of remnants from an asteroid \
-		mining operation. Minor hull damage is to be expected."
+	reasons += "Орбита [station_name()] проходит через облако остатков от \
+		добычи астероидов. Ожидаются незначительные повреждения корпуса."
 
-	reasons += "A large meteoroid on intercept course with [station_name()] has been demolished. \
-		Residual debris may impact the station exterior."
+	reasons += "Крупный метеороид на курсе перехвата с [station_name()] был уничтожен. \
+		Оставшиеся обломки могут столкнуться с внешней стороной станции."
 
-	reasons += "[station_name()] has hit a particularly rough patch of space. \
-		Please mind any turbulence or damage from debris."
+	reasons += "[station_name()] попала в особенно неспокойный участок космоса. \
+		Пожалуйста, будьте осторожны из-за турбулентности или повреждений от обломков."
 
-	priority_announce(pick(reasons), "Collision Alert")
+	priority_announce(pick(reasons), "Предупреждение о столкновении")

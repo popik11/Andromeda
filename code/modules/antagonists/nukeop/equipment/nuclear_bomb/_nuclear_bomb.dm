@@ -607,9 +607,9 @@ GLOBAL_VAR(station_nuke_source)
 
 		if(DETONATION_HIT_SYNDIE_BASE)
 			priority_announce(
-				"Long Range Scanners indicate that the nuclear device has detonated on a previously unknown base, we assume \
-				the base to be of Syndicate Origin. Good work crew.",
-				"Nuclear Operations Command",
+				"Дальние сканеры показывают, что ядерное устройство взорвалось на ранее неизвестной базе. Предполагаем, \
+				что база принадлежит Синдикату. Хорошая работа, экипаж.",
+				"Главное Разведывательное Управление",
 			)
 
 			var/datum/turf_reservation/syndicate_base = SSmapping.lazy_load_template(LAZY_TEMPLATE_KEY_NUKIEBASE)
@@ -621,9 +621,9 @@ GLOBAL_VAR(station_nuke_source)
 
 		else
 			priority_announce(
-				"Long Range Scanners indicate that the nuclear device has detonated; however seismic activity on the station \
-				is minimal. We anticipate that the device has not detonated on the station itself.",
-				"Nuclear Operations Command",
+				"Дальние сканеры показывают, что ядерное устройство взорвалось; однако сейсмическая активность на станции \
+				минимальна. Предполагаем, что устройство взорвалось не на самой станции.",
+				"Главное Разведывательное Управление",
 			)
 
 	if(drop_level)

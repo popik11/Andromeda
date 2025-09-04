@@ -156,10 +156,10 @@
 	var/message
 
 	if(current_level_number > previous_level_number)
-		title = "Внимание! Уровень безопасности повышен до [current_level_name]:"
+		title = "Уровень безопасности повышен до [current_level_name]:"
 		message = selected_level.elevating_to_announcement
 	else
-		title = "Внимание! Уровень безопасности понижен до [current_level_name]:"
+		title = "Уровень безопасности понижен до [current_level_name]:"
 		message = selected_level.lowering_to_announcement
 
 	var/list/level_announcement_strings = list()

@@ -1,11 +1,11 @@
 /datum/round_event_control/scrubber_overflow
-	name = "Scrubber Overflow: Normal"
+	name = "Переполнение скрубберов: Обычное"
 	typepath = /datum/round_event/scrubber_overflow
 	weight = 10
 	max_occurrences = 3
 	min_players = 10
 	category = EVENT_CATEGORY_JANITORIAL
-	description = "The scrubbers release a tide of mostly harmless froth."
+	description = "Скрубберы выпускают поток в основном безвредной пены."
 	admin_setup = list(/datum/event_admin_setup/listed_options/scrubber_overflow)
 
 /datum/round_event/scrubber_overflow
@@ -60,12 +60,12 @@
 
 /datum/round_event/scrubber_overflow/announce_deadchat(random, cause)
 	if(!forced_reagent_type)
-		//nothing out of the ordinary, so default announcement
+		//ничего необычного, поэтому стандартное объявление
 		return ..()
-	deadchat_broadcast(" has just been[random ? " randomly" : ""] triggered[cause ? " by [cause]" : ""]!", "<b>Scrubber Overflow: [initial(forced_reagent_type.name)]</b>", message_type=DEADCHAT_ANNOUNCEMENT)
+	deadchat_broadcast(" только что был[random ? " случайно" : ""] активирован[cause ? " с помощью [cause]" : ""]!", "<b>Переполнение скрубберов: [initial(forced_reagent_type.name)]</b>", message_type=DEADCHAT_ANNOUNCEMENT)
 
 /datum/round_event/scrubber_overflow/announce(fake)
-	priority_announce("The scrubbers network is experiencing a backpressure surge. Some ejection of contents may occur.", "[command_name()] Engineering Division")
+	priority_announce("В сети скрубберов обнаружен скачок давления. Возможен выброс содержимого.", "[command_name()]")
 
 /datum/round_event/scrubber_overflow/setup()
 	for(var/obj/machinery/atmospherics/components/unary/vent_scrubber/temp_vent as anything in SSmachines.get_machines_by_type_and_subtypes(/obj/machinery/atmospherics/components/unary/vent_scrubber))
@@ -123,28 +123,26 @@
 		CHECK_TICK
 
 /datum/round_event_control/scrubber_overflow/threatening
-	name = "Scrubber Overflow: Threatening"
+	name = "Переполнение скрубберов: Угрожающее"
 	typepath = /datum/round_event/scrubber_overflow/threatening
 	weight = 4
 	min_players = 25
 	max_occurrences = 1
 	earliest_start = 35 MINUTES
-	description = "The scrubbers release a tide of moderately harmless froth."
-	min_wizard_trigger_potency = 0
-	max_wizard_trigger_potency = 4
+	description = "Скрубберы выпускают поток умеренно вредной пены."
 
 /datum/round_event/scrubber_overflow/threatening
 	danger_chance = 10
 	reagents_amount = 100
 
 /datum/round_event_control/scrubber_overflow/catastrophic
-	name = "Scrubber Overflow: Catastrophic"
+	name = "Переполнение скрубберов: Катастрофическое"
 	typepath = /datum/round_event/scrubber_overflow/catastrophic
 	weight = 2
 	min_players = 35
 	max_occurrences = 1
 	earliest_start = 45 MINUTES
-	description = "The scrubbers release a tide of mildly harmless froth."
+	description = "Скрубберы выпускают поток слегка вредной пены."
 	min_wizard_trigger_potency = 3
 	max_wizard_trigger_potency = 6
 
@@ -153,19 +151,19 @@
 	reagents_amount = 150
 
 /datum/round_event_control/scrubber_overflow/every_vent
-	name = "Scrubber Overflow: Every Vent"
+	name = "Переполнение скрубберов: Все вентиляции"
 	typepath = /datum/round_event/scrubber_overflow/every_vent
 	weight = 0
 	max_occurrences = 0
-	description = "The scrubbers release a tide of mostly harmless froth, but every scrubber is affected."
+	description = "Скрубберы выпускают поток в основном безвредной пены, но затронуты все скрубберы."
 
 /datum/round_event/scrubber_overflow/every_vent
 	overflow_probability = 100
 	reagents_amount = 100
 
 /datum/event_admin_setup/listed_options/scrubber_overflow
-	normal_run_option = "Random Reagents"
-	special_run_option = "Random Single Reagent"
+	normal_run_option = "Случайные реагенты"
+	special_run_option = "Случайный одиночный реагент"
 
 /datum/event_admin_setup/listed_options/scrubber_overflow/get_list()
 	return sort_list(subtypesof(/datum/reagent), /proc/cmp_typepaths_asc)

@@ -1,8 +1,8 @@
 ["Greenshift"]
-name = "Greenshift"
+name = "Зелёная Смена"
 min_pop = 0
 weight = 2
-advisory_report = "Advisory Level: <b>Green Star</b></center><BR>Your sector's advisory level is Green Star. Surveillance information shows no credible threats to Nanotrasen assets within the Spinward Sector at this time. As always, the Department advises maintaining vigilance against potential threats, regardless of a lack of known threats."
+advisory_report = "Уровень угрозы: <b>Зелёная Звезда</b></center><BR>Уровень угрозы вашего сектора - Зелёная Звезда. Данные от 'ГРУНТ' не показывают каких либо угроз активам Нанотрейзен в вашем Секторе на данный момент. Как всегда, Департамент рекомендует сохранять бдительность против потенциальных угроз, независимо от отсутствия известных угроз."
 ruleset_type_settings.roundstart.low = 0
 ruleset_type_settings.roundstart.high = 0
 ruleset_type_settings.roundstart.half_range_pop_threshold = 25
@@ -30,10 +30,10 @@ ruleset_type_settings.latejoin.execution_cooldown_low = 10
 ruleset_type_settings.latejoin.execution_cooldown_high = 20
 
 ["Low Chaos"]
-name = "Low Chaos"
+name = "Низкий Хаос"
 min_pop = 0
 weight = 8
-advisory_report = "Advisory Level: <b>Yellow Star</b></center><BR>Your sector's advisory level is Yellow Star. Surveillance shows a credible risk of enemy attack against our assets in the Spinward Sector. We advise a heightened level of security alongside maintaining vigilance against potential threats."
+advisory_report = "Уровень угрозы: <b>Жёлтая Звезда</b></center><BR>Уровень угрозы вашего сектора - Жёлтая Звезда. Данные от 'ГРУНТ' показывает реальный риск вражеской атаки на наши активы в вашем Секторе. Рекомендуется повышенный уровень безопасности и сохранение бдительности против потенциальных угроз."
 ruleset_type_settings.roundstart.low = 1
 ruleset_type_settings.roundstart.high = 1
 ruleset_type_settings.roundstart.half_range_pop_threshold = 25
@@ -61,10 +61,10 @@ ruleset_type_settings.latejoin.execution_cooldown_low = 10
 ruleset_type_settings.latejoin.execution_cooldown_high = 20
 
 ["Low-Medium Chaos"]
-name = "Low-Medium Chaos"
+name = "Низко-Средний Хаос"
 min_pop = 0
 weight = 46
-advisory_report = "Advisory Level: <b>Red Star</b></center><BR>Your sector's advisory level is Red Star. The Department of Intelligence has decrypted Cybersun communications suggesting a high likelihood of attacks on Nanotrasen assets within the Spinward Sector. Stations in the region are advised to remain highly vigilant for signs of enemy activity and to be on high alert."
+advisory_report = "Уровень угрозы: <b>Красная Звезда</b></center><BR>Уровень угрозы вашего сектора - Красная Звезда. 'ГРУНТ' перехватили коммуникации Киберсан, свидетельствующие о высокой вероятности атак на активы Нанотрейзен в вашем Секторе. Всем станциям в регионе предписано сохранять повышенную бдительность и быть готовыми к вражеской активности."
 ruleset_type_settings.roundstart.low = 1
 ruleset_type_settings.roundstart.high = 2
 ruleset_type_settings.roundstart.half_range_pop_threshold = 25
@@ -92,10 +92,10 @@ ruleset_type_settings.latejoin.execution_cooldown_low = 10
 ruleset_type_settings.latejoin.execution_cooldown_high = 20
 
 ["Medium-High Chaos"]
-name = "Medium-High Chaos"
+name = "Средне-Высокий Хаос"
 min_pop = 0
 weight = 36
-advisory_report = "Advisory Level: <b>Black Orbit</b></center><BR>Your sector's advisory level is Black Orbit. Your sector's local communications network is currently undergoing a blackout, and we are therefore unable to accurately judge enemy movements within the region. However, information passed to us by GDI suggests a high amount of enemy activity in the sector, indicative of an impending attack. Remain on high alert and vigilant against any other potential threats."
+advisory_report = "Уровень угрозы: <b>Чёрная Орбита</b></center><BR>Уровень угрозы вашего сектора - Чёрная Орбита. Связь в секторе нарушена, что мешает отслеживать вражеские перемещения. По данным 'ГРУНТ', в секторе высокая активность противника, вероятна скорая атака. Сохраняйте максимальную бдительность."
 ruleset_type_settings.roundstart.low = 2
 ruleset_type_settings.roundstart.high = 3
 ruleset_type_settings.roundstart.half_range_pop_threshold = 25
@@ -123,10 +123,10 @@ ruleset_type_settings.latejoin.execution_cooldown_low = 10
 ruleset_type_settings.latejoin.execution_cooldown_high = 20
 
 ["High Chaos"]
-name = "High Chaos"
+name = "Высокий Хаос"
 min_pop = 25
 weight = 10
-advisory_report = "Advisory Level: <b>Midnight Sun</b></center><BR>Your sector's advisory level is Midnight Sun. Credible information passed to us by GDI suggests that the Syndicate is preparing to mount a major concerted offensive on Nanotrasen assets in the Spinward Sector to cripple our foothold there. All stations should remain on high alert and prepared to defend themselves."
+advisory_report = "Уровень угрозы: <b>Полуночное Солнце</b></center><BR>Уровень угрозы вашего сектора - Полуночное Солнце. По данным 'ГРУНТ', Синдикат готовит масштабную атаку на активы Нанотрейзен в вашем Секторе с целью подрыва нашего влияния в регионе. Вся станция должна быть в состоянии повышенной готовности и обороне."
 ruleset_type_settings.roundstart.low = 3
 ruleset_type_settings.roundstart.high = 4
 ruleset_type_settings.roundstart.half_range_pop_threshold = 25

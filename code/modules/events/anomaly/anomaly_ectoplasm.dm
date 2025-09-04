@@ -1,9 +1,9 @@
-#define ANOMALY_INTENSITY_MINOR "Minor Intensity"
-#define ANOMALY_INTENSITY_MODERATE "Moderate Intensity"
-#define ANOMALY_INTENSITY_MAJOR "Major Intensity"
+#define ANOMALY_INTENSITY_MINOR "Малая интенсивность"
+#define ANOMALY_INTENSITY_MODERATE "Средняя интенсивность"
+#define ANOMALY_INTENSITY_MAJOR "Высокая интенсивность"
 
 /datum/round_event_control/anomaly/anomaly_ectoplasm
-	name = "Anomaly: Ectoplasmic Outburst"
+	name = "Аномалия: Эктоплазменный выброс"
 	description = "Аномалия, вызывающая эффект различной интенсивности в зависимости от количества призраков, находящихся вокруг нее."
 	typepath = /datum/round_event/anomaly/anomaly_ectoplasm
 	min_players = 30
@@ -50,13 +50,13 @@
 	var/ghost_override
 
 /datum/event_admin_setup/anomaly_ectoplasm/prompt_admins()
-	if(tgui_alert(usr, "Override the anomaly effect and power?", "You'll be ruining the authenticity.", list("Yes", "No")) == "Yes")
+	if(tgui_alert(usr, "Переопределить эффект и мощность аномалии?", "Вы нарушите аутентичность.", list("Да", "Нет")) == "Да")
 		var/list/power_values = list(ANOMALY_INTENSITY_MINOR, ANOMALY_INTENSITY_MODERATE, ANOMALY_INTENSITY_MAJOR)
-		chosen_effect = tgui_input_list(usr, "Provide effect override", "Criiiiinge.", power_values)
+		chosen_effect = tgui_input_list(usr, "Укажите переопределение эффекта", "Криииинж.", power_values)
 		if(!chosen_effect)
 			return ADMIN_CANCEL_EVENT
 
-		ghost_override = tgui_input_number(usr, "How many ghosts do you want simulate orbiting your anomaly? (determines the effect radius).", "Seriously, CRINGE.", 0, 20, 1)
+		ghost_override = tgui_input_number(usr, "Сколько призраков вы хотите имитировать вокруг вашей аномалии? (определяет радиус эффекта).", "Серьёзно, КРИНЖ.", 0, 20, 1)
 		if(!ghost_override)
 			return ADMIN_CANCEL_EVENT
 

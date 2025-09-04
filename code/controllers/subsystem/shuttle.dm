@@ -7,7 +7,7 @@
 
 
 SUBSYSTEM_DEF(shuttle)
-	name = "Shuttle"
+	name = "Шаттл"
 	wait = 1 SECONDS
 	dependencies = list(
 		/datum/controller/subsystem/mapping,
@@ -320,12 +320,12 @@ SUBSYSTEM_DEF(shuttle)
 			return S
 	WARNING("Не удалось найти док с идентификатором: [id]")
 
-/// Check if we can call the evac shuttle.
-/// Returns TRUE if we can. Otherwise, returns a string detailing the problem.
+/// Проверить, можем ли мы вызвать эвакуационный шаттл.
+/// Возвращает TRUE, если можем. В противном случае возвращает строку с описанием проблемы.
 /datum/controller/subsystem/shuttle/proc/canEvac()
 	var/shuttle_refuel_delay = CONFIG_GET(number/shuttle_refuel_delay)
 	if(world.time - SSticker.round_start_time < shuttle_refuel_delay)
-		return "Аварийный шаттл заправляется. Пожалуйста, подождите [DisplayTimeText(shuttle_refuel_delay - (world.time - SSticker.round_start_time))] перед вызовом."
+		return "Аварийный шаттл готовится к блюспейс прыжку. Пожалуйста, подождите [DisplayTimeText(shuttle_refuel_delay - (world.time - SSticker.round_start_time))] перед вызовом."
 
 	switch(emergency.mode)
 		if(SHUTTLE_RECALL)
@@ -393,9 +393,9 @@ SUBSYSTEM_DEF(shuttle)
 		SSticker.emergency_reason = call_reason
 	message_admins("[ADMIN_LOOKUPFLW(user)] вызвал шаттл. (<A href='byond://?_src_=holder;[HrefToken()];trigger_centcom_recall=1'>ОТОЗВАТЬ ШАТТЛ</A>)")
 
-/// Call the emergency shuttle.
-/// If you are doing this on behalf of a player, use requestEvac instead.
-/// `signal_origin` is fluff occasionally provided to players.
+/// Вызвать аварийный шаттл.
+/// Если вы делаете это от имени игрока, используйте вместо этого requestEvac.
+/// `signal_origin` - это флафф, иногда предоставляемый игрокам.
 /datum/controller/subsystem/shuttle/proc/call_evac_shuttle(call_reason, signal_origin)
 	if (!check_backup_emergency_shuttle())
 		return
@@ -551,7 +551,7 @@ SUBSYSTEM_DEF(shuttle)
 		emergency.setTimer(emergency_dock_time)
 		priority_announce(
 			text = "У вас есть [DisplayTimeText(emergency_dock_time)] для посадки на аварийный шаттл.",
-			title = "Обнаружена враждебная среда",
+			title = "Ликвидация враждебной среды",
 			sound = 'sound/announcer/announcement/announce_dig.ogg',
 			sender_override = "Диспетчерская Флота",
 			color_override = "green",

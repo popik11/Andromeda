@@ -64,4 +64,4 @@
 	. = ..()
 	if(previous_security_level && SSsecurity_level.get_current_level_as_number() != SEC_LEVEL_DELTA)
 		SSsecurity_level.set_level(previous_security_level)
-	priority_announce("Wow. The Dark Matt-eor actually missed your station. Don't forget to thank your Chaplain for his apparent divine intervention.", "Meteor Update")
+	priority_announce("Вау. Тёмный Мат-еор действительно промахнулся мимо вашей станции. Не забудьте поблагодарить вашего Священника за его очевидное божественное вмешательство.", "Обновление о метеорах")

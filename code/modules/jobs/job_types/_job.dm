@@ -326,7 +326,7 @@
 		return "<b>Для общения в радиоканале вашего отдела используйте префикс :h. Чтобы узнать все доступные каналы осмотрите наушник.</b>"
 
 /datum/outfit/job
-	name = "Standard Gear"
+	name = "Стандартная Экипировка"
 
 	var/jobtype = null
 
@@ -454,7 +454,7 @@
 
 
 /datum/job/proc/get_captaincy_announcement(mob/living/captain)
-	return "Due to extreme staffing shortages, newly promoted Acting Captain [captain.real_name] on deck!"
+	return "Из-за крайней нехватки персонала был назначенный временно исполняющий обязанности Капитана, [captain.real_name] прибывает на станцию!"
 
 
 /// Returns an atom where the mob should spawn in.
@@ -615,7 +615,7 @@
 
 		mmi.name = "[initial(mmi.name)]: [organic_name]"
 		if(mmi.brain)
-			mmi.brain.name = "[organic_name]'s brain"
+			mmi.brain.name = "Мозг [organic_name]"
 		if(mmi.brainmob)
 			mmi.brainmob.real_name = organic_name //the name of the brain inside the cyborg is the robotized human's name.
 			mmi.brainmob.name = organic_name

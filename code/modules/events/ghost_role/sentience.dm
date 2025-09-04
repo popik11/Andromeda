@@ -36,19 +36,19 @@ GLOBAL_LIST_INIT(high_priority_sentience, typecacheof(list(
 	minimum_required = 1
 	role_name = "random animal"
 	var/animals = 1
-	var/one = "one"
+	var/one = "один"
 	fakeable = TRUE
 
 /datum/round_event/ghost_role/sentience/announce(fake)
 	var/sentience_report = ""
 
-	var/data = pick("scans from our long-range sensors", "our sophisticated probabilistic models", "our omnipotence", "the communications traffic on your station", "energy emissions we detected", "\[REDACTED\]")
-	var/pets = pick("animals/bots", "bots/animals", "pets", "simple animals", "lesser lifeforms", "\[REDACTED\]")
-	var/strength = pick("human", "moderate", "lizard", "security", "command", "clown", "low", "very low", "\[REDACTED\]")
+	var/data = pick("сканирований с наших дальних сенсоров", "наших сложных вероятностных моделей", "нашего всеведения", "трафика коммуникаций вашей станции", "обнаруженных энергетических выбросов", "\[УДАЛЕНО\]")
+	var/pets = pick("животных", "питомцев", "простых животных", "низших форм жизни", "\[УДАЛЕНО\]")
+	var/strength = pick("человеческий", "средний", "ящерский", "охраны", "командный", "клоунский", "низкий", "очень низкий", "\[УДАЛЕНО\]")
 
-	sentience_report += "Based on [data], we believe that [one] of the station's [pets] has developed [strength] level intelligence, and the ability to communicate."
+	sentience_report += "На основе [data], мы полагаем, что [one] из станционных [pets] развил [strength] уровень интеллекта и способность к коммуникации."
 
-	priority_announce(sentience_report,"[command_name()] Medium-Priority Update")
+	priority_announce(sentience_report,"[command_name()]")
 
 /datum/round_event/ghost_role/sentience/spawn_role()
 	var/list/mob/dead/observer/candidates = SSpolling.poll_ghost_candidates(check_jobban = ROLE_SENTIENCE, role = ROLE_SENTIENCE, alert_pic = /obj/item/slimepotion/slime/sentience, role_name_text = role_name)

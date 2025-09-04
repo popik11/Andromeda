@@ -34,7 +34,7 @@
 	bounty_types = CIV_JOB_SEC
 
 	family_heirlooms = list(/obj/item/book/manual/wiki/security_space_law)
-	rpg_title = "Guard Leader"
+	rpg_title = "Лидер Гильдии"
 	job_flags = STATION_JOB_FLAGS | HEAD_OF_STAFF_JOB_FLAGS | JOB_ANTAG_PROTECTED
 
 	human_authority = JOB_AUTHORITY_HUMANS_ONLY
@@ -43,11 +43,11 @@
 
 
 /datum/job/head_of_security/get_captaincy_announcement(mob/living/captain)
-	return "Due to staffing shortages, newly promoted Acting Captain [captain.real_name] on deck!"
+	return "Из-за крайней нехватки персонала был назначенный временно исполняющий обязанности Капитана, [captain.real_name] прибывает на станцию!"
 
 
 /datum/outfit/job/hos
-	name = "Head of Security"
+	name = "Глава Службы Безопасности"
 	jobtype = /datum/job/head_of_security
 
 	id = /obj/item/card/id/advanced/silver
@@ -81,7 +81,7 @@
 	implants = list(/obj/item/implant/mindshield)
 
 /datum/outfit/job/hos/mod
-	name = "Head of Security (MODsuit)"
+	name = "Глава Службы Безопасности (МОД)"
 
 	suit_store = /obj/item/tank/internals/oxygen
 	back = /obj/item/mod/control/pre_equipped/safeguard

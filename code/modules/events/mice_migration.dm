@@ -1,28 +1,28 @@
 /datum/round_event_control/mice_migration
-	name = "Mice Migration"
+	name = "Миграция мышей"
 	typepath = /datum/round_event/mice_migration
 	weight = 10
 	category = EVENT_CATEGORY_ENTITIES
-	description = "A horde of mice arrives, and perhaps even the Rat King themselves."
+	description = "Прибывает орда мышей, а возможно, и сам Крысиный Король."
 
 /datum/round_event/mice_migration
 	var/minimum_mice = 5
 	var/maximum_mice = 15
 
 /datum/round_event/mice_migration/announce(fake)
-	var/cause = pick("space-winter", "budget-cuts", "Ragnarok",
-		"space being cold", "\[REDACTED\]", "climate change",
-		"bad luck")
-	var/plural = pick("a number of", "a horde of", "a pack of", "a swarm of",
-		"a whoop of", "not more than [maximum_mice]")
-	var/name = pick("rodents", "mice", "squeaking things",
-		"wire eating mammals", "\[REDACTED\]", "energy draining parasites")
-	var/movement = pick("migrated", "swarmed", "stampeded", "descended")
-	var/location = pick("maintenance tunnels", "maintenance areas",
-		"\[REDACTED\]", "place with all those juicy wires")
+	var/cause = pick("космической зимы", "сокращения бюджета", "Рагнарёка",
+		"холодного космоса", "\[УДАЛЕНО\]", "изменения климата",
+		"неудачи")
+	var/plural = pick("несколько", "орда", "стая", "рой",
+		"толпа", "не более [maximum_mice]")
+	var/name = pick("грызунов", "мышей", "пищащих существ",
+		"поедающих провода млекопитающих", "\[УДАЛЕНО\]", "потребляющих энергию паразитов")
+	var/movement = pick("мигрировали", "роились", "пронеслись", "спустились")
+	var/location = pick("технические тоннели", "технические зоны",
+		"\[УДАЛЕНО\]", "место со всеми этими сочными проводами")
 
-	priority_announce("Due to [cause], [plural] [name] have [movement] \
-		into the [location].", "Migration Alert",
+	priority_announce("Из-за [cause], [plural] [name] [movement] \
+		в [location].", "Оповещение о миграции",
 		'sound/mobs/non-humanoids/mouse/mousesqueek.ogg')
 
 /datum/round_event/mice_migration/start()

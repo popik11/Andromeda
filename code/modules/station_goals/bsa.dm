@@ -15,7 +15,7 @@ GLOBAL_VAR_INIT(bsa_unlock, FALSE)
 		"Нам требуется, чтобы вы построили БСА-[rand(1,99)] на вашей станции.",
 		"",
 		"Базовые компоненты доступны для доставки через карго.",
-		"-Военное Командование Нанотрейзен</blockquote>",
+		"-Военный Космический Флот</blockquote>",
 	).Join("\n")
 
 /datum/station_goal/bluespace_cannon/on_report()

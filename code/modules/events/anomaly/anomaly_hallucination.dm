@@ -1,5 +1,5 @@
 /datum/round_event_control/anomaly/anomaly_hallucination
-	name = "Anomaly: Hallucination"
+	name = "Аномалия: Галлюцинация"
 	typepath = /datum/round_event/anomaly/anomaly_hallucination
 
 	min_players = 10

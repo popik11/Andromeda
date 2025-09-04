@@ -1,6 +1,6 @@
 /obj/structure/chair
 	name = "chair"
-	desc = "You sit in this. Either by will or force."
+	desc = "Ты сядешь в это. Либо по своей воле, либо силой."
 	icon = 'icons/obj/chairs.dmi'
 	icon_state = "chair"
 	anchored = TRUE
@@ -40,14 +40,14 @@
 
 	if(being_buckled == buckler)
 		being_buckled.visible_message(
-			span_notice("[buckler] sits down on [src]."),
-			span_notice("You sit down on [src]."),
+			span_notice("[buckler] садится на [declent_ru(NOMINATIVE)]."),
+			span_notice("Вы садитесь на [declent_ru(NOMINATIVE)]."),
 			visible_message_flags = ALWAYS_SHOW_SELF_MESSAGE,
 		)
 	else
 		being_buckled.visible_message(
-			span_notice("[buckler] sits [being_buckled] down on [src]."),
-			span_notice("[buckler] sits you down on [src]."),
+			span_notice("[buckler] усаживает [being_buckled] на [declent_ru(NOMINATIVE)]."),
+			span_notice("[buckler] усаживает вас на [declent_ru(NOMINATIVE)]."),
 			visible_message_flags = ALWAYS_SHOW_SELF_MESSAGE,
 		)
 
@@ -57,14 +57,14 @@
 
 	if(being_unbuckled == unbuckler)
 		being_unbuckled.visible_message(
-			span_notice("[unbuckler] stands up from [src]."),
-			span_notice("You stand up from [src]."),
+			span_notice("[unbuckler] встаёт с [declent_ru(GENITIVE)]."),
+			span_notice("Вы встаёте с [declent_ru(GENITIVE)]."),
 			visible_message_flags = ALWAYS_SHOW_SELF_MESSAGE,
 		)
 	else
 		being_unbuckled.visible_message(
-			span_notice("[unbuckler] stands [being_unbuckled] up from [src]."),
-			span_notice("[unbuckler] stands you up from [src]."),
+			span_notice("[unbuckler] поднимает [being_unbuckled] с [declent_ru(GENITIVE)]."),
+			span_notice("[unbuckler] поднимает вас с [declent_ru(GENITIVE)]."),
 			visible_message_flags = ALWAYS_SHOW_SELF_MESSAGE,
 		)
 

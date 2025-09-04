@@ -1,17 +1,17 @@
 /datum/round_event_control/operative
-	name = "Lone Operative"
+	name = "Одинокий Оперативник"
 	typepath = /datum/round_event/ghost_role/operative
-	weight = 0 //its weight is relative to how much stationary and neglected the nuke disk is. See nuclearbomb.dm. Shouldn't be dynamic hijackable.
+	weight = 0 //его вес зависит от того, насколько стационарен и заброшен ядерный диск. Смотри nuclearbomb.dm. Не должен быть доступен для захвата через dynamic.
 	max_occurrences = 1
 	category = EVENT_CATEGORY_INVASION
-	description = "A single nuclear operative assaults the station."
+	description = "Одинокий ядерный оперативник атакует станцию."
 
 /datum/round_event_control/operative/can_spawn_event(players_amt, allow_magic)
 	return ..() && SSdynamic.antag_events_enabled
 
 /datum/round_event/ghost_role/operative
 	minimum_required = 1
-	role_name = "lone operative"
+	role_name = "одинокий оперативник"
 	fakeable = FALSE
 
 /datum/round_event/ghost_role/operative/spawn_role()
@@ -34,7 +34,7 @@
 
 	Mind.add_antag_datum(/datum/antagonist/nukeop/lone)
 
-	message_admins("[ADMIN_LOOKUPFLW(operative)] has been made into lone operative by an event.")
-	operative.log_message("was spawned as a lone operative by an event.", LOG_GAME)
+	message_admins("[ADMIN_LOOKUPFLW(operative)] был создан как одинокий оперативник через событие.")
+	operative.log_message("был создан как одинокий оперативник через событие.", LOG_GAME)
 	spawned_mobs += operative
 	return SUCCESSFUL_SPAWN

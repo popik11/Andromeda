@@ -50,23 +50,23 @@
 	. = ..()
 	affected_mob.apply_status_effect(/datum/status_effect/stoned)
 	if(SPT_PROB(1, seconds_per_tick))
-		var/smoke_message = pick("You feel relaxed.","You feel calmed.","Your mouth feels dry.","You could use some water.","Your heart beats quickly.","You feel clumsy.","You crave junk food.","You notice you've been moving more slowly.")
+		var/smoke_message = pick("Вы чувствуете расслабление.","Вы чувствуете спокойствие.","Во рту пересохло.","Вам бы попить воды.","Сердце бьётся чаще.","Вы чувствуете неуклюжесть.","Хочется вредной еды.","Вы замечаете, что двигаетесь медленнее.")
 		to_chat(affected_mob, span_notice("[smoke_message]"))
 	if(SPT_PROB(2, seconds_per_tick))
 		affected_mob.emote(pick("smile","laugh","giggle"))
-	affected_mob.adjust_nutrition(-0.15 * REM * seconds_per_tick) //munchies
-	if(SPT_PROB(4, seconds_per_tick) && affected_mob.body_position == LYING_DOWN && !affected_mob.IsSleeping()) //chance to fall asleep if lying down
-		to_chat(affected_mob, span_warning("You doze off..."))
+	affected_mob.adjust_nutrition(-0.15 * REM * seconds_per_tick) //жор
+	if(SPT_PROB(4, seconds_per_tick) && affected_mob.body_position == LYING_DOWN && !affected_mob.IsSleeping()) //шанс уснуть если лёжа
+		to_chat(affected_mob, span_warning("Вы задремали..."))
 		affected_mob.Sleeping(10 SECONDS)
-	if(SPT_PROB(4, seconds_per_tick) && affected_mob.buckled && affected_mob.body_position != LYING_DOWN && !affected_mob.IsParalyzed()) //chance to be couchlocked if sitting
-		to_chat(affected_mob, span_warning("It's too comfy to move..."))
+	if(SPT_PROB(4, seconds_per_tick) && affected_mob.buckled && affected_mob.body_position != LYING_DOWN && !affected_mob.IsParalyzed()) //шанс залипнуть если сидишь
+		to_chat(affected_mob, span_warning("Слишком удобно, чтобы двигаться..."))
 		affected_mob.Paralyze(10 SECONDS)
 
 /datum/reagent/drug/nicotine
 	name = "Nicotine"
 	description = "Slightly reduces stun times. If overdosed it will deal toxin and oxygen damage."
 	color = "#60A584" // rgb: 96, 165, 132
-	taste_description = "smoke"
+	taste_description = "дыма"
 	trippy = FALSE
 	overdose_threshold = 15
 	metabolization_rate = 0.125 * REAGENTS_METABOLISM
@@ -82,7 +82,7 @@
 /datum/reagent/drug/nicotine/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, times_fired)
 	. = ..()
 	if(SPT_PROB(0.5, seconds_per_tick))
-		var/smoke_message = pick("You feel relaxed.", "You feel calmed.","You feel alert.","You feel rugged.")
+		var/smoke_message = pick("Вы чувствуете расслабление.","Вы чувствуете спокойствие.","Вы чувствуете бодрость.","Вы чувствуете себя крутым.")
 		to_chat(affected_mob, span_notice("[smoke_message]"))
 	affected_mob.add_mood_event("smoked", /datum/mood_event/smoked)
 	affected_mob.remove_status_effect(/datum/status_effect/jitter)

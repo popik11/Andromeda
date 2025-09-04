@@ -474,7 +474,7 @@
 		return
 	if(buckle_message_cooldown <= world.time)
 		buckle_message_cooldown = world.time + 25
-		balloon_alert(user, "can't move while buckled!")
+		balloon_alert(user, "вы не можете двигаться пока пристёгнуты!")
 	return
 
 /**

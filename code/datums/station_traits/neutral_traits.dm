@@ -1,44 +1,44 @@
-///This station traits gives 5 bananium sheets to the clown (and every dead clown out there in deep space or lavaland).
+///Этот станционный трейт дает 5 листов бананиума клоуну (и каждому мертвому клоуну в глубоком космосе или на лаваленде).
 /datum/station_trait/bananium_shipment
-	name = "Bananium Shipment"
+	name = "Поставка бананиума"
 	trait_type = STATION_TRAIT_NEUTRAL
 	weight = 5
 	cost = STATION_TRAIT_COST_LOW
-	report_message = "Rumors has it that the clown planet has been sending support packages to clowns in this system."
+	report_message = "Ходят слухи, что планета клоунов отправляет пакеты поддержки клоунам в этой системе."
 	trait_to_give = STATION_TRAIT_BANANIUM_SHIPMENTS
 
 /datum/station_trait/bananium_shipment/get_pulsar_message()
-	var/advisory_string = "Advisory Level: <b>Clown Planet</b></center><BR>"
-	advisory_string += "Your sector's advisory level is Clown Planet! Our bike horns have picked up on a large bananium stash. Clowns show a large influx of clowns on your station. We highly advise you to slip any threats to keep Honkotrasen assets within the Banana Sector. The Department of Intelligence advises defending chemistry from any clowns that are trying to make baldium or space lube."
+	var/advisory_string = "Уровень угрозы: <b>Планета Клоунов</b></center><BR>"
+	advisory_string += "Уровень угрозы вашего сектора - Планета Клоунов! Наши велосипедные гудки засекли большое хранилище бананиума. На вашей станции наблюдается большой приток клоунов. Мы настоятельно советуем вам подскальзывать любые угрозы для защиты активов Хонкотрейзен в Банановом Секторе. Департамент Разведки рекомендует защищать химическую лабораторию от любых клоунов, пытающихся создать бальдиум или космическую смазку."
 	return advisory_string
 
 /datum/station_trait/unnatural_atmosphere
-	name = "Unnatural atmospherical properties"
+	name = "Неестественные атмосферные свойства"
 	trait_type = STATION_TRAIT_NEUTRAL
 	weight = 5
 	cost = STATION_TRAIT_COST_LOW
 	show_in_report = TRUE
-	report_message = "System's local planet has irregular atmospherical properties."
+	report_message = "Местная планета системы обладает нерегулярными атмосферными свойствами."
 	trait_to_give = STATION_TRAIT_UNNATURAL_ATMOSPHERE
 
 	// This station trait modifies the atmosphere, which is too far past the time admins are able to revert it
 	can_revert = FALSE
 
 /datum/station_trait/spider_infestation
-	name = "Spider Infestation"
+	name = "Нашествие пауков"
 	trait_type = STATION_TRAIT_NEUTRAL
 	weight = 5
-	report_message = "We have introduced a natural countermeasure to reduce the number of rodents on board your station."
+	report_message = "Мы внедрили естественную контрмеру для сокращения количества грызунов на борту вашей станции."
 	trait_to_give = STATION_TRAIT_SPIDER_INFESTATION
 
 /datum/station_trait/unique_ai
-	name = "Unique AI"
+	name = "Уникальный ИИ"
 	trait_type = STATION_TRAIT_NEUTRAL
 	trait_flags = parent_type::trait_flags | STATION_TRAIT_REQUIRES_AI
 	weight = 5
 	show_in_report = TRUE
-	report_message = "For experimental purposes, this station AI might show divergence from default lawset. Do not meddle with this experiment, we've removed \
-		access to your set of alternative upload modules because we know you're already thinking about meddling with this experiment."
+	report_message = "В экспериментальных целях, ИИ этой станции может демонстрировать отклонения от стандартного набора законов. Не вмешивайтесь в этот эксперимент, мы удалили \
+		доступ к вашему набору альтернативных модулей загрузки, потому что мы знаем, что вы уже думаете о вмешательстве в этот эксперимент."
 	trait_to_give = STATION_TRAIT_UNIQUE_AI
 
 /datum/station_trait/unique_ai/on_round_start()
@@ -47,12 +47,12 @@
 		ai.show_laws()
 
 /datum/station_trait/ian_adventure
-	name = "Ian's Adventure"
+	name = "Приключение Иана"
 	trait_type = STATION_TRAIT_NEUTRAL
 	weight = 5
 	show_in_report = FALSE
 	cost = STATION_TRAIT_COST_LOW
-	report_message = "Ian has gone exploring somewhere in the station."
+	report_message = "Иан отправился исследовать станцию.. где-то."
 
 /datum/station_trait/ian_adventure/on_round_start()
 	for(var/mob/living/basic/pet/dog/corgi/dog in GLOB.mob_list)
@@ -107,50 +107,50 @@
 		qdel(old_dog)
 
 /datum/station_trait/glitched_pdas
-	name = "PDA glitch"
-	trait_type = STATION_TRAIT_NEUTRAL
-	weight = 5
-	show_in_report = TRUE
-	cost = STATION_TRAIT_COST_MINIMAL
-	report_message = "Something seems to be wrong with the PDAs issued to you all this shift. Nothing too bad though."
-	trait_to_give = STATION_TRAIT_PDA_GLITCHED
+    name = "Сбой КПК"
+    trait_type = STATION_TRAIT_NEUTRAL
+    weight = 5
+    show_in_report = TRUE
+    cost = STATION_TRAIT_COST_MINIMAL
+    report_message = "Что-то не так с КПК, выданными вам в эту смену. Это не связанно с мессенджером 'МаксиНТ', не удаляйте его ни в коем случае!"
+    trait_to_give = STATION_TRAIT_PDA_GLITCHED
 
-/datum/station_trait/announcement_intern
-	name = "Announcement Intern"
-	trait_type = STATION_TRAIT_NEUTRAL
-	weight = 1
-	show_in_report = TRUE
-	report_message = "Please be nice to him."
-	blacklist = list(/datum/station_trait/announcement_medbot, /datum/station_trait/birthday)
+//datum/station_trait/announcement_intern /// Rewokin: Убрал это, т.к. он меняет анонсера.
+//	name = "Стажёр объявлений"
+//	trait_type = STATION_TRAIT_NEUTRAL
+//	weight = 1
+//	show_in_report = TRUE
+//	report_message = "Пожалуйста, будьте к нему добры."
+//	blacklist = list(/datum/station_trait/announcement_medbot, /datum/station_trait/birthday)
 
-/datum/station_trait/announcement_intern/New()
-	. = ..()
-	SSstation.announcer = /datum/centcom_announcer/intern
+//datum/station_trait/announcement_intern/New()
+//	. = ..()
+//	SSstation.announcer = /datum/centcom_announcer/intern
 
-/datum/station_trait/announcement_intern/get_pulsar_message()
-	var/advisory_string = "Advisory Level: <b>(TITLE HERE)</b></center><BR>"
-	advisory_string += "(Copy/Paste the summary provided by the Threat Intelligence Office in this field. You shouldn't have any trouble with this just make sure to replace this message before hitting the send button. Also, make sure there's coffee ready for the meeting at 06:00 when you're done.)"
-	return advisory_string
+//datum/station_trait/announcement_intern/get_pulsar_message()
+//	var/advisory_string = "Advisory Level: <b>(TITLE HERE)</b></center><BR>"
+//	advisory_string += "(Copy/Paste the summary provided by the Threat Intelligence Office in this field. You shouldn't have any trouble with this just make sure to replace this message before hitting the send button. Also, make sure there's coffee ready for the meeting at 06:00 when you're done.)"
+//	return advisory_string
 
-/datum/station_trait/announcement_medbot
-	name = "Announcement \"System\""
-	trait_type = STATION_TRAIT_NEUTRAL
-	weight = 1
-	show_in_report = TRUE
-	report_message = "Our announcement system is under scheduled maintanance at the moment. Thankfully, we have a backup."
-	blacklist = list(/datum/station_trait/announcement_intern, /datum/station_trait/birthday)
+//datum/station_trait/announcement_medbot
+//	name = "Announcement \"System\""
+//	trait_type = STATION_TRAIT_NEUTRAL
+//	weight = 1
+//	show_in_report = TRUE
+//	report_message = "Our announcement system is under scheduled maintanance at the moment. Thankfully, we have a backup."
+//	blacklist = list(/datum/station_trait/announcement_intern, /datum/station_trait/birthday)
 
-/datum/station_trait/announcement_medbot/New()
-	. = ..()
-	SSstation.announcer = /datum/centcom_announcer/medbot
+///datum/station_trait/announcement_medbot/New()
+//	. = ..()
+//	SSstation.announcer = /datum/centcom_announcer/medbot
 
 /datum/station_trait/colored_assistants
-	name = "Colored Assistants"
+	name = "Разноцветные асистенты"
 	trait_type = STATION_TRAIT_NEUTRAL
 	weight = 10
 	show_in_report = TRUE
 	cost = STATION_TRAIT_COST_MINIMAL
-	report_message = "Due to a shortage in standard issue jumpsuits, we have provided your assistants with one of our backup supplies."
+	report_message = "Из-за нехватки комбинезонов стандартного образца, мы предоставили вашим ассистентам один из наших резервных запасов."
 	blacklist = list(/datum/station_trait/assistant_gimmicks)
 
 /datum/station_trait/colored_assistants/New()
@@ -160,18 +160,18 @@
 	GLOB.colored_assistant = new new_colored_assistant_type
 
 /datum/station_trait/birthday
-	name = "Employee Birthday"
+	name = "День рождения сотрудника"
 	trait_type = STATION_TRAIT_NEUTRAL
 	weight = 2
 	show_in_report = TRUE
-	report_message = "We here at Nanotrasen would all like to wish Employee Name a very happy birthday"
+	report_message = "Мы в Нанотрейзен хотим поздравить Имя Сотрудника с днём рождения"
 	trait_to_give = STATION_TRAIT_BIRTHDAY
-	blacklist = list(/datum/station_trait/announcement_intern, /datum/station_trait/announcement_medbot) //Overiding the annoucer hides the birthday person in the annoucement message.
-	///Variable that stores a reference to the person selected to have their birthday celebrated.
+//	blacklist = list(/datum/station_trait/announcement_intern, /datum/station_trait/announcement_medbot) //Переопределение диктора скрывает именинника в сообщении объявления.
+	///Переменная, хранящая ссылку на человека, выбранного для празднования дня рождения.
 	var/mob/living/carbon/human/birthday_person
-	///Variable that holds the real name of the birthday person once selected, just incase the birthday person's real_name changes.
+	///Переменная, хранящая настоящее имя именинника после выбора, на случай изменения real_name именинника.
 	var/birthday_person_name = ""
-	///Variable that admins can override with a player's ckey in order to set them as the birthday person when the round starts.
+	///Переменная, которую админы могут переопределить ckey игрока, чтобы установить его именинником при начале раунда.
 	var/birthday_override_ckey
 
 /datum/station_trait/birthday/New()
@@ -187,7 +187,7 @@
 	. = ..()
 	if(birthday_override_ckey)
 		if(!check_valid_override())
-			message_admins("Attempted to make [birthday_override_ckey] the birthday person but they are not a valid station role. A random birthday person has be selected instead.")
+			message_admins("Попытка сделать [birthday_override_ckey] именинником провалилась, так как они не являются валидной станционной ролью. Вместо этого выбран случайный именинник.")
 
 	if(!birthday_person)
 		var/list/birthday_options = list()
@@ -216,8 +216,8 @@
 
 
 /datum/station_trait/birthday/proc/announce_birthday()
-	report_message = "We here at Nanotrasen would all like to wish [birthday_person ? birthday_person_name : "Employee Name"] a very happy birthday."
-	priority_announce("Happy birthday to [birthday_person ? birthday_person_name : "Employee Name"]! Nanotrasen wishes you a very happy [birthday_person ? thtotext(birthday_person.age + 1) : "255th"] birthday.")
+	report_message = "Мы в Нанотрейзен хотим поздравить [birthday_person ? birthday_person_name : "Имя Сотрудника"] с днём рождения."
+	priority_announce("С днём рождения [birthday_person ? birthday_person_name : "Имя Сотрудника"]! Нанотрейзен поздравляет вас с [birthday_person ? thtotext(birthday_person.age + 1) : "255-м"] днём рождения.")
 	if(birthday_person)
 		playsound(birthday_person, 'sound/items/party_horn.ogg', 50)
 		birthday_person.add_mood_event("birthday", /datum/mood_event/birthday)
@@ -255,18 +255,18 @@
 
 /obj/item/birthday_invite
 	name = "birthday invitation"
-	desc = "A card stating that it's someone's birthday today."
+	desc = "Открытка с сообщением, что у кого-то сегодня день рождения."
 	resistance_flags = FLAMMABLE
 	w_class = WEIGHT_CLASS_TINY
 
 /obj/item/birthday_invite/proc/setup_card(birthday_name)
-	desc = "A card stating that its [birthday_name]'s birthday today."
+	desc = "Открытка с сообщением, что сегодня день рождения у [birthday_name]."
 	icon_state = "paperslip_words"
 	icon = 'icons/obj/service/bureaucracy.dmi'
 
 /obj/item/clothing/head/costume/party
 	name = "party hat"
-	desc = "A crappy paper hat that you are REQUIRED to wear."
+	desc = "Дерьмовая бумажная шляпа, которую вы ОБЯЗАНЫ носить."
 	icon_state = "party_hat"
 	greyscale_config =  /datum/greyscale_config/party_hat
 	greyscale_config_worn = /datum/greyscale_config/party_hat/worn
@@ -292,12 +292,12 @@
 	greyscale_config_worn = /datum/greyscale_config/festive_hat/worn
 
 /datum/station_trait/scryers
-	name = "Scryers"
+	name = "Ясновидящие"
 	trait_type = STATION_TRAIT_NEUTRAL
 	weight = 2
 	cost = STATION_TRAIT_COST_LOW
 	show_in_report = TRUE
-	report_message = "Nanotrasen has chosen your station for an experiment - everyone has free scryers! Use these to talk to other people easily and privately."
+	report_message = "Нанотрейзен выбрала вашу станцию для эксперимента - у всех есть бесплатные устройства! Используйте их для лёгкого и приватного общения с другими людьми."
 
 /datum/station_trait/scryers/New()
 	. = ..()
@@ -323,12 +323,12 @@
 	spawned.equip_to_slot_or_del(new_scryer, ITEM_SLOT_NECK, initial = FALSE)
 
 /datum/station_trait/wallets
-	name = "Wallets!"
+	name = "Кошельки!"
 	trait_type = STATION_TRAIT_NEUTRAL
 	show_in_report = TRUE
 	weight = 5
 	cost = STATION_TRAIT_COST_MINIMAL
-	report_message = "It has become temporarily fashionable to use a wallet, so everyone on the station has been issued one."
+	report_message = "Временно стало модно использовать кошельки, поэтому каждый на станции получил по одному."
 
 /datum/station_trait/wallets/New()
 	. = ..()
@@ -354,7 +354,7 @@
 
 	var/holochip_amount = id_card.registered_account.account_balance
 	new /obj/item/holochip(wallet, holochip_amount)
-	id_card.registered_account.adjust_money(-holochip_amount, "System: Withdrawal")
+	id_card.registered_account.adjust_money(-holochip_amount, "Система: Снятие средств")
 
 	new /obj/effect/spawner/random/entertainment/wallet_storage(wallet)
 
@@ -362,22 +362,22 @@
 	for(var/obj/item/item in wallet)
 		item.add_fingerprint(living_mob, ignoregloves = TRUE)
 
-/// Tells the area map generator to ADD MORE TREEEES
+// Говорит генератору карты области ДОБАВИТЬ БОЛЬШЕ ДЕРЕЕЕЕЕЕВЕЕЕВ
 /datum/station_trait/forested
-	name = "Forested"
+	name = "Лесистость"
 	trait_type = STATION_TRAIT_NEUTRAL
 	trait_to_give = STATION_TRAIT_FORESTED
 	trait_flags = STATION_TRAIT_PLANETARY
 	weight = 10
 	show_in_report = TRUE
-	report_message = "There sure are a lot of trees out there."
+	report_message = "Здесь действительно много деревьев."
 
 /datum/station_trait/linked_closets
-	name = "Closet Anomaly"
+	name = "Аномалия Шкафов"
 	trait_type = STATION_TRAIT_NEUTRAL
 	show_in_report = TRUE
 	weight = 1
-	report_message = "We've reports of high amount of trace eigenstasium on your station. Ensure that your closets are working correctly."
+	report_message = "Мы получили сообщения о высоком содержании следов эйгенстазиума на вашей станции. Убедитесь, что ваши шкафы работают.. правильно?"
 
 /datum/station_trait/linked_closets/on_round_start()
 	. = ..()
@@ -395,19 +395,19 @@
 		GLOB.eigenstate_manager.create_new_link(targets)
 
 
-#define PRO_SKUB "pro-skub"
-#define ANTI_SKUB "anti-skub"
-#define SKUB_IDFC "i don't frikkin' care"
+#define PRO_SKUB "за-скаб"
+#define ANTI_SKUB "против-скаб"
+#define SKUB_IDFC "мне всё равно"
 #define RANDOM_SKUB null //This means that if you forgot to opt in/against/out, there's a 50/50 chance to be pro or anti
 
-/// A trait that lets players choose whether they want pro-skub or anti-skub (or neither), and receive the appropriate equipment.
+/// Трейт, позволяющий игрокам выбрать, хотят ли они быть за-скаб или против-скаб (или ни то, ни другое), и получить соответствующее снаряжение.
 /datum/station_trait/skub
-	name = "The Great Skub Contention"
+	name = "Великий скаб спор"
 	trait_type = STATION_TRAIT_NEUTRAL
 	show_in_report = FALSE
 	weight = 2
 	sign_up_button = TRUE
-	/// List of people signed up to be either pro_skub or anti_skub
+	/// Список людей, записавшихся быть либо за_скаб, либо против_скаб
 	var/list/skubbers = list()
 
 /datum/station_trait/skub/New()
@@ -416,7 +416,7 @@
 
 /datum/station_trait/skub/setup_lobby_button(atom/movable/screen/lobby/button/sign_up/lobby_button)
 	RegisterSignal(lobby_button, COMSIG_ATOM_UPDATE_OVERLAYS, PROC_REF(on_lobby_button_update_overlays))
-	lobby_button.desc = "Are you pro-skub or anti-skub? Click to cycle through pro-skub, anti-skub, random and neutral."
+	lobby_button.desc = "Вы за-скаб или против-скаб? Нажмите для переключения между за-скаб, против-скаб, рандомным или остаться нейтрального мения."
 	return ..()
 
 /// Let late-joiners jump on this gimmick too.
@@ -444,16 +444,16 @@
 	switch(skub_stance)
 		if(PRO_SKUB)
 			skubbers[player.ckey] = ANTI_SKUB
-			lobby_button.balloon_alert(player, "anti-skub")
+			lobby_button.balloon_alert(player, "против-скаб")
 		if(ANTI_SKUB)
 			skubbers[player.ckey] = SKUB_IDFC
-			lobby_button.balloon_alert(player, "don't care")
+			lobby_button.balloon_alert(player, "всё равно")
 		if(SKUB_IDFC)
 			skubbers[player.ckey] = RANDOM_SKUB
-			lobby_button.balloon_alert(player, "on the best side")
+			lobby_button.balloon_alert(player, "святой рандом")
 		if(RANDOM_SKUB)
 			skubbers[player.ckey] = PRO_SKUB
-			lobby_button.balloon_alert(player, "pro-skub")
+			lobby_button.balloon_alert(player, "за-скаб")
 
 /datum/station_trait/skub/proc/on_lobby_button_update_overlays(atom/movable/screen/lobby/button/sign_up/lobby_button, list/overlays)
 	SIGNAL_HANDLER
@@ -500,15 +500,15 @@
 
 /// Crew don't ever spawn as enemies of the station. Obsesseds, blob infection, space changelings etc can still happen though
 /datum/station_trait/background_checks
-	name = "Station-Wide Background Checks"
-	report_message = "We replaced the intern doing your crew's background checks with a trained screener for this shift! \
-		That said, our enemies may just find another way to infiltrate the station, so be careful."
+	name = "Проверки биографий"
+	report_message = "Мы заменили стажёра, занимавшегося проверкой биографий вашего экипажа, на обученного специалиста на эту смену! \
+		Тем не менее, наши враги могут найти другой способ проникнуть на станцию, так что будьте осторожны."
 	trait_type = STATION_TRAIT_NEUTRAL
 	weight = 1
 	show_in_report = TRUE
 	can_revert = FALSE
 
-	dynamic_threat_id = "Background Checks"
+	dynamic_threat_id = "Проверки биографий"
 
 /datum/station_trait/background_checks/New()
 	. = ..()
@@ -524,7 +524,7 @@
 		dynamic_config[initial(ruleset.config_tag)][NAMEOF(ruleset, weight)] = 0
 
 /datum/station_trait/pet_day
-	name = "Bring Your Pet To Work Day"
+	name = "Приводи питомца на работу"
 	trait_type = STATION_TRAIT_NEUTRAL
 	show_in_report = FALSE
 	weight = 2
@@ -535,7 +535,7 @@
 	RegisterSignal(SSdcs, COMSIG_GLOB_JOB_AFTER_SPAWN, PROC_REF(on_job_after_spawn))
 
 /datum/station_trait/pet_day/setup_lobby_button(atom/movable/screen/lobby/button/sign_up/lobby_button)
-	lobby_button.desc = "Want to bring your innocent pet to a giant metal deathtrap? Click here to customize it!"
+	lobby_button.desc = "Хотите привести своего невинного питомца в гигантскую металлическую ловушку смерти? Нажмите здесь, чтобы настроить его!"
 	RegisterSignal(lobby_button, COMSIG_ATOM_UPDATE_OVERLAYS, PROC_REF(on_lobby_button_update_overlays))
 	return ..()
 
@@ -566,14 +566,14 @@
 /datum/station_trait/pet_day/proc/on_lobby_button_update_overlays(atom/movable/screen/lobby/button/sign_up/lobby_button, list/overlays)
 	overlays += "select_pet"
 
-/// We're pulling a Jim Kramer with this one boys
+/// Мы делаем Джима Крамера с этим, парни
 /datum/station_trait/gmm_spotlight
-	name = "GMM Economic Spotlight"
-	report_message = "This shift, the Galactic Mineral Market is doing a showcase on your crew's affulence! Every paycheck, the station newscasters will alert the crew who has the most credits."
+	name = "Экономическое оповещение ГМР"
+	report_message = "В эту смену Галактический Минеральный Рынок проводит демонстрацию благосостояния вашего экипажа! Каждую зарплату станционные дикторы будут оповещать экипаж о том, у кого больше всего кредитов."
 	trait_type = STATION_TRAIT_NEUTRAL
 	trait_to_give = STATION_TRAIT_ECONOMY_ALERTS
 	weight = 2
 	cost = STATION_TRAIT_COST_LOW
 	show_in_report = TRUE
 
-	dynamic_threat_id = "GMM Econ Spotlight"
+	dynamic_threat_id = "Экономическое оповещение ГМР"

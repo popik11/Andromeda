@@ -9,39 +9,39 @@ GLOBAL_DATUM(current_anonymous_theme, /datum/anonymous_theme)
 */
 /client/proc/anon_names()
 	set category = "Admin.Events"
-	set name = "Setup Anonymous Names"
+	set name = "Настройка Анонимных Имён"
 
 	if(GLOB.current_anonymous_theme)
-		var/response = tgui_alert(usr, "Anon mode is currently enabled. Disable?", "cold feet", list("Disable Anon Names", "Keep it Enabled"))
-		if(response != "Disable Anon Names")
+		var/response = tgui_alert(usr, "Анонимный режим уже включен. Отключить?", "Передумывание", list("Отключить Анонимные Имена", "Оставить Включённым"))
+		if(response != "Отключить Анонимные Имена")
 			return
-		message_admins(span_adminnotice("[key_name_admin(usr)] has disabled anonymous names."))
+		message_admins(span_adminnotice("[key_name_admin(usr)] отключил анонимные имена."))
 		QDEL_NULL(GLOB.current_anonymous_theme)
 		return
-	var/list/input_list = list("Cancel")
+	var/list/input_list = list("Отмена")
 	for(var/_theme in typesof(/datum/anonymous_theme))
 		var/datum/anonymous_theme/theme = _theme
 		input_list[initial(theme.name)] = theme
-	var/result = input(usr, "Choose an anonymous theme","going dark") as null|anything in input_list
-	if(!usr || !result || result == "Cancel")
+	var/result = input(usr, "Выберите анонимную тему","переход в тень") as null|anything in input_list
+	if(!usr || !result || result == "Отмена")
 		return
 	var/datum/anonymous_theme/chosen_theme = input_list[result]
-	var/extras_enabled = "No"
-	var/alert_players = "No"
-	if(SSticker.current_state > GAME_STATE_PREGAME) //before anonnames is done, for asking a sleep
+	var/extras_enabled = "Нет"
+	var/alert_players = "Нет"
+	if(SSticker.current_state > GAME_STATE_PREGAME) //до выполнения anonnames, для запроса сна
 		if(initial(chosen_theme.extras_enabled))
-			extras_enabled = tgui_alert(usr, extras_enabled, "extras", list("Yes", "No"))
-		alert_players = tgui_alert(usr, "Alert crew? These are IC Themed FROM centcom.", "announcement", list("Yes", "No"))
-	//turns "Yes" and "No" into TRUE and FALSE
-	extras_enabled = extras_enabled == "Yes"
-	alert_players = alert_players == "Yes"
+			extras_enabled = tgui_alert(usr, extras_enabled, "дополнительно", list("Да", "Нет"))
+		alert_players = tgui_alert(usr, "Уведомить экипаж? Это внутриигровая тематика ОТ ЦентКома.", "объявление", list("Да", "Нет"))
+	//превращаем "Да" и "Нет" в TRUE и FALSE
+	extras_enabled = extras_enabled == "Да"
+	alert_players = alert_players == "Да"
 	GLOB.current_anonymous_theme = new chosen_theme(extras_enabled, alert_players)
-	message_admins(span_adminnotice("[key_name_admin(usr)] has enabled anonymous names. THEME: [GLOB.current_anonymous_theme]."))
+	message_admins(span_adminnotice("[key_name_admin(usr)] включил анонимные имена. ТЕМА: [GLOB.current_anonymous_theme]."))
 
 /* Datum singleton initialized by the client proc to hold the naming generation */
 /datum/anonymous_theme
 	///name of the anonymous theme, seen by admins pressing buttons to enable this
-	var/name = "Randomized Names"
+	var/name = "Рандомизированные Имена"
 	///if admins get the option to enable extras, this is the prompt to enable it.
 	var/extras_prompt
 	///extra non-name related fluff that is optional for admins to enable. One example is the wizard theme giving everyone random robes.
@@ -78,7 +78,7 @@ GLOBAL_DATUM(current_anonymous_theme, /datum/anonymous_theme)
  * it's in a proc so it can be a non-constant expression.
  */
 /datum/anonymous_theme/proc/announce_to_all_players()
-	priority_announce("A recent bureaucratic error in the Organic Resources Department has resulted in a necessary full recall of all identities and names until further notice.", "Identity Loss", SSstation.announcer.get_rand_alert_sound())
+	priority_announce("Недавняя бюрократическая ошибка привела к необходимости полного отзыва всех идентичностей и имён до дальнейшего уведомления.", "Потеря идентичности", SSstation.announcer.get_rand_alert_sound())
 
 /**
  * anonymous_all_players: sets all crewmembers on station anonymous.
@@ -106,7 +106,7 @@ GLOBAL_DATUM(current_anonymous_theme, /datum/anonymous_theme)
  * called when the anonymous theme is removed regardless of extra theming
  */
 /datum/anonymous_theme/proc/restore_all_players()
-	priority_announce("Names and Identities have been restored.", "Identity Restoration", SSstation.announcer.get_rand_alert_sound())
+	priority_announce("Имена и идентичности восстановлены.", "Восстановление идентичности", SSstation.announcer.get_rand_alert_sound())
 	for(var/mob/living/player in GLOB.player_list)
 		if(!player.mind || (!ishuman(player) && !issilicon(player)) || player.mind.assigned_role.faction != FACTION_STATION)
 			continue
@@ -151,11 +151,11 @@ GLOBAL_DATUM(current_anonymous_theme, /datum/anonymous_theme)
 	name = "Employees"
 
 /datum/anonymous_theme/employees/announce_to_all_players()
-	priority_announce("As punishment for this station's poor productivity when compared to neighbor stations, names and identities will be restricted until further notice.", "Finance Report", SSstation.announcer.get_rand_alert_sound())
+	priority_announce("В качестве наказания за низкую продуктивность этой станции по сравнению с соседними станциями, имена и идентичности будут ограничены до дальнейшего уведомления.", "Финансовый отчёт", SSstation.announcer.get_rand_alert_sound())
 
 /datum/anonymous_theme/employees/anonymous_name(mob/target)
 	var/is_head_of_staff = target.mind.assigned_role.job_flags & JOB_HEAD_OF_STAFF
-	var/name = "[is_head_of_staff ? "Manager" : "Employee"] "
+	var/name = "[is_head_of_staff ? "Менеджер" : "Сотрудник"] "
 	for(var/i in 1 to 6)
 		if(prob(30) || i == 1)
 			name += ascii2text(rand(65, 90)) //A - Z
@@ -166,11 +166,11 @@ GLOBAL_DATUM(current_anonymous_theme, /datum/anonymous_theme)
 /datum/anonymous_theme/employees/anonymous_ai_name(is_ai = FALSE)
 	var/verbs = capitalize(pick(GLOB.ing_verbs))
 	var/phonetic = pick(GLOB.phonetic_alphabet)
-	return "Employee [is_ai ? "Core" : JOB_ASSISTANT] [verbs] [phonetic]"
+	return "Сотрудник [is_ai ? "Ядро" : JOB_ASSISTANT] [verbs] [phonetic]"
 
 /datum/anonymous_theme/wizards
-	name = "Wizard Academy"
-	extras_prompt = "Give everyone random robes too?"
+	name = "Академия Волшебников"
+	extras_prompt = "Также выдать всем случайные мантии?"
 
 /datum/anonymous_theme/wizards/player_extras(mob/living/player)
 	var/random_path = pick(
@@ -184,7 +184,7 @@ GLOBAL_DATUM(current_anonymous_theme, /datum/anonymous_theme)
 	player.put_in_hands(new random_path())
 
 /datum/anonymous_theme/wizards/announce_to_all_players()
-	priority_announce("Your station has been caught by a Wizard Federation Memetic Hazard. You are not y0urself, and yo% a2E 34!NOT4--- Welcome to the Academy, apprentices!", "Memetic Hazard", SSstation.announcer.get_rand_alert_sound())
+	priority_announce("Ваша станция подверглась меметической угрозе Федерации Волшебников. Вы не являетесь с0б0й, и в@ 2Е 34!НЕ4--- Добро пожаловать в Академию, ученики!", "Меметическая угроза", SSstation.announcer.get_rand_alert_sound())
 
 /datum/anonymous_theme/wizards/anonymous_name(mob/target)
 	var/wizard_name_first = pick(GLOB.wizard_first)
@@ -192,35 +192,35 @@ GLOBAL_DATUM(current_anonymous_theme, /datum/anonymous_theme)
 	return "[wizard_name_first] [wizard_name_second]"
 
 /datum/anonymous_theme/wizards/anonymous_ai_name(is_ai = FALSE)
-	return "Crystallized Knowledge [is_ai ? "Nexus" : "Sliver"] +[rand(1,99)]" //Could two people roll the same number? Yeah, probably. Do I CARE? Nawww
+	return "Кристаллизованное Знание [is_ai ? "Нексус" : "Осколок"] +[rand(1,99)]" //Могут ли два человека выпасть на одно число? Да, вероятно. Мне ВАЖНО? Неаа
 
 /datum/anonymous_theme/spider_clan
-	name = "Spider Clan"
+	name = "Клан Пауков"
 
 /datum/anonymous_theme/spider_clan/anonymous_name(mob/target)
 	return "[pick(GLOB.ninja_titles)] [pick(GLOB.ninja_names)]"
 
 /datum/anonymous_theme/spider_clan/announce_to_all_players()
-	priority_announce("Your station has been sold out to the Spider Clan. Your new designations will be applied now.", "New Management", SSstation.announcer.get_rand_alert_sound())
+	priority_announce("Ваша станция продана Клану Пауков. Ваши новые обозначения будут применены сейчас.", "Новое руководство", SSstation.announcer.get_rand_alert_sound())
 
 /datum/anonymous_theme/spider_clan/anonymous_ai_name(is_ai = FALSE)
 	var/posibrain_name = pick(GLOB.posibrain_names)
 	if(is_ai)
-		return "Shaolin Templemaster [posibrain_name]"
+		return "Шаолиньский Мастер Храма [posibrain_name]"
 	else
 		var/martial_prefix = capitalize(pick(GLOB.martial_prefix))
-		var/martial_style = pick("Monkey", "Tiger", "Viper", "Mantis", "Crane", "Panda", "Bat", "Bear", "Centipede", "Frog")
+		var/martial_style = pick("Обезьяны", "Тигра", "Гадюки", "Богомола", "Журавля", "Панды", "Летучей Мыши", "Медведя", "Сороконожки", "Лягушки")
 		return "\"[martial_prefix] [martial_style]\" [posibrain_name]"
 
 /datum/anonymous_theme/station
-	name = "Stations?"
-	extras_prompt = "Also set station name to be a random human name?"
+	name = "Станции?"
+	extras_prompt = "Также установить название станции как случайное человеческое имя?"
 
 /datum/anonymous_theme/station/theme_extras()
 	set_station_name("[pick(GLOB.first_names)] [pick(GLOB.last_names)]")
 
 /datum/anonymous_theme/station/announce_to_all_players()
-	priority_announce("Confirmed level 9 reality error event near [station_name()]. All personnel must try their best to carry on, as to not trigger more reality events by accident.", "Central Command Higher Dimensional Affairs", 'sound/announcer/notice/notice1.ogg')
+	priority_announce("Подтверждено событие ошибки реальности 9 уровня вблизи [station_name()]. Весь персонал должен стараться продолжать работу в обычном режиме, чтобы случайно не спровоцировать дополнительные события реальности.", "Дела высших измерений", 'sound/announcer/notice/notice1.ogg')
 
 /datum/anonymous_theme/station/anonymous_name(mob/target)
 	return new_station_name()

@@ -1347,7 +1347,7 @@
 
 	if((reading_check_flags & READING_CHECK_LIGHT) && !has_light_nearby() && !has_nightvision())
 		if(!silent)
-			to_chat(src, span_warning("Здесь слишком темно, чтобы читать!"))
+			to_chat(src, span_warning("Здесь слишком темно, чтоб что-то прочесть!"))
 		return FALSE
 
 	return TRUE

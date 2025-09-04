@@ -1,14 +1,14 @@
 // Simple hidden event that adds a few more latejoins and midrounds to the round
 // Keeps Greenshifts on their toes and prevents metagaming
 /datum/round_event_control/dynamic_tweak
-	name = "Dynamic Tweak"
+	name = "Динамическая Настройка"
 	typepath = /datum/round_event/dynamic_tweak
 	weight = 10
 	max_occurrences = 1
 	earliest_start = 20 MINUTES
 	alert_observers = FALSE
 	category = EVENT_CATEGORY_INVASION
-	description = "Allows Dynamic to spawn another midround or latejoin. Gives some spice to Greenshifts."
+	description = "Позволяет Dynamic создать дополнительного мидраунд или лейтджойн антагониста. Добавляет перчинки в Зелёные смены."
 
 /datum/round_event_control/dynamic_tweak/New()
 	. = ..()
@@ -32,4 +32,4 @@
 	SSdynamic.rulesets_to_spawn[HEAVY_MIDROUND] += new_heavies
 	SSdynamic.rulesets_to_spawn[LATEJOIN] += new_latejoins
 
-	message_admins("Event: Dynamic Tweak added [new_latejoins] latejoin\s, [new_lights] light midround\s and [new_heavies] heavy midround\s.")
+	message_admins("Событие: Динамическая Настройка добавила [new_latejoins] лейтджойн, [new_lights] легких мидраунд и [new_heavies] тяжелых мидраунд.")

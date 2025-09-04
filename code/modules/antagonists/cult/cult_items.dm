@@ -603,7 +603,7 @@ Striking a noncultist, however, will tear their flesh."}
 
 /obj/item/shuttle_curse
 	name = "cursed orb"
-	desc = "You peer within this smokey orb and glimpse terrible fates befalling the emergency escape shuttle. "
+	desc = "Вы заглядываете внутрь этой дымчатой сферы и видите ужасные судьбы, которые постигнут шаттл экстренной эвакуации."
 	icon = 'icons/obj/antags/cult/items.dmi'
 	icon_state = "shuttlecurse"
 	///how many times has the shuttle been cursed so far?
@@ -617,14 +617,14 @@ Striking a noncultist, however, will tear their flesh."}
 	if(!IS_CULTIST(user))
 		user.dropItemToGround(src, TRUE)
 		user.Paralyze(100)
-		to_chat(user, span_warning("A powerful force shoves you away from [src]!"))
+		to_chat(user, span_warning("Мощная сила отбрасывает вас от [src]!"))
 		return
 	if(totalcurses >= MAX_SHUTTLE_CURSES)
-		to_chat(user, span_warning("You try to shatter the orb, but it remains as solid as a rock!"))
-		to_chat(user, span_danger(span_big("It seems that the blood cult has exhausted its ability to curse the emergency escape shuttle. It would be unwise to create more cursed orbs or to continue to try to shatter this one.")))
+		to_chat(user, span_warning("Вы пытаетесь разбить сферу, но она остаётся твёрдой, как камень!"))
+		to_chat(user, span_danger(span_big("Похоже, культ крови исчерпал свою способность проклинать шаттл экстренной эвакуации. Создавать новые проклятые сферы или пытаться разбить эту далее было бы неразумно.")))
 		return
 	if(locate(/obj/narsie) in SSpoints_of_interest.narsies)
-		to_chat(user, span_warning("Nar'Sie is already on this plane, there is no delaying the end of all things."))
+		to_chat(user, span_warning("Нар'Си уже на этом плане, нет смысла оттягивать конец всего сущего."))
 		return
 
 	if(SSshuttle.emergency.mode == SHUTTLE_CALL)
@@ -648,26 +648,26 @@ Striking a noncultist, however, will tear their flesh."}
 		if(surplus > 0)
 			SSshuttle.block_recall(surplus)
 		totalcurses++
-		to_chat(user, span_danger("You shatter the orb! A dark essence spirals into the air, then disappears."))
+		to_chat(user, span_danger("Вы разбиваете сферу! Тёмная сущность взвивается в воздух и исчезает."))
 		playsound(user.loc, 'sound/effects/glass/glassbr1.ogg', 50, TRUE)
 
 		if(!remaining_curses)
 			remaining_curses = strings(CULT_SHUTTLE_CURSE, "curse_announce")
 
-		var/curse_message = pick_n_take(remaining_curses) || "Something has gone horrendously wrong..."
+		var/curse_message = pick_n_take(remaining_curses) || "Произошло что-то ужасно неправильное..."
 
-		curse_message += " The shuttle will be delayed by three minutes."
-		priority_announce("[curse_message]", "System Failure", 'sound/announcer/notice/notice1.ogg')
+		curse_message += " Вылет шаттла будет задержан на три минуты."
+		priority_announce("[curse_message]", "Сбой системы", 'sound/announcer/notice/notice1.ogg')
 		if(MAX_SHUTTLE_CURSES-totalcurses <= 0)
-			to_chat(user, span_danger(span_big("You sense that the emergency escape shuttle can no longer be cursed. It would be unwise to create more cursed orbs.")))
+			to_chat(user, span_danger(span_big("Вы чувствуете, что шаттл экстренной эвакуации больше нельзя проклясть. Создавать новые проклятые сферы было бы неразумно.")))
 		else if(MAX_SHUTTLE_CURSES-totalcurses == 1)
-			to_chat(user, span_danger(span_big("You sense that the emergency escape shuttle can only be cursed one more time.")))
+			to_chat(user, span_danger(span_big("Вы чувствуете, что шаттл экстренной эвакуации можно проклясть всего лишь ещё один раз.")))
 		else
-			to_chat(user, span_danger(span_big("You sense that the emergency escape shuttle can only be cursed [MAX_SHUTTLE_CURSES-totalcurses] more times.")))
+			to_chat(user, span_danger(span_big("Вы чувствуете, что шаттл экстренной эвакуации можно проклясть ещё [MAX_SHUTTLE_CURSES-totalcurses] раз.")))
 
 		if(totalcurses >= MAX_SHUTTLE_CURSES && (world.time < first_curse_time + SHUTTLE_CURSE_OMFG_TIMESPAN))
-			var/omfg_message = pick_list(CULT_SHUTTLE_CURSE, "omfg_announce") || "LEAVE US ALONE!"
-			addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(priority_announce), omfg_message, "Priority Alert", 'sound/announcer/announcement/announce_syndi.ogg', null, "Nanotrasen Department of Transportation: Central Command"), rand(2 SECONDS, 6 SECONDS))
+			var/omfg_message = pick_list(CULT_SHUTTLE_CURSE, "omfg_announce") || "ОСТАВЬТЕ НАС В ПОКОЕ!"
+			addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(priority_announce), omfg_message, "Приоритетное оповещение", 'sound/announcer/announcement/announce_syndi.ogg', null, "Диспетчерская Флота"), rand(2 SECONDS, 6 SECONDS))
 			for(var/mob/iter_player as anything in GLOB.player_list)
 				if(IS_CULTIST(iter_player))
 					iter_player.client?.give_award(/datum/award/achievement/misc/cult_shuttle_omfg, iter_player)

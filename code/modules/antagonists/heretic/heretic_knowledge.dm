@@ -590,11 +590,11 @@
 		human_user.physiology.burn_mod *= 0.5
 
 	SSblackbox.record_feedback("tally", "heretic_ascended", 1, GLOB.heretic_research_tree[type][HKT_ROUTE])
-	log_heretic_knowledge("[key_name(user)] completed their final ritual at [gameTimestamp()].")
+	log_heretic_knowledge("[key_name(user)] завершил свой финальный ритуал в [gameTimestamp()].")
 	notify_ghosts(
-		"[user.real_name] has completed an ascension ritual!",
+		"[user.real_name] завершил ритуал восхождения!",
 		source = user,
-		header = "A Heretic is Ascending!",
+		header = "Еретик Восходит!",
 	)
 	priority_announce(
 		text = replacetext(replacetext(announcement_text, "%NAME%", user.real_name), "%SPOOKY%", GLOBAL_PROC_REF(generate_heretic_text)),

@@ -34,11 +34,11 @@
 
 /datum/shuttle_event/simple_spawner/black_hole/no_escape/proc/announcement()
 	priority_announce(
-		text = "Sensors indicate that a black hole's gravitational field is affecting the region of space we are heading through.",
-		title = "The Orion Trail",
+		text = "Сенсоры указывают, что гравитационное поле Черной Дыры воздействует на регион космоса, через который мы пролетаем.",
+		title = "Тропа Ориона",
 		sound = 'sound/announcer/notice/notice1.ogg',
 		has_important_message = TRUE,
-		sender_override = "Emergency Shuttle",
+		sender_override = "Диспетчерская Флота",
 		color_override = "red",
 	)
 

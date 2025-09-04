@@ -1,30 +1,30 @@
 ///Spawns a cargo pod containing a random cargo supply pack on a random area of the station
 /datum/round_event_control/stray_cargo
-	name = "Stray Cargo Pod"
+	name = "Заблудившийся грузовой контейнер"
 	typepath = /datum/round_event/stray_cargo
 	weight = 20
 	max_occurrences = 4
 	earliest_start = 10 MINUTES
 	category = EVENT_CATEGORY_BUREAUCRATIC
-	description = "A pod containing a random supply crate lands on the station."
+	description = "Контейнер со случайным грузовым ящиком приземляется на станции."
 	admin_setup = list(/datum/event_admin_setup/set_location/stray_cargo, /datum/event_admin_setup/listed_options/stray_cargo)
 
 /datum/event_admin_setup/set_location/stray_cargo
-	input_text = "Aim pod at turf we're on?"
+	input_text = "Нацелить контейнер на наш тайл?"
 
 /datum/event_admin_setup/set_location/stray_cargo/apply_to_event(datum/round_event/stray_cargo/event)
 	event.admin_override_turf = chosen_turf
 
 /datum/event_admin_setup/listed_options/stray_cargo
-	input_text = "Choose a cargo crate to drop."
-	normal_run_option = "Random Crate"
+	input_text = "Выберите грузовой ящик для сброса."
+	normal_run_option = "Случайный ящик"
 
 /datum/event_admin_setup/listed_options/stray_cargo/get_list()
 	return sort_list(subtypesof(/datum/supply_pack), /proc/cmp_typepaths_asc)
 
 /datum/event_admin_setup/listed_options/stray_cargo/apply_to_event(datum/round_event/stray_cargo/event)
 	event.admin_override_contents = chosen
-	var/log_message = "[key_name_admin(usr)] has aimed a stray cargo pod at [event.admin_override_turf ? AREACOORD(event.admin_override_turf) : "a random location"]. The pod contents are [chosen ? chosen : "random"]."
+	var/log_message = "[key_name_admin(usr)] направил заблудившийся грузовой контейнер в [event.admin_override_turf ? AREACOORD(event.admin_override_turf) : "случайное место"]. Содержимое контейнера: [chosen ? chosen : "случайное"]."
 	message_admins(log_message)
 	log_admin(log_message)
 
@@ -131,12 +131,12 @@
 
 ///A rare variant that drops a crate containing syndicate uplink items
 /datum/round_event_control/stray_cargo/syndicate
-	name = "Stray Syndicate Cargo Pod"
+	name = "Заблудившийся грузовой контейнер Синдиката"
 	typepath = /datum/round_event/stray_cargo/syndicate
 	weight = 6
 	max_occurrences = 1
 	earliest_start = 30 MINUTES
-	description = "A pod containing syndicate gear lands on the station."
+	description = "Контейнер со снаряжением Синдиката приземляется на станции."
 	min_wizard_trigger_potency = 3
 	max_wizard_trigger_potency = 6
 	admin_setup = list(/datum/event_admin_setup/set_location/stray_cargo, /datum/event_admin_setup/syndicate_cargo_pod)

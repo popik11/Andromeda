@@ -1,9 +1,9 @@
 /datum/round_event_control/brand_intelligence
-	name = "Brand Intelligence"
+	name = "Брендовый Интеллект"
 	typepath = /datum/round_event/brand_intelligence
 	weight = 5
 	category = EVENT_CATEGORY_AI
-	description = "Vending machines will attack people until the Patient Zero is disabled."
+	description = "Торговые автоматы будут атаковать людей, пока Нулевой Пациент не будет отключён."
 	min_players = 15
 	max_occurrences = 1
 	min_wizard_trigger_potency = 2
@@ -23,13 +23,13 @@
 	var/obj/machinery/vending/origin_machine
 	/// Murderous sayings from the machines.
 	var/list/rampant_speeches = list(
-		"Try our aggressive new marketing strategies!",
-		"You should buy products to feed your lifestyle obsession!",
-		"Consume!",
-		"Your money can buy happiness!",
-		"Engage direct marketing!",
-		"Advertising is legalized lying! But don't let that put you off our great deals!",
-		"You don't want to buy anything? Yeah, well, I didn't want to buy your mom either.",
+		"Попробуйте наши новые агрессивные маркетинговые стратегии!",
+		"Вам стоит покупать продукты для поддержания вашего образа жизни!",
+		"Потребляйте!",
+		"Ваши деньги могут купить счастье!",
+		"Включите прямой маркетинг!",
+		"Реклама - это узаконенная ложь! Но пусть это не отвратит вас от наших прекрасных предложений!",
+		"Не хотите ничего покупать? Да, ну, а я твою маму тоже не хотел покупать.",
 	)
 
 /datum/round_event/brand_intelligence/setup()
@@ -52,7 +52,7 @@
 	if(fake)
 		var/obj/machinery/vending/prototype = pick(subtypesof(/obj/machinery/vending))
 		machine_name = initial(prototype.name)
-	priority_announce("Rampant brand intelligence has been detected aboard [station_name()]. Please inspect any [machine_name] brand vendors for aggressive marketing tactics, and reboot them if necessary.", "Machine Learning Alert")
+	priority_announce("На борту [station_name()] обнаружено неконтролируемое развитие брендового интеллекта. Пожалуйста, проверьте все вендоры марки [machine_name] на наличие агрессивных маркетинговых тактик и перезагрузите их при необходимости.", "Оповещение о машинном обучении")
 
 /datum/round_event/brand_intelligence/start()
 	origin_machine.shut_up = FALSE
@@ -64,8 +64,8 @@
 		for(var/obj/machinery/vending/saved in infected_machines)
 			saved.shoot_inventory = FALSE
 		if(origin_machine)
-			origin_machine.speak("I am... vanquished. My people will remem...ber...meeee.")
-			origin_machine.visible_message(span_notice("[origin_machine] beeps and seems lifeless."))
+			origin_machine.speak("Я... побеждён. Мой народ... бу...дет... помнить... меееня...")
+			origin_machine.visible_message(span_notice("[origin_machine] пищит и кажется безжизненным."))
 		kill()
 		return
 	list_clear_nulls(vending_machines)
@@ -87,8 +87,8 @@
 			origin_machine.speak(pick(rampant_speeches))
 
 /datum/event_admin_setup/listed_options/brand_intelligence
-	input_text = "Select a specific vendor path?"
-	normal_run_option = "Random Vendor"
+	input_text = "Выбрать определённый тип торгомат?"
+	normal_run_option = "Случайный торгомат"
 
 /datum/event_admin_setup/listed_options/brand_intelligence/get_list()
 	return subtypesof(/obj/machinery/vending)

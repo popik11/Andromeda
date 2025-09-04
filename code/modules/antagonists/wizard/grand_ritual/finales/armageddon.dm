@@ -2,32 +2,32 @@
 #define DOOM_TESLA "tesla"
 #define DOOM_METEORS "meteors"
 
-/// Kill yourself and probably a bunch of other people
+/// Убей себя и, вероятно, кучу других людей
 /datum/grand_finale/armageddon
-	name = "Annihilation"
-	desc = "This crew have offended you beyond the realm of pranks. Make the ultimate sacrifice to teach them a lesson your elders can really respect. \
-		YOU WILL NOT SURVIVE THIS."
+	name = "Аннигиляция"
+	desc = "Этот экипаж оскорбил вас за пределами мира шуток. Принесите высшую жертву, чтобы преподать им урок, который ваши старшие действительно оценят. \
+		ВЫ НЕ ВЫЖИТЕ."
 	icon = 'icons/mob/simple/lavaland/lavaland_monsters.dmi'
 	icon_state = "legion_head"
-	minimum_time = 90 MINUTES // This will probably immediately end the round if it gets finished.
-	ritual_invoke_time = 60 SECONDS // Really give the crew some time to interfere with this one.
+	minimum_time = 90 MINUTES // Это, вероятно, немедленно завершит раунд, если будет завершено.
+	ritual_invoke_time = 60 SECONDS // Дайте экипажу время помешать этому.
 	dire_warning = TRUE
 	glow_colour = "#be000048"
-	/// Things to yell before you die
+	/// Фразы, которые можно выкрикнуть перед смертью
 	var/static/list/possible_last_words = list(
-		"Flames and ruin!",
-		"Dooooooooom!!",
-		"HAHAHAHAHAHA!! AHAHAHAHAHAHAHAHAA!!",
-		"Hee hee hee!! Hoo hoo hoo!! Ha ha haaa!!",
-		"Ohohohohohoho!!",
-		"Cower in fear, puny mortals!",
-		"Tremble before my glory!",
-		"Pick a god and pray!",
-		"It's no use!",
-		"If the gods wanted you to live, they would not have created me!",
-		"God stays in heaven out of fear of what I have created!",
-		"Ruination is come!",
-		"All of creation, bend to my will!",
+		"Пламя и разрушение!",
+		"Дооооооооом!!",
+		"ХАХАХАХАХАХА!! АХАХАХАХАХАХАХАА!!",
+		"Хи-хи-хи!! Ху-ху-ху!! Ха-ха-хаа!!",
+		"Охохохохохо!!",
+		"Трепещите в страхе, жалкие смертные!",
+		"Содрогайтесь перед моим величием!",
+		"Молитесь своим богам!",
+		"Это бесполезно!",
+		"Если бы боги хотели, чтобы вы жили, они не создали бы меня!",
+		"Бог остаётся на небесах из страха перед тем, что я создал!",
+		"Пришло разрушение!",
+		"Всё творение, склонитесь перед моей волей!",
 	)
 
 /datum/grand_finale/armageddon/trigger(mob/living/carbon/human/invoker)
@@ -52,7 +52,7 @@
 			GLOB.meteor_mode ||= new()
 			GLOB.meteor_mode.meteordelay = 0
 			GLOB.meteor_mode.start_meteor()
-			priority_announce("Meteors have been detected on collision course with the station.", "Meteor Alert", ANNOUNCER_METEORS)
+			priority_announce("Обнаружены метеоры на курсе столкновения со станцией.", "Метеорная тревога", ANNOUNCER_METEORS)
 
 #undef DOOM_SINGULARITY
 #undef DOOM_TESLA

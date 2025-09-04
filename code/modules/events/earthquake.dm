@@ -3,8 +3,8 @@
 ///Much of the actual structural damage is done through the explosions subsystem. Objects, machines, and especially people
 ///that aren't moved out of the epicenter area (indicated by the wobbly tiles) will not just be thrown down a z-level, but also be destroyed/maimed in the process.
 /datum/round_event_control/earthquake
-	name = "Chasmic Earthquake"
-	description = "Causes an earthquake, demolishing anything caught in the fault."
+	name = "Бездненное землетрясение"
+	description = "Вызывает землетрясение, разрушая всё, что окажется в разломе."
 	typepath = /datum/round_event/earthquake
 	category = EVENT_CATEGORY_ENGINEERING
 	min_players = 20
@@ -90,7 +90,7 @@
 		underbelly += GET_TURF_BELOW(turf_to_quake)
 
 /datum/round_event/earthquake/announce(fake)
-	priority_announce("Planetary monitoring systems indicate a devastating seismic event in the near future.", "Seismic Report")
+	priority_announce("Системы планетарного мониторинга предсказывают разрушительное сейсмическое событие в ближайшем будущем.", "Сейсмический отчёт")
 
 /datum/round_event/earthquake/start()
 	notify_ghosts(

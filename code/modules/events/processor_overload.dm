@@ -1,32 +1,32 @@
 /datum/round_event_control/processor_overload
-	name = "Processor Overload"
+	name = "Перегрузка процессора"
 	typepath = /datum/round_event/processor_overload
 	weight = 15
 	min_players = 20
 	category = EVENT_CATEGORY_ENGINEERING
-	description = "Emps the telecomm processors, scrambling radio speech. Might blow up a few."
+	description = "ЭМИрует телекоммуникационные процессоры, шифруя радиопереговоры. Может взорвать несколько."
 
 /datum/round_event/processor_overload
 	announce_when = 1
 
 /datum/round_event/processor_overload/announce(fake)
-	var/alert = pick("Exospheric bubble inbound. Processor overload is likely. Please contact you*%xp25)`6cq-BZZT",
-		"Exospheric bubble inbound. Processor overload is likel*1eta;c5;'1v¬-BZZZT",
-		"Exospheric bubble inbound. Processor ov#MCi46:5.;@63-BZZZZT",
-		"Exospheric bubble inbo'Fz\\k55_@-BZZZZZT",
-		"Exospheri:%£ QCbyj^j</.3-BZZZZZZT",
-		"!!hy%;f3l7e,<$^-BZZZZZZZT",
+	var/alert = pick("Входящая экзосферная аномалия. Вероятна перегрузка процессоров. Пожалуйста, свяжитесь*%xp25)`6cq-БЗЗТ",
+		"Входящая экзосферная аномалия. Вероятна перегрузка процессоров*1eta;c5;'1v¬-БЗЗЗЗТ",
+		"Входящая экзосферная аномалия. Перегрузка процессоров#MCi46:5.;@63-БЗЗЗЗЗЗТ",
+		"Входящая экзосферная аномалия'Fz\\k55_@-БЗЗЗЗЗЗТ",
+		"Экзосфери:%£ QCbyj^j</.3-БЗЗЗЗЗЗТ",
+		"!!hy%;f3l7e,<$^-БЗЗЗЗЗЗЗЗТ",
 	)
 
-	//AIs are always aware of processor overload
+	//ИИ всегда знают о перегрузке процессоров
 	for(var/mob/living/silicon/ai/ai in GLOB.ai_list)
 		to_chat(ai, "<br>[span_warning("<b>[alert]</b>")]<br>")
 
-	// Announce most of the time, but leave a little gap so people don't know
-	// whether it's, say, a tesla zapping tcomms, or some selective
-	// modification of the tcomms bus
+	// Объявляем большую часть времени, но оставляем небольшой промежуток, чтобы люди не знали,
+	// является ли это, скажем, воздействием теслы на телекомы, или некоторым
+	// избирательным изменением шины телекомов
 	if(prob(80) || fake)
-		priority_announce(alert, "Anomaly Alert")
+		priority_announce(alert, "Обнаружена аномалия")
 
 /datum/round_event/processor_overload/start()
 	for(var/obj/machinery/telecomms/processor/spinny_thing in GLOB.telecomm_machines)

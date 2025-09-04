@@ -8,13 +8,13 @@
  */
 
 /datum/round_event_control/sandstorm
-	name = "Sandstorm: Directional"
+	name = "Песчаная буря: Направленная"
 	typepath = /datum/round_event/sandstorm
 	max_occurrences = 3
 	min_players = 35
 	earliest_start = 35 MINUTES
 	category = EVENT_CATEGORY_SPACE
-	description = "A wave of space dust continually grinds down a side of the station."
+	description = "Волна космической пыли постоянно истирает одну из сторон станции."
 	min_wizard_trigger_potency = 6
 	max_wizard_trigger_potency = 7
 	admin_setup = list(/datum/event_admin_setup/listed_options/sandstorm)
@@ -35,23 +35,24 @@
 	if(!start_side)
 		start_side = pick(GLOB.cardinals)
 
-	var/start_side_text = "unknown"
+	var/start_side_text = "неизвестно"
 	switch(start_side)
 		if(NORTH)
-			start_side_text = "fore"
+			start_side_text = "северной"
 		if(SOUTH)
-			start_side_text = "aft"
+			start_side_text = "южной"
 		if(EAST)
-			start_side_text = "starboard"
+			start_side_text = "восточной"
 		if(WEST)
-			start_side_text = "port"
+			start_side_text = "западной"
 		else
-			stack_trace("Sandstorm event given [start_side] as unrecognized direction. Cancelling event...")
+			stack_trace("Событие песчаной бури получило [start_side] как нераспознанное направление. Отмена события...")
 			kill()
 			return
 
-	priority_announce("A large wave of space dust is approaching from the [start_side_text] side of the station. \
-		Impact is expected in the next two minutes. All employees are encouraged to assist in repairs and damage mitigation if possible.", "Collision Emergency Alert")
+	priority_announce("К станции приближается крупная волна космической пыли с [start_side_text] стороны. \
+		Столкновение ожидается в течение следующих двух минут. Все сотрудники при возможности призываются \
+		к участию в ремонте и минимизации ущерба.", "Оповещение о столкновении")
 
 /datum/round_event/sandstorm/tick()
 	spawn_meteors(15, GLOB.meteors_sandstorm, start_side)
@@ -65,14 +66,13 @@
  */
 
 /datum/round_event_control/sandstorm_classic
-	name = "Sandstorm: Classic"
+	name = "Песчаная буря: Классическая"
 	typepath = /datum/round_event/sandstorm_classic
 	weight = 0
 	max_occurrences = 0
 	earliest_start = 0 MINUTES
 	category = EVENT_CATEGORY_SPACE
-	description = "The station is pelted by an extreme amount of dust, from all sides, for several minutes. Very destructive and likely to cause lag. Use at own risk."
-	map_flags = EVENT_SPACE_ONLY
+	description = "Станция подвергается интенсивной бомбардировке пылью со всех сторон в течение нескольких минут. Очень разрушительно и может вызвать лаги. Использовать на свой страх и риск."
 
 /datum/round_event/sandstorm_classic
 	start_when = 1
@@ -84,19 +84,19 @@
 	spawn_meteors(10, GLOB.meteors_dust)
 
 /datum/event_admin_setup/listed_options/sandstorm
-	input_text = "Choose a side to powersand?"
-	normal_run_option = "Random Sandstorm Direction"
+	input_text = "Выберите сторону для песчаной бури?"
+	normal_run_option = "Случайное направление песчаной бури"
 
 /datum/event_admin_setup/listed_options/sandstorm/get_list()
-	return list("Up", "Down", "Right", "Left")
+	return list("Север", "Юг", "Восток", "Запад")
 
 /datum/event_admin_setup/listed_options/sandstorm/apply_to_event(datum/round_event/sandstorm/event)
 	switch(chosen)
-		if("Up")
+		if("Север")
 			event.start_side = NORTH
-		if("Down")
+		if("Юг")
 			event.start_side = SOUTH
-		if("Right")
+		if("Восток")
 			event.start_side = EAST
-		if("Left")
+		if("Запад")
 			event.start_side = WEST

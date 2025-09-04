@@ -141,11 +141,11 @@ ADMIN_VERB(create_command_report, R_ADMIN, "Create Command Report", "Create a co
  * Uses the variables set by the user on our datum as the arguments for the report.
  */
 /datum/command_report_menu/proc/send_announcement()
-	/// Our current command name to swap back to after sending the report.
+	/// Наше текущее название команды для возврата после отправки отчёта.
 	var/original_command_name = command_name()
 	change_command_name(command_name)
 
-	/// The sound we're going to play on report.
+	/// Звук, который мы воспроизведём при отчёте.
 	var/report_sound = played_sound
 	if(played_sound == DEFAULT_ANNOUNCEMENT_SOUND)
 		report_sound = SSstation.announcer.get_rand_report_sound()
@@ -160,15 +160,15 @@ ADMIN_VERB(create_command_report, R_ADMIN, "Create Command Report", "Create a co
 		priority_announce(command_report_content, subheader == ""? null : subheader, report_sound, has_important_message = TRUE, color_override = chosen_color)
 
 	if(!announce_contents || print_report)
-		print_command_report(command_report_content, "[announce_contents ? "" : "Classified "][command_name] Update", !announce_contents)
+		print_command_report(command_report_content, "[announce_contents ? "" : "Секретно "][command_name] Обновление", !announce_contents)
 
 	change_command_name(original_command_name)
 
-	log_admin("[key_name(ui_user)] has created a command report: \"[command_report_content]\", sent from \"[command_name]\" with the sound \"[played_sound]\".")
+	log_admin("[key_name(ui_user)] создал командный отчёт: \"[command_report_content]\", отправленный от \"[command_name]\" со звуком \"[played_sound]\".")
 
-	message_admins("[key_name_admin(ui_user)] has created a command report, sent from \"[command_name]\" with the sound \"[played_sound]\"")
+	message_admins("[key_name_admin(ui_user)] создал командный отчёт, отправленный от \"[command_name]\" со звуком \"[played_sound]\"")
 	if(!announce_contents)
-		message_admins("The message was: [command_report_content]")
+		message_admins("Сообщение было: [command_report_content]")
 
 
 #undef DEFAULT_ANNOUNCEMENT_SOUND

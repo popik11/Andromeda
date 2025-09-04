@@ -625,7 +625,7 @@
 	log_transport("TC: [specific_transport_id] ending Tram Malfunction event.")
 
 /datum/transport_controller/linear/tram/proc/announce_malf_event()
-	priority_announce("Our automated control system has lost contact with the tram's onboard computer. Please stand by, engineering has been dispatched to the tram to perform a reset.", "[command_name()] Engineering Division")
+	priority_announce("Наша автоматическая система управления потеряла связь с бортовым компьютером трамвая. Пожалуйста, оставайтесь на месте, инженеры направлены к трамваю для выполнения сброса.", "[command_name()]")
 
 /datum/transport_controller/linear/tram/proc/register_collision(points = 1)
 	tram_registration.collisions += points
@@ -735,9 +735,9 @@
 	// Don't bother processing crossing signals, where this tram's going there are no signals
 	//for(var/obj/machinery/transport/crossing_signal/xing as anything in SStransport.crossing_signals)
 	//	xing.temp_malfunction()
-	priority_announce("In a turn of rather peculiar events, it appears that [GLOB.station_name] has struck an immovable rod. (Don't ask us where it came from.) This has led to a station brakes failure on one of the tram platforms.\n\n\
-		Our diligent team of engineers have been informed and they're rushing over - although not quite at the speed of our recently flying tram.\n\n\
-		So while we all look in awe at the universe's mysterious sense of humour, please stand clear of the tracks and remember to stand behind the yellow line.", "Braking News")
+	priority_announce("В ходе довольно странных событий, похоже, что [GLOB.station_name] столкнулся с неподвижным стержнем. (Не спрашивайте нас, откуда он взялся.) Это привело к появлению сквозного отверстия в некоторых местах станции.\n\n\
+		Ваша команда инженеров была проинформирована и уже мчится на место - хотя последний раз их видели в баре, явно не в трезвом виде.\n\n\
+		Пока мы все с трепетом смотрим на загадочное чувство юмора вселенной, пожалуйста, держитесь подальше от сквозных отверстий и помните, вакуум может утянуть вас в открытый космос.", "Экстренные новости")
 	set_active(TRUE)
 	set_status_code(CONTROLS_LOCKED, TRUE)
 	dispatch_transport(destination_platform = push_destination)

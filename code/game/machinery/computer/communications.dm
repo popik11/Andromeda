@@ -187,16 +187,16 @@
 			if (!authenticated_as_silicon_or_captain(user))
 				return
 
-			// Check if they have
+			// Проверить, есть ли доступ
 			if (!HAS_SILICON_ACCESS(user))
 				var/obj/item/held_item = user.get_active_held_item()
 				var/obj/item/card/id/id_card = held_item?.GetID()
 				if (!istype(id_card))
-					to_chat(user, span_warning("You need to swipe your ID!"))
+					to_chat(user, span_warning("Необходимо провести вашей ID-картой!"))
 					playsound(src, 'sound/machines/terminal/terminal_prompt_deny.ogg', 50, FALSE)
 					return
 				if (!(ACCESS_CAPTAIN in id_card.access))
-					to_chat(user, span_warning("You are not authorized to do this!"))
+					to_chat(user, span_warning("У вас нет авторизации для этого!"))
 					playsound(src, 'sound/machines/terminal/terminal_prompt_deny.ogg', 50, FALSE)
 					return
 
@@ -302,7 +302,7 @@
 			nuke_request(reason, user)
 			to_chat(user, span_notice("Request sent."))
 			user.log_message("has requested the nuclear codes from CentCom with reason \"[reason]\"", LOG_SAY)
-			priority_announce("The codes for the on-station nuclear self-destruct have been requested by [user]. Confirmation or denial of this request will be sent shortly.", "Nuclear Self-Destruct Codes Requested", SSstation.announcer.get_rand_report_sound())
+			priority_announce("Коды станционной ядерной боеголовки запрошены [user]. Подтверждение или отклонение этого запроса будет отправлено в ближайшее время.", "Запрос кода ядерной авторизации", SSstation.announcer.get_rand_report_sound())
 			playsound(src, 'sound/machines/terminal/terminal_prompt.ogg', 50, FALSE)
 			COOLDOWN_START(src, important_action_cooldown, IMPORTANT_ACTION_COOLDOWN)
 		if ("restoreBackupRoutingData")
@@ -858,17 +858,17 @@
 			)
 			SSdynamic.force_run_midround(pick(pirate_rulesets))
 
-		if(HACK_FUGITIVES) // Triggers fugitives, which can cause confusion / chaos as the crew decides which side help
+		if(HACK_FUGITIVES) // Запускает беглецов, что может вызвать замешательство/хаос, когда экипаж решает, какой стороне помочь
 			priority_announce(
-				"Attention crew: sector monitoring reports a jump-trace from an unidentified vessel destined for your system. Prepare for probable contact.",
-				"[command_name()] High-Priority Update",
+				"Внимание экипажу: 'ГРУНТ' сообщает о прыжковом следе от неопознанного судна, направляющегося в вашу систему. Приготовьтесь к возможному контакту.",
+				"[command_name()]",
 			)
 			SSdynamic.force_run_midround(/datum/dynamic_ruleset/midround/from_ghosts/fugitives)
 
-		if(HACK_SLEEPER) // Trigger one or multiple sleeper agents with the crew (or for latejoining crew)
+		if(HACK_SLEEPER) // Активирует одного или нескольких спящих агентов среди экипажа (или для поздно присоединившихся)
 			priority_announce(
-				"Attention crew, it appears that someone on your station has hijacked your telecommunications and broadcasted an unknown signal.",
-				"[command_name()] High-Priority Update",
+				"Внимание экипажу: похоже, что кто-то на вашей станции захватил ваши телекоммуникации и транслировал неизвестный сигнал.",
+				"[command_name()]",
 			)
 			var/max_number_of_sleepers = clamp(round(length(GLOB.alive_player_list) / 40), 1, 3)
 			if(!SSdynamic.force_run_midround(/datum/dynamic_ruleset/midround/from_living/traitor, forced_max_cap = max_number_of_sleepers))
