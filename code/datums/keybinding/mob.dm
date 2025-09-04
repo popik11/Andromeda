@@ -39,14 +39,14 @@
 	var/hand_index = NONE
 
 /datum/keybinding/mob/select_hand/right
-	hotkey_keys = list("Q")
+	hotkey_keys = list("Unbound")
 	name = "select_right_hand"
 	full_name = "Переключить на Правую Руку"
 	keybind_signal = COMSIG_KB_MOB_SELECTRIGHTHAND_DOWN
 	hand_index = RIGHT_HANDS
 
 /datum/keybinding/mob/select_hand/left
-	hotkey_keys = list("E")
+	hotkey_keys = list("Unbound")
 	name = "select_left_hand"
 	full_name = "Переключить на Левую Руку"
 	keybind_signal = COMSIG_KB_MOB_SELECTLEFTHAND_DOWN
