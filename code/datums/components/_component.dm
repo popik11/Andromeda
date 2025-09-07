@@ -1,44 +1,44 @@
 /**
- * # Component
+ * # Компонент
  *
- * The component datum
+ * Датум (datums) компонента
  *
- * A component should be a single standalone unit
- * of functionality, that works by receiving signals from its parent
- * object to provide some single functionality (i.e a slippery component)
- * that makes the object it's attached to cause people to slip over.
- * Useful when you want shared behaviour independent of type inheritance
+ * Компонент должен быть единым самостоятельным модулем
+ * функциональности, который работает, получая сигналы от своего родительского
+ * объекта для обеспечения определенной функциональности (например, скользкий компонент),
+ * который заставляет объект, к которому он прикреплен, заставлять людей поскальзываться.
+ * Полезно, когда вы хотите иметь общее поведение, независимое от наследования типов
  */
 /datum/component
 	/**
-	  * Defines how duplicate existing components are handled when added to a datum
+	  * Определяет, как обрабатываются дублирующиеся существующие компоненты при добавлении к Датум
 	  *
-	  * See [COMPONENT_DUPE_*][COMPONENT_DUPE_ALLOWED] definitions for available options
+	  * Смотрите определения [COMPONENT_DUPE_*][COMPONENT_DUPE_ALLOWED] для доступных вариантов
 	  */
 	var/dupe_mode = COMPONENT_DUPE_HIGHLANDER
 
-	/// The datum this components belongs to
+	/// Датум, к которому принадлежит этот компонент
 	var/datum/parent
 
 	/**
-	  * Only set to true if you are able to properly transfer this component
+	  * Устанавливайте в true только если вы можете правильно передать этот компонент
 	  *
-	  * At a minimum [RegisterWithParent][/datum/component/proc/RegisterWithParent] and [UnregisterFromParent][/datum/component/proc/UnregisterFromParent] should be used
+	  * Как минимум, должны использоваться [RegisterWithParent][/datum/component/proc/RegisterWithParent] и [UnregisterFromParent][/datum/component/proc/UnregisterFromParent]
 	  *
-	  * Make sure you also implement [PostTransfer][/datum/component/proc/PostTransfer] for any post transfer handling
+	  * Убедитесь, что вы также реализуете [PostTransfer][/datum/component/proc/PostTransfer] для любой пост-передаточной обработки
 	  */
 	var/can_transfer = FALSE
 
-	/// A lazy list of the sources for this component
+	/// Ленивый список источников для этого компонента
 	var/list/sources
 
 /**
- * Create a new component.
+ * Создать новый компонент.
  *
- * Additional arguments are passed to [Initialize()][/datum/component/proc/Initialize]
+ * Дополнительные аргументы передаются в [Initialize()][/datum/component/proc/Initialize]
  *
- * Arguments:
- * * datum/P the parent datum this component reacts to signals from
+ * Аргументы:
+ * * datum/P родительский датум, на сигналы которого реагирует этот компонент
  */
 /datum/component/New(list/raw_args)
 	parent = raw_args[1]
@@ -47,7 +47,7 @@
 	var/result = Initialize(arglist(arguments))
 
 	if(result == COMPONENT_INCOMPATIBLE)
-		stack_trace("Incompatible [type] assigned to a [parent.type]! args: [json_encode(arguments)]")
+		stack_trace("Несовместимый [type] назначен на [parent.type]! args: [json_encode(arguments)]")
 		qdel(src, TRUE, TRUE)
 		return
 
@@ -56,23 +56,23 @@
 		return
 
 	if(QDELETED(src) || QDELETED(parent))
-		CRASH("Component [type] was created with a deleted parent or was deleted itself before it could be added to a parent")
+		CRASH("Компонент [type] был создан с удаленным родителем или был удален до того, как мог быть добавлен к родителю")
 
 	_JoinParent()
 
 /**
- * Called during component creation with the same arguments as in new excluding parent.
+ * Вызывается во время создания компонента с теми же аргументами, что и в new, исключая parent.
  *
- * Do not call `qdel(src)` from this function, `return COMPONENT_INCOMPATIBLE` instead
+ * Не вызывайте `qdel(src)` из этой функции, вместо этого используйте `return COMPONENT_INCOMPATIBLE`
  */
 /datum/component/proc/Initialize(...)
 	return
 
 /**
- * Properly removes the component from `parent` and cleans up references
+ * Правильно удаляет компонент из `parent` и очищает ссылки
  *
- * Arguments:
- * * force - makes it not check for and remove the component from the parent
+ * Аргументы:
+ * * force - не проверяет и не удаляет компонент из родителя
  */
 /datum/component/Destroy(force = FALSE)
 	if(!parent)
@@ -84,45 +84,45 @@
 	return ..()
 
 /**
- * Internal proc to handle behaviour of components when joining a parent
+ * Внутренняя процедура для обработки поведения компонентов при присоединении к родителю
  */
 /datum/component/proc/_JoinParent()
 	var/datum/P = parent
-	//lazy init the parent's dc list
+	//ленивая инициализация списка dc родителя
 	var/list/dc = P._datum_components
 	if(!dc)
 		P._datum_components = dc = list()
 
-	//set up the typecache
+	//настройка кэша типов
 	var/our_type = type
 	for(var/I in _GetInverseTypeList(our_type))
 		var/test = dc[I]
-		if(test) //already another component of this type here
+		if(test) //уже есть другой компонент этого типа
 			var/list/components_of_type
 			if(!length(test))
 				components_of_type = list(test)
 				dc[I] = components_of_type
 			else
 				components_of_type = test
-			if(I == our_type) //exact match, take priority
+			if(I == our_type) //точное совпадение, имеет приоритет
 				var/inserted = FALSE
 				for(var/J in 1 to components_of_type.len)
 					var/datum/component/C = components_of_type[J]
-					if(C.type != our_type) //but not over other exact matches
+					if(C.type != our_type) //но не поверх других точных совпадений
 						components_of_type.Insert(J, I)
 						inserted = TRUE
 						break
 				if(!inserted)
 					components_of_type += src
-			else //indirect match, back of the line with ya
+			else //косвенное совпадение, в конец очереди
 				components_of_type += src
-		else //only component of this type, no list
+		else //единственный компонент этого типа, без списка
 			dc[I] = src
 
 	RegisterWithParent()
 
 /**
- * Internal proc to handle behaviour when being removed from a parent
+ * Внутренняя процедура для обработки поведения при удалении из родителя
  */
 /datum/component/proc/_RemoveFromParent()
 	var/datum/parent = src.parent
@@ -133,12 +133,12 @@
 		if(length(components_of_type)) //
 			var/list/subtracted = components_of_type - src
 
-			if(subtracted.len == 1) //only 1 guy left
-				parents_components[I] = subtracted[1] //make him special
+			if(subtracted.len == 1) //остался только один
+				parents_components[I] = subtracted[1] //делаем его особенным
 			else
 				parents_components[I] = subtracted
 
-		else //just us
+		else //только мы
 			parents_components -= I
 
 	if(!parents_components.len)
@@ -147,29 +147,29 @@
 	UnregisterFromParent()
 
 /**
- * Register the component with the parent object
+ * Зарегистрировать компонент в родительском объекте
  *
- * Use this proc to register with your parent object
+ * Используйте эту процедуру для регистрации в вашем родительском объекте
  *
- * Overridable proc that's called when added to a new parent
+ * Переопределяемая процедура, вызываемая при добавлении к новому родителю
  */
 /datum/component/proc/RegisterWithParent()
 	return
 
 /**
- * Unregister from our parent object
+ * Отрегистрироваться от нашего родительского объекта
  *
- * Use this proc to unregister from your parent object
+ * Используйте эту процедуру для отрегистрации от вашего родительского объекта
  *
- * Overridable proc that's called when removed from a parent
+ * Переопределяемая процедура, вызываемая при удалении из родителя
  * *
  */
 /datum/component/proc/UnregisterFromParent()
 	return
 
 /**
- * Called when the component has a new source registered.
- * Return COMPONENT_INCOMPATIBLE to signal that the source is incompatible and should not be added
+ * Вызывается, когда у компонента регистрируется новый источник.
+ * Верните COMPONENT_INCOMPATIBLE, чтобы сигнализировать, что источник несовместим и не должен быть добавлен
  */
 /datum/component/proc/on_source_add(source, ...)
 	SHOULD_CALL_PARENT(TRUE)
@@ -178,84 +178,84 @@
 	LAZYOR(sources, source)
 
 /**
- * Called when the component has a source removed.
- * You probably want to call parent after you do your logic because at the end of this we qdel if we have no sources remaining!
+ * Вызывается, когда у компонента удаляется источник.
+ * Вероятно, вы захотите вызвать parent после своей логики, потому что в конце этой процедуры мы удаляем компонент, если у него не осталось источников!
  */
 /datum/component/proc/on_source_remove(source)
 	SHOULD_CALL_PARENT(TRUE)
 	if(dupe_mode != COMPONENT_DUPE_SOURCES)
-		CRASH("Component '[type]' does not use sources but is trying to remove a source")
+		CRASH("Компонент '[type]' не использует источники, но пытается удалить источник")
 	LAZYREMOVE(sources, source)
 	if(!LAZYLEN(sources))
 		qdel(src)
 
 /**
- * Called on a component when a component of the same type was added to the same parent
+ * Вызывается у компонента, когда компонент того же типа был добавлен к тому же родителю
  *
- * See [/datum/component/var/dupe_mode]
+ * Смотрите [/datum/component/var/dupe_mode]
  *
- * `C`'s type will always be the same of the called component
+ * Тип `C` всегда будет таким же, как у вызываемого компонента
  */
 /datum/component/proc/InheritComponent(datum/component/C, i_am_original)
 	return
 
 
 /**
- * Called on a component when a component of the same type was added to the same parent with [COMPONENT_DUPE_SELECTIVE]
+ * Вызывается у компонента, когда компонент того же типа был добавлен к тому же родителю с [COMPONENT_DUPE_SELECTIVE]
  *
- * See [/datum/component/var/dupe_mode]
+ * Смотрите [/datum/component/var/dupe_mode]
  *
- * `C`'s type will always be the same of the called component
+ * Тип `C` всегда будет таким же, как у вызываемого компонента
  *
- * return TRUE if you are absorbing the component, otherwise FALSE if you are fine having it exist as a duplicate component
+ * Верните TRUE, если вы поглощаете компонент, иначе FALSE, если вы не против его существования в качестве дубликата
  */
 /datum/component/proc/CheckDupeComponent(datum/component/C, ...)
 	return
 
 
 /**
- * Callback Just before this component is transferred
+ * Колбек непосредственно перед передачей этого компонента
  *
- * Use this to do any special cleanup you might need to do before being deregged from an object
+ * Используйте это для любой специальной очистки, которая может потребоваться перед отменой регистрации из объекта
  */
 /datum/component/proc/PreTransfer(datum/new_parent)
 	return
 
 /**
- * Callback Just after a component is transferred
+ * Колбек сразу после передачи компонента
  *
- * Use this to do any special setup you need to do after being moved to a new object
+ * Используйте это для любой специальной настройки, которую нужно выполнить после перемещения на новый объект
  *
- * Do not call `qdel(src)` from this function, `return COMPONENT_INCOMPATIBLE` instead
+ * Не вызывайте `qdel(src)` из этой функции, вместо этого используйте `return COMPONENT_INCOMPATIBLE`
  */
 /datum/component/proc/PostTransfer(datum/new_parent)
-	return COMPONENT_INCOMPATIBLE //Do not support transfer by default as you must properly support it
+	return COMPONENT_INCOMPATIBLE //По умолчанию не поддерживаем передачу, так как вы должны правильно её поддерживать
 
 /**
- * Internal proc to create a list of our type and all parent types
+ * Внутренняя процедура для создания списка нашего типа и всех родительских типов
  */
 /datum/component/proc/_GetInverseTypeList(our_type = type)
-	//we can do this one simple trick
+	//мы можем сделать этот простой трюк
 	. = list(our_type)
 	var/current_type = parent_type
-	//and since most components are root level + 1, this won't even have to run
+	//и поскольку большинство компонентов находятся на корневом уровне + 1, это даже не придется запускать
 	while (current_type != /datum/component)
 		. += current_type
 		current_type = type2parent(current_type)
 
-// The type arg is casted so initial works, you shouldn't be passing a real instance into this
+// Аргумент type приводится, чтобы initial работал, вы не должны передавать реальный экземпляр в эту функцию
 /**
- * Return any component assigned to this datum of the given type
+ * Возвращает любой компонент, назначенный этому дейтауму указанного типа
  *
- * This will throw an error if it's possible to have more than one component of that type on the parent
+ * Вызовет ошибку, если возможно наличие более одного компонента этого типа на родителе
  *
- * Arguments:
- * * datum/component/c_type The typepath of the component you want to get a reference to
+ * Аргументы:
+ * * datum/component/c_type Тип компонента, на который вы хотите получить ссылку
  */
 /datum/proc/GetComponent(datum/component/c_type)
 	RETURN_TYPE(c_type)
 	if(initial(c_type.dupe_mode) == COMPONENT_DUPE_ALLOWED || initial(c_type.dupe_mode) == COMPONENT_DUPE_SELECTIVE)
-		stack_trace("GetComponent was called to get a component of which multiple copies could be on an object. This can easily break and should be changed. Type: \[[c_type]\]")
+		stack_trace("GetComponent был вызван для получения компонента, несколько копий которого могут находиться на объекте. Это может легко сломаться и должно быть изменено. Тип: \[[c_type]\]")
 	var/list/dc = _datum_components
 	if(!dc)
 		return null
@@ -263,20 +263,20 @@
 	if(length(.))
 		return .[1]
 
-// The type arg is casted so initial works, you shouldn't be passing a real instance into this
+// Аргумент type приводится, чтобы initial работал, вы не должны передавать реальный экземпляр в эту функцию
 /**
- * Return any component assigned to this datum of the exact given type
+ * Возвращает любой компонент, назначенный этому дейтауму точно указанного типа
  *
- * This will throw an error if it's possible to have more than one component of that type on the parent
+ * Вызовет ошибку, если возможно наличие более одного компонента этого типа на родителе
  *
- * Arguments:
- * * datum/component/c_type The typepath of the component you want to get a reference to
+ * Аргументы:
+ * * datum/component/c_type Тип компонента, на который вы хотите получить ссылку
  */
 /datum/proc/GetExactComponent(datum/component/c_type)
 	RETURN_TYPE(c_type)
 	var/initial_type_mode = initial(c_type.dupe_mode)
 	if(initial_type_mode == COMPONENT_DUPE_ALLOWED || initial_type_mode == COMPONENT_DUPE_SELECTIVE)
-		stack_trace("GetComponent was called to get a component of which multiple copies could be on an object. This can easily break and should be changed. Type: \[[c_type]\]")
+		stack_trace("GetComponent был вызван для получения компонента, несколько копий которого могут находиться на объекте. Это может легко сломаться и должно быть изменено. Тип: \[[c_type]\]")
 	var/list/all_components = _datum_components
 	if(!all_components)
 		return null
@@ -288,10 +288,10 @@
 	return null
 
 /**
- * Get all components of a given type that are attached to this datum
+ * Получить все компоненты указанного типа, прикрепленные к этому дейтауму
  *
- * Arguments:
- * * c_type The component type path
+ * Аргументы:
+ * * c_type Тип компонента
  */
 /datum/proc/GetComponents(c_type)
 	var/list/components = _datum_components?[c_type]
@@ -300,40 +300,40 @@
 	return islist(components) ? components : list(components)
 
 /**
- * Creates an instance of `new_type` in the datum and attaches to it as parent
+ * Создает экземпляр `new_type` в дейтауме и прикрепляет его как родителя
  *
- * Sends the [COMSIG_COMPONENT_ADDED] signal to the datum
+ * Отправляет сигнал [COMSIG_COMPONENT_ADDED] в дейтаум
  *
- * Returns the component that was created. Or the old component in a dupe situation where [COMPONENT_DUPE_UNIQUE] was set
+ * Возвращает созданный компонент. Или старый компонент в ситуации дублирования, где был установлен [COMPONENT_DUPE_UNIQUE]
  *
- * If this tries to add a component to an incompatible type, the component will be deleted and the result will be `null`. This is very unperformant, try not to do it
+ * Если эта попытка добавить компонент к несовместимому типу, компонент будет удален и результатом будет `null`. Это очень не производительно, старайтесь не делать этого
  *
- * Properly handles duplicate situations based on the `dupe_mode` var
+ * Правильно обрабатывает ситуации дублирования на основе переменной `dupe_mode`
  */
 /datum/proc/_AddComponent(list/raw_args, source)
 	var/original_type = raw_args[1]
 	var/datum/component/component_type = original_type
 
 	if(QDELING(src))
-		CRASH("Attempted to add a new component of type \[[component_type]\] to a qdeleting parent of type \[[type]\]!")
+		CRASH("Попытка добавить новый компонент типа \[[component_type]\] к удаляемому родителю типа \[[type]\]!")
 
 	var/datum/component/new_component
 
 	if(!ispath(component_type, /datum/component))
 		if(!istype(component_type, /datum/component))
-			CRASH("Attempted to instantiate \[[component_type]\] as a component added to parent of type \[[type]\]!")
+			CRASH("Попытка создать экземпляр \[[component_type]\] как компонент, добавленный к родителю типа \[[type]\]!")
 		else
 			new_component = component_type
 			component_type = new_component.type
 	else if(component_type == /datum/component)
-		CRASH("[component_type] attempted instantiation!")
+		CRASH("[component_type] попытка создания экземпляра!")
 
 	var/dupe_mode = initial(component_type.dupe_mode)
 	var/uses_sources = (dupe_mode == COMPONENT_DUPE_SOURCES)
 	if(uses_sources && !source)
-		CRASH("Attempted to add a sourced component of type '[component_type]' to '[type]' without a source!")
+		CRASH("Попытка добавить компонент с источником типа '[component_type]' к '[type]' без источника!")
 	else if(!uses_sources && source)
-		CRASH("Attempted to add a normal component of type '[component_type]' to '[type]' with a source!")
+		CRASH("Попытка добавить обычный компонент типа '[component_type]' к '[type]' с источником!")
 
 	var/datum/component/old_component
 
@@ -368,14 +368,14 @@
 
 				if(COMPONENT_DUPE_SOURCES)
 					if((source in old_component.sources) && !old_component.allow_source_update(source))
-						return old_component // source already registered, no work to do
+						return old_component // источник уже зарегистрирован, нечего делать
 
 					if(old_component.on_source_add(arglist(list(source) + raw_args.Copy(2))) == COMPONENT_INCOMPATIBLE)
-						stack_trace("incompatible source added to a [old_component.type]. Args: [json_encode(raw_args)]")
+						stack_trace("несовместимый источник добавлен к [old_component.type]. Аргументы: [json_encode(raw_args)]")
 						return null
 
 		else if(!new_component)
-			new_component = new component_type(raw_args) // There's a valid dupe mode but there's no old component, act like normal
+			new_component = new component_type(raw_args) // Есть допустимый режим дублирования, но нет старого компонента, действуйте как обычно
 
 	else if(dupe_mode == COMPONENT_DUPE_SELECTIVE)
 		var/list/arguments = raw_args.Copy()
@@ -390,11 +390,11 @@
 			new_component = new component_type(raw_args)
 
 	else if(!new_component)
-		new_component = new component_type(raw_args) // Dupes are allowed, act like normal
+		new_component = new component_type(raw_args) // Дубликаты разрешены, действуйте как обычно
 
-	if(!old_component && !QDELETED(new_component)) // Nothing related to duplicate components happened and the new component is healthy
+	if(!old_component && !QDELETED(new_component)) // Ничего связанного с дублирующими компонентами не произошло и новый компонент исправен
 		if(source && new_component.on_source_add(arglist(list(source) + raw_args.Copy(2))) == COMPONENT_INCOMPATIBLE)
-			stack_trace("incompatible source added to a [new_component.type]. Args: [json_encode(raw_args)]")
+			stack_trace("несовместимый источник добавлен к [new_component.type]. Аргументы: [json_encode(raw_args)]")
 			return null
 		SEND_SIGNAL(src, COMSIG_COMPONENT_ADDED, new_component)
 		return new_component
@@ -402,7 +402,7 @@
 	return old_component
 
 /**
- * Removes a component source from this datum
+ * Удаляет источник компонента из этого дейтаума
  */
 /datum/proc/RemoveComponentSource(source, datum/component/component_type)
 	if(ispath(component_type))
@@ -412,13 +412,13 @@
 	component_type.on_source_remove(source)
 
 /**
- * Get existing component of type, or create it and return a reference to it
+ * Получить существующий компонент типа или создать его и вернуть ссылку на него
  *
- * Use this if the item needs to exist at the time of this call, but may not have been created before now
+ * Используйте это, если элемент должен существовать во время этого вызова, но, возможно, не был создан до этого момента
  *
- * Arguments:
- * * component_type The typepath of the component to create or return
- * * ... additional arguments to be passed when creating the component if it does not exist
+ * Аргументы:
+ * * component_type Тип компонента для создания или возврата
+ * * ... дополнительные аргументы, передаваемые при создании компонента, если он не существует
  */
 /datum/proc/_LoadComponent(list/arguments)
 	. = GetComponent(arguments[1])
@@ -426,8 +426,8 @@
 		return _AddComponent(arguments)
 
 /**
- * Removes the component from parent, ends up with a null parent
- * Used as a helper proc by the component transfer proc, does not clean up the component like Destroy does
+ * Удаляет компонент из родителя, в результате родитель становится null
+ * Используется как вспомогательная процедура для процедуры передачи компонента, не очищает компонент как Destroy
  */
 /datum/component/proc/ClearFromParent(datum/new_parent)
 	if(!parent)
@@ -439,12 +439,12 @@
 	SEND_SIGNAL(old_parent, COMSIG_COMPONENT_REMOVING, src)
 
 /**
- * Transfer this component to another parent
+ * Передает этот компонент другому родителю
  *
- * Component is taken from source datum
+ * Компонент берется из исходного дейтаума
  *
- * Arguments:
- * * datum/component/target Target datum to transfer to
+ * Аргументы:
+ * * datum/component/target Целевой дейтаум для передачи
  */
 /datum/proc/TakeComponent(datum/component/target)
 	if(!target || target.parent == src)
@@ -456,7 +456,7 @@
 		if(COMPONENT_INCOMPATIBLE)
 			var/c_type = target.type
 			qdel(target)
-			CRASH("Incompatible [c_type] transfer attempt to a [type]!")
+			CRASH("Попытка передачи несовместимого [c_type] к [type]!")
 
 	AddComponent(target)
 	if(!QDELETED(target))
@@ -464,12 +464,12 @@
 		target._JoinParent()
 
 /**
- * Transfer all components to target
+ * Передает все компоненты цели
  *
- * All components from source datum are taken
+ * Все компоненты из исходного дейтаума берутся
  *
- * Arguments:
- * * /datum/target the target to move the components to
+ * Аргументы:
+ * * /datum/target цель для перемещения компонентов
  */
 /datum/proc/TransferComponents(datum/target)
 	var/list/dc = _datum_components
@@ -487,11 +487,11 @@
 				target.TakeComponent(component)
 
 /**
- * Return the object that is the host of any UI's that this component has
+ * Возвращает объект, который является хостом любых UI этого компонента
  */
 /datum/component/ui_host()
 	return parent
 
-///Whether the component is allowed to call on_source_add() on a source that's already present
+///Разрешено ли компоненту вызывать on_source_add() на источнике, который уже присутствует
 /datum/component/proc/allow_source_update(source)
 	return FALSE
