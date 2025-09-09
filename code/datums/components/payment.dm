@@ -102,7 +102,7 @@
 		return FALSE
 
 	if(physical_cash_total < total_cost)
-		to_chat(user, span_notice("Недостаточно средств. Отмена."))
+		to_chat(user, span_warning("Недостаточно средств. Отмена."))
 		return FALSE
 	for(var/obj/cash_object in counted_money)
 		qdel(cash_object)

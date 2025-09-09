@@ -17,7 +17,7 @@ export NODE_VERSION_LTS=22.11.0
 export BUN_VERSION=1.2.16
 
 # Тег версии SpacemanDMM
-export SPACEMAN_DMM_VERSION=suite-1.10
+export SPACEMAN_DMM_VERSION=suite-1.11
 
 # Версия Python для mapmerge и других инструментов
 export PYTHON_VERSION=3.9.0
