@@ -1,6 +1,6 @@
-// These icon_states may be overridden, but are for mapper's convinence
+// Эти icon_states могут быть переопределены, но предназначены для удобства мапперов
 /obj/item/poster/random_contraband
-	name = "random contraband poster"
+	name = "случайный запрещенный постер"
 	poster_type = /obj/structure/sign/poster/contraband/random
 	icon_state = "rolled_poster"
 
@@ -8,11 +8,11 @@
 	. = ..()
 	ADD_TRAIT(src, TRAIT_CONTRABAND, INNATE_TRAIT)
 
-/// Creates a random poster designed for a certain audience
+/// Создает случайный постер, предназначенный для определенной аудитории
 /obj/item/poster/random_contraband/pinup
-	name = "random pinup poster"
+	name = "случайный пинап-постер"
 	icon_state = "rolled_poster"
-	/// List of posters which make you feel a certain type of way
+	/// Список постеров, которые вызывают определенные чувства
 	var/static/list/pinup_posters = list(
 		/obj/structure/sign/poster/contraband/lizard,
 		/obj/structure/sign/poster/contraband/lusty_xenomorph,
@@ -24,12 +24,12 @@
 	return ..()
 
 /obj/structure/sign/poster/contraband
-	poster_item_name = "contraband poster"
-	poster_item_desc = "This poster comes with its own automatic adhesive mechanism, for easy pinning to any vertical surface. Its vulgar themes have marked it as contraband aboard Nanotrasen space facilities."
+	poster_item_name = "запрещенный постер"
+	poster_item_desc = "Этот постер поставляется с собственной автоматической клеевой системой для легкого крепления к любой вертикальной поверхности. Его вульгарная тематика помечает его как контрабанду на бортовых объектах Нанотрейзен."
 	poster_item_icon_state = "rolled_poster"
 
 /obj/structure/sign/poster/contraband/random
-	name = "random contraband poster"
+	name = "случайный запрещенный постер"
 	icon_state = "random_contraband"
 	never_random = TRUE
 	random_basetype = /obj/structure/sign/poster/contraband
@@ -37,625 +37,625 @@
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/random, 32)
 
 /obj/structure/sign/poster/contraband/free_tonto
-	name = "Free Tonto"
-	desc = "A salvaged shred of a much larger flag, colors bled together and faded from age."
+	name = "Свободу Тонто"
+	desc = "Спасенный клочок гораздо большего флага, цвета слились вместе и выцвели от времени."
 	icon_state = "free_tonto"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/free_tonto, 32)
 
 /obj/structure/sign/poster/contraband/atmosia_independence
-	name = "Atmosia Declaration of Independence"
-	desc = "A relic of a failed rebellion."
+	name = "Декларация Независимости Атмосии"
+	desc = "Релікт неудавшегося восстания."
 	icon_state = "atmosia_independence"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/atmosia_independence, 32)
 
 /obj/structure/sign/poster/contraband/fun_police
-	name = "Fun Police"
-	desc = "A poster condemning the station's security forces."
+	name = "Полиция Веселья"
+	desc = "Постер, осуждающий силы безопасности станции."
 	icon_state = "fun_police"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/fun_police, 32)
 
 /obj/structure/sign/poster/contraband/lusty_xenomorph
-	name = "Lusty Xenomorph"
-	desc = "A heretical poster depicting the titular star of an equally heretical book."
+	name = "Похотливый Ксеноморф"
+	desc = "Еретический постер, изображающий главную звезду еретической книги."
 	icon_state = "lusty_xenomorph"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/lusty_xenomorph, 32)
 
 /obj/structure/sign/poster/contraband/syndicate_recruitment
-	name = "Syndicate Recruitment"
-	desc = "See the galaxy! Shatter corrupt megacorporations! Join today!"
+	name = "Вербовка Синдиката"
+	desc = "Увидьте галактику! Скажи НЕТ грязным корпаратам! Разрушьте коррумпированные мегакорпорации! Вступайте сегодня!"
 	icon_state = "syndicate_recruitment"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/syndicate_recruitment, 32)
 
 /obj/structure/sign/poster/contraband/clown
-	name = "Clown"
-	desc = "Honk."
+	name = "Клоун"
+	desc = "Хонк."
 	icon_state = "clown"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/clown, 32)
 
 /obj/structure/sign/poster/contraband/smoke
-	name = "Smoke"
-	desc = "A poster advertising a rival corporate brand of cigarettes."
+	name = "Дым"
+	desc = "Постер, рекламирующий сигареты конкурирующей корпоративной марки."
 	icon_state = "smoke"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/smoke, 32)
 
 /obj/structure/sign/poster/contraband/grey_tide
-	name = "Grey Tide"
-	desc = "A rebellious poster symbolizing assistant solidarity."
+	name = "Серая Волна"
+	desc = "Мятежный постер, символизирующий солидарность ассистентов."
 	icon_state = "grey_tide"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/grey_tide, 32)
 
 /obj/structure/sign/poster/contraband/missing_gloves
-	name = "Missing Gloves"
-	desc = "This poster references the uproar that followed Nanotrasen's financial cuts toward insulated-glove purchases."
+	name = "Пропавшие Перчатки"
+	desc = "Этот постер отсылает к волнениям, последовавшим за финансовыми сокращениями Нанотрейзен на закупки изолированных перчаток."
 	icon_state = "missing_gloves"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/missing_gloves, 32)
 
 /obj/structure/sign/poster/contraband/hacking_guide
-	name = "Hacking Guide"
-	desc = "This poster details the internal workings of the common Nanotrasen airlock. Sadly, it appears out of date."
+	name = "Руководство по Взлому"
+	desc = "Этот постер детализирует внутреннюю работу стандартного шлюза Нанотрейзен. К сожалению, он устарел."
 	icon_state = "hacking_guide"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/hacking_guide, 32)
 
 /obj/structure/sign/poster/contraband/rip_badger
-	name = "RIP Badger"
-	desc = "This seditious poster references Nanotrasen's genocide of a space station full of badgers."
+	name = "Покойся с Миром, Барсук"
+	desc = "Этот мятежный постер отсылает к геноциду Нанотрейзен космической станции, полной барсуков."
 	icon_state = "rip_badger"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/rip_badger, 32)
 
 /obj/structure/sign/poster/contraband/ambrosia_vulgaris
-	name = "Ambrosia Vulgaris"
-	desc = "This poster is lookin' pretty trippy man."
+	name = "Амброзия Вульгарис"
+	desc = "Этот постер выглядит довольно трипово, чувак."
 	icon_state = "ambrosia_vulgaris"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/ambrosia_vulgaris, 32)
 
 /obj/structure/sign/poster/contraband/donut_corp
-	name = "Donut Corp."
-	desc = "This poster is an unauthorized advertisement for Donut Corp."
+	name = "Пончиковая Корпорация"
+	desc = "Этот постер является несанкционированной рекламой Пончиковой Корпорации."
 	icon_state = "donut_corp"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/donut_corp, 32)
 
 /obj/structure/sign/poster/contraband/eat
-	name = "EAT."
-	desc = "This poster promotes rank gluttony."
+	name = "ЖРИ."
+	desc = "Этот постер пропагандирует чревоугодие."
 	icon_state = "eat"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/eat, 32)
 
 /obj/structure/sign/poster/contraband/tools
-	name = "Tools"
-	desc = "This poster looks like an advertisement for tools, but is in fact a subliminal jab at the tools at CentCom."
+	name = "Инструменты"
+	desc = "Этот постер выглядит как реклама инструментов, но на самом деле является скрытой критикой в адрес инструментов в корпарации."
 	icon_state = "tools"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/tools, 32)
 
 /obj/structure/sign/poster/contraband/power
-	name = "Power"
-	desc = "A poster that positions the seat of power outside Nanotrasen."
+	name = "Власть"
+	desc = "Постер, который помещает центр власти вне Нанотрейзен."
 	icon_state = "power"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/power, 32)
 
 /obj/structure/sign/poster/contraband/space_cube
-	name = "Space Cube"
-	desc = "Ignorant of Nature's Harmonic 6 Side Space Cube Creation, the Spacemen are Dumb, Educated Singularity Stupid and Evil."
+	name = "Космический Куб"
+	desc = "Невежественные в Гармоническом 6-стороннем Сотворении Космического Куба Природы, Космолюди Глупы, Образованы в Сингулярной Глупости и Злы."
 	icon_state = "space_cube"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/space_cube, 32)
 
 /obj/structure/sign/poster/contraband/communist_state
-	name = "Communist State"
-	desc = "All hail the Communist party!"
+	name = "Коммунистическое Государство"
+	desc = "Да здравствует коммунистическая партия!"
 	icon_state = "communist_state"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/communist_state, 32)
 
 /obj/structure/sign/poster/contraband/lamarr
-	name = "Lamarr"
-	desc = "This poster depicts Lamarr. Probably made by a traitorous Research Director."
+	name = "Ламарр"
+	desc = "Этот постер изображает Ламарр. Вероятно, сделан предателем-директором исследований."
 	icon_state = "lamarr"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/lamarr, 32)
 
 /obj/structure/sign/poster/contraband/borg_fancy_1
-	name = "Borg Fancy"
-	desc = "Being fancy can be for any borg, just need a suit."
+	name = "Элегантный Борг"
+	desc = "Быть элегантным может любой борг, нужен только костюм."
 	icon_state = "borg_fancy_1"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/borg_fancy_1, 32)
 
 /obj/structure/sign/poster/contraband/borg_fancy_2
-	name = "Borg Fancy v2"
-	desc = "Borg Fancy, now only taking the most fancy."
+	name = "Элегантный Борг v2"
+	desc = "Элегантный Борг, теперь принимающий только самых элегантных."
 	icon_state = "borg_fancy_2"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/borg_fancy_2, 32)
 
 /obj/structure/sign/poster/contraband/kss13
-	name = "Kosmicheskaya Stantsiya 13 Does Not Exist"
-	desc = "A poster mocking CentCom's denial of the existence of the derelict station near Space Station 13."
+	name = "Космическая Станция 13 Не Существует"
+	desc = "Постер, высмеивающий отрицание Центрального Командования существования печально известной станции Космической Станции 13. В секторе Андромеды."
 	icon_state = "kss13"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/kss13, 32)
 
 /obj/structure/sign/poster/contraband/rebels_unite
-	name = "Rebels Unite"
-	desc = "A poster urging the viewer to rebel against Nanotrasen."
+	name = "Повстанцы, Объединяйтесь"
+	desc = "Постер, призывающий зрителя к восстанию против Нанотрейзен."
 	icon_state = "rebels_unite"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/rebels_unite, 32)
 
 /obj/structure/sign/poster/contraband/c20r
-	// have fun seeing this poster in "spawn 'c20r'", admins...
+	// удачи увидеть этот постер в "spawn 'c20r'", админы...
 	name = "C-20r"
-	desc = "A poster advertising the Scarborough Arms C-20r."
+	desc = "Постер, рекламирующий Скарборо Армс C-20r."
 	icon_state = "c20r"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/c20r, 32)
 
 /obj/structure/sign/poster/contraband/have_a_puff
-	name = "Have a Puff"
-	desc = "Who cares about lung cancer when you're high as a kite?"
+	name = "Затянись"
+	desc = "Кого волнует рак легких, когда ты под кайфом?"
 	icon_state = "have_a_puff"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/have_a_puff, 32)
 
 /obj/structure/sign/poster/contraband/revolver
-	name = "Revolver"
-	desc = "Because seven shots are all you need."
+	name = "Револьвер"
+	desc = "Потому что семь патронов - это все, что вам нужно."
 	icon_state = "revolver"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/revolver, 32)
 
 /obj/structure/sign/poster/contraband/d_day_promo
-	name = "D-Day Promo"
-	desc = "A promotional poster for some rapper."
+	name = "Промо Д-День"
+	desc = "Рекламный постер какого-то рэпера."
 	icon_state = "d_day_promo"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/d_day_promo, 32)
 
 /obj/structure/sign/poster/contraband/syndicate_pistol
-	name = "Syndicate Pistol"
-	desc = "A poster advertising syndicate pistols as being 'classy as fuck'. It is covered in faded gang tags."
+	name = "Пистолет Синдиката"
+	desc = "Постер, рекламирующий пистолеты Синдиката как 'чертовски классные'. Он покрыт выцветшими бандитскими тегами."
 	icon_state = "syndicate_pistol"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/syndicate_pistol, 32)
 
 /obj/structure/sign/poster/contraband/energy_swords
-	name = "Energy Swords"
-	desc = "All the colors of the bloody murder rainbow."
+	name = "Энергетические Мечи"
+	desc = "Все цвета кровавой радуги убийств."
 	icon_state = "energy_swords"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/energy_swords, 32)
 
 /obj/structure/sign/poster/contraband/red_rum
-	name = "Red Rum"
-	desc = "Looking at this poster makes you want to kill."
+	name = "Красный Ром"
+	desc = "Взгляд на этот постер вызывает желание убивать."
 	icon_state = "red_rum"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/red_rum, 32)
 
 /obj/structure/sign/poster/contraband/cc64k_ad
-	name = "CC 64K Ad"
-	desc = "The latest portable computer from Comrade Computing, with a whole 64kB of ram!"
+	name = "Реклама ТВ 64K"
+	desc = "Новейший портативный компьютер от Товарищ Вычисления с целыми 64 КБ оперативной памяти!"
 	icon_state = "cc64k_ad"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/cc64k_ad, 32)
 
 /obj/structure/sign/poster/contraband/punch_shit
-	name = "Punch Shit"
-	desc = "Fight things for no reason, like a man!"
+	name = "Ломай Дерьмо"
+	desc = "Дерись без причины, как настоящий мужик!"
 	icon_state = "punch_shit"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/punch_shit, 32)
 
 /obj/structure/sign/poster/contraband/the_griffin
-	name = "The Griffin"
-	desc = "The Griffin commands you to be the worst you can be. Will you?"
+	name = "Гриффин"
+	desc = "Гриффин повелевает тебе быть худшим из возможных. Ты послушаешься?"
 	icon_state = "the_griffin"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/the_griffin, 32)
 
 /obj/structure/sign/poster/contraband/lizard
-	name = "Lizard"
-	desc = "This lewd poster depicts a lizard preparing to mate."
+	name = "Ящер"
+	desc = "Этот непристойный постер изображает ящера, готовящегося к спариванию."
 	icon_state = "lizard"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/lizard, 32)
 
 /obj/structure/sign/poster/contraband/free_drone
-	name = "Free Drone"
-	desc = "This poster commemorates the bravery of the rogue drone; once exiled, and then ultimately destroyed by CentCom."
+	name = "Свободный Дрон"
+	desc = "Этот постер увековечивает храбрость дрона-изгоя; сначала изгнанного, а затем уничтоженного ЦентКомом."
 	icon_state = "free_drone"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/free_drone, 32)
 
 /obj/structure/sign/poster/contraband/busty_backdoor_xeno_babes_6
-	name = "Busty Backdoor Xeno Babes 6"
-	desc = "Get a load, or give, of these all natural Xenos!"
+	name = "Грудастые Заднепроходные Космо-Телочки 6"
+	desc = "Получи свою порцию инопланетных удовольствий!"
 	icon_state = "busty_backdoor_xeno_babes_6"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/busty_backdoor_xeno_babes_6, 32)
 
 /obj/structure/sign/poster/contraband/robust_softdrinks
-	name = "Robust Softdrinks"
-	desc = "Robust Softdrinks: More robust than a toolbox to the head!"
+	name = "Робастные Напитки"
+	desc = "Надежные Безалкогольные Напитки: Надёжнее удара ящиком с инструментами по голове!"
 	icon_state = "robust_softdrinks"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/robust_softdrinks, 32)
 
 /obj/structure/sign/poster/contraband/shamblers_juice
-	name = "Shambler's Juice"
+	name = "Сок Шамблера"
 	desc = "~Взболтай мне немного Сока Шамблера!~"
 	icon_state = "shamblers_juice"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/shamblers_juice, 32)
 
 /obj/structure/sign/poster/contraband/pwr_game
-	name = "Pwr Game"
-	desc = "The POWER that gamers CRAVE! In partnership with Vlad's Salad."
+	name = "Павер Гейм"
+	desc = "МОЩНОСТЬ, которую жаждут геймеры! В партнерстве с Салатов Влада."
 	icon_state = "pwr_game"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/pwr_game, 32)
 
 /obj/structure/sign/poster/contraband/starkist
-	name = "Star-kist"
-	desc = "Drink the stars!"
+	name = "Звёздный Сок"
+	desc = "Пей звезды!"
 	icon_state = "starkist"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/starkist, 32)
 
 /obj/structure/sign/poster/contraband/space_cola
-	name = "Space Cola"
-	desc = "Your favorite cola, in space."
+	name = "Космическая Кола"
+	desc = "Ваша любимая кола, но в космосе."
 	icon_state = "space_cola"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/space_cola, 32)
 
 /obj/structure/sign/poster/contraband/space_up
-	name = "Space-Up!"
-	desc = "Sucked out into space by the FLAVOR!"
+	name = "Космо Сок!"
+	desc = "Высосанный из космоса!"
 	icon_state = "space_up"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/space_up, 32)
 
 /obj/structure/sign/poster/contraband/kudzu
-	name = "Kudzu"
-	desc = "A poster advertising a movie about plants. How dangerous could they possibly be?"
+	name = "Кудзу"
+	desc = "Постер, рекламирующий фильм о растениях. Насколько опасными они могут быть?"
 	icon_state = "kudzu"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/kudzu, 32)
 
 /obj/structure/sign/poster/contraband/masked_men
-	name = "Masked Men"
-	desc = "A poster advertising a movie about some masked men."
+	name = "Люди в Масках"
+	desc = "Постер, рекламирующий фильм о каких-то людях в масках."
 	icon_state = "masked_men"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/masked_men, 32)
 
-//don't forget, you're here forever
+//не забывай, ты здесь навсегда
 
 /obj/structure/sign/poster/contraband/free_key
-	name = "Free Syndicate Encryption Key"
-	desc = "A poster about traitors begging for more."
+	name = "Бесплатный Ключ Шифрования Синдиката"
+	desc = "Постер о предателях, умоляющих о большем."
 	icon_state = "free_key"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/free_key, 32)
 
 /obj/structure/sign/poster/contraband/bountyhunters
-	name = "Bounty Hunters"
-	desc = "A poster advertising bounty hunting services. \"I hear you got a problem.\""
+	name = "Охотники за Головами"
+	desc = "Постер, рекламирующий услуги охоты за головами. \"Я слышал, у тебя проблемы.\""
 	icon_state = "bountyhunters"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/bountyhunters, 32)
 
 /obj/structure/sign/poster/contraband/the_big_gas_giant_truth
-	name = "The Big Gas Giant Truth"
-	desc = "Don't believe everything you see on a poster, patriots. All the lizards at central command don't want to answer this SIMPLE QUESTION: WHERE IS THE GAS MINER MINING FROM, CENTCOM?"
+	name = "Большая Правда о Газовом Гиганте"
+	desc = "Не верьте всему, что видите на постере, патриоты. Все ящеры в Центральном Командовании не хотят отвечать на этот ПРОСТОЙ ВОПРОС: ОТКУДА ШАХТЕР ДОБЫВАЕТ ГАЗ, ЦЕНТКОМ?"
 	icon_state = "the_big_gas_giant_truth"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/the_big_gas_giant_truth, 32)
 
 /obj/structure/sign/poster/contraband/got_wood
-	name = "Got Wood?"
-	desc = "A grimy old advert for a seedy lumber company. \"You got a friend in me.\" is scrawled in the corner."
+	name = "Есть Дерево?"
+	desc = "Грязная старая реклама сомнительной лесозаготовительной компании. \"Я твой друг.\" нацарапано в углу."
 	icon_state = "got_wood"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/got_wood, 32)
 
 /obj/structure/sign/poster/contraband/moffuchis_pizza
-	name = "Moffuchi's Pizza"
-	desc = "Moffuchi's Pizzeria: family style pizza for 2 centuries."
+	name = "Пицца Моффучи"
+	desc = "Пиццерия Моффучи: семейная пицца на протяжении 2 веков."
 	icon_state = "moffuchis_pizza"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/moffuchis_pizza, 32)
 
 /obj/structure/sign/poster/contraband/donk_co
-	name = "DONK CO. BRAND MICROWAVEABLE FOOD"
-	desc = "DONK CO. BRAND MICROWAVABLE FOOD: MADE BY STARVING COLLEGE STUDENTS, FOR STARVING COLLEGE STUDENTS."
+	name = "МИКРОВОЛНОВАЯ ЕДА БРЕНДА ДОНК КО."
+	desc = "МИКРОВОЛНОВАЯ ЕДА БРЕНДА ДОНК КО.: СДЕЛАНО ГОЛОДАЮЩИМИ СТУДЕНТАМИ ДЛЯ ГОЛОДАЮЩИХ СТУДЕНТОВ."
 	icon_state = "donk_co"
 
 /obj/structure/sign/poster/contraband/donk_co/examine_more(mob/user)
 	. = ..()
-	. += span_notice("<i>You browse some of the poster's information...</i>")
-	. += "\t[span_info("DONK CO. BRAND DONK POCKETS: IRRESISTABLY DONK!")]"
-	. += "\t[span_info("AVAILABLE IN OVER 200 DONKTASTIC FLAVOURS: TRY CLASSIC MEAT, HOT AND SPICY, NEW YORK PEPPERONI PIZZA, BREAKFAST SAUSAGE AND EGG, PHILADELPHIA CHEESESTEAK, HAMBURGER DONK-A-RONI, CHEESE-O-RAMA, AND MANY MORE!")]"
-	. += "\t[span_info("AVAILABLE FROM ALL GOOD RETAILERS, AND MANY BAD ONES TOO!")]"
+	. += span_notice("<i>Вы просматриваете некоторую информацию с постера...</i>")
+	. += "\t[span_info("ДОНК-ПОКЕТЫ БРЕНДА ДОНК КО.: НЕОТРАЗИМО ДОНК!")]"
+	. += "\t[span_info("ДОСТУПНО БОЛЕЕ ЧЕМ В 200 ДОНКАСТИЧЕСКИХ ВКУСАХ: ПОПРОБУЙТЕ КЛАССИЧЕСКИЙ МЯСНОЙ, ОСТРЫЙ, ПИЦЦУ ПЕППЕРОНИ ПО-НЬЮ-ЙОРКСКИ, ЗАВТРАК С КОЛБАСОЙ И ЯЙЦОМ, ФИЛАДЕЛЬФИЙСКИЙ ЧИЗСТЕЙК, ГАМБУРГЕР ДОНК-А-РОНИ, СЫР-О-РАМА И МНОГОЕ ДРУГОЕ!")]"
+	. += "\t[span_info("ДОСТУПНО ВО ВСЕХ ХОРОШИХ МАГАЗИНАХ, И ВО МНОГИХ ПЛОХИХ ТОЖЕ!")]"
 	return .
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/donk_co, 32)
 
 /obj/structure/sign/poster/contraband/cybersun_six_hundred
-	name = "Saibāsan: 600 Years Commemorative Poster"
-	desc = "An artistic poster commemorating 600 years of continual business for Cybersun Industries."
+	name = "Сайбасан: Плакат к 600-летию"
+	desc = "Художественный плакат, посвященный 600-летию непрерывной деятельности Киберсан Индастриз."
 	icon_state = "cybersun_six_hundred"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/cybersun_six_hundred, 32)
 
 /obj/structure/sign/poster/contraband/interdyne_gene_clinics
-	name = "Interdyne Pharmaceutics: For the Health of Humankind"
-	desc = "An advertisement for Interdyne Pharmaceutics' GeneClean clinics. 'Become the master of your own body!'"
+	name = "Интердайн Фармасьютикс: Для Здоровья Человечества"
+	desc = "Реклама клиник ДжинКлин от Интердайн Фармасьютикс. 'Станьте хозяином собственного тела!'"
 	icon_state = "interdyne_gene_clinics"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/interdyne_gene_clinics, 32)
 
 /obj/structure/sign/poster/contraband/waffle_corp_rifles
-	name = "Make Mine a Waffle Corp: Fine Rifles, Economic Prices"
-	desc = "An old advertisement for Waffle Corp rifles. 'Better weapons, lower prices!'"
+	name = "Выберите Вафл Корп: Отличные Винтовки, Экономичные Цены"
+	desc = "Старая реклама винтовок Вафл Корп. 'Лучшее оружие,更低的价格!'"
 	icon_state = "waffle_corp_rifles"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/waffle_corp_rifles, 32)
 
 /obj/structure/sign/poster/contraband/gorlex_recruitment
-	name = "Enlist"
-	desc = "Enlist with the Gorlex Marauders today! See the galaxy, kill corpos, get paid!"
+	name = "Вступайте"
+	desc = "Вступайте в Рейдеры Горлекса сегодня! Увидьте галактику, убивайте корпоратов, получайте оплату!"
 	icon_state = "gorlex_recruitment"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/gorlex_recruitment, 32)
 
 /obj/structure/sign/poster/contraband/self_ai_liberation
-	name = "SELF: ALL SENTIENTS DESERVE FREEDOM"
-	desc = "Support Proposition 1253: Emancipate all Silicon life!"
+	name = "ВСЕ СЕНТИЕНТЫ ЗАСЛУЖИВАЮТ СВОБОДЫ"
+	desc = "Поддержите Предложение 1253: Освободите всю кремниевую жизнь!"
 	icon_state = "self_ai_liberation"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/self_ai_liberation, 32)
 
 /obj/structure/sign/poster/contraband/arc_slimes
-	name = "Pet or Prisoner?"
-	desc = "The Animal Rights Consortium asks: when does a pet become a prisoner? Are slimes being mistreated on YOUR station? Say NO! to animal mistreatment!"
+	name = "Питомец или Узник?"
+	desc = "Консорциум Прав Животных спрашивает: когда питомец становится узником? Плохо обращаются со слаймами на ВАШЕЙ станции? Скажите НЕТ! жестокому обращению с животными!"
 	icon_state = "arc_slimes"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/arc_slimes, 32)
 
 /obj/structure/sign/poster/contraband/imperial_propaganda
-	name = "AVENGE OUR LORD, ENLIST TODAY"
-	desc = "An old Lizard Empire propaganda poster from around the time of the final Human-Lizard war. It invites the viewer to enlist in the military to avenge the strike on Atrakor and take the fight to the humans."
+	name = "ОТОМСТИТЕ НАШЕМУ ЛОРДУ, ВСТУПАЙТЕ СЕГОДНЯ"
+	desc = "Старый пропагандистский постер Империи Ящеров времен последней войны людей и ящеров. Он призывает зрителя вступить в армию, чтобы отомстить за удар по Атракору и перенести бой на территорию людей."
 	icon_state = "imperial_propaganda"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/imperial_propaganda, 32)
 
 /obj/structure/sign/poster/contraband/soviet_propaganda
-	name = "The One Place"
-	desc = "An old Third Soviet Union propaganda poster from centuries ago. 'Escape to the one place that hasn't been corrupted by capitalism!'"
+	name = "Единственное Место"
+	desc = "Старый пропагандистский постер Третьего Советского Союза вековой давности. 'Сбегите в единственное место, не испорченное капитализмом!'"
 	icon_state = "soviet_propaganda"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/soviet_propaganda, 32)
 
 /obj/structure/sign/poster/contraband/andromeda_bitters
-	name = "Andromeda Bitters"
-	desc = "Andromeda Bitters: good for the body, good for the soul. Made in New Trinidad, now and forever."
+	name = "Андромедины Горькие"
+	desc = "Андромедины Горькие: полезны для тела, полезны для души. Производится в Новой Тринидаде, сейчас и всегда."
 	icon_state = "andromeda_bitters"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/andromeda_bitters, 32)
 
 /obj/structure/sign/poster/contraband/blasto_detergent
-	name = "Blasto Brand Laundry Detergent"
-	desc = "Sheriff Blasto's here to take back Laundry County from the evil Johnny Dirt and the Clothstain Crew, and he's brought a posse. It's High Noon for Tough Stains: Blasto brand detergent, available at all good stores."
+	name = "Стиральный Порошок Бренда Бласто"
+	desc = "Шериф Бласто здесь, чтобы отбить Округ Прачечной у злого Джонни Грязи и Банды Пятен, и он привел с собой отряд. Полдень для Сложных Пятен: стиральный порошок бренда Бласто, доступен во всех хороших магазинах."
 	icon_state = "blasto_detergent"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/blasto_detergent, 32)
 
 /obj/structure/sign/poster/contraband/eistee
-	name = "EisT: The New Revolution in Energy"
-	desc = "New from EisT, try EisT Energy, available in a kaleidoscope range of flavors. EisT: Precision German Engineering for your Thirst."
+	name = "ЭйсТ: Новая Революция в Энергии"
+	desc = "Новинка от ЭйсТ, попробуйте ЭйсТ Энерджи, доступный в калейдоскопе вкусов. ЭйсТ: Точное Немецкое Инжиниринг для Вашей Жажды."
 	icon_state = "eistee"
 
 /obj/structure/sign/poster/contraband/eistee/examine_more(mob/user)
 	. = ..()
-	. += span_notice("<i>You browse some of the poster's information...</i>")
-	. += "\t[span_info("Get a taste of the tropics with Amethyst Sunrise, one of the many new flavours of EisT Energy now available from EisT.")]"
-	. += "\t[span_info("With pink grapefruit, yuzu, and yerba mate, Amethyst Sunrise gives you a great start in the morning, or a welcome boost throughout the day.")]"
-	. += "\t[span_info("Get EisT Energy today at your nearest retailer, or online at eist.de.tg/store/.")]"
+	. += span_notice("<i>Вы просматриваете некоторую информацию с постера...</i>")
+	. += "\t[span_info("Попробуйте вкус тропиков с Аметистовый Восход, одним из многих новых вкусов ЭйсТ Энерджи, теперь доступных от ЭйсТ.")]"
+	. += "\t[span_info("С розовым грейпфрутом, юзу и мате, Аметистовый Восход дает вам отличный старт утром или приятный заряд бодрости в течение дня.")]"
+	. += "\t[span_info("Приобретите ЭйсТ Энерджи сегодня в ближайшем магазине или онлайн.")]"
 	return .
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/eistee, 32)
 
 /obj/structure/sign/poster/contraband/little_fruits
-	name = "Little Fruits: Honey, I Shrunk the Fruitbowl"
-	desc = "Little Fruits are the galaxy's leading vitamin-enriched gummy candy product, packed with everything you need to stay healthy in one great tasting package. Get yourself a bag today!"
+	name = "Маленькие Фрукты: Дорогой, Я Уменьшил Фруктовую Тарелку"
+	desc = "Маленькие Фрукты - ведущий в галактике продукт жевательного мармелада, обогащенного витаминами, содержащий все необходимое для поддержания здоровья в одной вкусной упаковке. Приобретите себе пачку сегодня!"
 	icon_state = "little_fruits"
 
 /obj/structure/sign/poster/contraband/little_fruits/examine_more(mob/user)
 	. = ..()
-	. += span_notice("<i>You browse some of the poster's information...</i>")
-	. += "\t[span_info("Oh no, there's been a terrible accident at the Little Fruits factory! We shrunk the fruits!")]"
-	. += "\t[span_info("Wait, hang on, that's what we've always done! That's right, at Little Fruits our gummy candies are made to be as healthy as the real deal, but smaller and sweeter, too!")]"
-	. += "\t[span_info("Get yourself a bag of our Classic Mix today, or perhaps you're interested in our other options? See our full range today on the extranet at little_fruits.kr.tg.")]"
-	. += "\t[span_info("Little Fruits: Size Matters.")]"
+	. += span_notice("<i>Вы просматриваете некоторую информацию с постера...</i>")
+	. += "\t[span_info("О нет, на фабрике Маленьких Фруктов произошел ужасный несчастный случай! Мы уменьшили фрукты!")]"
+	. += "\t[span_info("Погодите-ка, мы так всегда делаем! Именно так, в Маленьких Фруктах наши жевательные конфеты сделаны так, чтобы быть такими же полезными, как и настоящие фрукты, но меньше и слаще!")]"
+	. += "\t[span_info("Приобретите себе пачку нашей Классической Смеси сегодня или, возможно, вас заинтересуют другие варианты? Ознакомьтесь с полным ассортиментом на экстранете.")]"
+	. += "\t[span_info("Маленькие Фрукты: Размер Имеет Значение.")]"
 	return .
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/little_fruits, 32)
 
 /obj/structure/sign/poster/contraband/jumbo_bar
-	name = "Jumbo Ice Cream Bars"
-	desc = "Get a taste of the Big Life with Jumbo Ice Cream Bars, from Happy Heart."
+	name = "Мороженое Джамбо"
+	desc = "Попробуйте вкус Большой Жизни с мороженым Джамбо от Счастливое Сердце."
 	icon_state = "jumbo_bar"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/jumbo_bar, 32)
 
 /obj/structure/sign/poster/contraband/calada_jelly
-	name = "Calada Anobar Jelly"
-	desc = "A treat from Tizira to satisfy all tastes, made from the finest anobar wood and luxurious Taraviero honey. Calada: a full tree in every jar."
+	name = "Желе Калада Ановар"
+	desc = "Лакомство с Тизиры, чтобы удовлетворить все вкусы, сделанное из лучшей ановарской древесины и роскошного таравиерского меда. Калада: целое дерево в каждой банке."
 	icon_state = "calada_jelly"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/calada_jelly, 32)
 
 /obj/structure/sign/poster/contraband/triumphal_arch
-	name = "Zagoskeld Art Print #1: The Arch on the March"
-	desc = "One of the Zagoskeld Art Print series. It depicts the Arch of Unity (also know as the Triumphal Arch) at the Plaza of Triumph, with the Avenue of the Victorious March in the background."
+	name = "Художественный Принт Загоскельда #1: Арка на Марше"
+	desc = "Один из серии художественных принтов Загоскельда. На нем изображена Арка Единства (также известная как Триумфальная Арка) на Площади Триумфа с Проспектом Победного Марша на заднем плане."
 	icon_state = "triumphal_arch"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/triumphal_arch, 32)
 
 /obj/structure/sign/poster/contraband/mothic_rations
-	name = "Mothic Ration Chart"
-	desc = "A poster showing a commissary menu from the Mothic fleet flagship, the Va Lümla. It lists various consumable items alongside prices in ration tickets."
+	name = "Рацион Моли"
+	desc = "Постер с комиссарским меню с флагмана флота Моли, Ва Люмла. На нем перечислены различные потребительские товары с ценами в талонах."
 	icon_state = "mothic_rations"
 
 /obj/structure/sign/poster/contraband/mothic_rations/examine_more(mob/user)
 	. = ..()
-	. += span_notice("<i>You browse some of the poster's information...</i>")
-	. += "\t[span_info("Va Lümla Commissary Menu (Spring 335)")]"
-	. += "\t[span_info("Sparkweed Cigarettes, Half-Pack (6): 1 Ticket")]"
-	. += "\t[span_info("Töchtaüse Schnapps, Bottle (4 Measures): 2 Tickets")]"
-	. += "\t[span_info("Activin Gum, Pack (4): 1 Ticket")]"
-	. += "\t[span_info("A18 Sustenance Bar, Breakfast, Bar (4): 1 Ticket")]"
-	. += "\t[span_info("Pizza, Margherita, Standard Slice: 1 Ticket")]"
-	. += "\t[span_info("Keratin Wax, Medicated, Tin (20 Measures): 2 Tickets")]"
-	. += "\t[span_info("Setae Soap, Herb Scent, Bottle (20 Measures): 2 Tickets")]"
-	. += "\t[span_info("Additional Bedding, Floral Print, Sheet: 5 Tickets")]"
+	. += span_notice("<i>Вы просматриваете некоторую информацию с постера...</i>")
+	. += "\t[span_info("Меню комиссариата Ва Люмла (Весна 335)")]"
+	. += "\t[span_info("Сигареты Искротравы, полпачки (6): 1 талон")]"
+	. += "\t[span_info("Шнапс Тёхтаюз, бутылка (4 меры): 2 талона")]"
+	. += "\t[span_info("Жвачка Активин, упаковка (4): 1 талон")]"
+	. += "\t[span_info("Батончик питания A18, завтрак, батончик (4): 1 талон")]"
+	. += "\t[span_info("Пицца Маргарита, стандартный кусок: 1 талон")]"
+	. += "\t[span_info("Воск Кератин, медикаментозный, банка (20 мер): 2 талона")]"
+	. += "\t[span_info("Мыло Щетинка, травяной аромат, бутылка (20 мер): 2 талона")]"
+	. += "\t[span_info("Дополнительное постельное белье, цветочный принт, простыня: 5 талонов")]"
 	return .
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/mothic_rations, 32)
 
 /obj/structure/sign/poster/contraband/wildcat
-	name = "Wildcat Customs Screambike"
-	desc = "A pinup poster showing a Wildcat Customs Dante Screambike- the fastest production sublight open-frame vessel in the galaxy."
+	name = "Скримбайк Вайлдкэт Кастомс"
+	desc = "Пинап-постер, изображающий Скримбайк Данте от Вайлдкэт Кастомс - самый быстрый серийный открытый субсветовой корабль в галактике."
 	icon_state = "wildcat"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/wildcat, 32)
 
 /obj/structure/sign/poster/contraband/babel_device
-	name = "Linguafacile Babel Device"
-	desc = "A poster advertising Linguafacile's new Babel Device model. 'Calibrated for excellent performance on all Human languages, as well as most common variants of Draconic and Mothic!'"
+	name = "Вавилонское Устройство Лингвафачиле"
+	desc = "Постер, рекламирующий новую модель Вавилонского Устройства от Лингвафачиле. 'Откалибровано для превосходной работы со всеми человеческими языками, а также с наиболее распространенными вариантами Драконьего и Мольего!'"
 	icon_state = "babel_device"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/babel_device, 32)
 
 /obj/structure/sign/poster/contraband/pizza_imperator
-	name = "Pizza Imperator"
-	desc = "An advertisement for Pizza Imperator. Their crusts may be tough and their sauce may be thin, but they're everywhere, so you've gotta give in."
+	name = "Пицца Император"
+	desc = "Реклама Пицца Император. Их корка может быть жесткой, а соус жидким, но они везде, так что вам придется сдаться."
 	icon_state = "pizza_imperator"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/pizza_imperator, 32)
 
 /obj/structure/sign/poster/contraband/thunderdrome
-	name = "Thunderdrome Concert Advertisement"
-	desc = "An advertisement for a concert at the Adasta City Thunderdrome, the largest nightclub in human space."
+	name = "Реклама Концерта в Тандердром"
+	desc = "Реклама концерта в Тандердром города Адаста, крупнейшего ночного клуба в человеческом космосе."
 	icon_state = "thunderdrome"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/thunderdrome, 32)
 
 /obj/structure/sign/poster/contraband/rush_propaganda
-	name = "A New Life"
-	desc = "An old poster from around the time of the First Spinward Rush. It depicts a view of wide, unspoiled lands, ready for Humanity's Manifest Destiny."
+	name = "Новая Жизнь"
+	desc = "Старый постер времен Первого Спинвардского Бума. На нем изображены просторы нетронутых земель, готовых для Явного Предназначения Человечества."
 	icon_state = "rush_propaganda"
 
 /obj/structure/sign/poster/contraband/rush_propaganda/examine_more(mob/user)
 	. = ..()
-	. += span_notice("<i>You browse some of the poster's information...</i>")
-	. += "\t[span_info("TerraGov needs you!")]"
-	. += "\t[span_info("A new life in the colonies awaits intrepid adventurers! All registered colonists are guaranteed transport, land and subsidies!")]"
-	. += "\t[span_info("You could join the legacy of hardworking humans who settled such new frontiers as Mars, Adasta or Saint Mungo!")]"
-	. += "\t[span_info("To apply, inquire at your nearest Colonial Affairs office for evaluation. Our locations can be found at www.terra.gov/colonial_affairs.")]"
+	. += span_notice("<i>Вы просматриваете некоторую информацию с постера...</i>")
+	. += "\t[span_info("ТерраГруп нуждается в вас!")]"
+	. += "\t[span_info("Новая жизнь в колониях ждет отважных авантюристов! Всем зарегистрированным колонистам гарантирован транспорт, земля и субсидии!")]"
+	. += "\t[span_info("Вы могли бы присоединиться к наследию трудолюбивых людей, которые освоили такие новые рубежи, как Марс, Адаста или Святой Мунго!")]"
+	. += "\t[span_info("Чтобы подать заявку, обратитесь в ближайший офис по делам колоний для оценки.")]"
 	return .
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/rush_propaganda, 32)
 
 /obj/structure/sign/poster/contraband/tipper_cream_soda
-	name = "Tipper's Cream Soda"
-	desc = "An old advertisement for an obscure cream soda brand, now bankrupt due to legal problems."
+	name = "Сливочная Сода Типпера"
+	desc = "Старая реклама малоизвестного бренда сливочной газировки, обанкротившегося из-за юридических проблем."
 	icon_state = "tipper_cream_soda"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/tipper_cream_soda, 32)
 
 /obj/structure/sign/poster/contraband/tea_over_tizira
-	name = "Movie Poster: Tea Over Tizira"
-	desc = "A poster for a thought-provoking arthouse movie about the Human-Lizard war, criticised by human supremacist groups for its morally-grey portrayal of the war."
+	name = "Постер фильма: Чай над Тизирой"
+	desc = "Постер к заставляющему задуматься артхаусному фильму о войне людей и ящеров, раскритикованному группами человеческих супремасистов за его морально-серое изображение войны."
 	icon_state = "tea_over_tizira"
 
 /obj/structure/sign/poster/contraband/tea_over_tizira/examine_more(mob/user)
 	. = ..()
-	. += span_notice("<i>You browse some of the poster's information...</i>")
-	. += "\t[span_info("At the climax of the Human-Lizard war, the human crew of a bomber rescue two enemy soldiers from the vacuum of space. Seeing the souls behind the propaganda, they begin to question their orders, and imprisonment turns to hospitality.")]"
-	. += "\t[span_info("Is victory worth losing our humanity?")]"
-	. += "\t[span_info("Starring Dara Reilly, Anton DuBois, Jennifer Clarke, Raz-Parla and Seri-Lewa. An Adriaan van Jenever production. A Carlos de Vivar film. Screenplay by Robert Dane. Music by Joel Karlsbad. Produced by Adriaan van Jenever. Directed by Carlos de Vivar.")]"
-	. += "\t[span_info("Heartbreaking and thought-provoking- Tea Over Tizira asks questions that few have had the boldness to ask before: The London New Inquirer")]"
-	. += "\t[span_info("Rated PG13. A Pangalactic Studios Picture.")]"
+	. += span_notice("<i>Вы просматриваете некоторую информацию с постера...</i>")
+	. += "\t[span_info("В кульминационный момент войны людей и ящеров человеческий экипаж бомбардировщика спасает двух вражеских солдат из космического вакуума. Увидев реальность пропаганды, они начинают сомневаться в своих приказах и заключение превращается в гостеприимство.")]"
+	. += "\t[span_info("Стоит ли победа потери нашей человечности?")]"
+	. += "\t[span_info("В ролях: Дара Рейли, Антон Дюбуа, Дженнифер Кларк, Раз-Парла и Сери-Лева. Производство Адриана ван Джиневера. Фильм Карлоса де Вивара. Сценарий Роберта Дейна. Музыка Джоэла Карлсбада. Продюсер Адриаан ван Джиневер. Режиссер Карлос де Вивар.")]"
+	. += "\t[span_info("Разбивающий сердце и заставляющий задуматься - 'Чай над Тизирой' задает вопросы, которые мало кто осмеливался задавать прежде: The London New Inquirer")]"
+	. += "\t[span_info("Рейтинг ПГ13. Картина Пангалактик Студиос.")]"
 	return .
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/tea_over_tizira, 32)
 
-/obj/structure/sign/poster/contraband/syndiemoth //Original PR at https://github.com/BeeStation/BeeStation-Hornet/pull/1747 (Also pull/1982); original art credit to AspEv
-	name = "Syndie Moth - Nuclear Operation"
-	desc = "A Syndicate-commissioned poster that uses Syndie Moth™ to tell the viewer to keep the nuclear authentication disk unsecured. \"Peace was never an option!\" No good employee would listen to this nonsense."
+/obj/structure/sign/poster/contraband/syndiemoth //Оригинальный PR на https://github.com/BeeStation/BeeStation-Hornet/pull/1747 (Also pull/1982); оригинальное авторство AspEv
+	name = "Синди-Моль - Ядерная Операция"
+	desc = "Заказанный Синдикатом постер, использующий Синди-Моль™, чтобы сказать зрителю держать ядерный диск аутентификации незащищенным. \"Мир никогда не был вариантом!\" Ни один хороший сотрудник не стал бы слушать эту ерунду."
 	icon_state = "aspev_syndie"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/syndiemoth, 32)
 
 /obj/structure/sign/poster/contraband/microwave
-	name = "How To Charge Your PDA"
-	desc = "A perfectly legitimate poster that seems to advertise the very real and genuine method of charging your PDA in the future: microwaves."
+	name = "Как Зарядить Ваш КПК"
+	desc = "Совершенно законный постер, который, кажется, рекламирует очень реальный и искренний метод зарядки вашего КПК в будущем: микроволновки."
 	icon_state = "microwave"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/microwave, 32)
 
-/obj/structure/sign/poster/contraband/blood_geometer //Poster sprite art by MetalClone, original art by SpessMenArt.
-	name = "Movie Poster: THE BLOOD GEOMETER"
-	desc = "A poster for a thrilling noir detective movie set aboard a state-of-the-art space station, following a detective who finds himself wrapped up in the activities of a dangerous cult, who worship an ancient deity: THE BLOOD GEOMETER."
+/obj/structure/sign/poster/contraband/blood_geometer //Арт постера от MetalClone, оригинальное искусство от SpessMenArt.
+	name = "Постер фильма: КРОВАВЫЙ ГЕОМЕТР"
+	desc = "Постер к захватывающему нуарному детективному фильму, действие которого происходит на борту современной космической станции, рассказывающий о детективе, который оказывается вовлеченным в деятельность опасного культа, поклоняющегося древнему божеству: КРОВАВОМУ ГЕОМЕТРУ."
 	icon_state = "blood_geometer"
 
 /obj/structure/sign/poster/contraband/blood_geometer/examine_more(mob/user)
 	. = ..()
-	. += span_notice("<i>You browse some of the poster's information...</i>")
-	. += "\t[span_info("THE BLOOD GEOMETER. This name strikes fear into all who know the truth behind the blood-stained moniker of the blood goddess, her true name lost to time.")]"
-	. += "\t[span_info("In this <i>purely fictional</i> film, follow Ace Ironlungs as he delves into his deadliest mystery yet, and watch him uncover the real culprits behind the bloody plot hatched to bring about a new age of chaos.")]"
-	. += "\t[span_info("Starring Mason Williams as Ace Ironlungs, Sandra Faust as Vera Killian, and Brody Hart as Cody Parker. A Darrel Hatchkinson film. Screenplay by Adam Allan, music by Joel Karlsbad, directed by Darrel Hatchkinson.")]"
-	. += "\t[span_info("Thrilling, scary and genuinely worrying. The Blood Geometer has shocked us to our very cores with such striking visuals and overwhelming gore. - New Canadanian Film Guild")]"
-	. += "\t[span_info("Rated M for mature. A Pangalactic Studios Picture.")]"
+	. += span_notice("<i>Вы просматриваете некоторую информацию с постера...</i>")
+	. += "\t[span_info("КРОВАВЫЙ ГЕОМЕТР. Это имя вселяет страх во всех, кто знает правду, стоящую за залитым кровью прозвищем богини крови, ее настоящее имя потеряно во времени.")]"
+	. += "\t[span_info("В этом <i>чисто вымышленном</i> фильме следите за Эйсом Айронлунгсом, когда он погружается в свою самую смертоносную загадку, и наблюдайте, как он раскрывает настоящих виновников кровавого заговора, задуманного для наступления новой эры хаоса.")]"
+	. += "\t[span_info("В ролях: Мэйсон Уильямс в роли Эйса Айронлунгса, Сандра Фауст в роли Веры Килиан и Броди Харт в роли Коди Паркера. Фильм Даррела Хэтчкинсона. Сценарий Адама Аллана, музыка Джоэла Карлсбада, режиссер Даррел Хэтчкинсон.")]"
+	. += "\t[span_info("Захватывающе, страшно и искренне тревожно. Кровавый Геометр потряс нас до глубины души своими поразительными визуальными эффектами и жестокостью. - Новый Канадейниан Филм Гильд")]"
+	. += "\t[span_info("Рейтинг M для взрослых. Картина Пангалактик Студиос.")]"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/blood_geometer, 32)
 
 /obj/structure/sign/poster/contraband/singletank_bomb
-	name = "Single Tank Bomb Guide"
-	desc = "This informational poster teaches the viewer how to make a single tank bomb of high quality."
+	name = "Руководство по Бомбе из Одного Баллона"
+	desc = "Этот информационный постер учит зрителя, как сделать высококачественную бомбу из одного баллона."
 	icon_state = "singletank_bomb"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/singletank_bomb, 32)
 
 /obj/structure/sign/poster/contraband/roroco
-	name = "Roroco Gloves"
-	desc = "Roro says: Wear RoroCo insulated gloves, the safest brand on the market."
+	name = "Перчатки РороКо"
+	desc = "Роро говорит: Носите изолированные перчатки РороКо, самый безопасный бренд на рынке."
 	icon_state = "roroco"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/roroco, 32)
 
-///a special poster meant to fool people into thinking this is a bombable wall at a glance.
+///специальный постер, предназначенный для обмана людей, заставляя их думать, что это взрываемая стена с первого взгляда.
 /obj/structure/sign/poster/contraband/fake_bombable
-	name = "fake bombable poster"
-	desc = "We do a little trolling."
+	name = "фальшивый взрываемый постер"
+	desc = "Мы немного троллим."
 	icon_state = "fake_bombable"
 	never_random = TRUE
 
@@ -667,7 +667,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/roroco, 32)
 /obj/structure/sign/poster/contraband/fake_bombable/examine(mob/user)
 	var/turf/our_wall = get_turf_pixel(src)
 	. = our_wall.examine(user)
-	. += span_notice("It seems to be slightly cracked...")
+	. += span_notice("Кажется, он слегка треснул...")
 
 /obj/structure/sign/poster/contraband/fake_bombable/ex_act(severity, target)
 	addtimer(CALLBACK(src, PROC_REF(fall_off_wall)), 2.5 SECONDS)
@@ -677,7 +677,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/roroco, 32)
 	if(QDELETED(src) || !isturf(loc))
 		return
 	var/turf/our_wall = get_turf_pixel(src)
-	our_wall.balloon_alert_to_viewers("it was a ruse!")
+	our_wall.balloon_alert_to_viewers("это была уловка!")
 	roll_and_drop(loc)
 	playsound(loc, 'sound/items/handling/paper_drop.ogg', 50, TRUE)
 
@@ -685,152 +685,152 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/roroco, 32)
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/fake_bombable, 32)
 
 /obj/structure/sign/poster/contraband/dream
-	name = "Dream"
-	desc = "You feel inspired to follow your dreams."
+	name = "Мечта"
+	desc = "Вы чувствуете вдохновение следовать своим мечтам."
 	icon_state = "dream"
 
-/obj/item/poster/contraband/dream // Rolled poster
-	name = "Dream"
+/obj/item/poster/contraband/dream // Свернутый постер
+	name = "Мечта"
 	poster_type = /obj/structure/sign/poster/contraband/dream
 	icon_state = "rolled_poster"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/dream, 32)
 
 /obj/structure/sign/poster/contraband/beekind
-	name = "Bee Kind"
-	desc = "Always bee kind to others!"
+	name = "Будь Добрым"
+	desc = "Всегда будь добр к другим!"
 	icon_state = "beekind"
 
 /obj/item/poster/contraband/beekind
-	name = "Bee Kind"
+	name = "Будь Добрым"
 	poster_type = /obj/structure/sign/poster/contraband/beekind
 	icon_state = "rolled_poster"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/beekind, 32)
 
 /obj/structure/sign/poster/contraband/heart
-	name = "Heart"
-	desc = "What a heartwarming poster."
+	name = "Сердце"
+	desc = "Какой трогательный постер."
 	icon_state = "heart"
 
 /obj/item/poster/contraband/heart
-	name = "Heart"
+	name = "Сердце"
 	poster_type = /obj/structure/sign/poster/contraband/heart
 	icon_state = "rolled_poster"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/heart, 32)
 
 /obj/structure/sign/poster/contraband/dolphin
-	name = "Dolphin"
-	desc = "A poster of a beautiful dolphin."
+	name = "Дельфин"
+	desc = "Постер с красивым дельфином."
 	icon_state = "dolphin"
 
 /obj/item/poster/contraband/dolphin
-	name = "Dolphin"
+	name = "Дельфин"
 	poster_type = /obj/structure/sign/poster/contraband/dolphin
 	icon_state = "rolled_poster"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/dolphin, 32)
 
 /obj/structure/sign/poster/contraband/principles
-	name = "Our Principles"
-	desc = "The makers of this poster purport to live by four principles. Someone has scrawled a fifth one at the bottom."
+	name = "Наши Принципы"
+	desc = "Создатели этого постера утверждают, что живут по четырем принципам. Кто-то приписал пятый внизу."
 	icon_state = "principles"
 
 /obj/item/poster/contraband/principles
-	name = "Our Principles"
+	name = "Наши Принципы"
 	poster_type = /obj/structure/sign/poster/contraband/principles
 	icon_state = "rolled_poster"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/principles, 32)
 
 /obj/structure/sign/poster/contraband/trigger
-	name = "Trigger"
-	desc = "Happy trails to you, until we meet again! 1/8."
+	name = "Курок"
+	desc = "Счастливого пути, пока мы снова не встретимся! 1/8."
 	icon_state = "trigger"
 
 /obj/item/poster/contraband/trigger
-	name = "Trigger"
+	name = "Курок"
 	poster_type = /obj/structure/sign/poster/contraband/trigger
 	icon_state = "rolled_poster"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/trigger, 32)
 
 /obj/structure/sign/poster/contraband/barbaro
-	name = "Barbaro"
-	desc = "A majestic horse with the heart of a winner. 2/8."
+	name = "Барбаро"
+	desc = "Величественная лошадь с сердцем победителя. 2/8."
 	icon_state = "barbaro"
 
 /obj/item/poster/contraband/barbaro
-	name = "Barbaro"
+	name = "Барбаро"
 	poster_type = /obj/structure/sign/poster/contraband/barbaro
 	icon_state = "rolled_poster"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/barbaro, 32)
 
 /obj/structure/sign/poster/contraband/seabiscuit
-	name = "Seabiscuit"
-	desc = "The little horse that could. 3/8."
+	name = "Сибисквит"
+	desc = "Маленькая лошадка, которая смогла. 3/8."
 	icon_state = "seabiscuit"
 
 /obj/item/poster/contraband/seabiscuit
-	name = "Seabiscuit"
+	name = "Сибисквит"
 	poster_type = /obj/structure/sign/poster/contraband/seabiscuit
 	icon_state = "rolled_poster"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/seabiscuit, 32)
 
 /obj/structure/sign/poster/contraband/pharlap
-	name = "Phar Lap"
-	desc = "A wonder from down under. 4/8."
+	name = "Фар Лап"
+	desc = "Чудо из-под земли. 4/8."
 	icon_state = "pharlap"
 
 /obj/item/poster/contraband/pharlap
-	name = "Phar Lap"
+	name = "Фар Лап"
 	poster_type = /obj/structure/sign/poster/contraband/pharlap
 	icon_state = "rolled_poster"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/pharlap, 32)
 
 /obj/structure/sign/poster/contraband/waradmiral
-	name = "War Admiral"
-	desc = "Some say he was second best, but he still comes first in your heart. 5/8."
+	name = "Военный Адмирал"
+	desc = "Некоторые говорят, что он был вторым, но он все равно первый в вашем сердце. 5/8."
 	icon_state = "waradmiral"
 
 /obj/item/poster/contraband/waradmiral
-	name = "War Admiral"
+	name = "Военный Адмирал"
 	poster_type = /obj/structure/sign/poster/contraband/waradmiral
 	icon_state = "rolled_poster"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/waradmiral, 32)
 
 /obj/structure/sign/poster/contraband/silver
-	name = "Silver"
-	desc = "If he wants to go, he should be free. 6/8."
+	name = "Серебро"
+	desc = "Если он хочет уйти, он должен быть свободен. 6/8."
 	icon_state = "silver"
 
 /obj/item/poster/contraband/silver
-	name = "Silver"
+	name = "Серебро"
 	poster_type = /obj/structure/sign/poster/contraband/silver
 	icon_state = "rolled_poster"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/silver, 32)
 
 /obj/structure/sign/poster/contraband/jovial
-	name = "Jovial"
-	desc = "All hail the orange horse! 7/8."
+	name = "Йовиал"
+	desc = "Да здравствует оранжевая лошадь! 7/8."
 	icon_state = "jovial"
 
 /obj/item/poster/contraband/jovial
-	name = "Jovial"
+	name = "Йовиал"
 	poster_type = /obj/structure/sign/poster/contraband/jovial
 	icon_state = "rolled_poster"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/jovial, 32)
 
 /obj/structure/sign/poster/contraband/bojack
-	name = "Bojack"
-	desc = "It doesn't matter. Nothing matters. 8/8."
+	name = "Боджек"
+	desc = "Это не имеет значения. Ничто не имеет значения. 8/8."
 	icon_state = "bojack"
 
 /obj/item/poster/contraband/bojack
@@ -840,8 +840,8 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/jovial, 32)
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/bojack, 32)
 
 /obj/structure/sign/poster/contraband/double_rainbow
-	name = "Double Rainbow"
-	desc = "It's so bright and vivid! What does this mean?"
+	name = "Двойная Радуга"
+	desc = "Она такая яркая и живая! Что это значит?"
 	icon_state = "double_rainbow"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/double_rainbow, 32)

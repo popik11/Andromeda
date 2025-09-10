@@ -12,8 +12,8 @@
  * If you just want a random poster, see [/obj/item/poster/random_official] or [/obj/item/poster/random_contraband]
  */
 /obj/item/poster
-	name = "poorly coded poster"
-	desc = "You probably shouldn't be holding this."
+	name = "плохо закодированный постер"
+	desc = "Вам, наверное, не стоит держать это в руках."
 	icon = 'icons/obj/poster.dmi'
 	force = 0
 	resistance_flags = FLAMMABLE
@@ -23,14 +23,14 @@
 
 /obj/item/poster/examine(mob/user)
 	. = ..()
-	. += span_notice("You can booby-trap the poster by using a glass shard on it before you put it up.")
+	. += span_notice("Вы можете установить ловушку на постер, использовав осколок стекла на нём перед размещением.")
 
 /obj/item/poster/Initialize(mapload, obj/structure/sign/poster/new_poster_structure)
 	. = ..()
 
 	var/static/list/hovering_item_typechecks = list(
 		/obj/item/shard = list(
-			SCREENTIP_CONTEXT_LMB = "Booby trap poster",
+			SCREENTIP_CONTEXT_LMB = "Установить ловушку на постер",
 		),
 	)
 	AddElement(/datum/element/contextual_screentip_item_typechecks, hovering_item_typechecks)
@@ -45,7 +45,7 @@
 	// rolled up form to take.
 	if(poster_structure)
 		if(QDELETED(poster_structure))
-			stack_trace("A poster was initialized with a qdeleted poster_structure, something's gone wrong")
+			stack_trace("Постер был инициализирован с удалённой poster_structure, что-то пошло не так")
 			return INITIALIZE_HINT_QDEL
 		name = poster_structure.poster_item_name
 		desc = poster_structure.poster_item_desc
@@ -58,14 +58,14 @@
 		return ..()
 
 	if (poster_structure.trap?.resolve())
-		balloon_alert(user, "already trapped!")
+		balloon_alert(user, "уже с ловушкой!")
 		return
 
 	if(!user.transferItemToLoc(I, poster_structure))
 		return
 
 	poster_structure.trap = WEAKREF(I)
-	to_chat(user, span_notice("You conceal \the [I] inside the rolled up poster."))
+	to_chat(user, span_notice("Вы прячете [I.declent_ru(NOMINATIVE)] внутри свёрнутого постера."))
 
 /obj/item/poster/Exited(atom/movable/gone, direction)
 	. = ..()
@@ -87,9 +87,9 @@
  * For the item form that can be spawned for players, see [/obj/item/poster]
  */
 /obj/structure/sign/poster
-	name = "poster"
+	name = "постер"
 	var/original_name
-	desc = "A large piece of space-resistant printed paper."
+	desc = "Большой кусок космоустойчивой печатной бумаги."
 	icon = 'icons/obj/poster.dmi'
 	anchored = TRUE
 	buildable_sign = FALSE //Cannot be unwrenched from a wall.
@@ -102,7 +102,7 @@
 	var/printable = FALSE
 
 	var/poster_item_name = "hypothetical poster"
-	var/poster_item_desc = "This hypothetical poster item should not exist, let's be honest here."
+	var/poster_item_desc = "Этого гипотетического предмета постера не должно существовать, давайте будем честны."
 	var/poster_item_icon_state = "rolled_poster"
 	var/poster_item_type = /obj/item/poster
 	///A sharp shard of material can be hidden inside of a poster, attempts to embed when it is torn down.
@@ -114,8 +114,8 @@
 		randomise(random_basetype)
 	if(!ruined)
 		original_name = name // can't use initial because of random posters
-		name = "poster - [name]"
-		desc = "A large piece of space-resistant printed paper. [desc]"
+		name = "постер - [name]"
+		desc = "Большой кусок космоустойчивой печатной бумаги. [desc]"
 
 	AddElement(/datum/element/beauty, 300)
 
@@ -124,14 +124,14 @@
 	if (!held_item)
 		if (ruined)
 			return .
-		context[SCREENTIP_CONTEXT_LMB] = "Rip up poster"
+		context[SCREENTIP_CONTEXT_LMB] = "Сорвать постер"
 		return CONTEXTUAL_SCREENTIP_SET
 
 	if (held_item.tool_behaviour == TOOL_WIRECUTTER)
 		if (ruined)
-			context[SCREENTIP_CONTEXT_LMB] = "Clean up remnants"
+			context[SCREENTIP_CONTEXT_LMB] = "Убрать остатки"
 			return CONTEXTUAL_SCREENTIP_SET
-		context[SCREENTIP_CONTEXT_LMB] = "Take down poster"
+		context[SCREENTIP_CONTEXT_LMB] = "Снять постер"
 		return CONTEXTUAL_SCREENTIP_SET
 	return .
 
@@ -176,10 +176,10 @@
 	if(tool.tool_behaviour == TOOL_WIRECUTTER)
 		tool.play_tool_sound(src, 100)
 		if(ruined)
-			to_chat(user, span_notice("You remove the remnants of the poster."))
+			to_chat(user, span_notice("Вы убираете остатки постера."))
 			qdel(src)
 		else
-			to_chat(user, span_notice("You carefully remove the poster from the wall."))
+			to_chat(user, span_notice("Вы аккуратно снимаете постер со стены."))
 			roll_and_drop(Adjacent(user) ? get_turf(user) : loc, user)
 
 /obj/structure/sign/poster/attack_hand(mob/user, list/modifiers)
@@ -191,7 +191,7 @@
 /// Check to see if this poster is tearable and gives the user feedback if it is not.
 /obj/structure/sign/poster/proc/check_tearability(mob/user)
 	if(ruined)
-		balloon_alert(user, "already ruined!")
+		balloon_alert(user, "уже испорчен!")
 		return FALSE
 	return TRUE
 
@@ -201,9 +201,9 @@
 	if (!payload)
 		return
 
-	to_chat(user, span_warning("There's something sharp behind this! What the hell?"))
+	to_chat(user, span_warning("За этим что-то острое! Какого чёрта?"))
 	if(!can_embed_trap(user) || !payload.force_embed(user, user.get_active_hand()))
-		visible_message(span_notice("A [payload.name] falls from behind the poster.") )
+		visible_message(span_notice("Из-за постера падает [payload.declent_ru(NOMINATIVE)]!") )
 		payload.forceMove(user.drop_location())
 
 /obj/structure/sign/poster/proc/can_embed_trap(mob/living/carbon/human/user)
@@ -227,7 +227,7 @@
 //separated to reduce code duplication. Moved here for ease of reference and to unclutter r_wall/attackby()
 /turf/closed/proc/place_poster(obj/item/poster/rolled_poster, mob/user)
 	if(!rolled_poster.poster_structure)
-		to_chat(user, span_warning("[rolled_poster] has no poster... inside it? Inform a coder!"))
+		to_chat(user, span_warning("[rolled_poster] не имеет постера... внутри? Сообщите кодерам!"))
 		return
 
 	// Deny placing posters on currently-diagonal walls, although the wall may change in the future.
@@ -238,16 +238,16 @@
 				return
 
 	var/stuff_on_wall = 0
-	for(var/obj/contained_object in contents) //Let's see if it already has a poster on it or too much stuff
+	for(var/obj/contained_object in contents) //Посмотрим, есть ли уже постер на стене или слишком много объектов
 		if(istype(contained_object, /obj/structure/sign/poster))
-			balloon_alert(user, "no room!")
+			balloon_alert(user, "нет места!")
 			return
 		stuff_on_wall++
 		if(stuff_on_wall == 3)
-			balloon_alert(user, "no room!")
+			balloon_alert(user, "нет места!")
 			return
 
-	balloon_alert(user, "hanging poster...")
+	balloon_alert(user, "вешаем постер...")
 	var/obj/structure/sign/poster/placed_poster = rolled_poster.poster_structure
 
 	flick("poster_being_set", placed_poster)
@@ -266,10 +266,10 @@
 	return isclosedturf(hopefully_still_a_closed_turf)
 
 /obj/structure/sign/poster/proc/on_placed_poster(mob/user)
-	to_chat(user, span_notice("You place the poster!"))
+	to_chat(user, span_notice("Вы размещаете постер!"))
 
 /obj/structure/sign/poster/proc/tear_poster(mob/user)
-	visible_message(span_notice("[user] rips [src] in a single, decisive motion!") )
+	visible_message(span_notice("[user] срывает [capitalize(declent_ru(NOMINATIVE))] одним решительным движением!") )
 	playsound(src.loc, 'sound/items/poster/poster_ripped.ogg', 100, TRUE)
 	spring_trap(user)
 
@@ -284,13 +284,14 @@
 /obj/structure/sign/poster/ripped
 	ruined = TRUE
 	icon_state = "poster_ripped"
-	name = "ripped poster"
-	desc = "You can't make out anything from the poster's original print. It's ruined."
+	name = "разорванный постер"
+	desc = "Вы не можете разобрать что-либо из оригинального изображения постера. Он испорчен.. \
+	Вы можете <b>откусить</b> остатки. "
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/ripped, 32)
 
 /obj/structure/sign/poster/random
-	name = "random poster" // could even be ripped
+	name = "случайный постер" // could even be ripped
 	icon_state = "random_anything"
 	never_random = TRUE
 	random_basetype = /obj/structure/sign/poster
@@ -302,11 +303,11 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/ripped, 32)
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/random, 32)
 
 /obj/structure/sign/poster/greenscreen
-	name = "greenscreen"
-	desc = "Used to create a convincing illusion of a different background."
+	name = "хромакей"
+	desc = "Используется для создания убедительной иллюзии другого фона."
 	icon_state = "greenscreen"
-	poster_item_name = "greenscreen"
-	poster_item_desc = "Used to create a convincing illusion of a different background."
+	poster_item_name = "хромакей"
+	poster_item_desc = "Используется для создания убедительной иллюзии другого фона."
 	never_random = TRUE
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/greenscreen, 32)
