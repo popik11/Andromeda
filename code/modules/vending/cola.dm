@@ -91,7 +91,7 @@
 
 /obj/machinery/vending/cola/red
 	icon_state = "red_cola"
-	name = "Космическая Коля"
+	name = "Космическая Кола"
 	desc = "Продаёт колу. В космосе."
 	product_slogans = "Кола в космосе!"
 	light_mask = "red_cola-light-mask"
