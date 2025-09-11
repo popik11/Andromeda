@@ -1,4 +1,4 @@
-#define USE_GENDER "Использовать пол"
+#define USE_GENDER "Использовать пол персонажа"
 #define MALE "Мужской"
 #define FEMALE "Женский"
 

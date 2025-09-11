@@ -159,7 +159,7 @@
 
 	var/datum/universal_icon/icon_with_undershirt = body.copy()
 
-	if (value != "Nude")
+	if (value != "Ничего")
 		var/datum/sprite_accessory/accessory = SSaccessories.undershirt_list[value]
 		icon_with_undershirt.blend_icon(uni_icon('icons/mob/clothing/underwear.dmi', accessory.icon_state), ICON_OVERLAY)
 

@@ -38,49 +38,49 @@
 
 #define TOGGLES_DEFAULT_CHAT (CHAT_OOC|CHAT_DEAD|CHAT_PRAYER|CHAT_PULLR|CHAT_GHOSTPDA|CHAT_GHOSTRADIO|CHAT_BANKCARD|CHAT_GHOSTLAWS|CHAT_LOGIN_LOGOUT)
 
-/// File path to the dev preference json file, which is loaded by guests while localhosting.
+/// Путь к файлу json предпочтений разработчика, который загружается гостями при локальном размещении.
 #define DEV_PREFS_PATH "config/dev_preferences.json"
 
-#define PARALLAX_INSANE "Insane"
-#define PARALLAX_HIGH "High"
-#define PARALLAX_MED "Medium"
-#define PARALLAX_LOW "Low"
-#define PARALLAX_DISABLE "Disabled"
+#define PARALLAX_INSANE "Безумный"
+#define PARALLAX_HIGH "Высокий"
+#define PARALLAX_MED "Средний"
+#define PARALLAX_LOW "Низкий"
+#define PARALLAX_DISABLE "Отключен"
 
-#define SCALING_METHOD_NORMAL "normal"
-#define SCALING_METHOD_DISTORT "distort"
-#define SCALING_METHOD_BLUR "blur"
+#define SCALING_METHOD_NORMAL "обычный"
+#define SCALING_METHOD_DISTORT "искажение"
+#define SCALING_METHOD_BLUR "размытие"
 
 #define PARALLAX_DELAY_DEFAULT world.tick_lag
 #define PARALLAX_DELAY_MED 1
 #define PARALLAX_DELAY_LOW 2
 
-#define SEC_DEPT_NONE "None"
-#define SEC_DEPT_ENGINEERING "Engineering"
-#define SEC_DEPT_MEDICAL "Medical"
-#define SEC_DEPT_SCIENCE "Science"
-#define SEC_DEPT_SUPPLY "Supply"
+#define SEC_DEPT_NONE "Никакой"
+#define SEC_DEPT_ENGINEERING "Инженерный"
+#define SEC_DEPT_MEDICAL "Медицинский"
+#define SEC_DEPT_SCIENCE "Научный"
+#define SEC_DEPT_SUPPLY "Снабжение"
 
-// Playtime tracking system, see jobs_exp.dm
-#define EXP_TYPE_LIVING "Living"
-#define EXP_TYPE_CREW "Crew"
-#define EXP_TYPE_COMMAND "Command"
-#define EXP_TYPE_ENGINEERING "Engineering"
-#define EXP_TYPE_MEDICAL "Medical"
-#define EXP_TYPE_SCIENCE "Science"
-#define EXP_TYPE_SUPPLY "Supply"
-#define EXP_TYPE_SECURITY "Security"
-#define EXP_TYPE_SILICON "Silicon"
-#define EXP_TYPE_SERVICE "Service"
-#define EXP_TYPE_ANTAG "Antag"
-#define EXP_TYPE_SPECIAL "Special"
-#define EXP_TYPE_GHOST "Ghost"
-#define EXP_TYPE_ADMIN "Admin"
+// Система отслеживания игрового времени, см. jobs_exp.dm
+#define EXP_TYPE_LIVING "Жизнь"
+#define EXP_TYPE_CREW "Экипаж"
+#define EXP_TYPE_COMMAND "Командование"
+#define EXP_TYPE_ENGINEERING "Инженерия"
+#define EXP_TYPE_MEDICAL "Медицина"
+#define EXP_TYPE_SCIENCE "Наука"
+#define EXP_TYPE_SUPPLY "Снабжение"
+#define EXP_TYPE_SECURITY "Безопасность"
+#define EXP_TYPE_SILICON "Кремниевые"
+#define EXP_TYPE_SERVICE "Обслуживание"
+#define EXP_TYPE_ANTAG "Антагонисты"
+#define EXP_TYPE_SPECIAL "Особые"
+#define EXP_TYPE_GHOST "Призраки"
+#define EXP_TYPE_ADMIN "Администрация"
 
-//Flags in the players table in the db
+// Флаги в таблице игроков в базе данных
 #define DB_FLAG_EXEMPT (1<<0)
 
-#define DEFAULT_CYBORG_NAME "Default Cyborg Name"
+#define DEFAULT_CYBORG_NAME "Имя киборга по умолчанию"
 
 // Choose grid or list TGUI layouts for UI's, when possible.
 /// Force grid layout, even if default is a list.
@@ -150,8 +150,8 @@
 /// The time needed to unlock the gamer cloak in preferences
 #define PLAYTIME_VETERAN 300000 // 5,000 hours
 
-/// The key used for sprite accessories that should never actually be applied to the player.
-#define SPRITE_ACCESSORY_NONE "None"
+/// Ключ, используемый для спрайтовых аксессуаров, которые никогда не должны применяться к игроку.
+#define SPRITE_ACCESSORY_NONE "Ничего"
 
 // Loadout
 /// Used to make something not recolorable even if it's capable
@@ -167,7 +167,7 @@
 /// Handles which layer the item will be on, for accessories
 #define INFO_LAYER "layer"
 
-// Lipstick styles
-#define UPPER_LIP "Upper"
-#define MIDDLE_LIP "Middle"
-#define LOWER_LIP "Lower"
+// Стили помады
+#define UPPER_LIP "Верхняя"
+#define MIDDLE_LIP "Средняя"
+#define LOWER_LIP "Нижняя"

@@ -122,22 +122,22 @@ GLOBAL_LIST_INIT(skin_tones, sort_list(list(
 	)))
 
 GLOBAL_LIST_INIT(skin_tone_names, list(
-	"african1" = "Medium brown",
-	"african2" = "Dark brown",
-	"albino" = "Albino",
-	"arab" = "Light brown",
-	"asian1" = "Ivory",
-	"asian2" = "Beige",
-	"caucasian1" = "Porcelain",
-	"caucasian2" = "Light peach",
-	"caucasian3" = "Peach",
-	"indian" = "Brown",
-	"latino" = "Light beige",
-	"mediterranean" = "Olive",
-	"mixed1" = "Chestnut",
-	"mixed2" = "Walnut",
-	"mixed3" = "Coffee",
-	"mixed4" = "Macadamia",
+	"african1" = "Средне-коричневый",
+	"african2" = "Темно-коричневый",
+	"albino" = "Альбинос",
+	"arab" = "Светло-коричневый",
+	"asian1" = "Слоновая кость",
+	"asian2" = "Бежевый",
+	"caucasian1" = "Фарфоровый",
+	"caucasian2" = "Светло-персиковый",
+	"caucasian3" = "Персиковый",
+	"indian" = "Коричневый",
+	"latino" = "Светло-бежевый",
+	"mediterranean" = "Оливковый",
+	"mixed1" = "Каштановый",
+	"mixed2" = "Ореховый",
+	"mixed3" = "Кофейный",
+	"mixed4" = "Макадамия",
 ))
 
 /proc/age2agedescription(age)

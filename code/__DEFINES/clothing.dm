@@ -43,28 +43,28 @@
 /// How much integrity does a shirt lose every time we bite it?
 #define MOTH_EATING_CLOTHING_DAMAGE 15
 
-//Suit/Skirt
-/// Preference: Jumpsuit
-#define PREF_SUIT "Jumpsuit"
-/// Preference: Jumpskirt
-#define PREF_SKIRT "Jumpskirt"
+//Костюм/Юбка
+/// Предпочтение: Комбинезон
+#define PREF_SUIT "Комбинезон"
+/// Предпочтение: Юбка-комбинезон
+#define PREF_SKIRT "Юбка-комбинезон"
 
-// Types of backpack
-/// Backpack type: Department themed backpack
-#define DBACKPACK "Department Backpack"
-/// Backpack type: Department themed duffelbag
-#define DDUFFELBAG "Department Duffel Bag"
-/// Backpack type: Department themed satchel
-#define DSATCHEL "Department Satchel"
-/// Backpack type: Department themed messenger bag
-#define DMESSENGER "Department Messenger Bag"
-/// Backpack type: Grey backpack
-#define GBACKPACK "Grey Backpack"
-/// Backpack type: Grey duffelbag
-#define GDUFFELBAG "Grey Duffel Bag"
-/// Backpack type: Grey satchel
-#define GSATCHEL "Grey Satchel"
-/// Backpack type: Grey messenger bag
-#define GMESSENGER "Grey Messenger Bag"
-/// Backpack type: Leather satchel
-#define LSATCHEL "Leather Satchel"
+// Типы рюкзаков
+/// Тип рюкзака: Тематический рюкзак отдела
+#define DBACKPACK "Рюкзак отдела"
+/// Тип рюкзака: Тематическая вещмешок отдела
+#define DDUFFELBAG "Вещмешок отдела"
+/// Тип рюкзака: Тематическая сумка отдела
+#define DSATCHEL "Сумка отдела"
+/// Тип рюкзака: Тематический почтальон отдела
+#define DMESSENGER "Барсетка отдела"
+/// Тип рюкзака: Серый рюкзак
+#define GBACKPACK "Серый рюкзак"
+/// Тип рюкзака: Серый вещмешок
+#define GDUFFELBAG "Серый вещмешок"
+/// Тип рюкзака: Серый сумка
+#define GSATCHEL "Серый сумка"
+/// Тип рюкзака: Серый почтальон
+#define GMESSENGER "Серая барсетка"
+/// Тип рюкзака: Кожаная сумка
+#define LSATCHEL "Кожаная сумка"

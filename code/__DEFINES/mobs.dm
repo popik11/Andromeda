@@ -216,11 +216,11 @@
 ///The species is forced to have digitigrade legs in generation.
 #define DIGITIGRADE_FORCED 2
 
-// Preferences for leg types
-/// Legs that are normal
-#define NORMAL_LEGS "Normal Legs"
-/// Digitgrade legs that are like bended and uhhh no shoes
-#define DIGITIGRADE_LEGS "Digitigrade Legs"
+// Предпочтения по типам ног
+/// Обычные ноги
+#define NORMAL_LEGS "Обычные ноги"
+/// Пальцеходящие ноги, согнутые и без обуви
+#define DIGITIGRADE_LEGS "Пальцеходящие ноги"
 
 // Health/damage defines
 #define MAX_LIVING_HEALTH 100
