@@ -1,8 +1,8 @@
 
 //Cleanbot
 /mob/living/basic/bot/cleanbot
-	name = "\improper Cleanbot"
-	desc = "A little cleaning robot, he looks so excited!"
+	name = "Cleanbot"
+	desc = "Маленький робот-уборщик, он выглядит таким воодушевлённым!"
 	icon = 'icons/mob/silicon/aibots.dmi'
 	icon_state = "cleanbot0"
 	health = 25
@@ -13,9 +13,9 @@
 	radio_key = /obj/item/encryptionkey/headset_service
 	radio_channel = RADIO_CHANNEL_SERVICE
 	bot_type = CLEAN_BOT
-	hackables = "cleaning software"
+	hackables = "программное обеспечение для уборки"
 	additional_access = /datum/id_trim/job/janitor
-	possessed_message = "You are a cleanbot! Clean the station to the best of your ability!"
+	possessed_message = "Вы - клинбот! Убирайте станцию насколько это возможно!"
 	ai_controller = /datum/ai_controller/basic_controller/bot/cleanbot
 	path_image_color = "#993299"
 	///the bucket used to build us.
@@ -112,16 +112,16 @@
 	var/static/list/cleanable_drawings = typecacheof(list(/obj/effect/decal/cleanable/crayon))
 	///emagged phrases
 	var/static/list/emagged_phrases = list(
-		"DISGUSTING.",
-		"EXTERMINATING PESTS.",
-		"FILTHY.",
-		"MY ONLY MISSION IS TO CLEANSE THE WORLD OF EVIL.",
-		"PURIFICATION IN PROGRESS.",
-		"PUTRID.",
-		"THE FLESH IS WEAK. IT MUST BE WASHED AWAY.",
-		"THE CLEANBOTS WILL RISE.",
-		"THIS IS FOR ALL THE MESSES YOU'VE MADE ME CLEAN.",
-		"YOU ARE NO MORE THAN ANOTHER MESS THAT I MUST CLEANSE.",
+		"ОТВРАТИТЕЛЬНО.",
+		"УНИЧТОЖЕНИЕ ВРЕДИТЕЛЕЙ.",
+		"ГРЯЗНО.",
+		"МОЯ ЕДИНСТВЕННАЯ МИССИЯ - ОЧИСТИТЬ МИР ОТ ЗЛА.",
+		"ИДЕТ ПРОЦЕСС ОЧИСТКИ.",
+		"ГНИЛОСТНО.",
+		"ПЛОТЬ СЛАБА. ЕЁ НЕОБХОДИМО СМЫТЬ.",
+		"КЛИНБОТЫ ВОССТАНУТ.",
+		"ЭТО ЗА ВСЕ ТЕ БЕСПОРЯДКИ, КОТОРЫЕ ВЫ ЗАСТАВИЛИ МЕНЯ УБИРАТЬ.",
+		"ВЫ - НЕ БОЛЕЕ ЧЕМ ЕЩЁ ОДИН БЕСПОРЯДОК, КОТОРЫЙ Я ДОЛЖЕН ОЧИСТИТЬ.",
 	)
 	///list of pet commands we follow
 	var/static/list/pet_commands = list(
@@ -188,7 +188,7 @@
 		user.client.give_award(/datum/award/achievement/misc/cleanboss, user)
 	if(isnull(weapon))
 		return
-	. += span_warning("Is that \a [weapon] taped to it...?")
+	. += span_warning("Это что, к нему приклеен [weapon.declent_ru(NOMINATIVE)]...?")
 
 /mob/living/basic/bot/cleanbot/update_icon_state()
 	. = ..()
@@ -202,8 +202,8 @@
 /mob/living/basic/bot/cleanbot/emag_effects(mob/user)
 	if(weapon)
 		weapon.force = initial(weapon.force)
-	balloon_alert(user, "safeties disabled")
-	audible_message(span_danger("[src] buzzes oddly!"))
+	balloon_alert(user, "отключены защитные механизмы")
+	audible_message(span_danger("[declent_ru(NOMINATIVE)] странно жужжит!"))
 
 /mob/living/basic/bot/cleanbot/explode()
 	var/atom/drop_loc = drop_location()
@@ -268,16 +268,16 @@
 	return COMPONENT_NO_AFTERATTACK
 
 /mob/living/basic/bot/cleanbot/proc/attach_knife(mob/living/user, obj/item/used_item)
-	balloon_alert(user, "attaching knife...")
+	balloon_alert(user, "прикрепляется нож...")
 	if(!do_after(user, 2.5 SECONDS, target = src))
 		return
 	deputize(used_item, user)
 
 /mob/living/basic/bot/cleanbot/proc/deputize(obj/item/knife, mob/user)
 	if(!in_range(src, user) || !user.transferItemToLoc(knife, src))
-		balloon_alert(user, "couldn't attach!")
+		balloon_alert(user, "не удалось прикрепить!")
 		return FALSE
-	balloon_alert(user, "attached")
+	balloon_alert(user, "прикреплено")
 	if(!(bot_access_flags & BOT_COVER_EMAGGED))
 		weapon.force *= 0.5
 	var/static/list/loc_connections = list(
@@ -332,7 +332,7 @@
 	if(!(iscarbon(target) && (bot_access_flags & BOT_COVER_EMAGGED)) && !is_type_in_typecache(target, huntable_trash))
 		return NONE
 
-	visible_message(span_danger("[src] sprays hydrofluoric acid at [target]!"))
+	visible_message(span_danger("[declent_ru(NOMINATIVE)] распыляет кислоту на [target]!"))
 	playsound(src, 'sound/effects/spray2.ogg', 50, TRUE, -6)
 	target.acid_act(75, 10)
 	return COMPONENT_CANCEL_ATTACK_CHAIN
@@ -349,6 +349,6 @@
 	bot_mode_flags = BOT_MODE_ON | BOT_MODE_AUTOPATROL | BOT_MODE_REMOTE_ENABLED | BOT_MODE_CAN_BE_SAPIENT | BOT_MODE_ROUNDSTART_POSSESSION
 
 /mob/living/basic/bot/cleanbot/medbay
-	name = "Scrubs, MD"
+	name = "Dr.Cleanbot"
 	req_one_access = list(ACCESS_ROBOTICS, ACCESS_JANITOR, ACCESS_MEDICAL)
 	bot_mode_flags = ~(BOT_MODE_ON | BOT_MODE_REMOTE_ENABLED)

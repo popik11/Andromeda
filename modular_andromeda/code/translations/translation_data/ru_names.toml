@@ -26005,6 +26005,24 @@ instrumental = "Генски"
 prepositional = "Генски"
 gender = "male"
 
+["Donk Exenteration Drone"]
+nominative = "Дрон Дренажа Донк"
+genitive = "Дрона Дренажа Донк"
+dative = "Дрону Дренажа Донк"
+accusative = "Дрона Дренажа Донк"
+instrumental = "Дроном Дренажа Донк"
+prepositional = "Дроне Дренажа Донк"
+gender = "male"
+
+["Vibebot"]
+nominative = "Вайббот"
+genitive = "Вайббота"
+dative = "Вайбботу"
+accusative = "Вайббота"
+instrumental = "Вайбботом"
+prepositional = "Вайбботе"
+gender = "male"
+
 ["emergency toolbox"]
 nominative = "набор аварийных инструментов"
 genitive = "набора аварийных инструментов"
@@ -26139,11 +26157,20 @@ instrumental = "силовым кабелем"
 prepositional = "силовом кабеле"
 gender = "male"
 
-["Human"]
-nominative = "Человек"
-genitive = "Человека"
-dative = "Человеку"
-accusative = "Человека"
-instrumental = "Человеком"
-prepositional = "Человеке"
+["Cleanbot"]
+nominative = "Клинбот"
+genitive = "Клинбота"
+dative = "Клинботу"
+accusative = "Клинбота"
+instrumental = "Клинботом"
+prepositional = "Клинботе"
+gender = "male"
+
+["Dr.Cleanbot"]
+nominative = "Доктор Клинбот"
+genitive = "Доктора Клинбота"
+dative = "Доктору Клинботу"
+accusative = "Доктора Клинбота"
+instrumental = "Доктором Клинботом"
+prepositional = "Докторе Клинботе"
 gender = "male"

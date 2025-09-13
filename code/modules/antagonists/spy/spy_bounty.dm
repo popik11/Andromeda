@@ -581,7 +581,7 @@
 
 /datum/spy_bounty/targets_person/some_item/id/target_found(mob/crewmember)
 	. = ..()
-	name = "[crewmember.real_name]'s ID Card"
+	name = "[crewmember.real_name] ID Карта"
 
 // Steal someone's PDA
 /datum/spy_bounty/targets_person/some_item/pda

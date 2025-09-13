@@ -4,8 +4,8 @@
 	blackboard = list(
 		BB_TARGETING_STRATEGY = /datum/targeting_strategy/basic,
 		BB_SALUTE_MESSAGES = list(
-			"performs an elaborate salute for",
-			"nods in appreciation towards",
+			"выполняет сложное приветствие для",
+			"кивает в знак признательности",
 		),
 		BB_UNREACHABLE_LIST_COOLDOWN = 45 SECONDS,
 	)

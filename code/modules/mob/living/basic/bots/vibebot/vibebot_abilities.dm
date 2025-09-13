@@ -5,8 +5,8 @@
  */
 #define VIBE_MOOD_TIMER 30 SECONDS
 /datum/action/cooldown/mob_cooldown/bot/vibe
-	name = "Vibe"
-	desc = "Use on yourself to remove color!"
+	name = "Вибрация"
+	desc = "Используйте на себе, чтобы удалить цвет!"
 	click_to_activate = TRUE
 	button_icon = 'icons/mob/actions/actions_minor_antag.dmi'
 	button_icon_state = "funk"
@@ -41,18 +41,18 @@
 		human_target.add_mood_event("vibebot_party", mood_to_add)
 	COOLDOWN_START(src, change_mood, VIBE_MOOD_TIMER)
 
-///Removes all colors
+///Удаляет все цвета
 /datum/action/cooldown/mob_cooldown/bot/vibe/proc/remove_colors()
 	owner.remove_atom_colour(TEMPORARY_COLOUR_PRIORITY)
 	owner.set_light_color(null)
 
 /datum/mood_event/depressing_party
-	description = "That was a really grim party..."
+	description = "Это была очень мрачная вечеринка..."
 	mood_change = -1
 	timeout = 30 SECONDS
 
 /datum/mood_event/festive_party
-	description = "That was a really fantastic party!"
+	description = "Это была потрясающая вечеринка!"
 	mood_change = 2
 	timeout = 30 SECONDS
 

@@ -83,8 +83,10 @@ GLOBAL_LIST_EMPTY(objects_by_id_tag)
 		// Sanity in case one is null for some reason
 		var/picked_index = rand(max(length(attacking_item.attack_verb_simple), length(attacking_item.attack_verb_continuous)))
 
-		var/message_verb_continuous = "attacks"
-		var/message_verb_simple = "attack"
+		var/message_verb_continuous = "атакует"
+		var/message_verb_simple = "атакуете"
+		var/hit_weakly_simple = " "
+		var/hit_weakly_continuous = " "
 		// Sanity in case one is... longer than the other?
 		if (picked_index && length(attacking_item.attack_verb_continuous) >= picked_index)
 			message_verb_continuous = attacking_item.attack_verb_continuous[picked_index]
@@ -95,17 +97,17 @@ GLOBAL_LIST_EMPTY(objects_by_id_tag)
 			if(HAS_TRAIT(src, TRAIT_INVERTED_DEMOLITION))
 				message_verb_simple = "shred"
 				message_verb_continuous = "shreds"
-			else
-				message_verb_simple = "pulverise"
-				message_verb_continuous = "pulverises"
+//			else
+//				message_verb_simple = "pulverise"
+//				message_verb_continuous = "pulverises"
 
 		if(demo_mod < 1)
-			message_verb_simple = "слабо " + ru_attack_verb(message_verb_simple)
-			message_verb_continuous = "слабо " + ru_attack_verb(message_verb_continuous)
+			hit_weakly_simple = " слабо "
+			hit_weakly_continuous = " слабо "
 
 		user.visible_message(
-			span_danger("[capitalize(user.declent_ru(NOMINATIVE))] [message_verb_continuous] [declent_ru(ACCUSATIVE)] с помощью [attacking_item.declent_ru(GENITIVE)][damage ? "." : ", [no_damage_feedback]!"]"),
-			span_danger("Вы [message_verb_simple] [declent_ru(ACCUSATIVE)] с помощью [attacking_item.declent_ru(GENITIVE)][damage ? "." : ", [no_damage_feedback]!"]"),
+			span_danger("[capitalize(user.declent_ru(NOMINATIVE))][hit_weakly_continuous][ru_attack_verb(message_verb_continuous)] [declent_ru(ACCUSATIVE)] с помощью [attacking_item.declent_ru(GENITIVE)][damage ? "." : ", [no_damage_feedback]!"]"),
+			span_danger("Вы[hit_weakly_simple][ru_attack_verb(message_verb_simple)] [declent_ru(ACCUSATIVE)] с помощью [attacking_item.declent_ru(GENITIVE)][damage ? "." : ", [no_damage_feedback]!"]"),
 			null,
 			COMBAT_MESSAGE_RANGE,
 		)

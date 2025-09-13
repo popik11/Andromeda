@@ -1,6 +1,6 @@
 /mob/living/basic/bot/vibebot
-	name = "\improper Vibebot"
-	desc = "A little robot. It's just vibing, doing its thing."
+	name = "Vibebot"
+	desc = "Маленький робот. Он просто вайбит, занимается своим делом."
 	icon = 'icons/mob/silicon/aibots.dmi'
 	icon_state = "vibebot1"
 	base_icon_state = "vibebot"
@@ -10,13 +10,13 @@
 	ai_controller = /datum/ai_controller/basic_controller/bot/vibebot
 	light_power = 2
 
-	hackables = "vibing scanners"
+	hackables = "сканеры вайба"
 	radio_key = /obj/item/encryptionkey/headset_service
 	radio_channel = RADIO_CHANNEL_SERVICE
 	bot_type = VIBE_BOT
 	data_hud_type = DATA_HUD_DIAGNOSTIC
 	path_image_color = "#2cac12"
-	possessed_message = "You are a vibebot! Maintain the station's vibes to the best of your ability!"
+	possessed_message = "Ты - вайббот! Поддерживай вайбы станции насколько это возможно!"
 
 /mob/living/basic/bot/vibebot/Initialize(mapload)
 	. = ..()

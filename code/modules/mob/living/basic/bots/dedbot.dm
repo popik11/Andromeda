@@ -4,8 +4,8 @@
 #define SPIN_SLASH_ABILITY_TYPEPATH /datum/action/cooldown/mob_cooldown/exenterate
 
 /mob/living/basic/bot/dedbot
-	name = "\improper Donk Exenteration Drone" //Exenteration means ripping entrails out, ouch!
-	desc = "A bladed commercial defence drone, often called an 'Ex-Drone' or 'D.E.D.bot'. It follows a simple programmed patrol route, and slashes at anyone who doesn't have an identity implant."
+	name = "Donk Exenteration Drone" //Exenteration means ripping entrails out, ouch!
+	desc = "Боевой коммерческий дрон с лезвиями, часто называемый 'Экс-Дроном' или 'Д.Е.Д.бот'. Он следует по простому запрограммированному маршруту патрулирования и атакует любого, у кого нет импланта идентификации."
 	icon_state = "ded_drone0"
 	base_icon_state = "ded_drone"
 	req_one_access = list(ACCESS_SYNDICATE)
@@ -28,7 +28,7 @@
 	bubble_icon = "machine"
 	pass_flags = PASSMOB | PASSFLAPS
 	maximum_survivable_temperature = 360 //prone to overheating
-	possessed_message = "You are an exenteration drone. Exenterate."
+	possessed_message = "Ты - дренажный дрон. Дренируй."
 	additional_access = /datum/id_trim/away/hauntedtradingpost/boss
 	bot_mode_flags = BOT_MODE_ON | BOT_MODE_AUTOPATROL
 	mob_size = MOB_SIZE_SMALL
@@ -78,8 +78,8 @@
 	finish_planning = FALSE
 
 /datum/action/cooldown/mob_cooldown/exenterate
-	name = "Exenterate"
-	desc = "Disembowel every living thing in range with your blades."
+	name = "Дренировать"
+	desc = "Потрошить все живое в радиусе действия своими лезвиями."
 	button_icon = 'icons/obj/weapons/stabby.dmi'
 	button_icon_state = "huntingknife"
 	click_to_activate = FALSE
@@ -105,7 +105,7 @@
 	if(!COOLDOWN_FINISHED(src, cooldown_time))
 		return FALSE
 	caster.Shake(1.4, 0.8, 0.3 SECONDS)
-	caster.visible_message(span_danger("[caster] shakes violently!"))
+	caster.visible_message(span_danger("[caster] сильно трясется!"))
 	playsound(caster, 'sound/items/weapons/drill.ogg', 120 , TRUE)
 	slash_em(caster)
 	StartCooldown(cooldown_time)
@@ -114,8 +114,8 @@
 	for(var/mob/living/victim in range(ability_range, caster))
 		if(faction_check(victim.faction, immune_factions) && owner.CanReach(victim))
 			continue
-		to_chat(caster, span_warning("You slice [victim]!"))
-		to_chat(victim, span_warning("You are cut by [caster]'s blades!"))
+		to_chat(caster, span_warning("Вы режете [victim]!"))
+		to_chat(victim, span_warning("Вас режут лезвиями [caster]!"))
 		victim.apply_damage(damage = damage_dealt, damagetype = BRUTE, def_zone = pick(valid_targets), sharpness = SHARP_EDGED)
 
 #undef SPIN_SLASH_ABILITY_TYPEPATH

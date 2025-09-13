@@ -1,8 +1,8 @@
 #define TEND_DAMAGE_INTERACTION "tend_damage_interaction"
 
 /mob/living/basic/bot/medbot
-	name = "\improper Medibot"
-	desc = "A little medical robot. He looks somewhat underwhelmed."
+	name = "Medibot"
+	desc = "Маленький медицинский робот. Выглядит несколько разочарованным."
 	icon = 'icons/mob/silicon/aibots.dmi'
 	icon_state = "medbot_generic_idle"
 	base_icon_state = "medbot"
@@ -20,8 +20,8 @@
 	radio_channel = RADIO_CHANNEL_MEDICAL
 	bot_type = MED_BOT
 	data_hud_type = DATA_HUD_MEDICAL_ADVANCED
-	hackables = "health processor circuits"
-	possessed_message = "You are a medbot! Ensure good health among the crew to the best of your ability!"
+	hackables = "схемы процессора здоровья"
+	possessed_message = "Вы - медбот! Обеспечивайте хорошее здоровье экипажа насколько это возможно!"
 
 	additional_access = /datum/id_trim/medibot
 	announcement_type = /datum/action/cooldown/bot_announcement/medbot
@@ -238,7 +238,7 @@
 			medical_mode_flags ^= MEDBOT_STATIONARY_MODE
 		if("sync_tech")
 			if(!linked_techweb)
-				to_chat(user, span_notice("No research techweb connected."))
+				to_chat(user, span_notice("Исследовательская техвеб-сеть не подключена."))
 				return
 			var/oldheal_amount = heal_amount
 			var/tech_boosters
@@ -250,14 +250,14 @@
 			if(tech_boosters)
 				heal_amount = (round(tech_boosters * 0.5, 0.1) * initial(heal_amount)) + initial(heal_amount) //every 2 tend wounds tech gives you an extra 100% healing, adjusting for unique branches (combo is bonus)
 				if(oldheal_amount < heal_amount)
-					speak("New knowledge found! Surgical efficacy improved to [round(heal_amount/initial(heal_amount)*100)]%!")
+					speak("Обнаружены новые знания! Эффективность хирургического вмешательства улучшена до [round(heal_amount/initial(heal_amount)*100)]%!")
 
 	update_appearance()
 
 /mob/living/basic/bot/medbot/emag_effects(mob/user)
 	medical_mode_flags &= ~MEDBOT_DECLARE_CRIT
-	balloon_alert(user, "reagent synthesis circuits shorted")
-	audible_message(span_danger("[src] buzzes oddly!"))
+	balloon_alert(user, "схемы синтеза реагентов замкнуты")
+	audible_message(span_danger("[declent_ru(NOMINATIVE)] странно жужжит!"))
 	flick_overlay_view(mutable_appearance(icon, "[base_icon_state]_spark"), 1 SECONDS)
 	playsound(src, SFX_SPARKS, 75, TRUE, SHORT_RANGE_SOUND_EXTRARANGE)
 	return TRUE
@@ -267,11 +267,11 @@
 	if(!(medical_mode_flags & MEDBOT_TIPPED_MODE))
 		return
 	var/static/list/panic_state = list(
-		"It appears to be tipped over, and is quietly waiting for someone to set it right.",
-		"It is tipped over and requesting help.",
-		"They are tipped over and appear visibly distressed.",
-		span_warning("They are tipped over and visibly panicking!"),
-		span_warning(span_bold("They are freaking out from being tipped over!"))
+		"Похоже, он опрокинут и тихо ждет, пока его поставят правильно.",
+		"Он опрокинут и просит о помощи.",
+		"Они опрокинуты и выглядят явно обеспокоенными.",
+		span_warning("Они опрокинуты и явно паникуют!"),
+		span_warning(span_bold("Они сходят с ума от того, что их опрокинули!"))
 	)
 	. += pick(panic_state)
 /*
@@ -292,8 +292,7 @@
 	tipper = WEAKREF(user)
 	playsound(src, 'sound/machines/warning-buzzer.ogg', 50)
 	if(prob(10))
-		speak("PSYCH ALERT: Crewmember [user.name] recorded displaying antisocial tendencies torturing bots in [get_area(src)]. Please schedule psych evaluation.", radio_channel)
-
+		speak("ПСИХ-ОПОВЕЩЕНИЕ: Член экипажа [user.name] зафиксирован с проявлением антисоциальных наклонностей, мучая ботов в [get_area(src)]. Пожалуйста, назначьте психологическую оценку.", radio_channel)
 /mob/living/basic/bot/medbot/explode()
 	var/atom/our_loc = drop_location()
 	drop_part(medkit_type, our_loc)
@@ -332,11 +331,11 @@
 
 	if (!(bot_access_flags & BOT_COVER_EMAGGED))
 		if((damage_type_healer == HEAL_ALL_DAMAGE && patient.get_total_damage() <= heal_threshold) || (!(damage_type_healer == HEAL_ALL_DAMAGE) && patient.get_current_damage_of_type(damage_type_healer) <= heal_threshold))
-			to_chat(src, "[patient] is healthy! Your programming prevents you from tending the wounds of anyone with less than [heal_threshold + 1] [damage_type_healer == HEAL_ALL_DAMAGE ? "total" : damage_type_healer] damage.")
+			to_chat(src, "[patient] здоров! Ваше программирование не позволяет вам лечить раны тех, у кого меньше [heal_threshold + 1] [damage_type_healer == HEAL_ALL_DAMAGE ? "общего" : damage_type_healer] урона.")
 			return
 
 	update_bot_mode(new_mode = BOT_HEALING, update_hud = FALSE)
-	patient.visible_message("[src] is trying to tend the wounds of [patient]", span_userdanger("[src] is trying to tend your wounds!"))
+	patient.visible_message("[declent_ru(NOMINATIVE)] пытается обработать раны [patient]", span_userdanger("[declent_ru(NOMINATIVE)] пытается обработать ваши раны!"))
 	if(!do_after(src, delay = 2 SECONDS, target = patient, interaction_key = TEND_DAMAGE_INTERACTION))
 		update_bot_mode(new_mode = BOT_IDLE)
 		return
@@ -346,23 +345,23 @@
 		modified_heal_amount *= 1.1
 	if(bot_access_flags & BOT_COVER_EMAGGED)
 		patient.reagents?.add_reagent(/datum/reagent/toxin/chloralhydrate, 5)
-		log_combat(src, patient, "pretended to tend wounds on", "internal tools")
+		log_combat(src, patient, "притворился, что обрабатывает раны", "внутренние инструменты")
 	else if(damage_type_healer == HEAL_ALL_DAMAGE)
 		patient.heal_ordered_damage(amount = modified_heal_amount, damage_types = list(BRUTE, BURN, TOX, OXY))
-		log_combat(src, patient, "tended the wounds of", "internal tools")
+		log_combat(src, patient, "обработал раны", "внутренние инструменты")
 		if(patient.get_total_damage() <= heal_threshold)
 			done_healing = TRUE
 	else
 		patient.heal_damage_type(heal_amount = modified_heal_amount, damagetype = damage_type_healer)
-		log_combat(src, patient, "tended the wounds of", "internal tools")
+		log_combat(src, patient, "обработал раны", "внутренние инструменты")
 		if(patient.get_current_damage_of_type(damage_type_healer) <= heal_threshold)
 			done_healing = TRUE
 
-	patient.visible_message(span_notice("[src] tends the wounds of [patient]!"), "[span_infoplain(span_green("[src] tends your wounds!"))]")
+	patient.visible_message(span_notice("[declent_ru(NOMINATIVE)] обрабатывает раны [patient]!"), "[span_infoplain(span_green("[declent_ru(NOMINATIVE)] обрабатывает ваши раны!"))]")
 
 	if(done_healing)
-		visible_message(span_infoplain("[src] places [p_their()] tools back into [p_themselves()]."))
-		to_chat(src, "[patient] is now healthy!")
+		visible_message(span_infoplain("[declent_ru(NOMINATIVE)] убирает инструменты обратно в [p_themselves()]."))
+		to_chat(src, "[patient] теперь здоров!")
 		update_bot_mode(new_mode = BOT_IDLE)
 		return
 
@@ -393,7 +392,7 @@
 		ACCESS_VIROLOGY,
 		ACCESS_PHARMACY,
 		)
-	honorifics = list("Medical Robot")
+	honorifics = list("Медицинский Робот")
 	honorific_positions = HONORIFIC_POSITION_FIRST | HONORIFIC_POSITION_LAST | HONORIFIC_POSITION_FIRST_FULL | HONORIFIC_POSITION_NONE
 
 /mob/living/basic/bot/medbot/autopatrol
@@ -403,15 +402,15 @@
 	medical_mode_flags = MEDBOT_DECLARE_CRIT | MEDBOT_STATIONARY_MODE | MEDBOT_SPEAK_MODE
 
 /mob/living/basic/bot/medbot/mysterious
-	name = "\improper Mysterious Medibot"
-	desc = "International Medibot of mystery."
+	name = "Mysterious Medibot"
+	desc = "Международный медбот тайны."
 	skin = "bezerk"
 	damage_type_healer = HEAL_ALL_DAMAGE
 	heal_amount = 10
 
 /mob/living/basic/bot/medbot/derelict
-	name = "\improper Old Medibot"
-	desc = "Looks like it hasn't been modified since the late 2080s."
+	name = "Old Medibot"
+	desc = "Похоже, его не модифицировали с конца 2080-х."
 	skin = "bezerk"
 	damage_type_healer = HEAL_ALL_DAMAGE
 	medical_mode_flags = MEDBOT_SPEAK_MODE
@@ -420,7 +419,7 @@
 
 /mob/living/basic/bot/medbot/nukie
 	name = "Oppenheimer"
-	desc = "A medibot stolen from a Nanotrasen station and upgraded by the Syndicate. Despite their best efforts at reprogramming, it still appears visibly upset near nuclear explosives."
+	desc = "Медбот, украденный со станции Нанотрейзен и усовершенствованный Синдикатом. Несмотря на все их усилия по перепрограммированию, он все еще выглядит явно расстроенным рядом с ядерными взрывчатками."
 	health = 40
 	maxHealth = 40
 	skin = "bezerk"

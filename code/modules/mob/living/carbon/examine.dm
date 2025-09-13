@@ -385,7 +385,7 @@
 		if(!(part.bodypart_flags & BODYPART_PSEUDOPART))
 			continue
 		var/obj/item/corresponding_item = get_item_for_held_index(part.held_index) || part
-		. += "[t_He] a [corresponding_item.examine_title(user)] in place of [initial(part.plaintext_zone)]."
+		. += "[t_He] имеет [corresponding_item.examine_title(user)] вместо [initial(part.plaintext_zone)]."
 	//gloves
 	if(gloves && !(obscured_slots & HIDEGLOVES) && !HAS_TRAIT(gloves, TRAIT_EXAMINE_SKIP))
 		. += "[t_He] носит [gloves.examine_title(user, declent = ACCUSATIVE)] на руках."

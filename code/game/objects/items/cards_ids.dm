@@ -916,9 +916,9 @@
 	var/name_string
 	if(registered_name)
 		if(trim && (honorific_position & ~HONORIFIC_POSITION_NONE))
-			name_string = "[update_honorific()]'s ID Card"
+			name_string = "[update_honorific()] ID Карта"
 		else
-			name_string = "[registered_name]'s ID Card"
+			name_string = "[registered_name] ID Карта"
 	else
 		name_string = initial(name)
 
@@ -1644,7 +1644,7 @@
 /obj/item/card/id/advanced/plainclothes/update_label()
 	if(!trim_assignment_override)
 		return ..()
-	var/name_string = registered_name ? "[registered_name]'s ID Card" : initial(name)
+	var/name_string = registered_name ? "[registered_name] ID Карта" : initial(name)
 	var/datum/id_trim/fake = SSid_access.trim_singletons_by_path[alt_trim]
 	name = "[name_string] ([fake.assignment])"
 

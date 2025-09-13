@@ -138,16 +138,16 @@
 /mob/proc/get_held_index_name(i)
 	var/list/hand = list()
 	if(i > 2)
-		hand += "upper "
+		hand += "верхней "
 	var/num = 0
 	if(IS_RIGHT_INDEX(i))
 		num = i-2
-		hand += "right hand"
+		hand += "правой руке"
 	else
 		num = i-1
-		hand += "left hand"
+		hand += "левой руке"
 	num -= (num*0.5)
-	if(num > 1) //"upper left hand #1" seems weird, but "upper left hand #2" is A-ok
+	if(num > 1) //"верхняя левая рука #1" звучит странно, но "верхняя левая рука #2" нормально
 		hand += " #[num]"
 	return hand.Join()
 

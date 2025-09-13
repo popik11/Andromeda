@@ -94,8 +94,8 @@
 	// Sanity in case one is null for some reason
 	var/picked_index = rand(max(length(weapon.attack_verb_simple), length(weapon.attack_verb_continuous)))
 
-	var/message_verb_continuous = "attacks"
-	var/message_verb_simple = "attack"
+	var/message_verb_continuous = "атакует"
+	var/message_verb_simple = "атакуете"
 	var/message_hit_area = get_hit_area_message(hit_area)
 	// Sanity in case one is... longer than the other?
 	if (picked_index && length(weapon.attack_verb_continuous) >= picked_index)

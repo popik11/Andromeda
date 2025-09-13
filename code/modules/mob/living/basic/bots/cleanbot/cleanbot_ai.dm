@@ -7,11 +7,11 @@
 		BB_PET_TARGETING_STRATEGY = /datum/targeting_strategy/basic/not_friends,
 		BB_UNREACHABLE_LIST_COOLDOWN = 3 MINUTES,
 		BB_SALUTE_MESSAGES = list(
-			"salutes",
-			"nods in appreciation towards",
-			"mops the dirt away in the path of",
+			"отдает честь",
+			"кивает в знак признательности",
+			"убирает грязь с пути",
 		),
-		BB_FRIENDLY_MESSAGE = "empathetically acknowledges your hardwork and tough circumstances",
+		BB_FRIENDLY_MESSAGE = "с пониманием признает ваш тяжелый труд и сложные обстоятельства",
 	)
 	planning_subtrees = list(
 		/datum/ai_planning_subtree/escape_captivity/pacifist,
@@ -198,8 +198,8 @@
 	return ..()
 
 /datum/pet_command/clean
-	command_name = "Clean"
-	command_desc = "Command a cleanbot to clean the mess."
+	command_name = "Уборка"
+	command_desc = "Приказать клинботу убрать беспорядок."
 	requires_pointing = TRUE
 	radial_icon = 'icons/obj/service/janitor.dmi'
 	radial_icon_state = "mop"

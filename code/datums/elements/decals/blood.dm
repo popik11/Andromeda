@@ -62,7 +62,7 @@
 	if(istype(blood_type))
 		blood_descriptor = LOWER_TEXT(blood_type.get_blood_name())
 
-	override[EXAMINE_POSITION_BEFORE] = "[blood_descriptor]-запачканный"
+	override[EXAMINE_POSITION_BEFORE] = "(запачканный в [blood_descriptor])"
 
 /datum/element/decal/blood/proc/on_color_update(obj/item/source, color_updated)
 	SIGNAL_HANDLER

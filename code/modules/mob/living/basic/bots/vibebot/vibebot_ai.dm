@@ -73,7 +73,7 @@
 	controller.add_to_blacklist(target)
 	if(succeeded)
 		var/mob/living/living_pawn = controller.pawn
-		living_pawn.manual_emote("celebrates with [target]!")
+		living_pawn.manual_emote("празднует с [target]!")
 		living_pawn.emote("flip")
 	return ..()
 
