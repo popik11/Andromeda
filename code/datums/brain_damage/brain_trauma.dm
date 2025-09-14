@@ -3,6 +3,8 @@
 // но сохранить особенности поведения, пока травма не будет вылечена нейрином, операцией, лоботомией или магией - в зависимости от устойчивости травмы.
 
 /datum/brain_trauma
+	/// Tracks abstract types of brain traumas, useful for determining traumas that should not exist
+	abstract_type = /datum/brain_trauma
 	var/name = "Травма мозга"
 	var/desc = "Травма, вызванная повреждением мозга, которая вызывает проблемы у пациента."
 	var/scan_desc = "общая травма мозга" // описание при обнаружении сканером здоровья
@@ -13,9 +15,6 @@
 	var/can_gain = TRUE
 	var/random_gain = TRUE // может ли быть получена случайным образом?
 	var/resilience = TRAUMA_RESILIENCE_BASIC // насколько сложно вылечить?
-
-	/// Отслеживает абстрактные типы травм мозга, полезно для определения травм, которых не должно существовать
-	var/abstract_type = /datum/brain_trauma
 
 /datum/brain_trauma/Destroy()
 	// Обрабатываем ссылки на мозг
