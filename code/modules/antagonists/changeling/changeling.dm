@@ -540,6 +540,13 @@
 	for(var/datum/quirk/target_quirk as anything in target.quirks)
 		LAZYADD(new_profile.quirks, new target_quirk.type)
 
+	// ADD ANDROMEDA (барки)
+	new_profile.blooper_id = target.blooper_id
+	new_profile.blooper_pitch = target.blooper_pitch
+	new_profile.blooper_speed = target.blooper_speed
+	new_profile.blooper_pitch_range = target.blooper_pitch_range
+	// END ANDROMEDA (барки)
+
 	// Clothes, of course
 	new_profile.underwear = target.underwear
 	new_profile.underwear_color = target.underwear_color
@@ -870,6 +877,14 @@
 	user.regenerate_icons()
 	user.name = user.get_visible_name()
 	current_profile = chosen_profile
+
+	// ADD ANDROMEDA (барки)
+	user.blooper = null
+	user.blooper_id = chosen_profile.blooper_id
+	user.blooper_pitch = chosen_profile.blooper_pitch
+	user.blooper_speed = chosen_profile.blooper_speed
+	user.blooper_pitch_range = chosen_profile.blooper_pitch_range
+	// END ANDROMEDA (барки)
 
 // Changeling profile themselves. Store a data to store what every DNA instance looked like.
 /datum/changeling_profile
