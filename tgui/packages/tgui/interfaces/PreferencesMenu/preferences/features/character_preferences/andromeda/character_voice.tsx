@@ -34,7 +34,7 @@ const FeatureBlooperDropdownInput = (props) => {
 };
 
 export const blooper_pitch_range: FeatureNumeric = {
-  name: 'Диапазон голоса персонажа',
+  name: 'Голос - диапазон голоса',
   description:
     '[0.1 - 0.8] Меньшее число - меньший диапазон. Большее число - больший диапазон.',
   component: FeatureNumberInput,
@@ -46,14 +46,14 @@ export const blooper_speech: FeatureChoiced = {
 };
 
 export const blooper_speech_speed: FeatureNumeric = {
-  name: 'Скорость голоса персонажа',
+  name: 'Голос - скорость голоса',
   description:
     '[2 - 16] Меньшее число - большая скорость. Большее число - медленнее голос.',
   component: FeatureNumberInput,
 };
 
 export const blooper_speech_pitch: FeatureNumeric = {
-  name: 'Высота голоса персонажа',
+  name: 'Голос - высота голоса',
   description:
     '[0.4 - 2] Меньшее число - ниже высота. Большее число - выше высота.',
   component: FeatureNumberInput,
