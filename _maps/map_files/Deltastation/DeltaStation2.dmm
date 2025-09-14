@@ -19983,10 +19983,9 @@
 /turf/open/floor/iron,
 /area/station/engineering/atmos/storage)
 "eVS" = (
-/obj/structure/closet/secure_closet/personal,
-/obj/item/storage/wallet,
 /obj/effect/turf_decal/bot,
 /obj/effect/turf_decal/tile/neutral/fourcorners,
+/obj/machinery/cryopod,
 /turf/open/floor/iron/dark,
 /area/station/commons/locker)
 "eVU" = (
@@ -35444,16 +35443,6 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/visible,
 /turf/closed/wall/r_wall,
 /area/station/science/ordnance/burnchamber)
-"iMO" = (
-/obj/structure/closet/secure_closet/personal,
-/obj/structure/sign/nanotrasen{
-	pixel_x = 32
-	},
-/obj/item/storage/wallet,
-/obj/effect/turf_decal/bot,
-/obj/effect/turf_decal/tile/neutral/fourcorners,
-/turf/open/floor/iron/dark,
-/area/station/commons/locker)
 "iMS" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/effect/turf_decal/tile/neutral{
@@ -60897,9 +60886,9 @@
 /turf/open/floor/iron,
 /area/station/maintenance/port)
 "pgX" = (
-/obj/machinery/status_display/ai/directional/north,
 /obj/machinery/light/small/directional/north,
 /obj/effect/turf_decal/tile/neutral/fourcorners,
+/obj/machinery/computer/cryopod/directional/north,
 /turf/open/floor/iron/dark,
 /area/station/commons/locker)
 "pgY" = (
@@ -85535,6 +85524,7 @@
 	dir = 4
 	},
 /obj/effect/turf_decal/tile/neutral/fourcorners,
+/obj/machinery/computer/cryopod/directional/west,
 /turf/open/floor/iron/dark,
 /area/station/science/genetics)
 "vdB" = (
@@ -147612,7 +147602,7 @@ svd
 mtd
 ijP
 rYA
-lSw
+eVS
 eVS
 hDy
 sja
@@ -148126,8 +148116,8 @@ hmi
 ebQ
 ahe
 rYA
-iMO
-lSw
+eVS
+eVS
 hDy
 sja
 xJX

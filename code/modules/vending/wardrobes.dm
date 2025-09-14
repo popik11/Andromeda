@@ -259,7 +259,7 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 /obj/item/vending_refill/wardrobe/robo_wardrobe
 	machine_name = "Робо Стиль"
 
-/obj/machinery/vending/scidrobe
+/obj/machinery/vending/wardrobe/science_wardrobe
 	name = "Научный Стиль"
 	desc = "Простая торговая машина, подходящая для выдачи хорошо скроенной научной одежды. Одобрено Космическими Кубинцами."
 	icon_state = "scidrobe"

@@ -13902,15 +13902,7 @@
 /turf/open/floor/plating,
 /area/station/science/robotics/mechbay)
 "ePA" = (
-/obj/machinery/light/small/directional/south,
-/obj/machinery/button/door/directional/south{
-	id = "FitnessShower";
-	name = "Lock Control";
-	normaldoorcontrol = 1;
-	specialfunctions = 4
-	},
-/obj/machinery/duct,
-/turf/open/floor/iron/freezer,
+/turf/open/floor/iron/lavaland,
 /area/station/commons/fitness/recreation)
 "ePN" = (
 /obj/structure/chair{
@@ -33752,9 +33744,6 @@
 	},
 /turf/open/floor/iron,
 /area/station/hallway/secondary/exit/departure_lounge)
-"lHH" = (
-/turf/open/floor/iron/freezer,
-/area/station/commons/fitness/recreation)
 "lHK" = (
 /obj/structure/cable,
 /obj/machinery/power/apc/auto_name/directional/west,
@@ -33883,13 +33872,8 @@
 /turf/open/floor/engine,
 /area/station/engineering/supermatter/room)
 "lLw" = (
-/obj/machinery/shower/directional/south,
-/obj/structure/curtain,
-/obj/structure/window/reinforced/tinted/spawner/directional/west,
-/obj/machinery/door/window/left/directional/south{
-	name = "Shower"
-	},
-/turf/open/floor/iron/freezer,
+/obj/machinery/cryopod,
+/turf/open/floor/iron/lavaland,
 /area/station/commons/fitness/recreation)
 "lLB" = (
 /obj/structure/table/glass,
@@ -58383,6 +58367,11 @@
 	},
 /turf/open/floor/catwalk_floor,
 /area/station/cargo/warehouse)
+"ubk" = (
+/obj/machinery/cryopod,
+/obj/machinery/light/directional/north,
+/turf/open/floor/iron/lavaland,
+/area/station/commons/fitness/recreation)
 "ubl" = (
 /obj/machinery/telecomms/broadcaster/preset_left,
 /turf/open/floor/circuit/telecomms/mainframe,
@@ -62261,9 +62250,8 @@
 /turf/open/floor/iron,
 /area/station/hallway/primary/central)
 "vpR" = (
-/obj/structure/mirror/directional/west,
-/obj/structure/sink/directional/east,
-/turf/open/floor/iron/freezer,
+/obj/machinery/computer/cryopod/directional/west,
+/turf/open/floor/iron/lavaland,
 /area/station/commons/fitness/recreation)
 "vqj" = (
 /obj/machinery/computer/atmos_alert/station_only{
@@ -62668,12 +62656,8 @@
 /turf/open/floor/wood/large,
 /area/station/commons/lounge)
 "vwp" = (
-/obj/machinery/door/airlock{
-	id_tag = "FitnessShower";
-	name = "Fitness Room Shower"
-	},
-/obj/machinery/duct,
-/turf/open/floor/iron/freezer,
+/obj/machinery/door/airlock/public/glass,
+/turf/open/floor/iron/lavaland,
 /area/station/commons/fitness/recreation)
 "vwq" = (
 /obj/effect/turf_decal/stripes/corner{
@@ -105155,7 +105139,7 @@ lMJ
 lMJ
 lMJ
 szp
-lHH
+ubk
 vpR
 ilh
 ipG
