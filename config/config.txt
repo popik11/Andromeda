@@ -197,9 +197,6 @@ ALLOW_ADMIN_OOCCOLOR
 ###==========================================================================================
 ALLOW_ADMIN_ASAYCOLOR
 
-## Job slot open/close by identification consoles delay in seconds
-ID_CONSOLE_JOBSLOT_DELAY 30
-
 ## Request Emergency Temporary Access - RETA System
 ## Enables temporary department access when Requests Console emergency calls are made
 RETA_ENABLED
