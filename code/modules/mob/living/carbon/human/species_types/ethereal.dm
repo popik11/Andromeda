@@ -1,5 +1,5 @@
 /datum/species/ethereal
-	name = "\improper Ethereal"
+	name = "Эфириал"
 	id = SPECIES_ETHEREAL
 	meat = /obj/item/food/meat/slab/human/mutant/ethereal
 	mutantlungs = /obj/item/organ/lungs/ethereal
@@ -247,15 +247,17 @@
 		Однако их кожа очень тонкая и её легко пронзить оружием, наносящим физический урон."
 
 /datum/species/ethereal/get_species_description()
-	return "Происходящие с планеты Росток, теократические эфиреалы \
-		разделены социально по кастам и проповедуют догму помощи слабым и \
-		угнетённым."
+	return "Эфириал - ещё не получили описание, т.к. лор в разработке. :)"
 
 /datum/species/ethereal/get_species_lore()
 	return list(
-		"Эфиреалы - вид, родом с планеты Росток. \
-		Когда их впервые обнаружили, они находились на средневековом уровне технологического развития, \
-		но благодаря своей естественной склонности к электричеству, они чувствовали себя комфортно среди крупных установок Нанотрейзен.",
+		"Разработка",
+
+		"Лора",
+
+		"В",
+
+		"Процессе",
 	)
 
 /datum/species/ethereal/create_pref_unique_perks()

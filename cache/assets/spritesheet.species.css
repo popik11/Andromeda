@@ -1,0 +1,7 @@
+.species64x64{display:inline-block;width:64px;height:64px;background-image:url('%species_64x64.png%');background-repeat:no-repeat;}
+.species64x64.Эфириал{background-position:-0px -0px;}
+.species64x64.Человек{background-position:-64px -0px;}
+.species64x64.Фелинид{background-position:-128px -0px;}
+.species64x64.Унатх{background-position:-0px -64px;}
+.species64x64.Ниан{background-position:-64px -64px;}
+.species64x64.Плазмамен{background-position:-128px -64px;}
