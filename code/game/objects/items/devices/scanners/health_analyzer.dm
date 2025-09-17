@@ -42,10 +42,10 @@
 /obj/item/healthanalyzer/examine(mob/user)
 	. = ..()
 	if(src.mode != SCANNER_NO_MODE)
-		. += span_notice("Alt-клик [src], чтобы переключить показания повреждений конечностей. Ctrl-shift-клик, чтобы распечатать отчет о показаниях.")
+		. += span_notice("Alt-клик по [declent_ru(DATIVE)], чтобы переключить показания повреждений конечностей. Ctrl-Shift-клик, чтобы распечатать отчет о показаниях.")
 
 /obj/item/healthanalyzer/suicide_act(mob/living/carbon/user)
-	user.visible_message(span_suicide("[user] начинает анализировать [user.p_them()]себя с помощью [src]! На дисплее отображается, что[user.p_theyre()] труп!"))
+	user.visible_message(span_suicide("[user] начинает анализировать [user.p_them()]себя с помощью [declent_ru(NOMINATIVE)]! На дисплее отображается, что[user.p_theyre()] труп!"))
 	return BRUTELOSS
 
 /obj/item/healthanalyzer/attack_self(mob/user)
@@ -214,10 +214,10 @@
 							<table class='ml-2'>\
 							<tr>\
 							<td style='width:7em;'><font color='#ff0000'><b>Повреждения:</b></font></td>\
-							<td style='width:5em;'><font color='#ff3333'><b>Физические</b></font></td>\
-							<td style='width:4em;'><font color='#ff9933'><b>Термические</b></font></td>\
-							<td style='width:4em;'><font color='#00cc66'><b>Токсины</b></font></td>\
-							<td style='width:8em;'><font color='#00cccc'><b>Респираторные</b></font></td>\
+							<td style='width:5em;'><font color='#ff3333'><b>Физ.</b></font></td>\
+							<td style='width:4em;'><font color='#ff9933'><b>Терм.</b></font></td>\
+							<td style='width:4em;'><font color='#00cc66'><b>Токс.</b></font></td>\
+							<td style='width:8em;'><font color='#00cccc'><b>Удуш.</b></font></td>\
 							</tr>\
 							<tr>\
 							<td><font color='#ff3333'><b>Суммарно:</b></font></td>\
@@ -245,7 +245,7 @@
 					if(!is_damaged && (zone != BODY_ZONE_CHEST || (tox_loss <= 0 && oxy_loss <= 0)) && !has_any_embeds && !has_any_wounds)
 						continue
 					dmgreport += "<tr>"
-					dmgreport += "<td><font color='#cc3333'>[capitalize((limb.bodytype & BODYTYPE_ROBOTIC) ? limb.name : limb.plaintext_zone)]:</font></td>"
+					dmgreport += "<td><font color='#cc3333'>[capitalize((limb.bodytype & BODYTYPE_ROBOTIC) ? limb.name : limb.ru_plaintext_zone[NOMINATIVE])]:</font></td>"
 					dmgreport += "<td><font color='#cc3333'>[limb.brute_dam > 0 ? ceil(limb.brute_dam) : "0"]</font></td>"
 					dmgreport += "<td><font color='#ff9933'>[limb.burn_dam > 0 ? ceil(limb.burn_dam) : "0"]</font></td>"
 					if(zone == BODY_ZONE_CHEST) // tox/oxy is stored in the chest
@@ -475,7 +475,7 @@
 	report_paper.update_appearance()
 
 	user.put_in_hands(report_paper)
-	balloon_alert(user, "logs cleared")
+	balloon_alert(user, "журналы очищены")
 
 	resolve_patient_eligibility(report_paper, user)
 	report_text = list()
@@ -658,7 +658,7 @@
 /obj/item/healthanalyzer/simple/attack_self(mob/user)
 	if(next_encouragement < world.time)
 		playsound(src, 'sound/machines/ping.ogg', 50, FALSE)
-		to_chat(user, span_notice("[src] makes a happy ping and [pick(encouragements)]!"))
+		to_chat(user, span_notice("[declent_ru(NOMINATIVE)] издает радостный пинг и [pick(encouragements)]!"))
 		next_encouragement = world.time + 10 SECONDS
 		show_emotion(AID_EMOTION_HAPPY)
 	else if(emotion != AID_EMOTION_ANGRY)
@@ -667,14 +667,14 @@
 		violence(user)
 
 /obj/item/healthanalyzer/simple/proc/greed_warning(mob/user)
-	to_chat(user, span_warning("[src] displays an eerily high-definition frowny face, chastizing you for asking it for too much encouragement."))
+	to_chat(user, span_warning("[declent_ru(NOMINATIVE)] displays an eerily high-definition frowny face, chastizing you for asking it for too much encouragement."))
 	show_emotion(AID_EMOTION_ANGRY)
 
 /obj/item/healthanalyzer/simple/proc/violence(mob/user)
 	playsound(src, 'sound/machines/buzz/buzz-sigh.ogg', 50, FALSE)
 	if(isliving(user))
 		var/mob/living/L = user
-		to_chat(L, span_warning("[src] makes a disappointed buzz and pricks your finger for being greedy. Ow!"))
+		to_chat(L, span_warning("[declent_ru(NOMINATIVE)] makes a disappointed buzz and pricks your finger for being greedy. Ow!"))
 		flick(icon_state + "_pinprick", src)
 		violence_damage(user)
 		user.dropItemToGround(src)
@@ -697,7 +697,7 @@
 
 	if(!iscarbon(interacting_with))
 		playsound(src, 'sound/machines/buzz/buzz-sigh.ogg', 30, TRUE)
-		to_chat(user, span_notice("[src] makes a sad buzz and briefly displays an unhappy face, indicating it can't scan [interacting_with]."))
+		to_chat(user, span_notice("[declent_ru(NOMINATIVE)] makes a sad buzz and briefly displays an unhappy face, indicating it can't scan [interacting_with]."))
 		show_emotion(AI_EMOTION_SAD)
 		return ITEM_INTERACT_BLOCKING
 
