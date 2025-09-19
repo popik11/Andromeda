@@ -212,23 +212,23 @@ GLOBAL_LIST_INIT(armor_by_type, generate_armor_type_cache())
 /proc/armor_to_protection_name(armor_type)
 	switch(armor_type)
 		if(ACID)
-			return "ACID"
+			return "КИСЛОТА"
 		if(BIO)
-			return "BIOHAZARD"
+			return "БИООПАСНОСТЬ"
 		if(BOMB)
-			return "EXPLOSIVE"
+			return "ВЗРЫВ"
 		if(BULLET)
-			return "BULLET"
+			return "ПУЛИ"
 		if(CONSUME)
-			return "CONSUMING"
+			return "ПОГЛОЩЕНИЕ"
 		if(ENERGY)
-			return "ENERGY"
+			return "ЭНЕРГИЯ"
 		if(FIRE)
-			return "FIRE"
+			return "ОГОНЬ"
 		if(LASER)
-			return "LASER"
+			return "ЛАЗЕР"
 		if(MELEE)
-			return "MELEE"
+			return "БЛИЖНИЙ БОЙ"
 		if(WOUND)
-			return "WOUNDING"
-	CRASH("Unknown armor type '[armor_type]'")
+			return "РАНЕНИЯ"
+	CRASH("Неизвестный тип брони '[armor_type]'")

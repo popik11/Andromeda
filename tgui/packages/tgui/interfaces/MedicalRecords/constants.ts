@@ -13,10 +13,10 @@ export const PHYSICALSTATUS2COLOR = {
 } as const;
 
 export const PHYSICALSTATUS2DESC = {
-  Active: 'Active. Individual is conscious and healthy.',
-  Debilitated: 'Debilitated. Individual is conscious, but unhealthy.',
-  Unconscious: 'Unconscious. Individual may require medical attention.',
-  Deceased: 'Deceased. Individual has died and begun to decay.',
+  Active: 'Активен. Индивид в сознании и здоров.',
+  Debilitated: 'Нетрудоспособен. Индивид в сознании, но нездоров.',
+  Unconscious: 'Без сознания. Индивид может нуждаться в медицинской помощи.',
+  Deceased: 'Скончался. Индивид умер и начал разлагаться.',
 } as const;
 
 export const MENTALSTATUS2ICON = {
@@ -34,9 +34,9 @@ export const MENTALSTATUS2COLOR = {
 } as const;
 
 export const MENTALSTATUS2DESC = {
-  Stable: 'Stable. Individual is sane and free from psychological disorders.',
+  Stable: 'Стабилен. Индивид вменяем и свободен от психологических расстройств.',
   Watch:
-    'Watch. Individual has symptoms of mental illness. Monitor them closely.',
-  Unstable: 'Unstable. Individual has one or more mental illnesses.',
-  Insane: 'Insane. Individual exhibits severe, abnormal mental behaviors.',
+    'Наблюдение. У индивида есть симптомы психического заболевания. Наблюдайте за ним внимательно.',
+  Unstable: 'Нестабилен. Индивид имеет одно или несколько психических заболеваний.',
+  Insane: 'Безумен. Индивид демонстрирует тяжелое, ненормальное психическое поведение.',
 } as const;

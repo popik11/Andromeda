@@ -17,11 +17,11 @@ import type { Threshold } from './types';
 export const SymptomDisplay = (props) => {
   const { symptoms = [] } = props;
   if (!symptoms?.length) {
-    return <NoticeBox>No symptoms detected.</NoticeBox>;
+    return <NoticeBox>Симптомов не обнаружено.</NoticeBox>;
   }
 
   return (
-    <Section fill title="Symptoms">
+    <Section fill title="Симптомы">
       {symptoms.map((symptom) => {
         const { name, desc, threshold_desc } = symptom;
         return (
@@ -49,9 +49,9 @@ const Thresholds = (props) => {
   const convertedThresholds = Object.entries<Threshold>(thresholds);
 
   return (
-    <Section mt={1} title="Thresholds">
+    <Section mt={1} title="Пороги">
       {!convertedThresholds.length ? (
-        <NoticeBox>None</NoticeBox>
+        <NoticeBox>Нету</NoticeBox>
       ) : (
         <LabeledList>
           {convertedThresholds.map(([label, descr], index) => {
@@ -74,29 +74,29 @@ const Traits = (props) => {
   } = props;
 
   return (
-    <Section title="Modifiers">
+    <Section title="Модификаторы">
       <LabeledList>
-        <Tooltip content="Rarity of the symptom.">
+        <Tooltip content="Редкость симптома.">
           <LabeledList.Item color={getColor(level)} label="Level">
             {level}
           </LabeledList.Item>
         </Tooltip>
-        <Tooltip content="Decides the cure complexity.">
+        <Tooltip content="Определяет сложность лечения.">
           <LabeledList.Item color={getColor(resistance)} label="Resistance">
             {resistance}
           </LabeledList.Item>
         </Tooltip>
-        <Tooltip content="Symptomic progression.">
+        <Tooltip content="Прогрессирование симптомов.">
           <LabeledList.Item color={getColor(stage_speed)} label="Stage Speed">
             {stage_speed}
           </LabeledList.Item>
         </Tooltip>
-        <Tooltip content="Detection difficulty from medical equipment.">
+        <Tooltip content="Сложность обнаружения медицинским оборудованием.">
           <LabeledList.Item color={getColor(stealth)} label="Stealth">
             {stealth}
           </LabeledList.Item>
         </Tooltip>
-        <Tooltip content="Decides the spread type.">
+        <Tooltip content="Определяет тип распространения.">
           <LabeledList.Item color={getColor(transmission)} label="Transmission">
             {transmission}
           </LabeledList.Item>

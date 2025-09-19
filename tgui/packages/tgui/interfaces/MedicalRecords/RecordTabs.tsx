@@ -24,8 +24,8 @@ export const MedicalRecordTabs = (props) => {
   const { records = [], station_z } = data;
 
   const errorMessage = !records.length
-    ? 'No records found.'
-    : 'No match. Refine your search.';
+    ? 'Записей не найдено.'
+    : 'Совпадений нет. Уточните поиск.';
 
   const [search, setSearch] = useState('');
 
@@ -40,7 +40,7 @@ export const MedicalRecordTabs = (props) => {
         <Input
           fluid
           onChange={setSearch}
-          placeholder="Name/Job/DNA"
+          placeholder="ФИО/Проф/ДНК"
           expensive
         />
       </Stack.Item>
@@ -63,18 +63,18 @@ export const MedicalRecordTabs = (props) => {
             <Button
               disabled
               icon="plus"
-              tooltip="Add new records by inserting a 1 by 1 meter photo into the terminal. You do not need this screen open."
+              tooltip="Добавляйте новые записи, вставляя фотографию размером 1 на 1 метр в терминал. Вам не нужно держать этот экран открытым."
             >
-              Create
+              Создать
             </Button>
           </Stack.Item>
           <Stack.Item>
             <Button.Confirm
-              content="Purge"
+              content="Очистить"
               icon="trash"
               disabled={!station_z}
               onClick={() => act('purge_records')}
-              tooltip="Wipe all record data."
+              tooltip="Удалить все данные записей."
             />
           </Stack.Item>
         </Stack>

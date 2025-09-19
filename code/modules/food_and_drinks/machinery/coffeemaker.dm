@@ -98,7 +98,7 @@
 		span_notice("- Заваривает кофе на <b>[speed*100]%</b>.")
 		if(coffeepot)
 			for(var/datum/reagent/consumable/cawfee as anything in coffeepot.reagents.reagent_list)
-				. += span_notice("- [cawfee.volume] юнитов кофе в кофейнике.")
+				. += span_notice("- [cawfee.volume] мл. кофе в кофейнике.")
 		if(cartridge)
 			if(cartridge.charges < 1)
 				. += span_notice("- кофейный картридж пуст.")

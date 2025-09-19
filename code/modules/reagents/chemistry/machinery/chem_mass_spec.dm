@@ -1,6 +1,6 @@
 /obj/machinery/chem_mass_spec
 	name = "High-performance liquid chromatography machine"
-	desc = "Allows you to purify reagents & separate out inverse reagents"
+	desc = "Позволяет очищать реагенты и отделять обратные реагенты"
 	icon = 'icons/obj/medical/chemical.dmi'
 	icon_state = "HPLC"
 	base_icon_state = "HPLC"
@@ -54,10 +54,10 @@
 	. = NONE
 
 	if(!QDELETED(beaker1))
-		context[SCREENTIP_CONTEXT_ALT_LMB] = "Eject input beaker"
+		context[SCREENTIP_CONTEXT_ALT_LMB] = "Извлечь входную мензурку"
 		. = CONTEXTUAL_SCREENTIP_SET
 	if(!QDELETED(beaker2))
-		context[SCREENTIP_CONTEXT_ALT_RMB] = "Eject output beaker"
+		context[SCREENTIP_CONTEXT_ALT_RMB] = "Извлечь выходную мензурку"
 		. = CONTEXTUAL_SCREENTIP_SET
 
 	if(isnull(held_item) || (held_item.item_flags & ABSTRACT) || (held_item.flags_1 & HOLOGRAM_1))
@@ -65,48 +65,48 @@
 
 	if(is_reagent_container(held_item))
 		if(QDELETED(beaker1))
-			context[SCREENTIP_CONTEXT_LMB] = "Insert input beaker"
+			context[SCREENTIP_CONTEXT_LMB] = "Вставить входную мензурку"
 		else
-			context[SCREENTIP_CONTEXT_LMB] = "Replace input beaker"
+			context[SCREENTIP_CONTEXT_LMB] = "Заменить входную мензурку"
 
 		if(QDELETED(beaker2))
-			context[SCREENTIP_CONTEXT_RMB] = "Insert output beaker"
+			context[SCREENTIP_CONTEXT_RMB] = "Вставить выходную мензурку"
 		else
-			context[SCREENTIP_CONTEXT_RMB] = "Replace output beaker"
+			context[SCREENTIP_CONTEXT_RMB] = "Заменить выходную мензурку"
 
 		return CONTEXTUAL_SCREENTIP_SET
 
 	if(held_item.tool_behaviour == TOOL_WRENCH)
-		context[SCREENTIP_CONTEXT_LMB] = "[anchored ? "Un" : ""]anchor"
+		context[SCREENTIP_CONTEXT_LMB] = "[anchored ? "От" : "Зак"]репить"
 		return CONTEXTUAL_SCREENTIP_SET
 	else if(held_item.tool_behaviour == TOOL_SCREWDRIVER)
-		context[SCREENTIP_CONTEXT_LMB] = "[panel_open ? "Close" : "Open"] panel"
+		context[SCREENTIP_CONTEXT_LMB] = "[panel_open ? "Закрыть" : "Открыть"] панель"
 		return CONTEXTUAL_SCREENTIP_SET
 	else if(panel_open && held_item.tool_behaviour == TOOL_CROWBAR)
-		context[SCREENTIP_CONTEXT_LMB] = "Deconstruct"
+		context[SCREENTIP_CONTEXT_LMB] = "Разобрать"
 		return CONTEXTUAL_SCREENTIP_SET
 
 /obj/machinery/chem_mass_spec/examine(mob/user)
 	. = ..()
 
 	if(!QDELETED(beaker1))
-		. += span_notice("Input beaker of [beaker1.reagents.maximum_volume]u capacity is inserted.")
-		. += span_notice("Its Input beaker Can be ejected with [EXAMINE_HINT("LMB Alt")] click.")
+		. += span_notice("Входная мензурка емкостью [beaker1.reagents.maximum_volume]мл вставлена.")
+		. += span_notice("Входную мензурку можно извлечь с помощью [EXAMINE_HINT("ЛКМ Alt")] клика.")
 	else
-		. += span_warning("Its missing an input beaker. insert with [EXAMINE_HINT("Left Click")].")
+		. += span_warning("Отсутствует входная мензурка. Вставьте с помощью [EXAMINE_HINT("ЛКМ")].")
 	if(!QDELETED(beaker2))
-		. += span_notice("Output beaker of [beaker2.reagents.maximum_volume]u capacity is inserted.")
-		. += span_notice("Its Output beaker can be ejected with [EXAMINE_HINT("RMB Alt")] click.")
+		. += span_notice("Выходная мензурка емкостью [beaker2.reagents.maximum_volume]мл вставлена.")
+		. += span_notice("Выходную мензурку можно извлечь с помощью [EXAMINE_HINT("ПКМ Alt")] клика.")
 	else
-		. += span_warning("Its missing an output beaker, insert with [EXAMINE_HINT("Right Click")].")
+		. += span_warning("Отсутствует выходная мензурка, вставьте с помощью [EXAMINE_HINT("ПКМ")].")
 
 	if(anchored)
-		. += span_notice("Its [EXAMINE_HINT("anchored")] in place.")
+		. += span_notice("Она [EXAMINE_HINT("закреплена")] на месте.")
 	else
-		. += span_warning("Needs to be [EXAMINE_HINT("wrenched")] to use.")
-	. += span_notice("Its maintainence panel can be [EXAMINE_HINT("screwed")] [panel_open ? "closed" : "open"].")
+		. += span_warning("Нужно [EXAMINE_HINT("закрепить гаечным ключом")] для использования.")
+	. += span_notice("Техническая панель может быть [EXAMINE_HINT("отвинчена")] [panel_open ? "закрыта" : "открыта"].")
 	if(panel_open)
-		. += span_notice("It can be [EXAMINE_HINT("pried")] apart.")
+		. += span_notice("Ее можно [EXAMINE_HINT("вскрыть")].")
 
 /obj/machinery/chem_mass_spec/update_overlays()
 	. = ..()
@@ -153,7 +153,7 @@
 
 	if(is_reagent_container(item) && item.is_open_container())
 		if(processing_reagents)
-			balloon_alert(user, "still processing!")
+			balloon_alert(user, "все еще обрабатывается!")
 			return ITEM_INTERACT_BLOCKING
 
 		var/obj/item/reagent_containers/beaker = item
@@ -162,7 +162,7 @@
 
 		var/is_right_clicking = LAZYACCESS(modifiers, RIGHT_CLICK)
 		replace_beaker(user, !is_right_clicking, beaker)
-		to_chat(user, span_notice("You add [beaker] to [is_right_clicking ? "output" : "input"] slot."))
+		to_chat(user, span_notice("Вы добавляете [beaker.declent_ru(ACCUSATIVE)] в [is_right_clicking ? "выходной" : "входной"] слот."))
 		update_appearance()
 		ui_interact(user)
 		return ITEM_INTERACT_SUCCESS
@@ -172,7 +172,7 @@
 /obj/machinery/chem_mass_spec/wrench_act(mob/living/user, obj/item/tool)
 	. = ITEM_INTERACT_BLOCKING
 	if(processing_reagents)
-		balloon_alert(user, "still processing!")
+		balloon_alert(user, "все еще обрабатывается!")
 		return .
 
 	if(default_unfasten_wrench(user, tool) == SUCCESSFUL_UNFASTEN)
@@ -181,7 +181,7 @@
 /obj/machinery/chem_mass_spec/screwdriver_act(mob/living/user, obj/item/tool)
 	. = ITEM_INTERACT_BLOCKING
 	if(processing_reagents)
-		balloon_alert(user, "still processing!")
+		balloon_alert(user, "все еще обрабатывается!")
 		return .
 
 	if(default_deconstruction_screwdriver(user, icon_state, icon_state, tool))
@@ -191,7 +191,7 @@
 /obj/machinery/chem_mass_spec/crowbar_act(mob/living/user, obj/item/tool)
 	. = ITEM_INTERACT_BLOCKING
 	if(processing_reagents)
-		balloon_alert(user, "still processing!")
+		balloon_alert(user, "все еще обрабатывается!")
 		return .
 
 	if(default_deconstruction_crowbar(tool))
@@ -299,7 +299,7 @@
 		beaker1Data["maxVolume"] = beaker_1_reagents.maximum_volume
 		var/list/beakerContents = list()
 		for(var/datum/reagent/reagent as anything in beaker_1_reagents.reagent_list)
-			var/log = "Ready"
+			var/log = "Готов"
 			var/datum/reagent/target = reagent
 			var/purity = target.purity
 			var/is_inverse = FALSE
@@ -311,14 +311,14 @@
 			else
 				var/initial_purity = initial(reagent.purity)
 				if((initial_purity - reagent.purity) <= 0) //already at max purity
-					log = "Cannot purify above [round(initial_purity * 100)]%"
+					log = "Нельзя очистить выше [round(initial_purity * 100)]%"
 
 			beakerContents += list(list(
 				"name" = target.name,
 				"volume" = round(reagent.volume, CHEMICAL_VOLUME_ROUNDING),
 				"mass" = target.mass,
 				"purity" = round(purity * 100),
-				"type" = is_inverse ? "Inverted" : "Clean",
+				"type" = is_inverse ? "Инвертированный" : "Чистый",
 				"log" = log
 			))
 			.["peakHeight"] = max(.["peakHeight"], reagent.volume)
@@ -342,7 +342,7 @@
 				"volume" = round(reagent.volume, CHEMICAL_VOLUME_ROUNDING),
 				"mass" = reagent.mass,
 				"purity" = round(reagent.purity * 100),
-				"type" = "Clean",
+				"type" = "Чистый",
 				"log" = log[reagent.type]
 			))
 		beaker2Data["contents"] = beakerContents
@@ -356,17 +356,17 @@
 	switch(action)
 		if("activate")
 			if(QDELETED(beaker1))
-				say("Missing input beaker!")
+				say("Отсутствует входная мензурка!")
 				return
 			if(QDELETED(beaker2))
-				say("Missing output beaker!")
+				say("Отсутствует выходная мензурка!")
 				return
 
 			//adjust timer for purification
 			progress_time = 0
 			estimate_time()
 			if(delay_time <= 0)
-				say("No work to be done!")
+				say("Нет работы для выполнения!")
 				return
 
 			//start the purification process
@@ -430,14 +430,14 @@
 
 /obj/machinery/chem_mass_spec/click_alt(mob/living/user)
 	if(processing_reagents)
-		balloon_alert(user, "still processing!")
+		balloon_alert(user, "все еще обрабатывается!")
 		return CLICK_ACTION_BLOCKING
 	replace_beaker(user, TRUE)
 	return CLICK_ACTION_SUCCESS
 
 /obj/machinery/chem_mass_spec/click_alt_secondary(mob/living/user)
 	if(processing_reagents)
-		balloon_alert(user, "still processing!")
+		balloon_alert(user, "все еще обрабатывается!")
 		return
 	replace_beaker(user, FALSE)
 
@@ -466,7 +466,7 @@
 					continue
 				input_reagents.remove_reagent(reagent.type, product_vol)
 				output_reagents.add_reagent(reagent.inverse_chem, product_vol, reagtemp = input_reagents.chem_temp, added_purity = reagent.get_inverse_purity(), added_ph = reagent.ph)
-				log[reagent.type] = "Purified to [reagent.get_inverse_purity() * 100]%"
+				log[reagent.type] = "Очищено до [reagent.get_inverse_purity() * 100]%"
 				continue
 
 			//out of our selected range
@@ -481,7 +481,7 @@
 			//add the purified reagent. More impure reagents will yield smaller amounts
 			beaker1.reagents.remove_reagent(reagent.type, product_vol)
 			beaker2.reagents.add_reagent(reagent.type, product_vol * (1 - delta_purity), reagtemp = beaker1.reagents.chem_temp, added_purity = initial(reagent.purity), added_ph = reagent.ph)
-			log[reagent.type] = "Purified to [initial(reagent.purity) * 100]%"
+			log[reagent.type] = "Очищено до [initial(reagent.purity) * 100]%"
 
 		//recompute everything
 		lower_mass_range = calculate_mass(smallest = TRUE)

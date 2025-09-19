@@ -17,10 +17,10 @@ const HEALTH_COLOR_BY_LEVEL = [
 ];
 
 const SORT_NAMES = {
-  ijob: 'Job',
-  name: 'Name',
-  area: 'Position',
-  health: 'Vitals',
+  ijob: 'Профессия',
+  name: 'ФИО',
+  area: 'Позиция',
+  health: 'Показатели',
 };
 
 const STAT_LIVING = 0;
@@ -112,7 +112,7 @@ const HealthStat = (props: HealthStatProps) => {
 
 export const CrewConsole = () => {
   return (
-    <Window title="Crew Monitor" width={600} height={600}>
+    <Window title="Мониторинг экипажа" width={600} height={600}>
       <Window.Content scrollable>
         <Section minHeight="540px">
           <CrewTable />
@@ -185,7 +185,7 @@ const CrewTable = () => {
             />
           </Button>
           <Input
-            placeholder="Search for name..."
+            placeholder="Поиск..."
             onChange={setSearchQuery}
             value={searchQuery}
           />
@@ -194,17 +194,17 @@ const CrewTable = () => {
     >
       <Table>
         <Table.Row>
-          <Table.Cell bold>Name</Table.Cell>
+          <Table.Cell bold>ФИО</Table.Cell>
           <Table.Cell bold collapsing />
           <Table.Cell bold collapsing textAlign="center">
-            Vitals
+            Состояние
           </Table.Cell>
           <Table.Cell bold textAlign="center">
-            Position
+            Позиция
           </Table.Cell>
           {!!data.link_allowed && (
             <Table.Cell bold collapsing textAlign="center">
-              Tracking
+              Отслеживание
             </Table.Cell>
           )}
         </Table.Row>
@@ -274,9 +274,9 @@ const CrewTableEntry = (props: CrewTableEntryProps) => {
             <HealthStat type="brute" value={brutedam} />
           </Box>
         ) : life_status !== STAT_DEAD ? (
-          'Alive'
+          'Жив'
         ) : (
-          'Dead'
+          'Труп'
         )}
       </Table.Cell>
       <Table.Cell>
@@ -296,7 +296,7 @@ const CrewTableEntry = (props: CrewTableEntryProps) => {
               })
             }
           >
-            Track
+            Отслеживать
           </Button>
         </Table.Cell>
       )}

@@ -12,7 +12,7 @@
  */
 /obj/structure/filingcabinet
 	name = "filing cabinet"
-	desc = "A large cabinet with drawers."
+	desc = "Большой шкаф с ящиками."
 	icon = 'icons/obj/service/bureaucracy.dmi'
 	icon_state = "filingcabinet"
 	density = TRUE
@@ -24,7 +24,7 @@
 
 /obj/structure/filingcabinet/chestdrawer/wheeled
 	name = "rolling chest drawer"
-	desc = "A small cabinet with drawers. This one has wheels!"
+	desc = "Небольшой шкаф с ящиками. У этого есть колесики!"
 	anchored = FALSE
 
 /obj/structure/filingcabinet/white
@@ -44,19 +44,19 @@
 
 /obj/structure/filingcabinet/attackby(obj/item/P, mob/living/user, list/modifiers, list/attack_modifiers)
 	if(P.tool_behaviour == TOOL_WRENCH && LAZYACCESS(modifiers, RIGHT_CLICK))
-		to_chat(user, span_notice("You begin to [anchored ? "unwrench" : "wrench"] [src]."))
+		to_chat(user, span_notice("Вы начинаете [anchored ? "откручивать" : "прикручивать"] [declent_ru(NOMINATIVE)]."))
 		if(P.use_tool(src, user, 20, volume=50))
-			to_chat(user, span_notice("You successfully [anchored ? "unwrench" : "wrench"] [src]."))
+			to_chat(user, span_notice("Вы успешно [anchored ? "открутили" : "прикрутили"] [declent_ru(NOMINATIVE)]."))
 			set_anchored(!anchored)
 	else if(P.w_class < WEIGHT_CLASS_NORMAL)
 		if(!user.transferItemToLoc(P, src))
 			return
-		to_chat(user, span_notice("You put [P] in [src]."))
+		to_chat(user, span_notice("Вы кладете [P.declent_ru(NOMINATIVE)] в [declent_ru(NOMINATIVE)]."))
 		icon_state = "[initial(icon_state)]-open"
 		sleep(0.5 SECONDS)
 		icon_state = initial(icon_state)
 	else if(!user.combat_mode || (P.item_flags & NOBLUDGEON))
-		to_chat(user, span_warning("You can't put [P] in [src]!"))
+		to_chat(user, span_warning("Вы не можете положить [P.declent_ru(NOMINATIVE)] в [declent_ru(NOMINATIVE)]!"))
 	else
 		return ..()
 
@@ -110,9 +110,9 @@
 			I.forceMove(loc)
 			if(prob(25))
 				step_rand(I)
-			to_chat(user, span_notice("You pull \a [I] out of [src] at random."))
+			to_chat(user, span_notice("Вы вытаскиваете [I.declent_ru(NOMINATIVE)] из [declent_ru(NOMINATIVE)] наугад."))
 			return
-	to_chat(user, span_notice("You find nothing in [src]."))
+	to_chat(user, span_notice("Вы ничего не находите в [declent_ru(NOMINATIVE)]."))
 
 /*
  * Security Record Cabinets
@@ -149,15 +149,15 @@
 		return
 	for(var/datum/record/crew/record in GLOB.manifest.general)
 		var/obj/item/paper/med_record_paper = new /obj/item/paper(src)
-		var/med_record_text = "<CENTER><B>Medical Record</B></CENTER><BR>"
-		med_record_text += "Name: [record.name] Rank: [record.rank]<BR>\nGender: [record.gender]<BR>\nAge: [record.age]<BR>"
-		med_record_text += "<BR>\n<CENTER><B>Medical Data</B></CENTER><BR>\nBlood Type: [record.blood_type]<BR>\nDNA: [record.dna_string]<BR>\n<BR>\nPhysical Status: [record.physical_status]<BR>\nMental Status: [record.mental_status]<BR>\nMinor Disabilities: [record.minor_disabilities]<BR>\nDetails: [record.minor_disabilities_desc]<BR>\n<BR>\nMajor Disabilities: [record.major_disabilities]<BR>\nDetails: [record.major_disabilities_desc]<BR>\n<BR>\nImportant Notes:<BR>\n\t[record.medical_notes]<BR>\n<BR>\n<CENTER><B>Comments/Log</B></CENTER><BR>"
+		var/med_record_text = "<CENTER><B>Медицинская карта</B></CENTER><BR>"
+		med_record_text += "Имя: [record.name] Профессия: [record.rank]<BR>\nПол: [record.gender]<BR>\nВозраст: [record.age]<BR>"
+		med_record_text += "<BR>\n<CENTER><B>Медицинские данные</B></CENTER><BR>\nГруппа крови: [record.blood_type]<BR>\nДНК: [record.dna_string]<BR>\n<BR>\nФизический статус: [record.physical_status]<BR>\nМентальный статус: [record.mental_status]<BR>\nЛегкие нарушения: [record.minor_disabilities]<BR>\nПодробности: [record.minor_disabilities_desc]<BR>\n<BR>\nТяжелые нарушения: [record.major_disabilities]<BR>\nПодробности: [record.major_disabilities_desc]<BR>\n<BR>\nВажные заметки:<BR>\n\t[record.medical_notes]<BR>\n<BR>\n<CENTER><B>Комментарии/Логи</B></CENTER><BR>"
 		med_record_text += "</TT>"
 		med_record_paper.add_raw_text(med_record_text)
-		med_record_paper.name = "paper - '[record.name]'"
+		med_record_paper.name = "документ - '[record.name]'"
 		med_record_paper.update_appearance()
-		virgin = FALSE //tabbing here is correct- it's possible for people to try and use it
-						//before the records have been generated, so we do this inside the loop.
+		virgin = FALSE //табуляция здесь верна - возможно, люди попытаются использовать это
+						//до того, как записи будут сгенерированы, поэтому мы делаем это внутри цикла.
 
 //ATTACK HAND IGNORING PARENT RETURN VALUE
 /obj/structure/filingcabinet/medical/attack_hand(mob/user, list/modifiers)

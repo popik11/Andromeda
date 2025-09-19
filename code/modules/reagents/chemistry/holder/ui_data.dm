@@ -64,38 +64,38 @@
 	return coords
 
 
-///Returns a string descriptor of a reactions themic_constant
+///Возвращает строковое описание термодинамической константы реакции
 /datum/reagents/proc/determine_reaction_thermics(datum/chemical_reaction/reaction)
 	var/thermic = reaction.thermic_constant
 	if(reaction.reaction_flags & REACTION_HEAT_ARBITARY)
-		thermic *= 100 //Because arbitary is a lower scale
+		thermic *= 100 //Потому что произвольная шкала меньше
 	switch(thermic)
 		if(-INFINITY to -1500)
-			return "Overwhelmingly endothermic"
+			return "Подавляюще эндотермическая"
 		if(-1500 to -1000)
-			return "Extremely endothermic"
+			return "Чрезвычайно эндотермическая"
 		if(-1000 to -500)
-			return "Strongly endothermic"
+			return "Сильно эндотермическая"
 		if(-500 to -200)
-			return "Moderately endothermic"
+			return "Умеренно эндотермическая"
 		if(-200 to -50)
-			return "Endothermic"
+			return "Эндотермическая"
 		if(-50 to 0)
-			return "Weakly endothermic"
+			return "Слабо эндотермическая"
 		if(0)
 			return ""
 		if(0 to 50)
-			return "Weakly Exothermic"
+			return "Слабо экзотермическая"
 		if(50 to 200)
-			return "Exothermic"
+			return "Экзотермическая"
 		if(200 to 500)
-			return "Moderately exothermic"
+			return "Умеренно экзотермическая"
 		if(500 to 1000)
-			return "Strongly exothermic"
+			return "Сильно экзотермическая"
 		if(1000 to 1500)
-			return "Extremely exothermic"
+			return "Чрезвычайно экзотермическая"
 		if(1500 to INFINITY)
-			return "Overwhelmingly exothermic"
+			return "Подавляюще экзотермическая"
 
 /datum/reagents/proc/parse_addictions(datum/reagent/reagent)
 	var/addict_text = list()
@@ -105,13 +105,13 @@
 			if(-INFINITY to 0)
 				continue
 			if(0 to 5)
-				addict_text += "Weak [ref.name]"
+				addict_text += "Слабая [ref.name]"
 			if(5 to 10)
 				addict_text += "[ref.name]"
 			if(10 to 20)
-				addict_text += "Strong [ref.name]"
+				addict_text += "Сильная [ref.name]"
 			if(20 to INFINITY)
-				addict_text += "Potent [ref.name]"
+				addict_text += "Мощная [ref.name]"
 	return addict_text
 
 /datum/reagents/ui_data(mob/user)
@@ -133,7 +133,7 @@
 	if(ui_reagent_id)
 		var/datum/reagent/reagent = find_reagent_object_from_type(ui_reagent_id)
 		if(!reagent)
-			to_chat(user, "Could not find reagent!")
+			to_chat(user, "Не удалось найти реагент!")
 			ui_reagent_id = null
 		else
 			data["reagent_mode_reagent"] = list("name" = reagent.name, "id" = reagent.type, "desc" = reagent.description, "reagentCol" = reagent.color, "pH" = reagent.ph, "pHCol" = convert_ph_to_readable_color(reagent.ph), "metaRate" = reagent.metabolization_rate, "OD" = reagent.overdose_threshold)
@@ -154,7 +154,7 @@
 
 		var/datum/chemical_reaction/reaction = get_chemical_reaction(ui_reaction_id)
 		if(!reaction)
-			to_chat(user, "Could not find reaction!")
+			to_chat(user, "Не удалось найти реакцию!")
 			ui_reaction_id = null
 			return data
 		//Required holder
@@ -290,7 +290,7 @@
 		ui_reaction_index = index
 	var/list/sub_reactions = get_recipe_from_reagent_product(path)
 	if(!length(sub_reactions))
-		to_chat(usr, "There is no recipe associated with this product.")
+		to_chat(usr, "С этим продуктом не связан ни один рецепт.")
 		return FALSE
 	if(ui_reaction_index > length(sub_reactions))
 		ui_reaction_index = 1
@@ -316,7 +316,7 @@
 			input_reagent = get_reagent_type_from_product_string(input_reagent) //from string to type
 			var/datum/reagent/reagent = find_reagent_object_from_type(input_reagent)
 			if(!reagent)
-				to_chat(usr, "Could not find reagent!")
+				to_chat(usr, "Не удалось найти реагент!")
 				return FALSE
 			ui_reagent_id = reagent.type
 			return TRUE
@@ -325,7 +325,7 @@
 			input_reagent = get_reagent_type_from_product_string(input_reagent) //from string to type
 			var/datum/reagent/reagent = find_reagent_object_from_type(input_reagent)
 			if(!reagent)
-				to_chat(usr, "Could not find product reagent!")
+				to_chat(usr, "Не удалось найти продукт-реагент!")
 				return
 			ui_reaction_id = get_reaction_from_indexed_possibilities(reagent.type)
 			return TRUE

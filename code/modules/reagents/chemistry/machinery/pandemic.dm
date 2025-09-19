@@ -1,7 +1,7 @@
 
 /obj/machinery/computer/pandemic
 	name = "PanD.E.M.I.C 2200"
-	desc = "Used to work with viruses."
+	desc = "Используется для работы с вирусами."
 	density = TRUE
 	icon = 'icons/obj/medical/chemical.dmi'
 	icon_state = "pandemic0"
@@ -25,12 +25,12 @@
 
 	var/static/list/hovering_item_typechecks = list(
 		/obj/item/reagent_containers/dropper = list(
-			SCREENTIP_CONTEXT_LMB = "Use dropper",
+			SCREENTIP_CONTEXT_LMB = "Использовать пипетку",
 		),
 
 		/obj/item/reagent_containers/syringe = list(
-			SCREENTIP_CONTEXT_LMB = "Inject sample",
-			SCREENTIP_CONTEXT_RMB = "Draw sample"
+			SCREENTIP_CONTEXT_LMB = "Ввести образец",
+			SCREENTIP_CONTEXT_RMB = "Забрать образец"
 		),
 	)
 
@@ -38,8 +38,8 @@
 
 	AddElement( \
 		/datum/element/contextual_screentip_bare_hands, \
-		lmb_text = "Open interface", \
-		rmb_text = "Remove beaker", \
+		lmb_text = "Открыть интерфейс", \
+		rmb_text = "Извлечь мензурку", \
 	)
 
 
@@ -51,12 +51,12 @@
 	. = ..()
 	if(beaker)
 		var/is_close
-		if(Adjacent(user)) //don't reveal exactly what's inside unless they're close enough to see the UI anyway.
-			. += "It contains \a [beaker]."
+		if(Adjacent(user)) //не раскрывать точно, что внутри, если они недостаточно близко, чтобы видеть интерфейс.
+			. += "Он содержит [beaker.declent_ru(NOMINATIVE)]."
 			is_close = TRUE
 		else
-			. += "It has a beaker inside it."
-		. += span_info("Alt-click to eject [is_close ? beaker : "the beaker"].")
+			. += "В нем есть мензурка."
+		. += span_info("Alt-клик чтобы извлечь [is_close ? beaker : "мензурку"].")
 
 /obj/machinery/computer/pandemic/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
@@ -84,7 +84,7 @@
 	//Advanced science! Precision instruments (eg droppers and syringes) are precise enough to modify the loaded sample!
 	if(istype(held_item, /obj/item/reagent_containers/dropper) || istype(held_item, /obj/item/reagent_containers/syringe))
 		if(!beaker)
-			balloon_alert(user, "no beaker!")
+			balloon_alert(user, "нет мензурки!")
 			return ..()
 		if(istype(held_item, /obj/item/reagent_containers/syringe) && LAZYACCESS(modifiers, RIGHT_CLICK))
 			held_item.interact_with_atom_secondary(beaker, user)
@@ -99,12 +99,12 @@
 	if(machine_stat & (NOPOWER|BROKEN))
 		return ..()
 	if(beaker)
-		balloon_alert(user, "pandemic full!")
+		balloon_alert(user, "пандемик полон!")
 		return ..()
 	if(!user.transferItemToLoc(held_item, src))
 		return ..()
 	beaker = held_item
-	balloon_alert(user, "beaker loaded")
+	balloon_alert(user, "мензурка загружена")
 	update_appearance()
 	SStgui.update_uis(src)
 
@@ -230,7 +230,7 @@
 
 
 	if(!istype(adv_disease) || !adv_disease.mutable)
-		to_chat(usr, span_warning("ERROR: Cannot replicate virus strain."))
+		to_chat(usr, span_warning("ОШИБКА: Невозможно реплицировать штамм вируса."))
 		return FALSE
 	use_energy(active_power_usage)
 	adv_disease = adv_disease.Copy()
@@ -241,13 +241,13 @@
 	var/list/data = list("viruses" = list(adv_disease))
 
 	var/obj/item/reagent_containers/cup/tube/bottle = new(drop_location())
-	bottle.name = "[adv_disease.name] culture tube"
-	bottle.desc = "A small test tube containing [adv_disease.agent] culture in synthblood medium."
+	bottle.name = "Пробирка с культурой [adv_disease.name]"
+	bottle.desc = "Небольшая пробирка, содержащая культуру [adv_disease.agent] в синткровяной среде."
 	bottle.reagents.add_reagent(/datum/reagent/blood, 20, data)
 	wait = TRUE
 	update_appearance()
 	var/turf/source_turf = get_turf(src)
-	log_virus("A culture tube was printed for the virus [adv_disease.admin_details()] at [loc_name(source_turf)] by [key_name(usr)]")
+	log_virus("Была напечатана пробирка с культурой для вируса [adv_disease.admin_details()] в [loc_name(source_turf)] пользователем [key_name(usr)]")
 	addtimer(CALLBACK(src, PROC_REF(reset_replicator_cooldown)), 5 SECONDS)
 	return TRUE
 
@@ -269,7 +269,7 @@
 	var/id = index
 	var/datum/disease/disease = SSdisease.archive_diseases[id]
 	var/obj/item/reagent_containers/cup/tube/bottle = new(drop_location())
-	bottle.name = "[disease.name] vaccine tube"
+	bottle.name = "Пробирка с вакциной [disease.name]"
 	bottle.reagents.add_reagent(/datum/reagent/vaccine, 15, list(id))
 	wait = TRUE
 	update_appearance()

@@ -1,6 +1,6 @@
 /obj/machinery/chem_dispenser
 	name = "chem dispenser"
-	desc = "Creates and dispenses chemicals."
+	desc = "Создает и выдает химикаты."
 	density = TRUE
 	icon = 'icons/obj/medical/chemical.dmi'
 	icon_state = "dispenser"
@@ -120,12 +120,12 @@
 /obj/machinery/chem_dispenser/examine(mob/user)
 	. = ..()
 	if(panel_open)
-		. += span_notice("[src]'s maintenance hatch is open!")
+		. += span_notice("Техническая панель [declent_ru(GENITIVE)] открыт!")
 	if(in_range(user, src) || isobserver(user))
-		. += span_notice("The status display reads:\n\
-		Recharge rate: <b>[display_power(recharge_amount, convert = FALSE)]</b>.\n\
-		Energy cost: <b>[siunit(power_cost, "J/u", 3)]</b>.")
-	. += span_notice("Use <b>RMB</b> to eject a stored beaker.")
+		. += span_notice("Дисплей статуса показывает:\n\
+		Скорость перезарядки: <b>[display_power(recharge_amount, convert = FALSE)]</b>.\n\
+		Стоимость энергии: <b>[siunit(power_cost, "Дж/ед", 3)]</b>.")
+	. += span_notice("Используйте <b>ПКМ</b> чтобы извлечь хранимую мензурку.")
 
 /obj/machinery/chem_dispenser/on_set_is_operational(old_value)
 	if(old_value) //Turned off
@@ -165,9 +165,9 @@
 
 /obj/machinery/chem_dispenser/emag_act(mob/user, obj/item/card/emag/emag_card)
 	if(obj_flags & EMAGGED)
-		balloon_alert(user, "already emagged!")
+		balloon_alert(user, "уже емагнут!")
 		return FALSE
-	balloon_alert(user, "safeties shorted out")
+	balloon_alert(user, "защитные механизмы замкнуты")
 	dispensable_reagents |= emagged_reagents//add the emagged reagents to the dispensable ones
 	obj_flags |= EMAGGED
 	return TRUE
@@ -280,10 +280,10 @@
 					var/datum/reagents/holder = beaker.reagents
 					var/to_dispense = max(0, min(amount, holder.maximum_volume - holder.total_volume))
 					if(!to_dispense)
-						say("The container is full!")
+						say("Контейнер полон!")
 						return
 					if(!cell.use(to_dispense * power_cost))
-						say("Not enough energy to complete operation!")
+						say("Недостаточно энергии для завершения операции!")
 						return
 					beaker.add_hiddenprint(ui.user)
 					holder.add_reagent(reagent, to_dispense, reagtemp = dispensed_temperature, added_purity = base_reagent_purity)
@@ -326,7 +326,7 @@
 					if(!to_dispense)
 						continue
 					if(!cell.use(to_dispense * power_cost))
-						say("Not enough energy to complete operation!")
+						say("Недостаточно энергии для завершения операции!")
 						return
 					beaker.add_hiddenprint(ui.user)
 					holder.add_reagent(reagent, to_dispense, reagtemp = dispensed_temperature, added_purity = base_reagent_purity)
@@ -336,7 +336,7 @@
 			return TRUE
 
 		if("clear_recipes")
-			if(is_operational && tgui_alert(ui.user, "Clear all recipes?", "Clear?", list("Yes", "No")) == "Yes")
+			if(is_operational && tgui_alert(ui.user, "Очистить все рецепты?", "Очистить?", list("Да", "Нет")) == "Да")
 				saved_recipes = list()
 				return TRUE
 
@@ -348,17 +348,17 @@
 		if("save_recording")
 			if(!is_operational)
 				return
-			var/name = tgui_input_text(ui.user, "What do you want to name this recipe?", "Recipe Name", max_length = MAX_NAME_LEN)
+			var/name = tgui_input_text(ui.user, "Как вы хотите назвать этот рецепт?", "Название рецепта", max_length = MAX_NAME_LEN)
 			if(!ui.user.can_perform_action(src, ALLOW_SILICON_REACH))
 				return
-			if(saved_recipes[name] && tgui_alert(ui.user, "\"[name]\" already exists, do you want to overwrite it?",, list("Yes", "No")) == "No")
+			if(saved_recipes[name] && tgui_alert(ui.user, "\"[name]\" уже существует, вы хотите перезаписать его?",, list("Да", "Нет")) == "Нет")
 				return
 			if(name && recording_recipe)
 				for(var/reagent in recording_recipe)
 					var/reagent_id = GLOB.name2reagent[reagent]
 					if(!dispensable_reagents.Find(reagent_id))
-						visible_message(span_warning("[src] buzzes."), span_hear("You hear a faint buzz."))
-						to_chat(ui.user, span_warning("[src] cannot find <b>[reagent]</b>!"))
+						visible_message(span_warning("[declent_ru(NOMINATIVE)] жужжит."), span_hear("Вы слышите тихое жужжание."))
+						to_chat(ui.user, span_warning("[declent_ru(NOMINATIVE)] не может найти <b>[reagent]</b>!"))
 						playsound(src, 'sound/machines/buzz/buzz-two.ogg', 50, TRUE)
 						return
 				saved_recipes[name] = recording_recipe
@@ -430,7 +430,7 @@
 	cell.use(total * power_cost)
 	cell.emp_act(severity)
 	work_animation()
-	visible_message(span_danger("[src] malfunctions, spraying chemicals everywhere!"))
+	visible_message(span_danger("[declent_ru(NOMINATIVE)] даёт сбой, распыляя химикаты повсюду!"))
 
 /obj/machinery/chem_dispenser/RefreshParts()
 	. = ..()
@@ -489,7 +489,7 @@
 
 /obj/machinery/chem_dispenser/drinks
 	name = "soda dispenser"
-	desc = "Contains a large reservoir of soft drinks."
+	desc = "Содержит большой резервуар с безалкогольными напитками."
 	icon = 'icons/obj/medical/chemical.dmi'
 	icon_state = "soda_dispenser"
 	base_icon_state = "soda_dispenser"
@@ -572,7 +572,7 @@
 	return b_o
 
 /obj/machinery/chem_dispenser/drinks/fullupgrade //fully ugpraded stock parts, emagged
-	desc = "Contains a large reservoir of soft drinks. This model has had its safeties shorted out."
+	desc = "Содержит большой резервуар с безалкогольными напитками. У этой модели отключены защитные механизмы."
 	obj_flags = CAN_BE_HIT | EMAGGED
 	circuit = /obj/item/circuitboard/machine/chem_dispenser/drinks/fullupgrade
 
@@ -582,7 +582,7 @@
 
 /obj/machinery/chem_dispenser/drinks/beer
 	name = "booze dispenser"
-	desc = "Contains a large reservoir of the good stuff."
+	desc = "Содержит большой резервуар с хорошими вещами."
 	icon = 'icons/obj/medical/chemical.dmi'
 	icon_state = "booze_dispenser"
 	base_icon_state = "booze_dispenser"
@@ -632,7 +632,7 @@
 	. = ..()
 
 /obj/machinery/chem_dispenser/drinks/beer/fullupgrade //fully ugpraded stock parts, emagged
-	desc = "Contains a large reservoir of the good stuff. This model has had its safeties shorted out."
+	desc = "Содержит большой резервуар с хорошими вещами. У этой модели отключены защитные механизмы."
 	obj_flags = CAN_BE_HIT | EMAGGED
 	circuit = /obj/item/circuitboard/machine/chem_dispenser/drinks/beer/fullupgrade
 
@@ -642,7 +642,7 @@
 
 /obj/machinery/chem_dispenser/mutagen
 	name = "mutagen dispenser"
-	desc = "Creates and dispenses mutagen."
+	desc = "Создает и выдает мутаген."
 	/// The default list of reagents dispensable by mutagen chem dispenser
 	var/static/list/mutagen_dispensable_reagents = list(/datum/reagent/toxin/mutagen)
 	upgrade_reagents = null
@@ -656,7 +656,7 @@
 
 /obj/machinery/chem_dispenser/mutagensaltpeter
 	name = "botanical chemical dispenser"
-	desc = "Creates and dispenses chemicals useful for botany."
+	desc = "Создает и выдает химикаты, полезные для ботаники."
 	circuit = /obj/item/circuitboard/machine/chem_dispenser/mutagensaltpeter
 
 	/// The default list of dispensable reagents available in the mutagensaltpeter chem dispenser
@@ -681,7 +681,7 @@
 	. = ..()
 
 /obj/machinery/chem_dispenser/fullupgrade //fully ugpraded stock parts, emagged
-	desc = "Creates and dispenses chemicals. This model has had its safeties shorted out."
+	desc = "Создает и выдает химикаты. У этой модели отключены защитные механизмы."
 	obj_flags = CAN_BE_HIT | EMAGGED
 	circuit = /obj/item/circuitboard/machine/chem_dispenser/fullupgrade
 
@@ -691,7 +691,7 @@
 
 /obj/machinery/chem_dispenser/abductor
 	name = "reagent synthesizer"
-	desc = "Synthesizes a variety of reagents using proto-matter."
+	desc = "Синтезирует различные реагенты с использованием прото-материи."
 	icon = 'icons/obj/antags/abductor.dmi'
 	icon_state = "chem_dispenser"
 	base_icon_state = "chem_dispenser"

@@ -165,7 +165,7 @@
 		var/datum/reagent/reagent_ingredient = valid_type
 		if(istype(reagent_ingredient))
 			var/amount = initial(cur_recipe.reqs[reagent_ingredient])
-			string_ingredient_list += "[amount] юнит[declension_ru(amount, "", "а", "ов")] [initial(reagent_ingredient.name)]\n"
+			string_ingredient_list += "[amount] мил[declension_ru(amount, "", "лиилтра", "лилитров")] [initial(reagent_ingredient.name)]\n"
 
 		var/atom/ingredient = valid_type
 		var/amount = initial(cur_recipe.reqs[ingredient])

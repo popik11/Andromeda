@@ -2,7 +2,7 @@
 
 /obj/machinery/chem_master
 	name = "ChemMaster 3000"
-	desc = "Used to separate chemicals and distribute them in a variety of forms."
+	desc = "Используется для разделения химикатов и распределения их в различных формах."
 	icon = 'icons/obj/medical/chemical.dmi'
 	icon_state = "chemmaster"
 	base_icon_state = "chemmaster"
@@ -57,41 +57,41 @@
 	. = NONE
 	if(isnull(held_item) || (held_item.item_flags & ABSTRACT) || (held_item.flags_1 & HOLOGRAM_1))
 		if(isnull(held_item))
-			context[SCREENTIP_CONTEXT_RMB] = "Remove beaker"
+			context[SCREENTIP_CONTEXT_RMB] = "Извлечь мензурку"
 			. = CONTEXTUAL_SCREENTIP_SET
 		return .
 
 	if(is_reagent_container(held_item) && held_item.is_open_container())
 		if(!QDELETED(beaker))
-			context[SCREENTIP_CONTEXT_LMB] = "Replace beaker"
+			context[SCREENTIP_CONTEXT_LMB] = "Заменить мензурку"
 		else
-			context[SCREENTIP_CONTEXT_LMB] = "Insert beaker"
+			context[SCREENTIP_CONTEXT_LMB] = "Вставить мензурку"
 		return CONTEXTUAL_SCREENTIP_SET
 
 	if(held_item.tool_behaviour == TOOL_SCREWDRIVER)
-		context[SCREENTIP_CONTEXT_LMB] = "[panel_open ? "Close" : "Open"] panel"
+		context[SCREENTIP_CONTEXT_LMB] = "[panel_open ? "Закрыть" : "Открыть"] панель"
 		return CONTEXTUAL_SCREENTIP_SET
 	else if(held_item.tool_behaviour == TOOL_WRENCH)
-		context[SCREENTIP_CONTEXT_LMB] = "[anchored ? "Un" : ""] anchor"
+		context[SCREENTIP_CONTEXT_LMB] = "[anchored ? "От" : "Зак"]репить"
 		return CONTEXTUAL_SCREENTIP_SET
 	else if(panel_open && held_item.tool_behaviour == TOOL_CROWBAR)
-		context[SCREENTIP_CONTEXT_LMB] = "Deconstruct"
+		context[SCREENTIP_CONTEXT_LMB] = "Разобрать"
 		return CONTEXTUAL_SCREENTIP_SET
 
 /obj/machinery/chem_master/examine(mob/user)
 	. = ..()
 	if(in_range(user, src) || isobserver(user))
-		. += span_notice("The status display reads:<br>Reagent buffer capacity: <b>[reagents.maximum_volume]</b> units.<br>Printing speed: <b>[0.75 SECONDS / printing_speed * 100]%</b>.")
+		. += span_notice("Дисплей статуса показывает:<br>Емкость буфера реагентов: <b>[reagents.maximum_volume]</b> мл.<br>Скорость печати: <b>[0.75 SECONDS / printing_speed * 100]%</b>.")
 		if(!QDELETED(beaker))
-			. += span_notice("[beaker] of <b>[beaker.reagents.maximum_volume]u</b> capacity inserted")
-			. += span_notice("Right click with empty hand to remove beaker")
+			. += span_notice("[beaker.declent_ru(NOMINATIVE)] емкостью <b>[beaker.reagents.maximum_volume]мл</b> вставлена")
+			. += span_notice("ПКМ пустой рукой чтобы извлечь мензурку")
 		else
-			. += span_warning("Missing input beaker")
+			. += span_warning("Отсутствует входная мензурка")
 
-		. += span_notice("It can be [EXAMINE_HINT("wrenched")] [anchored ? "loose" : "in place"]")
-		. += span_notice("Its maintainence panel can be [EXAMINE_HINT("screwed")] [panel_open ? "close" : "open"]")
+		. += span_notice("Может быть [EXAMINE_HINT("закреплена гаечным ключом")] [anchored ? "освобождена" : "на месте"]")
+		. += span_notice("Техническая панель может быть [EXAMINE_HINT("отвинчена")] [panel_open ? "закрыта" : "открыта"]")
 		if(panel_open)
-			. += span_notice("The machine can be [EXAMINE_HINT("pried")] apart.")
+			. += span_notice("Машину можно [EXAMINE_HINT("вскрыть")].")
 
 /obj/machinery/chem_master/update_appearance(updates)
 	. = ..()
@@ -188,7 +188,7 @@
 
 	. = ITEM_INTERACT_BLOCKING
 	if(is_printing)
-		balloon_alert(user, "still printing!")
+		balloon_alert(user, "все еще печатает!")
 		return .
 
 	if(default_unfasten_wrench(user, tool) == SUCCESSFUL_UNFASTEN)
@@ -200,7 +200,7 @@
 
 	. = ITEM_INTERACT_BLOCKING
 	if(is_printing)
-		balloon_alert(user, "still printing!")
+		balloon_alert(user, "все еще печатает!")
 		return .
 
 	if(default_deconstruction_screwdriver(user, icon_state, icon_state, tool))
@@ -213,7 +213,7 @@
 
 	. = ITEM_INTERACT_BLOCKING
 	if(is_printing)
-		balloon_alert(user, "still printing!")
+		balloon_alert(user, "все еще печатает!")
 		return .
 
 	if(default_deconstruction_crowbar(tool))
@@ -412,7 +412,7 @@
 	switch(action)
 		if("eject")
 			if(is_printing)
-				say("The buffer is locked while printing.")
+				say("Буфер заблокирован во время печати.")
 				return
 
 			replace_beaker(ui.user)
@@ -420,7 +420,7 @@
 
 		if("transfer")
 			if(is_printing)
-				say("The buffer is locked while printing.")
+				say("Буфер заблокирован во время печати.")
 				return
 
 			var/reagent_ref = params["reagentRef"]
@@ -435,7 +435,7 @@
 
 			var/should_transfer = is_transfering || (target == "buffer") // we should always transfer if target is the buffer
 			if(should_transfer && isnull(beaker)) // if there's no beaker, we cannot transfer
-				say("No reagent container is inserted.")
+				say("Реагентный контейнер не вставлен.")
 				return FALSE
 
 			var/reagents_from
@@ -573,7 +573,7 @@
 
 /obj/machinery/chem_master/condimaster
 	name = "CondiMaster 3000"
-	desc = "Used to create condiments and other cooking supplies."
+	desc = "Используется для создания приправ и других кулинарных принадлежностей."
 	icon_state = "condimaster"
 
 /obj/machinery/chem_master/condimaster/load_printable_containers()

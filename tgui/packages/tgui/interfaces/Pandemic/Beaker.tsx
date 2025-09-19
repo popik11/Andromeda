@@ -18,11 +18,11 @@ export const BeakerDisplay = (props) => {
   const cant_empty = !has_beaker || !beaker?.volume;
   let content;
   if (!has_beaker) {
-    content = <NoticeBox>No beaker loaded.</NoticeBox>;
+    content = <NoticeBox>Мензурка не загружена.</NoticeBox>;
   } else if (!beaker?.volume) {
-    content = <NoticeBox>Beaker is empty.</NoticeBox>;
+    content = <NoticeBox>Мензурка пуста.</NoticeBox>;
   } else if (!has_blood) {
-    content = <NoticeBox>No blood sample loaded.</NoticeBox>;
+    content = <NoticeBox>Образец крови не загружен.</NoticeBox>;
   } else {
     content = (
       <Stack vertical>
@@ -38,25 +38,25 @@ export const BeakerDisplay = (props) => {
 
   return (
     <Section
-      title="Beaker"
+      title="Мензурка"
       buttons={
         <>
           <Button
             icon="times"
-            content="Empty and Eject"
+            content="Очистить и Извлечь"
             color="bad"
             disabled={cant_empty}
             onClick={() => act('empty_eject_beaker')}
           />
           <Button
             icon="trash"
-            content="Empty"
+            content="Очистить"
             disabled={cant_empty}
             onClick={() => act('empty_beaker')}
           />
           <Button
             icon="eject"
-            content="Eject"
+            content="Извлечь"
             disabled={!has_beaker}
             onClick={() => act('eject_beaker')}
           />
@@ -73,24 +73,24 @@ const Info = (props) => {
   const { data } = useBackend<Data>();
   const { beaker, blood } = data;
   if (!beaker || !blood) {
-    return <NoticeBox>No beaker loaded</NoticeBox>;
+    return <NoticeBox>Мензурка не загружена</NoticeBox>;
   }
 
   return (
     <Stack>
       <Stack.Item grow={2}>
         <LabeledList>
-          <LabeledList.Item label="DNA">
+          <LabeledList.Item label="ДНК">
             {capitalizeFirst(blood.dna)}
           </LabeledList.Item>
-          <LabeledList.Item label="Type">
+          <LabeledList.Item label="Группа">
             {capitalizeFirst(blood.type)}
           </LabeledList.Item>
         </LabeledList>
       </Stack.Item>
       <Stack.Item grow={2}>
         <LabeledList>
-          <LabeledList.Item label="Container">
+          <LabeledList.Item label="Контейнер">
             <ProgressBar
               color="darkred"
               value={beaker.volume}
@@ -114,21 +114,21 @@ const Antibodies = (props) => {
   const { act, data } = useBackend<Data>();
   const { is_ready, resistances = [] } = data;
   if (!resistances) {
-    return <NoticeBox>Nothing detected</NoticeBox>;
+    return <NoticeBox>Ничего не обнаружено</NoticeBox>;
   }
 
   return (
     <LabeledList>
-      <LabeledList.Item label="Antibodies">
+      <LabeledList.Item label="Антитела">
         {!resistances.length
-          ? 'None'
+          ? 'Отсутствуют'
           : resistances.map((resistance) => {
               return (
                 <Button
                   key={resistance.name}
                   icon="eye-dropper"
                   disabled={!is_ready}
-                  tooltip="Creates a vaccine bottle."
+                  tooltip="Создает флакон для вакцины."
                   onClick={() =>
                     act('create_vaccine_bottle', {
                       index: resistance.id,

@@ -2,8 +2,8 @@
  * Global Science techweb for RND consoles
  */
 /datum/techweb/science
-	id = "SCIENCE"
-	organization = "Nanotrasen"
+	id = "НАУКА"
+	organization = "Нанотрейзен"
 	should_generate_points = TRUE
 
 /datum/techweb/science/research_node(datum/techweb_node/node, force = FALSE, auto_adjust_cost = TRUE, get_that_dosh = TRUE, atom/research_source)
@@ -12,8 +12,8 @@
 		node.on_station_research(research_source)
 
 /datum/techweb/oldstation
-	id = "CHARLIE"
-	organization = "Nanotrasen"
+	id = "ЧАРЛИ"
+	organization = "Нанотрейзен"
 	should_generate_points = TRUE
 
 /datum/techweb/oldstation/New()
@@ -24,8 +24,8 @@
  * Admin techweb that has everything unlocked by default
  */
 /datum/techweb/admin
-	id = "ADMIN"
-	organization = "Central Command"
+	id = "АДМИН"
+	organization = "Центральное Командование"
 
 /datum/techweb/admin/New()
 	. = ..()

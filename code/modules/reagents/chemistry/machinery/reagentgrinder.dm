@@ -51,37 +51,37 @@
 	var/result = NONE
 	if(isnull(held_item))
 		if(!QDELETED(beaker) && !operating)
-			context[SCREENTIP_CONTEXT_RMB] = "Remove beaker"
+			context[SCREENTIP_CONTEXT_RMB] = "Извлечь мензурку"
 			result = CONTEXTUAL_SCREENTIP_SET
 		return result
 
 	if(is_reagent_container(held_item) && held_item.is_open_container() && !operating)
 		if(QDELETED(beaker))
-			context[SCREENTIP_CONTEXT_LMB] = "Insert beaker"
+			context[SCREENTIP_CONTEXT_LMB] = "Вставить мензурку"
 		else
-			context[SCREENTIP_CONTEXT_LMB] = "Replace beaker"
+			context[SCREENTIP_CONTEXT_LMB] = "Заменить мензурку"
 		return CONTEXTUAL_SCREENTIP_SET
 
 	if(held_item.tool_behaviour == TOOL_SCREWDRIVER)
-		context[SCREENTIP_CONTEXT_LMB] = "[panel_open ? "Close" : "Open"] panel"
+		context[SCREENTIP_CONTEXT_LMB] = "[panel_open ? "Закрыть" : "Открыть"] панель"
 		return CONTEXTUAL_SCREENTIP_SET
 	else if(held_item.tool_behaviour == TOOL_CROWBAR && panel_open)
-		context[SCREENTIP_CONTEXT_LMB] = "Deconstruct"
+		context[SCREENTIP_CONTEXT_LMB] = "Разобрать"
 		return CONTEXTUAL_SCREENTIP_SET
 	else if(held_item.tool_behaviour == TOOL_WRENCH)
-		context[SCREENTIP_CONTEXT_LMB] = "[anchored ? "Una" : "A"]nchor"
+		context[SCREENTIP_CONTEXT_LMB] = "[anchored ? "От" : "Зак"]репить"
 		return CONTEXTUAL_SCREENTIP_SET
 
 	if(istype(held_item, /obj/item/storage/bag))
-		context[SCREENTIP_CONTEXT_LMB] = "Transfer contents"
+		context[SCREENTIP_CONTEXT_LMB] = "Переместить содержимое"
 	else
-		context[SCREENTIP_CONTEXT_LMB] = "Insert item"
+		context[SCREENTIP_CONTEXT_LMB] = "Вставить предмет"
 	return CONTEXTUAL_SCREENTIP_SET
 
 /obj/machinery/reagentgrinder/examine(mob/user)
 	. = ..()
 	if(!in_range(user, src) && !issilicon(user) && !isobserver(user))
-		. += span_warning("You're too far away to examine [src]'s contents and display!")
+		. += span_warning("Вы слишком далеко, чтобы рассмотреть содержимое и дисплей [declent_ru(GENITIVE)]!")
 		return
 
 	var/total_weight = 0
@@ -93,7 +93,7 @@
 		if (isstack(target))
 			var/obj/item/stack/target_stack = target
 			amount = target_stack.amount
-		to_process["[target.name]"] += amount
+		to_process["[target.declent_ru(NOMINATIVE)]"] += amount
 		total_weight += target.w_class
 	if(to_process.len)
 		. += span_notice("Сейчас содержит:")
@@ -102,10 +102,10 @@
 		. += span_notice("Наполнен на <b>[round((total_weight / maximum_weight) * 100)]%</b> вместимости.")
 
 	if(!QDELETED(beaker))
-		. += span_notice("Мензурка размером в <b>[beaker.reagents.maximum_volume]u</b> [declension_ru(beaker.reagents.maximum_volume,"юнит","юнита","юнитов")] вставлена. Содержимое:")
+		. += span_notice("Мензурка размером в <b>[beaker.reagents.maximum_volume]</b> [declension_ru(beaker.reagents.maximum_volume,"мл","мл","мл")] вставлена. Содержимое:")
 		if(beaker.reagents.total_volume)
 			for(var/datum/reagent/reg as anything in beaker.reagents.reagent_list)
-				. += span_notice("[round(reg.volume, CHEMICAL_VOLUME_ROUNDING)] [declension_ru(round(reg.volume, CHEMICAL_VOLUME_ROUNDING),"юнит","юнита","юнитов")] [reg.name]")
+				. += span_notice("[round(reg.volume, CHEMICAL_VOLUME_ROUNDING)] [declension_ru(round(reg.volume, CHEMICAL_VOLUME_ROUNDING),"мл","мл","мл")] [reg.name]")
 		else
 			. += span_notice("Ничего.")
 		. += span_notice("[EXAMINE_HINT("ПКМ")] пустой рукой для снятия мензурки.")
@@ -183,7 +183,7 @@
 
 		//Nothing would come from grinding or juicing
 		if(!length(ingredient.grind_results) && !ingredient.reagents.total_volume)
-			to_chat(user, span_warning("You cannot grind/juice [ingredient] into reagents!"))
+			to_chat(user, span_warning("Вы не можете измельчить/выжать [ingredient.declent_ru(NOMINATIVE)] в реагенты!"))
 			continue
 
 		//Error messages should be in the objects' definitions
@@ -205,7 +205,7 @@
 	var/items_transfered = 0
 	for(var/obj/item/weapon as anything in filtered_list)
 		if(weapon.w_class + total_weight > maximum_weight)
-			to_chat(user, span_warning("[weapon] is too big to fit into [src]."))
+			to_chat(user, span_warning("[weapon.declent_ru(NOMINATIVE)] слишком большой, чтобы поместиться в [declent_ru(NOMINATIVE)]."))
 			continue
 
 		//try to remove the right way
@@ -214,7 +214,7 @@
 
 		total_weight += weapon.w_class
 		items_transfered += 1
-		to_chat(user, span_notice("[weapon] was loaded into [src]."))
+		to_chat(user, span_notice("[weapon.declent_ru(NOMINATIVE)] был загружен в [declent_ru(NOMINATIVE)]."))
 
 	return items_transfered
 
@@ -225,7 +225,7 @@
 	//add the beaker
 	if (is_reagent_container(tool) && tool.is_open_container())
 		replace_beaker(user, tool)
-		to_chat(user, span_notice("You add [tool] to [src]."))
+		to_chat(user, span_notice("Вы добавляете [tool.declent_ru(NOMINATIVE)] в [declent_ru(NOMINATIVE)]."))
 		return ITEM_INTERACT_SUCCESS
 
 	//add items from bag
@@ -247,26 +247,26 @@
 		//add the items
 		var/items_added = load_items(user, to_add)
 		if(!items_added)
-			to_chat(user, span_warning("No items were added."))
+			to_chat(user, span_warning("Ничего не было добавлено."))
 			return ITEM_INTERACT_BLOCKING
-		to_chat(user, span_notice("[items_added] items were added from [tool] to [src]."))
+		to_chat(user, span_notice("[items_added] предметов было добавлено из [tool.declent_ru(NOMINATIVE)] в [declent_ru(NOMINATIVE)]."))
 		return ITEM_INTERACT_SUCCESS
 
-	//add item directly
+	//добавить предмет напрямую
 	else if(length(tool.grind_results) || tool.reagents?.total_volume)
-		if(tool.atom_storage && length(tool.contents)) //anything that has internal storage would be too much recursion for us to handle
-			to_chat(user, span_notice("Drag this item onto [src] to dump its contents, or empty it to grind the container."))
+		if(tool.atom_storage && length(tool.contents)) //все, что имеет внутреннее хранилище, было бы слишком большой рекурсией для нас
+			to_chat(user, span_notice("Перетащите этот предмет на [declent_ru(NOMINATIVE)], чтобы выгрузить его содержимое, или опустошите его, чтобы измельчить контейнер."))
 			return ITEM_INTERACT_BLOCKING
 
-		//add the items
+		//добавить предметы
 		if(!load_items(user, list(tool)))
 			return ITEM_INTERACT_BLOCKING
-		to_chat(user, span_notice("[tool] was added to [src]."))
+		to_chat(user, span_notice("[tool.declent_ru(NOMINATIVE)] был добавлен в [declent_ru(NOMINATIVE)]."))
 		return ITEM_INTERACT_SUCCESS
 
-	//ask player to drag stuff into grinder
+	//попросить игрока перетащить вещи в измельчитель
 	else if(tool.atom_storage)
-		to_chat(user, span_warning("You must drag & dump contents of [tool] into [src]."))
+		to_chat(user, span_warning("Вы должны перетащить и выгрузить содержимое [tool.declent_ru(NOMINATIVE)] в [declent_ru(NOMINATIVE)]."))
 		return ITEM_INTERACT_BLOCKING
 
 	return NONE
@@ -275,7 +275,7 @@
 	. = NONE
 
 	if(operating)
-		balloon_alert(user, "still operating!")
+		balloon_alert(user, "все еще работает!")
 		return ITEM_INTERACT_BLOCKING
 
 	if(default_unfasten_wrench(user, tool) == SUCCESSFUL_UNFASTEN)
@@ -286,7 +286,7 @@
 	. = NONE
 
 	if(operating)
-		balloon_alert(user, "still operating!")
+		balloon_alert(user, "все еще работает!")
 		return ITEM_INTERACT_BLOCKING
 
 	if(default_deconstruction_screwdriver(user, icon_state, icon_state, tool))
@@ -297,7 +297,7 @@
 	. = NONE
 
 	if(operating)
-		balloon_alert(user, "still operating!")
+		balloon_alert(user, "все еще работает!")
 		return ITEM_INTERACT_BLOCKING
 
 	if(default_deconstruction_crowbar(tool))
@@ -312,7 +312,7 @@
 			continue
 		contents_to_dump += to_dump
 
-	to_chat(user, span_notice("You dumped [load_items(user, contents_to_dump)] items from [storage.parent] into [src]."))
+	to_chat(user, span_notice("Вы выгрузили [load_items(user, contents_to_dump)] предметов из [storage.parent] в [declent_ru(NOMINATIVE)]."))
 
 	return STORAGE_DUMP_HANDLED
 
@@ -437,13 +437,13 @@
 
 		if(juicing)
 			if(!ingredient.juice(beaker.reagents, user))
-				to_chat(user, span_danger("[src] shorts out as it tries to juice up [ingredient], and transfers it back to storage."))
+				to_chat(user, span_danger("[declent_ru(NOMINATIVE)] выходит из строя при попытке выжать [ingredient] и возвращает его в хранилище."))
 				continue
 		else if(!ingredient.grind(beaker.reagents, user))
 			if(isstack(ingredient))
-				to_chat(user, span_notice("[src] attempts to grind as many pieces of [ingredient] as possible."))
+				to_chat(user, span_notice("[declent_ru(NOMINATIVE)] пытается измельчить как можно больше частей [ingredient]."))
 			else
-				to_chat(user, span_danger("[src] shorts out as it tries to grind up [ingredient], and transfers it back to storage."))
+				to_chat(user, span_danger("[declent_ru(NOMINATIVE)] выходит из строя при попытке измельчить [ingredient] и возвращает его в хранилище."))
 			continue
 
 		//happens only for stacks where some of the sheets were grinded so we roughly compute the weight grinded

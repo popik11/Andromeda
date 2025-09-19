@@ -34,19 +34,19 @@
 		if(!(reagent_sigreturn & STOP_GENERIC_REAGENT_EXAMINE))
 			if(reagents.flags & TRANSPARENT)
 				if(reagents.total_volume)
-					. += "Имеется <b>[reagents.total_volume]</b> юнитов различных химикатов[user_sees_reagents ? ":" : "."]"
+					. += "Имеется <b>[reagents.total_volume]</b> мл. различных химикатов[user_sees_reagents ? ":" : "."]"
 					if(user_sees_reagents || (reagent_sigreturn & ALLOW_GENERIC_REAGENT_EXAMINE)) //Show each individual reagent for detailed examination
 						for(var/datum/reagent/current_reagent as anything in reagents.reagent_list)
-							. += "&bull; [round(current_reagent.volume, CHEMICAL_VOLUME_ROUNDING)] юнитов [current_reagent.name]"
+							. += "&bull; [round(current_reagent.volume, CHEMICAL_VOLUME_ROUNDING)] мл [current_reagent.name]"
 						if(reagents.is_reacting)
 							. += span_warning("Оно сейчас вступает в реакцию!")
 						. += span_notice("pH раствора равен [round(reagents.ph, 0.01)] и имеет температуру в [reagents.chem_temp]K.")
 
 				else
-					. += "It contains:<br>Nothing."
+					. += "Содержит:<br>Ничего."
 			else if(reagents.flags & AMOUNT_VISIBLE)
 				if(reagents.total_volume)
-					. += span_notice("Имеется [reagents.total_volume] юнитов.")
+					. += span_notice("Имеется [reagents.total_volume] мл.")
 				else
 					. += span_danger("Пусто.")
 

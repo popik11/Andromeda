@@ -113,11 +113,11 @@ GLOBAL_DATUM_INIT(manifest, /datum/manifest, new)
 	var/assignment = id_card?.get_trim_assignment() || person.mind.assigned_role.title
 
 	var/mutable_appearance/character_appearance = new(appearance_proxy?.appearance || person.appearance)
-	var/person_gender = "Other"
+	var/person_gender = "Оно"
 	if(person.gender == "male")
-		person_gender = "Male"
+		person_gender = "Мужчина"
 	if(person.gender == "female")
-		person_gender = "Female"
+		person_gender = "Женщина"
 	var/datum/dna/stored/record_dna = new()
 	person.dna.copy_dna(record_dna)
 

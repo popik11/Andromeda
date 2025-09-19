@@ -17,7 +17,7 @@ export const SpecimenDisplay = (props) => {
     <Section
       fill
       scrollable
-      title="Specimen"
+      title="Образец"
       buttons={
         <Stack>
           {viruses.length > 1 && (
@@ -41,21 +41,21 @@ export const SpecimenDisplay = (props) => {
             <Button
               icon="flask"
               disabled={!is_ready || !virus}
-              tooltip={virus ? '' : 'No virus culture found.'}
+              tooltip={virus ? '' : 'Культура вируса не обнаружена.'}
               onClick={() =>
                 act('create_culture_bottle', {
                   index: virus.index,
                 })
               }
             >
-              Create Culture Bottle
+              Создать бутылку с культурой
             </Button>
           </Stack.Item>
         </Stack>
       }
     >
       {!virus ? (
-        <NoticeBox success>Nothing detected.</NoticeBox>
+        <NoticeBox success>Ничего не обнаружено.</NoticeBox>
       ) : (
         <Stack fill vertical>
           <Stack.Item>

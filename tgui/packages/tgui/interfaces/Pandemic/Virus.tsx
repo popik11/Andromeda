@@ -45,10 +45,10 @@ const Info = (props) => {
 
   return (
     <LabeledList>
-      <LabeledList.Item label="Name">
+      <LabeledList.Item label="Название">
         {can_rename ? (
           <Input
-            placeholder="Input a name"
+            placeholder="Введите имя"
             value={name === 'Unknown' ? '' : name}
             onBlur={(value) =>
               act('rename_disease', {
@@ -61,12 +61,12 @@ const Info = (props) => {
           <Box color="bad">{decodeHtmlEntities(name)}</Box>
         )}
       </LabeledList.Item>
-      <LabeledList.Item label="Description">{description}</LabeledList.Item>
-      <LabeledList.Item label="Agent">
+      <LabeledList.Item label="Описание">{description}</LabeledList.Item>
+      <LabeledList.Item label="Агент">
         {capitalizeFirst(agent)}
       </LabeledList.Item>
-      <LabeledList.Item label="Spread">{spread}</LabeledList.Item>
-      <LabeledList.Item label="Possible Cure">{cure}</LabeledList.Item>
+      <LabeledList.Item label="Распространение">{spread}</LabeledList.Item>
+      <LabeledList.Item label="Возможное лечение">{cure}</LabeledList.Item>
     </LabeledList>
   );
 };
@@ -82,24 +82,24 @@ const Traits = (props) => {
   } = props;
 
   return (
-    <Section title="Statistics">
+    <Section title="Статистика">
       <LabeledList>
-        <Tooltip content="Decides the cure complexity.">
+        <Tooltip content="Определяет сложность лечения.">
           <LabeledList.Item color={getColor(resistance)} label="Resistance">
             {resistance}
           </LabeledList.Item>
         </Tooltip>
-        <Tooltip content="Symptomic progression.">
+        <Tooltip content="Прогрессирование симптомов.">
           <LabeledList.Item color={getColor(stage_speed)} label="Stage speed">
             {stage_speed}
           </LabeledList.Item>
         </Tooltip>
-        <Tooltip content="Detection difficulty from medical equipment.">
+        <Tooltip content="Сложность обнаружения медицинским оборудованием.">
           <LabeledList.Item color={getColor(stealth)} label="Stealth">
             {stealth}
           </LabeledList.Item>
         </Tooltip>
-        <Tooltip content="Decides the spread type.">
+        <Tooltip content="Определяет тип распространения.">
           <LabeledList.Item
             color={getColor(transmission)}
             label="Transmissibility"

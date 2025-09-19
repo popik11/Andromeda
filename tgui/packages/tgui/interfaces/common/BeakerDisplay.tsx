@@ -36,11 +36,11 @@ export const BeakerDisplay = (props: BeakerProps) => {
   return (
     <LabeledList>
       <LabeledList.Item
-        label="Beaker"
+        label="Мензурка"
         buttons={
           !!beaker && (
             <Button icon="eject" onClick={() => act('eject')}>
-              Eject
+              Извлечь
             </Button>
           )
         }
@@ -49,19 +49,19 @@ export const BeakerDisplay = (props: BeakerProps) => {
           (!!beaker && (
             <>
               <AnimatedNumber initial={0} value={beaker.currentVolume} />/
-              {beaker.maxVolume} units
+              {beaker.maxVolume} мл
             </>
           )) ||
-          'No beaker'}
+          'Отсутствует'}
       </LabeledList.Item>
-      <LabeledList.Item label="Contents">
+      <LabeledList.Item label="Содержимое">
         <Box color="label">
-          {(!title_label && !beaker && 'N/A') ||
-            (beakerContents.length === 0 && 'Nothing')}
+          {(!title_label && !beaker && 'Отсутствует') ||
+            (beakerContents.length === 0 && 'Пусто')}
         </Box>
         {beakerContents.map((chemical) => (
           <Box key={chemical.name} color="label">
-            <AnimatedNumber initial={0} value={chemical.volume} /> units of{' '}
+            <AnimatedNumber initial={0} value={chemical.volume} /> мл{' '}
             {chemical.name}
           </Box>
         ))}
@@ -83,26 +83,26 @@ export const BeakerSectionDisplay = (props: BeakerProps) => {
 
   return (
     <Section
-      title={title_label || 'Beaker'}
+      title={title_label || 'Мензурка'}
       buttons={
         !!beaker && (
           <>
             <Box inline color="label" mr={2}>
-              {beaker.currentVolume} / {beaker.maxVolume} units
+              {beaker.currentVolume} / {beaker.maxVolume} мл
             </Box>
             <Button icon="eject" onClick={() => act('eject')}>
-              Eject
+              Извлечь
             </Button>
           </>
         )
       }
     >
       <Box color="label">
-        {(!beaker && 'N/A') || (beakerContents.length === 0 && 'Nothing')}
+        {(!beaker && 'Отсутствует') || (beakerContents.length === 0 && 'Пусто')}
       </Box>
       {beakerContents.map((chemical) => (
         <Box key={chemical.name} color="label">
-          <AnimatedNumber initial={0} value={chemical.volume} /> units of{' '}
+          <AnimatedNumber initial={0} value={chemical.volume} /> мл{' '}
           {chemical.name}
         </Box>
       ))}

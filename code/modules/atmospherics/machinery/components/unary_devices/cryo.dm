@@ -163,52 +163,52 @@
 		beaker = null
 
 /obj/machinery/cryo_cell/add_context(atom/source, list/context, obj/item/held_item, mob/user)
-	context[SCREENTIP_CONTEXT_CTRL_LMB] = "Turn [on ? "off" : "on"]"
-	context[SCREENTIP_CONTEXT_ALT_LMB] = "[state_open ? "Close" : "Open"] door"
+	context[SCREENTIP_CONTEXT_CTRL_LMB] = "Включить [on ? "выключено" : "включено"]"
+	context[SCREENTIP_CONTEXT_ALT_LMB] = "[state_open ? "Закрыть" : "Открыть"] дверь"
 	if(isnull(held_item))
 		return CONTEXTUAL_SCREENTIP_SET
 
 	if(QDELETED(beaker) && istype(held_item, /obj/item/reagent_containers/cup))
-		context[SCREENTIP_CONTEXT_LMB] = "Insert beaker"
+		context[SCREENTIP_CONTEXT_LMB] = "Вставить мензурку"
 		return CONTEXTUAL_SCREENTIP_SET
 
 	switch(held_item.tool_behaviour)
 		if(TOOL_SCREWDRIVER)
-			context[SCREENTIP_CONTEXT_LMB] = "[panel_open ? "Close" : "Open"] panel"
+			context[SCREENTIP_CONTEXT_LMB] = "[panel_open ? "Закрыть" : "Открыть"] панель"
 		if(TOOL_CROWBAR)
 			if(!state_open && !panel_open && !is_operational)
-				context[SCREENTIP_CONTEXT_LMB] = "Pry Open"
+				context[SCREENTIP_CONTEXT_LMB] = "Вскрыть"
 			else if(panel_open)
-				context[SCREENTIP_CONTEXT_LMB] = "Deconstruct"
+				context[SCREENTIP_CONTEXT_LMB] = "Разобрать"
 		if(TOOL_WRENCH)
-			context[SCREENTIP_CONTEXT_LMB] = "[panel_open ? "Rotate" : ""]"
+			context[SCREENTIP_CONTEXT_LMB] = "[panel_open ? "Повернуть" : ""]"
 	return CONTEXTUAL_SCREENTIP_SET
 
-/obj/machinery/cryo_cell/examine(mob/user) //this is leaving out everything but efficiency since they follow the same idea of "better beaker, better results"
+/obj/machinery/cryo_cell/examine(mob/user) //здесь опущено все, кроме эффективности, поскольку они следуют той же идее "лучшая мензурка - лучшие результаты"
 	. = ..()
 	if(in_range(user, src) || isobserver(user))
-		. += span_notice("The status display reads: Efficiency at <b>[efficiency * 100]</b>%.")
+		. += span_notice("Дисплей статуса показывает: Эффективность на уровне <b>[efficiency * 100]</b>%.")
 		if(occupant)
 			if(on)
-				. += span_notice("Someone's inside [src]!")
+				. += span_notice("Кто-то внутри [declent_ru(GENITIVE)]!")
 			else
-				. += span_notice("You can barely make out a form floating in [src].")
+				. += span_notice("Вы едва различаете форму, плавающую в [declent_ru(DATIVE)].")
 		else
-			. += span_notice("[src] seems empty.")
+			. += span_notice("В [declent_ru(DATIVE)] пусто.")
 		if(beaker)
-			. += span_notice("A beaker of [beaker.reagents.maximum_volume]u capacity is located inside.")
+			. += span_notice("Внутри находится мензурка емкостью [beaker.reagents.maximum_volume]u.")
 		else
-			. += span_warning("Its missing a beaker.")
+			. += span_warning("Отсутствует мензурка.")
 
-		. += span_notice("Use [EXAMINE_HINT("Alt-Click")] to [state_open ? "Close" : "Open"] the machine.")
-		. += span_notice("Use [EXAMINE_HINT("Ctrl-Click")] to turn [on ? "Off" : "On"] the machine.")
+		. += span_notice("Используйте [EXAMINE_HINT("Alt-Клик")] чтобы [state_open ? "Закрыть" : "Открыть"] машину.")
+		. += span_notice("Используйте [EXAMINE_HINT("Ctrl-Клик")] чтобы [on ? "Выключить" : "Включить"] машину.")
 
-		. += span_notice("Its maintainence panel can be [EXAMINE_HINT("screwed")] open.")
+		. += span_notice("Ее сервисная панель может быть [EXAMINE_HINT("отвинчена")].")
 		if(panel_open)
-			. += span_notice("[src] can be [EXAMINE_HINT("pried")] apart.")
-			. += span_notice("[src] can be rotated with a [EXAMINE_HINT("wrench")].")
+			. += span_notice("[declent_ru(NOMINATIVE)] может быть [EXAMINE_HINT("вскрыта")].")
+			. += span_notice("[declent_ru(NOMINATIVE)] может быть повернута с помощью [EXAMINE_HINT("гаечного ключа")].")
 		else if(machine_stat & NOPOWER)
-			. += span_notice("[src] can be [EXAMINE_HINT("pried")] open.")
+			. += span_notice("[declent_ru(NOMINATIVE)] может быть [EXAMINE_HINT("вскрыта")].")
 
 /obj/machinery/cryo_cell/update_icon()
 	SET_PLANE_IMPLICIT(src, initial(plane))
@@ -234,23 +234,23 @@
 	if(!istype(tool, /obj/item/reagent_containers/cup))
 		return
 	if(!QDELETED(beaker))
-		balloon_alert(user, "beaker present!")
+		balloon_alert(user, "мензурка присутствует!")
 		return ITEM_INTERACT_BLOCKING
 	if(!user.transferItemToLoc(tool, src))
 		return ITEM_INTERACT_BLOCKING
 
 	beaker = tool
-	balloon_alert(user, "beaker inserted")
-	user.log_message("added \a [tool] to cryo containing [pretty_string_from_reagent_list(tool.reagents.reagent_list)].", LOG_GAME)
+	balloon_alert(user, "мензурка вставлена")
+	user.log_message("добавил [tool] в крио, содержащий [pretty_string_from_reagent_list(tool.reagents.reagent_list)].", LOG_GAME)
 	return ITEM_INTERACT_SUCCESS
 
 /obj/machinery/cryo_cell/screwdriver_act(mob/living/user, obj/item/tool)
 	. = ITEM_INTERACT_BLOCKING
 	if(on)
-		balloon_alert(user, "turn off!")
+		balloon_alert(user, "выключите!")
 		return
 	if(occupant)
-		balloon_alert(user, "occupant inside!")
+		balloon_alert(user, "внутри находится человек!")
 		return
 
 	if(default_deconstruction_screwdriver(user, "pod-off", "pod-off", tool))
@@ -260,7 +260,7 @@
 /obj/machinery/cryo_cell/crowbar_act(mob/living/user, obj/item/tool)
 	. = ITEM_INTERACT_BLOCKING
 	if(on)
-		balloon_alert(user, "turn off!")
+		balloon_alert(user, "выключите!")
 		return
 
 	var/can_crowbar = FALSE
@@ -286,7 +286,7 @@
 
 	var/unsafe_release = FALSE
 	if(internal_pressure > 2 * ONE_ATMOSPHERE)
-		to_chat(user, span_warning("As you begin prying \the [src] a gush of air blows in your face... maybe you should reconsider?"))
+		to_chat(user, span_warning("Когда вы начинаете вскрывать [declent_ru(ACCUSATIVE)], поток воздуха ударяет вам в лицо... может стоит передумать?"))
 		if(!do_after(user, 2 SECONDS, target = src))
 			return
 		unsafe_release = TRUE
@@ -309,13 +309,13 @@
 /obj/machinery/cryo_cell/wrench_act(mob/living/user, obj/item/tool)
 	. = ITEM_INTERACT_BLOCKING
 	if(on)
-		balloon_alert(user, "turn off!")
+		balloon_alert(user, "выключите!")
 		return
 	if(occupant)
-		balloon_alert(user, "occupant inside!")
+		balloon_alert(user, "внутри находится человек!")
 		return
 	if(state_open)
-		balloon_alert(user, "close first!")
+		balloon_alert(user, "сначала закройте!")
 		return
 
 	if(default_change_direction_wrench(user, tool))
@@ -406,31 +406,31 @@
 	var/mob/living/mob_occupant = occupant
 	if(mob_occupant.on_fire)
 		mob_occupant.extinguish_mob()
-	if(mob_occupant.stat == DEAD) // Notify doctors and potentially eject if the patient is dead
+	if(mob_occupant.stat == DEAD) // Уведомить врачей и возможно выбросить, если пациент мертв
 		set_on(FALSE)
-		aas_config_announce(/datum/aas_config_entry/medical_cryo_announcements, list("EJECTING" = autoeject), src, list(broadcast_channel), "Deceased")
-		if(autoeject) // Eject if configured.
+		aas_config_announce(/datum/aas_config_entry/medical_cryo_announcements, list("EJECTING" = autoeject), src, list(broadcast_channel), "Умерший")
+		if(autoeject) // Выбросить, если настроено.
 			open_machine()
 		playsound(src, 'sound/machines/cryo_warning.ogg', 100)
 		return PROCESS_KILL
 
-	// Don't bother with fully healed people.
+	// Не беспокоить полностью вылеченных людей.
 	if(mob_occupant.get_organic_health() >= mob_occupant.getMaxHealth())
 		if(iscarbon(mob_occupant))
 			var/mob/living/carbon/C = mob_occupant
 			if(C.all_wounds)
-				if(!treating_wounds) // if we have wounds and haven't already alerted the doctors we're only dealing with the wounds, let them know
+				if(!treating_wounds) // если у нас есть раны и мы еще не уведомили врачей, что занимаемся только ранами, дайте им знать
 					treating_wounds = TRUE
-					playsound(src, 'sound/machines/cryo_warning.ogg', 100) // Bug the doctors.
-					aas_config_announce(/datum/aas_config_entry/medical_cryo_announcements, list(), src, list(broadcast_channel), "Wound Treatment")
-			else // otherwise if we were only treating wounds and now we don't have any, turn off treating_wounds so we can boot 'em out
+					playsound(src, 'sound/machines/cryo_warning.ogg', 100) // Потревожить врачей.
+					aas_config_announce(/datum/aas_config_entry/medical_cryo_announcements, list(), src, list(broadcast_channel), "Лечение Ран")
+			else // в противном случае, если мы лечили только раны и теперь их нет, выключим treating_wounds, чтобы мы могли их выкинуть
 				treating_wounds = FALSE
 
 		if(!treating_wounds)
 			set_on(FALSE)
-			playsound(src, 'sound/machines/cryo_warning.ogg', 100) // Bug the doctors.
-			aas_config_announce(/datum/aas_config_entry/medical_cryo_announcements, list("EJECTING" = autoeject), src, list(broadcast_channel), "Fully Recovered")
-			if(autoeject) // Eject if configured.
+			playsound(src, 'sound/machines/cryo_warning.ogg', 100) // Потревожить врачей.
+			aas_config_announce(/datum/aas_config_entry/medical_cryo_announcements, list("EJECTING" = autoeject), src, list(broadcast_channel), "Полностью Вылечен")
+			if(autoeject) // Выбросить, если настроено.
 				open_machine()
 			return PROCESS_KILL
 
@@ -452,7 +452,7 @@
 	//check for workable conditions
 	if(!internal_connector.gas_connector.nodes[1] || !air1 || !air1.gases.len || air1.total_moles() < CRYO_MIN_GAS_MOLES) // Turn off if the machine won't work.
 		set_on(FALSE)
-		aas_config_announce(/datum/aas_config_entry/medical_cryo_announcements, list("EJECTING" = autoeject), src, list(broadcast_channel), "Insufficient Gas")
+		aas_config_announce(/datum/aas_config_entry/medical_cryo_announcements, list("EJECTING" = autoeject), src, list(broadcast_channel), "Недостаточно Газа")
 		if(autoeject) // Eject if configured.
 			open_machine()
 		return PROCESS_KILL
@@ -523,14 +523,14 @@
 /obj/machinery/cryo_cell/container_resist_act(mob/living/user)
 	user.changeNext_move(CLICK_CD_BREAKOUT)
 	user.last_special = world.time + CLICK_CD_BREAKOUT
-	user.visible_message(span_notice("You see [user] kicking against the glass of [src]!"), \
-		span_notice("You struggle inside [src], kicking the release with your foot... (this will take about [DisplayTimeText(CRYO_BREAKOUT_TIME)].)"), \
-		span_hear("You hear a thump from [src]."))
+	user.visible_message(span_notice("Вы видите, как [user] бьет ногами по стеклу [declent_ru(GENITIVE)]!"), \
+		span_notice("Вы боретесь внутри [declent_ru(GENITIVE)], ударяя ногой по механизму открытия... (это займет около [DisplayTimeText(CRYO_BREAKOUT_TIME)].)"), \
+		span_hear("Вы слышите глухой удар из [declent_ru(GENITIVE)]."))
 	if(do_after(user, CRYO_BREAKOUT_TIME, target = src, hidden = TRUE))
 		if(!user || user.stat != CONSCIOUS || user.loc != src )
 			return
-		user.visible_message(span_warning("[user] successfully broke out of [src]!"), \
-			span_notice("You successfully break out of [src]!"))
+		user.visible_message(span_warning("[user] успешно вырвался из [declent_ru(GENITIVE)]!"), \
+			span_notice("Вы успешно вырываетесь из [declent_ru(GENITIVE)]!"))
 		open_machine()
 
 /obj/machinery/cryo_cell/ui_state(mob/user)
@@ -559,11 +559,11 @@
 
 		occupant_data["name"] = mob_occupant.name
 		if(mob_occupant.stat == DEAD)
-			occupant_data["stat"] = "Dead"
+			occupant_data["stat"] = "Труп"
 		else if (HAS_TRAIT(mob_occupant, TRAIT_KNOCKEDOUT))
-			occupant_data["stat"] = "Unconscious"
+			occupant_data["stat"] = "Бессознания"
 		else
-			occupant_data["stat"] = "Conscious"
+			occupant_data["stat"] = "В сознании"
 
 		occupant_data["bodyTemperature"] = round(mob_occupant.bodytemperature, 1)
 
@@ -632,12 +632,12 @@
 /obj/machinery/cryo_cell/click_ctrl(mob/user)
 	if(is_operational && !state_open)
 		set_on(!on)
-		balloon_alert(user, "turned [on ? "on" : "off"]")
+		balloon_alert(user, "[on ? "включено" : "выключено"]")
 		return CLICK_ACTION_SUCCESS
 	return CLICK_ACTION_BLOCKING
 
 /obj/machinery/cryo_cell/click_alt(mob/user)
-	//Required so players don't close the cryo on themselves without a doctor's help
+	//Необходимо, чтобы игроки не закрывали крио на себе без помощи врача
 	if(get_turf(user) == get_turf(src))
 		return CLICK_ACTION_BLOCKING
 
@@ -645,7 +645,7 @@
 		close_machine()
 	else
 		open_machine()
-	balloon_alert(user, "door [state_open ? "opened" : "closed"]")
+	balloon_alert(user, "дверь [state_open ? "открыта" : "закрыта"]")
 	return CLICK_ACTION_SUCCESS
 
 /obj/machinery/cryo_cell/mouse_drop_receive(mob/target, mob/user, params)
@@ -658,7 +658,7 @@
 			close_machine(target)
 		return
 
-	user.visible_message(span_notice("[user] starts shoving [target] inside [src]."), span_notice("You start shoving [target] inside [src]."))
+	user.visible_message(span_notice("[user] начинает заталкивать [target] внутрь [declent_ru(GENITIVE)]."), span_notice("Вы начинаете заталкивать [target] внутрь [declent_ru(GENITIVE)]."))
 	if (do_after(user, 2.5 SECONDS, target=target))
 		close_machine(target)
 
@@ -666,16 +666,16 @@
 	user.overlay_fullscreen("remote_view", /atom/movable/screen/fullscreen/impaired, 1)
 
 /datum/aas_config_entry/medical_cryo_announcements
-	name = "Medical Alert: Cryogenics Reports"
+	name = "Медицинская тревога: Отчеты по криогенике"
 	announcement_lines_map = list(
-		"Autoejecting" = "Auto ejecting patient now.",
-		"Deceased" = "Cryogenics report: Patient is deceased. %AUTOEJECTING",
-		"Fully Recovered" = "Cryogenics report: Patient fully restored. %AUTOEJECTING",
-		"Insufficient Gas" = "Cryogenics report: Insufficient cryogenic gas, shutting down. %AUTOEJECTING",
-		"Wound Treatment" = "Cryogenics report: Patient vitals fully recovered, continuing automated wound treatment."
+		"Autoejecting" = "Автоматическое извлечение пациента.",
+		"Умерший" = "Отчет по криогенике: Пациент скончался. %AUTOEJECTING",
+		"Полностью Вылечен" = "Отчет по криогенике: Пациент полностью восстановлен. %AUTOEJECTING",
+		"Недостаточно Газа" = "Отчет по криогенике: Недостаточно криогенного газа, отключение. %AUTOEJECTING",
+		"Лечение Ран" = "Отчет по криогенике: Показатели жизнедеятельности пациента полностью восстановлены, продолжается автоматическое лечение ран."
 	)
 	vars_and_tooltips_map = list(
-		"AUTOEJECTING" = "will be replaced with Autoejecting line, if system reports it's necessity"
+		"AUTOEJECTING" = "будет заменено строкой Autoejecting, если система сообщает о необходимости"
 	)
 
 /datum/aas_config_entry/medical_cryo_announcements/compile_announce(list/variables_map, announcement_line)
@@ -683,7 +683,7 @@
 	. = ..()
 	// Why double replacetext_char? Well, to handle cases where variable in the middle of sentence like "also %AUTOEJECTING this", so there will be no double spaces
 	// Yeah I am bad, at this, sorry (it should be a perfect place for regex usage, but I am weak)
-	. = trim(replacetext_char(replacetext_char(., "\[NO DATA\] ", ""), "\[NO DATA\]", ""))
+	. = trim(replacetext_char(replacetext_char(., "\[НЕТ ДАННЫХ\] ", ""), "\[НЕТ ДАННЫХ\]", ""))
 
 #undef MAX_TEMPERATURE
 #undef CRYO_MULTIPLY_FACTOR

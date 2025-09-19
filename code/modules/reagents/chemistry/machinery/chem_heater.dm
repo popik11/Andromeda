@@ -44,20 +44,20 @@
 
 	if(!QDELETED(beaker))
 		if(istype(held_item, /obj/item/reagent_containers/dropper) || istype(held_item, /obj/item/reagent_containers/syringe))
-			context[SCREENTIP_CONTEXT_LMB] = "Inject"
+			context[SCREENTIP_CONTEXT_LMB] = "Ввести"
 			return CONTEXTUAL_SCREENTIP_SET
 		if(is_reagent_container(held_item)  && held_item.is_open_container())
-			context[SCREENTIP_CONTEXT_LMB] = "Replace beaker"
+			context[SCREENTIP_CONTEXT_LMB] = "Заменить мензурку"
 			return CONTEXTUAL_SCREENTIP_SET
 	else if(is_reagent_container(held_item)  && held_item.is_open_container())
-		context[SCREENTIP_CONTEXT_LMB] = "Insert beaker"
+		context[SCREENTIP_CONTEXT_LMB] = "Вставить мензурку"
 		return CONTEXTUAL_SCREENTIP_SET
 
 	if(held_item.tool_behaviour == TOOL_SCREWDRIVER)
-		context[SCREENTIP_CONTEXT_LMB] = "Open panel"
+		context[SCREENTIP_CONTEXT_LMB] = "Открыть панель"
 		return CONTEXTUAL_SCREENTIP_SET
 	else if(panel_open && held_item.tool_behaviour == TOOL_CROWBAR)
-		context[SCREENTIP_CONTEXT_LMB] = "Deconstruct"
+		context[SCREENTIP_CONTEXT_LMB] = "Разобрать"
 		return CONTEXTUAL_SCREENTIP_SET
 
 	return NONE
@@ -65,19 +65,19 @@
 /obj/machinery/chem_heater/examine(mob/user)
 	. = ..()
 	if(in_range(user, src) || isobserver(user))
-		. += span_notice("The status display reads: Heating reagents at <b>[heater_coefficient * 1000]%</b> speed.")
+		. += span_notice("Дисплей статуса показывает: Нагрев реагентов со скоростью <b>[heater_coefficient * 1000]%</b>.")
 		if(!QDELETED(beaker))
-			. += span_notice("It has a beaker of [beaker.reagents.total_volume] units capacity.")
+			. += span_notice("В нем находится мензурка емкостью [beaker.reagents.total_volume] единиц.")
 			if(beaker.reagents.is_reacting)
-				. += span_notice("Its contents are currently reacting.")
+				. += span_notice("Ее содержимое в настоящее время реагирует.")
 		else
-			. += span_warning("There is no beaker inserted.")
-		. += span_notice("Its heating is turned [on ? "On" : "Off"].")
-		. += span_notice("The status display reads: Heating reagents at <b>[heater_coefficient * 1000]%</b> speed.")
+			. += span_warning("Мензурка не вставлена.")
+		. += span_notice("Нагрев [on ? "Включен" : "Выключен"].")
+		. += span_notice("Дисплей статуса показывает: Нагрев реагентов со скоростью <b>[heater_coefficient * 1000]%</b>.")
 		if(panel_open)
-			. += span_notice("Its panel is open and can now be [EXAMINE_HINT("pried")] apart.")
+			. += span_notice("Его панель открыта и теперь может быть [EXAMINE_HINT("вскрыта")].")
 		else
-			. += span_notice("Its panel can be [EXAMINE_HINT("pried")] open")
+			. += span_notice("Его панель может быть [EXAMINE_HINT("вскрыта")]")
 
 /obj/machinery/chem_heater/update_icon_state()
 	icon_state = "[base_icon_state][beaker ? 1 : 0]b"
@@ -102,7 +102,7 @@
 	if(is_reagent_container(held_item)  && held_item.is_open_container())
 		if(replace_beaker(user, held_item))
 			ui_interact(user)
-		balloon_alert(user, "beaker added")
+		balloon_alert(user, "мензурка добавлена")
 		return ITEM_INTERACT_SUCCESS
 
 	return NONE
@@ -363,16 +363,16 @@
 /obj/machinery/chem_heater/proc/move_buffer(datum/reagent/buffer_type, volume)
 	PRIVATE_PROC(TRUE)
 
-	//no beaker
+	//нет мензурки
 	if(QDELETED(beaker))
-		say("No beaker found!")
+		say("Мензурка не найдена!")
 		return FALSE
 
-	//trying to absorb buffer from currently inserted beaker
+	//попытка поглотить буфер из текущей вставленной мензурки
 	if(volume < 0)
 		if(!beaker.reagents.has_reagent(buffer_type))
 			var/name = initial(buffer_type.name)
-			say("Unable to find [name] in beaker to draw from! Please insert a beaker containing [name].")
+			say("Не удалось найти [name] в мензурке для забора! Пожалуйста, вставьте мензурку, содержащую [name].")
 			return FALSE
 		beaker.reagents.trans_to(src, (reagents.maximum_volume / 2) - reagents.get_reagent_amount(buffer_type), target_id = buffer_type)
 		return TRUE
@@ -384,7 +384,7 @@
 //Has a lot of buffer and is upgraded
 /obj/machinery/chem_heater/debug
 	name = "Debug Reaction Chamber"
-	desc = "Now with even more buffers!"
+	desc = "Теперь с еще большим количеством буферов!"
 
 /obj/machinery/chem_heater/debug/Initialize(mapload)
 	. = ..()
@@ -393,9 +393,9 @@
 	reagents.add_reagent(/datum/reagent/reaction_agent/acidic_buffer, 1000)
 	heater_coefficient = 0.4 //hack way to upgrade
 
-//map load types
+//типы загрузки карты
 /obj/machinery/chem_heater/withbuffer
-	desc = "This Reaction Chamber comes with a bit of buffer to help get you started."
+	desc = "Эта реакционная камера поставляется с небольшим количеством буфера, чтобы помочь вам начать работу."
 
 /obj/machinery/chem_heater/withbuffer/Initialize(mapload)
 	. = ..()
