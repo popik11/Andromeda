@@ -48,29 +48,29 @@ export const isRecordMatch = (record: GenericRecord, search: string) => {
   }
 };
 
-/** Returns a string header based on print type */
+/** Возвращает строку заголовка на основе типа печати */
 export const getDefaultPrintHeader = (printType: PRINTOUT) => {
   switch (printType) {
     case PRINTOUT.Rapsheet:
-      return 'Record';
+      return 'Досье';
     case PRINTOUT.Wanted:
-      return 'WANTED';
+      return 'РАЗЫСКИВАЕТСЯ';
     case PRINTOUT.Missing:
-      return 'MISSING';
+      return 'ПРОПАВШИЙ БЕЗ ВЕСТИ';
   }
 };
 
-/** Returns a string description based on print type */
+/** Возвращает строку описания на основе типа печати */
 export const getDefaultPrintDescription = (
   name: string,
   printType: PRINTOUT,
 ) => {
   switch (printType) {
     case PRINTOUT.Rapsheet:
-      return `A standard security record for ${name}.`;
+      return `Стандартный учётный лист СБ на ${name}.`;
     case PRINTOUT.Wanted:
-      return `A poster declaring ${name} to be a wanted criminal, wanted by Nanotrasen. Report any sightings to security immediately.`;
+      return `Постер, объявляющий ${name} разыскиваемым преступником. Немедленно сообщайте о любых случаях обнаружения в службу безопасности.`;
     case PRINTOUT.Missing:
-      return `A poster declaring ${name} to be a missing individual, missed by Nanotrasen. Report any sightings to security immediately.`;
+      return `Постер, объявляющий ${name} пропавшим без вести. Немедленно сообщайте о любых случаях обнаружения в службу безопасности.`;
   }
 };

@@ -11,7 +11,7 @@ export const MedicalRecords = (props) => {
   const { authenticated } = data;
 
   return (
-    <Window title="Медицинские записи" width={750} height={550}>
+    <Window title="Медицинская Служба" width={750} height={550}>
       <Window.Content>
         <Stack fill>
           {!authenticated ? <UnauthorizedView /> : <AuthView />}
@@ -33,7 +33,7 @@ const UnauthorizedView = (props) => {
         </Stack.Item>
         <Stack.Item align="center" grow>
           <Box color="good" fontSize="18px" bold mt={5}>
-            Нанотрейзен HealthPRO
+            Нанотрейзен Служба Медицинской Помощи
           </Box>
         </Stack.Item>
         <Stack.Item>

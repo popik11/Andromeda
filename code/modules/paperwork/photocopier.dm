@@ -37,8 +37,8 @@
 /// The maximum amount of copies you can make with one press of the copy button.
 #define MAX_COPIES_AT_ONCE 10
 
-/// Photocopier copy fee.
-#define PHOTOCOPIER_FEE 5
+/// Плата за копирование.
+#define PHOTOCOPIER_FEE 0   /// Rewokin: Кто укажет цену выше 0, сделаю перекрут яичек для этого жадного корпората.
 
 /// Paper blanks (form templates, basically). Loaded from `config/blanks.json`.
 /// If invalid or not found, set to null.
@@ -59,7 +59,7 @@ GLOBAL_LIST_INIT(paper_blanks, init_paper_blanks())
 
 /obj/machinery/photocopier
 	name = "photocopier"
-	desc = "Used to copy important documents and anatomy studies."
+	desc = "Использовался для копирования важных документов. Любовь бюрократов, страдание ассистентов."
 	icon = 'icons/obj/service/library.dmi'
 	icon_state = "photocopier"
 	density = TRUE
@@ -198,8 +198,8 @@ GLOBAL_LIST_INIT(paper_blanks, init_paper_blanks())
 /obj/machinery/photocopier/examine(mob/user)
 	. = ..()
 	if(object_copy)
-		. += span_notice("There is something inside the scanner tray.")
-	. += span_notice("You can put any type of blank paper inside to print a form onto it or to copy something onto it.")
+		. += span_notice("В лотке сканера что-то есть.")
+	. += span_notice("Вы можете положить внутрь любой тип чистой бумаги для печати формы или копирования чего-либо на неё.")
 
 /obj/machinery/photocopier/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
@@ -286,9 +286,9 @@ GLOBAL_LIST_INIT(paper_blanks, init_paper_blanks())
 			if(ass)
 				if(ishuman(ass) && (ass.get_item_by_slot(ITEM_SLOT_ICLOTHING) || ass.get_item_by_slot(ITEM_SLOT_OCLOTHING)))
 					if(ass == usr)
-						to_chat(usr, span_notice("You feel kind of silly, copying your ass with your clothes on."))
+						to_chat(usr, span_notice("Вы чувствуете себя немного глупо, копируя свою задницу в одежде."))
 					else
-						to_chat(usr, span_notice("You feel kind of silly, copying [ass]\'s ass with [ass.p_their()] clothes on."))
+						to_chat(usr, span_notice("Вы чувствуете себя немного глупо, копируя задницу [ass] в [ass.p_their()] одежде."))
 					return FALSE
 				do_copies(CALLBACK(src, PROC_REF(make_ass_copy)), usr, ASS_PAPER_USE, ASS_TONER_USE, num_copies)
 				return TRUE
@@ -317,7 +317,7 @@ GLOBAL_LIST_INIT(paper_blanks, init_paper_blanks())
 				remove_photocopy(usr, object_copy)
 				object_copy = null
 			else if(check_ass())
-				to_chat(ass, span_notice("You feel a slight pressure on your ass."))
+				to_chat(ass, span_notice("Вы чувствуете лёгкое тепло на своей заднице."))
 			return TRUE
 
 		// AI printing photos from their saved images.
@@ -326,7 +326,7 @@ GLOBAL_LIST_INIT(paper_blanks, init_paper_blanks())
 				return FALSE
 			var/mob/living/silicon/ai/tempAI = usr
 			if(!length(tempAI.aicamera.stored))
-				balloon_alert(usr, "no images saved!")
+				balloon_alert(usr, "нет сохранённых изображений!")
 				return FALSE
 			var/datum/picture/selection = tempAI.aicamera.selectpicture(usr)
 			do_copies(CALLBACK(src, PROC_REF(make_photo_copy), selection, PHOTO_COLOR), usr, PHOTO_PAPER_USE, PHOTO_TONER_USE, 1)
@@ -398,8 +398,8 @@ GLOBAL_LIST_INIT(paper_blanks, init_paper_blanks())
 	obj_flags |= EMAGGED
 
 	playsound(src, SFX_SPARKS, 50, TRUE, SHORT_RANGE_SOUND_EXTRARANGE)
-	visible_message(span_warning("Sparks fly out of [src]!"))
-	balloon_alert(user, "payment system shorted")
+	visible_message(span_warning("Из [declent_ru(NOMINATIVE)] вылетают искры!"))
+	balloon_alert(user, "платёжная система замкнула")
 	return TRUE
 
 /**
@@ -416,16 +416,16 @@ GLOBAL_LIST_INIT(paper_blanks, init_paper_blanks())
 	var/error_message = null
 	if(!toner_cartridge)
 		copies_amount = 0
-		error_message = span_warning("An error message flashes across \the [src]'s screen: \"No toner cartridge found. Aborting.\"")
+		error_message = span_warning("На экране [declent_ru(GENITIVE)] появляется сообщение об ошибке: \"Картридж с тонером не найден. Прерывание.\"")
 	else if(toner_cartridge.charges < (toner_use / toner_efficiency) * copies_amount)
 		copies_amount = FLOOR(toner_cartridge.charges / (toner_use / toner_efficiency), 1)
-		error_message = span_warning("An error message flashes across \the [src]'s screen: \"Not enough toner to perform [copies_amount >= 1 ? "full " : ""]operation.\"")
+		error_message = span_warning("На экране [declent_ru(GENITIVE)] появляется сообщение об ошибке: \"Недостаточно тонера для выполнения [copies_amount >= 1 ? "полной " : ""]операции.\"")
 	if(get_paper_count(created_paper) < paper_use * copies_amount)
 		copies_amount = FLOOR(get_paper_count(created_paper) / paper_use, 1)
-		error_message = span_warning("An error message flashes across \the [src]'s screen: \"Not enough paper to perform [copies_amount >= 1 ? "full " : ""]operation.\"")
+		error_message = span_warning("На экране [declent_ru(GENITIVE)] появляется сообщение об ошибке: \"Недостаточно бумаги для выполнения [copies_amount >= 1 ? "полной " : ""]операции.\"")
 	if(!(obj_flags & EMAGGED) && (copies_amount > 0) && (attempt_charge(src, user, (copies_amount - 1) * usage_cost) & COMPONENT_OBJ_CANCEL_CHARGE))
 		copies_amount = 0
-		error_message = span_warning("An error message flashes across \the [src]'s screen: \"Failed to charge bank account. Aborting.\"")
+		error_message = span_warning("На экране [declent_ru(GENITIVE)] появляется сообщение об ошибке: \"Не удалось списать средства с банковского счёта. Прерывание.\"")
 
 	copies_left = copies_amount
 
@@ -469,7 +469,7 @@ GLOBAL_LIST_INIT(paper_blanks, init_paper_blanks())
 /// Determines if the printer is currently busy, informs the user if it is.
 /obj/machinery/photocopier/proc/check_busy(mob/user)
 	if(busy)
-		balloon_alert(user, "printer is busy!")
+		balloon_alert(user, "принтер занят!")
 		return TRUE
 	return FALSE
 
@@ -602,7 +602,7 @@ GLOBAL_LIST_INIT(paper_blanks, init_paper_blanks())
 	for(var/infoline in blank["info"])
 		printinfo += infoline
 
-	printblank.name = "paper - '[printname]'"
+	printblank.name = "бумага - '[printname]'"
 	printblank.add_raw_text(printinfo, color = copy_colour)
 	printblank.update_appearance()
 	use_toner(PAPER_TONER_USE)
@@ -621,7 +621,7 @@ GLOBAL_LIST_INIT(paper_blanks, init_paper_blanks())
 	if(isnull(temp_img))
 		return null
 	var/obj/item/photo/copied_ass = new /obj/item/photo(src)
-	var/datum/picture/toEmbed = new(name = "[ass]'s Ass", desc = "You see [ass]'s ass on the photo.", image = temp_img)
+	var/datum/picture/toEmbed = new(name = "Задница [ass]", desc = "Вы видите задницу [ass] на фотографии.", image = temp_img)
 	toEmbed.psize_x = 128
 	toEmbed.psize_y = 128
 	copied_ass.set_picture(toEmbed, TRUE, TRUE)
@@ -647,7 +647,7 @@ GLOBAL_LIST_INIT(paper_blanks, init_paper_blanks())
 	object.forceMove(user.loc)
 	user.put_in_hands(object)
 
-	to_chat(user, span_notice("You take [object] out of [src]. [busy ? "The [src] comes to a halt." : ""]"))
+	to_chat(user, span_notice("Вы достаёте [object.declent_ru(NOMINATIVE)] из [declent_ru(GENITIVE)]. [busy ? "[capitalize(declent_ru(NOMINATIVE))] останавливается." : ""]"))
 
 /obj/machinery/photocopier/screwdriver_act(mob/living/user, obj/item/tool)
 	. = ..()
@@ -665,45 +665,45 @@ GLOBAL_LIST_INIT(paper_blanks, init_paper_blanks())
 	return ITEM_INTERACT_SUCCESS
 
 /obj/machinery/photocopier/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
-	// No infinite paper chain. You need the original paperwork to make more copies.
+	// Нет бесконечной цепочки бумаги. Вам нужен оригинал документа, чтобы сделать больше копий.
 	if(istype(tool, /obj/item/paperwork/photocopy))
-		balloon_alert(user, "too blurry!")
-		to_chat(user, span_warning("The [tool] is far too messy to produce a good copy!"))
+		balloon_alert(user, "слишком размыто!")
+		to_chat(user, span_warning("[capitalize(tool.declent_ru(NOMINATIVE))] слишком неаккуратен для создания хорошей копии!"))
 		return ITEM_INTERACT_FAILURE
 
 	if(istype(tool, /obj/item/paper/paperslip))
-		balloon_alert(user, "too small!")
+		balloon_alert(user, "слишком маленький!")
 		return ITEM_INTERACT_FAILURE
 
 	if(istype(tool, /obj/item/blueprints))
-		balloon_alert(user, "too large!")
-		to_chat(user, span_warning("\The [tool] is too large to put into the copier. You need to find something else to record the document."))
+		balloon_alert(user, "слишком большой!")
+		to_chat(user, span_warning("[capitalize(tool.declent_ru(NOMINATIVE))] слишком велик для помещения в копировальный аппарат. Вам нужно найти что-то ещё для записи документа."))
 		return ITEM_INTERACT_FAILURE
 
 	if(istype(tool, /obj/item/toner))
 		if(toner_cartridge)
-			balloon_alert(user, "another cartridge inside!")
+			balloon_alert(user, "уже есть картридж!")
 			return ITEM_INTERACT_FAILURE
 
 		tool.forceMove(src)
 		toner_cartridge = tool
-		balloon_alert(user, "cartridge inserted")
+		balloon_alert(user, "картридж вставлен")
 		return ITEM_INTERACT_SUCCESS
 
 	if(istype(tool, /obj/item/paperplane))
-		balloon_alert(user, "flatten paper first!")
+		balloon_alert(user, "сначала разгладьте бумагу!")
 		return ITEM_INTERACT_FAILURE
 
 	if(istype(tool, /obj/item/paper))
 		var/obj/item/paper/paper = tool
 
 		if(paper.resistance_flags & ON_FIRE)
-			balloon_alert(user, "paper on fire!")
+			balloon_alert(user, "бумага горит!")
 			return ITEM_INTERACT_FAILURE
 
-		if(paper.is_empty()) // if not empty it gets inserted as an object to be copied
+		if(paper.is_empty()) // если не пуста, вставляется как объект для копирования
 			if(!has_room_for_paper())
-				balloon_alert(user, "cannot hold more paper!")
+				balloon_alert(user, "не может вместить больше бумаги!")
 				return ITEM_INTERACT_FAILURE
 
 			insert_empty_paper(user, paper.type)
@@ -714,7 +714,7 @@ GLOBAL_LIST_INIT(paper_blanks, init_paper_blanks())
 		var/obj/item/paper_bin/paper_bin = tool
 
 		if(!paper_bin.total_paper)
-			balloon_alert(user, "paper bin empty!")
+			balloon_alert(user, "лоток для бумаги пуст!")
 			return ITEM_INTERACT_FAILURE
 
 		var/paper_inserted = 0
@@ -739,12 +739,12 @@ GLOBAL_LIST_INIT(paper_blanks, init_paper_blanks())
 				paper_bin.total_paper -= (paper_to_take)
 
 		if(!paper_inserted && !has_room_for_paper()) // no paper was inserted because it was full
-			balloon_alert(user, "cannot hold more paper!")
+			balloon_alert(user, "не может вместить больше бумаги!")
 			return ITEM_INTERACT_FAILURE
 
 		paper_bin.update_appearance()
 		// we use silent for insert_empty_paper() so that we don't spam balloon_alerts and instead condense them into one alert here
-		balloon_alert(user, "[paper_inserted] paper inserted")
+		balloon_alert(user, "[paper_inserted] бумага вставлена")
 		return ITEM_INTERACT_SUCCESS
 
 	if(is_type_in_typecache(tool, whitelist_scannable_objects))
@@ -763,17 +763,17 @@ GLOBAL_LIST_INIT(paper_blanks, init_paper_blanks())
 		paper_stack[paper_type] = 0
 	paper_stack[paper_type] += amount
 	if(!silent)
-		balloon_alert(user, "paper inserted")
+		balloon_alert(user, "бумага вставлена")
 
 /obj/machinery/photocopier/proc/insert_copy_object(mob/user, obj/item/object)
 	if(!copier_empty())
-		balloon_alert(user, "scanner tray occupied!")
+		balloon_alert(user, "лоток сканера занят!")
 		return
 	if(!user.temporarilyRemoveItemFromInventory(object))
 		return
 	object_copy = object
 	object.forceMove(src)
-	balloon_alert(user, "copy object inserted")
+	balloon_alert(user, "объект для копирования вставлен")
 	flick("photocopier1", src)
 
 /obj/machinery/photocopier/atom_break(damage_flag)
@@ -787,25 +787,25 @@ GLOBAL_LIST_INIT(paper_blanks, init_paper_blanks())
 		return
 	add_fingerprint(user)
 	if(target == user)
-		user.visible_message(span_notice("[user] starts climbing onto the photocopier!"), span_notice("You start climbing onto the photocopier..."))
+		user.visible_message(span_notice("[user] начинает залезать на копировальный аппарат!"), span_notice("Вы начинаете залезать на копировальный аппарат..."))
 	else
-		user.visible_message(span_warning("[user] starts putting [target] onto the photocopier!"), span_notice("You start putting [target] onto the photocopier..."))
+		user.visible_message(span_warning("[user] начинает класть [target] на копировальный аппарат!"), span_notice("Вы начинаете класть [target] на копировальный аппарат..."))
 
 	if(do_after(user, 2 SECONDS, target = src))
-		if(!target || QDELETED(target) || QDELETED(src) || !Adjacent(target)) //check if the photocopier/target still exists.
+		if(!target || QDELETED(target) || QDELETED(src) || !Adjacent(target)) //проверяем, существует ли ещё копировальный аппарат/цель.
 			return
 
 		if(target == user)
-			user.visible_message(span_notice("[user] climbs onto the photocopier!"), span_notice("You climb onto the photocopier."))
+			user.visible_message(span_notice("[user] залезает на копировальный аппарат!"), span_notice("Вы залезли на копировальный аппарат."))
 		else
-			user.visible_message(span_warning("[user] puts [target] onto the photocopier!"), span_notice("You put [target] onto the photocopier."))
+			user.visible_message(span_warning("[user] кладёт [target] на копировальный аппарат!"), span_notice("Вы положили [target] на копировальный аппарат."))
 
 		target.forceMove(drop_location())
 		ass = target
 
 		if(!isnull(object_copy))
 			object_copy.forceMove(drop_location())
-			visible_message(span_warning("[object_copy] is shoved out of the way by [ass]!"))
+			visible_message(span_warning("[object_copy] выталкивается с пути [ass]!"))
 			object_copy = null
 
 /**
@@ -855,7 +855,7 @@ GLOBAL_LIST_INIT(paper_blanks, init_paper_blanks())
 
 /// Subtype of photocopier that is free to use.
 /obj/machinery/photocopier/gratis
-	desc = "Does the same important paperwork, but it's free to use! The best type of free."
+	desc = "Выполняет ту же важную бумажную работу, но бесплатен в использовании! Лучший вид бесплатного."
 	usage_cost = 0 // it's free! no charge! very cool and gratis-pilled.
 
 /obj/machinery/photocopier/gratis/prebuilt
@@ -867,7 +867,7 @@ GLOBAL_LIST_INIT(paper_blanks, init_paper_blanks())
  */
 /obj/item/toner
 	name = "toner cartridge"
-	desc = "A small, lightweight cartridge of Nanotrasen ValueBrand toner. Fits photocopiers and autopainters alike."
+	desc = "Небольшой лёгкий картридж с тонером Нанотрейзен ЦенныйБренд. Подходит для копировальных аппаратов и автокрасочных машин."
 	icon = 'icons/obj/service/bureaucracy.dmi'
 	icon_state = "tonercartridge"
 	w_class = WEIGHT_CLASS_SMALL
@@ -877,18 +877,18 @@ GLOBAL_LIST_INIT(paper_blanks, init_paper_blanks())
 
 /obj/item/toner/examine(mob/user)
 	. = ..()
-	. += span_notice("The ink level gauge on the side reads [round(charges / max_charges * 100)]%")
+	. += span_notice("Уровень чернил на боковой шкале показывает [round(charges / max_charges * 100)]%")
 
 /obj/item/toner/large
 	name = "large toner cartridge"
-	desc = "A hefty cartridge of Nanotrasen ValueBrand toner. Fits photocopiers and autopainters alike."
+	desc = "Вместительный картридж с тонером Нанотрейзен ЦенныйБренд. Подходит для копировальных аппаратов и автокрасочных машин."
 	grind_results = list(/datum/reagent/iodine = 90, /datum/reagent/iron = 10)
 	charges = 25
 	max_charges = 25
 
 /obj/item/toner/extreme
 	name = "extremely large toner cartridge"
-	desc = "Why would ANYONE need THIS MUCH TONER?"
+	desc = "Кому вообще может понадобиться ТАКОЕ КОЛИЧЕСТВО ТОНЕРА?"
 	charges = 200
 	max_charges = 200
 

@@ -253,7 +253,7 @@ const CrimeAuthor = (props) => {
   return (
     <Stack fill vertical>
       <Stack.Item color="label">
-        ФИО
+        Название
         <Input
           fluid
           maxLength={25}

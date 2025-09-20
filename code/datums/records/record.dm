@@ -101,10 +101,10 @@
 	trim = "Unassigned",
 	/// Crew specific
 	lock_ref,
-	major_disabilities = "None",
-	major_disabilities_desc = "No disabilities have been diagnosed at the moment.",
-	minor_disabilities = "None",
-	minor_disabilities_desc = "No disabilities have been diagnosed at the moment.",
+	major_disabilities = "Отсутствуют",
+	major_disabilities_desc = "В настоящее время инвалидности не диагностированы.",
+	minor_disabilities = "Отсутствуют",
+	minor_disabilities_desc = "В настоящее время инвалидности не диагностированы.",
 	physical_status = PHYSICAL_ACTIVE,
 	mental_status = MENTAL_STABLE,
 	quirk_notes,
@@ -235,7 +235,7 @@
 
 	var/datum/picture/picture = new
 	picture.picture_name = name
-	picture.picture_desc = "This is [name]."
+	picture.picture_desc = "Это [name]."
 	picture.picture_image = picture_image
 
 	var/obj/item/photo/new_photo = new(null, picture)
@@ -244,26 +244,26 @@
 	return new_photo
 
 /// Returns a paper printout of the current record's crime data.
-/datum/record/crew/proc/get_rapsheet(alias, header = "Rapsheet", description = "No further details.")
+/datum/record/crew/proc/get_rapsheet(alias, header = "Досье", description = "Никаких дополнительных подробностей.")
 	var/print_count = ++GLOB.manifest.print_count
 	var/obj/item/paper/printed_paper = new
-	var/final_paper_text = "<center><b>SR-[print_count]: [header]</b></center><br>"
+	var/final_paper_text = "<center><b>Дело-[print_count]: [header]</b></center><br>"
 
-	final_paper_text += "Name: [name]<br>Gender: [gender]<br>Age: [age]<br>"
+	final_paper_text += "ФИО: [name]<br>Пол: [gender]<br>Возраст: [age]<br>"
 	if(alias != name)
-		final_paper_text += "Alias: [alias]<br>"
+		final_paper_text += "Псевдоним: [alias]<br>"
 
-	final_paper_text += "Species: [species]<br>Fingerprint: [fingerprint]<br>Wanted Status: [wanted_status]<br><br>"
+	final_paper_text += "Раса: [species]<br>Отпечатки: [fingerprint]<br>Статус розыска: [wanted_status]<br><br>"
 
 	final_paper_text += "<center><B>Security Data</B></center><br><br>"
 
-	final_paper_text += "Crimes:<br>"
+	final_paper_text += "Преступления:<br>"
 	final_paper_text += {"<table style="text-align:center;" border="1" cellspacing="0" width="100%">
 						<tr>
-						<th>Crime</th>
-						<th>Details</th>
-						<th>Author</th>
-						<th>Time Added</th>
+						<th>Статья</th>
+						<th>Детали</th>
+						<th>Автор</th>
+						<th>Время созд.</th>
 						</tr>"}
 	for(var/datum/crime/crime in crimes)
 		if(crime.valid)
@@ -273,18 +273,18 @@
 			final_paper_text += "<td>[crime.time]</td>"
 		else
 			for(var/i in 1 to 4)
-				final_paper_text += "<td>--REDACTED--</td>"
+				final_paper_text += "<td>--УДАЛЕНО--</td>"
 		final_paper_text += "</tr>"
 	final_paper_text += "</table><br><br>"
 
-	final_paper_text += "Citations:<br>"
+	final_paper_text += "Штрафы:<br>"
 	final_paper_text  += {"<table style="text-align:center;" border="1" cellspacing="0" width="100%">
 						<tr>
-						<th>Citation</th>
-						<th>Details</th>
-						<th>Author</th>
-						<th>Time Added</th>
-						<th>Fine</th>
+						<th>Штраф</th>
+						<th>Детали</th>
+						<th>Автор</th>
+						<th>Время созд.</th>
+						<th>Сумма</th>
 						</tr><br>"}
 	for(var/datum/crime/citation/warrant in citations)
 		final_paper_text += "<tr><td>[warrant.name]</td>"
@@ -295,13 +295,13 @@
 		final_paper_text += "</tr>"
 	final_paper_text += "</table><br><br>"
 
-	final_paper_text += "<center>Important Notes:</center><br>"
+	final_paper_text += "<center>Важные примечания (Описание):</center><br>"
 	if(security_note)
 		final_paper_text += "- [security_note]<br>"
 	if(description)
 		final_paper_text += "- [description]<br>"
 
-	printed_paper.name = "SR-[print_count] '[name]'"
+	printed_paper.name = "Дело-[print_count] '[name]'"
 	printed_paper.add_raw_text(final_paper_text)
 	printed_paper.update_appearance()
 

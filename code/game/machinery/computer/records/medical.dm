@@ -1,6 +1,6 @@
 /obj/machinery/computer/records/medical
 	name = "medical records console"
-	desc = "This can be used to check medical records."
+	desc = "Это может быть использовано для проверки медицинских записей."
 	icon_screen = "medcomp"
 	icon_keyboard = "med_key"
 	req_one_access = list(ACCESS_MEDICAL, ACCESS_DETECTIVE, ACCESS_GENETICS)
@@ -13,7 +13,7 @@
 
 /obj/machinery/computer/records/medical/laptop
 	name = "medical laptop"
-	desc = "A cheap Nanotrasen medical laptop, it functions as a medical records computer. It's bolted to the table."
+	desc = "Дешёвый медицинский ноутбук Нанотрейзен, функционирует как компьютер медицинских записей. Прикручен к столу."
 	icon_state = "laptop"
 	icon_screen = "medlaptop"
 	icon_keyboard = "laptop_key"

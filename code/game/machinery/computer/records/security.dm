@@ -7,7 +7,7 @@
 
 /obj/machinery/computer/records/security
 	name = "security records console"
-	desc = "Used to view and edit personnel's security records."
+	desc = "Используется для просмотра и редактирования учётных записей службы безопасности персонала."
 	icon_screen = "security"
 	icon_keyboard = "security_key"
 	req_one_access = list(ACCESS_SECURITY, ACCESS_HOP)
@@ -22,7 +22,7 @@
 
 /obj/machinery/computer/records/security/laptop
 	name = "security laptop"
-	desc = "A cheap Nanotrasen security laptop, it functions as a security records console. It's bolted to the table."
+	desc = "Дешёвый ноутбук НаноТрейзен СБ, функционирует как консоль учётных записей. Прикручен к столу."
 	icon_state = "laptop"
 	icon_screen = "seclaptop"
 	icon_keyboard = "laptop_key"
@@ -30,7 +30,7 @@
 	projectiles_pass_chance = 100
 
 /obj/machinery/computer/records/security/laptop/syndie
-	desc = "A cheap, jailbroken security laptop. It functions as a security records console. It's bolted to the table."
+	desc = "Дешёвый взломанный ноутбук СБ. Функционирует как консоль учётных записей. Прикручен к столу."
 	req_one_access = list(ACCESS_SYNDICATE)
 
 /obj/machinery/computer/records/security/Initialize(mapload, obj/item/circuitboard/C)
@@ -161,7 +161,7 @@
 			return TRUE
 
 		if("delete_record")
-			investigate_log("[user] deleted record: \"[target]\".", INVESTIGATE_RECORDS)
+			investigate_log("[user] удалил запись: \"[target]\".", INVESTIGATE_RECORDS)
 			qdel(target)
 			return TRUE
 
@@ -179,7 +179,7 @@
 
 		if("set_note")
 			var/note = strip_html_full(params["note"], MAX_MESSAGE_LEN)
-			investigate_log("[user] has changed the security note of record: \"[target]\" from \"[target.security_note]\" to \"[note]\".", INVESTIGATE_RECORDS)
+			investigate_log("[user] изменил заметку службы безопасности в записи: \"[target]\" с \"[target.security_note]\" на \"[note]\".", INVESTIGATE_RECORDS)
 			target.security_note = note
 			return TRUE
 
@@ -190,7 +190,7 @@
 			if(wanted_status == WANTED_ARREST && !length(target.crimes))
 				return FALSE
 
-			investigate_log("[target.name] has been set from [target.wanted_status] to [wanted_status] by [key_name(usr)].", INVESTIGATE_RECORDS)
+			investigate_log("[target.name] был переведён из статуса [target.wanted_status] в статус [wanted_status] пользователем [key_name(usr)].", INVESTIGATE_RECORDS)
 			target.wanted_status = wanted_status
 
 			update_matching_security_huds(target.name)
@@ -203,13 +203,13 @@
 /obj/machinery/computer/records/security/proc/add_crime(mob/user, datum/record/crew/target, list/params)
 	var/input_name = strip_html_full(params["name"], MAX_CRIME_NAME_LEN)
 	if(!input_name)
-		to_chat(usr, span_warning("You must enter a name for the crime."))
+		to_chat(usr, span_warning("Вы должны ввести название преступления."))
 		playsound(src, 'sound/machines/terminal/terminal_error.ogg', 75, TRUE)
 		return FALSE
 
 	var/max = CONFIG_GET(number/maxfine)
 	if(params["fine"] > max)
-		to_chat(usr, span_warning("The maximum fine is [max] credits."))
+		to_chat(usr, span_warning("Максимальный штраф составляет [max] кредитов."))
 		playsound(src, 'sound/machines/terminal/terminal_error.ogg', 75, TRUE)
 		return FALSE
 
@@ -220,7 +220,7 @@
 	if(params["fine"] == 0)
 		var/datum/crime/new_crime = new(name = input_name, details = input_details, author = usr)
 		target.crimes += new_crime
-		investigate_log("New Crime: <strong>[input_name]</strong> | Added to [target.name] by [key_name(user)]. Their previous status was [target.wanted_status]", INVESTIGATE_RECORDS)
+		investigate_log("Новое преступление: <strong>[input_name]</strong> | Добавлено к [target.name] пользователем [key_name(user)]. Его предыдущий статус был [target.wanted_status]", INVESTIGATE_RECORDS)
 		SSblackbox.ReportCitation(REF(new_crime), user.ckey, user.real_name, target.name, input_name, input_details)
 		target.wanted_status = WANTED_ARREST
 
@@ -231,8 +231,8 @@
 	var/datum/crime/citation/new_citation = new(name = input_name, details = input_details, author = usr, fine = params["fine"])
 
 	target.citations += new_citation
-	new_citation.alert_owner(user, src, target.name, "You have been issued a [params["fine"]]cr citation for [input_name]. Fines are payable at Security.")
-	investigate_log("New Citation: <strong>[input_name]</strong> Fine: [params["fine"]] | Added to [target.name] by [key_name(user)]", INVESTIGATE_RECORDS)
+	new_citation.alert_owner(user, src, target.name, "Вам был выписан штраф на [params["fine"]]кр за [input_name]. Штрафы оплачиваются у Службы Безопасности.")
+	investigate_log("Новый Штраф: <strong>[input_name]</strong> Сумма: [params["fine"]] | Добавлен к [target.name] пользователем [key_name(user)]", INVESTIGATE_RECORDS)
 	SSblackbox.ReportCitation(REF(new_citation), user.ckey, user.real_name, target.name, input_name, input_details, params["fine"])
 
 	return TRUE
@@ -243,20 +243,20 @@
 	if(!editing_crime?.valid)
 		return FALSE
 
-	if(user != editing_crime.author && !has_armory_access(user)) // only warden/hos/command can edit crimes they didn't author
-		investigate_log("[user] attempted to edit crime: \"[editing_crime.name]\" for target: \"[target.name]\" but failed due to lacking armoury access and not being the author of the crime.", INVESTIGATE_RECORDS)
+	if(user != editing_crime.author && !has_armory_access(user)) // только начальник охраны/комендант/командир могут редактировать преступления, авторами которых они не являются
+		investigate_log("[user] попытался отредактировать преступление: \"[editing_crime.name]\" для цели: \"[target.name]\", но не удалось из-за отсутствия доступа в оружейную и отсутствия авторства преступления.", INVESTIGATE_RECORDS)
 		return FALSE
 
 	if(params["name"] && length(params["name"]) > 2 && params["name"] != editing_crime.name)
 		var/new_name = strip_html_full(params["name"], MAX_CRIME_NAME_LEN)
-		investigate_log("[user] edited crime: \"[editing_crime.name]\" for target: \"[target.name]\", changing the name to: \"[new_name]\".", INVESTIGATE_RECORDS)
+		investigate_log("[user] отредактировал преступление: \"[editing_crime.name]\" для цели: \"[target.name]\", изменив название на: \"[new_name]\".", INVESTIGATE_RECORDS)
 		editing_crime.name = new_name
 		SSblackbox.ReportCitation(REF(editing_crime), message = new_name)
 		return TRUE
 
 	if(params["description"] && length(params["description"]) > 2 && params["name"] != editing_crime.name)
 		var/new_details = strip_html_full(params["description"], MAX_MESSAGE_LEN)
-		investigate_log("[user] edited crime \"[editing_crime.name]\" for target: \"[target.name]\", changing the details to: \"[new_details]\" from: \"[editing_crime.details]\".", INVESTIGATE_RECORDS)
+		investigate_log("[user] отредактировал преступление \"[editing_crime.name]\" для цели: \"[target.name]\", изменив детали на: \"[new_details]\" с: \"[editing_crime.details]\".", INVESTIGATE_RECORDS)
 		editing_crime.details = new_details
 		SSblackbox.ReportCitation(REF(editing_crime), description = new_details)
 		return TRUE
@@ -306,7 +306,7 @@
 
 	to_void.valid = FALSE
 	to_void.voider = user
-	investigate_log("[key_name(user)] has invalidated [target.name]'s crime: [to_void.name]", INVESTIGATE_RECORDS)
+	investigate_log("[key_name(user)] аннулировал преступление [target.name]: [to_void.name]", INVESTIGATE_RECORDS)
 
 	for(var/datum/crime/incident in target.crimes)
 		if(!incident.valid)
@@ -316,7 +316,7 @@
 
 	if(acquitted)
 		target.wanted_status = WANTED_DISCHARGED
-		investigate_log("[key_name(user)] has invalidated [target.name]'s last valid crime. Their status is now [WANTED_DISCHARGED].", INVESTIGATE_RECORDS)
+		investigate_log("[key_name(user)] аннулировал последнее действительное преступление [target.name]. Их статус теперь [WANTED_DISCHARGED].", INVESTIGATE_RECORDS)
 
 		update_matching_security_huds(target.name)
 	return TRUE
@@ -332,17 +332,17 @@
 /// Handles printing records via UI. Takes the params from UI_act.
 /obj/machinery/computer/records/security/proc/print_record(mob/user, datum/record/crew/target, list/params)
 	if(printing)
-		balloon_alert(user, "printer busy")
+		balloon_alert(user, "принтер занят")
 		playsound(src, 'sound/machines/terminal/terminal_error.ogg', 100, TRUE)
 		return FALSE
 
 	printing = TRUE
-	balloon_alert(user, "printing")
+	balloon_alert(user, "печатается")
 	playsound(src, 'sound/machines/printer.ogg', 100, TRUE)
 
 	var/obj/item/printable
 	var/input_alias = strip_html_full(params["alias"], MAX_NAME_LEN) || target.name
-	var/input_description = strip_html_full(params["desc"], MAX_BROADCAST_LEN) || "No further details."
+	var/input_description = strip_html_full(params["desc"], MAX_BROADCAST_LEN) || "Дополнительные детали отсутствуют."
 	var/input_header = strip_html_full(params["head"], 8) || capitalize(params["type"])
 
 	switch(params["type"])
@@ -355,16 +355,16 @@
 		if("wanted")
 			var/list/crimes = target.crimes
 			if(!length(crimes))
-				balloon_alert(user, "no crimes")
+				balloon_alert(user, "нет преступлений")
 				return FALSE
 
-			input_description += "\n\n<b>WANTED FOR:</b>"
+			input_description += "\n\n<b>РАЗЫСКИВАЕТСЯ ЗА:</b>"
 			for(var/datum/crime/incident in crimes)
 				if(!incident.valid)
-					input_description += "<b>--REDACTED--</b>"
+					input_description += "<b>--УДАЛЕНО--</b>"
 					continue
-				input_description += "\n<bCrime:</b> [incident.name]\n"
-				input_description += "<b>Details:</b> [incident.details]\n"
+				input_description += "\n<b>Преступление:</b> [incident.name]\n"
+				input_description += "<b>Детали:</b> [incident.details]\n"
 
 			var/obj/item/photo/mugshot = target.get_front_photo()
 			var/obj/item/poster/wanted/wanted_poster = new(null, null, mugshot.picture.picture_image, input_alias, input_description, input_header)
@@ -374,7 +374,7 @@
 		if("rapsheet")
 			var/list/crimes = target.crimes
 			if(!length(crimes))
-				balloon_alert(user, "no crimes")
+				balloon_alert(user, "нет преступлений")
 				return FALSE
 
 			var/obj/item/paper/rapsheet = target.get_rapsheet(input_alias, input_header, input_description)
@@ -390,7 +390,7 @@
  */
 /obj/item/circuit_component/arrest_console_data
 	display_name = "Security Records Data"
-	desc = "Outputs the security records data, where it can then be filtered with a Select Query component"
+	desc = "Выводит данные учётных записей службы безопасности, которые затем можно фильтровать с помощью компонента Select Query"
 	circuit_flags = CIRCUIT_FLAG_INPUT_SIGNAL|CIRCUIT_FLAG_OUTPUT_SIGNAL
 
 	/// The records retrieved
@@ -453,7 +453,7 @@
 	records.set_output(new_table)
 /obj/item/circuit_component/arrest_console_arrest
 	display_name = "Security Records Set Status"
-	desc = "Receives a table to use to set people's arrest status. Table should be from the security records data component. If New Status port isn't set, the status will be decided by the options."
+	desc = "Получает таблицу для установки статуса задержания людей. Таблица должна быть из компонента данных учётных записей службы безопасности. Если порт Нового Статуса не установлен, статус будет определяться опциями."
 	circuit_flags = CIRCUIT_FLAG_INPUT_SIGNAL|CIRCUIT_FLAG_OUTPUT_SIGNAL
 
 	/// The targets to set the status of.
@@ -517,9 +517,9 @@
 
 
 	if(successful_set > 0)
-		investigate_log("[names_of_entries.Join(", ")] have been set to [status_to_set] by [parent.get_creator()].", INVESTIGATE_RECORDS)
+		investigate_log("[names_of_entries.Join(", ")] были установлены в статус [status_to_set] пользователем [parent.get_creator()].", INVESTIGATE_RECORDS)
 		if(successful_set > COMP_SECURITY_ARREST_AMOUNT_TO_FLAG)
-			message_admins("[successful_set] security entries have been set to [status_to_set] by [parent.get_creator_admin()]. [ADMIN_COORDJMP(src)]")
+			message_admins("[successful_set] учётных записей службы безопасности были установлены в статус [status_to_set] пользователем [parent.get_creator_admin()]. [ADMIN_COORDJMP(src)]")
 		update_all_security_huds()
 
 #undef COMP_SECURITY_ARREST_AMOUNT_TO_FLAG

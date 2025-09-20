@@ -9,16 +9,16 @@
 
 /obj/item/poster/wanted
 	icon_state = "rolled_poster_legit"
-	var/postHeaderText = "WANTED" // MAX 7 Characters
+	var/postHeaderText = "РОЗЫСК" // МАКСИМУМ 7 символов
 	var/postHeaderColor = COLOR_RED
 	var/background = "wanted_background"
-	var/postName = "wanted poster"
-	var/postDesc = "A wanted poster for"
+	var/postName = "постер розыска"
+	var/postDesc = "Постер розыска для"
 
 /obj/item/poster/wanted/missing
-	postName = "missing poster"
-	postDesc = "A missing poster for"
-	postHeaderText = "MISSING" // MAX 7 Characters
+	postName = "постер пропавшего"
+	postDesc = "Постер пропавшего для"
+	postHeaderText = "ПОИСК" // МАКСИМУМ 7 символов
 	postHeaderColor = COLOR_BLUE
 
 
