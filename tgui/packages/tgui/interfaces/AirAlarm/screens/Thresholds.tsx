@@ -12,20 +12,20 @@ export function AirAlarmControlThresholds(props) {
   return (
     <Table>
       <Table.Row>
-        <Table.Cell bold>Threshold</Table.Cell>
+        <Table.Cell bold>Порог</Table.Cell>
         <Table.Cell bold color="bad">
-          Danger Below
+          Пониженная
         </Table.Cell>
         <Table.Cell bold color="average">
-          Warning Below
+          Ниже среднего
         </Table.Cell>
         <Table.Cell bold color="average">
-          Warning Above
+          Выше среднего
         </Table.Cell>
         <Table.Cell bold color="bad">
-          Danger Above
+          Повышеная
         </Table.Cell>
-        <Table.Cell bold>Actions</Table.Cell>
+        <Table.Cell bold>Действия</Table.Cell>
       </Table.Row>
       {tlvSettings.map((tlv) => (
         <Table.Row key={tlv.name} className="candystripe">
@@ -39,14 +39,14 @@ export function AirAlarmControlThresholds(props) {
                   name: tlv.name,
                   type: thresholdTypeMap.hazard_min,
                   typeVar: 'hazard_min',
-                  typeName: 'Minimum Hazard',
+                  typeName: 'Мин. Опасность',
                   unit: tlv.unit,
                   finish: () => setActiveModal(undefined),
                 })
               }
             >
               {tlv.hazard_min === -1
-                ? 'Disabled'
+                ? 'Отключено'
                 : `${tlv.hazard_min} ${tlv.unit}`}
             </Button>
           </Table.Cell>
@@ -59,14 +59,14 @@ export function AirAlarmControlThresholds(props) {
                   name: tlv.name,
                   type: thresholdTypeMap.warning_min,
                   typeVar: 'warning_min',
-                  typeName: 'Minimum Warning',
+                  typeName: 'Мин. Предупреждение',
                   unit: tlv.unit,
                   finish: () => setActiveModal(undefined),
                 })
               }
             >
               {tlv.warning_min === -1
-                ? 'Disabled'
+                ? 'Отключено'
                 : `${tlv.warning_min} ${tlv.unit}`}
             </Button>
           </Table.Cell>
@@ -79,14 +79,14 @@ export function AirAlarmControlThresholds(props) {
                   name: tlv.name,
                   type: thresholdTypeMap.warning_max,
                   typeVar: 'warning_max',
-                  typeName: 'Maximum Warning',
+                  typeName: 'Макс. Предупреждение',
                   unit: tlv.unit,
                   finish: () => setActiveModal(undefined),
                 })
               }
             >
               {tlv.warning_max === -1
-                ? 'Disabled'
+                ? 'Отключено'
                 : `${tlv.warning_max} ${tlv.unit}`}
             </Button>
           </Table.Cell>
@@ -99,14 +99,14 @@ export function AirAlarmControlThresholds(props) {
                   name: tlv.name,
                   type: thresholdTypeMap.hazard_max,
                   typeVar: 'hazard_max',
-                  typeName: 'Maximum Hazard',
+                  typeName: 'Макс. Опасность',
                   unit: tlv.unit,
                   finish: () => setActiveModal(undefined),
                 })
               }
             >
               {tlv.hazard_max === -1
-                ? 'Disabled'
+                ? 'Отключено'
                 : `${tlv.hazard_max} ${tlv.unit}`}
             </Button>
           </Table.Cell>

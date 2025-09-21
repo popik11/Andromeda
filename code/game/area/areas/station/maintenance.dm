@@ -237,7 +237,7 @@
 	icon_state = "maint_dorms"
 
 /area/station/maintenance/disposal/incinerator
-	name = "\improper Мусоросжигатель"
+	name = "\improper Термогенераторная"
 	icon_state = "incinerator"
 
 /area/station/maintenance/space_hut

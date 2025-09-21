@@ -23,7 +23,7 @@
 	PROTECTED_PROC(TRUE)
 
 	var/static/list/default_category = list(
-		"name" = "Products",
+		"name" = "Товары",
 		"icon" = "cart-shopping",
 	)
 

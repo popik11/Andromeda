@@ -10,11 +10,11 @@ export function AlarmEditingModal(props: EditingModalProps) {
   return (
     <Modal>
       <Section
-        title="Threshold Value Editor"
+        title="Редактор Пороговых Значений"
         buttons={<Button onClick={() => finish()} icon="times" color="red" />}
       >
         <Box mb={1.5}>
-          Editing the {typeName.toLowerCase()} value for {name.toLowerCase()}
+          Редактирование значения {typeName.toLowerCase()} для {name.toLowerCase()}
           ...
         </Box>
         {oldValue === -1 ? (
@@ -27,7 +27,7 @@ export function AlarmEditingModal(props: EditingModalProps) {
               })
             }
           >
-            Enable
+            Включить
           </Button>
         ) : (
           <>
@@ -54,7 +54,7 @@ export function AlarmEditingModal(props: EditingModalProps) {
                 })
               }
             >
-              Disable
+              Отключить
             </Button>
           </>
         )}

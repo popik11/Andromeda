@@ -234,7 +234,7 @@
 	if(records != product_records) //только товарные записи, без монет или скрытых вещей
 		return
 
-	categories["Products"] = list("icon" = "cart-shopping")
+	categories["Товары"] = list("icon" = "cart-shopping")
 	for(var/stocked_hash in products)
 		var/base64 = ""
 		var/obj/item/target = null
@@ -251,7 +251,7 @@
 			path = stocked_hash,
 			name = target.name,
 			price = target.custom_price,
-			category = "Products",
+			category = "Товары",
 			ref = stocked_hash,
 			colorable = FALSE,
 			image = base64

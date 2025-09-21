@@ -5,8 +5,8 @@
 	icon_state = "manifold-3"
 	base_icon_state = "manifold"
 
-	name = "pipe manifold"
-	desc = "A manifold composed of regular pipes."
+	name = "heat exchange manifold"
+	desc = "Коллектор, состоящий из теплообменных труб."
 
 	dir = SOUTH
 	initialize_directions = EAST|NORTH|WEST

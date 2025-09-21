@@ -26174,3 +26174,201 @@ accusative = "Доктора Клинбота"
 instrumental = "Доктором Клинботом"
 prepositional = "Докторе Клинботе"
 gender = "male"
+
+["layer adaptor"]
+nominative = "адаптер слоя"
+genitive = "адаптера слоя"
+dative = "адаптеру слоя"
+accusative = "адаптер слоя"
+instrumental = "адаптером слоя"
+prepositional = "адаптере слоя"
+gender = "male"
+
+["color adapter"]
+nominative = "цветовой адаптер"
+genitive = "цветового адаптера"
+dative = "цветовому адаптеру"
+accusative = "цветовой адаптер"
+instrumental = "цветовым адаптером"
+prepositional = "цветовом адаптере"
+gender = "male"
+
+["bridge pipe"]
+nominative = "мостовая труба"
+genitive = "мостовой трубы"
+dative = "мостовой трубе"
+accusative = "мостовую трубу"
+instrumental = "мостовой трубой"
+prepositional = "мостовой трубе"
+gender = "female"
+
+["multi deck pipe adapter"]
+nominative = "этажный адаптер труб"
+genitive = "этажного адаптера труб"
+dative = "этажному адаптеру труб"
+accusative = "этажный адаптер труб"
+instrumental = "этажным адаптером труб"
+prepositional = "этажном адаптере труб"
+gender = "male"
+
+["digital valve"]
+nominative = "клапан удалённого управления"
+genitive = "клапана удалённого управления"
+dative = "клапану удалённого управления"
+accusative = "клапан удалённого управления"
+instrumental = "клапаном удалённого управления"
+prepositional = "клапане удалённого управления"
+gender = "male"
+
+["gas pump"]
+nominative = "газовый насос"
+genitive = "газового насоса"
+dative = "газовому насосу"
+accusative = "газовый насос"
+instrumental = "газовым насосом"
+prepositional = "газовом насосе"
+gender = "male"
+
+["volumetric gas pump"]
+nominative = "объемный газовый насос"
+genitive = "объемного газового насоса"
+dative = "объемному газовому насосу"
+accusative = "объемный газовый насос"
+instrumental = "объемным газовым насосом"
+prepositional = "объемном газовом насосе"
+gender = "male"
+
+["passive gate"]
+nominative = "пассивный клапан"
+genitive = "пассивного клапана"
+dative = "пассивному клапану"
+accusative = "пассивный клапан"
+instrumental = "пассивным клапаном"
+prepositional = "пассивном клапане"
+gender = "male"
+
+["pressure valve"]
+nominative = "клапан давления"
+genitive = "клапана давления"
+dative = "клапану давления"
+accusative = "клапан давления"
+instrumental = "клапаном давления"
+prepositional = "клапане давления"
+gender = "male"
+
+["temperature gate"]
+nominative = "клапан температуры"
+genitive = "клапана температуры"
+dative = "клапану температуры"
+accusative = "клапан температуры"
+instrumental = "клапаном температуры"
+prepositional = "клапане температуры"
+gender = "male"
+
+["temperature pump"]
+nominative = "температурный насос"
+genitive = "температурного насоса"
+dative = "температурному насосу"
+accusative = "температурный насос"
+instrumental = "температурным насосом"
+prepositional = "температурном насосе"
+gender = "male"
+
+["gas filter"]
+nominative = "газовый фильтр"
+genitive = "газового фильтра"
+dative = "газовому фильтру"
+accusative = "газовый фильтр"
+instrumental = "газовым фильтром"
+prepositional = "газовом фильтре"
+gender = "male"
+
+["gas mixer"]
+nominative = "газовый смеситель"
+genitive = "газового смесителя"
+dative = "газовому смесителю"
+accusative = "газовый смеситель"
+instrumental = "газовым смесителем"
+prepositional = "газовом смесителе"
+gender = "male"
+
+["connector port"]
+nominative = "порт"
+genitive = "порта"
+dative = "порту"
+accusative = "порт"
+instrumental = "портом"
+prepositional = "порте"
+gender = "male"
+
+["passive vent"]
+nominative = "пассивная вентиляция"
+genitive = "пассивной вентиляции"
+dative = "пассивной вентиляции"
+accusative = "пассивную вентиляцию"
+instrumental = "пассивной вентиляцией"
+prepositional = "пассивной вентиляции"
+gender = "female"
+
+["meter"]
+nominative = "измеритель"
+genitive = "измерителя"
+dative = "измерителю"
+accusative = "измеритель"
+instrumental = "измерителем"
+prepositional = "измерителе"
+gender = "male"
+
+["gas flow meter"]
+nominative = "измеритель"
+genitive = "измерителя"
+dative = "измерителю"
+accusative = "измеритель"
+instrumental = "измерителем"
+prepositional = "измерителе"
+gender = "male"
+
+["heat exchange pipe"]
+nominative = "теплообменная труба"
+genitive = "теплообменной трубы"
+dative = "теплообменной трубе"
+accusative = "теплообменную трубу"
+instrumental = "теплообменной трубой"
+prepositional = "теплообменной трубе"
+gender = "female"
+
+["heat exchange manifold"]
+nominative = "теплообменный коллектор"
+genitive = "теплообменного коллектора"
+dative = "теплообменному коллектору"
+accusative = "теплообменный коллектор"
+instrumental = "теплообменным коллектором"
+prepositional = "теплообменном коллекторе"
+gender = "male"
+
+["4-way pipe manifold"]
+nominative = "4-сторонний теплообменный коллектор"
+genitive = "4-стороннего теплообменного коллектора"
+dative = "4-стороннему теплообменному коллектору"
+accusative = "4-сторонний теплообменный коллектор"
+instrumental = "4-сторонним теплообменным коллектором"
+prepositional = "4-стороннем теплообменном коллекторе"
+gender = "male"
+
+["junction"]
+nominative = "адаптер"
+genitive = "адаптера"
+dative = "адаптеру"
+accusative = "адаптер"
+instrumental = "адаптером"
+prepositional = "адаптере"
+gender = "male"
+
+["heat exchanger"]
+nominative = "теплообменник"
+genitive = "теплообменника"
+dative = "теплообменнику"
+accusative = "теплообменник"
+instrumental = "теплообменником"
+prepositional = "теплообменнике"
+gender = "male"

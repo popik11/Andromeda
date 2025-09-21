@@ -10,7 +10,7 @@ Passive gate is similar to the regular pump except:
 /obj/machinery/atmospherics/components/binary/passive_gate
 	icon_state = "passgate_map-3"
 	name = "passive gate"
-	desc = "A one-way air valve that does not require power. Passes gas when the output pressure is lower than the target pressure."
+	desc = "Односторонний воздушный клапан, не требующий питания. Пропускает газ, когда выходное давление ниже целевого давления."
 	can_unwrench = TRUE
 	shift_underlay_only = FALSE
 	interaction_flags_machine = INTERACT_MACHINE_OFFLINE | INTERACT_MACHINE_WIRES_IF_OPEN | INTERACT_MACHINE_ALLOW_SILICON | INTERACT_MACHINE_OPEN_SILICON
@@ -26,15 +26,15 @@ Passive gate is similar to the regular pump except:
 
 /obj/machinery/atmospherics/components/binary/passive_gate/add_context(atom/source, list/context, obj/item/held_item, mob/user)
 	. = ..()
-	context[SCREENTIP_CONTEXT_CTRL_LMB] = "Turn [on ? "off" : "on"]"
-	context[SCREENTIP_CONTEXT_ALT_LMB] = "Maximize target pressure"
+	context[SCREENTIP_CONTEXT_CTRL_LMB] = "Включить [on ? "выкл" : "вкл"]"
+	context[SCREENTIP_CONTEXT_ALT_LMB] = "Максимизировать целевое давление"
 	return CONTEXTUAL_SCREENTIP_SET
 
 /obj/machinery/atmospherics/components/binary/passive_gate/click_ctrl(mob/user)
 	if(is_operational)
 		set_on(!on)
-		balloon_alert(user, "turned [on ? "on" : "off"]")
-		investigate_log("was turned [on ? "on" : "off"] by [key_name(user)]", INVESTIGATE_ATMOS)
+		balloon_alert(user, "переключён [on ? "вкл" : "выкл"]")
+		investigate_log("был переключён [on ? "вкл" : "выкл"] пользователем [key_name(user)]", INVESTIGATE_ATMOS)
 		return CLICK_ACTION_SUCCESS
 	return CLICK_ACTION_BLOCKING
 
@@ -43,8 +43,8 @@ Passive gate is similar to the regular pump except:
 		return CLICK_ACTION_BLOCKING
 
 	target_pressure = MAX_OUTPUT_PRESSURE
-	investigate_log("was set to [target_pressure] kPa by [key_name(user)]", INVESTIGATE_ATMOS)
-	balloon_alert(user, "pressure output set to [target_pressure] kPa")
+	investigate_log("был установлен на [target_pressure] кПа пользователем [key_name(user)]", INVESTIGATE_ATMOS)
+	balloon_alert(user, "выходное давление установлено на [target_pressure] кПа")
 	update_appearance(UPDATE_ICON)
 	return CLICK_ACTION_SUCCESS
 
@@ -90,7 +90,7 @@ Passive gate is similar to the regular pump except:
 	switch(action)
 		if("power")
 			on = !on
-			investigate_log("was turned [on ? "on" : "off"] by [key_name(usr)]", INVESTIGATE_ATMOS)
+			investigate_log("был переключён [on ? "вкл" : "выкл"] пользователем [key_name(usr)]", INVESTIGATE_ATMOS)
 			. = TRUE
 		if("pressure")
 			var/pressure = params["pressure"]
@@ -102,13 +102,13 @@ Passive gate is similar to the regular pump except:
 				. = TRUE
 			if(.)
 				target_pressure = clamp(pressure, 0, ONE_ATMOSPHERE*100)
-				investigate_log("was set to [target_pressure] kPa by [key_name(usr)]", INVESTIGATE_ATMOS)
+				investigate_log("был установлен на [target_pressure] кПа пользователем [key_name(usr)]", INVESTIGATE_ATMOS)
 	update_appearance(UPDATE_ICON)
 
 /obj/machinery/atmospherics/components/binary/passive_gate/can_unwrench(mob/user)
 	. = ..()
 	if(. && on)
-		to_chat(user, span_warning("You cannot unwrench [src], turn it off first!"))
+		to_chat(user, span_warning("Вы не можете открутить [declent_ru(NOMINATIVE)], сначала выключите его!"))
 		return FALSE
 
 

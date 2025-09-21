@@ -3,7 +3,7 @@
 	icon_state = "adapter_map-3"
 
 	name = "color adapter"
-	desc = "A one meter section of regular pipe used to connect different colored pipes."
+	desc = "Однометровый участок обычной трубы, используемый для соединения труб разного цвета."
 
 	dir = SOUTH
 	initialize_directions = NORTH | SOUTH

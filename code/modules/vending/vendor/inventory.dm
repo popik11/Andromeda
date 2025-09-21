@@ -30,7 +30,7 @@
 
 		var/obj/item/temp = typepath
 		var/datum/data/vending_product/new_record = new
-		new_record.name = initial(temp.name)
+		new_record.name = capitalize(declent_ru_initial(temp::name, NOMINATIVE, temp::name))
 		new_record.product_path = typepath
 		if(!start_empty)
 			new_record.amount = amount
@@ -60,8 +60,8 @@
 */
 /obj/machinery/vending/proc/build_inventories(start_empty = FALSE)
 	build_inventory(products, product_records, product_categories, start_empty)
-	build_inventory(contraband, hidden_records, list(list("name" = "Contraband", "icon" = "mask", "products" = contraband)), start_empty, premium = TRUE)
-	build_inventory(premium, coin_records, list(list("name" = "Premium", "icon" = "coins", "products" = premium)), start_empty, premium = TRUE)
+	build_inventory(contraband, hidden_records, list(list("name" = "Контрабанда", "icon" = "mask", "products" = contraband)), start_empty, premium = TRUE)
+	build_inventory(premium, coin_records, list(list("name" = "Премиум", "icon" = "coins", "products" = premium)), start_empty, premium = TRUE)
 
 //Better would be to make constructable child
 /obj/machinery/vending/RefreshParts()

@@ -1,5 +1,5 @@
 /obj/item/analyzer
-	desc = "A hand-held environmental scanner which reports current gas levels."
+	desc = "Портативный сканер окружающей среды, который показывает текущие уровни газов."
 	name = "gas analyzer"
 	custom_price = PAYCHECK_LOWER * 0.9
 	icon = 'icons/obj/devices/scanner.dmi'
@@ -54,16 +54,16 @@
 
 /obj/item/analyzer/examine(mob/user)
 	. = ..()
-	. += span_notice("Right-click [src] to open the gas reference.")
-	. += span_notice("Alt-click [src] to activate the barometer function.")
+	. += span_notice("Правый клик по [src], чтобы открыть справочник по газам.")
+	. += span_notice("Alt+ЛКМ по [src], чтобы активировать функцию барометра.")
 
 /obj/item/analyzer/suicide_act(mob/living/carbon/user)
-	user.visible_message(span_suicide("[user] begins to analyze [user.p_them()]self with [src]! The display shows that [user.p_theyre()] dead!"))
+	user.visible_message(span_suicide("[user] начинает анализировать [user.p_them()] себя с помощью [src]! Дисплей показывает, что [user.p_theyre()] мёртв!"))
 	return BRUTELOSS
 
-/obj/item/analyzer/click_alt(mob/user) //Barometer output for measuring when the next storm happens
+/obj/item/analyzer/click_alt(mob/user) //Показания барометра для измерения времени следующего шторма
 	if(cooldown)
-		to_chat(user, span_warning("[src]'s barometer function is preparing itself."))
+		to_chat(user, span_warning("Функция барометра [src] готовится к работе."))
 		return CLICK_ACTION_BLOCKING
 
 	var/turf/T = get_turf(user)
@@ -75,7 +75,7 @@
 	var/datum/weather/ongoing_weather = null
 
 	if(!user_area.outdoors)
-		to_chat(user, span_warning("[src]'s barometer function won't work indoors!"))
+		to_chat(user, span_warning("Функция барометра [src] не работает в помещении!"))
 		return CLICK_ACTION_BLOCKING
 
 	for(var/V in SSweather.processing)
@@ -86,19 +86,19 @@
 
 	if(ongoing_weather)
 		if((ongoing_weather.stage == MAIN_STAGE) || (ongoing_weather.stage == WIND_DOWN_STAGE))
-			to_chat(user, span_warning("[src]'s barometer function can't trace anything while the storm is [ongoing_weather.stage == MAIN_STAGE ? "already here!" : "winding down."]"))
+			to_chat(user, span_warning("Функция барометра [src] не может ничего отследить, пока шторм [ongoing_weather.stage == MAIN_STAGE ? "уже здесь!" : "затихает."]"))
 			return CLICK_ACTION_BLOCKING
 
-		to_chat(user, span_notice("The next [ongoing_weather] will hit in [butchertime(ongoing_weather.next_hit_time - world.time)]."))
+		to_chat(user, span_notice("Следующий [ongoing_weather] начнётся через [butchertime(ongoing_weather.next_hit_time - world.time)]."))
 		if(!(ongoing_weather.weather_flags & FUNCTIONAL_WEATHER))
-			to_chat(user, span_warning("[src]'s barometer function says that the next storm will breeze on by."))
+			to_chat(user, span_warning("Функция барометра [src] сообщает, что следующий шторм пройдёт стороной."))
 	else
 		var/next_hit = SSweather.next_hit_by_zlevel["[T.z]"]
 		var/fixed = next_hit ? timeleft(next_hit) : -1
 		if(fixed < 0)
-			to_chat(user, span_warning("[src]'s barometer function was unable to trace any weather patterns."))
+			to_chat(user, span_warning("Функция барометра [src] не смогла обнаружить какие-либо погодные явления."))
 		else
-			to_chat(user, span_warning("[src]'s barometer function says a storm will land in approximately [butchertime(fixed)]."))
+			to_chat(user, span_warning("Функция барометра [src] сообщает, что шторм начнётся приблизительно через [butchertime(fixed)]."))
 	cooldown = TRUE
 	addtimer(CALLBACK(src, TYPE_PROC_REF(/obj/item/analyzer, ping)), cooldown_time)
 	return CLICK_ACTION_SUCCESS
@@ -106,7 +106,7 @@
 /obj/item/analyzer/proc/ping()
 	if(isliving(loc))
 		var/mob/living/L = loc
-		to_chat(L, span_notice("[src]'s barometer function is ready!"))
+		to_chat(L, span_notice("Функция барометра [src] готова к работе!"))
 	playsound(src, 'sound/machines/click.ogg', 100)
 	cooldown = FALSE
 
@@ -170,7 +170,7 @@
 	for(var/datum/gas_mixture/air as anything in airs)
 		var/mix_name = capitalize(LOWER_TEXT(target.name))
 		if(airs.len != 1) //not a unary gas mixture
-			mix_name += " - Node [airs.Find(air)]"
+			mix_name += " - Узел [airs.Find(air)]"
 		new_gasmix_data += list(gas_mixture_parser(air, mix_name))
 	last_gasmix_data = new_gasmix_data
 
@@ -189,16 +189,16 @@
 	var/message = list()
 	if(!silent && isliving(user))
 		playsound(user, SFX_INDUSTRIAL_SCAN, 20, TRUE, -2, TRUE, FALSE)
-		user.visible_message(span_notice("[user] uses the analyzer on [icon2html(icon, viewers(user))] [target]."), span_notice("You use the analyzer on [icon2html(icon, user)] [target]."))
-	message += span_boldnotice("Results of analysis of [icon2html(icon, user)] [target].")
+		user.visible_message(span_notice("[user] использует анализатор на [icon2html(icon, viewers(user))] [target]."), span_notice("Вы используете анализатор на [icon2html(icon, user)] [target]."))
+	message += span_boldnotice("Результаты анализа [icon2html(icon, user)] [target].")
 
 	var/list/airs = islist(mixture) ? mixture : list(mixture)
 	for(var/datum/gas_mixture/air as anything in airs)
 		var/mix_name = capitalize(LOWER_TEXT(target.name))
 		if(airs.len > 1) //not a unary gas mixture
 			var/mix_number = airs.Find(air)
-			message += span_boldnotice("Node [mix_number]")
-			mix_name += " - Node [mix_number]"
+			message += span_boldnotice("Узел [mix_number]")
+			mix_name += " - Узел [mix_number]"
 
 		var/total_moles = air.total_moles()
 		var/pressure = air.return_pressure()
@@ -208,27 +208,27 @@
 		var/thermal_energy = air.thermal_energy()
 
 		if(total_moles > 0)
-			message += span_notice("Moles: [round(total_moles, 0.01)] mol")
+			message += span_notice("Моли: [round(total_moles, 0.01)] моль")
 
 			var/list/cached_gases = air.gases
 			for(var/id in cached_gases)
 				var/gas_concentration = cached_gases[id][MOLES]/total_moles
-				message += span_notice("[cached_gases[id][GAS_META][META_GAS_NAME]]: [round(cached_gases[id][MOLES], 0.01)] mol ([round(gas_concentration*100, 0.01)] %)")
-			message += span_notice("Temperature: [round(temperature - T0C,0.01)] &deg;C ([round(temperature, 0.01)] K)")
-			message += span_notice("Volume: [volume] L")
-			message += span_notice("Pressure: [round(pressure, 0.01)] kPa")
-			message += span_notice("Heat Capacity: [display_energy(heat_capacity)] / K")
-			message += span_notice("Thermal Energy: [display_energy(thermal_energy)]")
+				message += span_notice("[cached_gases[id][GAS_META][META_GAS_NAME]]: [round(cached_gases[id][MOLES], 0.01)] моль ([round(gas_concentration*100, 0.01)] %)")
+			message += span_notice("Температура: [round(temperature - T0C,0.01)] &deg;C ([round(temperature, 0.01)] K)")
+			message += span_notice("Объём: [volume] л")
+			message += span_notice("Давление: [round(pressure, 0.01)] кПа")
+			message += span_notice("Теплоёмкость: [display_energy(heat_capacity)] / K")
+			message += span_notice("Тепловая энергия: [display_energy(thermal_energy)]")
 		else
-			message += airs.len > 1 ? span_notice("This node is empty!") : span_notice("[target] is empty!")
-			message += span_notice("Volume: [volume] L") // don't want to change the order volume appears in, suck it
+			message += airs.len > 1 ? span_notice("Этот узел пуст!") : span_notice("[target] пуст!")
+			message += span_notice("Объём: [volume] л") // не хочу менять порядок отображения объёма, смирись
 
 	// we let the join apply newlines so we do need handholding
 	to_chat(user, boxed_message(jointext(message, "\n")), type = MESSAGE_TYPE_INFO)
 	return TRUE
 
 /obj/item/analyzer/ranged
-	desc = "A hand-held long-range environmental scanner which reports current gas levels."
+	desc = "Портативный сканер окружающей среды дальнего действия, который показывает текущие уровни газов."
 	name = "long-range gas analyzer"
 	icon_state = "analyzerranged"
 	worn_icon_state = "analyzer"

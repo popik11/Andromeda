@@ -7,7 +7,7 @@
 	mutanttongue = /obj/item/organ/tongue/cat
 	mutantears = /obj/item/organ/ears/cat
 	mutant_organs = list(
-		/obj/item/organ/tail/cat = "Cat",
+		/obj/item/organ/tail/cat = "Кошка",
 	)
 	inherent_traits = list(
 		TRAIT_CATLIKE_GRACE,
@@ -28,10 +28,10 @@
 	if(ishuman(carbon_being))
 		var/mob/living/carbon/human/target_human = carbon_being
 		if(!pref_load) //Hah! They got forcefully purrbation'd. Force default felinid parts on them if they have no mutant parts in those areas!
-			target_human.dna.features[FEATURE_TAIL] = "Cat"
-			if(target_human.dna.features[FEATURE_EARS] == "None")
-				target_human.dna.features[FEATURE_EARS] = "Cat"
-		if(target_human.dna.features[FEATURE_EARS] == "None")
+			target_human.dna.features[FEATURE_TAIL] = "Кошка"
+			if(target_human.dna.features[FEATURE_EARS] == "Ничего")
+				target_human.dna.features[FEATURE_EARS] = "Кошачьи"
+		if(target_human.dna.features[FEATURE_EARS] == "Ничего")
 			mutantears = /obj/item/organ/ears
 		else
 			var/obj/item/organ/ears/cat/ears = new(FALSE, target_human.dna.features[FEATURE_EARS])
@@ -40,7 +40,7 @@
 
 /datum/species/human/felinid/randomize_features(mob/living/carbon/human/human_mob)
 	var/list/features = ..()
-	features[FEATURE_EARS] = pick("None", "Cat")
+	features[FEATURE_EARS] = pick("Ничего", "Кошачьи")
 	return features
 
 /datum/species/human/felinid/get_laugh_sound(mob/living/carbon/human/felinid)

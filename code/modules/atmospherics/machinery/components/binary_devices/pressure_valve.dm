@@ -1,7 +1,7 @@
 /obj/machinery/atmospherics/components/binary/pressure_valve
 	icon_state = "pvalve_map-3"
 	name = "pressure valve"
-	desc = "An activable one way valve that let gas pass through if the pressure on the input side is higher than the set pressure."
+	desc = "Активируемый односторонний клапан, который пропускает газ, если давление на входной стороне выше установленного давления."
 	can_unwrench = TRUE
 	shift_underlay_only = FALSE
 	construction_type = /obj/item/pipe/directional
@@ -18,15 +18,15 @@
 
 /obj/machinery/atmospherics/components/binary/pressure_valve/add_context(atom/source, list/context, obj/item/held_item, mob/user)
 	. = ..()
-	context[SCREENTIP_CONTEXT_CTRL_LMB] = "Turn [on ? "off" : "on"]"
-	context[SCREENTIP_CONTEXT_ALT_LMB] = "Maximize target pressure"
+	context[SCREENTIP_CONTEXT_CTRL_LMB] = "Включить [on ? "выкл" : "вкл"]"
+	context[SCREENTIP_CONTEXT_ALT_LMB] = "Максимизировать целевое давление"
 	return CONTEXTUAL_SCREENTIP_SET
 
 /obj/machinery/atmospherics/components/binary/pressure_valve/click_ctrl(mob/user)
 	if(is_operational)
 		set_on(!on)
-		balloon_alert(user, "turned [on ? "on" : "off"]")
-		investigate_log("was turned [on ? "on" : "off"] by [key_name(user)]", INVESTIGATE_ATMOS)
+		balloon_alert(user, "переключён [on ? "вкл" : "выкл"]")
+		investigate_log("был переключён [on ? "вкл" : "выкл"] пользователем [key_name(user)]", INVESTIGATE_ATMOS)
 		return CLICK_ACTION_SUCCESS
 	return CLICK_ACTION_BLOCKING
 
@@ -35,8 +35,8 @@
 		return CLICK_ACTION_BLOCKING
 
 	target_pressure = MAX_OUTPUT_PRESSURE
-	investigate_log("was set to [target_pressure] kPa by [key_name(user)]", INVESTIGATE_ATMOS)
-	balloon_alert(user, "target pressure set to [target_pressure] kPa")
+	investigate_log("был установлен на [target_pressure] кПа пользователем [key_name(user)]", INVESTIGATE_ATMOS)
+	balloon_alert(user, "целевое давление установлено на [target_pressure] кПа")
 	update_appearance(UPDATE_ICON)
 	return CLICK_ACTION_SUCCESS
 
@@ -90,7 +90,7 @@
 	switch(action)
 		if("power")
 			on = !on
-			investigate_log("was turned [on ? "on" : "off"] by [key_name(usr)]", INVESTIGATE_ATMOS)
+			investigate_log("был переключён [on ? "вкл" : "выкл"] пользователем [key_name(usr)]", INVESTIGATE_ATMOS)
 			. = TRUE
 		if("pressure")
 			var/pressure = params["pressure"]
@@ -102,13 +102,13 @@
 				. = TRUE
 			if(.)
 				target_pressure = clamp(pressure, 0, ONE_ATMOSPHERE*100)
-				investigate_log("was set to [target_pressure] kPa by [key_name(usr)]", INVESTIGATE_ATMOS)
+				investigate_log("был установлен на [target_pressure] кПа пользователем [key_name(usr)]", INVESTIGATE_ATMOS)
 	update_appearance(UPDATE_ICON)
 
 /obj/machinery/atmospherics/components/binary/pressure_valve/can_unwrench(mob/user)
 	. = ..()
 	if(. && on && is_operational)
-		to_chat(user, span_warning("You cannot unwrench [src], turn it off first!"))
+		to_chat(user, span_warning("Вы не можете открутить [declent_ru(NOMINATIVE)], сначала выключите его!"))
 		return FALSE
 
 

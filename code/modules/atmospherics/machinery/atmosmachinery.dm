@@ -120,11 +120,11 @@
 
 /obj/machinery/atmospherics/examine(mob/user)
 	. = ..()
-	. += span_notice("[src] is on layer [piping_layer].")
+	. += span_notice("[declent_ru(NOMINATIVE)] находится на слое [piping_layer].")
 	if((vent_movement & VENTCRAWL_ENTRANCE_ALLOWED) && isliving(user))
 		var/mob/living/L = user
 		if(HAS_TRAIT(L, TRAIT_VENTCRAWLER_NUDE) || HAS_TRAIT(L, TRAIT_VENTCRAWLER_ALWAYS))
-			. += span_notice("Alt-click to crawl through it.")
+			. += span_notice("Alt+ЛКМ, чтобы проползти через неё.")
 
 /**
  * Sets up our pipe hiding logic, consolidated in one place so subtypes may override it.
@@ -445,11 +445,11 @@
 		empty_pipe = TRUE
 
 	if(!empty_pipe)
-		to_chat(user, span_notice("You begin to unfasten \the [src]..."))
+		to_chat(user, span_notice("Вы начинаете откручивать [(declent_ru(ACCUSATIVE))]..."))
 
 	if (internal_pressure > 2 * ONE_ATMOSPHERE)
-		to_chat(user, span_warning("As you begin unwrenching \the [src] a gush of air blows in your face... maybe you should reconsider?"))
-		unsafe_wrenching = TRUE //Oh dear oh dear
+		to_chat(user, span_warning("Когда вы начинаете откручивать [(declent_ru(ACCUSATIVE))], поток газа ударяет вам в лицо... возможно, стоит передумать?"))
+		unsafe_wrenching = TRUE //Ой-ой-ой
 
 	if(I.use_tool(src, user, empty_pipe ? 0 : 2 SECONDS, volume = 50))
 		user.visible_message( \
@@ -493,7 +493,7 @@
 		var/datum/gas_mixture/env_air = loc.return_air()
 		pressures = int_air.return_pressure() - env_air.return_pressure()
 
-	user.visible_message(span_danger("[user] is sent flying by pressure!"),span_userdanger("The pressure sends you flying!"))
+	user.visible_message(span_danger("[user] отбрасывает давлением!"),span_userdanger("Давление отбрасывает вас!"))
 
 	// if get_dir(src, user) is not 0, target is the edge_target_turf on that dir
 	// otherwise, edge_target_turf uses a random cardinal direction

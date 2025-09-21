@@ -10,7 +10,7 @@ export function AirAlarmControlModes(props) {
   if (!modes || modes.length === 0) {
     return (
       <NoticeBox info textAlign="center">
-        Nothing to show
+        Нечего показать
       </NoticeBox>
     );
   }

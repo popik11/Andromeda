@@ -182,7 +182,7 @@ Buildable meters
 
 /obj/item/pipe/verb/flip()
 	set category = "Object"
-	set name = "Invert Pipe"
+	set name = "Инвертировать Трубу"
 	set src in view(1)
 
 	if ( usr.incapacitated )
@@ -425,7 +425,7 @@ Buildable meters
 
 /obj/item/pipe_meter
 	name = "meter"
-	desc = "A meter that can be wrenched on pipes, or attached to the floor with screws."
+	desc = "Измеритель, который можно прикрутить к трубам или прикрепить к полу винтами."
 	icon = 'icons/obj/pipes_n_cables/pipe_item.dmi'
 	icon_state = "meter"
 	inhand_icon_state = "buildpipe"

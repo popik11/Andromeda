@@ -10,7 +10,7 @@
 	//node1 is input port
 
 	name = "dual-port air vent"
-	desc = "Has a valve and pump attached to it. There are two ports."
+	desc = "Имеет присоединённые клапан и насос. Есть два порта."
 
 	hide = TRUE
 

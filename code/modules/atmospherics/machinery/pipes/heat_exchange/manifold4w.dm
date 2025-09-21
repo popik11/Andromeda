@@ -6,7 +6,7 @@
 	base_icon_state = "manifold4w"
 
 	name = "4-way pipe manifold"
-	desc = "A manifold composed of heat-exchanging pipes."
+	desc = "Коллектор, состоящий из теплообменных труб."
 
 	initialize_directions = ALL_CARDINALS
 

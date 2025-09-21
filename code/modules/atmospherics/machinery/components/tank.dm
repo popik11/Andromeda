@@ -2,7 +2,7 @@
 
 /obj/machinery/atmospherics/components/tank
 	name = "pressure tank"
-	desc = "A large vessel containing pressurized gas."
+	desc = "Большой сосуд, содержащий сжатый газ."
 
 	icon = 'icons/map_icons/objects.dmi'
 	icon_state = "/obj/machinery/atmospherics/components/tank"
@@ -77,7 +77,7 @@
 	if(!crack_states)
 		crack_states = list()
 		for(var/i in 1 to crack_states_count)
-			crack_states += "crack[i]"
+			crack_states += "трещина[i]"
 
 	if(!merger_typecache)
 		merger_typecache = typecacheof(/obj/machinery/atmospherics/components/tank)
@@ -121,10 +121,10 @@
 	. = ..()
 	var/wrench_hint = EXAMINE_HINT("wrench")
 	if(!initialize_directions)
-		. += span_notice("A pipe port can be opened with a [wrench_hint].")
+		. += span_notice("Порт трубы можно открыть с помощью [wrench_hint].")
 	else
-		. += span_notice("The pipe port can be moved or closed with a [wrench_hint].")
-	. += span_notice("A holographic sticker on it says that its maximum safe pressure is: [siunit_pressure(max_pressure, 0)].")
+		. += span_notice("Порт трубы можно переместить или закрыть с помощью [wrench_hint].")
+	. += span_notice("Голографическая наклейка на нём гласит, что его максимальное безопасное давление составляет: [siunit_pressure(max_pressure, 0)].")
 
 /obj/machinery/atmospherics/components/tank/finalize_material_effects(list/materials)
 	. = ..()
@@ -165,7 +165,7 @@
  * This system exists because tanks not having all initialize_directions set correctly breaks shuttle rotations
  */
 /obj/machinery/atmospherics/components/tank/proc/set_portdir_relative(relative_port_dir, enable)
-	ASSERT(!isnull(enable), "Did not receive argument enable")
+	ASSERT(!isnull(enable), "Не получен аргумент enable")
 
 	// Rotate the given dir so that it's relative to north
 	var/port_dir
@@ -366,18 +366,18 @@
 		return
 	if(!tool.tool_start_check(user, amount = 0, heat_required = HIGH_TEMPERATURE_REQUIRED))
 		return
-	to_chat(user, span_notice("You begin to repair the cracks in the gas tank..."))
+	to_chat(user, span_notice("Вы начинаете заделывать трещины в газовом баллоне..."))
 	var/repair_amount = max_integrity / 10
 	do
 		if(!tool.use_tool(src, user, 2.5 SECONDS, volume = 40))
 			return
 	while(repair_damage(repair_amount))
-	to_chat(user, span_notice("The gas tank has been fully repaired and all cracks sealed."))
+	to_chat(user, span_notice("Газовый баллон полностью отремонтирован, все трещины заделаны."))
 
 /obj/machinery/atmospherics/components/tank/welder_act_secondary(mob/living/user, obj/item/tool)
 	. = ..()
 	. = TRUE
-	to_chat(user, span_notice("You begin cutting open the gas tank..."))
+	to_chat(user, span_notice("Вы начинаете вскрывать газовый баллон..."))
 	var/turf/current_location = get_turf(src)
 	var/datum/gas_mixture/airmix = current_location.return_air()
 
@@ -387,7 +387,7 @@
 	var/internal_pressure = air_contents.return_pressure() - airmix.return_pressure()
 	if(internal_pressure > 2 * ONE_ATMOSPHERE)
 		time_taken *= 2
-		to_chat(user, span_warning("The tank seems to be pressurized, are you sure this is a good idea?"))
+		to_chat(user, span_warning("Баллон, кажется, находится под давлением, вы уверены, что это хорошая идея?"))
 		unsafe = TRUE
 
 	if(!tool.use_tool(src, user, time_taken, volume = 60))
@@ -396,7 +396,7 @@
 	if(unsafe)
 		unsafe_pressure_release(user, internal_pressure)
 	deconstruct(disassembled=TRUE)
-	to_chat(user, span_notice("You finish cutting open the sealed gas tank, revealing the innards."))
+	to_chat(user, span_notice("Вы заканчиваете вскрытие герметичного газового баллона, обнажая его внутренности."))
 
 /obj/machinery/atmospherics/components/tank/on_deconstruction(disassembled)
 	var/turf/location = drop_location()
@@ -409,7 +409,7 @@
 	for(var/datum/material/material as anything in custom_materials)
 		if (frame.material_end_product)
 			// If something looks fishy, you get nothing
-			message_admins("\The [src] had multiple materials set. Unless you were messing around with VV, yell at a coder")
+			message_admins("[declent_ru(NOMINATIVE)] имел несколько установленных материалов. Если вы не баловались с VV, ругайте кодера")
 			frame.material_end_product = null
 			frame.construction_state = TANK_FRAME
 			break
@@ -538,19 +538,19 @@
 	var/wrenched_hint = EXAMINE_HINT("wrenched")
 
 	if(!anchored)
-		. += span_notice("[src] has not been [wrenched_hint] to the floor yet.")
+		. += span_notice("[declent_ru(NOMINATIVE)] ещё не [wrenched_hint] к полу.")
 	else
-		. += span_notice("[src] is [wrenched_hint] to the floor.")
+		. += span_notice("[declent_ru(NOMINATIVE)] [wrenched_hint] к полу.")
 
 	switch(construction_state)
 		if(TANK_FRAME)
 			var/screwed_hint = EXAMINE_HINT("screwed")
 			var/plating_hint = EXAMINE_HINT("metal plating")
-			. += span_notice("[src] is [screwed_hint] together and now just needs some [plating_hint].")
+			. += span_notice("[declent_ru(NOMINATIVE)] [screwed_hint] вместе и теперь нуждается в [plating_hint].")
 		if(TANK_PLATING_UNSECURED)
 			var/crowbar_hint = EXAMINE_HINT("crowbar")
 			var/welder_hint = EXAMINE_HINT("welder")
-			. += span_notice("The plating has been firmly attached and would need a [crowbar_hint] to detach, but still needs to be sealed by a [welder_hint].")
+			. += span_notice("Обшивка была прочно прикреплена и потребуется [crowbar_hint] для отсоединения, но всё ещё нуждается в герметизации с помощью [welder_hint].")
 
 /obj/structure/tank_frame/atom_deconstruct(disassembled)
 	if(disassembled)
@@ -580,54 +580,54 @@
 	if(construction_state != TANK_FRAME)
 		return
 	. = TRUE
-	to_chat(user, span_notice("You begin taking apart [src]."))
+	to_chat(user, span_notice("Вы начинаете разбирать [declent_ru(NOMINATIVE)]."))
 	if(!tool.use_tool(src, user, 1 SECONDS))
 		return
 	deconstruct(TRUE)
-	to_chat(user, span_notice("[src] has been taken apart."))
+	to_chat(user, span_notice("[declent_ru(NOMINATIVE)] был разобран."))
 
 /obj/structure/tank_frame/proc/add_plating(mob/living/user, obj/item/stack/stack)
 	. = FALSE
 	if(!stack.material_type)
-		balloon_alert(user, "invalid material!")
+		balloon_alert(user, "недопустимый материал!")
 	var/datum/material/stack_mat = GET_MATERIAL_REF(stack.material_type)
 	if(!(MAT_CATEGORY_RIGID in stack_mat.categories))
-		to_chat(user, span_notice("This material doesn't seem rigid enough to hold the shape of a tank..."))
+		to_chat(user, span_notice("Этот материал не кажется достаточно прочным, чтобы держать форму бака..."))
 		return
 
 	. = TRUE
-	to_chat(user, span_notice("You begin adding [stack] to [src]..."))
+	to_chat(user, span_notice("Вы начинаете добавлять [stack] к [declent_ru(NOMINATIVE)]..."))
 	if(!stack.use_tool(src, user, 3 SECONDS))
 		return
 	if(!stack.use(TANK_PLATING_SHEETS))
 		var/amount_more
 		switch(100 * stack.amount / TANK_PLATING_SHEETS)
 			if(0) // Wat?
-				amount_more = "any at all"
+				amount_more = "вообще никакого"
 			if(1 to 25)
-				amount_more = "a lot more"
+				amount_more = "намного больше"
 			if(26 to 50)
-				amount_more = "about four times as much"
+				amount_more = "примерно в четыре раза больше"
 			if(51 to 75)
-				amount_more = "about twice as much"
+				amount_more = "примерно в два раза больше"
 			if(76 to 100)
-				amount_more = "just a bit more"
+				amount_more = "чуть-чуть больше"
 			else
-				amount_more = "an indeterminate amount more"
-		to_chat(user, span_notice("You don't have enough [stack] to add all the plating. Maybe [amount_more]."))
+				amount_more = "неопределённое количество больше"
+		to_chat(user, span_notice("У вас недостаточно [stack] для добавления всей обшивки. Может быть, [amount_more]."))
 		return
 
 	material_end_product = stack_mat
 	construction_state = TANK_PLATING_UNSECURED
 	update_appearance(UPDATE_ICON)
-	to_chat(user, span_notice("You finish attaching [stack] to [src]."))
+	to_chat(user, span_notice("Вы заканчиваете крепление [stack] к [declent_ru(NOMINATIVE)]."))
 
 /obj/structure/tank_frame/crowbar_act_secondary(mob/living/user, obj/item/tool)
 	. = ..()
 	if(construction_state != TANK_PLATING_UNSECURED)
 		return
 	. = TRUE
-	to_chat(user, span_notice("You start prying off the outer plating..."))
+	to_chat(user, span_notice("Вы начинаете отрывать внешнюю обшивку..."))
 	if(!tool.use_tool(src, user, 2 SECONDS))
 		return
 	construction_state = TANK_FRAME
@@ -641,11 +641,11 @@
 		return
 	. = TRUE
 	if(!anchored)
-		to_chat(user, span_notice("You need to <b>wrench</b> [src] to the floor before finishing."))
+		to_chat(user, span_notice("Вам нужно <b>прикрутить</b> [declent_ru(NOMINATIVE)] к полу перед завершением."))
 		return
 	if(!tool.tool_start_check(user, amount = 0, heat_required = HIGH_TEMPERATURE_REQUIRED))
 		return
-	to_chat(user, span_notice("You begin sealing the outer plating with the welder..."))
+	to_chat(user, span_notice("Вы начинаете герметизировать внешнюю обшивку с помощью сварочного аппарата..."))
 	if(!tool.use_tool(src, user, 2 SECONDS, volume = 60))
 		return
 
@@ -656,7 +656,7 @@
 	var/list/new_custom_materials = list((material_end_product) = TANK_PLATING_SHEETS * SHEET_MATERIAL_AMOUNT)
 	new_tank.set_custom_materials(new_custom_materials)
 	new_tank.on_construction(user, new_tank.pipe_color, new_tank.piping_layer)
-	to_chat(user, span_notice("[new_tank] has been sealed and is ready to accept gases."))
+	to_chat(user, span_notice("[new_tank] был загерметизирован и готов к приёму газов."))
 	qdel(src)
 
 #undef TANK_PLATING_SHEETS

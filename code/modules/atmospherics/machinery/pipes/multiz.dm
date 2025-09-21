@@ -1,7 +1,7 @@
 /// This is an atmospherics pipe which can relay air up/down a deck.
 /obj/machinery/atmospherics/pipe/multiz
 	name = "multi deck pipe adapter"
-	desc = "An adapter which allows pipes to connect to other pipenets on different decks."
+	desc = "Адаптер, позволяющий трубам подключаться к другим сетям трубопроводов на разных этажах."
 	icon_state = "adapter-3"
 	icon = 'icons/obj/pipes_n_cables/multiz.dmi'
 

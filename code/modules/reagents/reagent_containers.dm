@@ -130,7 +130,7 @@
 		else
 			CRASH("change_transfer_amount() called with invalid direction value")
 	amount_per_transfer_from_this = possible_transfer_amounts[index]
-	balloon_alert(user, "transferring [amount_per_transfer_from_this]u")
+	balloon_alert(user, "установлено на [amount_per_transfer_from_this]мл")
 	mode_change_message(user)
 
 /obj/item/reagent_containers/pre_attack_secondary(atom/target, mob/living/user, list/modifiers, list/attack_modifiers)

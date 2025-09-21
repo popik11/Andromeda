@@ -51,6 +51,7 @@
 #define LOG_RADIO_EMOTE (1 << 20)
 #define LOG_SPEECH_INDICATORS (1 << 21)
 #define LOG_TRANSPORT (1 << 22)
+#define LOG_LOOC (1 << 23) // ANDROMEDA ADDITION - LOOC
 
 //Individual logging panel pages
 #define INDIVIDUAL_GAME_LOG (LOG_GAME)
@@ -143,6 +144,7 @@
 #define LOG_CATEGORY_GAME_EMOTE "game-emote"
 #define LOG_CATEGORY_GAME_INTERNET_REQUEST "game-internet-request"
 #define LOG_CATEGORY_GAME_OOC "game-ooc"
+#define LOG_CATEGORY_GAME_LOOC "game-looc" // ANDROMEDA ADDITION - LOOC
 #define LOG_CATEGORY_GAME_PRAYER "game-prayer"
 #define LOG_CATEGORY_GAME_RADIO_EMOTE "game-radio-emote"
 #define LOG_CATEGORY_GAME_SAY "game-say"

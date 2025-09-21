@@ -3,9 +3,9 @@ import './styles/main.scss';
 import { useEffect, useRef, useState } from 'react';
 import { dragStartHandler } from 'tgui/drag';
 import { isEscape, KEY } from 'tgui-core/keys';
-import { type BooleanLike, classes } from 'tgui-core/react';
+import { BooleanLike, classes } from 'tgui-core/react';
 
-import { type Channel, ChannelIterator } from './ChannelIterator';
+import { Channel, ChannelIterator } from './ChannelIterator';
 import { ChatHistory } from './ChatHistory';
 import { LineLength, RADIO_PREFIXES, WindowSize } from './constants';
 import { getPrefix, windowClose, windowOpen, windowSet } from './helpers';
@@ -27,11 +27,13 @@ export function TguiSay() {
   const chatHistory = useRef(new ChatHistory());
   const messages = useRef(byondMessages);
   const scale = useRef(true);
-  const currentPrefix = useRef<keyof typeof RADIO_PREFIXES | null>(null);
 
   // I initially wanted to make these an object or a reducer, but it's not really worth it.
   // You lose the granulatity and add a lot of boilerplate.
   const [buttonContent, setButtonContent] = useState('');
+  const [currentPrefix, setCurrentPrefix] = useState<
+    keyof typeof RADIO_PREFIXES | null
+  >(null);
   const [lightMode, setLightMode] = useState(false);
   const [maxLength, setMaxLength] = useState(1024);
   const [size, setSize] = useState(WindowSize.Small);
@@ -39,10 +41,6 @@ export function TguiSay() {
 
   const position = useRef([window.screenX, window.screenY]);
   const isDragging = useRef(false);
-
-  function setCurrentPrefix(prefix: keyof typeof RADIO_PREFIXES | null): void {
-    currentPrefix.current = prefix;
-  }
 
   function handleArrowKeys(direction: KEY.Up | KEY.Down): void {
     const chat = chatHistory.current;
@@ -79,10 +77,10 @@ export function TguiSay() {
     // User is on a chat history message
     if (!chat.isAtLatest()) {
       chat.reset();
-      setButtonContent(currentPrefix.current ?? iterator.current());
+      setButtonContent(currentPrefix ?? iterator.current());
 
       // Empty input, resets the channel
-    } else if (currentPrefix.current && iterator.isSay() && value?.length === 0) {
+    } else if (currentPrefix && iterator.isSay() && value?.length === 0) {
       setCurrentPrefix(null);
       setButtonContent(iterator.current());
     }
@@ -125,7 +123,7 @@ export function TguiSay() {
 
   function handleEnter(): void {
     const iterator = channelIterator.current;
-    const prefix = currentPrefix.current ?? '';
+    const prefix = currentPrefix ?? '';
 
     if (value?.length && value.length < maxLength) {
       chatHistory.current.add(value);
@@ -140,16 +138,15 @@ export function TguiSay() {
 
   function handleForceSay(): void {
     const iterator = channelIterator.current;
-    const currentValue = innerRef.current?.value;
 
     // Only force say if we're on a visible channel and have typed something
-    if (!currentValue || !iterator.isVisible()) return;
+    if (!value || iterator.isVisible()) return;
 
-    const prefix = currentPrefix.current ?? '';
-    const grunt = iterator.isSay() ? prefix + currentValue : currentValue;
+    const prefix = currentPrefix ?? '';
+    const grunt = iterator.isSay() ? prefix + value : value;
 
     messages.current.forceSayMsg(grunt, iterator.current());
-    handleClose();
+    unloadChat();
   }
 
   function handleIncrementChannel(): void {
@@ -165,9 +162,9 @@ export function TguiSay() {
     const iterator = channelIterator.current;
     let newValue = event.currentTarget.value;
 
-    const newPrefix = getPrefix(newValue) || currentPrefix.current;
+    let newPrefix = getPrefix(newValue) || currentPrefix;
     // Handles switching prefixes
-    if (newPrefix && newPrefix !== currentPrefix.current) {
+    if (newPrefix && newPrefix !== currentPrefix) {
       setButtonContent(RADIO_PREFIXES[newPrefix]);
       setCurrentPrefix(newPrefix);
       newValue = newValue.slice(3);
@@ -269,27 +266,37 @@ export function TguiSay() {
     }
   }, [value]);
 
+  const TRANSLATE_ITTERATOR: Record<string, string> = {
+    Say: 'Говор',
+    Whis: 'Шёпот',
+    Radio: 'Радио',
+    Me: 'Эмоц',
+    Admin: 'Админ',
+  };
+
   const theme =
-    (lightMode && 'lightMode') ||
-    (currentPrefix.current && RADIO_PREFIXES[currentPrefix.current]) ||
+    (currentPrefix && RADIO_PREFIXES[currentPrefix]) ||
+    TRANSLATE_ITTERATOR[channelIterator.current.current()] ||
     channelIterator.current.current();
 
+  useEffect(() => {
+    setButtonContent(TRANSLATE_ITTERATOR[buttonContent] || buttonContent);
+  }, [buttonContent]);
+
   return (
-    <>
-      <div
-        className={`window window-${theme} window-${size}`}
-        onMouseDown={dragStartHandler}
-      >
-        {!lightMode && <div className={`shine shine-${theme}`} />}
-      </div>
-      <div
-        className={classes(['content', lightMode && 'content-lightMode'])}
-        style={{
-          zoom: scale.current ? '' : `${100 / window.devicePixelRatio}%`,
-        }}
-      >
+    <div
+      className={classes([
+        'window',
+        `window-${theme}`,
+        lightMode && 'window-light',
+      ])}
+      style={{
+        zoom: scale.current ? '' : `${100 / window.devicePixelRatio}%`,
+      }}
+    >
+      <div className="content">
         <button
-          className={`button button-${theme}`}
+          className="button"
           onMouseDown={handleButtonClick}
           onMouseUp={handleButtonRelease}
           type="button"
@@ -298,11 +305,7 @@ export function TguiSay() {
         </button>
         <textarea
           autoCorrect="off"
-          className={classes([
-            'textarea',
-            `textarea-${theme}`,
-            value.length > LineLength.Large && 'textarea-large',
-          ])}
+          className="textarea"
           maxLength={maxLength}
           onInput={handleInput}
           onKeyDown={handleKeyDown}
@@ -311,6 +314,6 @@ export function TguiSay() {
           value={value}
         />
       </div>
-    </>
+    </div>
   );
 }

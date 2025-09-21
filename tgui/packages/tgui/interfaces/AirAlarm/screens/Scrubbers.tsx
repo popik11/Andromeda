@@ -11,7 +11,7 @@ export function AirAlarmControlScrubbers(props) {
   if (!scrubbers || scrubbers.length === 0) {
     return (
       <NoticeBox info textAlign="center">
-        Nothing to show
+        Нечего показать
       </NoticeBox>
     );
   }

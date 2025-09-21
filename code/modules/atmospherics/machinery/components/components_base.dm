@@ -240,7 +240,7 @@
 /obj/machinery/atmospherics/components/ui_status(mob/user, datum/ui_state/state)
 	if(allowed(user))
 		return ..()
-	to_chat(user, span_danger("Access denied."))
+	to_chat(user, span_danger("Доступ запрещён."))
 	return UI_CLOSE
 
 // Tool acts
@@ -253,7 +253,7 @@
  */
 /obj/machinery/atmospherics/components/proc/crowbar_deconstruction_act(mob/living/user, obj/item/tool, internal_pressure = 0)
 	if(!panel_open)
-		balloon_alert(user, "open panel!")
+		balloon_alert(user, "откройте панель!")
 		return ITEM_INTERACT_SUCCESS
 
 	var/unsafe_wrenching = FALSE
@@ -271,12 +271,12 @@
 		default_deconstruction_crowbar(tool)
 		return ITEM_INTERACT_SUCCESS
 
-	to_chat(user, span_notice("You begin to unfasten \the [src]..."))
+	to_chat(user, span_notice("Вы начинаете откручивать [declent_ru(NOMINATIVE)]..."))
 
 	internal_pressure -= environment_air.return_pressure()
 
 	if(internal_pressure > 2 * ONE_ATMOSPHERE)
-		to_chat(user, span_warning("As you begin deconstructing \the [src] a gush of air blows in your face... maybe you should reconsider?"))
+		to_chat(user, span_warning("Когда вы начинаете разбирать [declent_ru(NOMINATIVE)], поток газа ударяет вам в лицо... возможно, стоит передумать?"))
 		unsafe_wrenching = TRUE
 
 	if(!do_after(user, 2 SECONDS, src))

@@ -3,7 +3,7 @@
 	density = FALSE
 
 	name = "gas mixer"
-	desc = "Very useful for mixing gasses."
+	desc = "Очень полезно для смешивания газов."
 
 	can_unwrench = TRUE
 	construction_type = /obj/item/pipe/trinary/flippable
@@ -26,15 +26,15 @@
 
 /obj/machinery/atmospherics/components/trinary/mixer/add_context(atom/source, list/context, obj/item/held_item, mob/user)
 	. = ..()
-	context[SCREENTIP_CONTEXT_CTRL_LMB] = "Turn [on ? "off" : "on"]"
-	context[SCREENTIP_CONTEXT_ALT_LMB] = "Maximize target pressure"
+	context[SCREENTIP_CONTEXT_CTRL_LMB] = "Включить [on ? "выкл" : "вкл"]"
+	context[SCREENTIP_CONTEXT_ALT_LMB] = "Максимизировать целевое давление"
 	return CONTEXTUAL_SCREENTIP_SET
 
 /obj/machinery/atmospherics/components/trinary/mixer/click_ctrl(mob/user)
 	if(is_operational)
 		set_on(!on)
-		balloon_alert(user, "turned [on ? "on" : "off"]")
-		investigate_log("was turned [on ? "on" : "off"] by [key_name(user)]", INVESTIGATE_ATMOS)
+		balloon_alert(user, "переключён [on ? "вкл" : "выкл"]")
+		investigate_log("был переключён [on ? "вкл" : "выкл"] пользователем [key_name(user)]", INVESTIGATE_ATMOS)
 		return CLICK_ACTION_SUCCESS
 	return CLICK_ACTION_BLOCKING
 
@@ -43,8 +43,8 @@
 		return CLICK_ACTION_BLOCKING
 
 	target_pressure = MAX_OUTPUT_PRESSURE
-	investigate_log("was set to [target_pressure] kPa by [key_name(user)]", INVESTIGATE_ATMOS)
-	balloon_alert(user, "pressure output on set to [target_pressure] kPa")
+	investigate_log("был установлен на [target_pressure] кПа пользователем [key_name(user)]", INVESTIGATE_ATMOS)
+	balloon_alert(user, "выходное давление установлено на [target_pressure] кПа")
 	return CLICK_ACTION_SUCCESS
 
 /obj/machinery/atmospherics/components/trinary/mixer/update_overlays()
@@ -154,7 +154,7 @@
 	switch(action)
 		if("power")
 			set_on(!on)
-			investigate_log("was turned [on ? "on" : "off"] by [key_name(usr)]", INVESTIGATE_ATMOS)
+			investigate_log("был переключён [on ? "вкл" : "выкл"] пользователем [key_name(usr)]", INVESTIGATE_ATMOS)
 			. = TRUE
 		if("pressure")
 			var/pressure = params["pressure"]
@@ -166,16 +166,16 @@
 				. = TRUE
 			if(.)
 				target_pressure = clamp(pressure, 0, MAX_OUTPUT_PRESSURE)
-				investigate_log("was set to [target_pressure] kPa by [key_name(usr)]", INVESTIGATE_ATMOS)
+				investigate_log("был установлен на [target_pressure] кПа пользователем [key_name(usr)]", INVESTIGATE_ATMOS)
 		if("node1")
 			var/value = text2num(params["concentration"])
 			adjust_node1_value(value)
-			investigate_log("was set to [100 * node1_concentration] % on node 1 by [key_name(usr)]", INVESTIGATE_ATMOS)
+			investigate_log("был установлен на [100 * node1_concentration] % на узле 1 пользователем [key_name(usr)]", INVESTIGATE_ATMOS)
 			. = TRUE
 		if("node2")
 			var/value = text2num(params["concentration"])
 			adjust_node1_value(100 - value)
-			investigate_log("was set to [100 * node2_concentration] % on node 2 by [key_name(usr)]", INVESTIGATE_ATMOS)
+			investigate_log("был установлен на [100 * node2_concentration] % на узле 2 пользователем [key_name(usr)]", INVESTIGATE_ATMOS)
 			. = TRUE
 	update_appearance(UPDATE_ICON)
 
@@ -186,7 +186,7 @@
 /obj/machinery/atmospherics/components/trinary/mixer/can_unwrench(mob/user)
 	. = ..()
 	if(. && on && is_operational)
-		to_chat(user, span_warning("You cannot unwrench [src], turn it off first!"))
+		to_chat(user, span_warning("Вы не можете открутить [declent_ru(NOMINATIVE)], сначала выключите его!"))
 		return FALSE
 
 // mapping

@@ -1,6 +1,6 @@
 /obj/machinery/meter
 	name = "gas flow meter"
-	desc = "It measures something."
+	desc = "Он что-то измеряет."
 	icon = 'icons/map_icons/objects.dmi'
 	icon_state = "/obj/machinery/meter"
 	post_init_icon_state = "meter"
@@ -122,11 +122,11 @@
 	if (target)
 		var/datum/gas_mixture/pipe_air = target.return_air()
 		if(pipe_air)
-			. = "The pressure gauge reads [round(pipe_air.return_pressure(), 0.01)] kPa; [round(pipe_air.temperature,0.01)] K ([round(pipe_air.temperature-T0C,0.01)]&deg;C)."
+			. = "Манометр показывает [round(pipe_air.return_pressure(), 0.01)] кПа; [round(pipe_air.temperature,0.01)] K ([round(pipe_air.temperature-T0C,0.01)]&deg;C)."
 		else
-			. = "The sensor error light is blinking."
+			. = "Индикатор ошибки датчика мигает."
 	else
-		. = "The connect error light is blinking."
+		. = "Индикатор ошибки подключения мигает."
 
 /obj/machinery/meter/examine(mob/user)
 	. = ..()
@@ -134,12 +134,12 @@
 
 /obj/machinery/meter/wrench_act(mob/user, obj/item/wrench)
 	..()
-	to_chat(user, span_notice("You begin to unfasten \the [src]..."))
+	to_chat(user, span_notice("Вы начинаете откручивать [declent_ru(NOMINATIVE)]..."))
 	if (wrench.use_tool(src, user, 40, volume=50))
 		user.visible_message(
-			"[user] unfastens \the [src].",
-			span_notice("You unfasten \the [src]."),
-			span_hear("You hear ratchet."))
+			"[user] откручивает [declent_ru(NOMINATIVE)].",
+			span_notice("Вы откручиваете [declent_ru(NOMINATIVE)]."),
+			span_hear("Вы слышите трещотку."))
 		deconstruct()
 	return TRUE
 
@@ -160,7 +160,7 @@
 
 /obj/item/circuit_component/atmos_meter
 	display_name = "Atmospheric Meter"
-	desc = "Allows to read the pressure and temperature of the pipenet."
+	desc = "Позволяет считывать давление и температуру трубопровода."
 
 	///Signals the circuit to retrieve the pipenet's current pressure and temperature
 	var/datum/port/input/request_data

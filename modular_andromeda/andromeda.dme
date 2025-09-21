@@ -21,7 +21,13 @@
 // BEGIN_INCLUDE
 #include "_modpack.dm"
 #include "_modpacks.dm"
+#include "code\_DEFINES\keybindings.dm"
 #include "code\_DEFINES\ru_jobs.dm"
+#include "code\admin\admin_helpers.dm"
+#include "code\communication\_communication_defines.dm"
+#include "code\communication\LOOC.dm"
+#include "code\communication\whisper.dm"
+#include "code\communication\~communication_defines.dm"
 #include "code\cryosleep\admin.dm"
 #include "code\cryosleep\ai.dm"
 #include "code\cryosleep\config.dm"

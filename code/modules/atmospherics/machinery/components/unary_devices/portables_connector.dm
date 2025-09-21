@@ -2,7 +2,7 @@
 	icon_state = "connector_map-3"
 
 	name = "connector port"
-	desc = "For connecting portables devices related to atmospherics control."
+	desc = "Для подключения портативных устройств, связанных с контролем атмосферы."
 
 	can_unwrench = TRUE
 

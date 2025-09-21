@@ -3,7 +3,7 @@
 	density = FALSE
 
 	name = "gas filter"
-	desc = "Very useful for filtering gasses."
+	desc = "Очень полезно для фильтрации газов."
 
 	can_unwrench = TRUE
 	construction_type = /obj/item/pipe/trinary/flippable/filter
@@ -20,15 +20,15 @@
 
 /obj/machinery/atmospherics/components/trinary/filter/add_context(atom/source, list/context, obj/item/held_item, mob/user)
 	. = ..()
-	context[SCREENTIP_CONTEXT_CTRL_LMB] = "Turn [on ? "off" : "on"]"
-	context[SCREENTIP_CONTEXT_ALT_LMB] = "Maximize transfer rate"
+	context[SCREENTIP_CONTEXT_CTRL_LMB] = "Включить [on ? "выкл" : "вкл"]"
+	context[SCREENTIP_CONTEXT_ALT_LMB] = "Максимизировать скорость передачи"
 	return CONTEXTUAL_SCREENTIP_SET
 
 /obj/machinery/atmospherics/components/trinary/filter/click_ctrl(mob/user)
 	if(is_operational)
 		set_on(!on)
-		balloon_alert(user, "turned [on ? "on" : "off"]")
-		investigate_log("was turned [on ? "on" : "off"] by [key_name(user)]", INVESTIGATE_ATMOS)
+		balloon_alert(user, "переключён [on ? "вкл" : "выкл"]")
+		investigate_log("был переключён [on ? "вкл" : "выкл"] пользователем [key_name(user)]", INVESTIGATE_ATMOS)
 		return CLICK_ACTION_SUCCESS
 	return CLICK_ACTION_BLOCKING
 
@@ -37,8 +37,8 @@
 		return CLICK_ACTION_BLOCKING
 
 	transfer_rate = MAX_TRANSFER_RATE
-	investigate_log("was set to [transfer_rate] L/s by [key_name(user)]", INVESTIGATE_ATMOS)
-	balloon_alert(user, "volume output set to [transfer_rate] L/s")
+	investigate_log("был установлен на [transfer_rate] л/с пользователем [key_name(user)]", INVESTIGATE_ATMOS)
+	balloon_alert(user, "выходной объём установлен на [transfer_rate] л/с")
 	return CLICK_ACTION_SUCCESS
 
 /obj/machinery/atmospherics/components/trinary/filter/update_overlays()
@@ -146,7 +146,7 @@
 	switch(action)
 		if("power")
 			set_on(!on)
-			investigate_log("was turned [on ? "on" : "off"] by [key_name(usr)]", INVESTIGATE_ATMOS)
+			investigate_log("был переключён [on ? "вкл" : "выкл"] пользователем [key_name(usr)]", INVESTIGATE_ATMOS)
 			. = TRUE
 		if("rate")
 			var/rate = params["rate"]
@@ -158,7 +158,7 @@
 				. = TRUE
 			if(.)
 				transfer_rate = clamp(rate, 0, MAX_TRANSFER_RATE)
-				investigate_log("was set to [transfer_rate] L/s by [key_name(usr)]", INVESTIGATE_ATMOS)
+				investigate_log("был установлен на [transfer_rate] л/с пользователем [key_name(usr)]", INVESTIGATE_ATMOS)
 		if("toggle_filter")
 			if(!gas_id2path(params["val"]))
 				return TRUE
@@ -169,14 +169,14 @@
 			else
 				change = "removed"
 			var/gas_name = GLOB.meta_gas_info[gas_id2path(params["val"])][META_GAS_NAME]
-			usr.investigate_log("[change] [gas_name] from the filter type.", INVESTIGATE_ATMOS)
+			usr.investigate_log("[change] [gas_name] из типа фильтра.", INVESTIGATE_ATMOS)
 			. = TRUE
 	update_appearance(UPDATE_ICON)
 
 /obj/machinery/atmospherics/components/trinary/filter/can_unwrench(mob/user)
 	. = ..()
 	if(. && on && is_operational)
-		balloon_alert(user, "turn off!")
+		balloon_alert(user, "выключи!")
 		return FALSE
 
 // mapping

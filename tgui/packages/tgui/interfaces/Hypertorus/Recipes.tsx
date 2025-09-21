@@ -53,42 +53,42 @@ type RecipeProps = {
 const recipe_effect_structure: Recipe[] = [
   {
     param: 'recipe_cooling_multiplier',
-    label: 'Cooling',
+    label: 'Охлаждение',
     icon: 'snowflake-o',
     scale: 3,
   },
   {
     param: 'recipe_heating_multiplier',
-    label: 'Heating',
+    label: 'Нагрев',
     icon: 'fire',
     scale: 3,
   },
   {
     param: 'energy_loss_multiplier',
-    label: 'Energy loss',
+    label: 'Потери энергии',
     icon: 'sun-o',
     scale: 3,
   },
   {
     param: 'fuel_consumption_multiplier',
-    label: 'Fuel use',
+    label: 'Расход топлива',
     icon: ['window-minimize', 'arrow-down'],
     scale: 1.5,
   },
   {
     param: 'gas_production_multiplier',
-    label: 'Production',
+    label: 'Производство',
     icon: ['window-minimize', 'arrow-up'],
     scale: 1.5,
   },
   {
     param: 'temperature_multiplier',
-    label: 'Max temperature',
+    label: 'Макс. температура',
     icon: 'thermometer-full',
     override_base: 0.85,
     scale: 1.15,
     tooltip: (v, d) =>
-      `Maximum: ${(d.baseMaxTemperature * v).toExponential()} K`,
+      `Максимум: ${(d.baseMaxTemperature * v).toExponential()} K`,
   },
 ];
 
@@ -144,22 +144,22 @@ export const HypertorusRecipes = (props: RecipeProps) => {
       <Table>
         <MemoRow header>
           <Table.Cell />
-          <Table.Cell colSpan={2}>Fuel</Table.Cell>
-          <Table.Cell colSpan={2}>Fusion Byproducts</Table.Cell>
-          <Table.Cell colSpan={6}>Produced gases</Table.Cell>
-          <Table.Cell colSpan={6}>Effects</Table.Cell>
+          <Table.Cell colSpan={2}>Топливо</Table.Cell>
+          <Table.Cell colSpan={2}>Побочные продукты синтеза</Table.Cell>
+          <Table.Cell colSpan={6}>Вырабатываемые газы</Table.Cell>
+          <Table.Cell colSpan={6}>Эффекты</Table.Cell>
         </MemoRow>
         <MemoRow header>
           <Table.Cell />
-          <Table.Cell>Primary</Table.Cell>
-          <Table.Cell>Secondary</Table.Cell>
+          <Table.Cell>Основное</Table.Cell>
+          <Table.Cell>Дополнительное</Table.Cell>
           <Table.Cell colSpan={2} />
-          <Table.Cell>Tier 1</Table.Cell>
-          <Table.Cell>Tier 2</Table.Cell>
-          <Table.Cell>Tier 3</Table.Cell>
-          <Table.Cell>Tier 4</Table.Cell>
-          <Table.Cell>Tier 5</Table.Cell>
-          <Table.Cell>Tier 6</Table.Cell>
+          <Table.Cell>Уровень 1</Table.Cell>
+          <Table.Cell>Уровень 2</Table.Cell>
+          <Table.Cell>Уровень 3</Table.Cell>
+          <Table.Cell>Уровень 4</Table.Cell>
+          <Table.Cell>Уровень 5</Table.Cell>
+          <Table.Cell>Уровень 6</Table.Cell>
           {
             // Lay out our pictographic headers for effects.
             recipe_effect_structure.map(({ param, label, icon }) => (

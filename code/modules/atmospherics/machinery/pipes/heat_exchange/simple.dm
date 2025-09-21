@@ -2,8 +2,8 @@
 	icon = 'icons/obj/pipes_n_cables/he-simple.dmi'
 	icon_state = "pipe11-3"
 
-	name = "pipe"
-	desc = "A one meter section of heat-exchanging pipe."
+	name = "heat exchange pipe"
+	desc = "Однометровый участок теплообменной трубы."
 
 	dir = SOUTH
 	initialize_directions = SOUTH|NORTH

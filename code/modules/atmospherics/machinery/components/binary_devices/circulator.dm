@@ -3,7 +3,7 @@
 
 /obj/machinery/atmospherics/components/binary/circulator
 	name = "circulator/heat exchanger"
-	desc = "A gas circulator pump and heat exchanger."
+	desc = "Циркуляционный насос и теплообменник для газов."
 	icon_state = "circ_base"
 	pipe_flags = PIPING_ONE_PER_TURF | PIPING_DEFAULT_LAYER_ONLY
 	vent_movement = VENTCRAWL_CAN_SEE
@@ -87,7 +87,7 @@
 	I.play_tool_sound(src)
 	if(generator)
 		disconnectFromGenerator()
-	balloon_alert(user, "[anchored ? "secure" : "unsecure"]")
+	balloon_alert(user, "[anchored ? "закреплён" : "откреплён"]")
 
 	var/obj/machinery/atmospherics/node1 = nodes[1]
 	var/obj/machinery/atmospherics/node2 = nodes[2]
@@ -140,16 +140,16 @@
 	if(generator)
 		disconnectFromGenerator()
 	mode = !mode
-	balloon_alert(user, "set to [mode ? "cold" : "hot"]")
+	balloon_alert(user, "установлен в режим [mode ? "охлаждения" : "нагрева"]")
 	return TRUE
 
 /obj/machinery/atmospherics/components/binary/circulator/screwdriver_act(mob/user, obj/item/I)
 	if(!anchored)
-		balloon_alert(user, "anchor it down!")
+		balloon_alert(user, "закрепите сначала!")
 		return
 	toggle_panel_open()
 	I.play_tool_sound(src)
-	balloon_alert(user, "panel [panel_open ? "open" : "closed"]")
+	balloon_alert(user, "панель [panel_open ? "открыта" : "закрыта"]")
 	return TRUE
 
 /obj/machinery/atmospherics/components/binary/circulator/crowbar_act(mob/user, obj/item/I)

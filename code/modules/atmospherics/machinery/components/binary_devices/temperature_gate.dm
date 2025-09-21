@@ -1,7 +1,7 @@
 /obj/machinery/atmospherics/components/binary/temperature_gate
 	icon_state = "tgate_map-3"
 	name = "temperature gate"
-	desc = "An activable gate that compares the input temperature with the interface set temperature to check if the gas can flow from the input side to the output side or not."
+	desc = "Активируемый клапан, который сравнивает входную температуру с температурой, установленной в интерфейсе, чтобы определить, может ли газ протекать от входной стороны к выходной или нет."
 	can_unwrench = TRUE
 	shift_underlay_only = FALSE
 	construction_type = /obj/item/pipe/directional
@@ -23,15 +23,15 @@
 
 /obj/machinery/atmospherics/components/binary/temperature_gate/add_context(atom/source, list/context, obj/item/held_item, mob/user)
 	. = ..()
-	context[SCREENTIP_CONTEXT_CTRL_LMB] = "Turn [on ? "off" : "on"]"
-	context[SCREENTIP_CONTEXT_ALT_LMB] = "Maximize target temperature"
+	context[SCREENTIP_CONTEXT_CTRL_LMB] = "Включить [on ? "выкл" : "вкл"]"
+	context[SCREENTIP_CONTEXT_ALT_LMB] = "Максимизировать целевую температуру"
 	return CONTEXTUAL_SCREENTIP_SET
 
 /obj/machinery/atmospherics/components/binary/temperature_gate/click_ctrl(mob/user)
 	if(is_operational)
 		set_on(!on)
-		balloon_alert(user, "turned [on ? "on" : "off"]")
-		investigate_log("was turned [on ? "on" : "off"] by [key_name(user)]", INVESTIGATE_ATMOS)
+		balloon_alert(user, "переключён [on ? "вкл" : "выкл"]")
+		investigate_log("был переключён [on ? "вкл" : "выкл"] пользователем [key_name(user)]", INVESTIGATE_ATMOS)
 		return CLICK_ACTION_SUCCESS
 	return CLICK_ACTION_BLOCKING
 
@@ -40,19 +40,19 @@
 		return CLICK_ACTION_BLOCKING
 
 	target_temperature = max_temperature
-	investigate_log("was set to [target_temperature] K by [key_name(user)]", INVESTIGATE_ATMOS)
-	balloon_alert(user, "target temperature set to [target_temperature] K")
+	investigate_log("был установлен на [target_temperature] K пользователем [key_name(user)]", INVESTIGATE_ATMOS)
+	balloon_alert(user, "целевая температура установлена на [target_temperature] K")
 	update_appearance(UPDATE_ICON)
 	return CLICK_ACTION_SUCCESS
 
 
 /obj/machinery/atmospherics/components/binary/temperature_gate/examine(mob/user)
 	. = ..()
-	. += "This device will let gas flow if the temperature of the gas in the input is [inverted ? "higher" : "lower"] than the temperature set in the interface."
+	. += "Это устройство будет пропускать газ, если температура газа на входе [inverted ? "выше" : "ниже"], чем температура, установленная в интерфейсе."
 	if(inverted)
-		. += "The device settings can be restored if a multitool is used on it."
+		. += "Настройки устройства можно восстановить, используя мультитул на нём."
 	else
-		. += "The sensor's settings can be changed by using a multitool on the device."
+		. += "Настройки датчика можно изменить, используя мультитул на устройстве."
 
 /obj/machinery/atmospherics/components/binary/temperature_gate/update_icon_nopipes()
 	if(on && is_operational && is_gas_flowing)
@@ -113,7 +113,7 @@
 	switch(action)
 		if("power")
 			set_on(!on)
-			investigate_log("was turned [on ? "on" : "off"] by [key_name(usr)]", INVESTIGATE_ATMOS)
+			investigate_log("был переключён [on ? "вкл" : "выкл"] пользователем [key_name(usr)]", INVESTIGATE_ATMOS)
 			. = TRUE
 		if("temperature")
 			var/temperature = params["temperature"]
@@ -125,13 +125,13 @@
 				. = TRUE
 			if(.)
 				target_temperature = clamp(minimum_temperature, temperature, max_temperature)
-				investigate_log("was set to [target_temperature] K by [key_name(usr)]", INVESTIGATE_ATMOS)
+				investigate_log("был установлен на [target_temperature] K пользователем [key_name(usr)]", INVESTIGATE_ATMOS)
 	update_appearance(UPDATE_ICON)
 
 /obj/machinery/atmospherics/components/binary/temperature_gate/can_unwrench(mob/user)
 	. = ..()
 	if(. && on && is_operational)
-		to_chat(user, span_warning("You cannot unwrench [src], turn it off first!"))
+		to_chat(user, span_warning("Вы не можете открутить [declent_ru(NOMINATIVE)], сначала выключите его!"))
 		return FALSE
 
 /obj/machinery/atmospherics/components/binary/temperature_gate/multitool_act(mob/living/user, obj/item/multitool/I)
@@ -139,9 +139,9 @@
 	if (istype(I))
 		inverted = !inverted
 		if(inverted)
-			to_chat(user, span_notice("You set the [src]'s sensors to release gases when the temperature is higher than the setted one."))
+			to_chat(user, span_notice("Вы настраиваете датчики [declent_ru(NOMINATIVE)] на выпуск газов при температуре выше установленной."))
 		else
-			to_chat(user, span_notice("You set the [src]'s sensors to the default settings."))
+			to_chat(user, span_notice("Вы сбрасываете датчики [declent_ru(NOMINATIVE)] к настройкам по умолчанию."))
 	return TRUE
 
 //mapping
