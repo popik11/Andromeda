@@ -42,7 +42,7 @@
 #define WIRE_BACKUP1 "Вспомогательное Питание 1"
 #define WIRE_BACKUP2 "Вспомогательное Питание 2"
 #define WIRE_BEACON "Маяк"
-#define WIRE_BOLTLIGHT "Индикаторы Болтов"
+#define WIRE_FEEDBACK "Индикаторы Болтов"
 #define WIRE_BOLTS "Болты"
 #define WIRE_BOOM "Провод Взрыва"
 #define WIRE_CAMERA "Камера"

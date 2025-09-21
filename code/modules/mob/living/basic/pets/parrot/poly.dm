@@ -16,7 +16,7 @@
 	name = "Poly"
 	desc = "Попугай Полли. Эксперт по квантовой теории крекеров. Любимая птичка адмирала 13 сектора."
 	gold_core_spawnable = NO_SPAWN
-	speech_probability_rate = 13
+	speech_probability_rate = 6
 
 	/// Колбэк (Callback) для сохранения нашей памяти в конце раунда.
 	var/datum/callback/roundend_callback = null
